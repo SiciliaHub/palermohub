@@ -1,0 +1,894 @@
+<!doctype html>
+<html lang="it">
+    <head>
+ <title>Cartografia e Ortofoto di base - Palermo Hub</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Palermo Hub, su base opendata">
+        <meta name="keywords" content="Open Data,Sicilia,PAI,Geologia,CTR, PRG, Variente Generale, Palermo">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="22/07/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87653723-1', 'auto');
+  ga('send', 'pageview');
+</script> 
+       
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo Hub" />
+<meta property="og:description" content="Cartografia e Ortofoto di base, su base opendata." />
+<meta property="og:url" content="http://siciliahub.github.io/mappe/palermo_hub/cartografia.html#14/38.1185/13.3595" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/mappe/palermo_hub/clip_index/cartografia.jpg" />
+<meta property="og:site_name" content="github.com/SiciliaHub/mappe" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Palermo Hub">
+<meta name="twitter:description" content="Cartografia e Ortofoto di base, su base opendata.">
+<meta name="twitter:image" content="http://siciliahub.github.io/mappe/palermo_hub/clip_index/cartografia.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="github.com/SiciliaHub/mappe" />
+<meta name="twitter:url" content="github.com/SiciliaHub/mappe">
+<!-- twitter -->   
+
+ <!-- css mappa -->
+<link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="lib/css/qgis2web.css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-measure.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>       
+
+<!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+ <script src="lib/js/qgi2web/leaflet.js"></script> 
+<script src="lib/js/qgi2web/L.Control.Locate.min.js"></script>
+<script src="lib/js/qgi2web/multi-style-layer.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet-svg-shape-markers.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+<script src="lib/js/qgi2web/leaflet-measure.js"></script>
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+<script src="lib/js/qgi2web/leaflet-search.js"></script>  
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/qgi2web/leaflet.pattern.js"></script>
+<script src="lib/js/qgi2web/rbush.min.js"></script>
+<script src="lib/js/qgi2web/labelgun.min.js"></script>
+<script src="lib/js/qgi2web/labels.js"></script>
+
+  <!-- script funzioni --> 
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+<script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+ 
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes 
+<script type="text/javascript" src="script.js"></script>   --> 
+
+<!-- script dati mappa 
+<script type="text/javascript" src="../mappe/palermo_hub/data/2k_2.js"></script> -->
+
+<script src="data/poligonoisola0.js"></script>
+<script src="data/osm_confine_palermo_epsg_3004_0.js"></script>
+<script src="data/ATA1213_Tracce_pa_1.js"></script>
+<script src="data/ATA1213_Tracce_pa_Trasversali_2.js"></script>
+<script src="data/ATA1213_Volo14cm_Tracce_pa_4.js"></script>
+<script src="data/10k_0.js"></script>
+<script src="data/5k_1.js"></script>
+<script src="data/2k_2.js"></script>
+
+</head>
+
+<body>
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+
+<!-- Sidebar SX -->
+<div id="sidebar" class="sidebar collapsed">
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" title="Menu slider" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+                <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+       <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+<li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Palermo Hub - Cartografia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="legenda"> <strong>Cartografia e Ortofoto di base - Palermo</strong></p>
+<img src="legend/ctr_unione.jpg" class="clip_resize" title="Quadri d’Unione" border="0" />
+<br><br>
+<p class="lorem2">La <strong>Regione Siciliana</strong> pur non disponendo, a tutt’oggi, di una legge regionale che normi in modo specifico ed organico la formazione della cartografia regionale tecnica e tematica, tuttavia con la L.R. 27 Dicembre 1978, n.71, " Norme integrative e modificative della legislazione vigente nel territorio della Regione Siciliana in materia urbanistica", art.69, ha affidato all’Assessorato del Territorio e dell’Ambiente il compito di "realizzare un sistema informativo territoriale e ambientale per il rilevamento, coordinamento e programmazione della fotocartografia del territorio regionale", e ciò al fine di dotare l’Amministrazione Regionale degli strumenti operativi di conoscenza del territorio e dell’ambiente per le pertinenti iniziative di programmazione.<br>
+Il programma di attività posto in essere a tale scopo dall’Assessorato ha riguardato in primo luogo, in modo particolare, la formazione della <strong>Carta Tecnica Regionale in scala 1:10.000</strong>, la realizzazione o acquisizione di coperture aereofotogrammetriche, a varie scadenze temporali, e di elaborazioni fotocartografiche e la formazione di cartografie tematiche a scala regionale. <br>
+<a href="http://www.sitr.regione.sicilia.it/?page_id=24" title="Sitr Regione Sicilia - Cartografia – Informazioni" target="_blank">Continua..</a>.</p>
+<hr>
+<p class="lorem2">  <strong>Note:</strong><br>
+   <em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
+   <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p>
+</div>    
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem2"> <strong>Rielaborazione di: </strong><a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>
+  <br>per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong></p> 
+ <p class="lorem2"><a href="http://siciliahub.github.io/mappe/14centimetri/#7/37.514/14.040" target="_blank">Ortofoto ad alta risoluzione del SITR della Regione Siciliana</a> a cura di <a href="https://twitter.com/aborruso" title="Andrea Borruso" target="_blank">@aborruso</a> (vedi <a href="http://opendatasicilia.it/2014/12/24/lortofoto-di-natale-14-centimetri/" title="L’ortofoto di Natale, a 14 centimetri" target="_blank">blog post</a> del 24/12/2014)</p>
+<p class="legenda"> <strong>Cartografia e Ortofoto di base</strong></p>
+<p class="lorem2"><strong>- Carta Tecnica Regionale 10K (C.T.R.) -</strong><br>
+<a href="http://www.sitr.regione.sicilia.it/?page_id=419" title="Download Cartografia" target="_blank">sitr.regione.sicilia.it</a> - con licenza <a href="https://creativecommons.org/licenses/by-sa/3.0/it/" title="Attribuzione - Condividi allo stesso modo 3.0 Italia (CC BY-SA 3.0 IT)" target="_blank">Creative Commons Attribuzione - Condividi allo stesso modo – 3.0 italia - (CC-BY SA 3.0)</a><br><br>
+L’<a href="http://opendatasicilia.it/2014/09/15/regione-siciliana-autorizza-ricalco-in-openstreetmap-sulle-ortofoto-sua-proprieta/" title="Regione Sicilina - Autorizzazione al ricalco" target="_blank">autorizzazione al ricalco</a> data a OpenStreetMap dalla Regione Siciliana vale anche per questi dati.<br><br>
+Progetto Qgis per la rappresentazione cartografica (vestizione) della CTR 10k di: <a href="https://twitter.com/aborruso" title="Andrea Borruso" target="_blank">@aborruso</a>, <a href="https://twitter.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a> e <a href="https://twitter.com/gbvitrano" title="Giovan Battista Vitrano" target="_blank">@gbvitrano</a> - <a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">opendatasicilia.it</a></p>
+<p class="lorem2"><a href="http://www.sitr.regione.sicilia.it/?page_id=2699" title="CTR ATA 2012-2013 Tif" target="_blank">Sitr Regione Sicilia - CTR 1:10.000 ediz. 2012-2013</a> (aggiornamento speditivo) File in formato Raster Tif+Tfw sistema di coordinate ETRS89 Fuso EST (EPSG:25832, ETRS 1989 UTM Zone 33N) <a href="http://www.sitr.regione.sicilia.it/geoportale/it/Metadata/Details/784" title="metadati" target="_blank">metadati.</a></p>
+<p class="lorem2"><a href="http://www.sitr.regione.sicilia.it/?page_id=2599" title="CTR ATA 2012-2013 pdf" target="_blank">Sitr Regione Sicilia - CTR 1:10.000 ediz. 2012_2013</a> (aggiornamento speditivo) file in formato pdf </p>
+
+<p class="lorem2"><strong>Tavole CTR in formato pdf - Palermo</strong><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_585160_150.pdf" title="Tavola n°  585160" target="_blank">585160</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_594040.pdf" title="Tavola n°  594040" target="_blank">594040</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_595010.pdf" title="Tavola n°  595010" target="_blank">595010</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_594070.pdf" title="Tavola n°  594070" target="_blank">594070</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_594080.pdf" title="Tavola n°  594080" target="_blank">594080</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_595050.pdf" title="Tavola n°  595050" target="_blank">595050</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_595060.pdf" title="Tavola n°  595060" target="_blank">595060</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_594120.pdf" title="Tavola n°  594120" target="_blank">594120</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_595090.pdf" title="Tavola n°  595090" target="_blank">595090</a><br>
+  Tavola n°&nbsp;&nbsp;<a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/ctr_2012_2013/pdf/ATA2012_595100.pdf" title="Tavola n°  595100" target="_blank">595100</a> </p>
+  
+ <p class="lorem2"><strong>Sitr Regione Sicilia - Services  </strong> </p>
+<p class="lorem2"><strong>  <a href="http://map.sitr.regione.sicilia.it/gis/rest/services/ATA_2012_2013/Ortofoto_ATA_2012_2013/MapServer" title="Ortofoto ATA 2012-2013" target="_blank">Ortofoto ATA 2012-2013</a></strong> (MapServer) </p>
+<p class="lorem2"><strong>  <a href="http://map.sitr.regione.sicilia.it/gis/rest/services/ATA_2012_2013/Ortofoto_ATA_2012_2013_Palermo_14cm/MapServer" title="Ortofoto ATA 2012 2013 Palermo 14 cm" target="_blank">Ortofoto ATA 2012 2013 Palermo 14 cm</a></strong> (MapServer)</p> 
+<p class="lorem2"><strong><a href="http://www.sitr.regione.sicilia.it/?page_id=547" title="Quadri d’Unione" target="_blank">Sitr Regione Sicilia - Quadri d’Unione</a></strong> I quadri di unione sono in formato vettoriale Shape File o in formato pdf. Per consultarli è necessario installare un software apposito come ad esempio Qgis, GRASS, ArcGIS, AutoCAD Map 3D.</p>
+<p class="lorem2"><strong>Sitr Regione Sicilia - <a href="http://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Cartografia/Grafici_volo_ATA_2012_2013_ETRF2000.zip" title="Grafici di volo ATA 2012-2013 ETRF2000" target="_blank">Grafici di volo ATA 2012-2013 ETRF2000</a></strong> in formato shape</p>
+<hr>
+<p class="lorem2">  <strong>Note:</strong><br>
+   <em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
+   <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p>
+</div>
+
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem2"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="lib/images/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="lib/images/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="lib/images/gp.png"width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="lib/images/in.png"width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="lib/images/pin.png" width="32" height="32"alt="pinterest"></a></p>
+</div>
+
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "http://siciliahub.github.io/mappe/palermo_hub/cartografia.html#14/38.1185/13.3595",});
+			});
+		</script>
+        <br>
+ <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://is.gd/V5UNGq"  readonly></p><br>
+<hr>
+<br>
+<p class="lorem2"><strong>Includi la mappa</strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="https://siciliahub.github.io/mappe/palermo_hub/cartografia.html#14/38.1185/13.3595"></iframe><a href="https://siciliahub.github.io/mappe/palermo_hub/cartografia.html#14/38.1185/13.3595" title="Palermo Hub, su base opendata">Visualizza a schermo intero</a>
+      </textarea><br><br>
+           <p class="lorem2">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+
+    </div>
+    
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem2">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem2"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
+<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
+<li><p class="lorem2"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a>plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</li></p>
+<li><p class="lorem2"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem2"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem2"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar v2" target="_blank">Sidebar v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet MousePosition" target="_blank">Leaflet MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet graphicscale" target="_blank">Leaflet graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;</li></p>
+<li><p class="lorem2"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet PolylineMeasure" target="_blank">Leaflet PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</li></p>
+<li><p class="lorem2"><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet zoomhome" target="_blank">Leaflet zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem2"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</li></p>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+      </ul> </div></div> </div>  
+  
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ff9900',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ff9900',
+                fillOpacity: 0.5
+              });
+            }
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });	
+		  
+var map = L.map('map', { zoomControl:false, maxZoom:20, minZoom:12}).fitBounds([[38.0391060456,13.140160209],[38.2277793856,13.4984503497]]);
+map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+var bounds_group = new L.featureGroup([]);
+	  
+<!-- mappe di base -->	  
+var basemaps = [ 
+L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 7,  maxZoom: 20, maxNativeZoom: 20, label: 'Google Terrain'}), 
+
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 7,  maxZoom: 20, maxNativeZoom: 20,label: 'Map tiles by CartoDB'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
+				minZoom: 7,  maxZoom: 20, maxNativeZoom: 20, label: 'Google Satellite'}),
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Source: &#9400; ESRI Satellite', minZoom: 7,  maxZoom: 19, maxNativeZoom: 19, label: 'ESRI Satellite - Max zoom 19'}),
+];
+ 	
+	<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+			
+<!-- funzioni mappa -->
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+		
+<!-- Poligono fantasma  inizio -->	
+        function pop_poligonoisola0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_poligonoisola0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_poligonoisola0_0() {
+            return {
+                pane: 'pane_poligonoisola0',
+                opacity: 0,
+                color: 'rgba(0,0,0,0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_poligonoisola0');
+        map.getPane('pane_poligonoisola0').style.zIndex = 1;
+        map.getPane('pane_poligonoisola0').style['mix-blend-mode'] = 'normal';
+    var layer_poligonoisola0 = new L.geoJson(json_poligonoisola0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_poligonoisola0',
+        onEachFeature: pop_poligonoisola0,
+        style: style_poligonoisola0_0,
+    });
+        bounds_group.addLayer(layer_poligonoisola0);
+        // map.addLayer(layer_poligonoisola0);		
+<!-- Poligono fantasma  fine -->	
+
+	  // Ortofoto Palermo 14 cm - Regione Siciliana 
+ var sicilia_wms = L.tileLayer.wms('http://map.sitr.regione.sicilia.it/gis/services/ATA_2012_2013/Ortofoto_ATA_2012_2013/MapServer/WmsServer?', {
+    layers: '0',
+	    format: 'image/png',
+        minZoom: 7,
+        maxZoom: 20,
+        maxNativeZoom: 20,
+    transparent: 'true',
+    attribution: 'SITR Regione Siciliana Volo ATA 2012 2013',
+}) //.addTo(map);
+	  
+ var palermo_wms = L.tileLayer.wms('http://map.sitr.regione.sicilia.it/gis/services/ATA_2012_2013/Ortofoto_ATA_2012_2013_Palermo_14cm/MapServer/WmsServer?', {
+    layers: '0',
+	    format: 'image/png',
+        minZoom: 7,
+        maxZoom: 20,
+        maxNativeZoom: 20,
+    transparent: 'true',
+    attribution: 'SITR Regione Siciliana Volo ATA 2012 2013',
+}) //.addTo(map);	
+  
+	    	  // Sfondo trasparente
+		 var sfondo_tra =L.tileLayer('../mappe/palermo_hub/data/sfondo/{z}/{x}/{y}.png', {
+        minZoom: 12,
+        maxZoom: 17,
+        maxNativeZoom: 17,
+        tms: true,
+        attribution: '',
+		zIndex: 390,
+      }); //.addTo(map); 
+  
+	   	  //mappa ctr10k
+		 var ctr10k =L.tileLayer('../mappe/palermo_hub/data/ctr10k/{z}/{x}/{y}.png', {
+        minZoom: 12,
+        maxZoom: 17,
+        maxNativeZoom: 17,
+        tms: true,
+        attribution: 'Carta Tecnica Regionale 10k',
+		zIndex: 400,
+      }) .addTo(map); 
+	
+		// ATA1213 Tracce Palermo
+        function pop_ATA1213_Tracce_pa_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\
+			  <th scope="row"><img src="legend/ATA1213_Tracce_pa_1.png" /><span class="legenda1">&nbsp;&nbsp;Volo ATA 2012-13&nbsp;<spam /></th>\
+                        <td><span class="legenda1">- Tracce di Palermo<spam /> <br /><br /></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Strisciata n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Strisciata'] !== null ? Autolinker.link(String(feature.properties['Strisciata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fotogramma n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Fotogramma'] !== null ? Autolinker.link(String(feature.properties['Fotogramma'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ATA1213_Tracce_pa_1_0() {
+            return {
+                pane: 'pane_ATA1213_Tracce_pa_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.5)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,51,181,0.1)',
+            }
+        }
+        map.createPane('pane_ATA1213_Tracce_pa_1');
+        map.getPane('pane_ATA1213_Tracce_pa_1').style.zIndex = 401;
+        map.getPane('pane_ATA1213_Tracce_pa_1').style['mix-blend-mode'] = 'normal';
+        var layer_ATA1213_Tracce_pa_1 = new L.geoJson(json_ATA1213_Tracce_pa_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_ATA1213_Tracce_pa_1',
+            onEachFeature: pop_ATA1213_Tracce_pa_1,
+            style: style_ATA1213_Tracce_pa_1_0,
+        });
+        bounds_group.addLayer(layer_ATA1213_Tracce_pa_1);
+        //map.addLayer(layer_ATA1213_Tracce_pa_1);
+		
+		// ATA1213 Tracce Trasversali Palermo
+        function pop_ATA1213_Tracce_pa_Trasversali_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<th scope="row"><img src="legend/ATA1213_Tracce_pa_Trasversali_2.png" /><span class="legenda1">&nbsp;&nbsp;Volo ATA 2012-13&nbsp;<spam /></th>\
+                        <td><span class="legenda1">- Tracce Tras.li di Palermo<spam /> <br /><br /></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Strisciata n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Strisciata'] !== null ? Autolinker.link(String(feature.properties['Strisciata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fotogramma n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Fotogramma'] !== null ? Autolinker.link(String(feature.properties['Fotogramma'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ATA1213_Tracce_pa_Trasversali_2_0() {
+            return {
+                pane: 'pane_ATA1213_Tracce_pa_Trasversali_2',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(253,171,1,0.3)',
+            }
+        }
+        map.createPane('pane_ATA1213_Tracce_pa_Trasversali_2');
+        map.getPane('pane_ATA1213_Tracce_pa_Trasversali_2').style.zIndex = 402;
+        map.getPane('pane_ATA1213_Tracce_pa_Trasversali_2').style['mix-blend-mode'] = 'normal';
+        var layer_ATA1213_Tracce_pa_Trasversali_2 = new L.geoJson(json_ATA1213_Tracce_pa_Trasversali_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_ATA1213_Tracce_pa_Trasversali_2',
+            onEachFeature: pop_ATA1213_Tracce_pa_Trasversali_2,
+            style: style_ATA1213_Tracce_pa_Trasversali_2_0,
+        });
+        bounds_group.addLayer(layer_ATA1213_Tracce_pa_Trasversali_2);
+      //  map.addLayer(layer_ATA1213_Tracce_pa_Trasversali_2);
+		
+		// ATA1213 Tracce volo 14 cm Palermo
+        function pop_ATA1213_Volo14cm_Tracce_pa_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+			  <th scope="row"><img src="legend/ATA1213_Volo14cm_Tracce_pa_4.png" /><span class="legenda1">&nbsp;&nbsp;Volo ATA 2012-13&nbsp;<spam /></th>\
+                        <td><span class="legenda1">- Tracce 14 cm di Palermo<spam /> <br /><br /></td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Strisciata n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Strisciata'] !== null ? Autolinker.link(String(feature.properties['Strisciata'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fotogramma n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Fotogramma'] !== null ? Autolinker.link(String(feature.properties['Fotogramma'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ATA1213_Volo14cm_Tracce_pa_4_0() {
+            return {
+                pane: 'pane_ATA1213_Volo14cm_Tracce_pa_4',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.5)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(254,0,2,0.1)',
+            }
+        }
+        map.createPane('pane_ATA1213_Volo14cm_Tracce_pa_4');
+        map.getPane('pane_ATA1213_Volo14cm_Tracce_pa_4').style.zIndex = 404;
+        map.getPane('pane_ATA1213_Volo14cm_Tracce_pa_4').style['mix-blend-mode'] = 'normal';
+        var layer_ATA1213_Volo14cm_Tracce_pa_4 = new L.geoJson(json_ATA1213_Volo14cm_Tracce_pa_4, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_ATA1213_Volo14cm_Tracce_pa_4',
+            onEachFeature: pop_ATA1213_Volo14cm_Tracce_pa_4,
+            style: style_ATA1213_Volo14cm_Tracce_pa_4_0,
+        });
+        bounds_group.addLayer(layer_ATA1213_Volo14cm_Tracce_pa_4);
+        // map.addLayer(layer_ATA1213_Volo14cm_Tracce_pa_4);
+		
+			// Quadro Unione 10k
+		function pop_10k_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+						 <tr>\
+			  <th scope="row"><img src="legend/10k_0.png" /><span class="legenda1">&nbsp;&nbsp;Quadro unione<spam /></th>\
+                        <td><span class="legenda1">- 10k<spam /> <br /><br /></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Foglio n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['FOGLIO50'] !== null ? Autolinker.link(String(feature.properties['FOGLIO50'])) : '') + '</td>\
+                    </tr>\
+				<tr>\
+                        <th scope="row">Tavola n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['FOGLIO'] !== null ? Autolinker.link(String(feature.properties['FOGLIO'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_10k_0_0() {
+            return {
+                pane: 'pane_10k_0',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+            }
+        }
+        map.createPane('pane_10k_0');
+        map.getPane('pane_10k_0').style.zIndex = 400;
+        map.getPane('pane_10k_0').style['mix-blend-mode'] = 'normal';
+        var layer_10k_0 = new L.geoJson(json_10k_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_10k_0',
+            onEachFeature: pop_10k_0,
+            style: style_10k_0_0,
+        });
+        bounds_group.addLayer(layer_10k_0);
+		
+	// Quadro Unione 5k
+        function pop_5k_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			 <tr>\
+			  <th scope="row"><img src="legend/5k_1.png" /><span class="legenda1">&nbsp;&nbsp;Quadro unione<spam /></th>\
+                        <td><span class="legenda1">- 5k<spam /> <br /><br /></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tavola n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Tavola'] !== null ? Autolinker.link(String(feature.properties['Tavola'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_5k_1_0() {
+            return {
+                pane: 'pane_5k_1',
+                opacity: 1,
+                color: 'rgba(0,181,15,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,0.0)',
+            }
+        }
+        map.createPane('pane_5k_1');
+        map.getPane('pane_5k_1').style.zIndex = 401;
+        map.getPane('pane_5k_1').style['mix-blend-mode'] = 'normal';
+        var layer_5k_1 = new L.geoJson(json_5k_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_5k_1',
+            onEachFeature: pop_5k_1,
+            style: style_5k_1_0,
+        });
+        bounds_group.addLayer(layer_5k_1);
+		
+	// Quadro Unione 2k
+        function pop_2k_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			                    <tr>\
+			  <th scope="row"><img src="legend/2k_2.png" /><span class="legenda1">&nbsp;&nbsp;Quadro unione<spam /></th>\
+                        <td><span class="legenda1">- 2k<spam /> <br /><br /></td>\
+                    </tr>\
+                        <th scope="row">Tavola n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Tavola'] !== null ? Autolinker.link(String(feature.properties['Tavola'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_2k_2_0() {
+            return {
+                pane: 'pane_2k_2',
+                opacity: 1,
+                color: 'rgba(59,36,228,1.0)',
+                dashArray: '10,5,1,5,1,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+            }
+        }
+        map.createPane('pane_2k_2');
+        map.getPane('pane_2k_2').style.zIndex = 402;
+        map.getPane('pane_2k_2').style['mix-blend-mode'] = 'normal';
+        var layer_2k_2 = new L.geoJson(json_2k_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_2k_2',
+            onEachFeature: pop_2k_2,
+            style: style_2k_2_0,
+        });
+        bounds_group.addLayer(layer_2k_2);	
+		
+				// Perimetro OSM
+        function pop_osm_confine_palermo_epsg_3004_0(feature, layer) {
+            var popupContent = '<table>\
+						                    <tr>\
+			  <th scope="row"><img src="legend/osm_confine_palermo_epsg_3004_0.png" /><span class="legenda1">&nbsp;&nbsp;Confine Comunale<spam /></th>\
+                        <td><span class="legenda1">- OSM<spam /> <br /><br /></td>\
+                    </tr>\
+                      <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_osm_confine_palermo_epsg_3004_0_0() {
+            return {
+                pane: 'pane_osm_confine_palermo_epsg_3004_0',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+            }
+        }
+        map.createPane('pane_osm_confine_palermo_epsg_3004_0');
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style.zIndex = 400;
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style['mix-blend-mode'] = 'normal';
+        var layer_osm_confine_palermo_epsg_3004_0 = new L.geoJson(json_osm_confine_palermo_epsg_3004_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_osm_confine_palermo_epsg_3004_0',
+            onEachFeature: pop_osm_confine_palermo_epsg_3004_0,
+            style: style_osm_confine_palermo_epsg_3004_0_0,
+        });
+        bounds_group.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		 map.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		
+		
+
+		
+<!-- Legenda mappa -->
+        var baseMaps = {};
+L.control.layers(baseMaps,{'<span class="legenda1">&nbsp;#OpenDataSicilia - Palermo Hub</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Base cartografica<hr><span class="legenda1">&nbsp;Ortofoto SITR Regione Sicilia</span>':layer_poligonoisola0,
+'<span class="legenda1">Sicilia - Volo ATA 2012-13</span>':sicilia_wms,
+'<img src="legend/ATA1213_Tracce_pa_1.png" /><span class="legenda1">&nbsp;&nbsp;Tracce</span>': layer_ATA1213_Tracce_pa_1,
+'<img src="legend/ATA1213_Tracce_pa_Trasversali_2.png" /><span class="legenda1">&nbsp;&nbsp;Tracce Trasversali</span>': layer_ATA1213_Tracce_pa_Trasversali_2,
+
+'<span class="legenda1">Palermo 14 cm - Volo ATA 2012-13</span><br />':palermo_wms,
+'<img src="legend/ATA1213_Volo14cm_Tracce_pa_4.png" /><span class="legenda1">&nbsp;&nbsp;Volo 14cm Tracce</span><hr> <span class="legenda1">&nbsp;Carta Tecnica Regionale</span>': layer_ATA1213_Volo14cm_Tracce_pa_4,
+
+'<img src="legend/sfonfo_tra.png" /><span class="legenda1">&nbsp;Sfondo semi trasparente</span>':sfondo_tra,
+'<img src="legend/ctr_02.png" /><span class="legenda1">&nbsp;&nbsp;Palermo 10k</span>' :ctr10k,
+'<img src="legend/osm_confine_palermo_epsg_3004_0.png" /> Confine Comunale<hr><span class="legenda1">&nbsp;Quadro unione</span>': layer_osm_confine_palermo_epsg_3004_0,
+
+'<img src="legend/2k_2.png" /><span class="legenda1">&nbsp;&nbsp;2k</span>': layer_2k_2,
+'<img src="legend/5k_1.png" /><span class="legenda1">&nbsp;&nbsp;5k</span>': layer_5k_1,
+'<img src="legend/10k_0.png" /><span class="legenda1">&nbsp;&nbsp;10k</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia"><br /><br />': layer_10k_0,
+
+ 
+}).addTo(map);
+      setBounds();
+		
+		<!-- strumenti di leaflet -->
+		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+		
+		  var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		 <!--.zoomControl.setPosition("topleft") -->;
+		 L.control.locate().addTo(map);
+		var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+		
+
+		
+        measureControl.addTo(map);
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
+		
+
+        </script>
+      
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+</div>  
+   <!-- loghi -->    
+<div id="tavolab"></div>           
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" width="80" title="opendatasicilia.it" alt="opendatasicilia"></a></div>  
+<!-- beta version     
+ <div id="beta"><img src="legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> -->
+  
+</body>
+</html>  

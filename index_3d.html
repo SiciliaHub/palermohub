@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+     <title>Palermo 3D Maps © WRLD and partners</title>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Palermo 3D - WRLD">
+        <meta name="keywords" content="Open Data, palermo,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="27/04/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+                <style>
+    html, body {
+        height: 100%;
+        margin: 0;
+    }
+    
+    #map {
+        min-height: 100%;
+        width: 100%;
+        overflow:hidden;
+    }
+        </style>
+ <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87653723-1', 'auto');
+  ga('send', 'pageview');
+</script>        
+        
+  <!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo 3D Maps © WRLD and partners" />
+<meta property="og:description" content="Palermo 3D Maps © WRLD and partners" />
+<meta property="og:url" content="http://siciliahub.github.io/mappe/palermo_hub/index_3d.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/mappe/wrld/legend/3d_wrld.jpg" />
+<meta property="og:site_name" content="github.com/SiciliaHub/mappe" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Palermo 3D Maps © WRLD and partners">
+<meta name="twitter:description" content="Palermo 3D Maps © WRLD and partners.">
+<meta name="twitter:image" content="http://siciliahub.github.io/mappe/wrld/legend/3d_wrld.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="github.com/SiciliaHub/mappe" />
+<meta name="twitter:url" content="github.com/SiciliaHub/mappe">
+<!-- twitter -->
+
+        
+ <!-- css mappa -->     
+ <link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">   
+<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css"> 
+    
+ <!-- script mappa -->           
+<script src="https://cdn-webgl.eegeo.com/eegeojs/early_access/latest/eegeo.js"></script>
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>    
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>   
+  
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes -->
+<script type="text/javascript" src="script.js"></script> 
+    
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>    
+  </head>
+  <body>
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+<!-- Sidebar SX -->
+<div id="sidebar" class="sidebar collapsed">
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" title="Menu slider" role="tab"><i class="fa fa-bars"></i></a></li>
+               <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                <li> <a href="http://opendatasicilia.it/2017/08/29/palermo-3d-maps-wrld/" target="_blank" title="Qui un post su OpenDataSicilia.it dove spiego come ho fatto" role="tab"><i class="fa fa-link"></i></a></li>
+                <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+           <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+           <li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+           <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">3D Maps WRLD<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem"> <strong><a href="https://www.wrld3d.com/" title="Your World, Reimagined" target="_blank">WRLD</a></strong> è  una piattaforma dinamica di mappatura 3D per edifici intelligenti, città, giochi, e esperienze virtuali.
+</p>
+<p class="lorem"><strong><a href="https://www.wrld3d.com/" title="Your World, Reimagined" target="_blank">WRLD</a></strong> fornisce un ambiente 3D completamente testurizzato che utilizza un sistema di coordinate globali in modo reale, quindi è pronto per essere utilizzato immediatamente – non è necessario creare un ambiente 3D o importare dati aggiuntivi di GIS. Crea stili personalizzati e utilizza lo strumento Unity per selezionare i livelli di dati desiderati – strade, edifici, alberi, etichette, ecc.<br>
+<strong><a href="https://www.wrld3d.com/" title="Your World, Reimagined" target="_blank">WRLD</a></strong> è un’azienda che crea e fornisce mappe 3D interattive per una varietà di sistemi operativi / dispositivi come iOS, Android, OSX, OculusVR e WebGL.<br><br>
+<strong>WRLD Guide: </strong><a href="https://mapdesigner.wrld3d.com/portal/latest/help/videos/">#Video</a> <a href="https://mapdesigner.wrld3d.com/portal/latest/help/documents/">#Documenti</a><br>
+<a href="https://www.sitepoint.com/3d-maps-with-eegeo-and-leaflet/" title="Building Gorgeous 3D Maps with eegeo.js and Leaflet" target="_blank">Qui</a> un articolo molto interessante che spiega come costruire mappe 3D con <a href="https://docs.eegeo.com/eegeo.js/" title="eegeo.js" target="_blank">eegeo.js</a> e <a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet</a><br>
+Dopo una veloce registrazione al <a href="https://www.wrld3d.com/" target="_blank">sito</a>, per ottenere le <a href="http://www.eegeo.com/register/" title="free eeGeo API key" target="_blank">free eeGeo API key</a>, si può utilizzare <a href="https://mapdesigner.wrld3d.com/portal/latest/" title="Map Designer" target="_blank">Map Designer</a> per configurare la copertura e la posizione della propria mappa, selezionare un tema, personalizzare i menu e il contenuto. <br><br>
+<a href="http://www.geekissimo.com/2010/07/29/firefox-4-0-abilitare-webgl-direct2d/" title="Firefox: come abilitare WebGL e Direct2D" target="_blank"><strong>Firefox: come abilitare WebGL e Direct2D</strong></a> </p>
+<hr>
+<p class="lorem"><strong>Altro esempio con tema minimal</strong></p>
+<iframe style="border: 0;" src="https://maps.wrld3d.com/embed/?mapscene=3cfce36" width="100%" height="350" frameborder="0" allowfullscreen="allowfullscreen"></iframe><br>
+<p class="lorem"><strong>Usage Mouse</strong><br>
+Left button + Move:	Pan<br>
+Middle button (Scroll whell)+ click: Orbit<br>
+Scroll whell: Zoom<br>
+Right button + Move: Rotate
+
+</p>
+</div>    
+          
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="lib/images/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="lib/images/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="lib/images/gp.png"width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="lib/images/in.png"width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="lib/images/pin.png" width="32" height="32"alt="pinterest"></a></p>
+</div>
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "http://siciliahub.github.io/mappe/palermo_hub/index_3d.html",});
+			});
+		</script><br>
+ <label for="url breve"><strong><p class="lorem">URL breve</strong></p><br><br></label>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://is.gd/6cg4Qw"  readonly></p><br>
+<hr>
+<br>
+<p class="lorem"><strong>Includi la mappa</strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="http://siciliahub.github.io/mappe/palermo_hub/index_3d.html"></iframe><a href="http://siciliahub.github.io/mappe/palermo_hub/index_3d.html" title="Palermo 3D Maps © WRLD and partners">Visualizza a schermo intero</a>
+      </textarea><br><br>
+           <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+    </div>
+    
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br><br><br><br><br><br><br>
+<hr>
+<p class="lorem">   <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato è distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />
+<a href="http://creativecommons.org/licenses/by/4.0/" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Internazionale</a> - <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Italia</a> </p> 
+
+<p class="lorem"> <em>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</em><br>
+  <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em> </p>
+</div>
+
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+<li><p class="lorem"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem"><a href="https://docs.eegeo.com/wrld.js/latest/docs/api/" title="3D Maps Anywhere with wrld.js" target="_blank">WRLD</a> per creare l'interfaccia di 3D web mapping;</li></p>
+<li><p class="lorem"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet-hash" target="_blank">Leaflet-hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar-v2" target="_blank">Sidebar-v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet.MousePosition" target="_blank">Leaflet.MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet.zoomhome" target="_blank">Leaflet.zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+      </ul> 
+      </div></div> </div>  
+      
+<!-- Mappa  -->        
+<div id="map" class="sidebar-map"></div>
+    <script>
+      var map = L.eeGeo.map("map", "b5abe61dc7753c5edd642f048ba7482f",  {   center: [38.115660, 13.361466], maxZoom:19, minZoom:2 } );
+	  map.attributionControl.addAttribution('Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+
+setTimeout(function() {
+  map.setView([38.115660, 13.361466], 15, {headingDegrees: 15, tiltDegrees:400});
+}, 5000);
+
+	<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 	
+
+		<!-- strumenti di leaflet -->
+		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map)
+	    var sidebar = L.control.sidebar('sidebar').addTo(map);
+	
+	 	<!-- scala mappa -->		
+
+
+</script>
+</div>
+      
+
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods_b.svg" width="100" title="opendatasicilia.it" alt="opendatasicilia"></a></div>    
+  </body>
+</html>
+

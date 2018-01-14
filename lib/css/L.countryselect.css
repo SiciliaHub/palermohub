@@ -1,0 +1,57 @@
+.leaflet-countryselect-container {
+	/*bottom:27px;*/
+	right:0px;
+ color: #4E4B4B; 
+font: 11px/1.5 "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;
+box-shadow:0 1px 7px rgba(0,0,0,.65);
+
+}
+
+
+	/*  spento su display 4" */
+	@media screen and (width: 320px) {  .leaflet-countryselect-container {display: none;  }}
+	/*@media screen and (width: 480px) {  .leaflet-countryselect-container {display: none;  }}*/
+
+/*  spento su display 5" */
+
+	@media screen and (width: 384px) {  .leaflet-countryselect-container {display: none;  }}
+	@media screen and (width: 360px) {.leaflet-countryselect-container {display: none; }}
+	/*@media screen and (width: 640px) { .leaflet-countryselect-container {display: none; }}*/
+
+/*  spento su display 6" portrait */
+	@media screen and (width: 375px) {.leaflet-countryselect-container {display: none; }}
+	/*@media screen and (width: 667px) {.leaflet-countryselect-container {display: none; }}*/
+
+/*.leaflet-countryselect-container leaflet-control{
+    padding: 0px;
+	top:-30px;
+	left::0px;
+}*/
+
+/*.basemaps.closed .basemap {
+    display: none;
+}
+.basemaps.closed .basemap.alt {
+    display: inline-block;
+}
+.basemaps.closed .basemap.alt h4 {
+    display: none;
+}*/
+/* foglio di stile atlante cartografico palermo -
+ giovan battista vitrano per opendatasicilia.it */
+/*.basemap {
+    display: inline-block; 
+	 todo: flexbox? 
+	     cursor: pointer;
+}
+.basemap.active img {
+    border-color: orange;
+    box-shadow: 2px 2px 4px #000;
+}
+.basemap img {
+    width: 42px;
+    border: 2px solid #FFF;
+    margin: 5px 0px 5px 10px;
+    border-radius: 40px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65)
+}*/

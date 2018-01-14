@@ -1,0 +1,1749 @@
+<!doctype html>
+<html lang="it">
+    <head>
+ <title>Aree di Emergenza - Protezione Civile - Regione Sicilia</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Aree di Emergenza - Protezione Civile - Regione Sicilia, su base opendata">
+        <meta name="keywords" content="Open Data,Sicilia, protezione civile, piano emergenza, incendi">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="22/07/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87653723-1', 'auto');
+  ga('send', 'pageview');
+</script> 
+       
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Aree di Emergenza - Protezione Civile - Regione Sicilia" />
+<meta property="og:description" content="Aree di Emergenza - Protezione Civile - Regione Sicilia, su base opendata." />
+<meta property="og:url" content="https://siciliahub.github.io/mappe/palermo_hub/piano_prot_civ.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/mappe/palermo_hub/legend/clip_index/piano_pc.jpg" />
+<meta property="og:site_name" content="github.com/SiciliaHub/mappe" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Aree di Emergenza - Protezione Civile - Regione Sicilia">
+<meta name="twitter:description" content="Aree di Emergenza - Protezione Civile - Regione Sicilia, su base opendata.">
+<meta name="twitter:image" content="http://siciliahub.github.io/mappe/palermo_hub/legend/clip_index/piano_pc.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="github.com/SiciliaHub/mappe" />
+<meta name="twitter:url" content="github.com/SiciliaHub/mappe">
+<!-- twitter -->   
+ 
+ <!-- css mappa -->
+<link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="lib/css/qgis2web.css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-measure.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>       
+
+
+<!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+<script src="lib/js/qgi2web/leaflet.js"></script>
+<script src="lib/js/qgi2web/L.Control.Locate.min.js"></script>
+<script src="lib/js/qgi2web/multi-style-layer.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet-svg-shape-markers.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+<script src="lib/js/qgi2web/leaflet-measure.js"></script>
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+<script src="lib/js/qgi2web/leaflet-search.js"></script>  
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+<script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+ 
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes -->
+<script type="text/javascript" src="script.js"></script> 
+<!-- script dati mappa -->
+<script src="data/comuniOSM0.js" charset="UTF-8"></script>
+<script src="data/AreeemergenzadellaprovinciadiCatania4.js"></script>
+<script src="data/AreeemergenzadellaprovinciadiEnna3.js"></script>
+<script src="data/AreeemergenzadellaprovinciadiMessina2.js"></script>
+<script src="data/AreeemergenzadellaprovinciadiRagusa0.js"></script>
+<script src="data/AreeemergenzadelcomunediPalermo0.js"></script>
+<script src="data/poligonoisola0.js"></script>
+<script src="data/Capitaneriediporto0.js"></script>
+<script src="data/PoliziadiStato1.js"></script>
+<script src="data/Prefetture0.js"></script>
+<script src="data/AssociazionidiVolontariatosicilia0.js"></script>
+<script src="data/Carabinierisicilia1.js"></script>
+<script src="data/VigilidelFuocosicilia2.js"></script>
+<script src="data/GuardiadiFinanza0.js"></script>
+
+</head>
+
+<body>
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+<!-- Sidebar SX -->
+<div id="sidebar" class="sidebar collapsed">
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" title="Menu slider" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+                <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+			<li><a href="#wiki"  title="Glossario"role="tab"><i class="fa fa-wikipedia-w" aria-hidden="true"></i></a></li>
+       <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+       <li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Aree di Emergenza - Sicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem"> <strong>Aree di Emergenza - Protezione Civile - Regione Sicilia</strong></p>
+<p class="lorem">Censimento delle aree di emergenza ai fini della pianificazione di Protezione Civile (Aree di attesa della popolazione, Aree di accoglienza o di ricovero della popolazione e Aree di ammassamento soccorritori e risorse) dei Comuni delle Provincia di Catania, Enna, Messina, Ragusa e del Comune di Palermo.<br>
+Inoltre disponibili informazioni sulle principali strutture operative (Prefetture, Carabinieri, Polizia di Stato, Guardia di Finanza, Capitanerie di porto, Vigili del Fuoco, Ass. Volontariato iscritte nel Registro Regionale del DRPC).<br>
+Per ogni oggetto geo localizzato in mappa sono riportare le informazioni ricavate dagli open data resi disponibili dal nuovo <a href="https://dati.regione.sicilia.it/" title="Portale Opendata della Regione Sicilia" target="_blank">Portale Open data della Regione Sicilia</a> e dal <a href="http://sit.protezionecivilesicilia.it/" title="Portale cartografico del Dipartimento Regionale della Protezione Civile della Regione Siciliana" target="_blank">Portale cartografico del Dipartimento Regionale della Protezione Civile della Regione Siciliana</a>. </p>
+<img src="legend/aree_emergenza.jpg" title="Aree di Emergenza - Protezione Civile - Regione Sicilia" class="clip_resize" /> <br> <img src="legend/wiki.jpg" title="Aree di Emergenza - Protezione Civile - Regione Sicilia" class="clip_resize" />
+<hr>
+<p class="lorem"> <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
+  <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em>
+   <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em> </p>
+</div>    
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem"> <strong>Rielaborazione di: </strong><a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>
+ <br>per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong><br> </p> 
+<p class="lorem"><strong>Fonte dati:</strong> <br> <br>
+  <strong>- Aree di Emergenza -</strong><br>
+  <a href="https://dati.regione.sicilia.it/" title="Portale open data della Regione Siciliana" target="_blank">Opendata Regione Siciliana</a>, <a href="https://dati.regione.sicilia.it/dataset/aree-di-emergenza" title="Aree di protezione civile" target="_blank">Aree di Protezione Civile</a>;<br>
+<a href="http://sit.protezionecivilesicilia.it/index.php?option=com_content&view=featured&Itemid=106" title="Regione Siciliana - Dipartimento della Protezione Civile" target="_blank">Regione Siciliana - Dipartimento della Protezione Civile</a>, <a href="http://sit.protezionecivilesicilia.it/index.php?option=com_content&view=article&id=87&Itemid=157" title="Aree di Protezione Civile" target="_blank">Aree di Protezione Civile</a>;<br>
+<a href="https://www.comune.palermo.it/" title="Comune di Palermo" target="_blank">Comune di Palermo</a>, <a href="https://www.comune.palermo.it/opendata.php" title="Opendata" target="_blank">Opendata</a>, <a href="https://www.comune.palermo.it/opendata_menus.php?sel=6" title="Mobilità e sicurezza" target="_blank">Mobilità e sicurezza</a>, <a href="https://www.comune.palermo.it/opendata_dld.php?id=351" title="Piano Comunale Protezione Civile - Palermo" target="_blank">Piano Comunale Protezione Civile - Palermo</a>; <br><br>
+<strong>- Strutture operative territoriali -</strong><br>
+<a href="https://dati.regione.sicilia.it/" title="Portale open data della Regione Siciliana" target="_blank">Opendata Regione Siciliana</a>, <a href="https://dati.regione.sicilia.it/dataset/strutture-operative-territoriali" title="Strutture operative territoriali - Dipartimento Regionale della Protezione Civile della Regione Siciliana" target="_blank">Strutture operative territoriali</a>; <br> 
+<a href="http://sit.protezionecivilesicilia.it/index.php?option=com_content&view=featured&Itemid=106" title="Regione Siciliana - Dipartimento della Protezione Civile" target="_blank">Regione Siciliana - Dipartimento della Protezione Civile</a>, <a href="http://sit.protezionecivilesicilia.it/index.php?option=com_content&view=article&id=89&Itemid=205" title="Strutture operative territoriali" target="_blank">Strutture operative territoriali</a>, <a href="http://sit.protezionecivilesicilia.it/index.php?option=com_content&view=article&id=86&Itemid=199" title="Associazioni per il Volontariato" target="_blank">Associazioni per il Volontariato</a>;<br>
+<p class="lorem"> <strong>- Elenco nomi Comuni -</strong><br>L'elenco dei nomi dei Comuni Siciliani è estratto da <a href="https://www.openstreetmap.org/#map=9/37.5304/13.9911" title="OpenStreetMap" target="_blank">OpenStreetMap</a> con <a href="http://overpass-turbo.eu/" title="overpass-turbo.eu" target="_blank">overpass-turbo.eu</a> seguendo la <a href="https://geomappando.com/2016/04/20/estrarre-dati-openstreetmap-overpass-turbo/" title="Estrarre dati da OpenStreetMap con Overpass turbo" target="_blank">guida</a> del blog <a href="https://geomappando.com/" title="Geomappando - Soluzioni WebGIS Open Source" target="_blank">geomappando</a></p> 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+<p class="lorem">   <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato è distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />
+<a href="http://creativecommons.org/licenses/by/4.0/" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Internazionale</a> - <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Italia</a> </p> 
+
+<p class="lorem"> <em>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</em><br>
+  <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em> </p>
+</div>
+
+<!-- Tab Glossario -->
+       <div class="sidebar-pane" id="wiki">
+       <h2 class="sidebar-header">Glossario Protezione Civile<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+ <p class="lorem"><strong>Aree di emergenza:</strong><br>Aree destinate, in caso di emergenza, ad uso di protezione civile. Esse devono essere preventivamente individuate nella pianificazione di emergenza e possono essere di tre tipi:</p>  
+<p class="lorem"><img src="markers/ammassamento.png" title="Area di ammassamento" height="37" /> <img src="markers/firemen_01.png"  title="Area di ammassamento - Colonna mobile Vigli del Fuoco"height="37" /> <strong>Aree di ammassamento soccorritori e risorse:</strong><br>Luoghi, in zone sicure rispetto alle diverse tipologie di rischio, dove dovranno trovare sistemazione idonea i soccorritori e le risorse necessarie a garantire un razionale intervento nelle zone di emergenza. Tali aree dovranno essere facilmente raggiungibili attraverso percorsi sicuri, anche con mezzi di grandi dimensioni, e ubicate nelle vicinanze di risorse idriche, elettriche ed con possibilità di smaltimento delle acque reflue. Il periodo di permanenza in emergenza di tali aree è compreso tra poche settimane e qualche mese.</p>  
+<p class="lorem"><img src="markers/info.png" title="Aree di attesa della popolazione" height="37" /> <strong>Aree di attesa della popolazione:</strong><br> Sono i luoghi di prima accoglienza per la popolazione; possono essere utilizzate piazze, slarghi, parcheggi, spazi pubblici o privati non soggetti a rischio (frane, alluvioni, crollo di strutture attigue, etc.), raggiungibili attraverso un percorso sicuro. Il numero delle aree da scegliere è funzione della capacità ricettiva degli spazi disponibili e del numero degli abitanti. In tali aree la popolazione riceve le prime informazioni sull'evento e i primi generi di conforto. Le Aree di Attesa della popolazione saranno utilizzate per un periodo di tempo compreso tra poche ore e qualche giorno.</p> 
+<p class="lorem"><img src="markers/ricovero.png" title="Aree di accoglienza o di ricovero della popolazione" height="37" /><strong>Aree di accoglienza o di ricovero della popolazione:</strong><br>Sono luoghi, individuati in aree sicure rispetto alle diverse tipologie di rischio e poste nelle vicinanze di risorse idriche, elettriche e fognarie, in cui vengono installati i primi insediamenti abitativi per alloggiare la popolazione colpita. Dovranno essere facilmente raggiungibili anche da mezzi di grandi dimensioni per consentirne l’allestimento e la gestione. Rientrano nella definizione di aree di accoglienza o di ricovero anche le strutture ricettive (hotel, residence, camping, etc.).</p>
+<hr>
+<p class="lorem"><img src="markers/ri.png" title="Aree Rischio industriale:" height="37" /><strong>Aree Rischio industriale:</strong><br>La presenza sul territorio di stabilimenti industriali, che utilizzano o detengono sostanze chimiche per le loro attività produttive, espone la popolazione e l’ambiente circostante al rischio industriale. Un incidente industriale può, infatti, provocare danni alla popolazione e al territorio.<br>Gli effetti sulla salute umana in caso di esposizione a sostanze tossiche rilasciate nell’atmosfera durante l’incidente variano a seconda delle caratteristiche delle sostanze, della loro concentrazione, della durata d’esposizione e dalla dose assorbita.<br>Gli effetti sull’ambiente sono legati alla contaminazione del suolo, dell’acqua e dell’atmosfera da parte delle sostanze tossiche. Gli effetti sulle cose riguardano principalmente i danni alle strutture.
+Una piena conoscenza di questi aspetti è la premessa indispensabile per ridurre il rischio industriale ai livelli più bassi possibili, prevenendo danni alla salute e all’ambiente. (<a href="http://www.protezionecivile.gov.it/jcms/it/rischio_industriale.wp" target="_blank">fonte</a>) </p>
+<p class="lorem">Fonte: <a href="http://www.protezionecivile.gov.it/jcms/it/glossario.wp?letter=A" title="Glossario Protezione Civile" target="_blank">Glossario Protezione Civile </a></p>
+</div>
+
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="lib/images/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="lib/images/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="lib/images/gp.png"width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="lib/images/in.png"width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="lib/images/pin.png" width="32" height="32"alt="pinterest"></a></p>
+</div>
+
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "https://siciliahub.github.io/mappe/palermo_hub/piano_prot_civ.html",});
+			});
+		</script>
+        <br>
+ <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://is.gd/xbJqoL"  readonly></p><br>
+<hr>
+<br>
+<p class="lorem"><strong>Includi la mappa</strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="https://siciliahub.github.io/mappe/palermo_hub/piano_prot_civ.html"></iframe><a href="https://siciliahub.github.io/mappe/palermo_hub/piano_prot_civ.html" title="Aree di Emergenza - Protezione Civile - Regione Sicilia, su base opendata">Visualizza a schermo intero</a>
+      </textarea><br><br>
+           <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+
+    </div>
+    
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
+<li><p class="lorem"><a href="https://github.com/tomchadwin/qgis2web" title="Qtiles" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
+<li><p class="lorem"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet-hash" target="_blank">Leaflet-hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar-v2" target="_blank">Sidebar-v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet.MousePosition" target="_blank">Leaflet.MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet-graphicscale" target="_blank">Leaflet-graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;</li></p>
+<li><p class="lorem"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet.Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</li></p>
+<li><p class="lorem"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet.PolylineMeasure" target="_blank">Leaflet.PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</li></p>
+<li><p class="lorem"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet.zoomhome" target="_blank">Leaflet.zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</li></p>
+<li><p class="lorem"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</li></p>
+<li><p class="lorem"><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</li></p>
+<li><p class="lorem"><a href="http://www.jqueryscript.net/menu/Responsive-Multi-level-Off-Screen-Navigation-Plugin-For-jQuery-cbFlyout.html" title="Responsive Multi-level Off Screen Navigation Plugin For jQuery - cbFlyout" target="_blank">Menu jQuery</a>, Responsive Multi-level Off Screen Navigation Plugin For jQuery - cbFlyout;</li><br><br></p>
+<li><p class="lorem">Icone per le tue mappe <a href="https://mapicons.mapsmarker.com/category/markers/stores/" title="Map Icons Collection" target="_blank"><img src="https://mapicons.mapsmarker.com/wp-content/uploads/2011/03/miclogo-88x31.gif" width="88" height="31" alt=""/></a> </li></p>
+      </ul> </div></div> </div>  
+  
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ff9900',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ff9900',
+                fillOpacity: 0.5
+              });
+            }
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });	
+	
+var map = L.map('map', { zoomControl:false, maxZoom:20, minZoom:7}).fitBounds([[38.0391060456,13.140160209],[38.2277793856,13.4984503497]]);
+map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+var bounds_group = new L.featureGroup([]);
+
+<!-- mappe di base -->	  
+var basemaps = [ 
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 7,  maxZoom: 20, maxNativeZoom: 20,label: 'Map tiles by CartoDB'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
+				minZoom: 7,  maxZoom: 20, maxNativeZoom: 20, label: 'Google Satellite'}),
+				
+L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 7,  maxZoom: 20, maxNativeZoom: 20, label: 'Google Terrain'}), 
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Source: &#9400; ESRI Satellite', minZoom: 7,  maxZoom: 19, maxNativeZoom: 19, label: 'ESRI Satellite - Max zoom 19'}),
+ ];
+ 	<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+	
+<!-- selettore comuni -->	
+var select = L.countrySelect({title:"Seleziona il Comune di interesse!"});
+			select.addTo(map);
+			select.on('change', function(e){
+				if (e.feature === undefined){ //Do nothing on title
+					return;
+				}
+				var country = L.geoJson(e.feature);
+				if (this.previousCountry != null){
+					map.removeLayer(this.previousCountry);
+				}
+				this.previousCountry = country;
+
+				map.addLayer(country);
+				map.fitBounds(country.getBounds());
+				
+			});	
+			
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+			
+<!-- funzioni mappa -->
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+<!-- Cerca Comune -->	
+        function pop_comuniOSM0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_comuniOSM0_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+           var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_comuniOSM0_0() {
+            return {
+                pane: 'pane_comuniOSM0',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/point.svg',
+            iconSize: [0.01, 0.01]
+        }),
+            }
+        }
+        map.createPane('pane_comuniOSM0');
+        map.getPane('pane_comuniOSM0').style.zIndex = 1;
+        map.getPane('pane_comuniOSM0').style['mix-blend-mode'] = 'normal';
+        var layer_comuniOSM0 = new L.geoJson(json_comuniOSM0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_comuniOSM0',
+            onEachFeature: pop_comuniOSM0,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_comuniOSM0_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_comuniOSM0);
+        map.addLayer(layer_comuniOSM0);
+		
+<!-- Poligono fantasma -->	
+        function pop_poligonoisola0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_poligonoisola0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_poligonoisola0_0() {
+            return {
+                pane: 'pane_poligonoisola0',
+                opacity: 0,
+                color: 'rgba(0,0,0,0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_poligonoisola0');
+        map.getPane('pane_poligonoisola0').style.zIndex = 1;
+        map.getPane('pane_poligonoisola0').style['mix-blend-mode'] = 'normal';
+    var layer_poligonoisola0 = new L.geoJson(json_poligonoisola0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_poligonoisola0',
+        onEachFeature: pop_poligonoisola0,
+        style: style_poligonoisola0_0,
+    });
+        bounds_group.addLayer(layer_poligonoisola0);
+        map.addLayer(layer_poligonoisola0);
+		
+<!-- Aree Emergneza  Province-->
+ <!-- Aree Emergenza Prov. Ragusa -->		
+        function pop_AreeemergenzadellaprovinciadiRagusa0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_AreeemergenzadellaprovinciadiRagusa0_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">' + (feature.properties['Tipologia'] !== null ? Autolinker.link(String(feature.properties['Tipologia'])) : '') + ' <spam /></td>\
+                    </tr>\
+					     <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Comune'] !== null ? Autolinker.link(String(feature.properties['Comune'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Istat_Prov'] !== null ? Autolinker.link(String(feature.properties['Istat_Prov'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Piano:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Numero'] !== null ? Autolinker.link(String(feature.properties['Numero'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Tipo area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['tipo_area'] !== null ? Autolinker.link(String(feature.properties['tipo_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nome area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['denom_area'] !== null ? Autolinker.link(String(feature.properties['denom_area'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['indi_area'] !== null ? Autolinker.link(String(feature.properties['indi_area'])) : '') + '</td>\
+                    </tr>\
+					                         <tr>\
+                        <th scope="row">Viabilità:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['viab_denom'] !== null ? Autolinker.link(String(feature.properties['viab_denom'])) : '') + '</td>\
+                    </tr>\
+					  <tr>\
+                        <th scope="row">Accessibiltà:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['accessibil'] !== null ? Autolinker.link(String(feature.properties['accessibil'])) : '') + '</td>\
+                    </tr>\
+						<tr>\
+                        <th scope="row">Pavimentazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pavimentaz'] !== null ? Autolinker.link(String(feature.properties['pavimentaz'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Estensione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['estensione'] !== null ? Autolinker.link(String(feature.properties['estensione'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pendenza (%):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pendenza'] !== null ? Autolinker.link(String(feature.properties['pendenza'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Altitudine (m):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['altitudine'] !== null ? Autolinker.link(String(feature.properties['altitudine'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Uso attuale:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['util_attua'] !== null ? Autolinker.link(String(feature.properties['util_attua'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (ha):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area ha'] !== null ? Autolinker.link(String(feature.properties['area ha'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (mq):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area mq'] !== null ? Autolinker.link(String(feature.properties['area mq'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_AreeemergenzadellaprovinciadiRagusa0_0(feature) {
+            switch(feature.properties['Tipologia']) {
+                case 'AREA DI ATTESA':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiRagusa0',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(62,157,31,0.75)',
+            }
+                    break;
+                case 'AREA DI RICOVERO':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiRagusa0',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(187,0,0,0.75)',
+            }
+                    break;
+                case 'AREA DI AMMASSAMENTO':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiRagusa0',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(198,192,4,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_AreeemergenzadellaprovinciadiRagusa0');
+        map.getPane('pane_AreeemergenzadellaprovinciadiRagusa0').style.zIndex = 550;
+        map.getPane('pane_AreeemergenzadellaprovinciadiRagusa0').style['mix-blend-mode'] = 'normal';
+    var layer_AreeemergenzadellaprovinciadiRagusa0 = new L.geoJson(json_AreeemergenzadellaprovinciadiRagusa0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_AreeemergenzadellaprovinciadiRagusa0',
+        onEachFeature: pop_AreeemergenzadellaprovinciadiRagusa0,
+        style: style_AreeemergenzadellaprovinciadiRagusa0_0,
+    });
+        bounds_group.addLayer(layer_AreeemergenzadellaprovinciadiRagusa0);
+     //   map.addLayer(layer_AreeemergenzadellaprovinciadiRagusa0);
+		
+ <!-- Aree Emergenza Prov. Messina -->
+        function pop_AreeemergenzadellaprovinciadiMessina2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_AreeemergenzadellaprovinciadiMessina2_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">' + (feature.properties['Tipologia'] !== null ? Autolinker.link(String(feature.properties['Tipologia'])) : '') + ' <spam /></td>\
+                    </tr>\
+					     <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Comune'] !== null ? Autolinker.link(String(feature.properties['Comune'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Istat_Prov'] !== null ? Autolinker.link(String(feature.properties['Istat_Prov'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Piano:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Numero'] !== null ? Autolinker.link(String(feature.properties['Numero'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Tipo area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['tipo_area'] !== null ? Autolinker.link(String(feature.properties['tipo_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nome area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['denom_area'] !== null ? Autolinker.link(String(feature.properties['denom_area'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['indi_area'] !== null ? Autolinker.link(String(feature.properties['indi_area'])) : '') + '</td>\
+                    </tr>\
+					                         <tr>\
+                        <th scope="row">Viabilità:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['viab_denom'] !== null ? Autolinker.link(String(feature.properties['viab_denom'])) : '') + '</td>\
+                    </tr>\
+					  <tr>\
+                        <th scope="row">Accessibiltà:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['accessibil'] !== null ? Autolinker.link(String(feature.properties['accessibil'])) : '') + '</td>\
+                    </tr>\
+						<tr>\
+                        <th scope="row">Pavimentazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pavimentaz'] !== null ? Autolinker.link(String(feature.properties['pavimentaz'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Estensione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['estensione'] !== null ? Autolinker.link(String(feature.properties['estensione'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pendenza (%):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pendenza'] !== null ? Autolinker.link(String(feature.properties['pendenza'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Altitudine (m):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['altitudine'] !== null ? Autolinker.link(String(feature.properties['altitudine'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Uso attuale:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['util_attua'] !== null ? Autolinker.link(String(feature.properties['util_attua'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (ha):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area ha'] !== null ? Autolinker.link(String(feature.properties['area ha'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (mq):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area mq'] !== null ? Autolinker.link(String(feature.properties['area mq'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_AreeemergenzadellaprovinciadiMessina2_0(feature) {
+            switch(feature.properties['Tipologia']) {
+                case 'AREA DI ATTESA':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiMessina2',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(62,157,31,0.75)',
+            }
+                    break;
+                case 'AREA DI RICOVERO':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiMessina2',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(187,0,0,0.75)',
+            }
+                    break;
+                case 'AREA DI AMMASSAMENTO':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiMessina2',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(198,192,4,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_AreeemergenzadellaprovinciadiMessina2');
+        map.getPane('pane_AreeemergenzadellaprovinciadiMessina2').style.zIndex = 550;
+        map.getPane('pane_AreeemergenzadellaprovinciadiMessina2').style['mix-blend-mode'] = 'normal';
+    var layer_AreeemergenzadellaprovinciadiMessina2 = new L.geoJson(json_AreeemergenzadellaprovinciadiMessina2, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_AreeemergenzadellaprovinciadiMessina2',
+        onEachFeature: pop_AreeemergenzadellaprovinciadiMessina2,
+        style: style_AreeemergenzadellaprovinciadiMessina2_0,
+    });
+        bounds_group.addLayer(layer_AreeemergenzadellaprovinciadiMessina2);
+      //  map.addLayer(layer_AreeemergenzadellaprovinciadiMessina2);
+
+<!-- Aree Emergenza Prov. Enna -->		
+        function pop_AreeemergenzadellaprovinciadiEnna3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_AreeemergenzadellaprovinciadiEnna3_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">' + (feature.properties['Tipologia'] !== null ? Autolinker.link(String(feature.properties['Tipologia'])) : '') + ' <spam /></td>\
+                    </tr>\
+					     <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Comune'] !== null ? Autolinker.link(String(feature.properties['Comune'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Istat_Prov'] !== null ? Autolinker.link(String(feature.properties['Istat_Prov'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Piano:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Numero'] !== null ? Autolinker.link(String(feature.properties['Numero'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Tipo area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['tipo_area'] !== null ? Autolinker.link(String(feature.properties['tipo_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nome area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['denom_area'] !== null ? Autolinker.link(String(feature.properties['denom_area'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['indi_area'] !== null ? Autolinker.link(String(feature.properties['indi_area'])) : '') + '</td>\
+                    </tr>\
+					                         <tr>\
+                        <th scope="row">Viabilità:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['viab_denom'] !== null ? Autolinker.link(String(feature.properties['viab_denom'])) : '') + '</td>\
+                    </tr>\
+					  <tr>\
+                        <th scope="row">Accessibiltà:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['accessibil'] !== null ? Autolinker.link(String(feature.properties['accessibil'])) : '') + '</td>\
+                    </tr>\
+						<tr>\
+                        <th scope="row">Pavimentazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pavimentaz'] !== null ? Autolinker.link(String(feature.properties['pavimentaz'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Estensione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['estensione'] !== null ? Autolinker.link(String(feature.properties['estensione'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pendenza (%):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pendenza'] !== null ? Autolinker.link(String(feature.properties['pendenza'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Altitudine (m):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['altitudine'] !== null ? Autolinker.link(String(feature.properties['altitudine'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Uso attuale:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['util_attua'] !== null ? Autolinker.link(String(feature.properties['util_attua'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (ha):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area ha'] !== null ? Autolinker.link(String(feature.properties['area ha'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (mq):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area mq'] !== null ? Autolinker.link(String(feature.properties['area mq'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_AreeemergenzadellaprovinciadiEnna3_0(feature) {
+            switch(feature.properties['Tipologia']) {
+                case 'AREA DI ATTESA':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiEnna3',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(62,157,31,0.75)',
+            }
+                    break;
+                case 'AREA DI RICOVERO':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiEnna3',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(187,0,0,0.75)',
+            }
+                    break;
+                case 'AREA DI AMMASSAMENTO':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiEnna3',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(198,192,4,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_AreeemergenzadellaprovinciadiEnna3');
+        map.getPane('pane_AreeemergenzadellaprovinciadiEnna3').style.zIndex = 550;
+        map.getPane('pane_AreeemergenzadellaprovinciadiEnna3').style['mix-blend-mode'] = 'normal';
+    var layer_AreeemergenzadellaprovinciadiEnna3 = new L.geoJson(json_AreeemergenzadellaprovinciadiEnna3, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_AreeemergenzadellaprovinciadiEnna3',
+        onEachFeature: pop_AreeemergenzadellaprovinciadiEnna3,
+        style: style_AreeemergenzadellaprovinciadiEnna3_0,
+    });
+        bounds_group.addLayer(layer_AreeemergenzadellaprovinciadiEnna3);
+      //  map.addLayer(layer_AreeemergenzadellaprovinciadiEnna3);
+		
+<!-- Aree Emergenza Prov. Catania  -->
+        function pop_AreeemergenzadellaprovinciadiCatania4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_AreeemergenzadellaprovinciadiCatania4_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">' + (feature.properties['Tipologia'] !== null ? Autolinker.link(String(feature.properties['Tipologia'])) : '') + ' <spam /></td>\
+                    </tr>\
+					     <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Comune'] !== null ? Autolinker.link(String(feature.properties['Comune'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Istat_Prov'] !== null ? Autolinker.link(String(feature.properties['Istat_Prov'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Piano:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Numero'] !== null ? Autolinker.link(String(feature.properties['Numero'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Tipo area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['tipo_area'] !== null ? Autolinker.link(String(feature.properties['tipo_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nome area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['denom_area'] !== null ? Autolinker.link(String(feature.properties['denom_area'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['indi_area'] !== null ? Autolinker.link(String(feature.properties['indi_area'])) : '') + '</td>\
+                    </tr>\
+					                         <tr>\
+                        <th scope="row">Viabilità:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['viab_denom'] !== null ? Autolinker.link(String(feature.properties['viab_denom'])) : '') + '</td>\
+                    </tr>\
+					  <tr>\
+                        <th scope="row">Accessibiltà:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['accessibil'] !== null ? Autolinker.link(String(feature.properties['accessibil'])) : '') + '</td>\
+                    </tr>\
+						<tr>\
+                        <th scope="row">Pavimentazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pavimentaz'] !== null ? Autolinker.link(String(feature.properties['pavimentaz'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Estensione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['estensione'] !== null ? Autolinker.link(String(feature.properties['estensione'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pendenza (%):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pendenza'] !== null ? Autolinker.link(String(feature.properties['pendenza'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Altitudine (m):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['altitudine'] !== null ? Autolinker.link(String(feature.properties['altitudine'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Uso attuale:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['util_attua'] !== null ? Autolinker.link(String(feature.properties['util_attua'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (ha):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area ha'] !== null ? Autolinker.link(String(feature.properties['area ha'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (mq):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area mq'] !== null ? Autolinker.link(String(feature.properties['area mq'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_AreeemergenzadellaprovinciadiCatania4_0(feature) {
+            switch(feature.properties['Tipologia']) {
+                case 'AREA DI ATTESA':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiCatania4',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(62,157,31,0.75)',
+            }
+                    break;
+                case 'AREA DI RICOVERO':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiCatania4',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(187,0,0,0.75)',
+            }
+                    break;
+                case 'AREA DI AMMASSAMENTO':
+                    return {
+                pane: 'pane_AreeemergenzadellaprovinciadiCatania4',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(198,192,4,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_AreeemergenzadellaprovinciadiCatania4');
+        map.getPane('pane_AreeemergenzadellaprovinciadiCatania4').style.zIndex = 550;
+        map.getPane('pane_AreeemergenzadellaprovinciadiCatania4').style['mix-blend-mode'] = 'normal';
+    var layer_AreeemergenzadellaprovinciadiCatania4 = new L.geoJson(json_AreeemergenzadellaprovinciadiCatania4, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_AreeemergenzadellaprovinciadiCatania4',
+        onEachFeature: pop_AreeemergenzadellaprovinciadiCatania4,
+        style: style_AreeemergenzadellaprovinciadiCatania4_0,
+    });
+        bounds_group.addLayer(layer_AreeemergenzadellaprovinciadiCatania4);
+       // map.addLayer(layer_AreeemergenzadellaprovinciadiCatania4);
+		
+<!-- Aree Emergneza Comune Palermo-->	
+        function pop_AreeemergenzadelcomunediPalermo0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_AreeemergenzadelcomunediPalermo0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">' + (feature.properties['Tipologia'] !== null ? Autolinker.link(String(feature.properties['Tipologia'])) : '') + ' <spam /></td>\
+                    </tr>\
+					     <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Comune'] !== null ? Autolinker.link(String(feature.properties['Comune'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Istat_Prov'] !== null ? Autolinker.link(String(feature.properties['Istat_Prov'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Piano:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Numero'] !== null ? Autolinker.link(String(feature.properties['Numero'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Tipo area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['tipo_area'] !== null ? Autolinker.link(String(feature.properties['tipo_area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nome area:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['denom_area'] !== null ? Autolinker.link(String(feature.properties['denom_area'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['indi_area'] !== null ? Autolinker.link(String(feature.properties['indi_area'])) : '') + '</td>\
+                    </tr>\
+					                         <tr>\
+                        <th scope="row">Viabilità:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['viab_denom'] !== null ? Autolinker.link(String(feature.properties['viab_denom'])) : '') + '</td>\
+                    </tr>\
+					  <tr>\
+                        <th scope="row">Accessibiltà:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['accessibil'] !== null ? Autolinker.link(String(feature.properties['accessibil'])) : '') + '</td>\
+                    </tr>\
+						<tr>\
+                        <th scope="row">Pavimentazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pavimentaz'] !== null ? Autolinker.link(String(feature.properties['pavimentaz'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Estensione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['estensione'] !== null ? Autolinker.link(String(feature.properties['estensione'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pendenza (%):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pendenza'] !== null ? Autolinker.link(String(feature.properties['pendenza'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Altitudine (m):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['altitudine'] !== null ? Autolinker.link(String(feature.properties['altitudine'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Uso attuale:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['util_attua'] !== null ? Autolinker.link(String(feature.properties['util_attua'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (ha):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area ha'] !== null ? Autolinker.link(String(feature.properties['area ha'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Superficie (mq):&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['area mq'] !== null ? Autolinker.link(String(feature.properties['area mq'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_AreeemergenzadelcomunediPalermo0_0(feature) {
+            switch(feature.properties['Tipologia']) {
+                case 'AREA DI ATTESA':
+                    return {
+                pane: 'pane_AreeemergenzadelcomunediPalermo0',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(62,157,31,0.75)',
+            }
+                    break;
+                case 'AREA DI RICOVERO':
+                    return {
+                pane: 'pane_AreeemergenzadelcomunediPalermo0',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(187,0,0,0.75)',
+            }
+                    break;
+                case 'AREA DI AMMASSAMENTO':
+                    return {
+                pane: 'pane_AreeemergenzadelcomunediPalermo0',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(198,192,4,0.75)',
+            }
+                    break;
+                case 'AREA DI AMMASSAMENTO - Colonna mobile Vigili del Fuoco':
+                    return {
+                pane: 'pane_AreeemergenzadelcomunediPalermo0',
+                opacity: 1,
+                color: 'rgba(79,79,79,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(198,192,4,0.75)',
+            }
+                    break;
+                case 'RISCHIO INDUSTRIALE':
+                    return {
+                pane: 'pane_AreeemergenzadelcomunediPalermo0',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(251,245,57,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_AreeemergenzadelcomunediPalermo0');
+        map.getPane('pane_AreeemergenzadelcomunediPalermo0').style.zIndex = 550;
+        map.getPane('pane_AreeemergenzadelcomunediPalermo0').style['mix-blend-mode'] = 'normal';
+    var layer_AreeemergenzadelcomunediPalermo0 = new L.geoJson(json_AreeemergenzadelcomunediPalermo0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_AreeemergenzadelcomunediPalermo0',
+        onEachFeature: pop_AreeemergenzadelcomunediPalermo0,
+        style: style_AreeemergenzadelcomunediPalermo0_0,
+    });
+        bounds_group.addLayer(layer_AreeemergenzadelcomunediPalermo0);
+        map.addLayer(layer_AreeemergenzadelcomunediPalermo0);
+		
+<!-- struttture operativa -->
+<!-- struttture poliza e paitaneria di porto -->
+<!-- struttture Capiteria di porto  -->
+        function pop_Capitaneriediporto0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_Capitaneriediporto0_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+						<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">Capitaneria di Porto <spam /></td>\
+                    </tr>\
+					    <tr>\
+						                    <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['CITTA'] !== null ? Autolinker.link(String(feature.properties['CITTA'])) : '') + '</td>\
+                    <tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['provincia'] !== null ? Autolinker.link(String(feature.properties['provincia'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Ufficio:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TIPO_COMAN'] !== null ? Autolinker.link(String(feature.properties['TIPO_COMAN'])) : '') + '</td>\
+                    </tr>\
+                    </tr>\
+                        <th scope="row">Dipendenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DIPENDENZA'] !== null ? Autolinker.link(String(feature.properties['DIPENDENZA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['INDIRIZZO'] !== null ? Autolinker.link(String(feature.properties['INDIRIZZO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Telefono:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TELEFONO'] !== null ? Autolinker.link(String(feature.properties['TELEFONO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fax:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['FAX'] !== null ? Autolinker.link(String(feature.properties['FAX'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Email:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['EMAIL'] !== null ? Autolinker.link(String(feature.properties['EMAIL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pec:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['PEC'] !== null ? Autolinker.link(String(feature.properties['PEC'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_Capitaneriediporto0_0() {
+            return {
+                pane: 'pane_Capitaneriediporto0',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/ferry.png',
+            iconSize: [28.0, 30.0]
+        }),
+            }
+        }
+        map.createPane('pane_Capitaneriediporto0');
+        map.getPane('pane_Capitaneriediporto0').style.zIndex = 551;
+        map.getPane('pane_Capitaneriediporto0').style['mix-blend-mode'] = 'normal';
+        var layer_Capitaneriediporto0 = new L.geoJson(json_Capitaneriediporto0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Capitaneriediporto0',
+            onEachFeature: pop_Capitaneriediporto0,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Capitaneriediporto0_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_Capitaneriediporto0);
+		
+		<!-- struttture Polizia di Stato  -->
+        function pop_PoliziadiStato1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_PoliziadiStato1_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+						<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">Polizia di Stato <spam /></td>\
+                       </tr>\
+					    <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['COMUNE'] !== null ? Autolinker.link(String(feature.properties['COMUNE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['PROVINCIA'] !== null ? Autolinker.link(String(feature.properties['PROVINCIA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Uffici:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TIPO'] !== null ? Autolinker.link(String(feature.properties['TIPO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DENOMINAZI'] !== null ? Autolinker.link(String(feature.properties['DENOMINAZI'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['INDIRIZZO'] !== null ? Autolinker.link(String(feature.properties['INDIRIZZO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Telefono:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TELEFONO'] !== null ? Autolinker.link(String(feature.properties['TELEFONO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fax:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['FAX'] !== null ? Autolinker.link(String(feature.properties['FAX'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Email:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['EMAIL'] !== null ? Autolinker.link(String(feature.properties['EMAIL'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_PoliziadiStato1_0() {
+            return {
+                pane: 'pane_PoliziadiStato1',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/polizia.png',
+            iconSize: [28.0, 30.0]
+        }),
+            }
+        }
+        map.createPane('pane_PoliziadiStato1');
+        map.getPane('pane_PoliziadiStato1').style.zIndex = 552;
+        map.getPane('pane_PoliziadiStato1').style['mix-blend-mode'] = 'normal';
+        var layer_PoliziadiStato1 = new L.geoJson(json_PoliziadiStato1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_PoliziadiStato1',
+            onEachFeature: pop_PoliziadiStato1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_PoliziadiStato1_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_PoliziadiStato1);
+		
+<!-- struttture prefetture -->		
+        function pop_Prefetture0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_Prefetture0_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+									<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">Prefettura<spam /></td>\
+                       </tr>\
+                    <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['PREFETTURA'] !== null ? Autolinker.link(String(feature.properties['PREFETTURA'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['COMUNE'] !== null ? Autolinker.link(String(feature.properties['COMUNE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['INDIRIZZO'] !== null ? Autolinker.link(String(feature.properties['INDIRIZZO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Telefono:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TELEFONO'] !== null ? Autolinker.link(String(feature.properties['TELEFONO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fax:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['FAX'] !== null ? Autolinker.link(String(feature.properties['FAX'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Email:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['EMAIL'] !== null ? Autolinker.link(String(feature.properties['EMAIL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pec:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['PEC'] !== null ? Autolinker.link(String(feature.properties['PEC'])) : '') + '</td>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_Prefetture0_0() {
+            return {
+                pane: 'pane_Prefetture0',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/legge.png',
+            iconSize: [28.0, 30.0]
+        }),
+            }
+        }
+        map.createPane('pane_Prefetture0');
+        map.getPane('pane_Prefetture0').style.zIndex = 553;
+        map.getPane('pane_Prefetture0').style['mix-blend-mode'] = 'normal';
+        var layer_Prefetture0 = new L.geoJson(json_Prefetture0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Prefetture0',
+            onEachFeature: pop_Prefetture0,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Prefetture0_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_Prefetture0);
+
+<!-- struttture Associazioni  -->
+        function pop_AssociazionidiVolontariatosicilia0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_AssociazionidiVolontariatosicilia0_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+						<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">Associazioni di Volontariato - Registro DRPC Sicilia<spam /></td>\
+                       </tr>\
+					                       <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DENOMINAZIONE'] !== null ? Autolinker.link(String(feature.properties['DENOMINAZIONE'])) : '') + '</td>\
+                    </tr>\
+					     <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['COMUNE'] !== null ? Autolinker.link(String(feature.properties['COMUNE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Codice:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['CODICE'] !== null ? Autolinker.link(String(feature.properties['CODICE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_AssociazionidiVolontariatosicilia0_0() {
+            return {
+                pane: 'pane_AssociazionidiVolontariatosicilia0',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/ass_prot_civile.png',
+            iconSize: [28.0, 30.0]
+        }),
+            }
+        }
+        map.createPane('pane_AssociazionidiVolontariatosicilia0');
+        map.getPane('pane_AssociazionidiVolontariatosicilia0').style.zIndex = 554;
+        map.getPane('pane_AssociazionidiVolontariatosicilia0').style['mix-blend-mode'] = 'normal';
+        var layer_AssociazionidiVolontariatosicilia0 = new L.geoJson(json_AssociazionidiVolontariatosicilia0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_AssociazionidiVolontariatosicilia0',
+            onEachFeature: pop_AssociazionidiVolontariatosicilia0,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_AssociazionidiVolontariatosicilia0_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_AssociazionidiVolontariatosicilia0);
+		
+<!-- struttture Carabinieri  -->
+        function pop_Carabinierisicilia1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_Carabinierisicilia1_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+						<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">Carabinieri<spam /></td>\
+                       </tr>\
+					                           <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DENOMINAZIONE'] !== null ? Autolinker.link(String(feature.properties['DENOMINAZIONE'])) : '') + '</td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Tipologia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TIPOLOGIA'] !== null ? Autolinker.link(String(feature.properties['TIPOLOGIA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['COMUNE'] !== null ? Autolinker.link(String(feature.properties['COMUNE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['PROVINCIA'] !== null ? Autolinker.link(String(feature.properties['PROVINCIA'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Cap:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['CAP'] !== null ? Autolinker.link(String(feature.properties['CAP'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['INDIRIZZO'] !== null ? Autolinker.link(String(feature.properties['INDIRIZZO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Telefono:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TELEFONO'] !== null ? Autolinker.link(String(feature.properties['TELEFONO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fax:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['FAX'] !== null ? Autolinker.link(String(feature.properties['FAX'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Email:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['E_MAIL'] !== null ? Autolinker.link(String(feature.properties['E_MAIL'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pec:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['PEC'] !== null ? Autolinker.link(String(feature.properties['PEC'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+        function style_Carabinierisicilia1_0() {
+            return {
+                pane: 'pane_Carabinierisicilia1',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/carabinieri.png',
+            iconSize: [28.0, 30.0]
+        }),
+            }
+        }
+        map.createPane('pane_Carabinierisicilia1');
+        map.getPane('pane_Carabinierisicilia1').style.zIndex = 555;
+        map.getPane('pane_Carabinierisicilia1').style['mix-blend-mode'] = 'normal';
+        var layer_Carabinierisicilia1 = new L.geoJson(json_Carabinierisicilia1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Carabinierisicilia1',
+            onEachFeature: pop_Carabinierisicilia1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_Carabinierisicilia1_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_Carabinierisicilia1);
+		
+	<!-- struttture Vigili del fuoco  -->	
+        function pop_VigilidelFuocosicilia2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_VigilidelFuocosicilia2_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+									<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">Vigili del Fuoco<spam /></td>\
+                       </tr>\
+                    <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DENOMINAZIONE'] !== null ? Autolinker.link(String(feature.properties['DENOMINAZIONE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['INDIRIZZO'] !== null ? Autolinker.link(String(feature.properties['INDIRIZZO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Telefono:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TELEFONO'] !== null ? Autolinker.link(String(feature.properties['TELEFONO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fax:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['FAX'] !== null ? Autolinker.link(String(feature.properties['FAX'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fax:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Fax_Ufficio'] !== null ? Autolinker.link(String(feature.properties['Fax_Ufficio'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pec:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['E_Mail_PEC_'] !== null ? Autolinker.link(String(feature.properties['E_Mail_PEC_'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pec:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['E_Mail_P1_'] !== null ? Autolinker.link(String(feature.properties['E_Mail_P1_'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Email:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['E_Mail'] !== null ? Autolinker.link(String(feature.properties['E_Mail'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_VigilidelFuocosicilia2_0() {
+            return {
+                pane: 'pane_VigilidelFuocosicilia2',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/firemen.png',
+            iconSize: [28.0, 30.0]
+        }),
+            }
+        }
+        map.createPane('pane_VigilidelFuocosicilia2');
+        map.getPane('pane_VigilidelFuocosicilia2').style.zIndex = 556;
+        map.getPane('pane_VigilidelFuocosicilia2').style['mix-blend-mode'] = 'normal';
+        var layer_VigilidelFuocosicilia2 = new L.geoJson(json_VigilidelFuocosicilia2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_VigilidelFuocosicilia2',
+            onEachFeature: pop_VigilidelFuocosicilia2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_VigilidelFuocosicilia2_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_VigilidelFuocosicilia2);
+		
+  <!-- struttture guardia di finanza -->   
+        function pop_GuardiadiFinanza0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_GuardiadiFinanza0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+							<tr>\
+                        <th scope="row">' + (feature.properties['ico'] !== null ? Autolinker.link(String(feature.properties['ico'])) : '') + '</th>\
+                        <td><span class="legenda1">Guardia di Finanza<spam /></td>\
+                       </tr>\
+                    <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DENOMINAZIONE'] !== null ? Autolinker.link(String(feature.properties['DENOMINAZIONE'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Indirizzo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['INDIRIZZO'] !== null ? Autolinker.link(String(feature.properties['INDIRIZZO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Telefono:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['CENTRALINO'] !== null ? Autolinker.link(String(feature.properties['CENTRALINO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fax:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['FAX'] !== null ? Autolinker.link(String(feature.properties['FAX'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_GuardiadiFinanza0_0() {
+            return {
+                pane: 'pane_GuardiadiFinanza0',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/gdf.png',
+            iconSize: [28.0, 30.0]
+        }),
+            }
+        }
+        map.createPane('pane_GuardiadiFinanza0');
+        map.getPane('pane_GuardiadiFinanza0').style.zIndex = 557;
+        map.getPane('pane_GuardiadiFinanza0').style['mix-blend-mode'] = 'normal';
+        var layer_GuardiadiFinanza0 = new L.geoJson(json_GuardiadiFinanza0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_GuardiadiFinanza0',
+            onEachFeature: pop_GuardiadiFinanza0,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_GuardiadiFinanza0_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_GuardiadiFinanza0);
+		
+	
+<!-- Legenda mappa -->
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<span class="legenda1">&nbsp;Mappa Aree di emergenza</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prot. Civile - Reg. Sicilia<br /><span class="legenda1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Legenda</span><table><tr><td style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/info.png" Title="Area di attesa" width="20" height="23"/></td><td>&nbsp;&nbsp;&nbsp;Area di attesa</td></tr><tr><td style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/ricovero.png" Title="Area accoglienza o di ricovero" "width="20" height="23" /></td><td>&nbsp;&nbsp;&nbsp;Area di ricovero</td></tr><tr><td style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/ammassamento.png" title="Area di ammassamento"width="20" height="23"/></td><td>&nbsp;&nbsp;&nbsp;Area di ammassamento</td></tr></tr><tr><td style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/firemen_01.png" Title=" Area di ammassamento Colonna mobile VV.F" width="20" height="23"/></td><td>&nbsp;&nbsp;&nbsp;Colonna mobile VV.F </td></tr></tr><tr><td style="text-align: center;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="legend/ri.png" Title="Area rischio industriale " width="20" height="23"/></td><td>&nbsp;&nbsp;&nbsp;Area rischio industriale</td></tr></table><span class="legenda1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Aree di emergenza.</span>':layer_poligonoisola0,'&nbsp;Provincia di Catania<br />': layer_AreeemergenzadellaprovinciadiCatania4,'&nbsp;Provincia di Enna<br />': layer_AreeemergenzadellaprovinciadiEnna3,'Provincia di Messina<br />': layer_AreeemergenzadellaprovinciadiMessina2,'&nbsp;Provincia di Ragusa<br />': layer_AreeemergenzadellaprovinciadiRagusa0, '&nbsp;Comune di Palermo<br /> <hr> <span class="legenda1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strutture operative<br /></span>': layer_AreeemergenzadelcomunediPalermo0, '&nbsp;&nbsp;<img src="legend/legge.png"Title=" Prefetture" width="20" height="23" />&nbsp;&nbsp;Prefetture': layer_Prefetture0, '&nbsp;&nbsp;<img src="legend/carabinieri.png" Title="Carabinieri" width="20" height="23" />&nbsp;&nbsp;Carabinieri': layer_Carabinierisicilia1,  '&nbsp;&nbsp;<img src="legend/polizia.png" Title=" Polizia di Stato" width="20" height="23"/>&nbsp;&nbsp;Polizia di Stato': layer_PoliziadiStato1, '&nbsp;&nbsp;<img src="legend/gdf.png" Title="Guardia di Finanza " width="20" height="23"/>&nbsp;&nbsp;Guardia di Finanza': layer_GuardiadiFinanza0,  '&nbsp;&nbsp;<img src="legend/ferry.png" Title="Capitanerie di porto " width="20" height="23" />&nbsp;&nbsp;Capitanerie di porto': layer_Capitaneriediporto0, '&nbsp;&nbsp;<img src="legend/firemen.png" Title="Vigili del Fuoco" width="20" height="23"/>&nbsp;&nbsp;Vigili del Fuoco': layer_VigilidelFuocosicilia2, '&nbsp;&nbsp;<img src="legend/ass_prot_civile.png" Title=" Associazioni di Volontariato" width="20" height="23" />&nbsp;&nbsp;Ass. Volontariato<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia"><br /><br />': layer_AssociazionidiVolontariatosicilia0, }).addTo(map);
+        setBounds();
+		
+		<!-- strumenti di leaflet -->
+		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+		
+		map.addControl(new L.Control.Search({
+            layer:  layer_comuniOSM0,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'name'}));
+			
+		  var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		 <!--.zoomControl.setPosition("topleft") -->;
+		 L.control.locate().addTo(map);
+		var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+
+        measureControl.addTo(map);
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
+        </script>
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+</div>  
+   <!-- loghi -->    
+<div id="tavolab"></div>           
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" width="80" title="opendatasicilia.it" alt="opendatasicilia"></a></div>    
+</body>
+</html>  

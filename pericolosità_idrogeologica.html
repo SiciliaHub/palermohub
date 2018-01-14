@@ -1,0 +1,914 @@
+<!doctype html>
+<html lang="it">
+    <head>
+ <title>Mappa della Pericolosità idrogeologica - Piano Stralcio di Bacino per l&lsquo;Assetto Idrogeologico (P.A.I.) Regione Sicilia - Palermo</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Mappa della Pericolosità idrogeologica - Piano Stralcio di Bacino per l&lsquo;Assetto Idrogeologico (P.A.I.) Regione Sicilia - Palermo, su base opendata">
+        <meta name="keywords" content="Open Data,Sicilia,PAI,Geologia,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="22/07/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87653723-1', 'auto');
+  ga('send', 'pageview');
+</script> 
+       
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo - Hub - Piano Stralcio di Bacino per l&lsquo;Assetto Idrogeologico (P.A.I.) Regione Sicilia" />
+<meta property="og:description" content="Piano Stralcio di Bacino per l&lsquo;Assetto Idrogeologico (P.A.I.) Regione Sicilia - Palermo, su base opendata." />
+<meta property="og:url" content="http://siciliahub.github.io/mappe/palermo_hub/index_pai.html#14/38.1185/13.3595" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/mappe/palermo_hub/clip_index/pericolosita_idro_geo.jpg" />
+<meta property="og:site_name" content="github.com/SiciliaHub/mappe" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Palermo - Hub - Piano Stralcio di Bacino per l&lsquo;Assetto Idrogeologico (P.A.I.) Regione Sicilia - Palermo">
+<meta name="twitter:description" content="Piano Stralcio di Bacino per l&lsquo;Assetto Idrogeologico (P.A.I.) Regione Sicilia - Palermo, su base opendata.">
+<meta name="twitter:image" content="http://siciliahub.github.io/mappe/palermo_hub/clip_index/pericolosita_idro_geo.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="github.com/SiciliaHub/mappe" />
+<meta name="twitter:url" content="github.com/SiciliaHub/mappe">
+<!-- twitter -->   
+ 
+
+ <!-- css mappa -->
+<link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="lib/css/qgis2web.css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-measure.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>       
+
+
+<!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+<script src="lib/js/qgi2web/leaflet.js"></script>
+<script src="lib/js/qgi2web/L.Control.Locate.min.js"></script>
+<script src="lib/js/qgi2web/multi-style-layer.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet-svg-shape-markers.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+<script src="lib/js/qgi2web/leaflet-measure.js"></script>
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+<script src="lib/js/qgi2web/leaflet-search.js"></script>  
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/qgi2web/leaflet.pattern.js"></script>
+<script src="lib/js/qgi2web/rbush.min.js"></script>
+<script src="lib/js/qgi2web/labelgun.min.js"></script>
+<script src="lib/js/qgi2web/labels.js"></script>
+
+  <!-- script funzioni --> 
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+<script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+ 
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes -->
+<script type="text/javascript" src="script.js"></script>   
+
+<!-- script dati mappa -->
+
+<script src="data/poligonoisola0.js"></script>
+<script src="data/PAlluvioneclonediPericolositAlluvione_0.js"></script>
+<script src="data/PFranaclonediPerciolositFrana_1.js"></script>
+</head>
+
+<body>
+   <!-- header --> 
+    <div id="header">
+      <!-- Content will be inserted by jQuery from menu.html -->
+    </div> 
+<!-- Sidebar SX -->
+<div id="sidebar" class="sidebar collapsed">
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" title="Menu slider" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+                <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+			<li><a href="#wiki"  title="Wiki Piano per l'Assetto Idrogeologico"role="tab"><i class="fa fa-wikipedia-w" aria-hidden="true"></i></a></li>
+       <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+<li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Palermo Hub - P.A.I.<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="legenda"> <strong>Piano Assetto Idrogeologico Palermo</strong></p>
+<p class="lorem2"><strong>Mappa della Pericolosità idrogeologica</strong></p>
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td><span class="legenda1">Pericolosità Frana</span></td>
+      <td width="2%">&nbsp;</td>
+      <td><span class="legenda1">Pericolosità Alluvione</span></td>
+      <td width="2%">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr valign="top">
+      <td><table>
+        <tr>
+          <td style="text-align: center;"><img src="legend/geo_P4Moltoelevata0.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P4 - Molto elevata</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><img src="legend/geo_P3Elevata1.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P3 - Elevata</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><img src="legend/geo_P2Media2.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P2 - Media</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><img src="legend/geo_P1Moderata3.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P1 - Moderata</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><img src="legend/geo_P0Basso4.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P0 - Basso</td>
+        </tr>
+      </table></td>
+      <td width="2%">&nbsp;</td>
+      <td><table>
+        <tr>
+          <td style="text-align: center;"><img src="legend/idro_P4Moltoelevata0.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P4 - Molto elevata</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><img src="legend/idro_P3Elevata1.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P3 - Elevata</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><img src="legend/idro_P2Media2.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P2 - Media</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><img src="legend/idro_P1Moderata3.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;P1 - Moderata</td>
+        </tr>
+        <tr>
+          <td style="text-align: center;"><img src="legend/idro_Sitidiattenzione4.png" /></td>
+          <td class="lorem">&nbsp;&nbsp;&nbsp;Siti di attenzione</td>
+        </tr>
+      </table></td>
+      <td width="2%">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table><br>
+<p class="lorem2"> <strong><a href="http://www.sitr.regione.sicilia.it/pai/index_of-CD_PAI_per_BACINO_039-040_per_CARTOGRAFIA_per_PERICOLOSITA_E_RISCHIO.html" title="Assessorato del territorio e dell'ambiente - Dipartimento dell'ambiente - Servizio III - Assetto del territorio e difesa del suolo - Piano Stralcio di Bacino per l'Assetto Idrogeologico" target="_blank">Tavole in formato pdf - Pericolosità e rischio geomorfologico - Regione Sicilina</a></strong></p>
+<p class="lorem2"> <strong><a href="http://www.sitr.regione.sicilia.it/pai/index_of-CD_PAI_per_BACINO_039-040_per_CARTOGRAFIA_per_PERICOLOSITA_IDRAULICA.html" title="Assessorato del territorio e dell'ambiente - Dipartimento dell'ambiente - Servizio III - Assetto del territorio e difesa del suolo - Piano Stralcio di Bacino per l'Assetto Idrogeologico" target="_blank">Tavole in formato pdf - Pericolosità Idraulica - Regione Sicilina</a></strong></p>
+<p class="lorem2"> <strong><a href="http://www.artasicilia.eu/old_site/web/bacini_idrografici/" title="ASSESSORATO TERRITORIO E AMBIENTE - Dipartimento Regionale Ambiente Servizio 3 – Piano di Gestione del rischio alluvioni " target="_blank">Piano di gestione del Rischio di Alluvioni - Regione Sicilina</a></strong></p>
+<hr>
+<p class="lorem2"><strong>Classificazione del P.A.I.</strong><br>
+<strong>Vincoli e regolamentazioni d’uso del territorio</strong>
+<strong>Pericolosità da frana moderata P1:</strong> generalmente consentita ogni tipologia di intervento prevista dagli strumenti di pianificazione territoriale e urbanistica.<br>
+<strong>Pericolosità da frana media P2:</strong> gli interventi ammissibili sono quelli previsti dagli strumenti di pianificazione territoriale e urbanistica. Gli interventi generalmente sono soggetti ad uno studio di compatibilità.<br>
+<strong>Pericolosità da frana elevata P3:</strong> sono generalmente consentiti, oltre agli interventi ammessi nelle aree a pericolosità molto elevata,anche gli interventi di ampliamento di edifici esistenti per l'adeguamento igienico-sanitario e la realizzazione di nuovi impianti di trattamento delle acque reflue.<br>
+<strong>Pericolosità da frana molto elevata P4:</strong> sono consentiti esclusivamente: gli interventi di demolizione senza ricostruzione; gli interventi strettamente necessari a ridurre la vulnerabilità degli edifici esistenti e a migliorare la tutela della pubblica incolumità, senza aumenti di superficie o di volume e senza cambiamenti di destinazione d’uso; le opere di bonifica e sistemazione dei movimenti franosi.<br>
+<strong>Siti di attenzione AA:</strong> porzioni di territorio ove vi sono informazioni di possibili situazioni di dissesto a cui non è ancora stata associata alcuna classe di pericolosità. Ogni determinazione relativa ad eventuali interventi è subordinata alla redazione di un adeguato studio geomorfologico volto ad accertare il livello dipericolosità sussistente nell’area.</p>
+<hr>
+<p class="lorem2"><strong>La pericolosità</strong> è definita in letteratura in vari modi e con diverse accezioni. Quella più largamente accettata in relazione ai fenomeni naturali è quella proposta nel rapporto UNESCO del 1984, secondo cui la pericolosità è definita come ”probabilità di occorrenza di un fenomeno potenzialmente pericoloso in un determinato intervallo di tempo e in una certa area”.<br> <br>
+La definizione di pericolosità include il concetto di spazialità e temporalità del fenomeno naturale e marginalmente il concetto di intensità o magnitudo cioè la dimensione ed il potere distruttivo del fenomeno.<br> <br>
+Alcuni autori hanno definito la pericolosità come probabilità che un fenomeno di una certa intensità si verifichi in un dato periodo ed in una data area.<br> <br>
+La valutazione della pericolosità può essere fatta con diverse metodologie:
+metodi euristici basati su stime soggettive e qualitative;
+metodi statistici basati sullo studio di relazioni statistiche tra fattori di controllo e pericolosità;
+metodi deterministici basati su funzioni che modellano la pericolosità a partire da leggi fisico meccaniche.<br> <br>
+La carta della pericolosità connessa ai fenomeni franosi costituisce una valutazione della pericolosità da frana finalizzata alla zonazione del territorio in aree suscettibili di innesco.<br> <br>
+Per i fenomeni franosi in genere, quindi, i modelli predittivi si limitano a definire dove un determinato fenomeno è possibile che accada e con quale probabilità, senza determinare in modo esplicito i tempi di ritorno e le intensità.<br> <br>
+Fonte: <a href="http://www.isprambiente.gov.it/it/temi/suolo-e-territorio/cartografia-geologica-e-geotematica/cartografia-della-pericolosita-geologica" target="_blank">isprambiente.gov.it</a></p>
+</div>    
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem2"> <strong>Rielaborazione di: </strong><a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>
+ <br>per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong></p> 
+ <p class="lorem2">Un ringraziamento speciale va ad <a href="https://twitter.com/aborruso" title="Andrea Borruso" target="_blank">@aborruso</a> e Tonino Corso per le spiegazioni/informazioni sui vari tematismi del PAI. Grazie!</p>
+<p class="lorem2"><strong>Fonte dati:</strong>  <br> <br>
+<strong>- Il Piano per l’Assetto Idrogeologico (PAI) -</strong><br>
+<a href="http://www.sitr.regione.sicilia.it/?p=576" title="PAI Geomorfologia e Idraulica" target="_blank">sitr.regione.sicilia.it</a><br>
+<a href="http://www.sitr.regione.sicilia.it/pai/" title="Piano Stralcio di Bacino per l'Assetto Idrogeologico" target="_blank">Assessorato del territorio e dell’ambiente – Dipartimento dell’ambiente</a><br>
+<a href="http://www.isprambiente.gov.it/it/pubblicazioni/rapporti/dissesto-idrogeologico-in-italia-pericolosita-e-indicatori-di-rischio-rapporto-2015" title="Istituto Superiore per la  Protezione e la Ricerca Ambientale" target="_blank">ISPRA</a> <br><br>
+<strong>- Carta Tecnica Regionale 10K (C.T.R.) -</strong><br>
+<a href="http://www.sitr.regione.sicilia.it/?page_id=419" title="Download Cartografia" target="_blank">sitr.regione.sicilia.it</a> - con licenza <a href="https://creativecommons.org/licenses/by-sa/3.0/it/" title="Attribuzione - Condividi allo stesso modo 3.0 Italia (CC BY-SA 3.0 IT)" target="_blank">Creative Commons Attribuzione - Condividi allo stesso modo – 3.0 italia - (CC-BY SA 3.0)</a><br><br>
+Progetto Qgis per la rappresentazione cartografica (vestizione) della CTR 10k di: <a href="https://twitter.com/aborruso" title="Andrea Borruso" target="_blank">@aborruso</a>, <a href="https://twitter.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a> e <a href="https://twitter.com/gbvitrano" title="Giovan Battista Vitrano" target="_blank">@gbvitrano</a> - <a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">opendatasicilia.it</a></p>
+<hr>
+<p class="lorem2"><strong>P.A.I. Regione Sicilia</strong>  <br>
+Con il Piano per l’Assetto Idrogeologico viene avviata, nella Regione Siciliana, la pianificazione di bacino, intesa come lo strumento fondamentale della politica di assetto territoriale delineata dalla legge 183/89, della quale ne costituisce il primo stralcio tematico e funzionale.
+Il Piano Stralcio per l’ Assetto Idrogeologico, di seguito denominato Piano Stralcio o Piano o P.A.I., redatto ai sensi dell’art. 17, comma 6 ter, della L. 183/89, dell’art. 1, comma 1, del D.L. 180/98, convertito con modificazioni dalla L. 267/98, e dell’art. 1 bis del D.L. 279/2000, convertito con modificazioni dalla L. 365/2000, ha valore di Piano Territoriale di Settore ed è lo strumento conoscitivo, normativo e tecnico-operativo mediante il quale sono pianificate e programmate le azioni, gli interventi e le norme d’uso riguardanti la difesa dal rischio idrogeologico del territorio siciliano.<br><br>
+<strong>Relazione generale PAI</strong><br>
+<a href="http://www.sitr.regione.sicilia.it/pai/CD_PAI/RELAZIONE_GENERALE_P.A.I.pdf" target="_blank">Relazione Generale in formato pdf</a><br>
+<a href="http://www.sitr.regione.sicilia.it/pai/CD_PAI/RELAZIONE_GENERALE_P.A.I.zip" target="_blank">Relazione Generale in formato zip</a><br><br>
+Il <a href="http://pti.regione.sicilia.it/portal/page/portal/PIR_PORTALE/PIR_LaStrutturaRegionale/PIR_Assessoratoregionaledelterritorioedellambiente/PIR_DipUrbanistica" target="_blank">Dipartimento dell’Urbanistica</a> della Regione Siciliana diffonde gratuitamente i <a href="http://www.sitr.regione.sicilia.it/?p=576" target="_blank">dati tematici originari</a> del <a href="http://www.sitr.regione.sicilia.it/pai/CD_PAI/RELAZIONE_GENERALE_P.A.I.zip" target="_blank">PAI</a> in formato shape (anno 2015/2016)  a fini di utilizzo istituzionali, secondo metodi di produzione e criteri di validazione atti a determinarne gli ambiti di sicurezza e completezza; essi non hanno alcun valore legale, ferme restando le opportune indicazioni fomite da precise delibere di Giunta Regionale. Pertanto, i dati tematici originari, in formato shape (.shp) o la loro elaborazione non sostituiscono le cartografie ufficiali del P.A.I., in formato .pdf, notificate alle Amministrazioni Comunali. Tali cartografie sono le uniche alle quali fare riferimento per le perimetrazioni vigenti. I dati tematici originari non sono commerciabili, ma possono essere utilizzati dagli utenti in base alle seguenti limitazioni di utilizzo e di diffusione: essi sono di proprietà della Regione Siciliana, che ne detiene i diritti d’autore (Legge n. 633/ 1941 e ss.mm.ii.)</p>
+<hr>
+<p class="lorem2"><a href="http://www.sitr.regione.sicilia.it/pai/PAI/Licenza_utilizzo_dati_tematici_PAI.pdf" target="_blank">Licenza:&nbsp;&nbsp;</a> sulle condizioni di utilizzo e diffusione dei dati tematici originari in formato ESRITM SHAPE della Regione Siciliana – Dipartimento Regionale Ambiente – Servizio 3 ‘Assetto del Territorio e Difesa del Suolo’</p>
+<p class="lorem2">   <a href="https://creativecommons.org/licenses/by-nc/3.0/it/" target="_blank" rel="license"><img src="legend/cc_nc.png" alt="Licenza Creative Commons" width="91" height="32" style="border-width:0"  title="Licenza sulle condizioni di utilizzo e diffusione dei dati tematici originari in formato ESRITM SHAPE della Regione Siciliana – Dipartimento Regionale Ambiente – Servizio 3 ‘Assetto del Territorio e Difesa del Suolo’ Creative Commons Attribuzione - Non commerciale 3.0 Italia (CC BY-NC 3.0 IT)." data-recalc-dims="1"/></a><br />
+<a href="https://creativecommons.org/licenses/by-nc/3.0/it/" title="Licenza Creative Commons Attribuzione - Non commerciale 3.0 Italia (CC BY-NC 3.0 IT)" target="_blank" rel="license">Creative Commons Attribuzione - Non commerciale 3.0 Italia (CC BY-NC 3.0 IT)</a></p> 
+
+<p class="lorem2"> <em>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</em><br>
+  <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em> </p>
+</div>
+
+<!-- Tab Glossario -->
+       <div class="sidebar-pane" id="wiki">
+       <h2 class="sidebar-header">Wiki - Glossario<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem2"><strong>Piano di assetto idrogeologico</strong><br></p>  
+<p class="lorem2">Il Piano per l’Assetto Idrogeologico (PAI) è uno strumento fondamentale della politica di assetto territoriale delineata dalla legge 183/89, viene avviata in ogni regione la pianificazione di bacino, esso ne costituisce il primo stralcio tematico e funzionale. Il Piano Stralcio per l’Assetto Idrogeologico, di seguito denominato Piano Stralcio o Piano o P.A.I., redatto ai sensi dell’art. 17, comma 6 ter, della L. 183/89, dell’art. 1, comma 1, del D.L. 180/98, convertito con modificazioni dalla L. 267/98, e dell’art. 1 bis del D.L. 279/2000, convertito con modificazioni dalla L. 365/2000, ha valore di Piano Territoriale di Settore ed è lo strumento conoscitivo, normativo e tecnico-operativo mediante il quale sono pianificate e programmate le azioni, gli interventi e le norme d’uso riguardanti la difesa dal rischio idrogeologico del territorio.</p>
+<p class="lorem2"><strong>Il P.A.I. ha sostanzialmente tre funzioni:</strong><br>
+<ol>
+  <li><p class="lorem2">
+    la funzione conoscitiva, che comprende lo studio dell’ambiente fisico e del sistema antropico, nonché della ricognizione delle previsioni degli strumenti urbanistici e dei vincoli idrogeologici e paesaggistici;</li></p>
+  <li><p class="lorem2">la funzione normativa e prescrittiva, destinata alle attività connesse alla tutela del territorio e delle acque fino alla valutazione della pericolosità e del rischio idrogeologico e alla conseguente attività di vincolo in regime sia straordinario che ordinario;</li></p>
+  <li><p class="lorem2">la funzione programmatica, che fornisce le possibili metodologie d’intervento finalizzate alla mitigazione del rischio, determina l’impegno finanziario occorrente e la distribuzione temporale degli interventi.</li>
+</ol></p>
+<p class="lorem2"><strong>Norme di attuazione:</strong><br>
+Le norme di attuazione contenute nel capitolo 11 della Relazione Generale del P.A.I. prevedono al comma 1 dell’art.5 che il P.A.I. è suscettibile di aggiornamento a seguito di variazioni succedutesi nel tempo o a nuovi studi che dimostrino un diverso assetto del territorio. In particolare, l’art. 5 “Aggiornamenti e modifiche” recita:</p>
+  <ol>
+  <li><p class="lorem2">  Il P.A.I. potrà essere oggetto di integrazioni e modifiche su richiesta e/o segnalazioni di Enti pubblici e Uffici territoriali, in relazione a:<br>
+    a) indagini e studi a scala di dettaglio presentati da pubbliche amministrazioni;<br>
+    b) nuovi eventi idrogeologici idonei a modificare il quadro della pericolosità;<br>
+    c) variazioni delle condizioni di pericolosità derivanti da: effetti d’interventi non strutturali; realizzazione e/o completamento d’interventi strutturali di messa in sicurezza delle aree interessate ed effetti prodotti dalle opere realizzate per la mitigazione del rischio.</li></p>
+    <li><p class="lorem2"> Nei casi di cui ai precedenti punti a), b) e c), le amministrazioni interessate devono provvedere a perimetrare le aree sulla Carta Tecnica Regionale, in scala 1:10000 e a trasmettere tali elaborati all’Assessorato Regionale Territorio e Ambiente – Dipartimento Territorio.</p>
+    <li><p class="lorem2"> Le modifiche e/o le integrazioni e gli aggiornamenti del P.A.I. saranno approvati con Decreto del Presidente della Regione, previa Delibera della Giunta Regionale, su proposta dell’assessore regionale a Territorio e Ambiente.</li></p>
+    <li><p class="lorem2"> Tutti gli elementi ricadenti in aree a pericolosità determinano condizioni di rischio; per quanto riguarda quelli non individuati nelle carte allegate al progetto del P.A.I., si invitano i comuni a segnalarne la presenza con ubicazione su cartografia.</li>
+</ol></p>
+<p class="lorem2">Fonte: <a href="https://it.wikipedia.org/wiki/Piano_di_assetto_idrogeologico" title="it.wikipedia.org" target="_blank">Piano di assetto idrogeologico</a></p>
+<p class="lorem2"><strong>Pericolosità:</strong> Probabilità che in una data area si verifichi un evento dannoso di una determinata intensità entro un determinato periodo di tempo, il tempo di ritorno. La pericolosità è funzione della frequenza dell’evento. In alcuni casi, ad esempio le alluvioni, è possibile stimare con un’approssimazione accettabile la probabilità che si verifichi un determinato evento entro il periodo di ritorno. In altri casi, come per alcuni tipi di frane, la stima è invece più difficile.</p>
+<p class="lorem2"><strong>Rischio:</strong>
+Il rischio può essere definito come il valore atteso di perdite (vite umane, feriti, danni alle proprietà e alle attività economiche) dovute al verificarsi di un evento di una data intensità, in una particolare area, in un determinato periodo di tempo.
+Il rischio quindi è traducibile nell'equazione: <br>
+<strong> R = P x V x E</strong><br>
+<br>
+P = Pericolosità (Hazard): è la probabilità che un fenomeno di una determinata intensità si verifichi in un certo periodo di tempo, in una data area.<br>
+V = Vulnerabilità:<br> la Vulnerabilità di un elemento (persone, edifici, infrastrutture, attività economiche) è la propensione a subire danneggiamenti in conseguenza delle sollecitazioni indotte da un evento di una certa intensità. <br>
+E = Esposizione o Valore esposto:<br> è il numero di unità (o “valore”) di ognuno degli elementi a rischio (es. vite umane, case) presenti in una data area.</p>
+<p class="lorem2">Fonte: <a href="http://www.protezionecivile.gov.it/jcms/it/glossario.wp" target="_blank">Glossario - Protezione Civile</a></p>
+</div>
+
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem2"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="lib/images/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="lib/images/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="lib/images/gp.png"width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="lib/images/in.png"width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="lib/images/pin.png" width="32" height="32"alt="pinterest"></a></p>
+</div>
+
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "https://siciliahub.github.io/mappe/palermo_hub/pericolosità_idrogeologica.html#14/38.1185/13.3595",});
+			});
+		</script>
+        <br>
+ <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://is.gd/UmibnD"  readonly><br>
+<hr>
+<br>
+<p class="lorem2"><strong>Includi la mappa </strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="https://siciliahub.github.io/mappe/palermo_hub/pericolosità_idrogeologica.html#14/38.1185/13.3595"></iframe><a href="https://siciliahub.github.io/mappe/palermo_hub/pericolosità_idrogeologica.html#14/38.1185/13.3595" title="Piano per l'Assetto Idrogeologico (P.A.I.) di Palermo - Regione Sicilia, su base opendata">Visualizza a schermo intero</a>
+      </textarea><br><br>
+           <p class="lorem2">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+
+    </div>
+    
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem2">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem2"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
+<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
+<li><p class="lorem2"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a>plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</li></p>
+<li><p class="lorem2"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem2"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem2"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar v2" target="_blank">Sidebar v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet MousePosition" target="_blank">Leaflet MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet graphicscale" target="_blank">Leaflet graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;</li></p>
+<li><p class="lorem2"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet PolylineMeasure" target="_blank">Leaflet PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</li></p>
+<li><p class="lorem2"><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet zoomhome" target="_blank">Leaflet zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem2"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</li></p>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+      </ul> </div></div> </div>  
+  
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ff9900',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ff9900',
+                fillOpacity: 0.5
+              });
+            }
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });	
+		  
+var map = L.map('map', { zoomControl:false, maxZoom:17, minZoom:12 }).fitBounds([[38.0391060456,13.140160209],[38.2277793856,13.4984503497]]);
+map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+var bounds_group = new L.featureGroup([]);
+	  
+<!-- mappe di base -->	  
+var basemaps = [ 
+L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 7,  maxZoom: 20, maxNativeZoom: 20, label: 'Google Terrain'}), 
+
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 7,  maxZoom: 20, maxNativeZoom: 20,label: 'Map tiles by CartoDB'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
+				minZoom: 7,  maxZoom: 20, maxNativeZoom: 20, label: 'Google Satellite'}),
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Source: &#9400; ESRI Satellite', minZoom: 7,  maxZoom: 19, maxNativeZoom: 19, label: 'ESRI Satellite - Max zoom 19'}),
+];
+ 	
+	<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+			
+<!-- funzioni mappa -->
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+<!-- Poligono fantasma  inizio -->	
+        function pop_poligonoisola0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_poligonoisola0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_poligonoisola0_0() {
+            return {
+                pane: 'pane_poligonoisola0',
+                opacity: 0,
+                color: 'rgba(0,0,0,0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_poligonoisola0');
+        map.getPane('pane_poligonoisola0').style.zIndex = 1;
+        map.getPane('pane_poligonoisola0').style['mix-blend-mode'] = 'normal';
+    var layer_poligonoisola0 = new L.geoJson(json_poligonoisola0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_poligonoisola0',
+        onEachFeature: pop_poligonoisola0,
+        style: style_poligonoisola0_0,
+    });
+        bounds_group.addLayer(layer_poligonoisola0);
+        // map.addLayer(layer_poligonoisola0);		
+<!-- Poligono fantasma  fine -->	
+	  
+	   	  //mappa ctr10k
+		 var ctr10k =L.tileLayer('data/ctr10k/{z}/{x}/{y}.png', {
+        minZoom: 12,
+        maxZoom: 17,
+        maxNativeZoom: 17,
+        tms: true,
+        attribution: 'Carta Tecnica Regionale 10k'
+      }) .addTo(map); 	
+		
+		// PAI – Pericolosità idrogeologica
+		//P. Alluvione (clone di Pericolosità Alluvione)
+		
+        function pop_PAlluvioneclonediPericolositAlluvione_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+									<tr>\
+                        <th scope="row"><span class="legenda1">P.A.I. - Palermo&nbsp;<spam /></th>\
+                        <td><span class="legenda1">- Pericolosità idrogeologica<spam /> <br /><br /></td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">' + (feature.properties['ico_1'] !== null ? Autolinker.link(String(feature.properties['ico_1'])) : '') + '</th>\
+                       <td>Pericolo Alluvione:&nbsp;&nbsp;<span class="legenda1">' + (feature.properties['note'] !== null ? Autolinker.link(String(feature.properties['note'])) : '') + '<spam />			                     </td>\
+                    </tr>\
+					<th scope="row"><hr></th>\
+                        <td><hr></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">N° bacino:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['bcn_nmr'] !== null ? Autolinker.link(String(feature.properties['bcn_nmr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bacino:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['bacino'] !== null ? Autolinker.link(String(feature.properties['bacino'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Grado del pericolo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pericolo'] !== null ? Autolinker.link(String(feature.properties['pericolo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Info ---</th>\
+                        <td>' + (feature.properties['info'] !== null ? Autolinker.link(String(feature.properties['info'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fonte dati:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['fonte dati'] !== null ? Autolinker.link(String(feature.properties['fonte dati'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Rielaborazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['rielaborazione'] !== null ? Autolinker.link(String(feature.properties['rielaborazione'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licenza'] !== null ? Autolinker.link(String(feature.properties['licenza'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_PAlluvioneclonediPericolositAlluvione_0_0(feature) {
+            switch(String(feature.properties['pericolo'])) {
+                case 'P4':
+                    return {
+                pane: 'pane_PAlluvioneclonediPericolositAlluvione_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(20,31,134,0.75)',
+            }
+                    break;
+                case 'P3':
+                    return {
+                pane: 'pane_PAlluvioneclonediPericolositAlluvione_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(19,38,226,0.75)',
+            }
+                    break;
+                case 'P2':
+                    return {
+                pane: 'pane_PAlluvioneclonediPericolositAlluvione_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(48,112,224,0.75)',
+            }
+                    break;
+                case 'P1':
+                    return {
+                pane: 'pane_PAlluvioneclonediPericolositAlluvione_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(48,164,224,0.75)',
+            }
+                    break;
+                case 'SA':
+                    return {
+                pane: 'pane_PAlluvioneclonediPericolositAlluvione_0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(48,200,224,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_PAlluvioneclonediPericolositAlluvione_0');
+        map.getPane('pane_PAlluvioneclonediPericolositAlluvione_0').style.zIndex = 400;
+        map.getPane('pane_PAlluvioneclonediPericolositAlluvione_0').style['mix-blend-mode'] = 'normal';
+        var layer_PAlluvioneclonediPericolositAlluvione_0 = new L.geoJson(json_PAlluvioneclonediPericolositAlluvione_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_PAlluvioneclonediPericolositAlluvione_0',
+            onEachFeature: pop_PAlluvioneclonediPericolositAlluvione_0,
+            style: style_PAlluvioneclonediPericolositAlluvione_0_0,
+        });
+        bounds_group.addLayer(layer_PAlluvioneclonediPericolositAlluvione_0);
+        map.addLayer(layer_PAlluvioneclonediPericolositAlluvione_0);
+		
+		// PAI – Pericolosità idrogeologica
+		//P.Frana clone di Perciolosità Frana
+		        function pop_PFranaclonediPerciolositFrana_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+								<tr>\
+                        <th scope="row"><span class="legenda1">P.A.I. - Palermo&nbsp;<spam /></th>\
+                        <td><span class="legenda1">- Pericolosità idrogeologica<spam /> <br /><br /></td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">' + (feature.properties['ico_2'] !== null ? Autolinker.link(String(feature.properties['ico_2'])) : '') + '</th>\
+                       <td>Pericolo Frana:&nbsp;&nbsp;<span class="legenda1">' + (feature.properties['note'] !== null ? Autolinker.link(String(feature.properties['note'])) : '') + '<spam />			                     </td>\
+                    </tr>\
+					<th scope="row"><hr></th>\
+                        <td><hr></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">N° bacino:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pai_nmr'] !== null ? Autolinker.link(String(feature.properties['pai_nmr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Bacino:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['bacino'] !== null ? Autolinker.link(String(feature.properties['bacino'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['provincia'] !== null ? Autolinker.link(String(feature.properties['provincia'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['comune'] !== null ? Autolinker.link(String(feature.properties['comune'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Altri Comuni:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['altri_comu'] !== null ? Autolinker.link(String(feature.properties['altri_comu'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Localita:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['localita'] !== null ? Autolinker.link(String(feature.properties['localita'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Coll. Diss.:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['coll_diss'] !== null ? Autolinker.link(String(feature.properties['coll_diss'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Etichetta:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['sigla_p'] !== null ? Autolinker.link(String(feature.properties['sigla_p'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Grado del pericolo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['pericolo'] !== null ? Autolinker.link(String(feature.properties['pericolo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Aggiunto:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['aggiunto'] !== null ? Autolinker.link(String(feature.properties['aggiunto'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Modificato:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['modificato'] !== null ? Autolinker.link(String(feature.properties['modificato'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Eliminato:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['eliminato'] !== null ? Autolinker.link(String(feature.properties['eliminato'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">n° dpr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['n_dpr'] !== null ? Autolinker.link(String(feature.properties['n_dpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Data dpr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['data_dpr'] !== null ? Autolinker.link(String(feature.properties['data_dpr'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Info ---</th>\
+                        <td>' + (feature.properties['info'] !== null ? Autolinker.link(String(feature.properties['info'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Fonte dati:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['fonte dati'] !== null ? Autolinker.link(String(feature.properties['fonte dati'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Rielaborazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['rielaborazione'] !== null ? Autolinker.link(String(feature.properties['rielaborazione'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licenza'] !== null ? Autolinker.link(String(feature.properties['licenza'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+        function style_PFranaclonediPerciolositFrana_1_0(feature) {
+            switch(String(feature.properties['note'])) {
+                case 'P4 - Molto elevata':
+                    return {
+                pane: 'pane_PFranaclonediPerciolositFrana_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(168,0,0,0.75)',
+            }
+                    break;
+                case 'P3 - Elevata':
+                    return {
+                pane: 'pane_PFranaclonediPerciolositFrana_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,0,0,0.75)',
+            }
+                    break;
+                case 'P2 - Media':
+                    return {
+                pane: 'pane_PFranaclonediPerciolositFrana_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,100,0,0.75)',
+            }
+                    break;
+                case 'P1 - Moderata':
+                    return {
+                pane: 'pane_PFranaclonediPerciolositFrana_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,170,0,0.75)',
+            }
+                    break;
+                case 'P0 - Basso':
+                    return {
+                pane: 'pane_PFranaclonediPerciolositFrana_1',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_PFranaclonediPerciolositFrana_1');
+        map.getPane('pane_PFranaclonediPerciolositFrana_1').style.zIndex = 401;
+        map.getPane('pane_PFranaclonediPerciolositFrana_1').style['mix-blend-mode'] = 'normal';
+        var layer_PFranaclonediPerciolositFrana_1 = new L.geoJson(json_PFranaclonediPerciolositFrana_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_PFranaclonediPerciolositFrana_1',
+            onEachFeature: pop_PFranaclonediPerciolositFrana_1,
+            style: style_PFranaclonediPerciolositFrana_1_0,
+        });
+        bounds_group.addLayer(layer_PFranaclonediPerciolositFrana_1);
+        map.addLayer(layer_PFranaclonediPerciolositFrana_1);
+
+		
+<!-- Legenda mappa -->
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<span class="legenda1">&nbsp;#OpenDataSicilia - Palermo Hub</span><br><span class="legenda1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;P.A.I.</span><hr>':layer_poligonoisola0,
+'<span class="legenda">&nbsp;C.T.R. 10k</span><hr><span class="legenda">Pericolosità idrogeologica<br /><br /></span>':ctr10k,
+
+
+
+'<span class="legenda1">&nbsp;Perciolosità Frana</span><br /><table><tr><td style="text-align: center;"><img src="legend/geo_P4Moltoelevata0.png" /></td><td>&nbsp;&nbsp;&nbsp;P4 - Molto elevata</td></tr><tr><td style="text-align: center;"><img src="legend/geo_P3Elevata1.png" /></td><td>&nbsp;&nbsp;&nbsp;P3 - Elevata</td></tr><tr><td style="text-align: center;"><img src="legend/geo_P2Media2.png" /></td><td>&nbsp;&nbsp;&nbsp;P2 - Media</td></tr><tr><td style="text-align: center;"><img src="legend/geo_P1Moderata3.png" /></td><td>&nbsp;&nbsp;&nbsp;P1 - Moderata</td></tr><tr><td style="text-align: center;"><img src="legend/geo_P0Basso4.png" /></td><td>&nbsp;&nbsp;&nbsp;P0 - Basso</td></tr></table><br />': layer_PFranaclonediPerciolositFrana_1,
+
+'<span class="legenda1">&nbsp;Pericolosità Alluvione</span><br /><table><tr><td style="text-align: center;"><img src="legend/idro_P4Moltoelevata0.png" /></td><td>&nbsp;&nbsp;&nbsp;P4 - Molto elevata</td></tr><tr><td style="text-align: center;"><img src="legend/idro_P3Elevata1.png" /></td><td>&nbsp;&nbsp;&nbsp;P3 - Elevata</td></tr><tr><td style="text-align: center;"><img src="legend/idro_P2Media2.png" /></td><td>&nbsp;&nbsp;&nbsp;P2 - Media</td></tr><tr><td style="text-align: center;"><img src="legend/idro_P1Moderata3.png" /></td><td>&nbsp;&nbsp;&nbsp;P1 - Moderata</td></tr><tr><td style="text-align: center;"><img src="legend/idro_Sitidiattenzione4.png" /></td><td>&nbsp;&nbsp;&nbsp;Siti di attenzione</td></tr></table><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia"><br /><br />': layer_PAlluvioneclonediPericolositAlluvione_0,
+}).addTo(map);
+      setBounds();
+		
+		<!-- strumenti di leaflet -->
+		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+			
+		  var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		 <!--.zoomControl.setPosition("topleft") -->;
+		 L.control.locate().addTo(map);
+		var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+
+        measureControl.addTo(map);
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
+        </script>
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+</div>  
+   <!-- loghi -->    
+<div id="tavolab"></div>           
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" width="80" title="opendatasicilia.it" alt="opendatasicilia"></a></div>  
+<!-- beta version  <div id="beta"><img src="legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> -->  
+
+  
+</body>
+</html>  

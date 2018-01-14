@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="it">
+    <head>
+            <title>Palermo - Rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2016</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Palermo - Rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2016 su base opendata">
+        <meta name="keywords" content="Open Data Sicilia, aminato, cemento, rimozione, palermo,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="07/05/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+        
+        
+<!-- Open Graph Protocol -->
+<meta property="og:title" content="Rimozione di cemento amianto negli spazi pubblici comunali" />
+<meta property="og:description" content="Palermo - Rimozione di cemento amianto negli spazi pubblici comunali dall'anno 2010 al 2016 su base opendata." />
+<meta property="og:url" content="https://siciliahub.github.io/mappe/palermo_hub/2016_rim_ami.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/mappe/palermo_hub/clip_index/amianto.jpg" />
+<meta property="og:site_name" content="github.com/SiciliaHub/mappe" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Rimozione di cemento amianto negli spazi pubblici comunali">
+<meta name="twitter:description" content="Palermo - Rimozione di cemento amianto negli spazi pubblici comunali dall'anno 2010 al 2016 su base opendata.">
+<meta name="twitter:image" content="http://siciliahub.github.io/mappe/palermo_hub/clip_index/amianto.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="github.com/SiciliaHub/mappe" />
+<meta name="twitter:url" content="github.com/SiciliaHub/mappe">
+<!-- twitter -->       
+        
+ <!-- css mappa -->
+<link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="lib/css/popup.css">
+<link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="lib/css/qgis2web.css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-measure.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; } </style>   
+
+                    <!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+<script src="lib/js/qgi2web/leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes -->
+<script type="text/javascript" src="script.js"></script> 
+     
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script>  
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+
+        <!-- script dati mappa -->
+<script src="rim_ami/2016/data/Rimozioneaminato20160.js"></script>
+
+    </head>
+    <body>
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+<div id="legenda"><a class="legenda" href="#chart" title="Grafici rimozione di cemento amianto negli spazi pubblici comunali"><img src="legend/tra.png" width="42" height="42" alt=""/></a></div>
+ <div id="sidebar" class="sidebar collapsed">
+   <!-- popup grafico -->  
+<div id="chart" class="overlay">
+	<div class="popup">
+		<a class="close" href="#" title="Chiudi - Closed">&times;</a>
+    		<h2>Rimozione di cemento amianto negli spazi pubblici comunali</h2>
+		<div class="contentp">
+<div class="infogram-embed" data-id="palermo___rimozione_di_cemento_amianto_negli_spazi_pubblici_comunali___barre" data-type="interactive" data-title="Palermo - Rimozione di cemento amianto negli spazi pubblici comunali - barre"></div><script>!function(e,t,s,i){var n="InfogramEmbeds",o=e.getElementsByTagName("script"),d=o[0],r=/^http:/.test(e.location)?"http:":"https:";if(/^\/{2}/.test(i)&&(i=r+i),window[n]&&window[n].initialized)window[n].process&&window[n].process();else if(!e.getElementById(s)){var a=e.createElement("script");a.async=1,a.id=s,a.src=i,d.parentNode.insertBefore(a,d)}}(document,0,"infogram-async","//e.infogr.am/js/dist/embed-loader-min.js");</script>
+		</div>
+	</div>
+</div>
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="mailto:coseerobe.gbvitrano@gmail.com" title="Email" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Grafici "role="tab"><i class="fa fa-info"></i></a></li>
+                 <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Palermo Hub - Rimoz. amianto<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+ <p class="lorem"><strong>Rielaborazione rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2016</strong> <a href="https://www.comune.palermo.it/opendata_menus.php?sel=1" title="Opendata Rimozione di cemento amianto negli spazi pubblici comunali, Palermo" target="_blank">da opendata Comunali</a></p>
+<iframe width="100%" height="500px" frameBorder="0" src="https://infogr.am/rimozione-8676065"></iframe>
+<hr>
+    <p class="lorem"> <strong>Note:</strong><br>
+   <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
+   <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em><br>
+   <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong>
+</div>        
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem"> <strong>Rielaborazione di:</strong> <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a><br>per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong><br><br>
+   <p class="lorem"><strong>Fonte dati:</strong> <a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=1" title="Opendata Palermo - Ambiente" target="_blank">Ambiente</a> <br><br>
+<a href="https://www.comune.palermo.it/opendata_dld.php?id=543" title="Rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2016" target="_blank" > Rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2016;</a><br>  <br>
+<a href="https://www.comune.palermo.it/opendata_dld.php?id=385" title="Rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2015" target="_blank" > Rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2015;</a><br> <br> 
+<a href="https://www.comune.palermo.it/opendata_dld.php?id=345" title="Rimozione di cemento amianto negli spazi pubblici comunali dall'anno 2010 al 2014" target="_blank" > Rimozione di cemento amianto negli spazi pubblici comunali dall'anno 2010 al 2014.</a><br>  <br>
+Tutti i dataset sono rilasciati con licenza 	<a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Creative Commons" target="_blank">Creative Commons Attribuzione 4.0 Internazionale</a>.<br> <br> 
+I dataset  attribuiscono ad ogni quartiere della città di Palermo il dato relativo alle rimozioni di rifiuti in cemento amianto (espressi in kg), abbandonati su suolo pubblico o all’interno di immobili di proprietà comunale, dall'anno 2010 al 2016.</p> 
+<p class="lorem"><strong>Assessorato titolare</strong>: Area dell'Innovazione Tecnologica Comunicazione Sport e Ambiente - Comune di Palermo<br>
+  <strong>Referente:</strong> Dott. Fiorino Francesco<br>
+<strong>Autore:</strong> Dott. Lupo Giovanni </p>
+<br><br><br><br><br><br><br><br>
+<p class="lorem">   <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato è distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />Tutto il materiale rielaborato è distribuito con Licenza <a href="http://creativecommons.org/licenses/by/4.0/" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Internazionale</a> - <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Italia</a> </p> 
+<hr>
+    <p class="lorem"> <strong>Note:</strong><br>
+   <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
+   <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em><br>
+   <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong><br><br>
+</p><br>
+</div>
+
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="lib/images/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="lib/images/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="lib/images/gp.png"width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="lib/images/in.png"width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="lib/images/pin.png" width="32" height="32"alt="pinterest"></a></p>
+</div>
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "https://siciliahub.github.io/mappe/palermo_hub/2016_rim_ami.html",});
+			});
+		</script><br>
+ <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://is.gd/MxH3QI" readonly><br>
+<hr>
+<br>
+<p class="lorem"><strong>Includi la mappa</strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="https://siciliahub.github.io/mappe/palermo_hub/2016_rim_ami.html"></iframe><p><a href="https://siciliahub.github.io/mappe/palermo_hub/2016_rim_ami.html" title="Visualizza - Mappa rimozione di cemento amianto negli spazi pubblici comunali a schermo intero">Visualizza a schermo intero</a>
+      </textarea><br><br>
+           <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+            </div>
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+<li><p class="lorem"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/tomchadwin/qgis2web" title="Qtiles" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;<br><br></li></p>
+<li><p class="lorem"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet-hash" target="_blank">Leaflet-hash</a>, per generare URL che contengono livello di zoom e posizione corrente;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar-v2" target="_blank">Sidebar-v2</a>, per creare questa sidebar a scomparsa;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet.MousePosition" target="_blank">Leaflet.MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet-graphicscale" target="_blank">Leaflet-graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;<br><br></li></p>
+
+<li><p class="lorem"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet.zoomhome" target="_blank">Leaflet.zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione.<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa.<br><br></li></p>
+<li><p class="lorem"><a href="https://infogr.am/" title="Infogr.am" target="_blank">Infogr.am</a>, infografica e grafici.<br><br></li></p>
+
+        </ul>
+</div>
+</div>
+</div>    
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+
+        <script>
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        var map = L.map('map', { zoomControl:false,  maxZoom:17, minZoom:12  }).fitBounds([[38.0456249463,13.1585982262],[38.2289798058,13.5367244669]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione dataset <a href="https://www.comune.palermo.it/opendata_dld.php?id=543" target="_blank" title="Rimozione cemento aminato 2016">Rimozione cemento aminato 2016</a> di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+            attribution:'Map tiles by <a target="_blank" href="http://cartodb.com/attributions#basemaps">CartoDB</a>, under <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. map data &#9400; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap contributors</a> under ODbL',
+            maxZoom: 17
+        });
+        basemap0.addTo(map);
+		
+			<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+			
+<!-- funzioni mappa -->
+		
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function pop_Rimozioneaminato20160(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Quartiere:</th>\
+                        <td>' + (feature.properties['DENOMINAZI'] !== null ? Autolinker.link(String(feature.properties['DENOMINAZI'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Rimozione anni 2010/13 (Kg):</th>\
+                        <td>' + (feature.properties['2010-2013'] !== null ? Autolinker.link(String(feature.properties['2010-2013'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Rimozione anno 2014 (Kg):</th>\
+                        <td>' + (feature.properties['2014'] !== null ? Autolinker.link(String(feature.properties['2014'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Rimozione anno 2015 (Kg):</th>\
+                        <td>' + (feature.properties['2015'] !== null ? Autolinker.link(String(feature.properties['2015'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Rimozione anno 2016 (Kg):</th>\
+                        <td>' + (feature.properties['2016_1'] !== null ? Autolinker.link(String(feature.properties['2016_1'])) : '') +  ' (Anno di riferimento)</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><hr></th>\
+                        <td><hr></td>\
+                    </tr>\
+					                    <tr>\
+                        <th scope="row">Totale (kg):</th>\
+                        <td>' + (feature.properties['somma_bis'] !== null ? Autolinker.link(String(feature.properties['somma_bis'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Rimozioneaminato20160(feature) {
+            switch(feature.properties['2016_1']) {
+                case '61886':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(215,48,39,0.75)',
+            }
+                    break;
+                case '19599':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(215,48,39,0.75)',
+            }
+                    break;
+                case '13570':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(215,48,39,0.75)',
+            }
+                    break;
+                case '9035':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(215,48,39,0.75)',
+            }
+                    break;
+                case '8819':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(252,141,89,0.75)',
+            }
+                    break;
+                case '8394':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(252,141,89,0.75)',
+            }
+                    break;
+                case '6338':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(252,141,89,0.75)',
+            }
+                    break;
+                case '5701':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(254,224,139,0.75)',
+            }
+                    break;
+                case '4902':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(254,224,139,0.75)',
+            }
+                    break;
+                case '2432':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(254,224,139,0.75)',
+            }
+                    break;
+                case '2308':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(254,224,139,0.75)',
+            }
+                    break;
+                case '1735':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.75)',
+            }
+                    break;
+                case '1542':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.75)',
+            }
+                    break;
+                case '1433':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,191,0.75)',
+            }
+                    break;
+                case '999':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(217,239,139,0.75)',
+            }
+                    break;
+                case '713':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(217,239,139,0.75)',
+            }
+                    break;
+                case '675':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(217,239,139,0.75)',
+            }
+                    break;
+                case '659':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(217,239,139,0.75)',
+            }
+                    break;
+                case '371':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(145,207,96,0.75)',
+            }
+                    break;
+                case '356':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(145,207,96,0.75)',
+            }
+                    break;
+                case '315':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(145,207,96,0.75)',
+            }
+                    break;
+                case '244':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(26,152,80,0.75)',
+            }
+                    break;
+                case '233':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(26,152,80,0.75)',
+            }
+                    break;
+                case '160':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(26,152,80,0.75)',
+            }
+                    break;
+                case '44':
+                    return {
+                pane: 'pane_Rimozioneaminato20160',
+                opacity: 1,
+                color: 'rgba(215,25,28,0.75)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(26,152,80,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Rimozioneaminato20160');
+        map.getPane('pane_Rimozioneaminato20160').style.zIndex = 400;
+        map.getPane('pane_Rimozioneaminato20160').style['mix-blend-mode'] = 'normal';
+    var layer_Rimozioneaminato20160 = new L.geoJson(json_Rimozioneaminato20160, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_Rimozioneaminato20160',
+        onEachFeature: pop_Rimozioneaminato20160,
+        style: style_Rimozioneaminato20160
+    });
+        bounds_group.addLayer(layer_Rimozioneaminato20160);
+        map.addLayer(layer_Rimozioneaminato20160);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Rimozione aminato 2016<br /><table><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_61886kgSettecannoli0.png" /></td><td>61.886 kg - Settecannoli</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_19599kgPallavicino1.png" /></td><td>19.599 kg - Pallavicino</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_13570kgMontegrappaSRosalia2.png" /></td><td>13.570 kg - Montegrappa – S. Rosalia</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_9035kgBrancaccioCiaculli3.png" /></td><td>9.035 kg - Brancaccio – Ciaculli</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_8819kgResuttanaSLorenzo4.png" /></td><td>8.819 kg - Resuttana - S. Lorenzo</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_8394kgBorgoNuovo5.png" /></td><td>8.394 kg - Borgo Nuovo</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_6338kgUditorePassodiRigano6.png" /></td><td>6.338 kg - Uditore - Passo di Rigano</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_5701kgTommasoNataleSferracavallo7.png" /></td><td>5.701 kg - Tommaso Natale – Sferracavallo</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_4902kgCruillasCep8.png" /></td><td>4.902 kg - Cruillas - Cep</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_2432kgAltarello9.png" /></td><td>2.432 kg - Altarello</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_2308kgVillagraziaFalsomiele10.png" /></td><td>2.308 kg - Villagrazia – Falsomiele</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_1735kgOretoStazione11.png" /></td><td>1.735 kg - Oreto-Stazione</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_1542kgPalazzoRealeMontediPiet12.png" /></td><td>1.542 kg - Palazzo Reale - Monte di Pietà</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_1433kgMontePellegrino13.png" /></td><td>1.433 kg - Monte Pellegrino</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_999kgMezzomonrealeVillaTasca14.png" /></td><td>999 kg - Mezzomonreale – Villa Tasca</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_713kgPoliteama15.png" /></td><td>713 kg - Politeama</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_675kgZisa16.png" /></td><td>675 kg - Zisa</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_659kgPartannaMondello17.png" /></td><td>659 kg - Partanna Mondello</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_371kgNoce18.png" /></td><td>371 kg - Noce</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_356kgTribunaliCastellammare19.png" /></td><td>356 kg - Tribunali – Castellammare</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_315kgLibert20.png" /></td><td>315 kg - Libertà</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_244kgCubaCalatafimi21.png" /></td><td>244 kg - Cuba – Calatafimi</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_233kgArenellaVergineMaria22.png" /></td><td>233 kg - Arenella – Vergine Maria</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_160kgMalaspinaPalagonia23.png" /></td><td>160 kg - Malaspina – Palagonia</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2016/legend/Rimozioneaminato20160_44kgBoccadifalco24.png" /></td><td>44 kg - Boccadifalco</td></tr></table>': layer_Rimozioneaminato20160,}).addTo(map);
+        setBounds();
+				<!-- strumenti di leaflet -->
+		
+				var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+			   var sidebar = L.control.sidebar('sidebar').addTo(map);
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+        </script>
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+</div>  
+   <!-- loghi -->    
+<div id="tavolab"></div>           
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" width="80" title="opendatasicilia.it" alt="opendatasicilia"></a></div>  
+<!-- beta version     
+ <div id="beta"><img src="legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> -->
+
+    </body>
+</html>

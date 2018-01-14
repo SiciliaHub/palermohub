@@ -1,0 +1,30 @@
+/* foglio di stile atlante cartografico palermo -
+giovan battista vitrano per opendatasicilia.it */
+
+@font-face {font-family:fontawesome;
+src:url("fonts/fontawesome-webfont.eot?") format("eot"),
+url("fonts/fontawesome-webfont.woff") format("woff"),
+url("fonts/fontawesome-webfont.woff2") format("woff2"),
+url("fonts/fontawesome-webfont.ttf") format("truetype"),
+url("fontst/fontawesome-webfont.svg#fontawesome") format("svg");
+font-weight:normal; font-style:normal;}
+
+html, body{padding: 0;    margin: 0;	height: 100%; font: 11px "Helvetica Neue", Arial, Helvetica, sans-serif; background-color: #fff;
+/*background-image:url(../images/ods_02.png); background-size: 30px 30px;background-repeat:no-repeat;background-position:5px 3px;background-attachment: fixed;*/}
+/* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it */ #map { height: 100%; font: 11px "Helvetica Neue", fontawesome, Arial, Helvetica, sans-serif; background-color: #fff;  } #ods { position:fixed; bottom:51px; right:17px; z-index: 999;}.lorem {font-style: italic; color: #4E4B4B; text-align: justify; }.awesome {font-style:fontawesome;  color: #4E4B4B;  }a:link {color: #FF9900;	text-decoration:none;}a:visited {	color: #FF9900;}/* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it */a:hover {color: #FF9900; text-decoration:underline; } a:active {color: #FF0000; text-decoration:none; } .clip_omira {width: 60px; height: 69px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) }
+.clip_omira:hover {opacity: 1;  -webkit-filter: grayscale(100%); } .clip_irta {width: 340px; height: 340px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } .clip_irta:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
+ 
+#bot {	position: fixed; width: 100%;	height: 50px;	background: #fff;	background-color: rgba(255,255,255,0.95);	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	padding: 0;	margin: 0;
+top: 0px;	right: 0px;	z-index: 1000;	text-align: left;}
+
+
+#note {position: relative;left:60px; bottom: 20px; width: 290px;	padding: 0;   /*top:60px;*/ right: 0px;	z-index: 1000;	text-align: right;}
+
+
+
+#logo {position:fixed; left:1%; width: 5%;  top:2px; z-index: 1000;}
+#titolo  {position:fixed; right: 5px; top:8px;  width:85%; float:right; z-index: 999; }
+
+#url_breve { width: 100%; margin: 0px auto; 	background-color: transparent; padding: 2px; overflow: hidden; 	border-radius: 2px; border-color: #C1C0C0; 	color: #4E4B4B; border-width: 1px;} #iframe {width: 100%; 	height:100px; 	margin: 0px auto;	background-color: transparent; 	padding: 2px; 	overflow-y: hidden; border-radius: 2px; border-color: #C1C0C0; 	color: #4E4B4B; border-width: 1px;}
+hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900;}
+/* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it */ .clip {    width: 42px;    border: 2px solid #FFF;    margin: 2 2px;    border-radius: 40px;    box-shadow: 0 1px 5px rgba(0,0,0,0.65)	} .clip_tab {width:98%;height:98%;border-radius: 5px; -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) }
