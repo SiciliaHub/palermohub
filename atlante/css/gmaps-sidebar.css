@@ -1,13 +1,23 @@
 .sidebar {
   position: absolute;
-  top: 60px;
+  top:87px;
   bottom: 0;
   width: 100%;
   overflow: hidden;
-  z-index: 2000; }
+  z-index: 1009; }
   .sidebar.collapsed {
     width: 40px;
-	top:60px; }
+	top:80px; }
+	
+  @media (min-width: 320px) and (max-width: 675px){
+    .sidebar-left {
+      left: 10px; 
+	  top:75px;} 
+	    .sidebar.collapsed {
+    width: 40px;
+	top:75px; }
+	  }	
+	
   @media (min-width: 768px) {
     .sidebar {
       top: 10px;
@@ -16,21 +26,21 @@
   @media (min-width: 768px) and (max-width: 991px) {
     .sidebar {
       width: 305px;
-	  top: 60px; } }
+	  top:80px; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     .sidebar {
       width: 390px; } }
   @media (min-width: 1200px) {
     .sidebar {
       width: 460px; 
-	  top: 60px;} }
+	  top:80px;} }
 
 .sidebar-left {
   left: 0; }
   @media (min-width: 768px) {
     .sidebar-left {
       left: 10px; 
-	  top: 60px;} }
+	  top:80px;} }
 
 .sidebar-right {
   right: 0; }
