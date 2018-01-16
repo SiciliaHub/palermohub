@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 #db {position: absolute; left: 1%; right:1% top: 0px;  width: 98%; overflow-x:hidden;}
 .exhibit-tileView-body { list-style: none; }
 .exhibit-collectionView-group-count { display: none; }

@@ -1,4 +1,6 @@
 /* contenitore menù 100% */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
 .container {
     width: 100%;}
 	
@@ -26,3 +28,5 @@
         border-left: 4px solid #777777;
     }
 }
+
+a:focus, a:hover {color: #4E4B4B;
