@@ -256,16 +256,16 @@
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
 <script src="lib/js/mboots/navbar.js"></script>
-<!-- cookie popup 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+<!-- cookie popup -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script src="lib/js/cookie/cookiepopup.js"></script>
-<script type="text/javascript">
+ <script type="text/javascript">    
     $(function () {
         // Cookies
         var options = {
             title: "Questo sito web utilizza i cookie per migliorare la vostra esperienza di navigazione web.",
             text: "Chiudendo questo banner, scorrendo questa pagina o cliccando su qualunque suo elemento acconsenti all'uso dei cookie.",
-            theme: "light",
+            theme: "Light",
             learnMore: true,
             position: "top",
             onAccept: acceptCallbackFunction
@@ -274,6 +274,32 @@
         var cookie = $.acceptCookies(options);
         updateCodeArea();
 
+        $('.clear-button').click(function(e) {
+            e.preventDefault();
+            $('#cookie-popup-container').remove();
+            document.cookie = 'cookiesAccepted=; path=/; Expires=Thu, 01 Jan 2050 00:00:01 GMT;';
+            cookie = $.acceptCookies(options);
+            $(".cookie-indicator").removeClass("badge-success").addClass("badge-danger").text("No cookie found");
+            updateCodeArea();
+        });
+
+        $('.theme-button').click(function(e) {
+            e.preventDefault();
+            $('#cookie-popup-container').remove();
+            options.theme = $(this).data("theme").replace("theme-", "");
+            cookie = $.acceptCookies(options);
+            updateCodeArea();
+        });
+
+        $('.position-button').click(function(e) {
+            e.preventDefault();
+            $('#cookie-popup-container').remove();
+
+            var position = $(this).data("position");
+            options.position = position;
+            cookie = $.acceptCookies(options);
+            updateCodeArea();
+        });
 
         $('#btnCustomize').click(function(e) {
             e.preventDefault();
@@ -323,8 +349,8 @@
             $(".cookie-indicator").removeClass("badge-success").addClass("badge-danger").text("No cookie found");
 
         function updateCodeArea() {
-            var code =
-                "var options = " +
+            var code = 
+                "var options = " + 
                     JSON.stringify(options, null, 5) +
                 ";\n" +
                 "$.acceptCookies(options);";
@@ -338,6 +364,7 @@
     var acceptCallbackFunction = function() {
         $(".cookie-indicator").removeClass("badge-danger").addClass("badge-success").text("Cookie saved");
     }
+
 
     function getCookie(cname) {
         var name = cname + "=";
