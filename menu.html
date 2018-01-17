@@ -273,32 +273,6 @@
         var cookie = $.acceptCookies(options);
         updateCodeArea();
 
-        $('.clear-button').click(function(e) {
-            e.preventDefault();
-            $('#cookie-popup-container').remove();
-            document.cookie = 'cookiesAccepted=; path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-            cookie = $.acceptCookies(options);
-            $(".cookie-indicator").removeClass("badge-success").addClass("badge-danger").text("No cookie found");
-            updateCodeArea();
-        });
-
-        $('.theme-button').click(function(e) {
-            e.preventDefault();
-            $('#cookie-popup-container').remove();
-            options.theme = $(this).data("theme").replace("theme-", "");
-            cookie = $.acceptCookies(options);
-            updateCodeArea();
-        });
-
-        $('.position-button').click(function(e) {
-            e.preventDefault();
-            $('#cookie-popup-container').remove();
-
-            var position = $(this).data("position");
-            options.position = position;
-            cookie = $.acceptCookies(options);
-            updateCodeArea();
-        });
 
         $('#btnCustomize').click(function(e) {
             e.preventDefault();
