@@ -23,10 +23,10 @@
     padding: 15px;
 }
 .cookie-popup-headline {
-    font-size: 20px;
+    font-size: 16px;
 }
 .cookie-popup-sub-headline {
-    font-size: 12px;
+    font-size: 11px;
 }
 .cookie-popup-right {
     display: table-cell;
@@ -52,7 +52,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    padding: 8px 8px;
+    padding: 2px 14px;
     font-size: 16px;
     min-width: 64px;
     line-height: 1.5;
@@ -75,7 +75,7 @@
 .cookie-popup-learn-more {
     display: block;
     clear: both;
-    font-size: 14px;
+    font-size: 11px;
     margin-top: 5px;
     margin-right: 5px;
     text-decoration: none;
@@ -92,7 +92,7 @@
 }
 .cookie-popup-lower {
     padding: 15px;
-    font-size: 14px;
+    font-size: 11px;
 }
 
 
