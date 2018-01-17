@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="it">
+    <head>
+<title>Database - Palermo hub - contenitore di mappe su Palermo realizzato da opendatasicilia.it</title>        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Palermo hub db">       
+     <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="noindex,nofollow">
+        <meta name="creation_Date" content="05/01/2018">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+	<!-- CSS Palermo hub  -->
+<link href="lib/css/tooltips.css" rel="stylesheet" type="text/css">
+<link href="lib/js/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/js/dist/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="lib/js/top/jquerysctipttop.css" rel="stylesheet" type="text/css" />
+<link href="lib/js/top/backTop.css" rel="stylesheet" type="text/css" />
+
+<style type="text/css">
+body {
+	/*background-color: #FFFFFF;*/
+	overflow-x:hidden;
+	}
+</style>
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  	<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+    
+ <!-- Script -->
+<script type="text/javascript" src="lib/js/dist/jquery.min.js"></script>  
+<script type="text/javascript" src="lib/js/dist/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/js/dist/scripts.js"></script>
+
+    <link rel="exhibit/data"
+    type="application/jsonp"
+    href="https://spreadsheets.google.com/feeds/list/1A-U8JCbH8Rh2PHoIHG2DL3uPNncR8DpGm3_nzBxRbHA/od6/public/basic?alt=json-in-script"
+    ex:converter="googleSpreadsheets" />
+
+    <script src="lib/js/dist/exhibit-api.js?locale=it"></script>
+
+    <script type="text/javascript">
+    var tableStyler = function(table, database) {
+    	$(table).addClass("table table-condensed table-striped");
+    };
+    </script>
+
+</head>
+<body>
+<!-- <div class="container"> -->
+<div id="db"><br /> 
+  <em style="font-size: 24px">Coming Soon...</em><br >
+<p class="lorem0"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus orci vitae nibh placerat mattis. Phasellus convallis diam quis diam eleifend dapibus. Aenean ornare, massa vel congue ultricies, quam enim commodo est, ac dictum diam nisi sed magna. Donec quis metus blandit lectus placerat consectetur a at eros. Nullam sit amet gravida justo. Fusce tempor pharetra metus nec varius. Nulla at est condimentum, consectetur libero eu, tincidunt elit. Aliquam et nisi sit amet elit pulvinar vestibulum dictum nec massa. Donec tempus a libero nec volutpat. In non efficitur lacus, vitae facilisis magna. Nunc pulvinar nibh eu ex cursus sollicitudin. Quisque in risus vel nibh euismod mollis eget nec sapien.<br > 
+Nulla eros urna, maximus vel ultricies eu, facilisis eget erat. Donec rhoncus odio id iaculis efficitur. Aliquam aliquam mi a nisi euismod pretium. Sed purus lectus, molestie at pretium et, dictum id turpis. Curabitur consequat leo justo, eget ultrices orci varius quis. Etiam dignissim risus vitae nisl hendrerit, eget rutrum dui finibus. Integer id erat ut enim consectetur suscipit finibus ac mi. Sed cursus justo nec purus cursus aliquam. Sed condimentum fermentum felis non convallis. In hac habitasse platea dictumst. Phasellus rutrum mollis elit vitae ullamcorper. Phasellus ultricies eros dignissim metus facilisis dapibus. <br ><br >
+Vivamus blandit lorem ut libero aliquam efficitur. Fusce nec pulvinar tellus, quis ultricies ipsum. Cras vitae pharetra magna. Nulla molestie pulvinar nulla, id lacinia metus scelerisque non. Pellentesque nibh turpis, sollicitudin commodo metus eu, pharetra euismod sem. Donec ut nunc quis diam mollis tincidunt. Vivamus at felis justo. In hac habitasse platea dictumst.<br >
+ Quisque euismod purus lacus, eu accumsan libero blandit eget. Aliquam vitae imperdiet nisl. Donec eget nisi vel mauris gravida sagittis. Integer fermentum ante vitae convallis scelerisque. Praesent imperdiet nisi odio, at commodo erat tristique vitae. Phasellus quis elit vitae erat rhoncus dapibus ut dictum leo. Nulla ut tortor augue. Integer eget dolor semper, mattis dui tristique, dictum est. Quisque molestie orci ac dolor pharetra, et faucibus elit luctus. Morbi luctus ligula orci, vitae imperdiet quam dapibus in. <br >Ut ac est nulla. Vestibulum ut nibh dictum, sagittis mauris at, facilisis arcu. Curabitur ut enim non lectus faucibus luctus non non enim. Mauris at dui gravida, maximus turpis vitae, auctor urna. Donec vel ullamcorper ligula. In pellentesque mi arcu, nec molestie orci porttitor vel. Vestibulum eget augue ut tellus molestie posuere ut sit amet turpis. Sed hendrerit mauris et nisl ultrices, sit amet venenatis felis tristique. Nullam nibh sem, aliquet eu nisi ac, tincidunt suscipit nisl. Curabitur feugiat non magna ac lacinia. Nam aliquam ligula et nisl pulvinar hendrerit. Donec efficitur nisi mauris, sed euismod tellus molestie id. Vestibulum justo nisl, aliquet quis commodo at, gravida ac lacus. <br ><br >
+ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus orci vitae nibh placerat mattis. Phasellus convallis diam quis diam eleifend dapibus. Aenean ornare, massa vel congue ultricies, quam enim commodo est, ac dictum diam nisi sed magna. Donec quis metus blandit lectus placerat consectetur a at eros. Nullam sit amet gravida justo. Fusce tempor pharetra metus nec varius. Nulla at est condimentum, consectetur libero eu, tincidunt elit. Aliquam et nisi sit amet elit pulvinar vestibulum dictum nec massa. Donec tempus a libero nec volutpat. In non efficitur lacus, vitae facilisis magna. Nunc pulvinar nibh eu ex cursus sollicitudin. Quisque in risus vel nibh euismod mollis eget nec sapien.<br > 
+Nulla eros urna, maximus vel ultricies eu, facilisis eget erat. Donec rhoncus odio id iaculis efficitur. Aliquam aliquam mi a nisi euismod pretium. Sed purus lectus, molestie at pretium et, dictum id turpis. Curabitur consequat leo justo, eget ultrices orci varius quis. Etiam dignissim risus vitae nisl hendrerit, eget rutrum dui finibus. Integer id erat ut enim consectetur suscipit finibus ac mi. Sed cursus justo nec purus cursus aliquam. Sed condimentum fermentum felis non convallis. In hac habitasse platea dictumst. Phasellus rutrum mollis elit vitae ullamcorper. Phasellus ultricies eros dignissim metus facilisis dapibus. <br >
+Vivamus blandit lorem ut libero aliquam efficitur. Fusce nec pulvinar tellus, quis ultricies ipsum. Cras vitae pharetra magna. Nulla molestie pulvinar nulla, id lacinia metus scelerisque non. Pellentesque nibh turpis, sollicitudin commodo metus eu, pharetra euismod sem. Donec ut nunc quis diam mollis tincidunt. Vivamus at felis justo. In hac habitasse platea dictumst.<br >
+ Quisque euismod purus lacus, eu accumsan libero blandit eget. Aliquam vitae imperdiet nisl. Donec eget nisi vel mauris gravida sagittis. Integer fermentum ante vitae convallis scelerisque. Praesent imperdiet nisi odio, at commodo erat tristique vitae. Phasellus quis elit vitae erat rhoncus dapibus ut dictum leo. Nulla ut tortor augue. Integer eget dolor semper, mattis dui tristique, dictum est. Quisque molestie orci ac dolor pharetra, et faucibus elit luctus. Morbi luctus ligula orci, vitae imperdiet quam dapibus in. <br ><br >Ut ac est nulla. Vestibulum ut nibh dictum, sagittis mauris at, facilisis arcu. Curabitur ut enim non lectus faucibus luctus non non enim. Mauris at dui gravida, maximus turpis vitae, auctor urna. Donec vel ullamcorper ligula. In pellentesque mi arcu, nec molestie orci porttitor vel. Vestibulum eget augue ut tellus molestie posuere ut sit amet turpis. Sed hendrerit mauris et nisl ultrices, sit amet venenatis felis tristique. Nullam nibh sem, aliquet eu nisi ac, tincidunt suscipit nisl. Curabitur feugiat non magna ac lacinia. Nam aliquam ligula et nisl pulvinar hendrerit. Donec efficitur nisi mauris, sed euismod tellus molestie id. Vestibulum justo nisl, aliquet quis commodo at, gravida ac lacus. <br >
+</p> 
+</div>
+<br >
+<footer>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="footermobile">
+    <tr>
+      <td width="1%">&nbsp;</td>
+      <td width="98" colspan="2" align="center" valign="top"><span class="lorem">Palermo Hub è un'iniziativa di <a href="http://opendatasicilia.it" title="opendatasicilia.it" target="_parent">opendatasicilia.it</a>.</span></td>
+      <td width="1%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="1%">&nbsp;</td>
+      <td width="49%" valign="middle"><span class="lorem0"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="license noopener"><img class="alignnone" style="border-width: 0;" title="Tutto il materiale rielaborato per Palermo Hub di OpenDataSicilia.it è distribuito con licenza Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0) tranne diversa indicazione." src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" alt="Licenza Creative Commons" /></a></span>
+        <table width="10%" border="0" align="right" cellpadding="0" cellspacing="0" class="ods_social" >
+          <tr>
+            <td></td>
+          </tr>
+        </table></td>
+      <td width="49" valign="bottom"><table width="10%" border="0" align="right" cellpadding="0" cellspacing="0" class="ods_social" >
+        <tbody>
+          <tr>
+            <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a></td>
+            <td>&nbsp;</td>
+            <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></td>
+            <td>&nbsp;</td>
+            <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></td>
+            <td>&nbsp;</td>
+            <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-globe fa-stack-1x fa-inverse"></i></span></a></td>
+            <td>&nbsp;</td>
+            <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i></span></a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+      </table></td>
+      <td width="1%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td valign="middle">&nbsp;</td>
+      <td valign="bottom">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+  </table>
+  <table width="100%" border="0" cellpadding="0" cellspacing="0" class="nofooter">
+  <tr>
+    <td width="1%">&nbsp;</td>
+    <td width="98" colspan="2" valign="top"><span class="lorem0"><br>
+        <a target="_blank" href="http://opendatasicilia.it/" title="opendatasicilia.it"><strong>#OpenDataSicilia</strong></a> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br />
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.</span></td>
+    <td width="1%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="1%">&nbsp;</td>
+    <td width="49%" valign="middle"><span class="lorem0"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="license noopener"><img class="alignnone" style="border-width: 0;" title="Tutto il materiale rielaborato per Palermo Hub di OpenDataSicilia.it è distribuito con licenza Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0) tranne diversa indicazione." src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" alt="Licenza Creative Commons" /></a></span>
+      <table width="10%" border="0" align="right" cellpadding="0" cellspacing="0" class="ods_social" >
+        <tr>
+          <td></td>
+        </tr>
+      </table></td>
+    <td width="49" valign="bottom"><table width="10%" border="0" align="right" cellpadding="0" cellspacing="0" class="ods_social" >
+            <tbody>
+              <tr>
+                <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a></td>
+                <td>&nbsp;</td>
+                <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></td>
+                <td>&nbsp;</td>
+                <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></td>
+                <td>&nbsp;</td>
+                <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-globe fa-stack-1x fa-inverse"></i></span></a></td>
+                <td>&nbsp;</td>
+                <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i></span></a></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+            </tr>
+    </table></td>
+    <td width="1%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td valign="middle">&nbsp;</td>
+    <td valign="bottom">&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+</table>
+</footer>
+ <a id='backTop'>Back To Top</a>
+ <!-- script toptoback automatico mobile/desktop -->  
+ <script type="text/javascript" src="lib/js/top/jquery.backTop.min.js"></script>
+<script>
+            $(document).ready( function() {
+                $('#backTop').backTop({
+                    'position' : 800,
+                    'speed' : 500,
+                    'color' : 'red',
+					
+					                });
+            });
+        </script>
+                   
+                   
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+
+</body>
+</html>
