@@ -64,7 +64,7 @@ footer {background: #F5F5F5;  border-top: 1px solid #ccc; width: 100%;
     @media screen and (width: 732px) {#beta {left:90px; bottom:60px;}.beta{width: 30px; height: 30px;}}
 	@media screen and (width: 736px) {#beta {left:90px; bottom:50px;}.beta{width: 30px; height: 30px;}}
 
-#ods { position:fixed; bottom:65px; right:17px; z-index: 800;}
+#ods { position:fixed; bottom:65px; right:17px; z-index: 1500;}
 #intro {position:fixed; width:96%; top:60px;  left:20px; z-index: 1000;}
 #db {position:fixed; top:-30px; right:1%; left:1%; height:580px;z-index: 1000;}
 
