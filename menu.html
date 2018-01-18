@@ -21,7 +21,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- CSS Bootstrap personal -->
 <link href="lib/js/mboots/navbar.css" rel="stylesheet">
-<link href="lib/js/cookie/accept-cookies.css" rel="stylesheet">
+			<!-- eu-cookie-lawt -->
+	<script src="lib/js/cookies/jquery-2.1.3.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="lib/js/cookies/jquery-eu-cookie-law-popup.css"/>
+	<script src="lib/js/cookies/jquery-eu-cookie-law-popup.js"></script>
 
 <style>
             body {padding-top: 0px;
@@ -43,6 +46,7 @@
        
 </head>
 <body>
+<div class="eupopup eupopup-top eupopup-style-compact"></div>
 <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
@@ -256,132 +260,6 @@
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
 <script src="lib/js/mboots/navbar.js"></script>
-<!-- cookie popup 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
- <script src="lib/js/cookie/cookiepopup.js"></script>
- <script type="text/javascript">    
-    $(function () {
-        // Cookies
-        var options = {
-            title: "Questo sito web utilizza i cookie per migliorare la vostra esperienza di navigazione web.",
-            text: "Chiudendo questo banner, scorrendo questa pagina o cliccando su qualunque suo elemento acconsenti all'uso dei cookie.",
-            theme: "Light",
-            learnMore: true,
-            position: "top",
-            onAccept: acceptCallbackFunction
-        };
-
-        var cookie = $.acceptCookies(options);
-        updateCodeArea();
-
-        $('.clear-button').click(function(e) {
-            e.preventDefault();
-            $('#cookie-popup-container').remove();
-            document.cookie = 'cookiesAccepted=; path=/; Expires=Thu, 01 Jan 2050 00:00:01 GMT;';
-            cookie = $.acceptCookies(options);
-            $(".cookie-indicator").removeClass("badge-success").addClass("badge-danger").text("No cookie found");
-            updateCodeArea();
-        });
-
-        $('.theme-button').click(function(e) {
-            e.preventDefault();
-            $('#cookie-popup-container').remove();
-            options.theme = $(this).data("theme").replace("theme-", "");
-            cookie = $.acceptCookies(options);
-            updateCodeArea();
-        });
-
-        $('.position-button').click(function(e) {
-            e.preventDefault();
-            $('#cookie-popup-container').remove();
-
-            var position = $(this).data("position");
-            options.position = position;
-            cookie = $.acceptCookies(options);
-            updateCodeArea();
-        });
-
-        $('#btnCustomize').click(function(e) {
-            e.preventDefault();
-
-            $('html, body').animate({
-                scrollTop: ($('.theme-buttons').offset().top)
-            },500);
-        });
-
-        $('.option-button').click(function(e) {
-            e.preventDefault();
-            $('#cookie-popup-container').remove();
-            var option = $(this).data("option");
-
-            if(option == "default") {
-                options = {
-                    title: "This website uses cookies",
-                    text: "By using this site, you agree to our use of cookies.",
-                    theme: "dark",
-                    learnMore: true,
-                    position: "bottom",
-                    onAccept: acceptCallbackFunction
-                }
-            }
-            else if(option == "nolearnbutton")
-                options.learnMore = false;
-            else if(option == "customtext") {
-                if($("#customHeader").val() != "")
-                    options.title = $("#customHeader").val();
-                if($("#customSubHeader").val() != "")
-                    options.text = $("#customSubHeader").val();
-                if($("#customAccept").val() != "")
-                    options.acceptButtonText = $("#customAccept").val();
-                if($("#customLearnMore").val() != "")
-                    options.learnMoreButtonText = $("#customLearnMore").val();
-                if($("#customLearnMoreInfo").val() != "")
-                    options.learnMoreInfoText = $("#customLearnMoreInfo").val();
-            }
-
-            cookie = $.acceptCookies(options);
-            updateCodeArea();
-        });
-
-        if(getCookie("cookiesAccepted"))
-            $(".cookie-indicator").removeClass("badge-danger").addClass("badge-success").text("Cookie saved");
-        else
-            $(".cookie-indicator").removeClass("badge-success").addClass("badge-danger").text("No cookie found");
-
-        function updateCodeArea() {
-            var code = 
-                "var options = " + 
-                    JSON.stringify(options, null, 5) +
-                ";\n" +
-                "$.acceptCookies(options);";
-
-            $('#currentOptions').val(code);
-            $("#currentOptions").height(0);
-            $("#currentOptions").height($("#currentOptions")[0].scrollHeight);
-        }
-    });
-
-    var acceptCallbackFunction = function() {
-        $(".cookie-indicator").removeClass("badge-danger").addClass("badge-success").text("Cookie saved");
-    }
-
-
-    function getCookie(cname) {
-        var name = cname + "=";
-        var decodedCookie = decodeURIComponent(document.cookie);
-        var ca = decodedCookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
-            while (c.charAt(0) == ' ') {
-                c = c.substring(1);
-            }
-            if (c.indexOf(name) == 0) {
-                return c.substring(name.length, c.length);
-            }
-        }
-        return "";
-    }
-</script>
 </body>
 </html>
 
