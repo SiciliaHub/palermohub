@@ -1,9 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 .clearfix {
 	clear: both;
 }
 
 .eupopup-container {
-	background-color: rgba(25, 25, 25, 0.9);
+	background-color: rgba(25, 25, 25, 0.85);
 	color: #efefef;
 	padding: 5px 20px;
 	font-size: 12px;
@@ -49,7 +50,7 @@
 	color: #a2a2a2;
 	filter: alpha(opacity=20);
 	position: absolute;
-	font-family: helvetica, arial, verdana, sans-serif;
+	font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;
 	top: 0; right: 0;
 	padding: 5px 10px;
 }
