@@ -271,6 +271,24 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/wiki.html</loc>
+<lastmod>2018-01-21</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/strumenti.html</loc>
+<lastmod>2018-01-21</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/info.html</loc>
+<lastmod>2018-01-21</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
 <lastmod>2018-01-21</lastmod>
