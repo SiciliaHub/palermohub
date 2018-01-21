@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /lib/
+Disallow: /lib/css/
+Disallow: /lib/images/
+Disallow: /lib/js/
+Disallow: /atlante/
+Disallow: /legend/
+Disallow: /markers/
+Disallow: /rim_ami/
+Disallow: /legend_prg/
+Sitemap: http://palermohub.opendatasicilia.it/sitemap.xml
