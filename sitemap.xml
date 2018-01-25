@@ -403,10 +403,17 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-<!--- <url>
-<loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
-<lastmod>2018-01-21</lastmod>
+<url>
+<loc>http://palermohub.opendatasicilia.it/vulnerabilità_sismica.html</loc>
+<lastmod>2018-01-25</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
-</url>  -->
+</url>
+
+<!--- <url>
+<loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
+<lastmod>2018-01-25</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>  --> 
 </urlset>
