@@ -409,6 +409,24 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/vulnerabilità_sismica_3D.html</loc>
+<lastmod>2018-01-25</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/dem_palermo.html</loc>
+<lastmod>2018-01-25</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/renderer_2_5D.html</loc>
+<lastmod>2018-01-25</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
