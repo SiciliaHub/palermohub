@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="it">
+    <head>
+            <title>Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale">
+        <meta name="keywords" content="Open Data Sicilia, aminato, cemento, rimozione, palermo,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="14/05/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+        
+        
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it" />
+<meta property="og:description" content="Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo" />
+<meta property="og:url" content="http://siciliahub.github.io/palermohub/index_sinistri_2016.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/index_sinistri_2016.jpg" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+<meta name="twitter:description" content="Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo">
+<meta name="twitter:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/index_sinistri_2016.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->          
+        
+ <!-- css -->
+<link href="lib/css/base_ods_sinistri.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="lib/css/qgis2web.css">
+<link rel="stylesheet" type="text/css" href="lib/css/popup.css">
+<link rel="stylesheet" href="lib/css/MarkerCluster.css" />
+<link rel="stylesheet" href="lib/css/MarkerCluster.Default.css" />
+<link href="../lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="../lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="../lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
+
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; } </style>   
+
+                    <!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+<script src="lib/js/qgi2web/leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>        
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="../lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="../lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+
+        <!-- script dati mappa -->
+<script src="circoscr/data/NSinistripercircoscrizione0.js"></script>
+
+    </head>
+    <body>
+<div id="legenda"><a class="legenda" href="#chart" title="Grafici Sinistri stradali rilevati nel territorio comunale di Palermo anno 2016 dalla polizia municipale di Palermo"><img src="legend/tra.png" width="42" height="42" alt=""/></a></div>
+ <div id="sidebar" class="sidebar collapsed">
+   <!-- popup grafico -->  
+<div id="chart" class="overlay">
+	<div class="popup">
+		<a class="close" href="#" title="Chiudi - Closed">&times;</a>
+    		<h2>Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale - <a href="https://public.tableau.com/views/PalermoIncidenti2016/SinistriPalermo2016?:embed=y&:display_count=yes" title="Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo" target="_blank">Visualizza a schemo intero</a></h2>
+		<div class="contentp">
+<div class='tableauPlaceholder' id='viz1494832787313' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PalermoIncidenti2016&#47;SinistriPalermo2016&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='PalermoIncidenti2016&#47;SinistriPalermo2016' /><param name='tabs' value='yes' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PalermoIncidenti2016&#47;SinistriPalermo2016&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1494832787313');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+		</div>
+	</div>
+</div>
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Informazioni "role="tab"><i class="fa fa-info"></i></a></li>
+                  <li><a href="https://public.tableau.com/views/PalermoIncidenti2016/SinistriPalermo2016?:embed=y&:display_count=yes" target="_blank" title="Grafici"role="tab"><i class="fa fa-bar-chart"></i>
+</a></li>
+                 <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+                               <li> <a href="#about" title="About" role="tab"><img src="../legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+<li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="../legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Palermo sinistri stradali anno 2016<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem"><strong>Rielaborazione Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo</strong> <a href="https://www.comune.palermo.it/opendata_dld.php?id=523" title="Sinistri stradali rilevati nel territorio comunale di Palermo anno 2016 dalla polizia municipale di Palermo" target="_blank">da opendata Comunali</a></p>
+<iframe width="100%" height="500px" frameBorder="0" src="https://infogr.am/sinistri_palermo_2016"></iframe>
+
+ <p class="lorem">Legenda codici:<br>F = Feriti - sinistro con lesioni a persone;<br> C = Cose - sinistro con solo danni a cose; <br> R = Riserva - sinistro con almeno una persona in prognosi riservata sulla vita (che se sciolta si trasforma in un normale incidente con feriti f se avviene il decesso in un mortale M); <br> M = Mortale - sinistro con almeno un deceduto.</p> 
+<hr>
+    <p class="lorem"> <strong>Note:</strong><br>
+   <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
+   <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em><br>
+   <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong>
+</div>        
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem"> <strong>Rielaborazione di:</strong> <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a><br>per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong><br><br>
+   <p class="lorem"><strong>Fonte dati:</strong> <a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=6" title="Opendata Palermo - Mobilità e Sicurezza" target="_blank">Mobilità e Sicurezza</a> <br><br> 
+<a href=" https://www.comune.palermo.it/opendata_dld.php?id=523" title="Sinistri stradali rilevati nel territorio comunale di Palermo nell anno 2016 dalla polizia municipale di Palermo" target="_blank" >Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo;</a><br>  <br>
+Il dataset è rilasciato con licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Creative Commons" target="_blank">Creative Commons Attribuzione 4.0 Internazionale</a>.<br> <br> 
+Il dataset viene fornito anche in formato klm e csv. Il dataset e' stato georeferenziato dall'isp. Salvatore Pullara.<br><br>Legenda codici:<br>F = Feriti - sinistro con lesioni a persone;<br> C = Cose - sinistro con solo danni a cose; <br> R = Riserva - sinistro con almeno una persona in prognosi riservata sulla vita (che se sciolta si trasforma in un normale incidente con feriti f se avviene il decesso in un mortale M); <br> M = Mortale - sinistro con almeno un deceduto.</p> 
+<p class="lorem"><strong>Assessorato titolare</strong>: Area della Polizia Municipale - Comune di Palermo<br>
+  <strong>Referente:</strong> Dott. Messina Vincenzo<br>
+<strong>Autore:</strong> Sig. Renda Girolamo - Isp. Salvatore Pullara</p>
+<br><br><br><br><br>
+<p class="lorem">   <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato è distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />Tutto il materiale rielaborato è distribuito con Licenza <a href="http://creativecommons.org/licenses/by/4.0/" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Internazionale</a> - <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Italia</a> </p> 
+<hr>
+    <p class="lorem"> <strong>Note:</strong><br>
+   <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
+   <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em><br>
+   <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong><br><br>
+</p><br>
+</div>
+
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="lib/images/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="lib/images/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="lib/images/gp.png"width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="lib/images/in.png"width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="lib/images/pin.png" width="32" height="32"alt="pinterest"></a></p>
+</div>
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "http://siciliahub.github.io/palermohub/index_sinistri_2016.html",});
+			});
+		</script><br>
+ <label for="url breve"><strong><p class="lorem">URL breve</strong></label><br><br>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://goo.gl/tf7kao" readonly></p><br>
+<hr>
+<br>
+<p class="lorem"><strong>Includi la mappa</strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="http://siciliahub.github.io/palermohub/index_sinistri_2016.html"></iframe><p><a href="http://siciliahub.github.io/palermohub/index_sinistri_2016.html" title="Visualizza - Mappa dei sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale a schermo intero">Visualizza a schermo intero</a></p>
+      </textarea>
+           <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+            </div>
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+<li><p class="lorem"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/tomchadwin/qgis2web" title="Qtiles" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;<br><br></li></p>
+<li><p class="lorem"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet-hash" target="_blank">Leaflet-hash</a>, per generare URL che contengono livello di zoom e posizione corrente;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar-v2" target="_blank">Sidebar-v2</a>, per creare questa sidebar a scomparsa;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet.MousePosition" target="_blank">Leaflet.MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet-graphicscale" target="_blank">Leaflet-graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;<br><br></li></p>
+
+<li><p class="lorem"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet.zoomhome" target="_blank">Leaflet.zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione.<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa.<br><br></li></p>
+<li><p class="lorem"><a href="https://www.tableau.com/" title="Tableau.com" target="_blank">Tableau.com</a>, Tableau può aiutare chiunque a vedere e comprendere i propri dati. Connettiti a quasi tutti i database, trascinando e rilasciando per creare visualizzazioni e condividere con un click.<br><br></li></p>
+<li><p class="lorem"><a href="https://infogr.am/" title="Infogr.am" target="_blank">Infogr.am</a>, infografica e grafici.<br><br></li></p>
+
+        </ul>
+</div>
+</div>
+</div>    
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+            highlightLayer.openPopup();
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        var map = L.map('map', { zoomControl:false,  maxZoom:17, minZoom:12  }).fitBounds([[38.0456249463,13.1585982262],[38.2289798058,13.5367244669]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione dataset <a href="https://www.comune.palermo.it/opendata_dld.php?id=523" target="_blank" title="Sinistri stradali rilevati nel territorio comunale di Palermo anno 2016 dalla polizia municipale">Palermo - Sinistri 2016</a> di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {
+            attribution:'Map tiles by <a target="_blank" href="http://cartodb.com/attributions#basemaps">CartoDB</a>, under <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. map data &#9400; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap contributors</a> under ODbL',
+            maxZoom: 17
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+			<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 
+		
+				<!-- mappa -->
+	
+        function pop_NSinistripercircoscrizione0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Circoscrizione:</th>\
+                        <td>' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Quartieri:</th>\
+                        <td>' + (feature.properties['descrizion'] !== null ? Autolinker.link(String(feature.properties['descrizion'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Totale sinistri per circoscrizione:</th>\
+                        <td>' + (feature.properties['COUNT'] !== null ? Autolinker.link(String(feature.properties['COUNT'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_NSinistripercircoscrizione0(feature) {
+            switch(feature.properties['name']) {
+                case 'I Circoscrizione':
+                    return {
+                pane: 'pane_NSinistripercircoscrizione0',
+                opacity: 1,
+                color: 'rgba(212,212,212,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,212,0.75)',
+            }
+                    break;
+                case 'III Circoscrizione':
+                    return {
+                pane: 'pane_NSinistripercircoscrizione0',
+                opacity: 1,
+                color: 'rgba(212,212,212,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,236,177,0.75)',
+            }
+                    break;
+                case 'VII Circoscrizione':
+                    return {
+                pane: 'pane_NSinistripercircoscrizione0',
+                opacity: 1,
+                color: 'rgba(212,212,212,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(254,217,142,0.75)',
+            }
+                    break;
+                case 'II Circoscrizione':
+                    return {
+                pane: 'pane_NSinistripercircoscrizione0',
+                opacity: 1,
+                color: 'rgba(212,212,212,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(254,185,91,0.75)',
+            }
+                    break;
+                case 'IV Circoscrizione':
+                    return {
+                pane: 'pane_NSinistripercircoscrizione0',
+                opacity: 1,
+                color: 'rgba(212,212,212,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(254,153,41,0.75)',
+            }
+                    break;
+                case 'VI Circoscrizione':
+                    return {
+                pane: 'pane_NSinistripercircoscrizione0',
+                opacity: 1,
+                color: 'rgba(212,212,212,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(236,124,27,0.75)',
+            }
+                    break;
+                case 'V Circoscrizione':
+                    return {
+                pane: 'pane_NSinistripercircoscrizione0',
+                opacity: 1,
+                color: 'rgba(212,212,212,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(217,95,14,0.75)',
+            }
+                    break;
+                case 'VIII Circoscrizione':
+                    return {
+                pane: 'pane_NSinistripercircoscrizione0',
+                opacity: 1,
+                color: 'rgba(212,212,212,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(185,73,9,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_NSinistripercircoscrizione0');
+        map.getPane('pane_NSinistripercircoscrizione0').style.zIndex = 400;
+        map.getPane('pane_NSinistripercircoscrizione0').style['mix-blend-mode'] = 'normal';
+    var layer_NSinistripercircoscrizione0 = new L.geoJson(json_NSinistripercircoscrizione0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_NSinistripercircoscrizione0',
+        onEachFeature: pop_NSinistripercircoscrizione0,
+        style: style_NSinistripercircoscrizione0
+    });
+        bounds_group.addLayer(layer_NSinistripercircoscrizione0);
+        map.addLayer(layer_NSinistripercircoscrizione0);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<span class="legenda1">N° Sinistri per circoscrizione</span><br /><table><tr><td style="text-align: center;"><img src="circoscr/legend/NSinistripercircoscrizione0_ICircoscrizione2500.png" /></td><td>I Circoscrizione (250)</td></tr><tr><td style="text-align: center;"><img src="circoscr/legend/NSinistripercircoscrizione0_IIICircoscrizione2951.png" /></td><td>III Circoscrizione (295)</td></tr><tr><td style="text-align: center;"><img src="circoscr/legend/NSinistripercircoscrizione0_VIICircoscrizione2962.png" /></td><td>VII Circoscrizione (296)</td></tr><tr><td style="text-align: center;"><img src="circoscr/legend/NSinistripercircoscrizione0_IICircoscrizione3103.png" /></td><td>II Circoscrizione (310)</td></tr><tr><td style="text-align: center;"><img src="circoscr/legend/NSinistripercircoscrizione0_IVCircoscrizione4214.png" /></td><td>IV Circoscrizione (421)</td></tr><tr><td style="text-align: center;"><img src="circoscr/legend/NSinistripercircoscrizione0_VICircoscrizione4735.png" /></td><td>VI Circoscrizione (473)</td></tr><tr><td style="text-align: center;"><img src="circoscr/legend/NSinistripercircoscrizione0_VCircoscrizione4766.png" /></td><td>V Circoscrizione (476)</td></tr><tr><td style="text-align: center;"><img src="circoscr/legend/NSinistripercircoscrizione0_VIIICircoscrizione10477.png" /></td><td>VIII Circoscrizione (1047)</td></tr></table>': layer_NSinistripercircoscrizione0,}).addTo(map);
+        setBounds();
+		
+				<!-- strumenti di leaflet -->
+		
+				var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+			   var sidebar = L.control.sidebar('sidebar').addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) <!--.zoomControl.setPosition("topleft") -->;
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+        </script>
+         <!-- header -->       
+<div id="titolo" class="leaflet-control"> 
+<a href="../index_sinistri_2016.html" title="Palermo - Sinistri stradali 2016 - Tipologia" class="btn btn--s btn--gray-border" target="_parent">Tipo</a>  <a href="../mese_sinistri_2016.html" title="Palermo - Sinistri stradali 2016 - Mese"  class="btn btn--s btn--gray-border" target="_parent">Mese</a>  <a href="../ora_sinistri_2016.html" title="Palermo - Sinistri stradali 2016 - Fascia oraria"  class="btn btn--s btn--gray-border" target="_parent">Ora</a>  <a href="../quartiere_sinistri_2016.html" title="Palermo - Sinistri stradali 2016 - Totali per quartieri" class="btn btn--s btn--gray-border" target="_parent">Quartieri</a> <a href="../circos_sinistri_2016.html" title="Palermo - Sinistri stradali 2016 - Totali per Circoscrizione" class="btn btn--s btn--orange" target="_parent">Ciroscrizioni</a> <a href="../esa2_sinistri_2016.html" title="Palermo - Sinistri stradali 2016 - Mappa densità" class="btn btn--s btn--gray-border" target="_parent">densita'</a><br>
+</div>
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="legend/ods.png" width="100" title="opendatasicilia.it" alt="opendatasicilia"></a></div> 
+
+
+    </body>
+</html>
