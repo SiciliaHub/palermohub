@@ -451,9 +451,15 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url> 
+<url>
+<loc>http://palermohub.opendatasicilia.it/index_sinistri_2016.html</loc>
+<lastmod>2018-01-26</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
-<lastmod>2018-01-25</lastmod>
+<lastmod>2018-01-26</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>  --> 
