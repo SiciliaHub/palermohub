@@ -463,9 +463,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 				var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
 		var hash = new L.Hash(map);
 			   var sidebar = L.control.sidebar('sidebar').addTo(map);
-	    map.on("mousemove", function(e) {
-		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
-         }) <!--.zoomControl.setPosition("topleft") -->;
+
 		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
         </script>
          <!-- header -->       
