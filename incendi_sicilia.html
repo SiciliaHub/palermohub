@@ -1,0 +1,936 @@
+<!doctype html>
+<html lang="it">
+    <head>
+ <title>Palermo Hub - Sicilia - Incendi boschivi dal 2010 a 2016 </title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata">
+        <meta name="keywords" content="Open Data,Sicilia, protezione civile, piano emergenza, incendi,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="22/07/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+   
+       
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Incendi boschivi dal 2009 a maggio 2016 in Italia" />
+<meta property="og:description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata." />
+<meta property="og:url" content="http://siciliahub.github.io/mappe/datiallefiamme/index.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/mappe/datiallefiamme/legend/mappa_incendi_1024.jpg" />
+<meta property="og:site_name" content="github.com/SiciliaHub/mappe" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Incendi boschivi dal 2009 a maggio 2016 in Italia">
+<meta name="twitter:description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata.">
+<meta name="twitter:image" content="http://siciliahub.github.io/mappe/datiallefiamme/legend/mappa_incendi_1024.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="github.com/SiciliaHub/mappe" />
+<meta name="twitter:url" content="github.com/SiciliaHub/mappe">
+<!-- twitter -->       
+
+ <!-- css -->
+<link href="lib/css/atlante_01.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_sicilia_map_den.css" rel="stylesheet" type="text/css">
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" href="lib/css/L.Control.Locate.min.css" />
+<link rel="stylesheet" type="text/css" href="lib/css/qgis2web.css">
+<link rel="stylesheet" href="lib/css/MarkerCluster.css" />
+<link rel="stylesheet" href="lib/css/MarkerCluster.Default.css" />
+<link rel="stylesheet" href="lib/css/leaflet-measure.css" />
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+
+ <!-- css menu -->
+ <link href="lib/css/global.css" rel="stylesheet" type="text/css">
+ 
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<link href="lib/css/iframe.css" rel="stylesheet" type="text/css"> 
+<style type="text/css">a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+.social1 a:link{color: #4E4B4B;	text-decoration:none;}
+.social1 a:visited {	color: #4E4B4B; text-decoration:none;}
+.social1 a:hover {color: #FF9900; text-decoration:none; } 
+
+</style>       
+            <!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+<script src="lib/js/qgi2web/leaflet.js"></script>
+<script src="lib/js/qgi2web/L.Control.Locate.min.js"></script>
+<script src="lib/js/qgi2web/multi-style-layer.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet-svg-shape-markers.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+<script src="lib/js/qgi2web/leaflet-measure.js"></script>
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+<script src="lib/js/qgi2web/leaflet-search.js"></script>  
+<script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>        
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<!-- script social --> 
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+
+        <!-- script dati mappa -->
+<script src="https://siciliahub.github.io/mappe/datiallefiamme/data/comuniOSM0.js" charset="UTF-8"></script>
+<script src="https://siciliahub.github.io/mappe/datiallefiamme/data/mappadensitagriglia5000def0.js"></script>
+
+    </head>
+    <body>
+     <!-- header -->    
+<header>
+  <div data-includeHTML="menu.html"></div>
+     <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="xxxxx.html#" title="xxxxxx"><strong>xxxxx</strong></a></div>
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+<div id="clip_gra"><a class="legenda" href="#chart" title="Grafici Incendi boschivi dal 2009 a maggio 2016 in Italia"><img src="legend/chart.png" width="38" height="38" alt=""/></a></div>     
+<div id="sidebar" class="sidebar collapsed">
+<!-- popup grafico -->
+<div id="chart" class="overlay">
+  <div class="popup">
+    <h2></h2>
+    <a class="close" href="#">&times;</a>
+    <div class="content">
+<div class='tableauPlaceholder' id='viz1503687993509' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;In&#47;IncendiSicilia200916&#47;MappaIncendiSicilia-Comuni&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='IncendiSicilia200916&#47;MappaIncendiSicilia-Comuni' /><param name='tabs' value='yes' /><param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;In&#47;IncendiSicilia200916&#47;MappaIncendiSicilia-Comuni&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='no' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='no' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1503687993509');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.65)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    </div>
+  </div>
+</div>
+
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" title="Menu slider" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+                <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+             <li><a href="#fire"  title="Progetto Italia a Fuoco"role="tab"><i class="fa fa-fire"></i></a></li>
+                <li> <a href="#about" title="OpenDataSicilia" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+                <li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Il caso Siciliano<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem"> <strong>Incendi dolosi in tre casi su quattro.</strong></p>
+<p class="lorem">Giovedì 16/06/2016 la Sicilia entra ufficialmente nell’odiata stagione degli “incendi”.<br>
+Centinaia di incendi divampano contemporaneamente in diverse territori dell’isola e capita che in un medesimo territorio le fiamme divampino a partire da diversi punti.<br>
+Gli organi di stampa, le istituzioni e l’opinione pubblica sembrano concordi nel giudicare gli eventi straordinari di quel giorno di una potenza distruttiva senza precedenti e soprattutto di origine dolosa.<br>
+Ma quali sono i documenti di pianificazione inerenti le attività di prevenzione e repressione degli incendi nel territorio siciliano?<br>
+Il documento principale, elaborato dal Corpo Forestale della Regione Siciliana, come previsto dalla Legge 353/2000, è il “Piano regionale per la programmazione delle attività di previsione, prevenzione e lotta agli incendi boschivi” (Piano AIB 2015). <br>
+È proprio il Piano AIB 2015 che, riportando i dati statistici ufficiali del decennio 1998-2008, certifica la matrice dolosa per il 74,6% degli ettari incendiati (da considerare inoltre che un’ulteriore 20% ha cause dubbie). Percentuale che nel quadriennio 2010-2013 viene invece stimata pari all’82%. I dati provengono per la gran parte dal Sistema Informativo Forestale siciliano.<br>La schiacciante e ufficiale predominanza di eventi di origine dolosa indurrebbe quindi ad una riflessione più approfondita su azioni specifiche e mirate di prevenzione.</p>
+<p class="lorem"> <strong>La contromossa della Giunta Regionale</strong></p>
+<p class="lorem">Il 22/06/2016 la Giunta Regionale ha deliberato tre proposte aventi ad oggetto la dichiarazione dello stato di calamità naturale, la richiesta dello stato di emergenza rivolta agli organi statali, e il coordinamento delle attività tra i componenti il Sistema regionale di Protezione Civile.<br>
+Nella prima, due dati fra tutti: 800 ettari di superficie agricola e boschiva andate in fumo nella sola Isola di Pantelleria a fine maggio e 80 comuni interessati dalle fiamme nel territorio delle Città Metropolitane di Palermo e Messina nei giorni 15, 16, 17 giugno 2016. Nell’ultima delibera citata invece si specifica che Il Dipartimento Regionale della Protezione Civile dovrà predisporre un piano regionale per il rischio incendi di interfaccia e boschivo con modelli di intervento e procedure afferenti attività di prevenzione, assistenza e soccorso. </p>
+<p class="lorem">Tratto da  <a href="http://datiallefiamme.it/" target="_blank" title="datiallefiamme.it">datiallefiamme.it</a> </p>
+<hr>
+<p class="lorem"> <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
+  <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em>
+   <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em> </p>
+</div>    
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem"> <strong>Rielaborazione di: </strong><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/giuragu" target="_blank" title="Giuseppe Ragusa">@giuragu</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>
+ <br>per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong> e <strong><a href="http://italiaafuoco.info/" Title="Italia a Fuoco" target="_blank">Italia a Fuoco</a></strong><br>
+   <p class="lorem"><strong>Fonte dati:</strong> <br>  <a href="http://sif.regione.sicilia.it/webgis/(F(zRw6lCLA_Cyebg-cTNZErJxCgfex9ZJXevRz1MBHJ1UnqlO4STq8-7rAlWb9opaGQRCXjRGTHt7UT66PWjKaYPG9-q-9CPpx1wjdGPze24h8QuvzW5loPoqHdVwz-qAidj1l7hYQymQtBRi-rYnSYlpyL4s1))/webgis.aspx" title="SIF - Sistema Informativo Forestale Regione Siciliana" target="_blank">SIF - Sistema Informativo Forestale Regione Siciliana</a> - Dati parziali<br> 
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>  
+
+<hr>
+<p class="lorem">   <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato è distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />
+<a href="http://creativecommons.org/licenses/by/4.0/" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Internazionale</a> - <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Italia</a> </p> 
+
+
+<p class="lorem"> <em>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</em><br>
+  <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em> </p>
+</div>
+
+<!-- Tab Progetto Italia a Fuoco -->
+<div class="sidebar-pane" id="fire">
+<h2 class="sidebar-header">Progetto Italia a Fuoco<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Progetto per raccogliere segnalazioni sugli incendi in Italia.</strong></p>
+<p class="lorem">Questo è un progetto non profit, organizzato interamente da volontari. È nato per condividere informazioni utili e verificate sugli incendi che ogni estate affliggono l’Italia.<br><br>Il progetto si pone come scopo quello di aggregare e non disperdere contenuti utili a tutti provenienti da fonti di varia natura (ufficiali e non) al fine creare valore in un momento di crisi per il paese.<br><br>Il progetto non vuole in alcun modo sostituirsi a fonti istituzionali di informazione a cui rimandiamo caldamente per l’attendibilità.<br><br>Il progetto, laddove lo si ritenga utile, è usabile da organizzazioni, associazioni, gruppi informali ed anche pubbliche amministrazioni che avessero bisogno di un servizio per informare su quanto sta avvenendo a seguito degli incendi.</p>
+<p class="lorem">L&rsquo;idea è di <a target="_blank" href="https://twitter.com/il_tempe">Matteo Tempestini</a>, <a target="_blank" href="https://twitter.com/matt_fortini">Matteo Fortini</a> e <a target="_blank" href="https://twitter.com/aborruso">Andrea Borruso</a> e nasce a seguito di maturata esperienza di hacking civico, ma il   sostegno è di chiunque vuole darlo (privati, associazioni, imprese,   istituzioni) purché l&rsquo;iniziativa non sia strumentalizzata per secondi   fini e di questo chi ha ideato il progetto cerca di farsi garante. Se   vuoi collaborare indica con un <a target="_blank" href="https://github.com/emergenzeHack/italiaafuoco/issues">issue in questo repository</a> chi sei e perchè vorresti collaborare, ti aspettiamo!<br> <br> 
+<a target="_blank" href="http://enketo.ona.io/x/#YVUh" title="Italia A Fuoco: invia una segnalazione relativa ad un incendio"><strong>SEGNALA</strong></a> - <a target="_blank" href="http://italiaafuoco.info/" title="Italia A Fuoco - Progetto per raccogliere segnalazioni sugli incendi in Italia"><strong>BLOG</strong></a></p>
+<br><br>
+<p class="lorem"><em>Ci trovi in questi luoghi: </em></p>
+<!-- table social -->
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="social1" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/1985622574797139/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/emergenzeHack/italiaafuoco" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/italiaafuoco" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://t.me/italiaafuoco" target="_blank" title="Telegram"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-paper-plane fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://medium.com/open-data-stories/un-servizio-di-informazione-per-gli-incendi-2d8c2d3cc02b" target="_blank" title="Medium"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://www.flickr.com/groups/italiaafuoco/" target="_blank" title="Flickr"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-flickr fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="social1" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="lib/images/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="lib/images/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="lib/images/gp.png" width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="lib/images/in.png" width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="lib/images/pin.png"  width="32" height="32"alt="pinterest"></a></p>
+</div>
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "http://siciliahub.github.io/palermohub/incendi_sicilia_aree.html",});
+			});
+		</script>
+<br>
+ <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://######"  readonly></p><br>
+<hr>
+<br>
+<p class="lorem"><strong>Includi la mappa</strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="http://siciliahub.github.io/palermohub/incendi_sicilia_aree.html"></iframe><p><a href="http://siciliahub.github.io/palermohub/incendi_sicilia_aree.html" title="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata">Visualizza a schermo intero</a></p>
+      </textarea><br><br>
+           <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+    </div>
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/tomchadwin/qgis2web" title="Qtiles" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;<br><br></li></p>
+<li><p class="lorem"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet-hash" target="_blank">Leaflet-hash</a>, per generare URL che contengono livello di zoom e posizione corrente;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar-v2" target="_blank">Sidebar-v2</a>, per creare questa sidebar a scomparsa;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet.MousePosition" target="_blank">Leaflet.MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet-graphicscale" target="_blank">Leaflet-graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet.Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa.<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet.PolylineMeasure" target="_blank">Leaflet.PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri).<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet.zoomhome" target="_blank">Leaflet.zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione.<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa.<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento.<br><br></li></p>
+<li><p class="lorem"><a href="http://www.jqueryscript.net/menu/Responsive-Multi-level-Off-Screen-Navigation-Plugin-For-jQuery-cbFlyout.html" title="Responsive Multi-level Off Screen Navigation Plugin For jQuery - cbFlyout" target="_blank">Menu jQuery</a>, Responsive Multi-level Off Screen Navigation Plugin For jQuery - cbFlyout.<br><br></li></p>
+<li><p class="lorem"><a href="https://www.tableau.com/" title="Tableau" target="_blank">Tableau</a>, software leader per la business intelligence: analisi veloci, facili, con qualsiasi sorgente di dati, su qualsiasi dispositivo.<br><br></li></p>
+      </ul>
+</div>
+</div>
+</div>  
+  
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ffff00',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ffff00',
+                fillOpacity: 0.50
+              });
+            }
+            highlightLayer.openPopup();
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+		
+var map = L.map('map', { zoomControl:false, maxZoom:12, minZoom:9 }).fitBounds([[37.6011061912,12.4036335813],[37.4614395741,15.667056554]]);
+map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+var bounds_group = new L.featureGroup([]);
+<!-- mappe di base -->	  
+var basemaps = [ 
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Source: &#9400; ESRI Satellite', minZoom: 9,  maxZoom: 12, maxNativeZoom: 12, label: 'ESRI Satellite'}),
+
+L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png', {attribution:'Map tiles by <a target="_blank" href="http://cartodb.com/attributions#basemaps">CartoDB</a>, under <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>. map data &#9400; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap contributors</a> under ODbL', minZoom: 9,  maxZoom: 12, maxNativeZoom: 12,label: 'Map tiles by CartoDB'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 9,  maxZoom: 12, maxNativeZoom: 12, label: 'Google Terrain'}), 
+ ];
+
+<!-- selettore comuni -->	
+var select = L.countrySelect({title:"Seleziona il Comune di interesse!"});
+			select.addTo(map);
+			select.on('change', function(e){
+				if (e.feature === undefined){ //Do nothing on title
+					return;
+				}
+				var country = L.geoJson(e.feature);
+				if (this.previousCountry != null){
+					map.removeLayer(this.previousCountry);
+				}
+				this.previousCountry = country;
+
+				map.addLayer(country);
+				map.fitBounds(country.getBounds());
+				
+			});	
+
+<!-- funzioni mappa -->
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+	<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+		
+		
+<!-- Cerca Comune -->	
+        function pop_comuniOSM0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_comuniOSM0_0(feature));
+                },
+                mouseover: highlightFeature,
+            });
+           var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_comuniOSM0_0() {
+            return {
+                pane: 'pane_comuniOSM0',
+        rotationAngle: 0.0,
+        rotationOrigin: 'center center',
+        icon: L.icon({
+            iconUrl: 'markers/point.svg',
+            iconSize: [0.01, 0.01]
+        }),
+            }
+        }
+        map.createPane('pane_comuniOSM0');
+        map.getPane('pane_comuniOSM0').style.zIndex = 1;
+        map.getPane('pane_comuniOSM0').style['mix-blend-mode'] = 'normal';
+        var layer_comuniOSM0 = new L.geoJson(json_comuniOSM0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_comuniOSM0',
+            onEachFeature: pop_comuniOSM0,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.marker(latlng, style_comuniOSM0_0(feature))
+            },
+        });
+        bounds_group.addLayer(layer_comuniOSM0);
+        map.addLayer(layer_comuniOSM0);
+
+  // function pop_Centroidi0(feature, layer) {
+        function pop_mappadensitagriglia5000def0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_mappadensitagriglia5000def0_0(feature));
+
+                    if (typeof layer.closePopup == 'function') {
+                        layer.closePopup();
+                    } else {
+                        layer.eachLayer(function(feature){
+                            feature.closePopup()
+                        });
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\<strong>Mappa densità n° incendi.</br>Dal 2010 al 2016</strong></br>Dati parziali  non aggiornati!	<tr>\
+                        <th scope="row"><hr></th>\
+                        <td><hr></td>\
+                  	  </tr>\
+                    <tr>\
+                        <th scope="row">Regione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['regione'] !== null ? Autolinker.link(String(feature.properties['regione'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Provincia:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['provincia'] !== null ? Autolinker.link(String(feature.properties['provincia'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Comune:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['comune'] !== null ? Autolinker.link(String(feature.properties['comune'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">N° incendi:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['COUNT'] !== null ? Autolinker.link(String(feature.properties['COUNT'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_mappadensitagriglia5000def0_0(feature) {
+            switch(feature.properties['COUNT']) {
+                case '1':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,248,240,0.75)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,237,216,0.75)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,218,177,0.75)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,201,143,0.75)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,182,104,0.75)',
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,166,69,0.75)',
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,147,30,0.75)',
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,128,0,0.75)',
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(255,109,0,0.75)',
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(245,93,0,0.75)',
+            }
+                    break;
+                case '11':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(232,76,0,0.75)',
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(218,57,0,0.75)',
+            }
+                    break;
+                case '13':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(205,40,0,0.75)',
+            }
+                    break;
+                case '14':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(191,21,0,0.75)',
+
+            }
+                    break;
+                case '15':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(176,3,0,0.75)',
+            }
+                    break;
+                case '16':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(162,0,0,0.75)',
+            }
+                    break;
+                case '17':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(149,0,0,0.75)',
+            }
+                    break;
+                case '18':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(135,0,0,0.75)',
+            }
+                    break;
+                case '19':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(122,0,0,0.75)',
+            }
+                    break;
+                case '20':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(110,0,0,0.75)',
+            }
+                    break;
+                case '21':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(95,0,0,0.75)',
+            }
+                    break;
+                case '22':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(81,0,0,0.75)',
+            }
+                    break;
+                case '24':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(66,0,0,0.75)',
+            }
+                    break;
+                case '25':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(54,0,0,0.75)',
+            }
+                    break;
+                case '27':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(39,0,0,0.75)',
+            }
+                    break;
+                case '32':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(26,0,0,0.75)',
+            }
+                    break;
+                case '36':
+                    return {
+                pane: 'pane_mappadensitagriglia5000def0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1, 
+                fillOpacity: 1,
+                fillColor: 'rgba(12,0,0,0.75)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_mappadensitagriglia5000def0');
+        map.getPane('pane_mappadensitagriglia5000def0').style.zIndex = 400;
+        map.getPane('pane_mappadensitagriglia5000def0').style['mix-blend-mode'] = 'normal';
+    var layer_mappadensitagriglia5000def0 = new L.geoJson(json_mappadensitagriglia5000def0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_mappadensitagriglia5000def0',
+        onEachFeature: pop_mappadensitagriglia5000def0,
+        style: style_mappadensitagriglia5000def0_0,
+    });
+        bounds_group.addLayer(layer_mappadensitagriglia5000def0);
+        map.addLayer(layer_mappadensitagriglia5000def0);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<span class="legenda1">Mappa densità n° incendi</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dal 2010 a 2016 - Dati parziali<br /><table><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_10.png" /></td><td>&nbsp;&nbsp;&nbsp;1</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_21.png" /></td><td>&nbsp;&nbsp;&nbsp;2</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_32.png" /></td><td>&nbsp;&nbsp;&nbsp;3</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_43.png" /></td><td>&nbsp;&nbsp;&nbsp;4</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_54.png" /></td><td>&nbsp;&nbsp;&nbsp;5</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_65.png" /></td><td>&nbsp;&nbsp;&nbsp;6</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_76.png" /></td><td>&nbsp;&nbsp;&nbsp;7</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_87.png" /></td><td>&nbsp;&nbsp;&nbsp;8</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_98.png" /></td><td>&nbsp;&nbsp;&nbsp;9</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_109.png" /></td><td>&nbsp;&nbsp;&nbsp;10</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1110.png" /></td><td>&nbsp;&nbsp;&nbsp;11</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1211.png" /></td><td>&nbsp;&nbsp;&nbsp;12</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1312.png" /></td><td>&nbsp;&nbsp;&nbsp;13</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1413.png" /></td><td>&nbsp;&nbsp;&nbsp;14</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1514.png" /></td><td>&nbsp;&nbsp;&nbsp;15</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1615.png" /></td><td>&nbsp;&nbsp;&nbsp;16</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1716.png" /></td><td>&nbsp;&nbsp;&nbsp;17</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1817.png" /></td><td>&nbsp;&nbsp;&nbsp;18</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_1918.png" /></td><td>&nbsp;&nbsp;&nbsp;19</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_2019.png" /></td><td>&nbsp;&nbsp;&nbsp;20</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_2120.png" /></td><td>&nbsp;&nbsp;&nbsp;21</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_2221.png" /></td><td>&nbsp;&nbsp;&nbsp;22</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_2422.png" /></td><td>&nbsp;&nbsp;&nbsp;24</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_2523.png" /></td><td>&nbsp;&nbsp;&nbsp;25</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_2724.png" /></td><td>&nbsp;&nbsp;&nbsp;27</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_3225.png" /></td><td>&nbsp;&nbsp;&nbsp;32</td></tr><tr><td style="text-align: center;"><img src="legend/mappadensitagriglia5000def0_3626.png" /></td><td>&nbsp;&nbsp;&nbsp;36</td></tr></table><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia"><br /><br />': layer_mappadensitagriglia5000def0,}).addTo(map);
+        setBounds();
+		<!-- strumenti di leaflet -->
+		
+				var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+		
+				map.addControl(new L.Control.Search({
+            layer:  layer_comuniOSM0,
+            initial: false,
+            hideMarkerOnCollapse: true,
+            propertyName: 'name'}));
+			
+			   var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		 L.control.locate().addTo(map);
+		var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+
+        measureControl.addTo(map);
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
+        </script>
+        
+<script src="lib/js/social/jquery_csbuttons.js"></script> 
+   <!-- loghi -->    
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods_b.svg" width="80" title="opendatasicilia.it" alt="opendatasicilia"></a></div>   
+<div id="itaf"><a href="http://italiaafuoco.info/" title="italiaafuoco.info" target="_blank"> 
+<img src="legend/italiaafuoco_clip.png" width="40" title="italiaafuoco.info" alt="italiaafuoco.info"></a></div>  
+</body>
+</html>  

@@ -1,0 +1,259 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Grafico e dati sul numero degli incendi boschivi in Italia dal 2009 a maggio 2016</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata">
+        <meta name="keywords" content="Open Data,Sicilia, protezione civile, piano emergenza, incendi,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="noindex,nofollow">
+        <meta name="creation_Date" content="22/07/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="../favicon.ico"/> 
+        <link rel="icon" href="../favicon.png" type="image/png"/> 
+ <!-- css menu -->
+<link href="../lib/css/global.css" rel="stylesheet" type="text/css">
+ <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;}
+a:visited {	color: #FF9900; text-decoration:none;}/* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it */
+a:hover {color: #FF9900; text-decoration:underline; } 
+a:active {color: #FF0000; text-decoration:none; } 
+
+.footer a:link{color: #FF9900;	text-decoration:none;}
+.footer a:visited {	color: #FF9900; text-decoration:none;}
+.footer a:hover {color: #FF9900; text-decoration:underline; } 
+
+.social a:link{color: #4E4B4B;	text-decoration:none;}
+.social a:visited {	color: #4E4B4B; text-decoration:none;}
+.social a:hover {color: #FFFFFF; text-decoration:none; } 
+
+.social1 a:link{color: #4E4B4B;	text-decoration:none;}
+.social1 a:visited {	color: #4E4B4B; text-decoration:none;}
+.social1 a:hover {color: #FF9900; text-decoration:none; } 
+
+</style>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87653723-1', 'auto');
+  ga('send', 'pageview');
+
+</script> 
+
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Incendi boschivi dal 2009 a maggio 2016 in Italia" />
+<meta property="og:description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata." />
+<meta property="og:url" content="http://siciliahub.github.io/mappe/datiallefiamme/index.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/mappe/datiallefiamme/legend/mappa_incendi_1024.jpg" />
+<meta property="og:site_name" content="github.com/SiciliaHub/mappe" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Incendi boschivi dal 2009 a maggio 2016 in Italia">
+<meta name="twitter:description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata.">
+<meta name="twitter:image" content="http://siciliahub.github.io/mappe/datiallefiamme/legend/mappa_incendi_1024.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="github.com/SiciliaHub/mappe" />
+<meta name="twitter:url" content="github.com/SiciliaHub/mappe">
+<!-- twitter -->  
+</head>
+
+
+<body>
+ <!-- header -->   
+<div id="left-flyout-nav" class="layout-left-flyout visible-sm"></div>
+		<div class="layout-right-content">
+		  <header class="the-header">
+		    <div class="navbar container">
+		      
+		      <!-- Trigger -->
+		      <a class="btn-navbar btn-navbar-navtoggle btn-flyout-trigger" href="#" title="Menù principale">
+		        <span class="icon-bar btn-flyout-trigger"></span>
+		        <span class="icon-bar btn-flyout-trigger"></span>
+		        <span class="icon-bar btn-flyout-trigger"></span>
+		      </a>
+		      
+		      <!-- Structure -->
+		      <nav class="the-nav nav-collapse clearfix">
+		        <ul class="nav nav-pill pull-left">
+		         <!-- inseriri qui menu di sx --> 
+                 <li class="dropdown">
+		            <a href="#" title="Blogs"><img src="../lib/images/ods_g.png" width="132" height="15" style="margin-top:5px" alt=""/><b class="caret"></b></a>
+		            <ul class="subnav">
+		        <li><a href="http://opendatasicilia.it/" title="Iniziativa civica per la promozione degli OpenData nell&#039;isola (e non solo)" target="_blank">OpenDataSicilia.it</a></li>
+                <li><a href="http://italiaafuoco.info/" title="Progetto civico per raccogliere segnalazioni sugli incendi in Italia." target="_blank">ItaliaaFuoco.info</a></li>
+                <li><a href="http://datiallefiamme.it/" title="datiallefiamme.it - Progetto per l'apertura dei dati sugli incendi boschivi in Italia attraverso le rilevazioni del Corpo Forestale e delle istituzioni pubbliche" target="_blank">datiallefiamme.it</a></li>
+	               </ul>
+		        </ul>
+                <!-- menu dx -->
+		        <ul class="nav nav-pill pull-right">
+                
+		          <li class="dropdown">
+                   <a href="#" title="Incendi boschivi in Italia dal 2009 a maggio 2016">Numero Incendi<b class="caret"></b></a>
+		            <ul class="subnav">
+                     <li><a href="../index.html" title="Mappa incendi boschivi in Italia dal 2009 a maggio 2016">Mappa</a></li>
+                      <li><a href="incendi_full.html" title="Dati alle fiamme in grafico - Numero degli incendi boschivi in Italia dal 2009 a maggio 2016">Grafici e dati</a></li>
+		            </ul>
+		          </li>
+					<li class="dropdown">
+		            <a href="#" title="Superficie percorsa dal fuoco in Italia dal 2009 a maggio 2016 ">Superficie<b class="caret"></b></a>
+		            <ul class="subnav">
+	                  <li><a href="../incendi_sup.html" title="Mappa delle superficie percorsa dal fuoco in Italia dal 2009 a maggio 2016">Mappa</a></li>
+                      <li><a href="incendi_sup_full.html" title="Dati alle fiamme in grafico - Superficie percorsa dal fuoco in Italia dal 2009 a maggio 2016">Grafici e dati</a></li>
+		            </ul>
+                <li class="dropdown">
+		            <a href="#" title="Il caso Sicilia - Censimento incendi dal 2010 a maggio 2016 - (Dati parziali al 2016 e non aggiornati) " >Il caso Sicilia<b class="caret"></b></a>
+		            <ul class="subnav">
+	                  <li><a href="../incendi_sicilia.html" title="Mappa densità dal 2010 a maggio 2016 - Dati parziali">Mappa densità</a></li>
+                      <li><a href="../incendi_sicilia_aree.html" title="Censimento aree incendi dal 2010 a maggio 2016 - Dati parziali">Censimento incendi</a></li>
+                    <li><a href="incendi_ilcasosicilia.html" title="Dati alle fiamme in grafico - Il caso Sicilia (Dati parziali)">Grafici e dati</a></li>
+
+	              </ul>
+		          </li>
+		        </ul>
+		      </nav>
+		    </div>
+		  </header>
+		</div><!-- END .layout-left-flyout -->
+        
+<script src="../lib/js/menu/jquery.js"></script>
+<script src="../lib/js/menu/jquery.cbFlyout.js"></script>
+<script src="../lib/js/menu/main.js"></script>
+		  <main class="container">
+    <table width="98%" border="0" cellspacing="0" cellpadding="0" >
+		      <tbody>
+		        <tr>
+		          <td width="95%" valign="bottom"><h2><span style="color:#ff9900">Dati alle fiamme in grafici - Il caso Siciliano</span></h2></td>
+		          <td width="5%" align="right" valign="middle" class="social1"><a href="../incendi_sicilia_aree.html" title="Switch to map...Il caso Sicilia - Censimento incendi dal 2010 a maggio 2016  "><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-map-o fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+	            </tr>
+		        <tr>
+		          <td valign="bottom">&nbsp;</td>
+		          <td align="right" valign="bottom" class="social1">&nbsp;</td>
+	            </tr>
+		        <tr>
+		          <td colspan="2"><p class="lorem"><strong>Incendi dolosi in tre casi su quattro.</strong></br>Giovedì 16/06/2016 la Sicilia entra ufficialmente nell’odiata stagione degli “incendi”.</br>
+Centinaia di incendi divampano contemporaneamente in diverse territori dell’isola e capita che in un medesimo territorio le fiamme divampino a partire da diversi punti.
+Gli organi di stampa, le istituzioni e l’opinione pubblica sembrano concordi nel giudicare gli eventi straordinari di quel giorno di una potenza distruttiva senza precedenti e soprattutto di origine dolosa.</br>
+Ma quali sono i documenti di pianificazione inerenti le attività di prevenzione e repressione degli incendi nel territorio siciliano?
+Il documento principale, elaborato dal Corpo Forestale della Regione Siciliana, come previsto dalla Legge 353/2000, è il “Piano regionale per la programmazione delle attività di previsione, prevenzione e lotta agli incendi boschivi” (Piano AIB 2015).</br>
+È proprio il Piano AIB 2015 che, riportando i dati statistici ufficiali del decennio 1998-2008, certifica la matrice dolosa per il 74,6% degli ettari incendiati (da considerare inoltre che un’ulteriore 20% ha cause dubbie). Percentuale che nel quadriennio 2010-2013 viene invece stimata pari all’82%. I dati provengono per la gran parte dal Sistema Informativo Forestale siciliano.
+La schiacciante e ufficiale predominanza di eventi di origine dolosa indurrebbe quindi ad una riflessione più approfondita su azioni specifiche e mirate di prevenzione. </p></td>
+	            </tr>
+		        <tr>
+		          <td colspan="2">&nbsp;</td>
+	            </tr>
+		        <tr>
+		          <td colspan="2"><h3><span style="color:#ff9900">Grafici con dati Nazionali</span></h3></td>
+	            </tr>
+	          </tbody>
+	        </table>      
+
+ <pre>  
+<div class='tableauPlaceholder' id='viz1502038138525' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Si&#47;Sicilia01-Datiallefiamme2009-2016&#47;Numeroincendi&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='Sicilia01-Datiallefiamme2009-2016&#47;Numeroincendi' /><param name='tabs' value='yes' /><param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Si&#47;Sicilia01-Datiallefiamme2009-2016&#47;Numeroincendi&#47;1.png' /> <param name='animate_transition' value='no' /><param name='display_static_image' value='no' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='no' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1502038138525');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.45)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>  
+</pre>   
+
+ <h3><span style="color:#ff9900">Grafici con dati Regionali (Dati parziali al 2016 e non aggiornati)</span></h3> 
+  <pre>   
+<div class='tableauPlaceholder' id='viz1503687993509' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;In&#47;IncendiSicilia200916&#47;MappaIncendiSicilia-Comuni&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='site_root' value='' /><param name='name' value='IncendiSicilia200916&#47;MappaIncendiSicilia-Comuni' /><param name='tabs' value='yes' /><param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;In&#47;IncendiSicilia200916&#47;MappaIncendiSicilia-Comuni&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='no' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='no' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1503687993509');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.45)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+  </pre>   
+ <h3><span style="color:#ff9900">La contromossa della Giunta Regionale</span></h3>
+ <p class="lorem">Il 22/06/2016 la Giunta Regionale ha deliberato tre proposte aventi ad oggetto la dichiarazione dello stato di calamità naturale, la richiesta dello stato di emergenza rivolta agli organi statali, e il coordinamento delle attività tra i componenti il Sistema regionale di Protezione Civile.</br>
+Nella prima, due dati fra tutti: 800 ettari di superficie agricola e boschiva andate in fumo nella sola Isola di Pantelleria a fine maggio e 80 comuni interessati dalle fiamme nel territorio delle Città Metropolitane di Palermo e Messina nei giorni 15, 16, 17 giugno 2016. Nell’ultima delibera citata invece si specifica che Il Dipartimento Regionale della Protezione Civile dovrà predisporre un piano regionale per il rischio incendi di interfaccia e boschivo con modelli di intervento e procedure afferenti attività di prevenzione, assistenza e soccorso. </p>
+ 
+    <br />
+ 
+</main>
+		</div><!-- END .layout-left-flyout -->
+        <pre1><code>
+<table width="98%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td width="5%" align="center" valign="middle"><a href="http://italiaafuoco.info/" title="italiaafuoco.info" target="_blank"> 
+<img src="../legend/italiaafuoco_clip.png" width="40" title="italiaafuoco.info" alt="italiaafuoco.info"></a></td>
+      <td width="2%">&nbsp;</td>
+      <td width="93%" rowspan="3" valign="top"><p class="footer"><a target="_blank" href="http://italiaafuoco.info/"><strong>Progetto Italia a Fuoco</strong></a><br>
+<p class="lorem"><strong>Progetto per raccogliere segnalazioni sugli incendi in Italia.</strong><br>
+Questo è un progetto non profit, organizzato interamente da volontari. È nato per condividere informazioni utili e verificate sugli incendi che ogni estate affliggono l’Italia.<br>Il progetto si pone come scopo quello di aggregare e non disperdere contenuti utili a tutti provenienti da fonti di varia natura (ufficiali e non) al fine creare valore in un momento di crisi per il paese.<br>Il progetto non vuole in alcun modo sostituirsi a fonti istituzionali di informazione a cui rimandiamo caldamente per l’attendibilità.<br>Il progetto, laddove lo si ritenga utile, è usabile da organizzazioni, associazioni, gruppi informali ed anche pubbliche amministrazioni che avessero bisogno di un servizio per informare su quanto sta avvenendo a seguito degli incendi.</p>
+
+<p class="lorem">L&rsquo;idea è di <a target="_blank" href="https://twitter.com/il_tempe">Matteo Tempestini</a>, <a target="_blank" href="https://twitter.com/matt_fortini">Matteo Fortini</a> e <a target="_blank" href="https://twitter.com/aborruso">Andrea Borruso</a> e nasce a seguito di maturata esperienza di hacking civico, ma il   sostegno è di chiunque vuole darlo (privati, associazioni, imprese,   istituzioni) purché l&rsquo;iniziativa non sia strumentalizzata per secondi   fini e di questo chi ha ideato il progetto cerca di farsi garante. Se   vuoi collaborare indica con un <a target="_blank" href="https://github.com/emergenzeHack/italiaafuoco/issues">issue in questo repository</a> chi sei e perchè vorresti collaborare, ti aspettiamo!<br> <br> 
+<a target="_blank" href="http://enketo.ona.io/x/#YVUh" title="Italia A Fuoco: invia una segnalazione relativa ad un incendio"><strong>SEGNALA</strong></a> - <a target="_blank" href="http://italiaafuoco.info/" title="Italia A Fuoco - Progetto per raccogliere segnalazioni sugli incendi in Italia"><strong>BLOG</strong></a></p></td>
+    </tr>
+    <tr>
+      <td width="5%">&nbsp;</td>
+      <td width="2%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="5%" align="center" valign="middle"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="../lib/images/ods.svg" width="100" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+      <td width="2%">&nbsp;</td>
+    </tr>
+  </tbody>
+</table>
+<!-- table social -->
+  <table width="10%" border="0" align="right" cellpadding="0" cellspacing="0" class="social1" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/1985622574797139/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/emergenzeHack/italiaafuoco" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/italiaafuoco" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://t.me/italiaafuoco" target="_blank" title="Telegram"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-paper-plane fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://medium.com/open-data-stories/un-servizio-di-informazione-per-gli-incendi-2d8c2d3cc02b" target="_blank" title="Medium"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://www.flickr.com/groups/italiaafuoco/" target="_blank" title="Flickr"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-flickr fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+             <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table></code></pre1>
+<script type="text/javascript" src="../lib/js/scrolltop/scrolltopcontrol.js"></script>
+<!-- loghi    
+       
+<div id="ods1"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="../lib/images/ods.svg" width="80" title="opendatasicilia.it" alt="opendatasicilia"></a></div>   
+<div id="itaf1"><a href="http://italiaafuoco.info/" title="italiaafuoco.info" target="_blank"> 
+<img src="../legend/italiaafuoco_clip.png" width="40" title="italiaafuoco.info" alt="italiaafuoco.info"></a></div> --> 
+</body>
+</html>
