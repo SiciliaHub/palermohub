@@ -31,7 +31,7 @@ html, body {padding: 0; overflow: hidden;   margin: 0;height: 100%; font: 11px "
 
   .clip_about {width: 100%; height: 100%; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } 
 
-#threejs {resize:both; overflow:auto;  position:fixed; padding: 0;	margin: 35px; bottom: 20px;	left: 20px; width: 20%;	height: 20%; background-color: rgba(255,255,255,0.80);	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	z-index: 1000; }
+#threejs {resize:both; overflow:auto;  position:fixed; padding: 0;	margin: 35px; bottom: 20px;	left: 20px; width: 20%;	height: 20%; background-color: rgba(255,255,255,0.80);	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	z-index: 1000; overflow-y: hidden;}
  @media (min-width: 320px) and (max-width: 736px) { #threejs {display:none;}}
 #threejs_testo {position: fixed; width: 20%;	height: 20px;padding: 0;	margin: 35px; bottom: -5px;	left: 20px;	z-index: 1000; text-align:right;}
  @media (min-width: 320px) and (max-width: 736px) { #threejs_testo {display:none;}}

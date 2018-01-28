@@ -23,7 +23,7 @@
 <link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/leaflet.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
 <link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
-<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/L.Control.Locate.min.css" />
 <link rel="stylesheet" type="text/css" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/qgis2web.css">
 <link rel="stylesheet" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/MarkerCluster.css" />
@@ -31,12 +31,8 @@
 <link rel="stylesheet" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/leaflet-measure.css" />
 <link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
 <link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
-<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
 <link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-
-
- <!-- css menu -->
- <link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/global.css" rel="stylesheet" type="text/css">
  
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
@@ -69,7 +65,59 @@
 <!-- script social -->
 <script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/basemap/L.Control.Basemaps.js"></script>
 <body>
-
+<!-- header -->    
+<header>
+  <div data-includeHTML="menu.html"></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="3d_etna_nord.html" title="3D Grading Map Etna Nord - EMSR213 - 2017" target="_parent"><strong>12 Etna Nord 3D</strong></a>
+<div id="vn-click">
+<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre mappe EMSR213&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+<div id="vn-info">
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="index_incendi_sicilia.html" title="Grading Map Sicilia - EMSR213 - 2017" target="_parent">Quadro Unione</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="caltagirone.html" title="Grading Map Caltagirone - EMSR213 - 2017" target="_parent">02 Caltagirone</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="francofonte.html" title="Grading Map Francofonte - EMSR213 - 2017" target="_parent">03 Francofonte</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="avola.html" title="Grading Map Avola - EMSR213 - 2017" target="_parent">04 Avola</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="sciacca.html" title="Grading Map Sciacca - EMSR213 - 2017" target="_parent">05 Sciacca</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="monreale.html" title="Grading Map Monreale - EMSR213 - 2017" target="_parent">06 Monreale</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="san_vito_lo_capo.html" title="Grading Map San Vito Lo Capo - EMSR213 - 2017" target="_parent">07 San Vito Lo Capo</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="blufi.html" title="Grading Map Blufi - EMSR213 - 2017" target="_parent">08 Blufi</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="mistretta.html" title="Grading Map Mistretta - EMSR213 - 2017" target="_parent">09 Mistretta</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="messina.html" title="Grading Map Messina - EMSR213 - 2017" target="_parent">10 Messina</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="naso.html" title="Grading Map Naso - EMSR213 - 2017" target="_parent">11 Naso</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="etna_nord.html" title="Grading Map Etna Nord - EMSR213 - 2017" target="_parent">12 Etna Nord</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="biancavilla.html" title="Grading Map Biancavilla - EMSR213 - 2017" target="_parent">13 Biancavilla</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="piazza_armerina.html" title="Grading Map Piazza Armerina - EMSR213 - 2017" target="_parent">16 Piazza Armerina</a><br>
+<span class="legenda">Modelli 3D</span>&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_caltagirone.html" title="3D Grading Map Caltagirone - EMSR213 - 2017" target="_parent">02 Caltagirone 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_francofonte.html" title="3D Grading Map Francofonte - EMSR213 - 2017" target="_parent">03 Francofonte 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_avola.html" title="3D Grading Map Avola - EMSR213 - 2017" target="_parent">04 Avola 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_sciacca.html" title="3D Grading Map Sciacca - EMSR213 - 2017" target="_parent">05 Sciacca 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_monreale.html" title="3D Grading Map Monreale - EMSR213 - 2017" target="_parent">06 Monreale 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_san_vito_lo_capo.html" title="3D Grading Map San Vito Lo Capo - EMSR213 - 2017" target="_parent">07 San Vito Lo Capo 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_blufi.html" title="3D Grading Map Blufi - EMSR213 - 2017" target="_parent">08 Blufi 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_mistretta.html" title="3D Grading Map Mistretta - EMSR213 - 2017" target="_parent">09 Mistretta 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_messina.html" title="3D Grading Map Messina - EMSR213 - 2017" target="_parent">10 Messina 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_naso.html" title="3D Grading Map Naso - EMSR213 - 2017" target="_parent">11 Naso 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_etna_nord.html" title="3D Grading Map Etna Nord - EMSR213 - 2017" target="_parent">12 Etna Nord 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_biancavilla.html" title="3D Grading Map Biancavilla - EMSR213 - 2017" target="_parent">13 Biancavilla 3D</a><br>
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="3d_piazza_armerina.html" title="3D Grading Map Piazza Armerina - EMSR213 - 2017" target="_parent">16 Piazza Armerina 3D</a><br>
+</div>
+<script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
+</div>   
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script> 
 
 <div id="webgl"></div>
 
