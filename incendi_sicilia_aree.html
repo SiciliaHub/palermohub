@@ -122,9 +122,7 @@
 <header>
   <div data-includeHTML="menu.html"></div>
       <!-- breadcrumbs --> 
-<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;
-
-<a href="incendi_sicilia_aree.html" title="Sicilia - Incendi boschivi censimento aree incendi dal 2010 a maggio 2016 - Dati parziali - Aree"><strong>Sicilia - Incendi boschivi</strong></a>
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="incendi_sicilia_aree.html" title="Sicilia - Incendi boschivi censimento aree incendi dal 2010 a maggio 2016 - Dati parziali - Aree"><strong>Sicilia - Incendi boschivi</strong></a>
 <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre mappe Incedi&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info">
 <i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="numero_incendi_italia.html" title="Italia - Numero di incendi boschivi dal 2009 a maggio 2016">Italia - Numero di incendi boschivi</a><br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="incendi_sup_italia.html" title="Italia - Ettari di superficie percorsa dal fuoco dal 2010 a 2016" target="_parent">Ettari di superficie percorsa dal fuoco</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<strong>Sicilia - Censimento aree incendi</strong><br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="incendi_sicilia.html" title="Sicilia - Incendi boschivi censimento aree incendi dal 2010 a maggio 2016 - Dati parziali - Mappa densità">Sicilia - Densità incendi</a> <br>
 </div>
@@ -993,7 +991,7 @@ var select = L.countrySelect({title:"Seleziona il Comune di interesse!"});
 		
 		
         var baseMaps = {};
-        L.control.layers(baseMaps,{' <span class="legenda1">Mappa censimento incendi.</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dal 2010 a 2016 - Dati parziali<br /><hr>':layer_poligonoisola0,'<img src="legend/Anno20106.png" />&nbsp;&nbsp;&nbsp;Anno 2010':layer_Anno20106,'<img src="legend/Anno20115.png" />&nbsp;&nbsp;&nbsp;Anno 2011': layer_Anno20115, '<img src="legend/Anno20124.png" />&nbsp;&nbsp;&nbsp;Anno 2012': layer_Anno20124,'<img src="legend/Anno20133.png" />&nbsp;&nbsp;&nbsp;Anno 2013': layer_Anno20133,'<img src="legend/Anno20142.png" />&nbsp;&nbsp;&nbsp;Anno 2014': layer_Anno20142,'<img src="legend/Anno20151.png" />&nbsp;&nbsp;&nbsp;Anno 2015': layer_Anno20151,'<img src="legend/Anno20160.png" />&nbsp;&nbsp;&nbsp;Anno 2016<br /><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia"><br /><br />': layer_Anno20160,}).addTo(map);
+        L.control.layers(baseMaps,{' <span class="legenda1">Mappa censimento incendi.</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dal 2010 a 2016 - Dati parziali<br /><hr>':layer_poligonoisola0,'<img src="legend/Anno20106.png" />&nbsp;&nbsp;&nbsp;Anno 2010':layer_Anno20106,'<img src="legend/Anno20115.png" />&nbsp;&nbsp;&nbsp;Anno 2011': layer_Anno20115, '<img src="legend/Anno20124.png" />&nbsp;&nbsp;&nbsp;Anno 2012': layer_Anno20124,'<img src="legend/Anno20133.png" />&nbsp;&nbsp;&nbsp;Anno 2013': layer_Anno20133,'<img src="legend/Anno20142.png" />&nbsp;&nbsp;&nbsp;Anno 2014': layer_Anno20142,'<img src="legend/Anno20151.png" />&nbsp;&nbsp;&nbsp;Anno 2015': layer_Anno20151,'<img src="legend/Anno20160.png" />&nbsp;&nbsp;&nbsp;Anno 2016<br /><br /><a href="incendi_sicilia.html" title="Mappa Densità censimento incendi " target="_parent"><span class="legenda1">Consulta la mappa densità</span></a><br><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia"><br /><br />': layer_Anno20160,}).addTo(map);
         setBounds();
 		<!-- strumenti di leaflet -->
 		
