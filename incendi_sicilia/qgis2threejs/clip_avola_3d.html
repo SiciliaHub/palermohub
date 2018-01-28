@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>EMSR213: Forest Fire in Southern Italy - Sicilia 3D</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="EMSR213: Forest Fire in Southern Italy - Sicilia su base opendata">
+        <meta name="keywords" content="Open Data,Sicilia, protezione civile, piano emergenza, incendi,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="27/04/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+<link rel="stylesheet" type="text/css" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/Qgis2threejs.css">
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/atlante_01.css" rel="stylesheet" type="text/css">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+<body>
+<div id="webgl"></div>
+
+<!-- popup -->
+<div id="popup" style="display:none;">
+<div id="closebtn">&times;</div>
+<div id="popupbar"></div>
+<div id="popupbody">
+ <div id="popupcontent"></div>
+ <div id="pageinfo">
+  <h1>Current View URL</h1>
+  <div><input id="urlbox" type="text"></div>
+
+  <h1>Usage</h1>
+  <div id="usage"></div>
+
+  <h1>About</h1>
+  <div id="about">
+  EMSR213: Forest Fire in Southern Italy - Sicilia, <a href="http://emergency.copernicus.eu/mapping/list-of-components/EMSR213"  title="EMSR213: Forest Fire in Southern Italy" target="_blank">Vector package </a><br>Rielaborazione dati <a href="https://twitter.com/gbvitrano" title="@gbvitrano" target="_blank">@gbvitrano</a> per <a href="http://opendatasicilia.it/" title="Open Data Sicilia" target="_blank">Open Data Sicilia</a><br>I contenuti della mappa sono rilasciati con la licenza: <a href="http://effis.jrc.ec.europa.eu/about-effis/data-license/"  title="Data License - EFFIS"target="_blank">Data License - EFFIS</a><br><br>
+
+This page was made with <a href="http://www.qgis.org/" target="_blank">QGIS</a> and <a href="https://github.com/minorua/Qgis2threejs" target="_blank">Qgis2threejs</a> plugin, 
+and uses the following library:
+  <ul>
+  <li>three.js <a href="http://threejs.org/" target="_blank">http://threejs.org/</a> <a href="./threejs/LICENSE" target="_blank" class="license">(LICENSE)</a></li>
+  <li id="lib_proj4js" style="display: none;">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a> <a href="./proj4js/LICENSE.md" target="_blank" class="license">(LICENSE)</a></li> 
+  </ul>
+  </div>
+ </div>
+</div></div>
+
+<!-- footer -->
+<div id="footer"><div id="infobtn">i</div></div>
+
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/threejs/three.min.js"></script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/Qgis2threejs_avola_clip.js"></script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/threejs/OrbitControls.js"></script>
+<script>
+var option = Q3D.Options;
+option.bgcolor = 0xa3cdff;
+</script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/avola_clip.js"></script>
+<script>
+if (typeof proj4 !== "undefined") document.getElementById("lib_proj4js").style.display = "list-item";
+
+var container = document.getElementById("webgl");
+var app = Q3D.application;
+app.init(container);
+
+// load the project
+app.loadProject(project);
+
+document.getElementById("infobtn").onclick = app.showInfo.bind(app);
+if ("hidebutton" in app.urlParams) document.getElementById("infobtn").style.display = "none";
+
+app.addEventListeners();
+app.start();
+
+</script>
+</body>
+</html>

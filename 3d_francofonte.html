@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>EMSR213: Forest Fire in Southern Italy - Sicilia 3D</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="EMSR213: Forest Fire in Southern Italy - Sicilia su base opendata">
+        <meta name="keywords" content="Open Data,Sicilia, protezione civile, piano emergenza, incendi,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="22/07/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+<link rel="stylesheet" type="text/css" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/Qgis2threejs.css">
+
+ <!-- css -->
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/atlante_01.css" rel="stylesheet" type="text/css">
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/leaflet.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/L.Control.Locate.min.css" />
+<link rel="stylesheet" type="text/css" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/qgis2web.css">
+<link rel="stylesheet" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/MarkerCluster.css" />
+<link rel="stylesheet" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/MarkerCluster.Default.css" />
+<link rel="stylesheet" href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/leaflet-measure.css" />
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+
+
+ <!-- css menu -->
+ <link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/global.css" rel="stylesheet" type="text/css">
+ 
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+ 
+
+<link href="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/css/atlante_01.css" rel="stylesheet" type="text/css">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+
+<!-- script mappa -->
+
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/leaflet.js"></script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>        
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/sidebar/leaflet-sidebar.js"></script>
+<!-- script social -->
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/basemap/L.Control.Basemaps.js"></script>
+<body>
+
+
+<div id="webgl"></div>
+
+<!-- popup -->
+<div id="popup" style="display:none;">
+<div id="closebtn">&times;</div>
+<div id="popupbar"></div>
+<div id="popupbody">
+ <div id="popupcontent"></div>
+ <div id="pageinfo">
+  <h1>Current View URL</h1>
+  <div><input id="urlbox" type="text"></div>
+
+  <h1>Usage</h1>
+  <div id="usage"></div>
+
+  <h1>About</h1>
+  <div id="about">
+  EMSR213: Forest Fire in Southern Italy - Sicilia, <a href="http://emergency.copernicus.eu/mapping/list-of-components/EMSR213"  title="EMSR213: Forest Fire in Southern Italy" target="_blank">Vector package </a><br>Rielaborazione dati <a href="https://twitter.com/gbvitrano" title="@gbvitrano" target="_blank">@gbvitrano</a> per <a href="http://opendatasicilia.it/" title="Open Data Sicilia" target="_blank">Open Data Sicilia</a><br>I contenuti della mappa sono rilasciati con la licenza: <a href="http://effis.jrc.ec.europa.eu/about-effis/data-license/"  title="Data License - EFFIS"target="_blank">Data License - EFFIS</a><br><br>
+This page was made with <a href="http://www.qgis.org/" target="_blank">QGIS</a> and <a href="https://github.com/minorua/Qgis2threejs" target="_blank">Qgis2threejs</a> plugin, 
+and uses the following library:
+  <ul>
+  <li>three.js <a href="http://threejs.org/" target="_blank">http://threejs.org/</a> <a href="./threejs/LICENSE" target="_blank" class="license">(LICENSE)</a></li>
+  <li id="lib_proj4js" style="display: none;">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a> <a href="./proj4js/LICENSE.md" target="_blank" class="license">(LICENSE)</a></li> 
+  </ul>
+  </div>
+ </div>
+</div></div>
+
+<!-- footer -->
+<div id="footer"><div id="infobtn">i</div></div>
+
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/threejs/three.min.js"></script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/Qgis2threejs.js"></script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/threejs/OrbitControls.js"></script>
+<script>
+var option = Q3D.Options;
+option.bgcolor = 0xffffff;
+</script>
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/qgis2threejs/francofonte.js"></script>
+
+<script>
+if (typeof proj4 !== "undefined") document.getElementById("lib_proj4js").style.display = "list-item";
+
+var container = document.getElementById("webgl");
+var app = Q3D.application;
+app.init(container);
+
+// load the project
+app.loadProject(project);
+
+document.getElementById("infobtn").onclick = app.showInfo.bind(app);
+if ("hidebutton" in app.urlParams) document.getElementById("infobtn").style.display = "none";
+
+app.addEventListeners();
+app.start();
+
+</script>
+
+<div id="sidebar" class="sidebar collapsed">
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#wiki"  title="Glossario"role="tab"><i class="fa fa-wikipedia-w" aria-hidden="true"></i></a></li>
+                  <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+                 <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+            <li><a href="#fire"  title="Progetto Italia a Fuoco"role="tab"><i class="fa fa-fire"></i></a></li>
+             <li> <a href="#about" title="OpenDataSicilia" role="tab"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+<li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Sicilia a fuoco<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem"><strong>Gli incendi in Sicilia, una situazione drammatica vista da COPERNICUS - Emergency Management Service<br>
+     <a href="http://emergency.copernicus.eu/mapping/list-of-components/EMSR213" title="EMSR213: Forest Fire in Southern Italy" target="_blank">EMSR213: Forest Fire in Southern Italy</a></strong> <p class="lorem">[EMSR213] Francofonte: Grading Map  <a href="http://emergency.copernicus.eu/mapping/ems-product-component/EMSR213_03FRANCOFONTE_02GRADING_MAP/1" title="
+[EMSR213] Francofonte: Grading Map " target="_blank"> Published: 2017-07-20 07:26 (UTC)</a></p>
+ <p class="lorem"><strong>Authorized User:</strong><br>
+Italy|Presidenza del Consiglio dei Ministri - Dipartimento della Protezione Civile - Centro Situazioni<br><br>
+<strong>Activation Reason: </strong><br>
+During recent weeks almost the whole Italian National Territory has suffered a period characterized by very high temperatures and an absence of significant rain. Exacerbated by these conditions numerous fires are affecting Italy, most specifically in southern areas. Several fires are affecting large forested areas and, in certain cases, fires are threatening inhabited areas. Damages to infrastructures, public and private structures have occurred as have temporary evacuations due to risk to life.</p>
+<img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/legend/03.png" width="165" height="24"  /><br>
+ <a href="http://emergency.copernicus.eu/mapping/system/files/components/EMSR213_03FRANCOFONTE_02GRADING_MAP_v1_100dpi.jpg" target="_blank" title="[EMSR213] Francofonte: Grading Map"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/images/francofonte.jpg"alt="[EMSR213] Francofonte: Grading Map" width="370" height="262" class="clip_about" title="[EMSR213] Francofonte: Grading Map"/></a> <br>
+
+<p class="lorem"> <em><strong>Copernicus EMS - Mapping mira a fornire prodotti quanto più accurati possibile. Tuttavia, le informazioni prodotte hanno limitazioni dovute alla scala, alla risoluzione, alla data e ai metodi di interpretazione dei dati originali dei materiali originali / satellitari.</strong></em><br>
+  <em><strong>I prodotti Copernicus EMS - Mapping sono forniti "come è" senza alcuna garanzia, espressa o implicita, inclusa la qualità o l'idoneità per qualsiasi scopo. L'intero rischio relativo all'utilizzo di questi prodotti è assunto dall'Utente e l'UE non si assume alcuna responsabilità per eventuali perdite, danni o inconvenienti causati dalla dipendenza dai prodotti Copernicus EMS-Mapping.</strong></em></p>
+</div>    
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem"> <strong>Rielaborazione di: </strong><a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a><br>per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong> e <strong><a href="http://italiaafuoco.info/" Title="Italia a Fuoco" target="_blank">Italia a Fuoco</a></strong><br>
+   <p class="lorem"><strong>Fonte dati:</strong> <br>  <a href="http://emergency.copernicus.eu/mapping/list-of-components/EMSR213" title="EMSR213: Forest Fire in Southern Italy" target="_blank">EMSR213: Forest Fire in Southern Italy</a> <br> 
+
+<p class="lorem">[EMSR213] Francofonte: Grading Map  <a href="http://emergency.copernicus.eu/mapping/ems-product-component/EMSR213_03FRANCOFONTE_02GRADING_MAP/1" title="
+[EMSR213] Francofonte: Grading Map " target="_blank"> Published: 2017-07-20 07:26 (UTC)</a></p>
+
+<p class="lorem"><strong>News </strong> del 28/05/2017 - Siracusa. Vasto incendio a Tremilia, lambite abitazioni: vigili del<a href="http://www.siracusaoggi.it/siracusa-vasto-incendio-a-tremmilia-lambite-abitazioni-vigili-del-fuoco-a-lavoro-per-ore/" title="Siracusa. Vasto incendio a Tremilia, lambite abitazioni: vigili del SiracusaOggi.it" target="_blank">...SiracusaOggi.it</a></p> 
+ <a href="#" target="_blank" title="bla bla"><img src="http://www.siracusaoggi.it/wp-content/uploads/2017/05/incendio-tremmilia-300x168.jpg"alt="news incendi" width="400" height="566" class="clip_about" title="Siracusa. Vasto incendio a Tremilia, lambite abitazioni: vigili del SiracusaOggi.it"/></a><br>
+
+<hr>
+<p class="lorem">I contenuti della mappa sono rilasciati con la licenza: <a href="http://emergency.copernicus.eu/mapping/sites/default/files/files/CopernicusEMS-Data_and_Dissemination_Policy.pdf " title="Copernicus EMS - Rapid Data Mapping Policy" target="_blank"><br><strong>Copernicus EMS - Rapid Data Mapping Policy</strong></a> </p> 
+<p class="lorem">  <em><strong>Disclaimer of liability</strong></em><br>
+  <em>Copernicus EMS - Mapping mira a fornire prodotti quanto più accurati possibile. Tuttavia, le informazioni prodotte hanno limitazioni dovute alla scala, alla risoluzione, alla data e ai metodi di interpretazione dei dati originali dei materiali originali / satellitari.</em><br>
+  <em>I prodotti Copernicus EMS - Mapping sono forniti "come è" senza alcuna garanzia, espressa o implicita, inclusa la qualità o l'idoneità per qualsiasi scopo. L'intero rischio relativo all'utilizzo di questi prodotti è assunto dall'Utente e l'UE non si assume alcuna responsabilità per eventuali perdite, danni o inconvenienti causati dalla dipendenza dai prodotti Copernicus EMS-Mapping.</em></p>
+</div>
+
+<!-- Tab Glossario -->
+       <div class="sidebar-pane" id="wiki">
+       <h2 class="sidebar-header">Che cosa è Copernico<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem">Copernicus (in precedenza il monitoraggio globale per l'ambiente e la sicurezza - GMES) è un programma comunitario finalizzato allo sviluppo di servizi informativi europei basati su dati satellitari di osservazione terrestre e dati in situ (non nello spazio).</p>  
+<p class="lorem">Copernicus è attuato dalla Commissione europea (CE) con il sostegno dell'Agenzia spaziale europea (ESA) per la componente spaziale e dell'Agenzia europea dell'ambiente (SEE) per la componente in situ.</p>  
+<p class="lorem">L'obiettivo di Copernicus è quello di monitorare e prevedere lo stato dell'ambiente in terra, in mare e nell'atmosfera, al fine di sostenere strategie di attenuazione del cambiamento climatico e di adattamento, gestione efficiente delle situazioni di emergenza e miglioramento della sicurezza di ogni cittadino.</p>  
+<p class="lorem">Le informazioni fornite da Copernicus miglioreranno la sicurezza degli utenti, ad esempio Fornendo informazioni sulle catastrofi naturali, come gli incendi boschivi o le inondazioni, aiutando così a prevenire la perdita di vite e di proprietà e danni all'ambiente.</p> 
+<p class="lorem">Copernicus è un programma guidato dagli utenti e i servizi di informazione forniti saranno liberamente e apertamente accessibili ai propri Utenti, soprattutto autorità pubbliche.</p> <br>
+<p class="lorem"><strong><a href="http://emergency.copernicus.eu/mapping/ems/what-copernicus" title="What is Copernicus" target="_blank">What is Copernicus</a></strong></p> 
+         
+</div>
+
+<!-- Tab Progetto Italia a Fuoco -->
+<div class="sidebar-pane" id="fire">
+<h2 class="sidebar-header">Progetto Italia a Fuoco<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Progetto per raccogliere segnalazioni sugli incendi in Italia.</strong></p>
+<p class="lorem">Questo è un progetto non profit, organizzato interamente da volontari. È nato per condividere informazioni utili e verificate sugli incendi che ogni estate affliggono l’Italia.<br><br>Il progetto si pone come scopo quello di aggregare e non disperdere contenuti utili a tutti provenienti da fonti di varia natura (ufficiali e non) al fine creare valore in un momento di crisi per il paese.<br><br>Il progetto non vuole in alcun modo sostituirsi a fonti istituzionali di informazione a cui rimandiamo caldamente per l’attendibilità.<br><br>Il progetto, laddove lo si ritenga utile, è usabile da organizzazioni, associazioni, gruppi informali ed anche pubbliche amministrazioni che avessero bisogno di un servizio per informare su quanto sta avvenendo a seguito degli incendi.</p>
+<p class="lorem">L&rsquo;idea è di <a target="_blank" href="https://twitter.com/il_tempe">Matteo Tempestini</a>, <a target="_blank" href="https://twitter.com/matt_fortini">Matteo Fortini</a> e <a target="_blank" href="https://twitter.com/aborruso">Andrea Borruso</a> e nasce a seguito di maturata esperienza di hacking civico, ma il   sostegno è di chiunque vuole darlo (privati, associazioni, imprese,   istituzioni) purché l&rsquo;iniziativa non sia strumentalizzata per secondi   fini e di questo chi ha ideato il progetto cerca di farsi garante. Se   vuoi collaborare indica con un <a target="_blank" href="https://github.com/emergenzeHack/italiaafuoco/issues">issue in questo repository</a> chi sei e perchè vorresti collaborare, ti aspettiamo!<br> <br> 
+<a target="_blank" href="http://enketo.ona.io/x/#YVUh" title="Italia A Fuoco: invia una segnalazione relativa ad un incendio"><strong>SEGNALA</strong></a> - <a target="_blank" href="http://italiaafuoco.info/" title="Italia A Fuoco - Progetto per raccogliere segnalazioni sugli incendi in Italia"><strong>BLOG</strong></a></p>
+<br><br>
+<p class="lorem"><em>Ci trovi in questi luoghi: </em></p>
+<!-- table social -->
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="social1" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/1985622574797139/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/emergenzeHack/italiaafuoco" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/italiaafuoco" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://t.me/italiaafuoco" target="_blank" title="Telegram"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-paper-plane fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://medium.com/open-data-stories/un-servizio-di-informazione-per-gli-incendi-2d8c2d3cc02b" target="_blank" title="Medium"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-medium fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://www.flickr.com/groups/italiaafuoco/" target="_blank" title="Flickr"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-flickr fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="social1" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/images/fb.png" alt="facebook"  width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/images/tw.png" alt="twitter"  width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/images/gp.png" width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/images/in.png" width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/images/pin.png"  width="32" height="32"alt="pinterest"></a></p>
+</div>
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "http://palermohub.opendatasicilia.it/index _incendi_sicilia.html",});
+			});
+		</script><br>
+ <label for="url breve"><strong><p class="lorem">URL breve</strong></label><br><br>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://goo.gl/CHz2PC"  readonly></p><br>
+<hr>
+<br>
+<p class="lorem"><strong>Includi la mappa</strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="http://palermohub.opendatasicilia.it/index _incendi_sicilia.html"></iframe><p><a href="http://palermohub.opendatasicilia.it/index _incendi_sicilia.html" title="Incendi Sicilia, COPERNICUS - Emergency Management - EMSR213: Forest Fire in Southern Italy - Sicilia, su base opendata">Visualizza a schermo intero</a></p>
+      </textarea>
+           <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+    </div>
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/tomchadwin/qgis2web" title="Qtiles" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/minorua/Qgis2threejs" title="Qgis2threejs " target="_blank">Qgis2threejs  ,</a>il plugin esporta i dati del terreno, l'immagine delle telecamere e i dati vettoriali sul tuo browser web. È possibile visualizzare gli oggetti 3D nel browser web che supporta WebGL;<br><br></li></p>
+<li><p class="lorem"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a> per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);<br><br></li></p>
+<li><p class="lorem"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet-hash" target="_blank">Leaflet-hash</a>, per generare URL che contengono livello di zoom e posizione corrente;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar-v2" target="_blank">Sidebar-v2</a>, per creare questa sidebar a scomparsa;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet.MousePosition" target="_blank">Leaflet.MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet-graphicscale" target="_blank">Leaflet-graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet.Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa.<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet.PolylineMeasure" target="_blank">Leaflet.PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri).<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet.zoomhome" target="_blank">Leaflet.zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione.<br><br></li></p>
+<li><p class="lorem"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa.<br><br></li></p>
+<li><p class="lorem"><a href="earthexplorer.usgs.gov" title="Modelli digitale del terreno - DEM" target="_blank">USGS - EarthExplorer</a>, Modello digitale del terreno<br><br></li></p>
+<li><p class="lorem"><a href="http://www.jqueryscript.net/menu/Responsive-Multi-level-Off-Screen-Navigation-Plugin-For-jQuery-cbFlyout.html" title="Responsive Multi-level Off Screen Navigation Plugin For jQuery - cbFlyout" target="_blank">Menu jQuery</a>, Responsive Multi-level Off Screen Navigation Plugin For jQuery - cbFlyout.<br><br></li></p>
+      </ul>
+</div>
+</div>
+</div>  
+  
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+<script>
+var map = L.map('map', { zoomControl:false, maxZoom:28, minZoom:28  }).fitBounds([[37.6011061912,12.4036335813],[37.4614395741,15.667056554]]);
+map.attributionControl.addAttribution('');
+  // L.tileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {       attribution: '',      minZoom: 2,      maxZoom: 2,      maxNativeZoom: 2    }).addTo(map);
+var sidebar = L.control.sidebar('sidebar').addTo(map);
+  </script>
+
+<script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/social/jquery_csbuttons.js"></script>
+
+
+<!-- clip mappa 2d --> 
+  <div id="tavola"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/legend/03_1.png" width="165"></div>  
+<div id="threejs" class="leaflet-control">
+<iframe src="grading_map.html#11/37.2179/15.1435" width="100%" height="98%" frameborder="0" scrolling="no"></iframe>
+</div> 
+<div id="threejs_testo" class="leaflet-control legenda2">
+  <a href="francofonte.html" title="Grading Map - Forest Fire in Southern Italy - Visualizza a schermo intero" target="_parent">Apri Grading Map EMSR213</a> </div>   
+  
+<!-- loghi e legenda -->   
+  <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/images/ods.svg" width="80" title="opendatasicilia.it" alt="opendatasicilia"></a></div>   
+<div id="itaf"><a href="http://italiaafuoco.info/" title="italiaafuoco.info" target="_blank"> 
+<img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/legend/italiaafuoco_clip.png" width="40" title="italiaafuoco.info" alt="italiaafuoco.info"></a></div>  
+<div id="leg3d"><img src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/legend/legenda.png" width="120" title="Fire Grading" alt="Fire Grading"></a></div> 
+</body>
+</html>
