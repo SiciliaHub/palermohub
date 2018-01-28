@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="it">
     <head>
- <title>Palermo Hub - Sicilia - Incendi boschivi dal 2010 a 2016 </title>
+ <title>Palermo Hub - Sicilia - Incendi boschivi dal 2010 a 2016</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata">
@@ -24,27 +24,26 @@
 
   gtag('config', 'UA-87653723-4');
 </script>
-   
-       
- <!-- Open Graph Protocol -->
-<meta property="og:title" content="Incendi boschivi dal 2009 a maggio 2016 in Italia" />
-<meta property="og:description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata." />
-<meta property="og:url" content="http://siciliahub.github.io/mappe/datiallefiamme/index.html" />
+
+    <!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it" />
+<meta property="og:description" content="Sicilia - Incendi boschivi dal 2010 a 2016" />
+<meta property="og:url" content="http://siciliahub.github.io/palermohub/incendi_sicilia_aree.html" />
 <meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
-<meta property="og:image" content="http://siciliahub.github.io/mappe/datiallefiamme/legend/mappa_incendi_1024.jpg" />
-<meta property="og:site_name" content="github.com/SiciliaHub/mappe" />
+<meta property="og:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/incendi_sicilia_aree.jpg" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
 <!-- Open Graph Protocol -->
 
 <!-- twitter -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Incendi boschivi dal 2009 a maggio 2016 in Italia">
-<meta name="twitter:description" content="Incendi boschivi dal 2009 a maggio 2016 in Italia, su base opendata.">
-<meta name="twitter:image" content="http://siciliahub.github.io/mappe/datiallefiamme/legend/mappa_incendi_1024.jpg">
+<meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+<meta name="twitter:description" content="Sicilia - Incendi boschivi dal 2010 a 2016">
+<meta name="twitter:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/incendi_sicilia_aree.jpg">
 <meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
-<meta name="twitter:site" content="github.com/SiciliaHub/mappe" />
-<meta name="twitter:url" content="github.com/SiciliaHub/mappe">
-<!-- twitter -->       
-
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter --> 
+   
  <!-- css -->
 <link href="lib/css/atlante_01.css" rel="stylesheet" type="text/css">
 <link href="lib/css/leaflet_sicilia.css" rel="stylesheet" type="text/css">
@@ -122,7 +121,21 @@
      <!-- header -->    
 <header>
   <div data-includeHTML="menu.html"></div>
-     <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="xxxxx.html#" title="xxxxxx"><strong>xxxxx</strong></a></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;
+
+<a href="incendi_sicilia_aree.html" title="Sicilia - Incendi boschivi dal 2010 a 2016 - Aree"><strong>Sicilia - Incendi boschivi</strong></a>
+<div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre mappe Incedi&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info">
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="numero_incendi_italia.html" title="Italia - Numero di incendi boschivi dal 2009 a maggio 2016">Italia - Numero di incendi boschivi</a><br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="incendi_sup_italia.html" title="Italia - Ettari di superficie percorsa dal fuoco dal 2010 a 2016" target="_parent">Ettari di superficie percorsa dal fuoco</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<strong>Sicilia - Incendi boschivi</strong><br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="incendi_sicilia.html" title="Sicilia - Incendi boschivi dal 2010 a 2016 - Mappa densità">Sicilia - Densità incendi</a> <br>
+</div>
+<script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
+</div> 
 </header>
 <script>
     $(document).ready(function () {
