@@ -25,9 +25,9 @@ html, body {padding: 0; overflow: hidden;   margin: 0;height: 100%; font: 11px "
 
 .breadcrumbs{padding-left:12px; padding-top:5px;  color: #4E4B4B; font-size:12px; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; text-align: left;
 }
-
-/*#ods { position:fixed; bottom:51px; right:17px; z-index: 1014;}
-#itaf { position:fixed; bottom:95px; right:37px; z-index: 1014;}*/
+/**/
+#ods { position:fixed; bottom:60px; right:17px; z-index: 1014;}
+#itaf { position:fixed; bottom:105px; right:37px; z-index: 1014;}
 
 .lorem {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}.awesome {font-style:fontawesome;  color: #4E4B4B;  }
 a:link {color: #FF9900;	text-decoration:none;}
@@ -189,7 +189,7 @@ z-index: 1010;}
 }
 /* jquery per aprire il grafico */
 
-<!--
+<!--   -->
 .collapsible {
 	margin-bottom: 20px;
 	background: #EBEBEB;
@@ -213,4 +213,50 @@ z-index: 1010;}
 	background: #990000;
 	border: 1px solid #990000;
 }
--->
+
+
+/* posizione icone sidebar per google chrome*/
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  margin: 0;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+
+/* Jquery Slide Toggle*/
+#vn-click{
+/*position: fixed; height: 25px;padding-left:12px; padding-top:5px;margin: 0;top: 50px; right: 0px;	z-index: 1010;*/
+padding:0px 10px;
+/*background:#ff9900;*/
+color:#4E4B4B;
+font-weight:normal;
+/*font-size:14px;*/
+cursor:pointer;
+display:inline-block;
+ border-radius: 3px;
+ height:20px;
+}
+@media (min-width: 320px) and (max-width: 736px) { #vn-click {padding:3px 5px;  }}
+
+#vn-info{
+	/*width:97%;
+	position:fixed;
+	left:130px;*/
+display:none;
+text-align:justify;
+background:rgba(248,248,248,0.98);
+color:#4E4B4B;
+padding:5px 5px;
+box-shadow: 0 1px 1.5px rgba(0,0,0,0.65);
+}
