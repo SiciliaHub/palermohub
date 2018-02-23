@@ -1,3 +1,15 @@
 [0108/144440.652:ERROR:process_info.cc(632)] range at 0x8bba40ba00000000, size 0x2c8 fully unreadable
 [0108/144440.652:ERROR:process_info.cc(632)] range at 0x8bba411e00000000, size 0x2c8 fully unreadable
 [0108/144440.652:ERROR:process_info.cc(632)] range at 0x0, size 0x2c8 fully unreadable
+[0223/135328.430:ERROR:process_reader_win.cc(182)] ResumeThread: Parametro non corretto. (0x57)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
+[0223/135328.442:ERROR:process_reader_win.cc(151)] SuspendThread: Accesso negato. (0x5)
