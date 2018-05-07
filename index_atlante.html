@@ -349,31 +349,31 @@ Un ringraziamento particolare va a <a href="https://twitter.com/napo" target="_b
 var basemaps = [
 		  		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution:'&copy;<a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-      minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
+      minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,
 	  label: 'OpenStreetMap'
         }),
 		
 		L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
                 attribution: 'Source: Google Road - Map data ©2015 Google',
-  minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
+  minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,
 	 	  label: 'Google Road'
               }),
 	
 				  L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
                 attribution: 'Source: Google Satellite - Map data ©2015 Google',
-minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
+minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,
 	 	  label: 'Google Satellite'
               }),		  
 			  
 	L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Source: ESRI Standard',
-  minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
+  minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,
 		  label: 'ESRI Standard'
               }),	  
 			
 			L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Source: ESRI Satellite',
-  minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
+  minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,
 		  label: 'ESRI Satellite'
               }),
 		        ];
@@ -393,19 +393,19 @@ L.control.mousePosition().addTo(map);
    							
 var omira = L.tileLayer.mask("http://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Omira 1935 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,        }).addTo(map);
+minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,        }).addTo(map);
 
 var irta = L.tileLayer.mask("http://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Irta 1956 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,   });
+minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,   });
 
 var sas = L.tileLayer.mask("http://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Sas 1987 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,  });
+minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,  });
 
 var ctc = L.tileLayer.mask("http://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Sas 1987 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,  });
+minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,  });
 
 var overlaysmap =  {'Carta tecnica Omira 1935 ': omira, 'Carta tecnica Municipale 19XX ': ctc, 'Carta tecnica Irta 1956': irta, 'Carta tecnica Sas 1987': sas, };
 
