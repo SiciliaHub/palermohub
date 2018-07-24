@@ -44,7 +44,7 @@ html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px 
     @media screen and (width: 732px) {#beta {left:90px; bottom:60px;}.beta{width: 42px; height: 42px;}}
 	@media screen and (width: 736px) {#beta {left:90px; bottom:50px;}.beta{width: 42px; height: 42px;}}
 
-#ods { position:fixed; bottom:65px; right:17px; z-index: 1500;}
+#ods { position:fixed; bottom:65px; right:120px; z-index: 1500;}
 /**/
 #itaf { position:fixed; bottom:110px; right:37px; z-index: 1014;}
 
@@ -94,7 +94,7 @@ a:active {color: #FF0000; text-decoration:none; }
 /*Clip resize;*/
 /*.clip_resize {width: 100%; height: 100%; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } */
 
-#grafico {resize: both; overflow: auto;  position:fixed; padding: 0;	margin: 35px; bottom: 20px; right:	left: 20px; width: 650px;	height:485px; background-color: rgba(255,255,255,0.80);	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	z-index: 1000; }
+#grafico {resize: both; overflow: auto;  position:fixed; padding: 0;	margin: 35px; bottom: 20px; left: 20px; width: 650px;	height:485px; background-color: rgba(255,255,255,0.80);	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	z-index: 1000; }
 
 #grafico_full {position: fixed; height:600px; width:600px; right:20px; top:30%; overflow:auto; z-index:1000; }
 #testo_dati {position: fixed; height:800px; width:600px; left: 20px; top:60px; overflow:auto; z-index:1000; }
