@@ -26,8 +26,8 @@ html, body {padding: 0; overflow: hidden;   margin: 0;height: 100%; font: 11px "
 .breadcrumbs{padding-left:12px; padding-top:5px;  color: #4E4B4B; font-size:12px; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; text-align: left;
 }
 /**/
-#ods { position:fixed; bottom:60px; right:120px; z-index: 1014;}
-#itaf { position:fixed; bottom:105px; right:140px; z-index: 1014;}
+#ods { position:fixed; bottom:71px; right:17px; z-index: 1014;}
+#itaf { position:fixed; bottom:115px; right:37px; z-index: 1014;}
 
 .lorem {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}.awesome {font-style:fontawesome;  color: #4E4B4B;  }
 a:link {color: #FF9900;	text-decoration:none;}
