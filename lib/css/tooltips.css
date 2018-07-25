@@ -52,14 +52,14 @@ a {
 .clip_tooltips:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 
 @media (min-width: 320px) and (max-width: 768px) {.nofooter { display:none;}}
- @media (min-width: 320px) and (max-width: 768px) {.clip_tooltips {width: 185px;height: 104px;}}
+@media (min-width: 320px) and (max-width: 768px) {.clip_tooltips {width: 185px;height: 104px;}}
  
-  @media (min-width: 320px) and (max-width: 768px) {.clip_socialr {width: 24px;height: 24px;}}
+@media (min-width: 320px) and (max-width: 768px) {.clip_socialr {width: 24px;height: 24px;}}
  
- .lorem0 {font-style: normal; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;  font-size: 11px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
+.lorem0 {font-style: normal; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;  font-size: 11px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
  
 @media (min-width: 320px) and (max-width: 768px) {.lorem0 {font-size: 9px; color: #4E4B4B; text-align: justify;}}
 @media (min-width: 320px) and (max-width: 768px) {.footermobile {font-size: 10px; color: #4E4B4B; text-align: justify;}}
-@media (min-width: 1023px)  {.footermobile { display:none;}}
+@media (min-width: 768px)  {.footermobile { display:none;}}
 @media (min-width: 320px) and (max-width: 768px) {.nofooter { display:none;}}
  
