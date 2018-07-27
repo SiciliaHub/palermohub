@@ -13,10 +13,12 @@ font-weight:normal; font-style:normal;}
 html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; background-color:#ffffff; 
 /*background-image:url(../images/ods_02.png); background-size: 30px 30px;background-repeat:no-repeat;background-position:5px 3px;background-attachment: fixed;*/}
 
-@media (min-width: 320px) and (max-width: 360px) {html, body  {height: 96.6%; }}
+@media (min-width: 320px) and (max-width: 960px) {html, body  {height: 96.6%; }}
+
+/*@media (min-width: 320px) and (max-width: 360px) {html, body  {height: 96.6%; }}
 @media (min-width: 361px) and (max-width: 414px) {html, body  {height: 97.6%; }}
 @media (min-width: 411px) and (max-width: 640px) {html, body  {height: 97.2%; }}
-@media (min-width: 768px) and (max-width: 960px) {html, body  {height: 96.6%; }}
+@media (min-width: 768px) and (max-width: 960px) {html, body  {height: 96.6%; }}*/
 
 
 
@@ -53,7 +55,7 @@ html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px 
 	@media screen and (width: 736px) {#beta {left:90px; bottom:50px;}.beta{width: 42px; height: 42px;}}
 
 #ods { position:fixed; bottom:71px; right:17px; z-index: 1500;}
-@media (min-width: 320px) and (max-width: 533px) {#ods { bottom: 140px; }}
+@media (min-width: 320px) and (max-width: 960px) {#ods { bottom: 120px; }}
 /**/
 #itaf { position:fixed; bottom:110px; right:37px; z-index: 1014;}
 
