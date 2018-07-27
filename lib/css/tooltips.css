@@ -2,18 +2,6 @@
 giovan battista vitrano per opendatasicilia.it */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-@media only screen and (min-width: 640px) {
-   table.exhibit-tabularView-body table td {
-      /* !important prevents the common CSS stylesheets from overriding
-         this as on RTD they are loaded after this stylesheet */
-      white-space: normal !important;
-   }
-
-   table.exhibit-tabularView-body {
-      overflow: visible !important;
-   }}
-
-
 a.tooltips {
   position: relative;
   display: inline;
