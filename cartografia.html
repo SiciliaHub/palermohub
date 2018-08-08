@@ -438,10 +438,13 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
         bounds_group.addLayer(layer_poligonoisola0);
         // map.addLayer(layer_poligonoisola0);		
 <!-- Poligono fantasma  fine -->	
+<!-- http://svr-arcgissitr/ArcGIS/services/Volo_2012_2013/MapServer/WMSServer -->
+
 
 	  // Ortofoto Palermo 14 cm - Regione Siciliana 
- var sicilia_wms = L.tileLayer.wms('http://map.sitr.regione.sicilia.it/gis/services/ATA_2012_2013/Ortofoto_ATA_2012_2013/MapServer/WmsServer?', {
-    layers: '0',
+ <!-- var sicilia_wms = L.tileLayer.wms('http://map.sitr.regione.sicilia.it/gis/services/ATA_2012_2013/Ortofoto_ATA_2012_2013/MapServer/WmsServer?', { -->
+    var sicilia_wms = L.tileLayer.wms('http://map.sitr.regione.sicilia.it/ArcGIS/services/Volo_2012_2013/MapServer/WMSServer?', {
+	layers: '0',
 	    format: 'image/png',
         minZoom: 7,
         maxZoom: 20,
@@ -450,7 +453,8 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
     attribution: 'SITR Regione Siciliana Volo ATA 2012 2013',
 }) //.addTo(map);
 	  
- var palermo_wms = L.tileLayer.wms('http://map.sitr.regione.sicilia.it/gis/services/ATA_2012_2013/Ortofoto_ATA_2012_2013_Palermo_14cm/MapServer/WmsServer?', {
+ <!-- var palermo_wms = L.tileLayer.wms('http://map.sitr.regione.sicilia.it/gis/services/ATA_2012_2013/Ortofoto_ATA_2012_2013_Palermo_14cm/MapServer/WmsServer?', { -->	  
+ var palermo_wms = L.tileLayer.wms('http://map.sitr.regione.sicilia.it/arcgis/services/AREE_URBANE/Ortofoto14cm_Palermo_ata20122013/MapServer/WMSServer', {
     layers: '0',
 	    format: 'image/png',
         minZoom: 7,
