@@ -68,3 +68,29 @@ a {
 /*@media (min-width: 320px) and (max-width: 768px) {.footermobile {font-size: 10px; color: #4E4B4B; text-align: justify;}}
 @media (min-width: 768px)  {.footermobile { display:none;}}*/
 
+/* Jquery Slide Toggle*/
+#vn-click{
+/*position: fixed; height: 25px;padding-left:12px; padding-top:5px;margin: 0;top: 50px; right: 0px;	z-index: 1010;*/
+padding:0px 10px;
+/*background:#ff9900;*/
+color:#4E4B4B;
+font-weight:normal;
+/*font-size:14px;*/
+cursor:pointer;
+display:inline-block;
+ border-radius: 3px;
+ height:20px;
+}
+@media (min-width: 320px) and (max-width: 736px) { #vn-click {padding:3px 5px;  }}
+
+#vn-info{
+	/*width:97%;
+	position:fixed;
+	left:130px;*/
+display:none;
+text-align:justify;
+background:rgba(248,248,248,0.98);
+color:#4E4B4B;
+padding:5px 5px;
+box-shadow: 0 1px 1.5px rgba(0,0,0,0.65);
+}
