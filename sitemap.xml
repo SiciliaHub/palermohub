@@ -553,7 +553,14 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
 <loc>http://palermohub.opendatasicilia.it/ponti_sicilia_centroidi.html</loc>
+<lastmod>2018-08-28</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/papafrancescopalermo.html</loc>
 <lastmod>2018-08-28</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
