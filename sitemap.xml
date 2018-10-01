@@ -561,7 +561,13 @@
 </url>
 <url>
 <loc>http://palermohub.opendatasicilia.it/papafrancescopalermo.html</loc>
-<lastmod>2018-08-28</lastmod>
+<lastmod>2018-09-02</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/anagrafe_scuola.html</loc>
+<lastmod>2018-10-01</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
