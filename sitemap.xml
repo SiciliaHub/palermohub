@@ -577,6 +577,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/app_rap.html</loc>
+<lastmod>2018-10-14</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
