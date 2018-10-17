@@ -583,6 +583,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/catasto_terre_bruciate_palermo.html</loc>
+<lastmod>2018-10-17</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
