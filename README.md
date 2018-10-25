@@ -6,3 +6,6 @@ Palermo Hub di [**opendatasicilia.it**](http://opendatasicilia.it/) è un conten
 [**Link 1 - palermohub.opendatasicilia.it**](https://siciliahub.github.io/palermohub/index.html)<br>
 
 [**Link 2 - siciliahub.github.io/palermohub**](https://siciliahub.github.io/palermohub/index.html)
+
+[![foto](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
+Attribuzione - Condividi allo stesso modo 4.0 Internazionale [(CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
