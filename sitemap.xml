@@ -589,6 +589,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/deputati_ars.html</loc>
+<lastmod>2018-11-11</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
