@@ -617,7 +617,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-
+<url>
+<loc>http://palermohub.opendatasicilia.it/terremoti_2019.html</loc>
+<lastmod>2018-13-01</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
 <lastmod>2018-01-28</lastmod>
