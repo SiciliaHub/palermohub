@@ -149,5 +149,16 @@ Si rammenta come chiaramente esplicitato anche in dettaglio nelle varie mappe, d
 					                });
             });
         </script>
+        <!-- Reading Progress Bar on Scroll - disattivare jquery-3.1.1.min.js se nella stessa pagina si usa top to back -->
+<!--  <script type="text/javascript" src="lib/js/prognroll/jquery.3.1.1.min.js"></script> -->
+ <script type="text/javascript" src="lib/js/prognroll/prognroll.js"></script>
+<script>
+    $(function() {
+      $("body").prognroll({
+        height: 4, //Progress bar height in pixels
+        color: "#ff9900", //Progress bar background color
+      });
+    });
+</script>
 </body>
 </html>

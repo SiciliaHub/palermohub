@@ -79,7 +79,7 @@ body {
 <body>
 <!-- <div class="container"> -->
 <div id="db"><br />
-<p class="lorem0"> <strong>PalermoHub </strong>di <a href="http://opendatasicilia.it" title="opendatasicilia.it" target="_parent" class="tooltips">opendatasicilia.it<span><img src="legend/clip_index/ods.jpg" class="clip_tooltips"  /></span></a> è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo,&nbsp;&nbsp;non ha alcun intento commerciale,&nbsp;&nbsp;l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli <a title="Da Wikipedia, l'enciclopedia libera" href="https://it.wikipedia.org/wiki/Dati_aperti" target="_blank" rel="noopener noreferrer">open data</a> o   <a href="https://medium.com/open-data-stories/non-open-data-ma-dati-pubblici-la-metafora-dellacqua-b09ff1c24fe3" title="Non “open data”, ma “dati pubblici”: la metafora dell’acqua" target="_parent" class="tooltips">dati pubblici<span><img src="https://cdn-images-1.medium.com/max/2000/1*iQIt7bAThmJXh5hEU_Q9qg.jpeg" class="clip_tooltips"  /></span>  </a> comunali, regionali,  nazionali. Tutti possono contribuire alla crescita e alla divulgazione.</p>
+<p class="lorem0"> <strong>PalermoHub </strong>di <a href="http://opendatasicilia.it" title="opendatasicilia.it" target="_parent" class="tooltips">opendatasicilia.it<span><img src="legend/clip_index/ods.jpg" class="clip_tooltips"  /></span></a> è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo,&nbsp;&nbsp;non ha alcun intento commerciale,&nbsp;&nbsp;l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli <a title="Da Wikipedia, l'enciclopedia libera" href="https://it.wikipedia.org/wiki/Dati_aperti" target="_blank" rel="noopener noreferrer">open data</a> o   <a href="https://medium.com/open-data-stories/non-open-data-ma-dati-pubblici-la-metafora-dellacqua-b09ff1c24fe3" title="Non “open data”, ma “dati pubblici”: la metafora dell’acqua" target="_parent" class="tooltips">dati pubblici<span><img src="https://cdn-images-1.medium.com/max/2000/1*iQIt7bAThmJXh5hEU_Q9qg.jpeg" class="clip_tooltips"  /></span>  </a> comunali, regionali,  nazionali e tutti possono contribuire alla crescita e alla divulgazione.</p>
 <div id="main-content">
 		<div class="row clearfix">
 			<div class="col-md-12 column"><br />
@@ -249,5 +249,16 @@ body {
 					                });
             });
         </script>
+        <!-- Reading Progress Bar on Scroll - disattivare jquery-3.1.1.min.js se nella stessa pagina si usa top to back -->
+<!--  <script type="text/javascript" src="lib/js/prognroll/jquery.3.1.1.min.js"></script> -->
+ <script type="text/javascript" src="lib/js/prognroll/prognroll_home.js"></script>
+<script>
+    $(function() {
+      $("body").prognroll({
+        height: 4, //Progress bar height in pixels
+        color: "#ff9900", //Progress bar background color
+      });
+    });
+</script>
 </body>
 </html>
