@@ -94,3 +94,44 @@ color:#4E4B4B;
 padding:5px 5px;
 box-shadow: 0 1px 1.5px rgba(0,0,0,0.65);
 }
+
+
+/*scroll bar*/
+/* width */
+::-webkit-scrollbar {
+  width: 8px; 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; border-radius: 16px; 
+  
+}
+
+/* Handle on hover */
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px; border-radius: 16px; 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff; border-radius: 16px; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; border-radius: 16px; 
+  
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 153, 0); border-radius: 16px; 
+}
