@@ -128,6 +128,7 @@
     .sidebar-pane {
 	min-width: 420px;
 	text-align: justify;
+	margin-left: -8px;
 } }
 
 .sidebar-header {
