@@ -328,6 +328,8 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
             }
         });	
 		  
+
+		  
 var map = L.map('map', { zoomControl:false, maxZoom:17, minZoom:14}).fitBounds([[38.105046891793705,13.33179089434345],[38.13560317770028,13.398355724675096]]);
 map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
 var bounds_group = new L.featureGroup([]);
@@ -358,8 +360,14 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
     map.on("mousemove", function(event) {
       mask.setCenter(event.containerPoint);
     });
-
- 	
+	
+<!-- Sposta il popup/mappa in base alle coordinate -->	
+map.on('popupopen', function(e) {
+    var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
+    px.y -= e.popup._container.clientHeight/1 // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+    map.panTo(map.unproject(px),{animate: true}); // pan to new center
+});
+				
 	<!-- scala mappa -->		
     var graphicScale = L.control.graphicScale({
 		doubleLine: true,
@@ -485,6 +493,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     }
                 },
                 mouseover: highlightFeature,
+				
             });
             var popupContent = '<table>\
                     <tr>\
@@ -543,6 +552,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
+
         function style_varie006foto_1_0() {
             return {
                 pane: 'pane_varie006foto_1',
@@ -556,6 +566,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                 fill: true,
                 fillOpacity: 1,
                 fillColor: 'rgba(0,0,0,1.0)',
+				
             }
         }
         map.createPane('pane_varie006foto_1');
@@ -2558,6 +2569,7 @@ L.control.layers(baseMaps,{'<span class="legenda">&nbsp;&nbsp;&nbsp;Bene Comune 
         .className += ' fa fa-search';
         document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
         .title += 'Search for a place';
+		
 		
         measureControl.addTo(map);
 		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
