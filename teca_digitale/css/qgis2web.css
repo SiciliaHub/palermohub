@@ -108,8 +108,8 @@
         .leaflet-control-layers-toggle {
             background-color: #f8f8f8 !important;
         }
-		.leaflet-popup-content tr:first-of-type {font-weight: bold; color: red;	font-size: 15px;}
+		.leaflet-popup-content tr:first-of-type {font-weight: bold; color: red;	font-size: 12px;}
 /* popup  su mobile" */	 @media (min-width: 320px) and (max-width: 736px) {.leaflet-popup-content tr:first-of-type {font-size:11px; }}		 
 	.leaflet-popup-content td, th{padding-bottom:3px }		
 		  /*foto resize; */
-.foto_resize {width: 100%; height: auto; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } /*testo Album; */		.testo_album { font-weight: bold; color: red; font-size: 14px;}/* popup  su mobile" */	 @media (min-width: 320px) and (max-width: 736px) {.testo_album {font-size:10px; }}				
+.foto_resize {width: 100%; height: auto; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } /*testo Album; */		.testo_album { font-weight: bold; color: red; font-size: 11px;}/* popup  su mobile" */	 @media (min-width: 320px) and (max-width: 736px) {.testo_album {font-size:10px; }}		 	 /* popup  su mobile disattiva riga" */	 @media (min-width: 320px) and (max-width: 736px) {.no_mobile {display:none; }}				

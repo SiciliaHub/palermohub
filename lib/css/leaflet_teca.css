@@ -490,7 +490,8 @@
 	padding: 1px;
 	text-align: left;
 	border-radius: 12px;
-		width: 500px
+	font-size:10px;
+		width: 350px
 	}
 /* popup  su mobile" */
 	 @media (min-width: 320px) and (max-width: 736px) {.leaflet-popup-content-wrapper {font-size:9px; width: 280px; }}	
