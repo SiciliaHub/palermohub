@@ -500,10 +500,6 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
                     </tr>\
@@ -511,59 +507,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -623,11 +599,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -637,59 +609,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
-                    </tr>\
-					 <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -749,11 +701,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -763,59 +711,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -875,11 +803,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -889,59 +813,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -1001,11 +905,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -1015,59 +915,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -1127,11 +1007,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -1141,59 +1017,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -1253,11 +1109,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -1267,59 +1119,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -1379,11 +1211,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -1393,59 +1221,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -1505,11 +1313,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -1519,59 +1323,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -1631,11 +1415,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -1645,59 +1425,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -1757,11 +1517,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -1771,59 +1527,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -1883,11 +1619,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -1897,59 +1629,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -2009,11 +1721,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -2023,59 +1731,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -2135,11 +1823,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -2149,59 +1833,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -2261,11 +1925,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -2275,59 +1935,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -2387,11 +2027,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -2401,59 +2037,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -2513,11 +2129,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -2527,59 +2139,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -2639,11 +2231,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -2653,59 +2241,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -2765,73 +2333,49 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
-                        <td> <strong>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</strong></td>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
-                        <td><strong>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</strong></td>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
@@ -2883,7 +2427,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row"></th>\
-                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : 'fdsfsffag') + '</td>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
@@ -2891,11 +2435,7 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                     </tr>\
 					 <tr>\
                         <th scope="row">Album:&nbsp;&nbsp;</th>\
-                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
-                        <td> <strong> ' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + ' </strong></td>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Link Album:&nbsp;&nbsp;</th>\
@@ -2905,59 +2445,39 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
                         <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
                     </tr>\
-					<tr>\
-                        <th scope="row">Città:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
-                    </tr>\
-                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                     <th scope="row">Luogo:&nbsp;&nbsp;</th>\
                         <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                     <tr>\
-                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Long:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Autore</th>\
+                        <td class="no_mobile">' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Autore</th>\
-                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                      <tr>\
+                        <th class="no_mobile" scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                        <th class="no_mobile" scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td class="no_mobile">' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
                     </tr>\
-                    <tr>\
-                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
-                    </tr>\
-                    <tr>\
-                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
-                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
-                    </tr>\
-                </table>';
+                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
