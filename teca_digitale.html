@@ -1,0 +1,3066 @@
+<!doctype html>
+<html lang="it">
+    <head>
+ <title>Biblioteche e bene comune digitale - Palermo Hub</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Palermo Hub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
+
+        <meta name="keywords" content="Open Data,Sicilia,PAI,Geologia,CTR, PRG, Variente Generale, Palermo">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="22/07/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+       
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it" />
+<meta property="og:description" content="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia" />
+<meta property="og:url" content="http://siciliahub.github.io/palermohub/teca_digitale.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/palermohub/teca_digitale/legend/clip_index/teca_digitale.jpg' />" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+<meta name="twitter:description" content="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia">
+<meta name="twitter:image" content="http://siciliahub.github.io/palermohub/teca_digitale/legend/clip_index/teca_digitale.jpg' />">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->   
+
+ <!-- css mappa -->
+<link href="lib/css/base_ods_teca.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_teca.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="teca_digitale/css/qgis2web.css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-measure.css" rel="stylesheet" type="text/css"> 
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css"> 
+
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="teca_digitale/css/MarkerCluster.css">
+<link rel="stylesheet" href="teca_digitale/css/MarkerCluster.Default.css">
+<link rel="stylesheet" href="teca_digitale/css/leaflet-control-geocoder.Geocoder.css">
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>       
+
+<!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+ <script src="lib/js/qgi2web/leaflet.js"></script> 
+<script src="lib/js/qgi2web/L.Control.Locate.min.js"></script>
+<script src="lib/js/qgi2web/multi-style-layer.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet-svg-shape-markers.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+ <script src="lib/js/qgi2web/leaflet-measure.js"></script> 
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+<script src="lib/js/qgi2web/leaflet-search.js"></script>  
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/qgi2web/leaflet.pattern.js"></script>
+<script src="lib/js/qgi2web/rbush.min.js"></script>
+<script src="lib/js/qgi2web/labelgun.min.js"></script>
+<script src="lib/js/qgi2web/labels.js"></script>
+<script src="teca_digitale/js/leaflet-control-geocoder.Geocoder.js"></script>
+<script src="teca_digitale/js/leaflet-tileoverlay-mask.js"></script>
+		<!-- script funzioni --> 
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+<script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+ 
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes 
+<script type="text/javascript" src="script.js"></script>   --> 
+
+<!-- script dati mappa -->
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/poligonoisola0.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/osm_confine_palermo_epsg_3004_0.js"></script>
+        <script src="teca_digitale/data/varie006foto_1.js"></script>
+        <script src="teca_digitale/data/Villeedimorestoriche103foto_2.js"></script>
+        <script src="teca_digitale/data/SantErasmo039foto_3.js"></script>
+        <script src="teca_digitale/data/ParchieVille012foto_4.js"></script>
+        <script src="teca_digitale/data/loStatuto009foto_5.js"></script>
+        <script src="teca_digitale/data/leviedellAcqua017foto_6.js"></script>
+        <script src="teca_digitale/data/leVie116foto_7.js"></script>
+        <script src="teca_digitale/data/lePorte065foto_8.js"></script>
+        <script src="teca_digitale/data/lePiazze115foto_9.js"></script>
+        <script src="teca_digitale/data/laZisa017foto_10.js"></script>
+        <script src="teca_digitale/data/laMarina051foto_11.js"></script>
+        <script src="teca_digitale/data/laKalsa010foto_12.js"></script>
+        <script src="teca_digitale/data/laCuba005foto_13.js"></script>
+        <script src="teca_digitale/data/laCala030foto_14.js"></script>
+        <script src="teca_digitale/data/ilPorto072foto_15.js"></script>
+        <script src="teca_digitale/data/ilPalazzoReale068foto_16.js"></script>
+        <script src="teca_digitale/data/iTeatri061foto_17.js"></script>
+        <script src="teca_digitale/data/iPalazzi049foto_18.js"></script>
+        <script src="teca_digitale/data/iCaffeiristoranti018foto_19.js"></script>
+        <script src="teca_digitale/data/gliAlberghi089foto_20.js"></script>
+</head>
+
+<body>
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+     <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="teca_digitale.html#15/38.1234/13.3613" title="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia"><strong>Teca Digitale e bene comune</strong></a></div>
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+
+<!-- Sidebar SX -->
+<div id="sidebar" class="sidebar collapsed">
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" title="Menu slider" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+            </ul>
+            <ul role="tablist">
+       <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+<li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Palermo Hub - Teca Digitale<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="legenda"> <strong>Biblioteche e bene comune digitale</strong></p>
+<img src="teca_digitale/legend/teca_digitale_storica.jpg" class="clip_resize" title="Teca Digitale Storica" border="0" />
+
+<br><br>
+<p class="lorem2">Dall’11 al 16 marzo 2019 la Presidenza del Consiglio dei Ministri, <a href="http://www.funzionepubblica.gov.it/" target="_blank">Dipartimento della Funzione Pubblica</a> organizza a livello nazionale la “<a href="http://open.gov.it/saa/" target="_blank">Settimana dell’Amministrazione aperta</a>” con l’obiettivo di promuovere la cultura e la pratica della trasparenza, della partecipazione e della accountability nelle amministrazioni pubbliche e nella società e accrescere la fiducia dei cittadini nelle istituzioni. Per il Comune di Palermo ha aderito la <a href="https://docs.google.com/document/d/1FOwSyu_n5VtIaKQERatrWk6mz5RkLr9DqXR0G1FHRmA/edit?usp=sharing" target="_blank">Biblioteca Comunale</a> presentando il progetto Teca digitale. <br><br>
+Il progetto nasce a fine 2017, quando sono state pubblicate su <a href="https://www.flickr.com/photos/biblioteca-comunale-palermo/albums" target="_blank">Flickr</a> le prime foto della Collezione fotografica di <strong>Enrico Di Benedetto</strong>, scattate a <strong>Palermo</strong> tra il <strong>XIX</strong> ed il <strong>XX</strong> secolo, un progetto permette a noi cittadini di fare <a href="http://opendatasicilia.it/2019/03/11/palermo-un-meraviglioso-viaggio-nel-tempo-grazie-alla-biblioteca-comunale-di-palermo/" target="_blank">un meraviglioso viaggio nel tempo</a> (cit.). <br><br>
+Ad oggi sono state pubblicate più di 800 foto, ad ognuna è associato a un “corredo informativo” costituito da: titolo, posizione geografica, gallerie di appartenenza, tag, licenza e metadati (non sono dati presenti in tutte le foto, ma nella grandissima parte), tutte pubblicate con una <strong>licenza aperta <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank">CC BY-SA 4.</a>0 che ne consente il riuso</strong><br><br>
+Grazie all’uso della licenza <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank">CC BY-SA 4.0</a>, alla buona struttura dei metadati e all’analisi di <a href="https://twitter.com/aborruso" target="_blank">@aborruso</a>, partendo dagli album di <a href="https://www.flickr.com/photos/biblioteca-comunale-palermo/albums" target="_blank">Flickr</a> con il  web scraping  ha ottenuto i dati grezzi ottimi per un <strong>riuso</strong>. <strong><a href="https://github.com/opendatasicilia/flickr-biblioteca-comunale-palermo" target="_blank"><br>Qui</a></strong> maggiori dettagli sulla la tecnica usata per recuperare i dati. </p>
+<hr>
+<p class="lorem2">  <strong>Note:</strong><br>
+   <em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
+   <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p>
+</div>    
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2></br>
+ <p class="lorem2"><strong>Rielaborazione di: </strong><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/totofiandaca" target="_blank" title="Totò Fiandaca">@totofiandaca</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a> per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong></p> 
+  
+ <p class="lorem2"><strong>Il riuso dei dati</strong><br>Nei file CSV ‘grattati’ da Andrea, per ogni foto, c’è la posizione geografica, che permette di localizzare le foto sul territorio comunale di Palermo, per farlo è stato utilizzato uno dei più usati GIS Desktop Open Source, <a href="https://qgis.org/it/site/" target="_blank">QGIS</a>.<br><br>  Utilizzando solo i file CSV è stato possibile creare la mappa e un atlante (cioè una stampa in serie di tutte le foto con tutti i dati disponibili): la mappa è interattiva, cioè al passaggio del mouse, su ogni punto, compare la relativa foto (vedi screenshot di sopra); oppure è possibile generare un unico atlante di oltre 800 schede, una per ogni foto presente nella collezione.</p>
+<p class="lorem2"><strong>Dati:</strong></br></br>
+ 	- l’elenco <a href="https://github.com/opendatasicilia/flickr-biblioteca-comunale-palermo/blob/master/report/download.csv" target="_blank">degli URL di ogni foto</a>;</br>
+ 	- l’elenco <a href="https://github.com/opendatasicilia/flickr-biblioteca-comunale-palermo/blob/master/report/coordinate.csv" target="_blank">delle coordinate</a> associate alle foto;</br>
+ 	- l’elenco <a href="https://github.com/opendatasicilia/flickr-biblioteca-comunale-palermo/blob/master/report/album.csv" target="_blank">degli album</a> associati alle foto;</br>
+ 	- i <a href="https://github.com/opendatasicilia/flickr-biblioteca-comunale-palermo/blob/master/report/lista.csv" target="_blank">metadati</a> associati alle foto;</br>
+ 	- un <a href="https://github.com/opendatasicilia/flickr-biblioteca-comunale-palermo/blob/master/report/output.csv" target="_blank">file</a> che mette insieme coordinate e metadati.</br>
+ 	- <a href="https://mega.nz/#!BU4kiSgR!wTCPeirs4T4dSSLazH5nj_yAxh3lz3o3SSlpbOBEWGk">progetto QGIS 3.6 Noosa</a></br>
+ 	- <a href="https://mega.nz/#!xU43gQRa!3ec7pLndH8GEC0t-at-2h6ULRDk6w_qNYvhvL2L-SJQ" target="_blank">Atlante foto in PDF</a> (oltre 150 mb)</br></br>
+<strong>Riferimenti</strong></br></br>
+ 	- <a href="http://opendatasicilia.it/2019/03/11/palermo-un-meraviglioso-viaggio-nel-tempo-grazie-alla-biblioteca-comunale-di-palermo/" target="_blank">Blog post </a>su #opendatasicilia by <a href="https://twitter.com/aborruso?lang=it">Andrea Borruso</a></br>
+ 	- <a href="https://pigrecoinfinito.wordpress.com/2019/03/11/un-meraviglioso-viaggio-nel-tempo-grazie-alla-biblioteca-comunale-di-palermo-e-al-riuso-dei-dati/" target="_blank">Blog post</a> su #pigrecoinfinito by <a href="https://twitter.com/totofiandaca?lang=it">Totò Fiandaca</a></br>
+ - <a href="http://opendatasicilia.it/2019/03/11/biblioteche-e-bene-comune-digitale/" target="_blank">Blog post</a> su #opendatasicilia by <a href="https://twitter.com/totofiandaca" target="_blank" title="Totò Fiandaca">@totofiandaca</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>
+ </p>
+<hr>
+<p class="lorem2">  <strong>Note:</strong><br>
+   <em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
+   <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p>
+</div>
+
+
+    
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem2">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem2"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
+<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
+<li><p class="lorem2"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a>plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</li></p>
+<li><p class="lorem2"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem2"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem2"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar v2" target="_blank">Sidebar v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet MousePosition" target="_blank">Leaflet MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet graphicscale" target="_blank">Leaflet graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;</li></p>
+<li><p class="lorem2"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet PolylineMeasure" target="_blank">Leaflet PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</li></p>
+<li><p class="lorem2"><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet zoomhome" target="_blank">Leaflet zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem2"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</li></p>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+      </ul> </div></div> </div>  
+  
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#fff',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#fff',
+                fillOpacity: 0.9
+              });
+            }
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });	
+		  
+var map = L.map('map', { zoomControl:false, maxZoom:17, minZoom:14}).fitBounds([[38.105046891793705,13.33179089434345],[38.13560317770028,13.398355724675096]]);
+map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+var bounds_group = new L.featureGroup([]);
+	
+
+<!-- mappe di base -->	  
+var basemaps = [ 
+L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
+				minZoom: 14,  maxZoom: 17, maxNativeZoom: 17, label: 'Google Satellite'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 7,  maxZoom: 17, maxNativeZoom: 17, label: 'Google Terrain'}), 
+
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 14,  maxZoom: 17, maxNativeZoom: 17,label: 'Map tiles by CartoDB'}),
+
+
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Source: &#9400; ESRI Satellite', minZoom: 7,  maxZoom: 17, maxNativeZoom: 17, label: 'ESRI Satellite - Max zoom 19'}),
+];
+    var mask = L.svg.mask();
+    L.tileOverlay("http://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png", {
+      attribution: "",
+      minZoom: 14,
+      maxZoom: 17,
+      maxNativeZoom: 17,
+      renderer: mask
+    }).addTo(map);
+
+    map.on("mousemove", function(event) {
+      mask.setCenter(event.containerPoint);
+    });
+
+ 	
+	<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+			
+<!-- funzioni mappa -->
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+		
+<!-- Poligono fantasma  inizio -->	
+        function pop_poligonoisola0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_poligonoisola0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_poligonoisola0_0() {
+            return {
+                pane: 'pane_poligonoisola0',
+                opacity: 0,
+                color: 'rgba(0,0,0,0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_poligonoisola0');
+        map.getPane('pane_poligonoisola0').style.zIndex = 1;
+        map.getPane('pane_poligonoisola0').style['mix-blend-mode'] = 'normal';
+    var layer_poligonoisola0 = new L.geoJson(json_poligonoisola0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_poligonoisola0',
+        onEachFeature: pop_poligonoisola0,
+        style: style_poligonoisola0_0,
+    });
+        bounds_group.addLayer(layer_poligonoisola0);
+        // map.addLayer(layer_poligonoisola0);		
+<!-- Poligono fantasma  fine -->	
+  
+				// Perimetro OSM
+        function pop_osm_confine_palermo_epsg_3004_0(feature, layer) {
+            var popupContent = '<table>\
+						           <tr>\
+			  <th scope="row"><img src="legend/osm_confine_palermo_epsg_3004_0.png" /><span class="legenda1">&nbsp;&nbsp;Confine Comunale<spam /></th>\
+                        <td><span class="legenda1">- OSM<spam /> <br /><br /></td>\
+                    </tr>\
+                      <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_osm_confine_palermo_epsg_3004_0_0() {
+            return {
+                pane: 'pane_osm_confine_palermo_epsg_3004_0',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+            }
+        }
+        map.createPane('pane_osm_confine_palermo_epsg_3004_0');
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style.zIndex = 400;
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style['mix-blend-mode'] = 'normal';
+        var layer_osm_confine_palermo_epsg_3004_0 = new L.geoJson(json_osm_confine_palermo_epsg_3004_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_osm_confine_palermo_epsg_3004_0',
+            onEachFeature: pop_osm_confine_palermo_epsg_3004_0,
+            style: style_osm_confine_palermo_epsg_3004_0_0,
+        });
+        bounds_group.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		// map.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		 
+		 		//Foto teca digitale
+		
+        function pop_varie006foto_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td >' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_varie006foto_1_0() {
+            return {
+                pane: 'pane_varie006foto_1',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,0,1.0)',
+            }
+        }
+        map.createPane('pane_varie006foto_1');
+        map.getPane('pane_varie006foto_1').style.zIndex = 401;
+        map.getPane('pane_varie006foto_1').style['mix-blend-mode'] = 'normal';
+        var layer_varie006foto_1 = new L.geoJson(json_varie006foto_1, {
+            attribution: '',
+            pane: 'pane_varie006foto_1',
+            onEachFeature: pop_varie006foto_1,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_varie006foto_1_0(feature));
+            },
+        });
+        var cluster_varie006foto_1 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_varie006foto_1.addLayer(layer_varie006foto_1);
+
+        bounds_group.addLayer(layer_varie006foto_1);
+        cluster_varie006foto_1.addTo(map);
+        function pop_Villeedimorestoriche103foto_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Villeedimorestoriche103foto_2_0() {
+            return {
+                pane: 'pane_Villeedimorestoriche103foto_2',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,51,153,1.0)',
+            }
+        }
+        map.createPane('pane_Villeedimorestoriche103foto_2');
+        map.getPane('pane_Villeedimorestoriche103foto_2').style.zIndex = 402;
+        map.getPane('pane_Villeedimorestoriche103foto_2').style['mix-blend-mode'] = 'normal';
+        var layer_Villeedimorestoriche103foto_2 = new L.geoJson(json_Villeedimorestoriche103foto_2, {
+            attribution: '',
+            pane: 'pane_Villeedimorestoriche103foto_2',
+            onEachFeature: pop_Villeedimorestoriche103foto_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_Villeedimorestoriche103foto_2_0(feature));
+            },
+        });
+        var cluster_Villeedimorestoriche103foto_2 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_Villeedimorestoriche103foto_2.addLayer(layer_Villeedimorestoriche103foto_2);
+
+        bounds_group.addLayer(layer_Villeedimorestoriche103foto_2);
+        cluster_Villeedimorestoriche103foto_2.addTo(map);
+        function pop_SantErasmo039foto_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_SantErasmo039foto_3_0() {
+            return {
+                pane: 'pane_SantErasmo039foto_3',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,153,204,1.0)',
+            }
+        }
+        map.createPane('pane_SantErasmo039foto_3');
+        map.getPane('pane_SantErasmo039foto_3').style.zIndex = 403;
+        map.getPane('pane_SantErasmo039foto_3').style['mix-blend-mode'] = 'normal';
+        var layer_SantErasmo039foto_3 = new L.geoJson(json_SantErasmo039foto_3, {
+            attribution: '',
+            pane: 'pane_SantErasmo039foto_3',
+            onEachFeature: pop_SantErasmo039foto_3,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_SantErasmo039foto_3_0(feature));
+            },
+        });
+        var cluster_SantErasmo039foto_3 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_SantErasmo039foto_3.addLayer(layer_SantErasmo039foto_3);
+
+        bounds_group.addLayer(layer_SantErasmo039foto_3);
+        cluster_SantErasmo039foto_3.addTo(map);
+        function pop_ParchieVille012foto_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ParchieVille012foto_4_0() {
+            return {
+                pane: 'pane_ParchieVille012foto_4',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,0,102,1.0)',
+            }
+        }
+        map.createPane('pane_ParchieVille012foto_4');
+        map.getPane('pane_ParchieVille012foto_4').style.zIndex = 404;
+        map.getPane('pane_ParchieVille012foto_4').style['mix-blend-mode'] = 'normal';
+        var layer_ParchieVille012foto_4 = new L.geoJson(json_ParchieVille012foto_4, {
+            attribution: '',
+            pane: 'pane_ParchieVille012foto_4',
+            onEachFeature: pop_ParchieVille012foto_4,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ParchieVille012foto_4_0(feature));
+            },
+        });
+        var cluster_ParchieVille012foto_4 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_ParchieVille012foto_4.addLayer(layer_ParchieVille012foto_4);
+
+        bounds_group.addLayer(layer_ParchieVille012foto_4);
+        cluster_ParchieVille012foto_4.addTo(map);
+        function pop_loStatuto009foto_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_loStatuto009foto_5_0() {
+            return {
+                pane: 'pane_loStatuto009foto_5',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,204,204,1.0)',
+            }
+        }
+        map.createPane('pane_loStatuto009foto_5');
+        map.getPane('pane_loStatuto009foto_5').style.zIndex = 405;
+        map.getPane('pane_loStatuto009foto_5').style['mix-blend-mode'] = 'normal';
+        var layer_loStatuto009foto_5 = new L.geoJson(json_loStatuto009foto_5, {
+            attribution: '',
+            pane: 'pane_loStatuto009foto_5',
+            onEachFeature: pop_loStatuto009foto_5,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_loStatuto009foto_5_0(feature));
+            },
+        });
+        var cluster_loStatuto009foto_5 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_loStatuto009foto_5.addLayer(layer_loStatuto009foto_5);
+
+        bounds_group.addLayer(layer_loStatuto009foto_5);
+        cluster_loStatuto009foto_5.addTo(map);
+        function pop_leviedellAcqua017foto_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_leviedellAcqua017foto_6_0() {
+            return {
+                pane: 'pane_leviedellAcqua017foto_6',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,51,51,1.0)',
+            }
+        }
+        map.createPane('pane_leviedellAcqua017foto_6');
+        map.getPane('pane_leviedellAcqua017foto_6').style.zIndex = 406;
+        map.getPane('pane_leviedellAcqua017foto_6').style['mix-blend-mode'] = 'normal';
+        var layer_leviedellAcqua017foto_6 = new L.geoJson(json_leviedellAcqua017foto_6, {
+            attribution: '',
+            pane: 'pane_leviedellAcqua017foto_6',
+            onEachFeature: pop_leviedellAcqua017foto_6,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_leviedellAcqua017foto_6_0(feature));
+            },
+        });
+        var cluster_leviedellAcqua017foto_6 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_leviedellAcqua017foto_6.addLayer(layer_leviedellAcqua017foto_6);
+
+        bounds_group.addLayer(layer_leviedellAcqua017foto_6);
+        cluster_leviedellAcqua017foto_6.addTo(map);
+        function pop_leVie116foto_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_leVie116foto_7_0() {
+            return {
+                pane: 'pane_leVie116foto_7',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,51,51,1.0)',
+            }
+        }
+        map.createPane('pane_leVie116foto_7');
+        map.getPane('pane_leVie116foto_7').style.zIndex = 407;
+        map.getPane('pane_leVie116foto_7').style['mix-blend-mode'] = 'normal';
+        var layer_leVie116foto_7 = new L.geoJson(json_leVie116foto_7, {
+            attribution: '',
+            pane: 'pane_leVie116foto_7',
+            onEachFeature: pop_leVie116foto_7,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_leVie116foto_7_0(feature));
+            },
+        });
+        var cluster_leVie116foto_7 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_leVie116foto_7.addLayer(layer_leVie116foto_7);
+
+        bounds_group.addLayer(layer_leVie116foto_7);
+        cluster_leVie116foto_7.addTo(map);
+        function pop_lePorte065foto_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_lePorte065foto_8_0() {
+            return {
+                pane: 'pane_lePorte065foto_8',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,102,204,1.0)',
+            }
+        }
+        map.createPane('pane_lePorte065foto_8');
+        map.getPane('pane_lePorte065foto_8').style.zIndex = 408;
+        map.getPane('pane_lePorte065foto_8').style['mix-blend-mode'] = 'normal';
+        var layer_lePorte065foto_8 = new L.geoJson(json_lePorte065foto_8, {
+            attribution: '',
+            pane: 'pane_lePorte065foto_8',
+            onEachFeature: pop_lePorte065foto_8,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_lePorte065foto_8_0(feature));
+            },
+        });
+        var cluster_lePorte065foto_8 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_lePorte065foto_8.addLayer(layer_lePorte065foto_8);
+
+        bounds_group.addLayer(layer_lePorte065foto_8);
+        cluster_lePorte065foto_8.addTo(map);
+        function pop_lePiazze115foto_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_lePiazze115foto_9_0() {
+            return {
+                pane: 'pane_lePiazze115foto_9',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,204,0,1.0)',
+            }
+        }
+        map.createPane('pane_lePiazze115foto_9');
+        map.getPane('pane_lePiazze115foto_9').style.zIndex = 409;
+        map.getPane('pane_lePiazze115foto_9').style['mix-blend-mode'] = 'normal';
+        var layer_lePiazze115foto_9 = new L.geoJson(json_lePiazze115foto_9, {
+            attribution: '',
+            pane: 'pane_lePiazze115foto_9',
+            onEachFeature: pop_lePiazze115foto_9,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_lePiazze115foto_9_0(feature));
+            },
+        });
+        var cluster_lePiazze115foto_9 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_lePiazze115foto_9.addLayer(layer_lePiazze115foto_9);
+
+        bounds_group.addLayer(layer_lePiazze115foto_9);
+        cluster_lePiazze115foto_9.addTo(map);
+        function pop_laZisa017foto_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_laZisa017foto_10_0() {
+            return {
+                pane: 'pane_laZisa017foto_10',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,153,51,1.0)',
+            }
+        }
+        map.createPane('pane_laZisa017foto_10');
+        map.getPane('pane_laZisa017foto_10').style.zIndex = 410;
+        map.getPane('pane_laZisa017foto_10').style['mix-blend-mode'] = 'normal';
+        var layer_laZisa017foto_10 = new L.geoJson(json_laZisa017foto_10, {
+            attribution: '',
+            pane: 'pane_laZisa017foto_10',
+            onEachFeature: pop_laZisa017foto_10,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_laZisa017foto_10_0(feature));
+            },
+        });
+        var cluster_laZisa017foto_10 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_laZisa017foto_10.addLayer(layer_laZisa017foto_10);
+
+        bounds_group.addLayer(layer_laZisa017foto_10);
+        cluster_laZisa017foto_10.addTo(map);
+        function pop_laMarina051foto_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_laMarina051foto_11_0() {
+            return {
+                pane: 'pane_laMarina051foto_11',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,204,255,1.0)',
+            }
+        }
+        map.createPane('pane_laMarina051foto_11');
+        map.getPane('pane_laMarina051foto_11').style.zIndex = 411;
+        map.getPane('pane_laMarina051foto_11').style['mix-blend-mode'] = 'normal';
+        var layer_laMarina051foto_11 = new L.geoJson(json_laMarina051foto_11, {
+            attribution: '',
+            pane: 'pane_laMarina051foto_11',
+            onEachFeature: pop_laMarina051foto_11,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_laMarina051foto_11_0(feature));
+            },
+        });
+        var cluster_laMarina051foto_11 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_laMarina051foto_11.addLayer(layer_laMarina051foto_11);
+
+        bounds_group.addLayer(layer_laMarina051foto_11);
+        cluster_laMarina051foto_11.addTo(map);
+        function pop_laKalsa010foto_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_laKalsa010foto_12_0() {
+            return {
+                pane: 'pane_laKalsa010foto_12',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,204,51,1.0)',
+            }
+        }
+        map.createPane('pane_laKalsa010foto_12');
+        map.getPane('pane_laKalsa010foto_12').style.zIndex = 412;
+        map.getPane('pane_laKalsa010foto_12').style['mix-blend-mode'] = 'normal';
+        var layer_laKalsa010foto_12 = new L.geoJson(json_laKalsa010foto_12, {
+            attribution: '',
+            pane: 'pane_laKalsa010foto_12',
+            onEachFeature: pop_laKalsa010foto_12,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_laKalsa010foto_12_0(feature));
+            },
+        });
+        var cluster_laKalsa010foto_12 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_laKalsa010foto_12.addLayer(layer_laKalsa010foto_12);
+
+        bounds_group.addLayer(layer_laKalsa010foto_12);
+        cluster_laKalsa010foto_12.addTo(map);
+        function pop_laCuba005foto_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_laCuba005foto_13_0() {
+            return {
+                pane: 'pane_laCuba005foto_13',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,204,51,1.0)',
+            }
+        }
+        map.createPane('pane_laCuba005foto_13');
+        map.getPane('pane_laCuba005foto_13').style.zIndex = 413;
+        map.getPane('pane_laCuba005foto_13').style['mix-blend-mode'] = 'normal';
+        var layer_laCuba005foto_13 = new L.geoJson(json_laCuba005foto_13, {
+            attribution: '',
+            pane: 'pane_laCuba005foto_13',
+            onEachFeature: pop_laCuba005foto_13,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_laCuba005foto_13_0(feature));
+            },
+        });
+        var cluster_laCuba005foto_13 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_laCuba005foto_13.addLayer(layer_laCuba005foto_13);
+
+        bounds_group.addLayer(layer_laCuba005foto_13);
+        cluster_laCuba005foto_13.addTo(map);
+        function pop_laCala030foto_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_laCala030foto_14_0() {
+            return {
+                pane: 'pane_laCala030foto_14',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,153,102,1.0)',
+            }
+        }
+        map.createPane('pane_laCala030foto_14');
+        map.getPane('pane_laCala030foto_14').style.zIndex = 414;
+        map.getPane('pane_laCala030foto_14').style['mix-blend-mode'] = 'normal';
+        var layer_laCala030foto_14 = new L.geoJson(json_laCala030foto_14, {
+            attribution: '',
+            pane: 'pane_laCala030foto_14',
+            onEachFeature: pop_laCala030foto_14,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_laCala030foto_14_0(feature));
+            },
+        });
+        var cluster_laCala030foto_14 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_laCala030foto_14.addLayer(layer_laCala030foto_14);
+
+        bounds_group.addLayer(layer_laCala030foto_14);
+        cluster_laCala030foto_14.addTo(map);
+        function pop_ilPorto072foto_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ilPorto072foto_15_0() {
+            return {
+                pane: 'pane_ilPorto072foto_15',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,51,51,1.0)',
+            }
+        }
+        map.createPane('pane_ilPorto072foto_15');
+        map.getPane('pane_ilPorto072foto_15').style.zIndex = 415;
+        map.getPane('pane_ilPorto072foto_15').style['mix-blend-mode'] = 'normal';
+        var layer_ilPorto072foto_15 = new L.geoJson(json_ilPorto072foto_15, {
+            attribution: '',
+            pane: 'pane_ilPorto072foto_15',
+            onEachFeature: pop_ilPorto072foto_15,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ilPorto072foto_15_0(feature));
+            },
+        });
+        var cluster_ilPorto072foto_15 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_ilPorto072foto_15.addLayer(layer_ilPorto072foto_15);
+
+        bounds_group.addLayer(layer_ilPorto072foto_15);
+        cluster_ilPorto072foto_15.addTo(map);
+        function pop_ilPalazzoReale068foto_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ilPalazzoReale068foto_16_0() {
+            return {
+                pane: 'pane_ilPalazzoReale068foto_16',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(102,204,153,1.0)',
+            }
+        }
+        map.createPane('pane_ilPalazzoReale068foto_16');
+        map.getPane('pane_ilPalazzoReale068foto_16').style.zIndex = 416;
+        map.getPane('pane_ilPalazzoReale068foto_16').style['mix-blend-mode'] = 'normal';
+        var layer_ilPalazzoReale068foto_16 = new L.geoJson(json_ilPalazzoReale068foto_16, {
+            attribution: '',
+            pane: 'pane_ilPalazzoReale068foto_16',
+            onEachFeature: pop_ilPalazzoReale068foto_16,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_ilPalazzoReale068foto_16_0(feature));
+            },
+        });
+        var cluster_ilPalazzoReale068foto_16 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_ilPalazzoReale068foto_16.addLayer(layer_ilPalazzoReale068foto_16);
+
+        bounds_group.addLayer(layer_ilPalazzoReale068foto_16);
+        cluster_ilPalazzoReale068foto_16.addTo(map);
+        function pop_iTeatri061foto_17(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_iTeatri061foto_17_0() {
+            return {
+                pane: 'pane_iTeatri061foto_17',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,153,0,1.0)',
+            }
+        }
+        map.createPane('pane_iTeatri061foto_17');
+        map.getPane('pane_iTeatri061foto_17').style.zIndex = 417;
+        map.getPane('pane_iTeatri061foto_17').style['mix-blend-mode'] = 'normal';
+        var layer_iTeatri061foto_17 = new L.geoJson(json_iTeatri061foto_17, {
+            attribution: '',
+            pane: 'pane_iTeatri061foto_17',
+            onEachFeature: pop_iTeatri061foto_17,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_iTeatri061foto_17_0(feature));
+            },
+        });
+        var cluster_iTeatri061foto_17 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_iTeatri061foto_17.addLayer(layer_iTeatri061foto_17);
+
+        bounds_group.addLayer(layer_iTeatri061foto_17);
+        cluster_iTeatri061foto_17.addTo(map);
+        function pop_iPalazzi049foto_18(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_iPalazzi049foto_18_0() {
+            return {
+                pane: 'pane_iPalazzi049foto_18',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(51,51,153,1.0)',
+            }
+        }
+        map.createPane('pane_iPalazzi049foto_18');
+        map.getPane('pane_iPalazzi049foto_18').style.zIndex = 418;
+        map.getPane('pane_iPalazzi049foto_18').style['mix-blend-mode'] = 'normal';
+        var layer_iPalazzi049foto_18 = new L.geoJson(json_iPalazzi049foto_18, {
+            attribution: '',
+            pane: 'pane_iPalazzi049foto_18',
+            onEachFeature: pop_iPalazzi049foto_18,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_iPalazzi049foto_18_0(feature));
+            },
+        });
+        var cluster_iPalazzi049foto_18 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_iPalazzi049foto_18.addLayer(layer_iPalazzi049foto_18);
+
+        bounds_group.addLayer(layer_iPalazzi049foto_18);
+        cluster_iPalazzi049foto_18.addTo(map);
+        function pop_iCaffeiristoranti018foto_19(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td> <strong>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</strong></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td><strong>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</strong></td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_iCaffeiristoranti018foto_19_0() {
+            return {
+                pane: 'pane_iCaffeiristoranti018foto_19',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,0,51,1.0)',
+            }
+        }
+        map.createPane('pane_iCaffeiristoranti018foto_19');
+        map.getPane('pane_iCaffeiristoranti018foto_19').style.zIndex = 419;
+        map.getPane('pane_iCaffeiristoranti018foto_19').style['mix-blend-mode'] = 'normal';
+        var layer_iCaffeiristoranti018foto_19 = new L.geoJson(json_iCaffeiristoranti018foto_19, {
+            attribution: '',
+            pane: 'pane_iCaffeiristoranti018foto_19',
+            onEachFeature: pop_iCaffeiristoranti018foto_19,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_iCaffeiristoranti018foto_19_0(feature));
+            },
+        });
+        var cluster_iCaffeiristoranti018foto_19 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_iCaffeiristoranti018foto_19.addLayer(layer_iCaffeiristoranti018foto_19);
+
+        bounds_group.addLayer(layer_iCaffeiristoranti018foto_19);
+        cluster_iCaffeiristoranti018foto_19.addTo(map);
+        function pop_gliAlberghi089foto_20(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row"></th>\
+                        <td>' + (feature.properties['title'] !== null ? Autolinker.link(String(feature.properties['title'])) : 'fdsfsffag') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row"><a href="http://opendatasicilia.it/" target="_blank"><img src="lib/images/ods.svg" width="110" Title="opendatasicilia.it" alt=""/></a></th>\
+                        <td>' + (feature.properties['url'] !== null ? (String(feature.properties['url'])) : '') + ' </td>\
+                    </tr>\
+					 <tr>\
+                        <th scope="row">Album:&nbsp;&nbsp;</th>\
+                        <td class="testo_album ">' + (feature.properties['album_title'] !== null ? Autolinker.link(String(feature.properties['album_title'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Numero foto nell&rsquo;album:&nbsp;&nbsp;</th>\
+                        <td> <strong> ' + (feature.properties['album_count_photo'] !== null ? Autolinker.link(String(feature.properties['album_count_photo'])) : '') + ' </strong></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link Album:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['album_link_album'] !== null ? Autolinker.link(String(feature.properties['album_link_album'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Link risorsa su Flickr:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['href'] !== null ? Autolinker.link(String(feature.properties['href'])) : '') + '</td>\
+                    </tr>\
+					<tr>\
+                        <th scope="row">Città:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['city'] !== null ? Autolinker.link(String(feature.properties['city'])) : '') + '</td>\
+                    </tr>\
+                        <th scope="row">Luogo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['geographic place'] !== null ? Autolinker.link(String(feature.properties['geographic place'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                    <tr>\
+                        <th scope="row">Lat:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['latitude'] !== null ? Autolinker.link(String(feature.properties['latitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Long:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['longitude'] !== null ? Autolinker.link(String(feature.properties['longitude'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Editore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['editor'] !== null ? Autolinker.link(String(feature.properties['editor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Autore</th>\
+                        <td>' + (feature.properties['author'] !== null ? Autolinker.link(String(feature.properties['author'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collaboratore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['contributor'] !== null ? Autolinker.link(String(feature.properties['contributor'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Collocazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['shelfmark'] !== null ? Autolinker.link(String(feature.properties['shelfmark'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Pagina:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['page'] !== null ? Autolinker.link(String(feature.properties['page'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Luogo di Pubblicazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['place of publishing'] !== null ? Autolinker.link(String(feature.properties['place of publishing'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Emissione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['issuance'] !== null ? Autolinker.link(String(feature.properties['issuance'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Identificatore:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['identifier'] !== null ? Autolinker.link(String(feature.properties['identifier'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Licenza:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['licence'] !== null ? Autolinker.link(String(feature.properties['licence'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_gliAlberghi089foto_20_0() {
+            return {
+                pane: 'pane_gliAlberghi089foto_20',
+                radius: 6.0,
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(153,204,51,1.0)',
+            }
+        }
+        map.createPane('pane_gliAlberghi089foto_20');
+        map.getPane('pane_gliAlberghi089foto_20').style.zIndex = 420;
+        map.getPane('pane_gliAlberghi089foto_20').style['mix-blend-mode'] = 'normal';
+        var layer_gliAlberghi089foto_20 = new L.geoJson(json_gliAlberghi089foto_20, {
+            attribution: '',
+            pane: 'pane_gliAlberghi089foto_20',
+            onEachFeature: pop_gliAlberghi089foto_20,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_gliAlberghi089foto_20_0(feature));
+            },
+        });
+        var cluster_gliAlberghi089foto_20 = new L.MarkerClusterGroup({showCoverageOnHover: false,
+            spiderfyDistanceMultiplier: 2});
+        cluster_gliAlberghi089foto_20.addLayer(layer_gliAlberghi089foto_20);
+
+        bounds_group.addLayer(layer_gliAlberghi089foto_20);
+        cluster_gliAlberghi089foto_20.addTo(map);
+    
+
+	
+<!-- Legenda mappa -->
+        var baseMaps = {};
+L.control.layers(baseMaps,{'<span class="legenda">&nbsp;&nbsp;&nbsp;Bene Comune Digitale</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PalermoHub':layer_poligonoisola0,
+'<img src="legend/osm_confine_palermo_epsg_3004_0.png" /> Confine Comunale <hr><span class="legenda">&nbsp;Gli Album</span>': layer_osm_confine_palermo_epsg_3004_0,
+
+'<img src="teca_digitale/legend/gliAlberghi089foto_20.png" width="24" height="24" /> gli Alberghi (089 foto)': cluster_gliAlberghi089foto_20,'<img src="teca_digitale/legend/iCaffeiristoranti018foto_19.png" width="24" height="24" /> i Caffè e i ristoranti (018 foto)': cluster_iCaffeiristoranti018foto_19,'<img src="teca_digitale/legend/iPalazzi049foto_18.png"  width="24" height="24" /> i Palazzi (049 foto)': cluster_iPalazzi049foto_18,'<img src="teca_digitale/legend/iTeatri061foto_17.png"  width="24" height="24" /> i Teatri (061 foto)': cluster_iTeatri061foto_17,'<img src="teca_digitale/legend/ilPalazzoReale068foto_16.png"  width="24" height="24" /> il Palazzo Reale (068 foto)': cluster_ilPalazzoReale068foto_16,'<img src="teca_digitale/legend/ilPorto072foto_15.png"  width="24" height="24" /> il Porto (072 foto)': cluster_ilPorto072foto_15,'<img src="teca_digitale/legend/laCala030foto_14.png"  width="24" height="24" /> la Cala (030 foto)': cluster_laCala030foto_14,'<img src="teca_digitale/legend/laCuba005foto_13.png"  width="24" height="24" /> la Cuba (005 foto)': cluster_laCuba005foto_13,'<img src="teca_digitale/legend/laKalsa010foto_12.png"  width="24" height="24" /> la Kalsa (010 foto)': cluster_laKalsa010foto_12,'<img src="teca_digitale/legend/laMarina051foto_11.png"  width="24" height="24" /> la Marina (051 foto)': cluster_laMarina051foto_11,'<img src="teca_digitale/legend/laZisa017foto_10.png"  width="24" height="24" /> la Zisa (017 foto)': cluster_laZisa017foto_10,'<img src="teca_digitale/legend/lePiazze115foto_9.png"  width="24" height="24" /> le Piazze (115 foto)': cluster_lePiazze115foto_9,'<img src="teca_digitale/legend/lePorte065foto_8.png"  width="24" height="24" /> le Porte (065 foto)': cluster_lePorte065foto_8,'<img src="teca_digitale/legend/leVie116foto_7.png"  width="24" height="24" /> le Vie (116 foto)': cluster_leVie116foto_7,'<img src="teca_digitale/legend/leviedellAcqua017foto_6.png"  width="24" height="24" /> le vie dell\'Acqua (017 foto)': cluster_leviedellAcqua017foto_6,'<img src="teca_digitale/legend/loStatuto009foto_5.png"  width="24" height="24" /> lo Statuto (009 foto)': cluster_loStatuto009foto_5,'<img src="teca_digitale/legend/ParchieVille012foto_4.png"  width="24" height="24" /> Parchi e Ville (012 foto)': cluster_ParchieVille012foto_4,'<img src="teca_digitale/legend/SantErasmo039foto_3.png"  width="24" height="24" /> Sant\'Erasmo (039 foto)': cluster_SantErasmo039foto_3,'<img src="teca_digitale/legend/Villeedimorestoriche103foto_2.png"  width="24" height="24" /> Ville e dimore storiche (103 foto)': cluster_Villeedimorestoriche103foto_2,'<img src="teca_digitale/legend/varie006foto_1.png"  width="24" height="24" /> varie (006 foto) <br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@opendatasicilia<br>': cluster_varie006foto_1,
+ 
+}).addTo(map);
+      setBounds();
+		
+
+		
+		
+		<!-- strumenti di leaflet -->
+		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+		
+		  var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		 <!--.zoomControl.setPosition("topleft") -->;
+		 L.control.locate().addTo(map);
+		var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+		
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+		
+        measureControl.addTo(map);
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
+		
+
+        </script>
+      
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+</div>  
+   <!-- loghi -->    
+<div id="tavolab"></div>           
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  
+<!-- beta version     
+ <div id="beta"><img src="teca_digitale/legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> -->
+   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+</body>
+</html>  
