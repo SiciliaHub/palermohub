@@ -1,0 +1,1099 @@
+<!doctype html>
+<html lang="it">
+    <head>
+ <title>Inventario Nazionale delle Foreste e dei Serbatoi Forestali di Carbonio (INFC) - Dati quantitativi su popolamento e necromassa - Palermo Hub</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Palermo Hub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
+
+        <meta name="keywords" content="Open Data,Sicilia,PAI,Geologia,CTR, PRG, Variente Generale, Palermo">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="12/03/2019">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+       
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it" />
+<meta property="og:description" content="Inventario Nazionale delle Foreste e dei Serbatoi Forestali di Carbonio (INFC) - Dati quantitativi su popolamento e necromassa - Rielaborazione dati OpenDataSicilia" />
+<meta property="og:url" content="http://siciliahub.github.io/palermohub/concentrazione_alberi.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/concentrazione_alberi.jpg" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+<meta name="twitter:description" content="Inventario Nazionale delle Foreste e dei Serbatoi Forestali di Carbonio (INFC) - Dati quantitativi su popolamento e necromassa - Rielaborazione dati OpenDataSicilia">
+<meta name="twitter:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/concentrazione_alberi.jpg" />
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->   
+
+ <!-- css mappa -->
+<link href="lib/css/base_ods_teca.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_teca.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="teca_digitale/css/qgis2web.css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-measure.css" rel="stylesheet" type="text/css"> 
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css"> 
+
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="teca_digitale/css/MarkerCluster.css">
+<link rel="stylesheet" href="teca_digitale/css/MarkerCluster.Default.css">
+<link rel="stylesheet" href="teca_digitale/css/leaflet-control-geocoder.Geocoder.css">
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>  
+     
+<!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+ <script src="lib/js/qgi2web/leaflet.js"></script> 
+<script src="lib/js/qgi2web/L.Control.Locate.min.js"></script>
+<script src="lib/js/qgi2web/multi-style-layer.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet-svg-shape-markers.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+ <script src="lib/js/qgi2web/leaflet-measure.js"></script> 
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+<script src="lib/js/qgi2web/leaflet-search.js"></script>  
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/qgi2web/leaflet.pattern.js"></script>
+<script src="lib/js/qgi2web/rbush.min.js"></script>
+<script src="lib/js/qgi2web/labelgun.min.js"></script>
+<script src="lib/js/qgi2web/labels.js"></script>
+<script src="teca_digitale/js/leaflet-control-geocoder.Geocoder.js"></script>
+
+		<!-- script funzioni --> 
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+<script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+ 
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes --> 
+<!-- <script type="text/javascript" src="script.js"></script>   --> 
+
+<!-- script dati mappa -->
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/poligonoisola0.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/osm_confine_palermo_epsg_3004_0.js"></script>
+  <script src="concentrazioni/data/sugherete_1.js"></script>
+        <script src="concentrazioni/data/pioppetiartificiali_2.js"></script>
+        <script src="concentrazioni/data/pinetedipinosilvestreemontano_3.js"></script>
+        <script src="concentrazioni/data/pinetedipinonerolaricioeloricato_4.js"></script>
+        <script src="concentrazioni/data/pinetedipinimediterranei_5.js"></script>
+        <script src="concentrazioni/data/piantagionidiconifere_6.js"></script>
+        <script src="concentrazioni/data/piantagionidialtrelatifoglie_7.js"></script>
+        <script src="concentrazioni/data/ostrieticarpineti_8.js"></script>
+        <script src="concentrazioni/data/leccete_9.js"></script>
+        <script src="concentrazioni/data/faggete_10.js"></script>
+        <script src="concentrazioni/data/cerreteboschidifarnettofragnovallonea_11.js"></script>
+        <script src="concentrazioni/data/castagneti_12.js"></script>
+        <script src="concentrazioni/data/boschiigrofili_13.js"></script>
+        <script src="concentrazioni/data/boschidilariceecembro_14.js"></script>
+        <script src="concentrazioni/data/boschidialtrelatifogliesempreverdi_15.js"></script>
+        <script src="concentrazioni/data/boschidiabeterosso_16.js"></script>
+        <script src="concentrazioni/data/boschidiabetebianco_17.js"></script>
+        <script src="concentrazioni/data/boschiarovereroverellaefarnia_18.js"></script>
+        <script src="concentrazioni/data/areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19.js"></script>
+        <script src="concentrazioni/data/altriboschidiconiferepureomiste_20.js"></script>
+        <script src="concentrazioni/data/altriboschicaducifogli_21.js"></script>
+</head>
+
+<body>
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+     <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="concentrazione_alberi.html#6/41.960/13.286" title="Inventario Nazionale delle Foreste e dei Serbatoi Forestali di Carbonio (INFC) - Rielaborazione dati OpenDataSicilia"><strong>Inventario Nazionale delle Foreste e dei Serbatoi Forestali di Carbonio (INFC)</strong></a></div>
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+
+<!-- Sidebar SX -->
+<div id="sidebar" class="sidebar collapsed">
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" title="Menu slider" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+            </ul>
+            <ul role="tablist">
+       <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+<li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Palermo Hub - INFC<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="legenda"> <strong> Inventario Nazionale delle Foreste e dei Serbatoi Forestali di Carbonio</strong><br> </p>
+<img src="legend/clip_index/concentrazione_alberi.jpg" class="clip_resize" title="Categoria inventariale Boschi alti " border="0" />
+<p class="lorem2">Dati quantitativi su popolamento e necromassa <br><br>
+<p class="lorem2">Il servizio <a href="https://inventarioforestale.org/it" title="inventarioforestale.org" target="_blank">inventarioforestale.org</a> è finalizzato a migliorare la fruibilità dei dati dell’Inventario Nazionale delle Foreste e dei serbatoi forestali di Carbonio – INFC (Inventario Forestale Nazionale Italiano). Il servizio consente l’accesso ai dati elementari e alla documentazione di progetto, essenziale per una corretta interpretazione dei dati stessi. <br><br> </p>
+<hr><br><br><br>
+<p class="lorem2">  <strong>Note:</strong><br>
+   <em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
+   <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p>
+</div>    
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2></br>
+ <p class="lorem2"><strong>Rielaborazione di: </strong><a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a></br> per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong></p> 
+  
+ <p class="lorem2"><strong>Accesso ai dati elementari</strong><br>file resi disponibili da questo servizio contengono i dati elementari INFC2005 a due livelli distinti di disaggregazione: per punto inventariale, come i valori ad ettaro per area di saggio, e per albero e ceppaia. Allo scopo di tutelare l’integrità della rete di campionamento e la riservatezza dei dati sensibili, la posizione geografica dei punti inventariali è fornita con un’approssimazione al chilometro quadrato, fornendo le coordinate del nodo Sud-Ovest della maglia del reticolo inventariale in cui è situato il punto di campionamento. Il peso statistico dei punti inventariali non viene pubblicato; pertanto, i dati elementari non possono essere utilizzati per la produzione di statistiche a livello nazionale, regionale o di altra unità territoriale. <a href="https://inventarioforestale.org/it/node/66" target="_blank" title="Qui maggiori dettagli">Qui maggiori dettagli</a></p>
+ 
+ 
+<p class="lorem2"><strong>Dati:</strong></br>
+ 	- <a href="https://inventarioforestale.org/node/20" title="Dati per punto inventariale" target="_blank">Dati per punto inventariale</a></br>
+ 	- <a href="https://inventarioforestale.org/node/21" title="Dati per albero e ceppaia" target="_blank">Dati per albero e ceppaia</a></br></br>
+	
+	Ps. E' posibile accedere hai dati solo dopo una veloce registrazione al sito  <a href="https://inventarioforestale.org/it" title="inventarioforestale.org" target="_blank">inventarioforestale.org</a></br></br>
+	
+<strong>Licenza:</strong><br> I dati pubblicati da inventarioforestale.org sono di proprietà esclusiva del Corpo Forestale dello Stato; la proprietà intellettuale dei dati e dei documenti INFC pubblicati è di CFS e CREA-MPF. I dati vengono messi a disposizione gratuitamente e possono essere utilizzati per qualunque scopo, anche commerciale, esclusa la produzione di statistiche relative alle risorse forestali a livello nazionale, regionale o di altra unità territoriale. L’INFC è inserito nella lista delle rilevazioni statistiche di interesse nazionale; pertanto, i risultati ufficiali INFC vengono prodotti e pubblicati esclusivamente da CFS e CREA-MPF. E’ fatto obbligo di citare la fonte dei dati per qualsiasi prodotto, riproduzione o elaborato ottenuto grazie all’impiego dei dati resi disponibili da <a href="https://inventarioforestale.org/it" title="inventarioforestale.org" target="_blank">inventarioforestale.org</a>.</p>
+</div>
+    
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem2">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem2"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
+<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
+<li><p class="lorem2"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a>plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</li></p>
+<li><p class="lorem2"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem2"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem2"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar v2" target="_blank">Sidebar v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet MousePosition" target="_blank">Leaflet MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet graphicscale" target="_blank">Leaflet graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;</li></p>
+<li><p class="lorem2"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet PolylineMeasure" target="_blank">Leaflet PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</li></p>
+<li><p class="lorem2"><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet zoomhome" target="_blank">Leaflet zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem2"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</li></p>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+      </ul> </div></div> </div>  
+  
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#fff',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#fff',
+                fillOpacity: 0.9
+              });
+            }
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+			
+       });	
+	   
+
+var map = L.map('map', { zoomControl:false, maxZoom:8, minZoom:5}).fitBounds([[36.29902627865635,1.7601891772941112],[47.15924641719391,24.812393528735576]]);
+map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+var bounds_group = new L.featureGroup([]);
+	
+
+<!-- mappe di base -->	  
+var basemaps = [ 
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 5,  maxZoom: 8, maxNativeZoom: 8,label: 'Map tiles by CartoDB'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
+				minZoom: 5,  maxZoom: 8, maxNativeZoom: 8, label: 'Google Satellite'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 5,  maxZoom: 8, maxNativeZoom: 8, label: 'Google Terrain'}), 
+
+
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Source: &#9400; ESRI Satellite', minZoom: 5,  maxZoom: 8, maxNativeZoom: 8, label: 'ESRI Satellite - Max zoom 19'}),
+];
+
+
+<!-- Sposta il popup/mappa in base alle coordinate -->	
+map.on('popupopen', function(e) {
+    var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
+    px.y -= e.popup._container.clientHeight/1 // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+    map.panTo(map.unproject(px),{animate: true}); // pan to new center
+});
+	<!-- Sposta il popup/mappa in base alle coordinate - fine -->	
+	
+	<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+			
+<!-- funzioni mappa -->
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+		
+<!-- Poligono fantasma  inizio -->	
+        function pop_poligonoisola0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_poligonoisola0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_poligonoisola0_0() {
+            return {
+                pane: 'pane_poligonoisola0',
+                opacity: 0,
+                color: 'rgba(0,0,0,0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_poligonoisola0');
+        map.getPane('pane_poligonoisola0').style.zIndex = 1;
+        map.getPane('pane_poligonoisola0').style['mix-blend-mode'] = 'normal';
+    var layer_poligonoisola0 = new L.geoJson(json_poligonoisola0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_poligonoisola0',
+        onEachFeature: pop_poligonoisola0,
+        style: style_poligonoisola0_0,
+    });
+        bounds_group.addLayer(layer_poligonoisola0);
+        // map.addLayer(layer_poligonoisola0);	
+		
+<!-- Poligono fantasma  fine -->	
+  
+				// Perimetro OSM
+        function pop_osm_confine_palermo_epsg_3004_0(feature, layer) {
+            var popupContent = '<table>\
+						           <tr>\
+			  <th scope="row"><img src="legend/osm_confine_palermo_epsg_3004_0.png" /><span class="legenda1">&nbsp;&nbsp;Confine Comunale<spam /></th>\
+                        <td><span class="legenda1">- OSM<spam /> <br /><br /></td>\
+                    </tr>\
+                      <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_osm_confine_palermo_epsg_3004_0_0() {
+            return {
+                pane: 'pane_osm_confine_palermo_epsg_3004_0',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+            }
+        }
+        map.createPane('pane_osm_confine_palermo_epsg_3004_0');
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style.zIndex = 400;
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style['mix-blend-mode'] = 'normal';
+        var layer_osm_confine_palermo_epsg_3004_0 = new L.geoJson(json_osm_confine_palermo_epsg_3004_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_osm_confine_palermo_epsg_3004_0',
+            onEachFeature: pop_osm_confine_palermo_epsg_3004_0,
+            style: style_osm_confine_palermo_epsg_3004_0_0,
+        });
+        bounds_group.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		// map.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		 
+		 		//Layers mappe concentrazione
+
+        // mappa concentrazione
+		
+        function pop_sugherete_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_sugherete_1');
+        map.getPane('pane_sugherete_1').style.zIndex = 401;
+        map.getPane('pane_sugherete_1').style['mix-blend-mode'] = 'normal';
+        var sugherete_1_hm = geoJson2heat(json_sugherete_1,
+                                      '');
+        var layer_sugherete_1 = new L.heatLayer(sugherete_1_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_sugherete_1);
+      //  map.addLayer(layer_sugherete_1);
+        function pop_pioppetiartificiali_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_pioppetiartificiali_2');
+        map.getPane('pane_pioppetiartificiali_2').style.zIndex = 402;
+        map.getPane('pane_pioppetiartificiali_2').style['mix-blend-mode'] = 'normal';
+        var pioppetiartificiali_2_hm = geoJson2heat(json_pioppetiartificiali_2,
+                                      '');
+        var layer_pioppetiartificiali_2 = new L.heatLayer(pioppetiartificiali_2_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_pioppetiartificiali_2);
+        // map.addLayer(layer_pioppetiartificiali_2);
+        function pop_pinetedipinosilvestreemontano_3(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_pinetedipinosilvestreemontano_3');
+        map.getPane('pane_pinetedipinosilvestreemontano_3').style.zIndex = 403;
+        map.getPane('pane_pinetedipinosilvestreemontano_3').style['mix-blend-mode'] = 'normal';
+        var pinetedipinosilvestreemontano_3_hm = geoJson2heat(json_pinetedipinosilvestreemontano_3,
+                                      '');
+        var layer_pinetedipinosilvestreemontano_3 = new L.heatLayer(pinetedipinosilvestreemontano_3_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_pinetedipinosilvestreemontano_3);
+     //   map.addLayer(layer_pinetedipinosilvestreemontano_3);
+        function pop_pinetedipinonerolaricioeloricato_4(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_pinetedipinonerolaricioeloricato_4');
+        map.getPane('pane_pinetedipinonerolaricioeloricato_4').style.zIndex = 404;
+        map.getPane('pane_pinetedipinonerolaricioeloricato_4').style['mix-blend-mode'] = 'normal';
+        var pinetedipinonerolaricioeloricato_4_hm = geoJson2heat(json_pinetedipinonerolaricioeloricato_4,
+                                      '');
+        var layer_pinetedipinonerolaricioeloricato_4 = new L.heatLayer(pinetedipinonerolaricioeloricato_4_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_pinetedipinonerolaricioeloricato_4);
+       // map.addLayer(layer_pinetedipinonerolaricioeloricato_4);
+        function pop_pinetedipinimediterranei_5(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_pinetedipinimediterranei_5');
+        map.getPane('pane_pinetedipinimediterranei_5').style.zIndex = 405;
+        map.getPane('pane_pinetedipinimediterranei_5').style['mix-blend-mode'] = 'normal';
+        var pinetedipinimediterranei_5_hm = geoJson2heat(json_pinetedipinimediterranei_5,
+                                      '');
+        var layer_pinetedipinimediterranei_5 = new L.heatLayer(pinetedipinimediterranei_5_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_pinetedipinimediterranei_5);
+      //  map.addLayer(layer_pinetedipinimediterranei_5);
+        function pop_piantagionidiconifere_6(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_piantagionidiconifere_6');
+        map.getPane('pane_piantagionidiconifere_6').style.zIndex = 406;
+        map.getPane('pane_piantagionidiconifere_6').style['mix-blend-mode'] = 'normal';
+        var piantagionidiconifere_6_hm = geoJson2heat(json_piantagionidiconifere_6,
+                                      '');
+        var layer_piantagionidiconifere_6 = new L.heatLayer(piantagionidiconifere_6_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_piantagionidiconifere_6);
+      // map.addLayer(layer_piantagionidiconifere_6);
+        function pop_piantagionidialtrelatifoglie_7(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_piantagionidialtrelatifoglie_7');
+        map.getPane('pane_piantagionidialtrelatifoglie_7').style.zIndex = 407;
+        map.getPane('pane_piantagionidialtrelatifoglie_7').style['mix-blend-mode'] = 'normal';
+        var piantagionidialtrelatifoglie_7_hm = geoJson2heat(json_piantagionidialtrelatifoglie_7,
+                                      '');
+        var layer_piantagionidialtrelatifoglie_7 = new L.heatLayer(piantagionidialtrelatifoglie_7_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_piantagionidialtrelatifoglie_7);
+       // map.addLayer(layer_piantagionidialtrelatifoglie_7);
+        function pop_ostrieticarpineti_8(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_ostrieticarpineti_8');
+        map.getPane('pane_ostrieticarpineti_8').style.zIndex = 408;
+        map.getPane('pane_ostrieticarpineti_8').style['mix-blend-mode'] = 'normal';
+        var ostrieticarpineti_8_hm = geoJson2heat(json_ostrieticarpineti_8,
+                                      '');
+        var layer_ostrieticarpineti_8 = new L.heatLayer(ostrieticarpineti_8_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_ostrieticarpineti_8);
+      //  map.addLayer(layer_ostrieticarpineti_8);
+        function pop_leccete_9(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_leccete_9');
+        map.getPane('pane_leccete_9').style.zIndex = 409;
+        map.getPane('pane_leccete_9').style['mix-blend-mode'] = 'normal';
+        var leccete_9_hm = geoJson2heat(json_leccete_9,
+                                      '');
+        var layer_leccete_9 = new L.heatLayer(leccete_9_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_leccete_9);
+       // map.addLayer(layer_leccete_9);
+        function pop_faggete_10(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_faggete_10');
+        map.getPane('pane_faggete_10').style.zIndex = 410;
+        map.getPane('pane_faggete_10').style['mix-blend-mode'] = 'normal';
+        var faggete_10_hm = geoJson2heat(json_faggete_10,
+                                      '');
+        var layer_faggete_10 = new L.heatLayer(faggete_10_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_faggete_10);
+     //   map.addLayer(layer_faggete_10);
+        function pop_cerreteboschidifarnettofragnovallonea_11(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_cerreteboschidifarnettofragnovallonea_11');
+        map.getPane('pane_cerreteboschidifarnettofragnovallonea_11').style.zIndex = 411;
+        map.getPane('pane_cerreteboschidifarnettofragnovallonea_11').style['mix-blend-mode'] = 'normal';
+        var cerreteboschidifarnettofragnovallonea_11_hm = geoJson2heat(json_cerreteboschidifarnettofragnovallonea_11,
+                                      '');
+        var layer_cerreteboschidifarnettofragnovallonea_11 = new L.heatLayer(cerreteboschidifarnettofragnovallonea_11_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_cerreteboschidifarnettofragnovallonea_11);
+       // map.addLayer(layer_cerreteboschidifarnettofragnovallonea_11);
+        function pop_castagneti_12(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_castagneti_12');
+        map.getPane('pane_castagneti_12').style.zIndex = 412;
+        map.getPane('pane_castagneti_12').style['mix-blend-mode'] = 'normal';
+        var castagneti_12_hm = geoJson2heat(json_castagneti_12,
+                                      '');
+        var layer_castagneti_12 = new L.heatLayer(castagneti_12_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_castagneti_12);
+      //  map.addLayer(layer_castagneti_12);
+        function pop_boschiigrofili_13(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_boschiigrofili_13');
+        map.getPane('pane_boschiigrofili_13').style.zIndex = 413;
+        map.getPane('pane_boschiigrofili_13').style['mix-blend-mode'] = 'normal';
+        var boschiigrofili_13_hm = geoJson2heat(json_boschiigrofili_13,
+                                      '');
+        var layer_boschiigrofili_13 = new L.heatLayer(boschiigrofili_13_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_boschiigrofili_13);
+       // map.addLayer(layer_boschiigrofili_13);
+        function pop_boschidilariceecembro_14(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_boschidilariceecembro_14');
+        map.getPane('pane_boschidilariceecembro_14').style.zIndex = 414;
+        map.getPane('pane_boschidilariceecembro_14').style['mix-blend-mode'] = 'normal';
+        var boschidilariceecembro_14_hm = geoJson2heat(json_boschidilariceecembro_14,
+                                      '');
+        var layer_boschidilariceecembro_14 = new L.heatLayer(boschidilariceecembro_14_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_boschidilariceecembro_14);
+       // map.addLayer(layer_boschidilariceecembro_14);
+        function pop_boschidialtrelatifogliesempreverdi_15(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_boschidialtrelatifogliesempreverdi_15');
+        map.getPane('pane_boschidialtrelatifogliesempreverdi_15').style.zIndex = 415;
+        map.getPane('pane_boschidialtrelatifogliesempreverdi_15').style['mix-blend-mode'] = 'normal';
+        var boschidialtrelatifogliesempreverdi_15_hm = geoJson2heat(json_boschidialtrelatifogliesempreverdi_15,
+                                      '');
+        var layer_boschidialtrelatifogliesempreverdi_15 = new L.heatLayer(boschidialtrelatifogliesempreverdi_15_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_boschidialtrelatifogliesempreverdi_15);
+       // map.addLayer(layer_boschidialtrelatifogliesempreverdi_15);
+        function pop_boschidiabeterosso_16(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_boschidiabeterosso_16');
+        map.getPane('pane_boschidiabeterosso_16').style.zIndex = 416;
+        map.getPane('pane_boschidiabeterosso_16').style['mix-blend-mode'] = 'normal';
+        var boschidiabeterosso_16_hm = geoJson2heat(json_boschidiabeterosso_16,
+                                      '');
+        var layer_boschidiabeterosso_16 = new L.heatLayer(boschidiabeterosso_16_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_boschidiabeterosso_16);
+      //  map.addLayer(layer_boschidiabeterosso_16);
+        function pop_boschidiabetebianco_17(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_boschidiabetebianco_17');
+        map.getPane('pane_boschidiabetebianco_17').style.zIndex = 417;
+        map.getPane('pane_boschidiabetebianco_17').style['mix-blend-mode'] = 'normal';
+        var boschidiabetebianco_17_hm = geoJson2heat(json_boschidiabetebianco_17,
+                                      '');
+        var layer_boschidiabetebianco_17 = new L.heatLayer(boschidiabetebianco_17_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_boschidiabetebianco_17);
+      //  map.addLayer(layer_boschidiabetebianco_17);
+        function pop_boschiarovereroverellaefarnia_18(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_boschiarovereroverellaefarnia_18');
+        map.getPane('pane_boschiarovereroverellaefarnia_18').style.zIndex = 418;
+        map.getPane('pane_boschiarovereroverellaefarnia_18').style['mix-blend-mode'] = 'normal';
+        var boschiarovereroverellaefarnia_18_hm = geoJson2heat(json_boschiarovereroverellaefarnia_18,
+                                      '');
+        var layer_boschiarovereroverellaefarnia_18 = new L.heatLayer(boschiarovereroverellaefarnia_18_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_boschiarovereroverellaefarnia_18);
+      //  map.addLayer(layer_boschiarovereroverellaefarnia_18);
+        function pop_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19');
+        map.getPane('pane_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19').style.zIndex = 419;
+        map.getPane('pane_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19').style['mix-blend-mode'] = 'normal';
+        var areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19_hm = geoJson2heat(json_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19,
+                                      '');
+        var layer_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19 = new L.heatLayer(areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19);
+      //  map.addLayer(layer_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19);
+        function pop_altriboschidiconiferepureomiste_20(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_altriboschidiconiferepureomiste_20');
+        map.getPane('pane_altriboschidiconiferepureomiste_20').style.zIndex = 420;
+        map.getPane('pane_altriboschidiconiferepureomiste_20').style['mix-blend-mode'] = 'normal';
+        var altriboschidiconiferepureomiste_20_hm = geoJson2heat(json_altriboschidiconiferepureomiste_20,
+                                      '');
+        var layer_altriboschidiconiferepureomiste_20 = new L.heatLayer(altriboschidiconiferepureomiste_20_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_altriboschidiconiferepureomiste_20);
+       // map.addLayer(layer_altriboschidiconiferepureomiste_20);
+        function pop_altriboschicaducifogli_21(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        map.createPane('pane_altriboschicaducifogli_21');
+        map.getPane('pane_altriboschicaducifogli_21').style.zIndex = 421;
+        map.getPane('pane_altriboschicaducifogli_21').style['mix-blend-mode'] = 'normal';
+        var altriboschicaducifogli_21_hm = geoJson2heat(json_altriboschicaducifogli_21,
+                                      '');
+        var layer_altriboschicaducifogli_21 = new L.heatLayer(altriboschicaducifogli_21_hm, {
+            attribution: '',
+            radius: 8,
+            max: 1,
+            minOpacity: 1,
+            gradient: {0: '#ffffff', 0.13: '#e5f5e0', 0.26: '#c7e9c0', 0.39: '#a1d99b', 0.52: '#74c476', 0.65: '#41ab5d', 0.78: '#238b45', 0.9: '#006d2c', 1: '#00441b'}});
+        bounds_group.addLayer(layer_altriboschicaducifogli_21);
+        map.addLayer(layer_altriboschicaducifogli_21);
+	
+<!-- Legenda mappa -->
+        var baseMaps = {'<span class="legenda">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;INFC</span><br>&nbsp;Inventario Nazionale delle Foreste e dei Serbatoi Forestali di Carbonio.<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Categoria inventariale Boschi alti <hr> <span class="legenda">Distribuzione di:</span> ':layer_poligonoisola0, "altri boschi caducifogli":layer_altriboschicaducifogli_21,
+		"altri boschi di conifere, pure o miste":layer_altriboschidiconiferepureomiste_20,
+		"aree temporaneamente prive di soprassuolo per cause antropiche o naturali":layer_areetemporaneamenteprivedisoprassuolopercauseantropicheonaturali_19,
+		"boschi a rovere, roverella e farnia":layer_boschiarovereroverellaefarnia_18,
+		"boschi di abete bianco":layer_boschidiabetebianco_17,
+		"boschi di abete rosso":layer_boschidiabeterosso_16,
+		"boschi di altre latifoglie sempreverdi":layer_boschidialtrelatifogliesempreverdi_15,
+		"boschi di larice e cembro":layer_boschidilariceecembro_14,
+		"boschi igrofili":layer_boschiigrofili_13,
+		"castagneti":layer_castagneti_12,
+		"cerrete, boschi di farnetto, fragno, vallonea":layer_cerreteboschidifarnettofragnovallonea_11,
+		"faggete":layer_faggete_10,
+		"leccete":layer_leccete_9,
+		"ostrieti, carpineti":layer_ostrieticarpineti_8,
+		"piantagioni di altre latifoglie":layer_piantagionidialtrelatifoglie_7,
+		"piantagioni di conifere":layer_piantagionidiconifere_6,
+		"pinete di pini mediterranei":layer_pinetedipinimediterranei_5,
+		"pinete di pino nero, laricio e loricato":layer_pinetedipinonerolaricioeloricato_4,
+		"pinete di pino silvestre e montano":layer_pinetedipinosilvestreemontano_3,
+		"pioppeti artificiali":layer_pioppetiartificiali_2,
+		"sugherete":layer_sugherete_1,};
+L.control.layers(baseMaps,{'<span class="legenda">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;OpenDataSicilia</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PalermoHub':layer_poligonoisola0,
+
+
+ 
+}).addTo(map);
+      setBounds();
+		  function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+		<!-- strumenti di leaflet -->
+		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+		
+		  var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		 <!--.zoomControl.setPosition("topleft") -->;
+		 L.control.locate().addTo(map);
+		var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+		
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+		
+		
+        measureControl.addTo(map);
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
+		
+
+        </script>
+      
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+</div>  
+   <!-- loghi -->    
+<div id="tavolab"></div>           
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  
+   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+</body>
+</html>  
