@@ -144,11 +144,11 @@ a:active {color: #FF0000; text-decoration:none; }
 	position: fixed;
 	font-size:0.65em;
 	color: #fff;
-	right: 10px;
-	top: 0px;
+	right: 70px;
+	top: 90px;
 	width: 80%;
 	float: right;
-	z-index: 999;
+	z-index: 1050;
 	text-align: right;
 }
 

@@ -48,6 +48,7 @@
 
  <!-- css mappa -->
 <link href="lib/css/base_ods_teca.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
 <link href="lib/css/leaflet_teca.css" rel="stylesheet" type="text/css">
 <link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="teca_digitale/css/qgis2web.css">
@@ -152,7 +153,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <header>
      <div data-includeHTML="menu.html"></div>
       <!-- breadcrumbs --> 
-<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="teca_digitale.html#15/38.1234/13.3613" title="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia" target="_parent"><strong>Teca Digitale e bene</strong></a>
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="teca_digitale.html#15/38.1234/13.3613" title="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia" target="_parent"><strong>Teca Digitale e bene comune</strong></a>
   <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe Storiche&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="index_atlante.html" title="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo" target="_parent"><strong>Atlante Storico</ strong></a> <br>
   </div>
 	 <script>
@@ -2588,9 +2589,11 @@ L.control.layers(baseMaps,{'<span class="legenda">&nbsp;&nbsp;&nbsp;Bene Comune 
             tileY: 0,
             tileZ: 1
         }));
-		
-
         </script>
+         <!-- header -->       
+<div id="titolo"class="leaflet-control"> 
+<a href="index_atlante.html" title="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo" class="btn btn--s btn--orange" target="_parent">Atlante Storico</a><br>
+   </div> 
       
 
 <script src="lib/js/social/jquery_csbuttons.js"></script>
