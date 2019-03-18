@@ -98,7 +98,17 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
  <!-- header -->    
 <header>
      <div data-includeHTML="menu.html"></div>
-               <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_atlante.html" title="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo"><strong>Atlante Storico</strong></a></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_atlante.html" title="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo"><strong>Atlante Storico</strong></a>
+  <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe Storiche&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="teca_digitale.html#15/38.1234/13.3613" title="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia" target="_parent"><strong>Teca Digitale e bene</strong></a>
+ </div>
+	 <script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
 </header>
 <script>
     $(document).ready(function () {
