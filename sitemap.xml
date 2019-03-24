@@ -653,6 +653,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/ccr_isole_ecologiche.html</loc>
+<lastmod>2018-03-02</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 
 <!--- <url>
