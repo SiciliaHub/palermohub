@@ -62,10 +62,23 @@ body {
 <!-- twitter --> 
 </head>
 <body>
+<!-- header -->    
 <header>
-  <div data-includeHTML="menu.html"></div>
-  <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="pa_divieti_balneazione_2019.html" title="Divieto di balneazione, dal 1° maggio al 31 ottobre 2019, nei tratti di mare antistanti la costa del territorio di Palermo."><strong>Palermo - Divieto di balneazione 2019</strong></a></div>
+     <div data-includeHTML="menu.html"></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="pa_divieti_balneazione_2019.html" title="Divieto di balneazione, dal 1° maggio al 31 ottobre 2019, nei tratti di mare antistanti la costa del territorio di Palermo."><strong>Palermo - Divieto di balneazione 2019</strong></a>  <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe di divieti&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="divieti_baln.html" title="Divieti di balneazione permanente per la stagione estiva 2016 nel comune di Palermo"><strong>Palermo - Divieto di balneazione 2016</strong></a>  </div> <br>
+  </div>
+
+  	 <script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script>
 </header>
+
+
  <iframe src="http://umap.openstreetmap.fr/it/map/palermo-stagione-balneare-2019-divieti-di-balneazi_317227#12/38.1910/13.3765" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:91.8%;width:100%;position:absolute;top:75px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
 
 <script>
