@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Circoscrizioni_Palermo_ISTAT_wgs_84_1.js"></script>
+        <script src="data/StranieriresidentiaPalermo2018_2.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:17, minZoom:12
+        }).fitBounds([[38.04309950591479,13.155137886248182],[38.22582092523022,13.542059136780459]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        var layer_DarkMatterretina_0 = L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', {
+            opacity: 1.0,
+            attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+        });
+        layer_DarkMatterretina_0;
+        map.addLayer(layer_DarkMatterretina_0);
+        function pop_Circoscrizioni_Palermo_ISTAT_wgs_84_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 300});
+        }
+
+        function style_Circoscrizioni_Palermo_ISTAT_wgs_84_1_0() {
+            return {
+                pane: 'pane_Circoscrizioni_Palermo_ISTAT_wgs_84_1',
+                opacity: 1,
+                color: 'rgba(255,255,255,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+            }
+        }
+        map.createPane('pane_Circoscrizioni_Palermo_ISTAT_wgs_84_1');
+        map.getPane('pane_Circoscrizioni_Palermo_ISTAT_wgs_84_1').style.zIndex = 401;
+        map.getPane('pane_Circoscrizioni_Palermo_ISTAT_wgs_84_1').style['mix-blend-mode'] = 'normal';
+        var layer_Circoscrizioni_Palermo_ISTAT_wgs_84_1 = new L.geoJson(json_Circoscrizioni_Palermo_ISTAT_wgs_84_1, {
+            attribution: '',
+            pane: 'pane_Circoscrizioni_Palermo_ISTAT_wgs_84_1',
+            onEachFeature: pop_Circoscrizioni_Palermo_ISTAT_wgs_84_1,
+            style: style_Circoscrizioni_Palermo_ISTAT_wgs_84_1_0,
+        });
+        bounds_group.addLayer(layer_Circoscrizioni_Palermo_ISTAT_wgs_84_1);
+        map.addLayer(layer_Circoscrizioni_Palermo_ISTAT_wgs_84_1);
+        function pop_StranieriresidentiaPalermo2018_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['layer'] !== null ? Autolinker.link(String(feature.properties['layer'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_StranieriresidentiaPalermo2018_2_0(feature) {
+            switch(String(feature.properties['layer'])) {
+                case 'Bangladesh':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,0,1.0)',
+            }
+                    break;
+                case 'Sri Lanka':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,0,1.0)',
+            }
+                    break;
+                case 'Romania':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(246,189,0,1.0)',
+            }
+                    break;
+                case 'Ghana':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,0,255,1.0)',
+            }
+                    break;
+                case 'Filippine':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(2,255,255,1.0)',
+            }
+                    break;
+                case 'Tunisia':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,0,255,1.0)',
+            }
+                    break;
+                case 'Marocco':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,255,0,1.0)',
+            }
+                    break;
+                case 'Repubblica Popolare Cinese':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,176,158,1.0)',
+            }
+                    break;
+                case 'Mauritius':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(113,236,121,1.0)',
+            }
+                    break;
+                case 'Costa d\'Avorio':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,177,228,1.0)',
+            }
+                    break;
+                case 'Nigeria':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,100,238,1.0)',
+            }
+                    break;
+                case 'Polonia':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(172,202,21,1.0)',
+            }
+                    break;
+                case 'Ecuador':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(109,214,179,1.0)',
+            }
+                    break;
+                case 'Ucraina':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(103,210,207,1.0)',
+            }
+                    break;
+                case 'Gambia':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,27,188,1.0)',
+            }
+                    break;
+                case 'India':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(145,240,36,1.0)',
+            }
+                    break;
+                case 'Capo Verde':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,82,123,1.0)',
+            }
+                    break;
+                case 'Senegal':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,173,94,1.0)',
+            }
+                    break;
+                case 'Brasile':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,127,207,1.0)',
+            }
+                    break;
+                case 'Altri Paesi':
+                    return {
+                pane: 'pane_StranieriresidentiaPalermo2018_2',
+                radius: 0.4,
+                stroke: false,
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_StranieriresidentiaPalermo2018_2');
+        map.getPane('pane_StranieriresidentiaPalermo2018_2').style.zIndex = 402;
+        map.getPane('pane_StranieriresidentiaPalermo2018_2').style['mix-blend-mode'] = 'normal';
+        var layer_StranieriresidentiaPalermo2018_2 = new L.geoJson(json_StranieriresidentiaPalermo2018_2, {
+            attribution: '',
+            pane: 'pane_StranieriresidentiaPalermo2018_2',
+            onEachFeature: pop_StranieriresidentiaPalermo2018_2,
+            pointToLayer: function (feature, latlng) {
+                var context = {
+                    feature: feature,
+                    variables: {}
+                };
+                return L.circleMarker(latlng, style_StranieriresidentiaPalermo2018_2_0(feature));
+            },
+        });
+        bounds_group.addLayer(layer_StranieriresidentiaPalermo2018_2);
+        map.addLayer(layer_StranieriresidentiaPalermo2018_2);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'<img src="legend/Circoscrizioni_Palermo_ISTAT_wgs_84_1.png" /> Circoscrizioni_Palermo_ISTAT_wgs_84': layer_Circoscrizioni_Palermo_ISTAT_wgs_84_1,			
+			'Stranieri residenti a Palermo 2018<br /><table><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Bangladesh53390.png" /></td><td>Bangladesh (5339)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_SriLanka34801.png" /></td><td>Sri Lanka (3480)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Romania32772.png" /></td><td>Romania (3277)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Ghana26813.png" /></td><td>Ghana (2681)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Filippine17814.png" /></td><td>Filippine (1781)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Tunisia10895.png" /></td><td>Tunisia (1089)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Marocco10526.png" /></td><td>Marocco (1052)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_RepubblicaPopolareCinese9917.png" /></td><td>Repubblica Popolare Cinese (991)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Mauritius9018.png" /></td><td>Mauritius (901)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_CostadAvorio6259.png" /></td><td>Costa d\'Avorio (625)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Nigeria53510.png" /></td><td>Nigeria (535)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Polonia27511.png" /></td><td>Polonia (275)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Ecuador24512.png" /></td><td>Ecuador (245)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Ucraina22913.png" /></td><td>Ucraina (229)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Gambia20514.png" /></td><td>Gambia (205)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_India18315.png" /></td><td>India (183)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_CapoVerde17716.png" /></td><td>Capo Verde (177)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Senegal16717.png" /></td><td>Senegal (167)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_Brasile12118.png" /></td><td>Brasile (121)</td></tr><tr><td style="text-align: center;"><img src="legend/StranieriresidentiaPalermo2018_2_AltriPaesi240019.png" /></td><td>Altri Paesi (2400)</td></tr></table>': layer_StranieriresidentiaPalermo2018_2,"Cartografia di base Dark Matter<br> bla bla ": layer_DarkMatterretina_0,}).addTo(map);
+        setBounds();
+        </script>
+        <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="../lib/images/ods_b.svg" alt="opendatasicilia" width="125" border="0" title="opendatasicilia.it"></a></div>  
+<!-- beta version     -->
+ <div id="beta"><img src="../legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> 
+</body>
+</html>
