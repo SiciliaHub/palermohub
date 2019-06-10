@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="it">
     <head>
- <title>Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018 - Palermo Hub</title>
+ <title>Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="Palermo Hub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
@@ -29,18 +29,18 @@
        
  <!-- Open Graph Protocol -->
 <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it" />
-<meta property="og:description" content="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018 - Rielaborazione dati OpenDataSicilia" />
-<meta property="og:url" content="http://siciliahub.github.io/palermohub/stranieri_residenti.html" />
+<meta property="og:description" content="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018 Mappa a densità di punti- Rielaborazione dati OpenDataSicilia" />
+<meta property="og:url" content="http://siciliahub.github.io/palermohub/stranieri_residenti_subregions_dot.html" />
 <meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
-<meta property="og:image" content="http://palermohub.opendatasicilia.it/legend/clip_index/residenti_stranieri_pa.jpg" />
+<meta property="og:image" content="http://palermohub.opendatasicilia.it/legend/clip_index/stranieri_residenti_subregions_dot.jpg" />
 <meta property="og:site_name" content="palermohub.opendatasicilia.it" />
 <!-- Open Graph Protocol -->
 
 <!-- twitter -->
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
-<meta name="twitter:description" content="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018 - Rielaborazione dati OpenDataSicilia">
-<meta name="twitter:image" content="http://palermohub.opendatasicilia.it/legend/clip_index/residenti_stranieri_pa.jpg" />
+<meta name="twitter:description" content="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018 Mappa a densità di punti - Rielaborazione dati OpenDataSicilia">
+<meta name="twitter:image" content="http://palermohub.opendatasicilia.it/legend/clip_index/stranieri_residenti_subregions_dot.jpg" />
 <meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
 <meta name="twitter:site" content="palermohub.opendatasicilia.it" />
 <meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
@@ -49,7 +49,7 @@
  <!-- css mappa -->
 <link href="lib/css/base_ods_stranieri.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
-<link href="lib/css/leaflet_stranieri.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_stranieri_dot.css" rel="stylesheet" type="text/css">
 <link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="stranieri_residenti/css/qgis2web.css">
 <link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
@@ -126,8 +126,8 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <!-- script dati mappa -->
 <script src="https://siciliahub.github.io/mappe/palermo_hub/data/poligonoisola0.js"></script>
 <script src="https://siciliahub.github.io/mappe/palermo_hub/data/osm_confine_palermo_epsg_3004_0.js"></script>
-<script src="stranieri_residenti/data/circos_pa_1.js"></script>
-     <!--   <script src="stranieri_residenti/data/varie006foto_1.js"></script>-->
+ <script src="stranieri_residenti_dot/data/ISTATUPL_1.js"></script>
+
 </head>
 
 <body>
@@ -137,8 +137,8 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <header>
      <div data-includeHTML="menu.html"></div>
       <!-- breadcrumbs --> 
-<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="stranieri_residenti_suregions.html" title="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018" target="_parent"><strong>Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018</strong></a>
-  <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe simili&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="stranieri_residenti_subregions_dot.html" title="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018 Mappa a densità di punti (official data)" target="_parent"><strong>Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018</strong></a><br>
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="stranieri_residenti_subregions_dot.html" title="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018 Mappa a densità di punti (official data)" target="_parent"><strong>Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018</strong></a>
+  <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe simili&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="stranieri_residenti_suregions.html" title="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018" target="_parent"><strong>Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018</ strong></a> <br>
   </div>
 	 <script>
 $(document).ready(function(){
@@ -156,7 +156,7 @@ $(document).ready(function(){
     });
 </script>
 
- <div id="clip_gra"><a class="legenda" href="#chart" title="Grafici Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018"><img src="legend/chart.png" width="64" height="64" alt=""/></a></div> 
+ <div id="clip_gra"><a class="legenda" href="#chart" title="Grafici Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018"><img src="legend/chart.png" width="38" height="38" alt=""/></a></div> 
 <!-- Sidebar SX -->
 <div id="sidebar" class="sidebar collapsed">
 <!-- popup grafico -->
@@ -165,7 +165,7 @@ $(document).ready(function(){
     <h2></h2>
     <a class="close" href="#">&times;</a>
     <div class="content">
-<div class='tableauPlaceholder' id='viz1558028603270' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;4M&#47;4MPQGZMR5&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='shared&#47;4MPQGZMR5' /> <param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;4M&#47;4MPQGZMR5&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='no' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='no' /><param name='filter' value='publish=yes' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1558028603270');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.width='100%';vizElement.style.height=(divElement.offsetWidth*0.65)+'px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+<div class='tableauPlaceholder' id='viz1560124319750' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PalermopopolazioneresidentepercittadinanzaUPLQuartiereeCircoscrizione-2018&#47;Dashboard-Intro&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='views&#47;PalermopopolazioneresidentepercittadinanzaUPLQuartiereeCircoscrizione-2018&#47;Dashboard-Intro?:embed=y&amp;:display_count=y' /> <param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PalermopopolazioneresidentepercittadinanzaUPLQuartiereeCircoscrizione-2018&#47;Dashboard-Intro&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='no' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='no' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1560124319750');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.minWidth='730px';vizElement.style.maxWidth='1000px';vizElement.style.width='100%';vizElement.style.height='780px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
     </div>
   </div>
 </div>  
@@ -178,9 +178,9 @@ $(document).ready(function(){
                 <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
                  <li><a href="#immago"  title="Immagini"role="tab"><i class="fa fa-picture-o"></i></a></li>
                  <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
-                   <li> <a href="http://opendatasicilia.it/2019/05/19/milano-e-palermo-le-mappe-della-distribuzione-della-popolazione-straniera-residente-nel-2018/" target="_blank" title="Post ODS - Palermo - Mappa random della popolazione straniera residente nel 2018" role="tab"><i class="fa fa-bookmark"></i></a></li>
-                   <li> <a href="https://data.world/gbvitrano/milano-residenti-per-quartiere-2018" target="_blank" title="Milano popolazione residente per cittadinanza e quartiere - 2018" role="tab"><i class="fa fa-database"></i></a></li>
-<li> <a href="https://data.world/gbvitrano/palermo-residenti-stranieri-aggregati-per-circoscrizione-k18" target="_blank" title="Palermo popolazione straniera residente per cittadinanza e Circoscrizione - 2018" role="tab"><i class="fa fa-database "></i></a></li>
+                   <li> <a href="#" target="_blank" title="Post ODS - Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione – 2018" role="tab"><i class="fa fa-bookmark"></i></a></li>
+                   <li> <a href="https://public.tableau.com/views/PalermopopolazioneresidentepercittadinanzaUPLQuartiereeCircoscrizione-2018/Dashboard-Intro?:embed=y&:display_count=yes&:toolbar=no&:origin=viz_share_link" target="_blank" title="Grafici - Viz Tableau - Public" role="tab"><i class="fa fa-bar-chart"></i></a></li>
+                 <li> <a href="https://data.world/gbvitrano/popolazione-residente-a-palermo-upl" target="_blank" title="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018" role="tab"><i class="fa fa-database "></i></a></li>
                    
             </ul>
             <ul role="tablist">
@@ -196,49 +196,46 @@ $(document).ready(function(){
 <div class="sidebar-pane" id="home">
 <h2 class="sidebar-header">Palermo Hub - Residenti Stranieri<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
 <p class="legenda"> <strong>Residenti Stranieri a Palermo - 2018</strong></p>
-<p class="lorem2">Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018</p>
-<iframe title="[ Residenti stranieri a Palermo 2018]" aria-label="Bar Chart" id="datawrapper-chart-OzUGU" src="https://datawrapper.dwcdn.net/OzUGU/8/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="282"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}})}();</script><br><br>
-<p class="lorem2">Nel 2018 risiedono nel comune di Palermo 668.405 abitanti. La popolazione è in calo da almeno un quarto di secolo (i residenti erano oltre 734 mila nel 1990). Dagli anni duemila si assiste inoltre ad un progressivo invecchiamento: l’età media è passata dai 39 anni del 2002 ai 43,3 del 2018, sebbene resti al di sotto di quella media nazionale (45,2 anni).<br><br>
-La presenza straniera si è quasi triplicata negli anni duemila raggiungendo a gennaio 2018 il livello di 25.663 cittadini (il 3,8% dei residenti, è l’8,5% a livello nazionale) con un rapporto di genere abbastanza equilibrato.<br><br>
-Palermo si contraddistingue tra i comuni siciliani per una maggiore presenza multietnica: gli stranieri residenti sono di 127 differenti nazionalità. Questa specificità è testimoniata tanto dal crogiolo di lingue parlate quanto dalle diverse “culture” presenti.<br><br> (cit. <a href="https://www.istat.it/it/files//2018/10/Palermo_interculturale_29_10_2018.pdf" title="PALERMO CITTÀ DELLA CULTURA - ISTAT 2018" target="_blank">PALERMO CITTÀ DELLA CULTURA</a> - ISTAT) </p>
+<p class="lorem2">Gli stranieri residenti a Palermo nel 2018  sono 25.735 e rappresentano 130 Nazionalità, oggi sono il 3,83% della popolazione totale (670.954). Chi sono questi stranieri? Da dove vengono? Quanti sono? Dove vivono? Qual'è il rapporto stranieri/italiani nel territorio? Tutti i dettagli delle statistiche più recenti nei grafici e nelle mappe.</p>  
+ <img src="stranieri_residenti_dot/images/4.png" class="clip_resize" title="01 - Popolazione residente italiana" border="0" /><br><br>
+<p class="lorem2">Le 4 principali nazionalità straniere a Palermo - 2018<br><br>
+I cittadini Bangladesi, Singalesi, Ghanesi e Romeni da soli costituiscono più della  metà (57,41%) di tutti gli stranieri residenti a Palermo.<br><br>
+Dalle mappe e dai grafici emerge che nel centro stroico (quartieri Palazzo Reale - Monte di Pietà e Tribunali) c'è la maggior presenza di residenti stranieri con 5.183 residenti pari al 20,14%, seguono i quartieri di: <br>
+- Politeama 3.710 residenti - 14,42%;<br>
+- Libertà  1.444 residenti - 5,61%;<br>
+- Zisa 2.531 residenti - 9.83%;<br>
+- Noce  2.248 residenti - 8,74%;<br>
+- Oreto Stazione 4.230 residenti - 16,44%<br>
+che da soli ospitano 19.346 residenti, pari al 75,17% del totale dei residenti.<br><br>
+La presenza straniera si è quasi triplicata negli anni duemila raggiungendo a Dicembre 2018 il livello di 25.735 cittadini (il 3,83% dei residenti, è l’8,5% a livello nazionale) con un rapporto di genere abbastanza equilibrato.</p>
 </div>    
           
 <!-- Tab immago -->
        <div class="sidebar-pane" id="immago">
        <h2 class="sidebar-header">Residenti Stranieri<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
 <p class="lorem2">Stranieri residenti a Palermo - 2018</p>          
-<iframe title="[ Tot. Residenti stranieri a Palermo 2018] " aria-label="Interactive donut chart" id="datawrapper-chart-vpf15" src="https://datawrapper.dwcdn.net/vpf15/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="500"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}})}();</script>
 <p class="lorem2">Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018</p>     
-<img src="stranieri_residenti/images/stranieri_subregions.png" class="clip_resize" title="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018" border="0" /><br><br>
-<p class="lorem2">South Asia 9.002 residenti </p> 
-<img src="stranieri_residenti/images/stranieri_subregions_South_Asia.png" class="clip_resize" title="South Asia 9.002 residenti" border="0" /><br><br>
-<p class="lorem2">Sub-saharan Africans 5.286 residenti </p> 
-<img src="stranieri_residenti/images/stranieri_subregions_Sub-saharan_Africans.png" class="clip_resize" title="Sub-saharan Africans 5.286 residenti" border="0" /><br><br>
-<p class="lorem2">Europa 3.780 residenti </p> 
-<img src="stranieri_residenti/images/stranieri_subregions_Europa.png" class="clip_resize" title="Europa 3.780 residenti" border="0" /><br><br>
-<p class="lorem2">Other 2.394 residenti </p> 
-<img src="stranieri_residenti/images/stranieri_subregions_Other.png" class="clip_resize" title="Other 2.394 residenti" border="0" /><br><br>
-<p class="lorem2">North Africa 2.135 residenti </p> 
-<img src="stranieri_residenti/images/stranieri_subregions_North_Africa.png" class="clip_resize" title="North Africa 2.135 residenti" border="0" /><br><br>
-<p class="lorem2">Southeast Asia 1.781 residenti </p> 
-<img src="stranieri_residenti/images/stranieri_subregions_Southeast_Asia.png" class="clip_resize" title="Southeast Asia 1.781 residenti" border="0" /><br><br>
-<p class="lorem2">East Asia 991 residenti </p> 
-<img src="stranieri_residenti/images/stranieri_subregions_East_Asia.png" class="clip_resize" title="East Asia 991 residenti" border="0" /><br><br>
-<p class="lorem2">South Americans 336 residenti </p> 
-<img src="stranieri_residenti/images/stranieri_subregions_South_Americans.png" class="clip_resize" title="South Americans 336 residenti" border="0" /><br><br>
-
+<img src="stranieri_residenti_dot/images/01.png" class="clip_resize" title="01 - Popolazione residente italiana" border="0" /><br><br>
+<p class="lorem2">01 - Popolazione residente italiana</p> 
+<img src="stranieri_residenti_dot/images/02.png" class="clip_resize" title="02 - Popolazione residente" border="0" /><br><br>
+<p class="lorem2">02 - Popolazione residente</p> 
+<img src="stranieri_residenti_dot/images/03.png" class="clip_resize" title="03 - Popolazione straniera residente aggregata per Continente" border="0" /><br><br>
+<p class="lorem2">03 - Popolazione straniera residente aggregata per Continente</p> 
+<img src="stranieri_residenti_dot/images/04.png" class="clip_resize" title="04 - Popolazione straniera residente aggregata per Sub-Regione" border="0" /><br><br>
+<p class="lorem2">04 - Popolazione straniera residente aggregata per Sub-Regione</p> 
 </div>
 
 <!-- Tab info -->
        <div class="sidebar-pane" id="info">
        <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2></br>
  <p class="lorem2"><strong>Rielaborazione di: </strong><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/totofiandaca" target="_blank" title="Totò Fiandaca">@totofiandaca</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a> per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong></p> 
- <br>
- <p class="lorem2"><strong>Fonte dati: Comune di Palermo</strong> nel portele <a href="https://www.comune.palermo.it/statistica.php" target="_blank">pubblicazioni statistiche</a>, file pdf <a href="https://www.comune.palermo.it/js/server/uploads/statistica/_10042019075012.pdf" target="_blank">Gli stranieri a Palermo nel 2018</a>, i dati sono stati estratti dalla tabella della tavola 6 CITTADINI STRANIERI AL 31/12/2018 PER CITTADINANZA E CIRCOSCRIZIONE </p>
- <a href="https://www.comune.palermo.it/js/server/uploads/statistica/_10042019075012.pdf" target="_blank"><img src="stranieri_residenti/images/tab_06.jpg" class="clip_resize" title="Tabella tavola 6 CITTADINI STRANIERI AL 31/12/2018 PER CITTADINANZA E CIRCOSCRIZIONEi" border="0" /></a><br><br>
-  <br><br>
+ <p class="lorem2">130 Nazionalità rappresentate da 25.735 residenti stranieri nel 2018</p> 
+ <img src="stranieri_residenti_dot/images/Palermo_World_01.jpg" class="clip_resize" title="130 Nazionalità rappresentate da 25.735 residenti stranieri nel 2018" border="0" /><br><br>
+  <p class="lorem2">Grazie al Dr Girolamo D'Anneo, Responsabile Studi e Ricerche Statistiche e Ciro Spataro  dell'Area Servizi alla città Servizio Innovazione  U.O. Transizione al Digitale, entrambi funzionari del Comune di Palermo, sono stati pubblicati i dataset relativi alla popolazione residente, italiana e straniera. <br><br> 
+  I nuovi dataset mi hanno permesso di replicare e migliorare il lavoro fatto nel post <a href="https://coseerobe.gbvitrano.it/milano-e-palermo-le-mappe-della-distribuzione-della-popolazione-straniera-residente-nel-2018.html" title="Milano e Palermo: le mappe della distribuzione della popolazione straniera residente nel 2018," target="_blank">Milano e Palermo: le mappe della distribuzione della popolazione straniera residente nel 2018</a>, dove  il dataset su Palermo non era esattamente ideale, in quell'esercizio i dati sono stati estratti da una tabella pdf, <a href="https://www.comune.palermo.it/js/server/uploads/statistica/_10042019075012.pdf" title="GLI STRANIERI A PALERMO NEL 2018" target="_blank">GLI STRANIERI A PALERMO NEL 2018</a>, pagina 21, Tavola 6: Cittadini al 31/12/2018 per cittadinanza a circoscrizione.</p>
+  
+ <p class="lorem2">    Fonte dati: <a href="https://opendata.comune.palermo.it/index.php" title="Comune di Palermo" target="_blank">Comune di Palermo</a> – <a href="https://opendata.comune.palermo.it/opendata-archivio-dataset.php" title="Dati sul territorio" target="_blank">Dati sul territorio</a> -  <a href="https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1219" title="Stranieri residenti a Palermo al 31/12/2018 per Unità di primo livello e cittadinanza" target="_blank">Stranieri residenti a Palermo al 31/12/2018 per Unità di primo livello e cittadinanza</a> e <a href="https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1211" title="opolazione residente a Palermo al 31/12/2018 per Unità di primo livello e cittadinanza" target="_blank">Popolazione residente a Palermo al 31/12/2018 per Unità di primo livello e cittadinanza</a></p>
  <p class="lorem2"><strong>Licenza <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" Title="CC BY-SA 4.0 - Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0) tranne diversa indicazione" target="_blank">CC BY-SA 4.0</a></strong> - Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0). </p>
-<br>
 <p class="lorem2">  <strong>Note:</strong><br>
    <em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
    <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
@@ -353,20 +350,19 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
        });	
 	   
 
-var map = L.map('map', { zoomControl:false, maxZoom:13, minZoom:13}).fitBounds([[38.105046891793705,13.33179089434345],[38.13560317770028,13.398355724675096]]);
+var map = L.map('map', { zoomControl:false, maxZoom:14, minZoom:12}).fitBounds([[38.045851675001444,13.195799698861464],[38.22904078206479,13.49928552140082]]);
 map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
 var bounds_group = new L.featureGroup([]);
-	
 
 <!-- mappe di base -->	  
 var basemaps = [ 
 L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', {attribution: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
-				minZoom: 13,  maxZoom: 13, maxNativeZoom: 13, label: 'OSM Dark Retina'}),
+				minZoom: 12,  maxZoom: 14, maxNativeZoom: 14, label: 'OSM Dark Retina'}),
 
 L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
-				minZoom: 13,  maxZoom: 13, maxNativeZoom: 13, label: 'Google Satellite'}),
+				minZoom: 12,  maxZoom: 14, maxNativeZoom: 14, label: 'Google Satellite'}),
 
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 13,  maxZoom: 13, maxNativeZoom: 13,label: 'Map tiles by CartoDB'}),
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 12,  maxZoom: 14, maxNativeZoom: 14,label: 'Map tiles by CartoDB'}),
 ];
 
 <!-- Sposta il popup/mappa in base alle coordinate -->	
@@ -377,11 +373,11 @@ map.on('popupopen', function(e) {
 });
 	<!-- Sposta il popup/mappa in base alle coordinate - fine -->	
 
-		   	  //mappa ctr10k
-		 var stra_res =L.tileLayer('stranieri_residenti/data/stra_sub//{z}/{x}/{y}.png', {
+   	  //mappa ctr10k
+		 var stra_res =L.tileLayer('stranieri_residenti_dot/data/stra_sub//{z}/{x}/{y}.png', {
         minZoom: 12,
-        maxZoom: 17,
-        maxNativeZoom: 17,
+        maxZoom: 14,
+        maxNativeZoom: 14,
         tms: true,
         attribution: 'Stranieri residenti a Palermo - 2018',
 		zIndex: 400,
@@ -504,7 +500,8 @@ map.on('popupopen', function(e) {
         bounds_group.addLayer(layer_osm_confine_palermo_epsg_3004_0);
 		// map.addLayer(layer_osm_confine_palermo_epsg_3004_0);
 		 
-function pop_circos_pa_1(feature, layer) {
+// dati delle UPL
+        function pop_ISTATUPL_1(feature, layer) {
             layer.on({
                 mouseout: function(e) {
                     for (i in e.target._eventParents) {
@@ -515,22 +512,23 @@ function pop_circos_pa_1(feature, layer) {
             });
             var popupContent = '<table>\
                     <tr>\
-                        <td>Cittadini stranieri residenti nella ' +  (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '<br> (aggregati per subregioni)</td>\
+                        <td>Residenti stranieri nell&rsquo;UPL  ' + (feature.properties['UPL_nome'] !== null ? Autolinker.link(String(feature.properties['UPL_nome'])) : '') + ' </td>\
                     </tr>\
                     <tr>\
-                        <td>' + (feature.properties['descrizione'] !== null ? Autolinker.link(String(feature.properties['descrizione'])) : '') + '</td>\
-                    </tr>\
+                        <td>Quartiere:&nbsp;' + (feature.properties['Quartiere'] !== null ? Autolinker.link(String(feature.properties['Quartiere'])) : '') + ' - ' + (feature.properties['circoscrizione'] !== null ? Autolinker.link(String(feature.properties['circoscrizione'])) : '') + '° Circoscrione </td>\
                     <tr>\
-                        <td>' + (feature.properties['iframe'] !== null ? (String(feature.properties['iframe'])) : '') + '<br> rielaborarioni dati <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a></td>\
+                        <td>Aggregazione per Sub-Regione</td>\
+                   <tr>\
+                   <td>' + (feature.properties['iframe'] !== null ? (String(feature.properties['iframe'])) : '') + '<br> rielaborarioni dati <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a></td>\
                     </tr>\
                 </table>';
             layer.bindPopup(popupContent, {maxHeight: 400});
         }
 
-        function style_circos_pa_1_0() {
+        function style_ISTATUPL_1_0() {
             return {
-                pane: 'pane_circos_pa_1',
-               opacity: 1,
+                pane: 'pane_ISTATUPL_1',
+                opacity: 1,
                 color: 'rgba(210,210,210,0.75)',
                 dashArray: '',
                 lineCap: 'butt',
@@ -538,27 +536,27 @@ function pop_circos_pa_1(feature, layer) {
                 weight: 0.15, 
                 fillOpacity: 1,
                 fillColor: 'rgba(224,209,134,0.0)',
+				fill: true,
+                
             }
         }
-        map.createPane('pane_circos_pa_1');
-        map.getPane('pane_circos_pa_1').style.zIndex = 401;
-        map.getPane('pane_circos_pa_1').style['mix-blend-mode'] = 'normal';
-        var layer_circos_pa_1 = new L.geoJson(json_circos_pa_1, {
+        map.createPane('pane_ISTATUPL_1');
+        map.getPane('pane_ISTATUPL_1').style.zIndex = 401;
+        map.getPane('pane_ISTATUPL_1').style['mix-blend-mode'] = 'normal';
+        var layer_ISTATUPL_1 = new L.geoJson(json_ISTATUPL_1, {
             attribution: '',
-            pane: 'pane_circos_pa_1',
-            onEachFeature: pop_circos_pa_1,
-            style: style_circos_pa_1_0,
+            pane: 'pane_ISTATUPL_1',
+            onEachFeature: pop_ISTATUPL_1,
+            style: style_ISTATUPL_1_0,
         });
-        bounds_group.addLayer(layer_circos_pa_1);
-        map.addLayer(layer_circos_pa_1);
+        bounds_group.addLayer(layer_ISTATUPL_1);
+        map.addLayer(layer_ISTATUPL_1);
 
 	
 <!-- Legenda mappa -->
         var baseMaps = {};
 L.control.layers(baseMaps,{'<span class="legenda">&nbsp;&nbsp;&nbsp;Stranieri Residenti 2018</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PalermoHub':layer_poligonoisola0,
-'<img src="legend/osm_confine_palermo_epsg_3004_0.png" /> Confine Comunale': layer_osm_confine_palermo_epsg_3004_0,'Stranieri residenti a Palermo 2018<br /><table><tr><td style="text-align: center;"><img src="stranieri_residenti/legend/residenti_stranieri_subregioncopia_1_SouthAsia0.png" /></td><td>South Asia (Tot. 9002)</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti/legend/residenti_stranieri_subregioncopia_1_SubsaharanAfricans1.png" /></td><td>Sub-saharan Africans (Tot. 5286)</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti/legend/residenti_stranieri_subregioncopia_1_Europa2.png" /></td><td>Europa (Tot. 3780)</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti/legend/residenti_stranieri_subregioncopia_1_Other3.png" /></td><td>Other (Tot. 2394)</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti/legend/residenti_stranieri_subregioncopia_1_NorthAfrica4.png" /></td><td>North Africa (Tot. 2135)</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti/legend/residenti_stranieri_subregioncopia_1_SoutheastAsia5.png" /></td><td>Southeast Asia (Tot. 1781)</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti/legend/residenti_stranieri_subregioncopia_1_EastAsia6.png" /></td><td>East Asia (Tot. 991)</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti/legend/residenti_stranieri_subregioncopia_1_SouthAmericans7.png" /></td><td>South Americans (Tot. 366)</td></tr></table>':stra_res,
-
- 
+'<img src="legend/osm_confine_palermo_epsg_3004_0.png" /> Confine Comunale': layer_osm_confine_palermo_epsg_3004_0,'Stranieri residenti a Palermo 2018<br /><table><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_SouthAsia90640.png" /></td><td>&nbsp;&nbsp;South Asia - 9064</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_SoutheastAsia18201.png" /></td><td>&nbsp;&nbsp;Southeast Asia - 1820</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_EastAsia10112.png" /></td><td>&nbsp;&nbsp;East Asia - 1011</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_NorthAfrica22903.png" /></td><td>&nbsp;&nbsp;North Africa - 2290</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_SubSaharanAfrica58414.png" /></td><td>&nbsp;&nbsp;Sub-Saharan Africa - 5841</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_SouthAmerica5965.png" /></td><td>&nbsp;&nbsp;South America - 596</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_EU2842146.png" /></td><td>&nbsp;&nbsp;EU-28 - 4214</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_EuropeansoutofEU5747.png" /></td><td>&nbsp;&nbsp;Europeans out of EU - 574</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_Others3258.png" /></td><td>&nbsp;&nbsp;Others - 325</td></tr></table>':stra_res, 
 }).addTo(map);
       setBounds();
 		
