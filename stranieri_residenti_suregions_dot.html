@@ -1,0 +1,615 @@
+<!doctype html>
+<html lang="it">
+    <head>
+ <title>Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018 - Palermo Hub</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Palermo Hub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
+
+        <meta name="keywords" content="Open Data,Sicilia,PAI,Geologia,CTR, PRG, Variente Generale, Palermo">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="12/03/2019">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+       
+ <!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it" />
+<meta property="og:description" content="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018 - Rielaborazione dati OpenDataSicilia" />
+<meta property="og:url" content="http://siciliahub.github.io/palermohub/stranieri_residenti.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://palermohub.opendatasicilia.it/legend/clip_index/residenti_stranieri_pa.jpg" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+<meta name="twitter:description" content="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018 - Rielaborazione dati OpenDataSicilia">
+<meta name="twitter:image" content="http://palermohub.opendatasicilia.it/legend/clip_index/residenti_stranieri_pa.jpg" />
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->   
+
+ <!-- css mappa -->
+<link href="lib/css/base_ods_stranieri.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
+<link href="lib/css/leaflet_stranieri_dot.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="stranieri_residenti/css/qgis2web.css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-measure.css" rel="stylesheet" type="text/css"> 
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css"> 
+
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="stranieri_residenti/css/MarkerCluster.css">
+<link rel="stylesheet" href="stranieri_residenti/css/MarkerCluster.Default.css">
+<link rel="stylesheet" href="stranieri_residenti/css/leaflet-control-geocoder.Geocoder.css">
+
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>  
+     
+<!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+ <script src="lib/js/qgi2web/leaflet.js"></script> 
+<script src="lib/js/qgi2web/L.Control.Locate.min.js"></script>
+<script src="lib/js/qgi2web/multi-style-layer.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet-svg-shape-markers.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+ <script src="lib/js/qgi2web/leaflet-measure.js"></script> 
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+<script src="lib/js/qgi2web/leaflet-search.js"></script>  
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/qgi2web/leaflet.pattern.js"></script>
+<script src="lib/js/qgi2web/rbush.min.js"></script>
+<script src="lib/js/qgi2web/labelgun.min.js"></script>
+<script src="lib/js/qgi2web/labels.js"></script>
+<script src="stranieri_residenti/js/leaflet-control-geocoder.Geocoder.js"></script>
+<script src="stranieri_residenti/js/leaflet-tileoverlay-mask.js"></script>
+		<!-- script funzioni --> 
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+<script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+ 
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes --> 
+<!-- <script type="text/javascript" src="script.js"></script>   --> 
+
+<!-- script dati mappa -->
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/poligonoisola0.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/osm_confine_palermo_epsg_3004_0.js"></script>
+ <script src="stranieri_residenti_dot/data/ISTATUPL_1.js"></script>
+
+</head>
+
+<body>
+
+
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="stranieri_residenti_suregions.html" title="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018" target="_parent"><strong>Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018</strong></a>
+  <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe simili&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="#" title="Stranieri residenti a Milano aggregati per cittadinanza e quartieri" target="_parent"><strong>Stranieri residenti a Milano - 2018</ strong></a> <br>
+  </div>
+	 <script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+
+ <div id="clip_gra"><a class="legenda" href="#chart" title="Grafici Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018"><img src="legend/chart.png" width="38" height="38" alt=""/></a></div> 
+<!-- Sidebar SX -->
+<div id="sidebar" class="sidebar collapsed">
+<!-- popup grafico -->
+<div id="chart" class="overlay">
+  <div class="popup">
+    <h2></h2>
+    <a class="close" href="#">&times;</a>
+    <div class="content">
+<div class='tableauPlaceholder' id='viz1560124319750' style='position: relative'><noscript><a href='#'><img alt=' ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PalermopopolazioneresidentepercittadinanzaUPLQuartiereeCircoscrizione-2018&#47;Dashboard-Intro&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='path' value='views&#47;PalermopopolazioneresidentepercittadinanzaUPLQuartiereeCircoscrizione-2018&#47;Dashboard-Intro?:embed=y&amp;:display_count=y' /> <param name='toolbar' value='no' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PalermopopolazioneresidentepercittadinanzaUPLQuartiereeCircoscrizione-2018&#47;Dashboard-Intro&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='no' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='no' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1560124319750');                    var vizElement = divElement.getElementsByTagName('object')[0];                    vizElement.style.minWidth='730px';vizElement.style.maxWidth='1000px';vizElement.style.width='100%';vizElement.style.height='780px';                    var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+    </div>
+  </div>
+</div>  
+
+
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" title="Menu slider" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#immago"  title="Immagini"role="tab"><i class="fa fa-picture-o"></i></a></li>
+                 <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+                   <li> <a href="#" target="_blank" title="Post ODS - Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione – 2018" role="tab"><i class="fa fa-bookmark"></i></a></li>
+                   <li> <a href="https://public.tableau.com/views/PalermopopolazioneresidentepercittadinanzaUPLQuartiereeCircoscrizione-2018/Dashboard-Intro?:embed=y&:display_count=yes&:toolbar=no&:origin=viz_share_link" target="_blank" title="Grafici - Viz Tableau - Public" role="tab"><i class="fa fa-bar-chart"></i></a></li>
+                 <li> <a href="https://data.world/gbvitrano/popolazione-residente-a-palermo-upl" target="_blank" title="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018" role="tab"><i class="fa fa-database "></i></a></li>
+                   
+            </ul>
+            <ul role="tablist">
+       <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+<li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Palermo Hub - Residenti Stranieri<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="legenda"> <strong>Residenti Stranieri a Palermo - 2018</strong></p>
+<p class="lorem2">Gli stranieri residenti a Palermo nel 2018  sono 25.735 e rappresentano 130 Nazionalità, oggi sono il 3,83% della popolazione totale (670.954). Chi sono questi stranieri? Da dove vengono? Quanti sono? Dove vivono? Qual'è il rapporto stranieri/italiani nel territorio? Tutti i dettagli delle statistiche più recenti nei grafici e nelle mappe.</p>  
+ <img src="stranieri_residenti_dot/images/4.png" class="clip_resize" title="01 - Popolazione residente italiana" border="0" /><br><br>
+<p class="lorem2">Le 4 principali nazionalità straniere a Palermo - 2018<br><br>
+I cittadini Bangladesi, Singalesi, Ghanesi e Romeni da soli costituiscono più della  metà (57,41%) di tutti gli stranieri residenti a Palermo.<br><br>
+Dalle mappe e dai grafici emerge che nel centro stroico (quartieri Palazzo Reale - Monte di Pietà e Tribunali) c'è la maggior presenza di residenti stranieri con 5.183 residenti pari al 20,14%, seguono i quartieri di: <br>
+- Politeama 3.710 residenti - 14,42%;<br>
+- Libertà  1.444 residenti - 5,61%;<br>
+- Zisa 2.531 residenti - 9.83%;<br>
+- Noce  2.248 residenti - 8,74%;<br>
+- Oreto Stazione 4.230 residenti - 16,44%<br>
+che da soli ospitano 19.346 residenti, pari al 75,17% del totale dei residenti.<br><br>
+La presenza straniera si è quasi triplicata negli anni duemila raggiungendo a Dicembre 2018 il livello di 25.735 cittadini (il 3,83% dei residenti, è l’8,5% a livello nazionale) con un rapporto di genere abbastanza equilibrato.</p>
+</div>    
+          
+<!-- Tab immago -->
+       <div class="sidebar-pane" id="immago">
+       <h2 class="sidebar-header">Residenti Stranieri<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2">Stranieri residenti a Palermo - 2018</p>          
+<p class="lorem2">Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018</p>     
+<img src="stranieri_residenti_dot/images/01.png" class="clip_resize" title="01 - Popolazione residente italiana" border="0" /><br><br>
+<p class="lorem2">01 - Popolazione residente italiana</p> 
+<img src="stranieri_residenti_dot/images/02.png" class="clip_resize" title="02 - Popolazione residente" border="0" /><br><br>
+<p class="lorem2">02 - Popolazione residente</p> 
+<img src="stranieri_residenti_dot/images/03.png" class="clip_resize" title="03 - Popolazione straniera residente aggregata per Continente" border="0" /><br><br>
+<p class="lorem2">03 - Popolazione straniera residente aggregata per Continente</p> 
+<img src="stranieri_residenti_dot/images/04.png" class="clip_resize" title="04 - Popolazione straniera residente aggregata per Sub-Regione" border="0" /><br><br>
+<p class="lorem2">04 - Popolazione straniera residente aggregata per Sub-Regione</p> 
+</div>
+
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2></br>
+ <p class="lorem2"><strong>Rielaborazione di: </strong><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/totofiandaca" target="_blank" title="Totò Fiandaca">@totofiandaca</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a> per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong></p> 
+ <p class="lorem2">130 Nazionalità rappresentate da 25.735 residenti stranieri nel 2018</p> 
+ <img src="stranieri_residenti_dot/images/Palermo_World_01.jpg" class="clip_resize" title="130 Nazionalità rappresentate da 25.735 residenti stranieri nel 2018" border="0" /><br><br>
+  <p class="lorem2">Grazie al Dr Girolamo D'Anneo, Responsabile Studi e Ricerche Statistiche e Ciro Spataro  dell'Area Servizi alla città Servizio Innovazione  U.O. Transizione al Digitale, entrambi funzionari del Comune di Palermo, sono stati pubblicati i dataset relativi alla popolazione residente, italiana e straniera. <br><br> 
+  I nuovi dataset mi hanno permesso di replicare e migliorare il lavoro fatto nel post <a href="https://coseerobe.gbvitrano.it/milano-e-palermo-le-mappe-della-distribuzione-della-popolazione-straniera-residente-nel-2018.html" title="Milano e Palermo: le mappe della distribuzione della popolazione straniera residente nel 2018," target="_blank">Milano e Palermo: le mappe della distribuzione della popolazione straniera residente nel 2018</a>, dove  il dataset su Palermo non era esattamente ideale, in quell'esercizio i dati sono stati estratti da una tabella pdf, <a href="https://www.comune.palermo.it/js/server/uploads/statistica/_10042019075012.pdf" title="GLI STRANIERI A PALERMO NEL 2018" target="_blank">GLI STRANIERI A PALERMO NEL 2018</a>, pagina 21, Tavola 6: Cittadini al 31/12/2018 per cittadinanza a circoscrizione.</p>
+  
+ <p class="lorem2">    Fonte dati: <a href="https://opendata.comune.palermo.it/index.php" title="Comune di Palermo" target="_blank">Comune di Palermo</a> – <a href="https://opendata.comune.palermo.it/opendata-archivio-dataset.php" title="Dati sul territorio" target="_blank">Dati sul territorio</a> -  <a href="https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1219" title="Stranieri residenti a Palermo al 31/12/2018 per Unità di primo livello e cittadinanza" target="_blank">Stranieri residenti a Palermo al 31/12/2018 per Unità di primo livello e cittadinanza</a> e <a href="https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1211" title="opolazione residente a Palermo al 31/12/2018 per Unità di primo livello e cittadinanza" target="_blank">Popolazione residente a Palermo al 31/12/2018 per Unità di primo livello e cittadinanza</a></p>
+ <p class="lorem2"><strong>Licenza <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" Title="CC BY-SA 4.0 - Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0) tranne diversa indicazione" target="_blank">CC BY-SA 4.0</a></strong> - Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0). </p>
+<p class="lorem2">  <strong>Note:</strong><br>
+   <em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
+   <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p>
+</div>
+    
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem2">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem2"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
+<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
+<li><p class="lorem2"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a>plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</li></p>
+<li><p class="lorem2"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem2"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem2"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar v2" target="_blank">Sidebar v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet MousePosition" target="_blank">Leaflet MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet graphicscale" target="_blank">Leaflet graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;</li></p>
+<li><p class="lorem2"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet PolylineMeasure" target="_blank">Leaflet PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</li></p>
+<li><p class="lorem2"><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet zoomhome" target="_blank">Leaflet zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem2"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</li></p>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+      </ul> </div></div> </div>  
+  
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: "#fff", 
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#fff',
+                fillOpacity: 0.25,
+				// lineCap: 'butt',
+               // lineJoin: 'miter',
+                weight: 3.0, 
+              });
+            }
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+			
+       });	
+	   
+
+var map = L.map('map', { zoomControl:false, maxZoom:14, minZoom:12}).fitBounds([[38.045851675001444,13.195799698861464],[38.22904078206479,13.49928552140082]]);
+map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+var bounds_group = new L.featureGroup([]);
+
+<!-- mappe di base -->	  
+var basemaps = [ 
+L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png', {attribution: 'Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.',
+				minZoom: 12,  maxZoom: 14, maxNativeZoom: 14, label: 'OSM Dark Retina'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
+				minZoom: 12,  maxZoom: 14, maxNativeZoom: 14, label: 'Google Satellite'}),
+
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 12,  maxZoom: 14, maxNativeZoom: 14,label: 'Map tiles by CartoDB'}),
+];
+
+<!-- Sposta il popup/mappa in base alle coordinate -->	
+map.on('popupopen', function(e) {
+    var px = map.project(e.popup._latlng); // find the pixel location on the map where the popup anchor is
+    px.y -= e.popup._container.clientHeight/2 // find the height of the popup container, divide by 2, subtract from the Y axis of marker location
+    map.panTo(map.unproject(px),{animate: true}); // pan to new center
+});
+	<!-- Sposta il popup/mappa in base alle coordinate - fine -->	
+
+   	  //mappa ctr10k
+		 var stra_res =L.tileLayer('stranieri_residenti_dot/data/stra_sub//{z}/{x}/{y}.png', {
+        minZoom: 12,
+        maxZoom: 14,
+        maxNativeZoom: 14,
+        tms: true,
+        attribution: 'Stranieri residenti a Palermo - 2018',
+		zIndex: 400,
+      }) .addTo(map); 
+	  
+	
+	<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+			
+<!-- funzioni mappa -->
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+		
+<!-- Poligono fantasma  inizio -->	
+        function pop_poligonoisola0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_poligonoisola0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_poligonoisola0_0() {
+            return {
+                pane: 'pane_poligonoisola0',
+                opacity: 0,
+                color: 'rgba(0,0,0,0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_poligonoisola0');
+        map.getPane('pane_poligonoisola0').style.zIndex = 1;
+        map.getPane('pane_poligonoisola0').style['mix-blend-mode'] = 'normal';
+    var layer_poligonoisola0 = new L.geoJson(json_poligonoisola0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_poligonoisola0',
+        onEachFeature: pop_poligonoisola0,
+        style: style_poligonoisola0_0,
+    });
+        bounds_group.addLayer(layer_poligonoisola0);
+        // map.addLayer(layer_poligonoisola0);	
+		
+<!-- Poligono fantasma  fine -->	
+  
+				// Perimetro OSM
+        function pop_osm_confine_palermo_epsg_3004_0(feature, layer) {
+            var popupContent = '<table>\
+						           <tr>\
+			  <th scope="row"><img src="stranieri_residenti/legend/osm_confine_palermo_epsg_3004_0.png" /><span class="legenda1">&nbsp;&nbsp;Confine Comunale<spam /></th>\
+                        <td><span class="legenda1">- OSM<spam /> <br /><br /></td>\
+                    </tr>\
+                      <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_osm_confine_palermo_epsg_3004_0_0() {
+            return {
+                pane: 'pane_osm_confine_palermo_epsg_3004_0',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+            }
+        }
+        map.createPane('pane_osm_confine_palermo_epsg_3004_0');
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style.zIndex = 400;
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style['mix-blend-mode'] = 'normal';
+        var layer_osm_confine_palermo_epsg_3004_0 = new L.geoJson(json_osm_confine_palermo_epsg_3004_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_osm_confine_palermo_epsg_3004_0',
+            onEachFeature: pop_osm_confine_palermo_epsg_3004_0,
+            style: style_osm_confine_palermo_epsg_3004_0_0,
+        });
+        bounds_group.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		// map.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		 
+// dati delle UPL
+        function pop_ISTATUPL_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+                        <td>Residenti stranieri nell&rsquo;UPL  ' + (feature.properties['UPL_nome'] !== null ? Autolinker.link(String(feature.properties['UPL_nome'])) : '') + ' </td>\
+                    </tr>\
+                    <tr>\
+                        <td>Quartiere:&nbsp;' + (feature.properties['Quartiere'] !== null ? Autolinker.link(String(feature.properties['Quartiere'])) : '') + ' - ' + (feature.properties['circoscrizione'] !== null ? Autolinker.link(String(feature.properties['circoscrizione'])) : '') + '° Circoscrione </td>\
+                    <tr>\
+                        <td>Aggregazione per Sub-Regione</td>\
+                   <tr>\
+                   <td>' + (feature.properties['iframe'] !== null ? (String(feature.properties['iframe'])) : '') + '<br> rielaborarioni dati <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a></td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ISTATUPL_1_0() {
+            return {
+                pane: 'pane_ISTATUPL_1',
+                opacity: 1,
+                color: 'rgba(210,210,210,0.75)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 0.15, 
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+				fill: true,
+                
+            }
+        }
+        map.createPane('pane_ISTATUPL_1');
+        map.getPane('pane_ISTATUPL_1').style.zIndex = 401;
+        map.getPane('pane_ISTATUPL_1').style['mix-blend-mode'] = 'normal';
+        var layer_ISTATUPL_1 = new L.geoJson(json_ISTATUPL_1, {
+            attribution: '',
+            pane: 'pane_ISTATUPL_1',
+            onEachFeature: pop_ISTATUPL_1,
+            style: style_ISTATUPL_1_0,
+        });
+        bounds_group.addLayer(layer_ISTATUPL_1);
+        map.addLayer(layer_ISTATUPL_1);
+
+	
+<!-- Legenda mappa -->
+        var baseMaps = {};
+L.control.layers(baseMaps,{'<span class="legenda">&nbsp;&nbsp;&nbsp;Stranieri Residenti 2018</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PalermoHub':layer_poligonoisola0,
+'<img src="legend/osm_confine_palermo_epsg_3004_0.png" /> Confine Comunale': layer_osm_confine_palermo_epsg_3004_0,'Stranieri residenti a Palermo 2018<br /><table><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_SouthAsia90640.png" /></td><td>&nbsp;&nbsp;South Asia - 9064</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_SoutheastAsia18201.png" /></td><td>&nbsp;&nbsp;Southeast Asia - 1820</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_EastAsia10112.png" /></td><td>&nbsp;&nbsp;East Asia - 1011</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_NorthAfrica22903.png" /></td><td>&nbsp;&nbsp;North Africa - 2290</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_SubSaharanAfrica58414.png" /></td><td>&nbsp;&nbsp;Sub-Saharan Africa - 5841</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_SouthAmerica5965.png" /></td><td>&nbsp;&nbsp;South America - 596</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_EU2842146.png" /></td><td>&nbsp;&nbsp;EU-28 - 4214</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_EuropeansoutofEU5747.png" /></td><td>&nbsp;&nbsp;Europeans out of EU - 574</td></tr><tr><td style="text-align: center;"><img src="stranieri_residenti_dot/legend/Palermo_melting_pot_1_Others3258.png" /></td><td>&nbsp;&nbsp;Others - 325</td></tr></table>':stra_res, 
+}).addTo(map);
+      setBounds();
+		
+		<!-- strumenti di leaflet -->
+		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+		
+		  var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		 <!--.zoomControl.setPosition("topleft") -->;
+		 L.control.locate().addTo(map);
+		var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+		
+        var osmGeocoder = new L.Control.Geocoder({
+            collapsed: true,
+            position: 'topleft',
+            text: 'Search',
+            title: 'Testing'
+        }).addTo(map);
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .className += ' fa fa-search';
+        document.getElementsByClassName('leaflet-control-geocoder-icon')[0]
+        .title += 'Search for a place';
+		
+		
+        measureControl.addTo(map);
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
+        </script>
+         <!-- header -->       
+
+   
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+</div>  
+   <!-- loghi     
+   <div id="titolo" class="leaflet-control" > <a href="index_atlante.html" title="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo" class="btn btn--s btn--orange" target="_parent">Atlante Storico</a><br>   </div> 
+<div id="tavolab"></div>  -->         
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods_b.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  
+<!-- beta version    
+ <div id="beta"><img src="legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> --> 
+   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+</body>
+</html>  
