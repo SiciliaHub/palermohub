@@ -607,11 +607,13 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
 <loc>http://palermohub.opendatasicilia.it/geolocalizza.html</loc>
 <lastmod>2019-12-01</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
 <loc>http://palermohub.opendatasicilia.it/news_incendi_2019.html</loc>
 <lastmod>2019-13-01</lastmod>
 <changefreq>weekly</changefreq>
