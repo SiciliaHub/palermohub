@@ -709,6 +709,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/sinistri_2018_flourish.html</loc>
+<lastmod>2018-07-22</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 
 <!--- <url>
