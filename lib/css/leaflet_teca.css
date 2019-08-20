@@ -332,6 +332,7 @@
 	border-radius: 5px;
 	}
 .leaflet-control-layers-toggle {
+	margin-top:30px;
 	background-image: url(../images/layers.jpg);
 	background-size: 45px 45px;
 	width: 42px;
@@ -342,6 +343,7 @@
     box-shadow: 0 1px 5px rgba(0,0,0,0.6);
 	}
 .leaflet-retina .leaflet-control-layers-toggle {
+	margin-top: 30px;
 	background-image: url(../images/layers.jpg);
 	background-size: 45px 45px;
 	width: 42px;
@@ -355,13 +357,16 @@
 	width: 44px;
 	height: 44px;
 	border-radius: 40px;
+	
 	}
 	
 .leaflet-control-layers .leaflet-control-layers-list,
 .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
 	display: none;
     width:220px;
-		
+	z-index: 2000 !important;
+	
+	
 		}
 	 @media (min-width: 320px) and (max-width: 736px) {.leaflet-control-layers .leaflet-control-layers-list,
 .leaflet-control-layers-expanded .leaflet-control-layers-toggle{width:170px;  }}
@@ -374,6 +379,7 @@
  @media (min-width: 320px) and (max-width: 736px) {.leaflet-control-layers-expanded {font-size:9px;  }}
 
 .leaflet-control-layers-expanded {
+	top: 25px;
 	max-height:620px;
 	overflow:auto;
 	overflow-x:hidden;
@@ -382,6 +388,7 @@
 	background: rgba(255,255,255,0.9);
 	border-radius: 8px;
 	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	/*z-index: 2000 !important;*/
 	}
  @media (min-width: 320px) and (max-width: 736px) {.leaflet-control-layers-expanded {max-height:500px;  }}
 

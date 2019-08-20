@@ -327,6 +327,7 @@
 	border-radius: 5px;
 	}
 .leaflet-control-layers-toggle {
+	margin-top: 30px;
 	background-image: url(../images/omira_clip.jpg);
 	background-size: 42px 42px;
 	width: 42px;
@@ -362,6 +363,7 @@
 	position: relative;
 	}
 .leaflet-control-layers-expanded {
+	top: 25px;
 	padding: 6px 10px 6px 6px;
 	color: #333;
 	background: #fff;
@@ -377,7 +379,7 @@
 	}
 .leaflet-control-layers label {
 	display: block;
-	}
+		}
 .leaflet-control-layers-separator {
 	height: 0;
 	border-top: 1px solid #ddd;
