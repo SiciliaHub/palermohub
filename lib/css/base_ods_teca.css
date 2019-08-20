@@ -148,6 +148,18 @@ a:active {color: #FF0000; text-decoration:none; }
 	top: 90px;
 	width: 80%;
 	float: right;
+	z-index: 1001;
+	text-align: right;
+}
+
+#titoloteca  {
+	position: fixed;
+	font-size:0.65em;
+	color: #fff;
+	right: 12px;
+	top: 85px;
+	width: 80%;
+	float: right;
 	z-index: 1050;
 	text-align: right;
 }
