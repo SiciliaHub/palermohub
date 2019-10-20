@@ -727,7 +727,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-
+<url>
+<loc>https://opendatasicilia.github.io/FontanellePalermo/mappa/index.html</loc>
+<lastmod>2019-09-25</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
