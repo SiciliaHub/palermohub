@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="it">
+    <head>
+<title>Database - Palermo hub - contenitore di mappe su Palermo realizzato da opendatasicilia.it</title>        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Palermo hub db">       
+     <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="noindex,nofollow">
+        <meta name="creation_Date" content="05/01/2018">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+	<!-- CSS Palermo hub  -->
+<link href="lib/css/tooltips.css" rel="stylesheet" type="text/css">
+<link href="lib/js/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/js/dist/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="lib/js/top/jquerysctipttop.css" rel="stylesheet" type="text/css" />
+<link href="lib/js/top/backTop.css" rel="stylesheet" type="text/css" />
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script> 
+
+<style type="text/css">
+body {
+	/*background-color: #FFFFFF;*/
+	overflow-x:hidden;
+	}
+
+</style>
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  	<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+    
+ <!-- Script -->
+<script type="text/javascript" src="lib/js/dist/jquery.min.js"></script>  
+<script type="text/javascript" src="lib/js/dist/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/js/dist/scripts.js"></script>
+
+    <link rel="exhibit/data"
+    type="application/jsonp"
+    href="https://spreadsheets.google.com/feeds/list/1A-U8JCbH8Rh2PHoIHG2DL3uPNncR8DpGm3_nzBxRbHA/od6/public/basic?alt=json-in-script"
+    ex:converter="googleSpreadsheets" />
+
+    <script src="lib/js/dist/exhibit-api.js?locale=it"></script>
+
+    <script type="text/javascript">
+    var tableStyler = function(table, database) {
+    	$(table).addClass("table table-condensed table-striped");
+    };
+    </script>
+
+</head>
+<body>
+<!-- <div class="container"> -->
+<div id="db"><br />
+<p class="lorem0"> <strong>PalermoHub </strong>di <a href="http://opendatasicilia.it" title="opendatasicilia.it" target="_parent" class="tooltips">opendatasicilia.it<span><img src="legend/clip_index/ods.jpg" class="clip_tooltips"  /></span></a> è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo,&nbsp;&nbsp;non ha alcun intento commerciale,&nbsp;&nbsp;l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli <a title="Da Wikipedia, l'enciclopedia libera" href="https://it.wikipedia.org/wiki/Dati_aperti" target="_blank" rel="noopener noreferrer">open data</a> o   <a href="https://medium.com/open-data-stories/non-open-data-ma-dati-pubblici-la-metafora-dellacqua-b09ff1c24fe3" title="Non “open data”, ma “dati pubblici”: la metafora dell’acqua" target="_parent" class="tooltips">dati pubblici<span><img src="https://cdn-images-1.medium.com/max/2000/1*iQIt7bAThmJXh5hEU_Q9qg.jpeg" class="clip_tooltips"  /></span>  </a> comunali, regionali,  nazionali e tutti possono contribuire alla crescita e alla divulgazione.</p>
+<div id="main-content">
+		<div class="row clearfix">
+			<div class="col-md-12 column"><br />
+	<strong><i class="fa fa-search fa-2x" aria-hidden="true"></i> Cerca</strong><div ex:role="facet" ex:facetClass="TextSearch"></div><br />
+			</div>
+		</div>
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+			<div   ex:role="facet"
+				ex:facetClass="Cloud"
+				ex:expression=".tag"
+			     ex:facetLabel="Tag"
+				ex:sortMode="count"></div>
+			</div>
+
+			<div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".collaborazione"
+				ex:facetLabel="Autore"
+				ex:sortMode="count"></div>
+			</div>
+            <div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".categoria"
+				ex:facetLabel="Categoria"
+				data-ex-missing-label="Non specificato">
+				</div>
+			</div>
+             <div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".territorio"
+				ex:facetLabel="Territorio"
+				data-ex-missing-label="Non specificato">
+				</div>
+			</div>
+            	<div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".mese"
+				ex:facetLabel="Mese"
+				data-ex-missing-label="Non specificato">
+				</div>
+			</div>
+            	<div class="col-md-1 column"><br />
+				<div ex:role="facet"
+				ex:expression=".anno"
+				ex:facetLabel="Anno"
+				data-ex-missing-label="Non specificato">
+				</div>
+			</div>
+               <div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".fontedati"
+				ex:facetLabel="Fonte Dati"
+				ex:sortMode="count"></div>
+		</div>
+              <div class="col-md-1 column"><br /><br /><br />
+				<!-- <img src="legend/beta.png" width="60" title="beta version" alt="beta version"> -->
+			</div>
+</div>
+        
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+            	<div ex:role="viewPanel" style="padding: 0in;">
+					<div ex:role="exhibit-view"
+					ex:viewClass="Exhibit.TabularView"
+					ex:label="Table"
+					ex:columns=".titolo,.descrizione,.immago,.categoria,.tag,.collaborazione,.primamappa,.titolo_pm,.fontedati"
+					ex:columnLabels="Titolo, Descrizione, Immagine, Categoria,  Tag, Autore, Prima mappa, Fonte Dati,"
+					ex:columnFormats="list,list,list,list,list,list,list,list,list,list"
+					ex:sortColumn="4"
+					ex:sortAscending="false"
+					ex:tableStyler="tableStyler">
+					<div ex:role="exhibit-lens">
+					<div class="table-responsive">
+							<table class="table" ex:class-content=".territorio">
+								<tr>
+	<td><a ex:href-content=".URL" ex:title-content=".titolo" ex:onclick-subcontent="trackOutboundLink('{{.URL}}'); return false;" target="_parent"><strong><span ex:content=".titolo" class="accussì"></strong></a></td>
+   									 <td><span ex:content=".descrizione"></td>
+			<td ><a ex:href-content=".URL" ex:title-content=".titolo"  ex:onclick-subcontent="trackOutboundLink('{{.URL}}'); return false;" target="_parent"><strong><span ex:content=".immago"  ></strong></a></td>
+									<td><span ex:content=".categoria"></td>
+                                    <td><span ex:content=".tag" ></span></td>
+                                    <td><span ex:content=".collaborazione"></span></td>
+									<td><a ex:href-content=".primamappa" ex:onclick-subcontent="trackOutboundLink('{{.primamappa}}'); return false;" title="Prima mappa rielaborata"  target="_blank"><strong><span ex:content=".titolo_pm" class="accussì"></strong></a></td>
+                                    <td><span ex:content=".fontedati"></td>
+								</tr>
+							</table> 
+					  </div>
+
+					</div>
+				</div>
+			</div>
+		</div><br >   <br ><br ><br ><br ><br ><br ><br ><br ><br ><br ><br ><br ></div>
+        
+<footer>
+<!-- tabella footer desktop/mobile -->
+<table width="100%" border="0" cellpadding="1" cellspacing="1" class="footermobile">
+    <tr>
+      <td>&nbsp;</td>
+      <td colspan="2" align="left" valign="middle"><span class="lorem"><strong>Palermo Hub</strong> è un'iniziativa di <a href="http://opendatasicilia.it" title="opendatasicilia.it" target="_parent"><strong>opendatasicilia.it</strong></a><strong>.</strong></span></td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="1%">&nbsp;</td>
+      <td width="49%" align="right" valign="middle"><table width="10%" border="0" align="left" cellpadding="0" cellspacing="0" class="ods_social" >
+        <tbody>
+          <tr>
+            <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a></td>
+            <td>&nbsp;</td>
+            <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></td>
+            <td>&nbsp;</td>
+            <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></td>
+            <td>&nbsp;</td>
+            <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-globe fa-stack-1x fa-inverse"></i></span></a></td>
+            <td>&nbsp;</td>
+            <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i></span></a></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+        <tr>
+          <td></td>
+        </tr>
+      </table></td>
+      <td width="49%" align="right" valign="bottom">&nbsp;</td>
+      <td width="1%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td align="left" valign="middle"><span class="lorem0"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="license noopener"><img class="alignnone" style="border-width: 0;" title="Tutto il materiale rielaborato per Palermo Hub di OpenDataSicilia.it è distribuito con licenza Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0) tranne diversa indicazione." src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" alt="Licenza Creative Commons" /></a></span></td>
+      <td align="right" valign="bottom">&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="4">&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="4">&nbsp;</td>
+  </tr>
+  </table>
+  </footer>
+<a id='backTop'>Back To Top</a>
+ <!-- script toptoback automatico mobile/desktop -->  
+ <script type="text/javascript" src="lib/js/top/jquery.backTop.min.js"></script>
+<script>
+            $(document).ready( function() {
+                $('#backTop').backTop({
+                    'position' : 400,
+                    'speed' : 300,
+                    'color' : 'red',
+					
+					                });
+            });
+        </script>
+        <!-- Reading Progress Bar on Scroll - disattivare jquery-3.1.1.min.js se nella stessa pagina si usa top to back -->
+<!--  <script type="text/javascript" src="lib/js/prognroll/jquery.3.1.1.min.js"></script> -->
+ <script type="text/javascript" src="lib/js/prognroll/prognroll_home.js"></script>
+<script>
+    $(function() {
+      $("body").prognroll({
+        height: 4, //Progress bar height in pixels
+        color: "#ff9900", //Progress bar background color
+      });
+    });
+</script>
+</body>
+</html>
