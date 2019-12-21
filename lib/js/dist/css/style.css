@@ -70,13 +70,8 @@ ul.nav li.active a {
 /* rimosso momentaneamente export tool */
 
 footer {background: #dbdbdb; border-top: 1px solid #aeaeae; width: 100%;
-    position: fixed;
-    left: 0;
-    bottom: 55px;
-	/*
-	color: white;
-   
-	text-align: center;*/
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 1030; 
+	/* 	color: white; text-align: center;*/
  
     
     
