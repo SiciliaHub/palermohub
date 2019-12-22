@@ -4,7 +4,7 @@
 ===================================*/
 .bx-wrapper {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   padding: 0;
   *zoom: 1;
   -ms-touch-action: pan-y;
@@ -45,7 +45,8 @@ ul.bxslider {
 .bx-wrapper .bx-pager,
 .bx-wrapper .bx-controls-auto {
   position: absolute;
-  bottom: -15px;
+  /*bottom: -15px;*/
+  top:-15px;
   width: 100%;
 }
 /* LOADER */
@@ -69,21 +70,21 @@ ul.bxslider {
   padding-top: 20px;
 }
 .bx-wrapper .bx-pager.bx-default-pager a {
-  background: #666;
+  background: #fff;
   text-indent: -9999px;
   display: block;
-  width: 5px;
-  height: 5px;
+  width: 14px;
+  height: 14px;
   margin: 0 5px;
   outline: 0;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -moz-border-radius: 75px;
+  -webkit-border-radius: 7px;
+  border-radius: 7px;
 }
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
 .bx-wrapper .bx-pager.bx-default-pager a.active,
 .bx-wrapper .bx-pager.bx-default-pager a:focus {
-  background: #000;
+  background: #ff9900;
 }
 .bx-wrapper .bx-pager-item,
 .bx-wrapper .bx-controls-auto .bx-controls-auto-item {
