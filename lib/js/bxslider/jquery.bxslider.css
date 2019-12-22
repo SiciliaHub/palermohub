@@ -11,11 +11,14 @@
   touch-action: pan-y;
 }
 .bx-wrapper img {
-  max-width: 100%;
+  max-width: 98.5%;
   display: block;
   border-radius: 10px 10px 0px 0px;
    border: 1px solid #ff9900;
 }
+
+@media (min-width: 1281px) and (max-width: 3440px) {.bx-wrapper img {max-width:99.2% !important;}}
+
 .bxslider {
   margin: 0;
   padding: 0;
@@ -171,8 +174,11 @@ ul.bxslider {
   left: 0;
   background: #666;
   background: rgba(80, 80, 80, 0.75);
-  width: 100%;
+  /*width: 100%;*/
+    width: 98.5%;
 }
+@media (min-width: 1281px) and (max-width: 3440px) {.bx-wrapper .bx-caption {width: 99.2% !important;}}
+
 .bx-wrapper .bx-caption span {
   color: #fff;
   font-family: "Open Sans";
@@ -180,6 +186,7 @@ ul.bxslider {
   font-size: 2em;
   /*font-size: .85em;*/
   padding: 2px;
+
 }
 
-@media (min-width: 320px) and (max-width: 1024px) {.bx-wrapper .bx-caption span {font-size: 1.2em;  padding: 0px;}}
+@media (min-width: 320px) and (max-width: 1024px) {.bx-wrapper .bx-caption span {font-size: 1.2em !important;  padding: 0px !important;}}
