@@ -182,7 +182,8 @@ ul.bxslider {
 .bx-wrapper .bx-caption span {
   color: #fff;
   font-family: "Open Sans";
-  display: block;
+  text-align: center;
+  display:block;
   font-size: 2em;
   /*font-size: .85em;*/
   padding: 2px;
