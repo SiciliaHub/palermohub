@@ -24,6 +24,9 @@
 <link href="lib/js/top/jquerysctipttop.css" rel="stylesheet" type="text/css" />
 <link href="lib/js/top/backTop.css" rel="stylesheet" type="text/css" />
 
+<!-- bxSlider CSS file -->
+<link href="lib/js/bxslider/jquery.bxslider.css" rel="stylesheet" />
+
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
 <script>
@@ -80,7 +83,20 @@ body {
 <body>
 <!-- <div class="container"> -->
 <div id="db"><br />
-<p class="lorem0"> <strong>PalermoHub </strong>di <a href="http://opendatasicilia.it" title="opendatasicilia.it" target="_parent" class="tooltips">opendatasicilia.it<span><img src="legend/clip_index/ods.jpg" class="clip_tooltips"  /></span></a> è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo,&nbsp;&nbsp;non ha alcun intento commerciale,&nbsp;&nbsp;l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli <a title="Da Wikipedia, l'enciclopedia libera" href="https://it.wikipedia.org/wiki/Dati_aperti" target="_blank" rel="noopener noreferrer">open data</a> o   <a href="https://medium.com/open-data-stories/non-open-data-ma-dati-pubblici-la-metafora-dellacqua-b09ff1c24fe3" title="Non “open data”, ma “dati pubblici”: la metafora dell’acqua" target="_parent" class="tooltips">dati pubblici<span><img src="https://cdn-images-1.medium.com/max/2000/1*iQIt7bAThmJXh5hEU_Q9qg.jpeg" class="clip_tooltips"  /></span>  </a> comunali, regionali,  nazionali e tutti possono contribuire alla crescita e alla divulgazione.</p>
+<p class="lorem0"> <strong>PalermoHub </strong>di <a href="http://opendatasicilia.it" title="opendatasicilia.it" target="_parent" class="tooltips">opendatasicilia.it<span><img src="legend/clip_index/ods.jpg" class="clip_tooltips"  /></span></a> è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo,&nbsp;&nbsp;non ha alcun intento commerciale,&nbsp;&nbsp;l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli <a title="Da Wikipedia, l'enciclopedia libera" href="https://it.wikipedia.org/wiki/Dati_aperti" target="_blank" rel="noopener noreferrer">open data</a> o   <a href="https://medium.com/open-data-stories/non-open-data-ma-dati-pubblici-la-metafora-dellacqua-b09ff1c24fe3" title="Non “open data”, ma “dati pubblici”: la metafora dell’acqua" target="_parent" class="tooltips">dati pubblici<span><img src="https://cdn-images-1.medium.com/max/2000/1*iQIt7bAThmJXh5hEU_Q9qg.jpeg" class="clip_tooltips"  /></span>  </a> comunali, regionali,  nazionali e tutti possono contribuire alla crescita e alla divulgazione.</p><br />
+
+<table width="98%" border="0" cellspacing="0" cellpadding="0">
+  <tbody>
+    <tr>
+      <td width="98%" align="center" valign="middle"><div class="bxslider">
+<div><a href="https://ods2020.opendatasicilia.it/"><img src="legend/slider/ods2020.jpg" title="#Ods2020 6-7 marzo 2020, Catania" /></a></div>
+<div><a href="http://palermohub.opendatasicilia.it/index_atlante.html#14/38.1113/13.3534"><img src="legend/slider/atlante.jpg" title="Atlante Storico e Viaggio nel tempo" /></a></div>
+<div><a href="http://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595"><img src="legend/slider/prg.jpg" title="Variante Generale al PRG - PPE Centro Storico, vigenti al 2016" /></a></div>
+<div><a href="http://palermohub.opendatasicilia.it/index_pai.html#14/38.1185/13.3595"><img src="legend/slider/pai2.jpg" title="Piano Assetto Idrogeologico Palermo" /></a></div>    
+</div></td>
+    </tr>
+  </tbody>
+</table>
 <div id="main-content">
 		<div class="row clearfix">
 			<div class="col-md-12 column"><br />
@@ -191,6 +207,23 @@ body {
         </script>
         <!-- Reading Progress Bar on Scroll - disattivare jquery-3.1.1.min.js se nella stessa pagina si usa top to back -->
 <!--  <script type="text/javascript" src="lib/js/prognroll/jquery.3.1.1.min.js"></script> -->
+<!-- jQuery library -->
+
+<!-- <script src="lib/js/bxslider/jquery-3.1.1.min.js"></script> -->
+
+<!-- bxSlider Javascript file -->
+<script src="lib/js/bxslider/jquery.bxslider.js"></script>
+<script>
+$(function(){
+  $('.bxslider').bxSlider({
+	auto: true,
+    mode: 'fade',
+    captions: true,
+	slideWidth: 1900
+  });
+});
+</script>
+
  <script type="text/javascript" src="lib/js/prognroll/prognroll_home.js"></script>
 <script>
     $(function() {
