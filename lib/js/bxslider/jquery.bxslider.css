@@ -106,7 +106,7 @@ ul.bxslider {
   background-position: 0 0;
 }
 .bx-wrapper .bx-next {
-  right: 10px;
+  right: 30px;
   background: url('images/controls.png') no-repeat -43px -32px;
 }
 .bx-wrapper .bx-next:hover,
