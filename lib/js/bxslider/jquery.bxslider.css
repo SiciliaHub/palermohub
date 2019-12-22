@@ -4,7 +4,7 @@
 ===================================*/
 .bx-wrapper {
   position: relative;
-  margin-bottom: 60px;
+  margin-bottom: 25px;
   padding: 0;
   *zoom: 1;
   -ms-touch-action: pan-y;
@@ -45,7 +45,7 @@ ul.bxslider {
 .bx-wrapper .bx-pager,
 .bx-wrapper .bx-controls-auto {
   position: absolute;
-  bottom: -30px;
+  bottom: -15px;
   width: 100%;
 }
 /* LOADER */
@@ -106,7 +106,7 @@ ul.bxslider {
   background-position: 0 0;
 }
 .bx-wrapper .bx-next {
-  right: 30px;
+  right: 25px;
   background: url('images/controls.png') no-repeat -43px -32px;
 }
 .bx-wrapper .bx-next:hover,
