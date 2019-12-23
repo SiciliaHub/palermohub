@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-#db {position: absolute; left: 0.5%; right:0.5% top: 0px;  width: 99%; overflow-x:hidden;}
+#db {position: absolute; left: 0.5%; right:0.5%; top: 0px;  width: 99%; overflow-x:hidden;}
 .exhibit-tileView-body { list-style: none; }
 .exhibit-collectionView-group-count { display: none; }
 
