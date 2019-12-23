@@ -51,7 +51,7 @@ ul.bxslider {
 .bx-wrapper .bx-controls-auto {
   position: absolute;
   /*bottom: -15px;*/
-  top:-15px;
+  top:-20px;
   width: 100%;
 }
 /* LOADER */
