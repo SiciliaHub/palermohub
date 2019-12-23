@@ -72,21 +72,21 @@ ul.bxslider {
   font-family: Arial;
   font-weight: bold;
   color: #666;
-  padding-top: 20px;
+  padding-top: 0px;
 }
 .bx-wrapper .bx-pager.bx-default-pager a {
-  background: #fff;
+  background: #666;
   text-indent: -9999px;
   display: block;
-  width: 14px;
-  height: 14px;
+  width: 10px;
+  height: 10px;
   margin: 0 5px;
   outline: 0;
-  -moz-border-radius: 7px;
-  -webkit-border-radius: 7px;
-  border-radius: 7px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
-@media (min-width: 320px) and (max-width: 1023px) {.bx-wrapper .bx-pager.bx-default-pager a {width: 10px!important; height: 10px!important;; -moz-border-radius: 5px!important;  -webkit-border-radius: 5px!important; border-radius: 5px!important;}}
+@media (min-width: 320px) and (max-width: 1023px) {.bx-wrapper .bx-pager.bx-default-pager a {width: 8px!important; height: 8px!important;; -moz-border-radius: 4px!important;  -webkit-border-radius: 4px!important; border-radius: 4px!important;}}
 
 .bx-wrapper .bx-pager.bx-default-pager a:hover,
 .bx-wrapper .bx-pager.bx-default-pager a.active,
