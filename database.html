@@ -84,7 +84,7 @@ body {
 <!-- <div class="container"> -->
 <div id="db"><br />
 <p class="lorem0"> <strong>PalermoHub </strong>di <a href="http://opendatasicilia.it" title="opendatasicilia.it" target="_parent" class="tooltips">opendatasicilia.it<span><img src="legend/clip_index/ods.jpg" class="clip_tooltips"  /></span></a> è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo,&nbsp;&nbsp;non ha alcun intento commerciale,&nbsp;&nbsp;l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli <a title="Da Wikipedia, l'enciclopedia libera" href="https://it.wikipedia.org/wiki/Dati_aperti" target="_blank" rel="noopener noreferrer">open data</a> o   <a href="https://medium.com/open-data-stories/non-open-data-ma-dati-pubblici-la-metafora-dellacqua-b09ff1c24fe3" title="Non “open data”, ma “dati pubblici”: la metafora dell’acqua" target="_parent" class="tooltips">dati pubblici<span><img src="https://cdn-images-1.medium.com/max/2000/1*iQIt7bAThmJXh5hEU_Q9qg.jpeg" class="clip_tooltips"  /></span>  </a> comunali, regionali,  nazionali e tutti possono contribuire alla crescita e alla divulgazione.</p><br />
-<div class="bxslider">
+<div class="bxslider no_mobile">
 <div><a href="https://ods2020.opendatasicilia.it/" target="_blank"><img src="legend/slider/ods2020.jpg" title="Iscriviti al Raduno #Ods2020 6-7 marzo 2020, Catania" /></a></div>
 <div><a href="http://palermohub.opendatasicilia.it/index_atlante.html#14/38.1113/13.3534"><img src="legend/slider/atlante.jpg" title="Atlante Storico e Viaggio nel tempo" /></a></div>
 <div><a href="http://palermohub.opendatasicilia.it/cartografia.html#14/38.1185/13.3595"><img src="legend/slider/ctr_10k_Pa.jpg" title="Palermo | CTR 10k e Ortofoto di base" /></a></div>
@@ -220,15 +220,13 @@ body {
 <script>
 $(function(){
   $('.bxslider').bxSlider({
-	auto: true,
+	auto: false,
 	pager: true,
-    mode: 'fade',
+    mode: 'horizontal',
     captions: true,
-	minSlides:1,
-	maxSlides:1,
 	shrinkItems: true,
 	slideWidth: 0,
-	speed: 4000,
+	speed: 2000,
 	  });
 });
 </script>
