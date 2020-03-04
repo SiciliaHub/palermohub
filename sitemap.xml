@@ -727,6 +727,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/oli_vegetali.html</loc>
+<lastmod>2020-03-04</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
