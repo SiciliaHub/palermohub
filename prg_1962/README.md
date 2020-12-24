@@ -4,7 +4,7 @@
 N. B. Le tavole sono in formato JPG quale frutto di scansione delle tavole cartacee.
 Rielaborazione: [@opendatasicilia](http://opendatasicilia.it/)<br> <br> <br>
 
-<a href="https://siciliahub.github.io/palermohub/prg_62/prg_62_pa.html/"><img width="1000" src="https://github.com/SiciliaHub/palermohub/blob/gh-pages/prg_1962/clip/prg_62_pa.png"
+<a href="https://siciliahub.github.io/palermohub/prg_62/prg_62_pa.html/"><img width="800" src="https://github.com/SiciliaHub/palermohub/blob/gh-pages/prg_1962/clip/prg_62_pa.png"
  Title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" /></a><br>
 
 [![foto](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
