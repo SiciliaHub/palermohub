@@ -5,7 +5,7 @@ Fonte dati: [Comune di Palermo - Portale Opendata - Urbanistica](https://opendat
 
 Rielaborazione: [@opendatasicilia](http://opendatasicilia.it/)<br> 
 
-<a href="https://siciliahub.github.io/palermohub/prg_62/prg_62_pa.html/"><img width="800" src="https://github.com/SiciliaHub/palermohub/blob/gh-pages/prg_1962/clip/prg_62_pa.png"
+<a href="http://palermohub.opendatasicilia.it/prg_1962/prg_pa_62.html"><img width="800" src="https://github.com/SiciliaHub/palermohub/blob/gh-pages/prg_1962/clip/prg_62_pa.png"
  Title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" /></a><br>
 
 [![foto](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
