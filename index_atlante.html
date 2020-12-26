@@ -127,7 +127,8 @@ $(document).ready(function(){
             <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
             <li> <a href="#omira" title="Carta Tecnica Omira 1935" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">O</strong></a></li>
             <li> <a href="#irta" title="Carta Tecnica IRTA 1959" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">I</strong></a></li>
-            <li> <a href="#sas" title="Carta Tecnica SAS 1987" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">S</strong></a></li>
+			<li> <a href="#prg62" title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">62</strong></a></li>	
+            <li> <a href="#sas" title="Carta Tecnica SAS 1987" role="tab"><strong style="font-size: 16px; font-family: 'fontawesome';">S</strong></a></li>
 			 <li> <a href="#usarmymap" title="U.S. Army Map Service, 1943-1944" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">U</strong></a></li>
         <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
       <li> <a href="http://www.cricd.it/pages.php?idpagina=13&idContenuto=3326" title="Book - Repertorio cartografico & aerofotografico" target="_blank" role="tab"><i class="fa fa-book" aria-hidden="true"></i></a></li>
@@ -236,7 +237,18 @@ L&rsquo;effetto &ldquo;occhio di bue&ldquo; ci permette di vedere come era la ci
 <strong>Descrizione:</strong> Cartografia realizzata nel 1987 dalla SAS, Societ&agrave; Aerofotogrammetrica Siciliana di Palermo.</p><br><br><br><br><br><br><br><br><br><br>
    <img src="atlante/images/sas_73_01.png" width="400" height="400" class="clip_resize" title=" Carta Tecnica SAS 1987 (Societa' Aerofotogrammetrica Siciliana - Palermo)"alt="SAS 1987"/> </p>   
       </div>
-	  
+	         <!-- Tab prg62 -->
+      <div class="sidebar-pane" id="prg62">
+        <h2 class="sidebar-header">Piano Regolatore Generale 1962<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+            <p class="lorem"><strong>Data:</strong> 1962 <strong>scala:</strong> 1:5000<br><br>
+      <strong>Descrizione:</strong> PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984.<br><br>
+	  L&rsquo;effetto &ldquo;occhio di bue&ldquo; ci permette di vedere come era la città al tempo in un particolare punto.</p><br><br>
+	<br><br><br><br>
+<a href="qu_prg_62.html" target="_blank"><img src="prg_1962/clip/prg_62_pa.png" width="350" height="385" class="clip_resize" title=" PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984."alt="PRG Palermo 1962"/></a> <br><br>
+<strong>Fonte dati:</strong> <a href="https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1287" title="Comune di Palermo - Portale Opendata - Urbanistica" target="_blank">Comune di Palermo - Portale Opendata - Urbanistica</a> - Licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC BY 4.0 IT" target="_blank">CC BY 4.0 IT</a><br><br>
+<strong>N. B.</strong> Scarica le tavole sono in formato JPG, frutto di scansione delle tavole cartacee.
+</p>   
+      </div>
 	       <!-- usarmymap -->
       <div class="sidebar-pane" id="usarmymap">
         <h2 class="sidebar-header">U.S. Army Map Service, 1941-1944<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
@@ -415,7 +427,7 @@ minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,
 <!-- muose coordinate -->
 L.control.mousePosition().addTo(map);				
          map.on("mousemove", function(e) {
-         nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); sas.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y);
+         nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); sas.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y);
          })
 var nuova = L.tileLayer.mask("https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Nuova pianta della Città di Palermo 1:1k | Seconda edizione Riveduta 1882 Luigi Pedone Laurieri - Editore | Lit. Bizzarrelli & Sanzò - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, }).addTo(map);
@@ -431,7 +443,11 @@ minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,});
 var irta = L.tileLayer.mask("http://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Irta 1956 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,});
-
+	
+var prg62 = L.tileLayer.mask("https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 20, maxNativeZoom: 20,});	
+	
 var sas = L.tileLayer.mask("http://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Sas 1987 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 20, maxNativeZoom: 20, });
@@ -448,7 +464,7 @@ var Palermo_50k = L.tileLayer.mask("https://mapwarper.net/maps/tile/45321/{z}/{x
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Palermo 1:50k | Series 4229, U.S. Army Map Service, 1941 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,});
 
-var overlaysmap =  {'Nuova pianta della Città di Palermo 1882 | 1:1k': nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893,  'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Irta 1956 | 1:5k': irta, 'Carta tecnica Sas 1987 | 1:5k': sas, 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k':City_Plans_Palermo, 'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k ':Palermo_50k,  };
+var overlaysmap =  {'Nuova pianta della Città di Palermo 1882 | 1:1k': nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893,  'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Carta tecnica Sas 1987 | 1:5k': sas, 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k':City_Plans_Palermo, 'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k ':Palermo_50k,  };
 
 var layerControl = new L.Control.Layers(overlaysmap);
          layerControl.addTo(map);
