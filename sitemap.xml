@@ -745,6 +745,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+	<url>
+<loc>http://palermohub.opendatasicilia.it/cambia-menti2.html</loc>
+<lastmod>2020-03-04</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
 <lastmod>2018-01-28</lastmod>

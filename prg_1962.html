@@ -1,0 +1,106 @@
+
+
+
+<html>
+<head>
+ <title>Cambia-menti…#Palermo…Variante Generale PRG 2004 vs PRG 1962</title>
+<link href="prg_2025/popup.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="http://joker-x.github.io/Leaflet.geoCSV/lib/leaflet.css" />
+		<!--[if lte IE 8]> <link rel="stylesheet" href="http://joker-x.github.io/Leaflet.geoCSV/lib/leaflet.ie.css" />  <![endif]-->
+		<!-- <script src="http://joker-x.github.io/Leaflet.geoCSV/lib/leaflet.js"></script>
+    <script src="http://labmod.org/maps/trento1915/leaflet-hash.js"></script>
+    <script src="http://frogcat.github.io/leaflet-tilelayer-mask/leaflet-tilelayer-mask.js"></script>-->
+    
+<script type="text/javascript" src="atlante/js/leaflet/leaflet.js"></script>
+<script src="atlante/js/hash/leaflet-hash.js"></script>
+<script src="atlante/js/tileoverlay/leaflet-tileoverlay-mask.js"></script>
+    <script src="http://joker-x.github.io/Leaflet.geoCSV/lib/jquery.js"></script>
+
+    <style type="text/css">
+        body, html {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+#ods {
+position:fixed;
+bottom:90px;
+right:17px;
+z-index: 999;}
+#legenda {
+position:fixed;
+top:120px;
+right:25px;
+z-index: 999;}
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+
+     </style>
+</head>
+<body>
+    <body>
+        <div id="map">
+        </div>
+
+        <script type="text/JavaScript">
+        var southWest = L.latLng(38.098969492479725, 13.41679573059082),
+            northEast = L.latLng(38.13779704369437, 13.310022354125977),
+    	      bounds = L.latLngBounds(southWest, northEast);
+
+        var map = L.map('map', {attributionControl:true}).setView([38.11127,13.3534422], 14);
+        var basemap0 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+			minZoom: 13,
+      maxZoom: 16,
+      maxNativeZoom: 16
+        });
+        basemap0.addTo(map);
+	  var google_sat = L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+                attribution: 'Source: Google Satellite - Map data ?2015 Google  - <a href="https://twitter.com/gbvitrano" title="Giovan Battista Vitrano">@gbvitrano</a> - <a href="http://coseerobe.gbvitrano.it/" title="cose&amp;robe" target="_blank" ><img src="http://gbvitrano.it/clip/gb/gb_01.png" width="24" height="24" Title=" Rielaborazione Opendata - Giovan Battista Vitrano" alt="Giovan Battista Vitrano"/></a> - <a href="http://www.comune.palermo.it/opendata_dld.php?id=320t" title="Opendata (shp) perimetrazione Zonizzazione P.R.G. vigente - Comune di Palermo" target="_blank">Dataset</a> - </a><a href="http://www.comune.palermo.it/territorio.php?sel=1&asel=4" title="Tavole Scala 1:5000 (dwf), della Variante P.R.G. di Palermo" target="_blank">Tavole Variante P.R.G.</a> - Le mappe della variante genarale PRG sono generate con QTiles',
+			minZoom: 13,
+      maxZoom: 16,
+      maxNativeZoom: 16,
+              });
+			       var prg62 = L.tileLayer.mask('https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.png',{
+            attribution: '<a href="https://www.comune.palermo.it/noticext.php?id=8088" target="_blank" Title="Fonte dati Comune di Palermo">Palermo 2025 - Schema di massima del PRG</a> - Rielaborazione di <a href="https://twitter.com/cirospat" target="_blank" Title="Ciro Spataro">@cirospat</a> ,<a href="https://twitter.com/Piersoft" target="_blank" Title="Francesco Piero Paolicelli">@piersoft</a> e <a href="https://twitter.com/gbvitrano" target="_blank" Title="Giovan Battista Vitrano">@gbvitrano</a> sull <a href="https://medium.com/@napo/mappa-di-trento-1915-da-un-libro-di-cesare-battisti-84935794b1ed#.abjvo34xq" target="_blank" Title="Mappa di Trento 1915 - da un libro di Cesare Battisti">articolo</a> di <a href="https://twitter.com/napo" target="_blank" Title="Maurizio Napolitano">@napo</a>',
+			minZoom: 13,
+      maxZoom: 16,
+      maxNativeZoom: 16
+        });
+        prg62.addTo(map);
+						<!-- mappe tiles -->
+var cs =L.tileLayer('https://gbvitrano.it/qgis/variante_generale/tiles/cs/{z}/{x}/{y}.png', {minZoom: 13,  maxZoom: 16, maxNativeZoom: 16, tms: true, attribution: '', }).addTo(map);	
+var zoniz =L.tileLayer('https://gbvitrano.it/qgis/variante_generale/tiles/zoniz/{z}/{x}/{y}.png', {minZoom: 13,  maxZoom: 16, maxNativeZoom: 16, tms: true, attribution: '' }).addTo(map);
+	
+
+        var overlays = {'Zonizzazione Variante Generale 2004</span><br /><table><tr><td style="text-align: center;"><img src="prg_2025/legend/AreeedimmobilisogettiatutelaambientaleCittaStorica5.png" /></td><td style="font-size:9px">Aree ed immobili sogetti a tutela ambientale - Citta Storica</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/AreeedimmobilisogettiatutelaambientaleNettoStorico4.png" /></td><td style="font-size:9px">Aree ed immobili sogetti a tutela ambientale - Netto Storico</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_A10.png" /></td><td style="font-size:9px">A1 - Manufatti storici e relative pertinenze e<br>fondi di rilevante pregio storico ed ambientale</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_A21.png" /></td><td style="font-size:9px">A2 - Tessuti urbani storici</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_B0a3.png" /></td><td style="font-size:9px">B0a - Aree urbane che ripropongono e proseguono<br>l&rsquo;impianto urbanistico delle zone A2 facenti parte del<br>centro urbano di Palermo</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_B0b4.png" /></td><td style="font-size:9px">B0b - Aree urbane che ripropongono e proseguono<br>l&rsquo;impianto urbanistico delle zone A2 facenti parte<br>delle borgate</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_B15.png" /></td><td style="font-size:9px">B1 - Aree urbane caratterizzate da edilizia residenziale a<br>bassa densit&agrave; con tipologia a casa unifamiliare</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_B26.png" /></td><td style="font-size:9px">B2 - Aree urbane caratterizzate da edilizia residenziale<br>con densit&agrave;  pari o inferiore a 4mc/mq.</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_B37.png" /></td><td style="font-size:9px">B3 - Aree urbane caratterizzate da edilizia residenziale<br>con densit&agrave;  superiore a 4mc/mq.</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_B4A8.png" /></td><td style="font-size:9px">B4A - Parte di territorio urbanizzate sulla base di piani<br>di edilizia economica e popolare o sovvenzionata realizzate<br>fino agli anni 50.</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_B4b9.png" /></td><td style="font-size:9px">B4B - Parte di territorio urbanizzate sulla base di piani<br>di edilizia economica e popolare o sovvenzionata realizzate<br>dopo gli anni 50.</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_B510.png" /></td><td style="font-size:9px">B5 - Parti di territoiro agricolo che hanno subito<br>massiccia edificazione</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_Ca12.png" /></td><td style="font-size:9px">Ca - Aree di nuova edificazione</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_Cb13.png" /></td><td style="font-size:9px">Cb - Aree di nuova edificazione che discendono<br>dal declassamento delle B1</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_D115.png" /></td><td style="font-size:9px">D1 - Aree di indiamenti produttivi esistenti</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_D216.png" /></td><td style="font-size:9px">D2 - Nuove aree per insediamenti Produttivi<br>da assogettare a PIP o a PE</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_E118.png" /></td><td style="font-size:9px">E1 - Parti di territorio prevalentemente pianeggianti<br>caratterizzati da colture agricole</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_E219.png" /></td><td style="font-size:9px">E2 - Parti di territorio prevalentemente collinari<br>caratterizzati da vegetazione di tipo spontaneo</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_F120.png" /></td><td style="font-size:9px">Zone F - Spazi ed attrezzature di interesse generale</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_IC149.png" /></td><td style="font-size:9px">Zone IC - Attrezzature di interesse comune</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_Parcheggi79.png" /></td><td style="font-size:9px">Parcheggi</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_S180.png" /></td><td style="font-size:9px">Istruzione</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_V185.png" /></td><td style="font-size:9px">Verde pubblico</td></tr><tr><td style="text-align: center;"><img src="prg_2025/legend/Zonizzazione3_VerdeStorico98.png" /></td><td style="font-size:9px">Verde Storico</td></table>':zoniz, 'Centro Storico':cs }; ;
+         var layerControl = new L.Control.Layers({
+         'OpenStreetMap': basemap0, 'Google satellite': google_sat,},overlays,{collapsed: true},{position: 'topright'});
+
+
+         layerControl.addTo(map);
+         map.on("mousemove", function(e) {
+           prg62.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }).zoomControl.setPosition("topleft");
+
+	        var hash = new L.Hash(map);
+
+        </script>
+         <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="prg_2025/legend/opendatasicilia.png" width="48px" title="opendatasicilia.it" alt="opendatasicilia"></a></div>
+<div id="legenda"><a href="prg_1962/pdf/Legenda_PRG_5000_62.pdf" title="Legenda PRG Palermo 1962" target="_blank" class="legenda"><img src="prg_2025/legend/ico_leg.png" width="64" height="64" alt=""/></a></div>
+<div id="leg" class="overlay">
+  <div class="popup">
+    <a class="close" href="#" title="Clicca qui per chiudere">&times;</a>
+    <div class="content">
+   <p><img src="prg_2025/legend/PRG_PA_2025_leg_01.jpg" width="100%"  alt=""/></p>
+    <p><a href="prg_2025/legend/PRG_PA_2025_leg_01.jpg" title="Legenda PRG Palermo 1962" target="_blank">Visualizza a schermo intero</a></p>
+    </div>
+  </div>
+</div>
+    </body>
+</html>
