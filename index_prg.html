@@ -131,11 +131,36 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 </head>
 
   <body>
- <!-- header -->    
+	  
+	  	 <!-- header -->    
 <header>
      <div data-includeHTML="menu.html"></div>
-          <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_prg.html#14/38.1185/13.3595" title="Strumenti Urbanistici - Variante Generale al PRG - PPE Centro Storico"><strong>Variante Generale al PRG - PPE Centro Storico</strong></a></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_prg.html#14/38.1185/13.3595" title="Strumenti Urbanistici - Variante Generale al PRG - PPE Centro Storico" target="_parent"><strong>Variante Generale al PRG - PPE Centro Storico</strong></a><div id="vn-click">
+	
+	<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre mappe P.R.G.&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info">
+	
+	<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="qu_prg_62.html" title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984">Quadro unione PRG 1962</a><br>
+	
+	<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<strong>Variante Generale al PRG - PPE Centro Storico</strong><br>
+	
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="cambia-menti2.html" title="Cambia-menti…#Palermo…Variante Generale PRG 2004 vs PRG 1962" target="_parent">Cambia-menti…#Palermo…Variante Generale PRG 2004 vs PRG 1962</a> <br>
+	
+	<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="cambia-menti.html" title="Cambia-menti…#Palermo…Variante Generale PRG 2004 vs Schema di massima del PRG 2025">Cambia-menti…#Palermo…Variante Generale PRG 2004 vs Schema di massima del PRG 2025</a> <br>
+	
+ </div>
+<script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
+</div> 
+     
 </header>
+	  
+	  
 <script>
     $(document).ready(function () {
         $("div[data-includeHTML]").each(function () {                
