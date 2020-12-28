@@ -318,9 +318,7 @@ L&rsquo;effetto &ldquo;occhio di bue&ldquo; ci permette di vedere come era la ci
 <iframe src="legend_prg/stru_urb/prg.html" frameborder="0" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:430px;width:100%;position:absolute;top:560px;left:0px;right:0px;bottom:0px" ></iframe>
           </div>
 
-
-
-	       <!-- usarmymap -->
+<!-- usarmymap -->
       <div class="sidebar-pane" id="usarmymap">
         <h2 class="sidebar-header">U.S. Army Map Service, 1941-1944<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
 		 <p class="lorem"><strong>Grazie a <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a> </strong> per la segnalazione della mappe d'Italia del 1941 negli di archivi USA negli archivi online <a href="https://www.lib.utexas.edu/"target="_blank" title="University of Texas Libraries | The University of Texas at Austin">University of Texas Libraries | The University of Texas at Austin</a> sezione <a href="https://legacy.lib.utexas.edu/maps/italy.html"target="_blank" title="Perry-Castañeda Library Map Collection | Italy Maps">Perry-Castañeda Library Map Collection | Italy Maps</a> con licenza <strong> <a href="https://legacy.lib.utexas.edu/usage_statement.html"target="_blank" title="Public Domain">Public Domain</a></strong><br>
@@ -538,7 +536,7 @@ var Palermo_50k = L.tileLayer.mask("https://mapwarper.net/maps/tile/45321/{z}/{x
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Palermo 1:50k | Series 4229, U.S. Army Map Service, 1941 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,});
 
-var overlaysmap =  {'Nuova pianta della Città di Palermo 1882 | 1:1k': nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893,  'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Variante Generale 2004 | 1:5k': prg04, 'Carta tecnica Sas 1987 | 1:5k': sas, 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k':City_Plans_Palermo, 'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k ':Palermo_50k,
+var overlaysmap =  {'Nuova pianta della Città di Palermo 1882 | 1:1k': nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893,  'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Variante Generale 2004 | 1:5k (max zoom 18)': prg04, 'Carta tecnica Sas 1987 | 1:5k': sas, 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k':City_Plans_Palermo, 'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k ':Palermo_50k,
 				   };
 
 var layerControl = new L.Control.Layers(overlaysmap);
