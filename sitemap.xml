@@ -751,6 +751,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+		<url>
+<loc>http://palermohub.opendatasicilia.it/buoni_pasto.html</loc>
+<lastmod>2021-02-16</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 <!--- <url>
 <loc>http://palermohub.opendatasicilia.it/xxxx.html</loc>
 <lastmod>2018-01-28</lastmod>
