@@ -515,7 +515,7 @@ L.control.mousePosition().addTo(map);
   omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); 
   sas.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); 
   City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); 
-  prg04.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  prg04.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); orto08.setCenter(e.containerPoint.x, e.containerPoint.y); orto12.setCenter(e.containerPoint.x, e.containerPoint.y); 
          })
         
 var nuova = L.tileLayer.mask("https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png", {
@@ -559,10 +559,17 @@ var ppecs = L.tileLayer.mask("https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Piano Particolareggiato Esecutivo del centro storico di Palermo - Palermo 1:500 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
 
+var orto08 = L.tileLayer.mask("http://map.sitr.regione.sicilia.it/gis/services/ATA_2007_2008/Ortofoto_ATA_2007_2008_GB/MapServer/WMSServer", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> Palermo Ortofoto 2007/2008 | - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,  tms: true,});
+
+var orto12 = L.tileLayer.mask(" L.tileLayer.wms('http://map.sitr.regione.sicilia.it/arcgis/services/AREE_URBANE/Ortofoto14cm_Palermo_ata20122013/MapServer/WMSServer')", {   attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> Palermo Ortofoto 2007/2008 | - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,  tms: true,});
+
 var overlaysmap =  {'Nuova pianta della Città di Palermo 1882 | 1:1k': nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893,  'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Municipale 19?? | 1:8k': ctc,
                     'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Variante Generale 2004 | 1:5k (max zoom 17)': prg04, 
 					'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500': ppecs, 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k':City_Plans_Palermo,
-					'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k ':Palermo_50k,
+					'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k ':Palermo_50k, 'Palermo | Ortofoto ATA 2007/2008':orto08, 'Palermo | Ortofoto ATA 2012/2013 |14cm':orto12,
 				   };
 
 var layerControl = new L.Control.Layers(overlaysmap);
