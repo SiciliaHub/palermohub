@@ -77,7 +77,7 @@
 <script src="atlante/js/social/jquery_csbuttons.js"></script>
 <script src="lib/js/mouseposition/LControlMousePosition.js"></script>
 
-<script src="atlante/js/basemap/L.Control.Basemaps.js"></script>
+<script src="atlante/js/basemap/L.Control.Basemaps_02.js"></script>
 
   <!-- script automatico mobile/desktop --> 
 <script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
@@ -489,17 +489,31 @@ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
               }),		  
 			  
 	L.tileLayer('http://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png', {
-    attribution: 'Source: Omira 1935',
+    attribution: 'Base cartografica: Omira 1935',
     minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
 	label: 'Omira 1935',
-	iconURL: 'http://palermohub.opendatasicilia.it/legend/basemap/omira_clip.jpg'
+	iconURL: 'legend/basemap/omira_clip.jpg'
               }),	  
 			
-			L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Source: ESRI Satellite',
+  L.tileLayer('http://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Carta Tecnica di Palermo - Irta 1956',
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-		  label: 'ESRI Satellite'
+  label: 'Carta Tecnica di Palermo - Irta 1956',
+  iconURL: 'legend/basemap/irta_clip.jpg'
               }),
+  L.tileLayer('http://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Carta Tecnica di Palermo - Sas 1987 ',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Carta Tecnica di Palermo - Sas 1987 ',
+  iconURL: 'legend/basemap/sas_clip.jpg'}),
+	
+	
+	
+	
+	
+	
+	
+	
 		        ];
 				
 	<!-- scala mappa -->		
@@ -574,8 +588,8 @@ var layerControl = new L.Control.Layers(overlaysmap);
             basemaps: basemaps,
             tileX: 0,
             tileY: 0,
-            tileZ: 1
-        }));
+            tileZ: 1,
+		    }));
 
         </script>
          <!-- header -->       

@@ -23,8 +23,8 @@
     box-shadow: 2px 2px 4px #000;
 }
 .basemap img {
-	width: 60px;
-    border: 2px solid #FF0000;
+	width: 50px;
+    border: 2px solid #FFF;
     margin: 5px 0px 5px 10px;
     border-radius: 40px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.65)
