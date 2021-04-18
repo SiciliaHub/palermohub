@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Atlante delle Carte Tecniche storiche di Palermo</title>
+  <meta charset="utf-8" />
+<meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+<meta name="description" content="Palermo hub - Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo ">
+<meta name="keywords" content="Open Data Sicilia, cartografia stroica, palermo,">
+<meta http-equiv="content-language" content="IT">
+<meta name="robots" content="index,follow">
+<meta name="creation_Date" content="28/03/2017">
+<meta name="revisit-after" content="7 days"> 
+<link rel="shortcut icon" href="http://siciliahub.github.io/mappe/atlante_carto_pa/favicon.ico"/> 
+<link rel="icon" href="http://siciliahub.github.io/mappe/atlante_carto_pa/favicon.png" type="image/png"/> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes"> -->
+
+<!-- Open Graph Protocol -->
+<meta property="og:title" content="Palermo hub - Atlante delle Carte Tecniche di Palermo" />
+<meta property="og:description" content="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo " />
+<meta property="og:url" content="http://siciliahub.github.io/palermohub/index_atlante.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/atlante.jpg" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Palermo hub - Atlante delle Carte Tecniche di Palermo">
+<meta name="twitter:description" content="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo">
+<meta name="twitter:image" content="ttp://siciliahub.github.io/mappe/palermo_hub/clip_index/atlante.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+ <!-- css -->
+<link href="atlante/css/base_ods.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
+
+<link href="atlante/css/leaflet.css" rel="stylesheet" type="text/css"> 
+<link href="atlante/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="atlante/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+
+<link href="atlante/ss/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Basemaps2.css" rel="stylesheet" type="text/css">
+
+<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
+ <!-- script -->
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes -->
+<script type="text/javascript" src="script.js"></script> 
+
+
+<script type="text/javascript" src="atlante/js/leaflet/leaflet.js"></script>
+<script type="text/javascript" src="atlante/js/sidebar/leaflet-sidebar.js"></script>
+<script src="atlante/js/hash/leaflet-hash.js"></script>
+<script src="atlante/js/tileoverlay/leaflet-tileoverlay-mask.js"></script>
+<script src="atlante/js/social/jquery_csbuttons.js"></script>
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+
+<script src="atlante/js/basemap/L.Control.Basemaps_02.js"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+	<script type="text/javascript">
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>    
+</head>
+<body onload="MM_preloadImages('prg_1962/tav_03c.jpg','prg_1962/tav_04c.jpg','prg_1962/clip/tav_08c.jpg.jpg','prg_1962/clip/tav_01c.jpg','prg_1962/clip/tav_02c.jpg','prg_1962/clip/tav_03c.jpg','prg_1962/clip/tav_04c.jpg','prg_1962/clip/tav_05c.jpg','prg_1962/clip/tav_06c.jpg','prg_1962/clip/tav_07c.jpg','prg_1962/clip/tav_09c.jpg')">
+
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_atlante.html" title="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo"><strong>Atlante Storico</strong></a>
+  <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe Storiche&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="teca_digitale.html#15/38.1234/13.3613" title="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia" target="_parent"><strong>Teca Digitale e bene comune</strong></a>
+ </div>
+	 <script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script> 
+<div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            <li> <a href="#omira" title="Carta Tecnica Omira 1935" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">O</strong></a></li>
+            <li> <a href="#irta" title="Carta Tecnica IRTA 1959" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">I</strong></a></li>
+			<li> <a href="#prg62" title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">62</strong></a></li>
+		<li> <a href="#prg" title="Variante Generale al PRG di Palermo" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">V</strong></a></li>
+         <li> <a href="#sas" title="Carta Tecnica SAS 1987" role="tab"><strong style="font-size: 16px; font-family: 'fontawesome';">S</strong></a></li>
+		 <li> <a href="#ppe" title="P.P.E. del centro storico di Palermo" role="tab"><strong style="font-size: 13px; font-family: 'fontawesome';">PPE</strong></a></li>
+			 <li> <a href="#usarmymap" title="U.S. Army Map Service, 1943-1944" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">U</strong></a></li>
+        <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+      <li> <a href="http://www.cricd.it/pages.php?idpagina=13&idContenuto=3326" title="Book - Repertorio cartografico & aerofotografico" target="_blank" role="tab"><i class="fa fa-book" aria-hidden="true"></i></a></li>
+       <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+       <li> <a href="http://opendatasicilia.it/2017/04/06/osservare-il-cambiamento-di-una-citta-grazie-alla-cartografia-il-caso-di-palermo" title="Leggi l'aticolo su #opendatasicilia.it" target="_blank" role="tab"><i class="fa fa-bookmark"></i></a></li>  
+              <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+         </ul>
+          <ul role="tablist">
+          <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+       <li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+         <li><a href="#tools" title="Configurazione" role="tab"><i class="fa fa-cog" aria-hidden="true"></i></a></li>
+         </ul></div>
+    <!-- Tab panes -->
+    <div class="sidebar-content active">
+      <div class="sidebar-pane" id="home">
+        <h2 class="sidebar-header">Palermo Hub - Atlante<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+        <p class="legenda"> <strong>Osservare il cambiamento di una città grazie alla cartografia:</strong> <a href="http://opendatasicilia.it/2017/04/06/osservare-il-cambiamento-di-una-citta-grazie-alla-cartografia-il-caso-di-palermo/" title="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo">il caso di Palermo</a></p>
+        <p class="lorem">Il bello di questa mappa è scoprire come questa città sia cambiata e ognuno troverà degli esempi diversi nei luoghi che conosce meglio.</p>  
+      <h3 class="lorem">Villa Trabia</h3>
+<p class="lorem">La via Piersanti Mattarella, già “Via Villa Trabia” si estendeva da via Notarbartolo a poco dopo l’ingresso del CEI (l’istituto Gonzaga).<br><br>
+  <a href="#17/38.13097/13.34639"><img src="atlante/images/gbimg05.jpg" width="370" height="230" title="Villa Trabia" class="clip_resize" alt="Villa Trabia"/></a> </p>
+      <h3 class="lorem">Un “fiume” limitrofo a Villa Sperlinga</h3>
+      <p class="lorem">Il “Passo di Rigano” che costeggia Villa Sperlinga è un colpo d’occhio.<br><br>
+        <a href="#17/38.13889/13.33927"><img src="atlante/images/gbimg10.jpg" width="370" height="230" title="Villa Trabia" class="clip_resize" alt="Villa Trabia"/></a> </p>
+      <h3 class="lorem">Il mare era “più vicino”</h3>
+      <p class="lorem">Era subito dopo Porta Felice e probabilmente se ne sentiva molto più forte la presenza.<br><br>
+        <a href="#17/38.12060/13.36958"><img src="atlante/images/gbimg03.jpg" width="370" height="230" title="Villa Trabia" class="clip_resize" alt="Villa Trabia"/></a> </p>
+      <p class="lorem">...e ora scopri anche tu i cambiamenti nel tuo quartiere, …..buon viaggio nella storia cartografica della città di Palermo.<br><br>   
+       </div>
+ <!-- Tab omira -->
+  <div class="sidebar-pane" id="omira">
+        <h2 class="sidebar-header">Carta Tecnica OMIRA<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+             <p class="lorem"> <strong>Data:</strong> 1935-1937 <strong>scala:</strong> 1:5000<br>      
+            Supporto e tecnica di riproduzione: digitale numero fogli: 17<br><br>
+            Comparazione tra carta tecnica OMIRA del 1935 con oggi. 
+L&rsquo;effetto &ldquo;occhio di bue&ldquo; ci permette di vedere come era la città al tempo in un particolare punto.<br><br>
+  <strong>Descrizione:</strong> cartografia realizzata col metodo aerofotogrammetrico “Nistri” dallaSoc. An. Ottico Meccanica Italiana e Rilevamenti Aerofotogrammetrici (O.M.I.R.A.) diRoma; committente è il Comune di Palermo che detiene le tavole originali a colori. L’orografia è rappresentata mediante curvedi livello (equidistanza m 5) e punti quotati. Il sistema cartesiano di riferimento è di tipo locale ed ha come origine il punto trigono-metrico di 2° ordine “La Martorana” di piazza Bellini.<br>Dal libro <a href="http://www.cricd.it/files/pages/Repertorio_cart.pdf" title="Repertorio in formato PDF" target="_blank"> Repertorio cartografico & aerofotografico</a> - CRICD Palermo 01/03/2010</p>
+<p class="lorem"><strong>Bibliografia:</strong><br> 
+  REPERTORIO CARTOGRAFICO E AEROFOTOGRAFICO<br> 
+  <a href="http://www.cricd.it/" title="Assessorato dei Beni Culturali e dell'Identità Siciliana - Dipartimento dei Beni Culturali e dell'Identità Siciliana - Centro Regionale per l'inventario, la catalogazione e la documentazione" target="_blank">CRicd</a> - <strong>Centro regionale</strong> per l'iventario, la catalogazione e la documentazione dei beni culturali e ambientali. <br>Servizio Documentazione - Unità Operativa X - Aerofototeca<br> 
+  <br><strong>Stampa:</strong><br>Priulla, Palermo 2010<br><br>
+  <a href="http://www.cricd.it/pages.php?idpagina=13&idContenuto=3326" title="Centro Regionale per l'inventario, la catalogazione e la documentazione" target="_blank">Qui</a> trovi il file pdf del libro <a href="http://www.cricd.it/files/pages/Repertorio_cart.pdf" title="Repertorio in formato PDF" target="_blank">Repertorio cartografico & aerofotografico</a> - CRICD Palermo 01/03/2010 <br><br> 
+  <strong>Quadro unione tavole al 5000</strong><br>
+<table width="300"  height="345" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <th width="60" height="69" align="center" valign="middle" scope="col"><img src="atlante/images/clip/Omira_clip_01.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 01"/></th>
+      <th width="60" height="69" align="center" valign="middle" scope="col"><img src="atlante/images/clip/Omira_clip_02.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 02"/></th>
+      <th width="60" height="69" align="center" valign="middle" scope="col"><img src="atlante/images/clip/clip.png" width="60" height="69" alt=""/></th>
+      <th width="60" height="69" align="center" valign="middle" scope="col"><img src="atlante/images/clip/clip.png" width="60" height="69" alt=""/></th>
+      <th width="60" height="69" align="center" valign="middle" scope="col"><img src="atlante/images/clip/clip.png" width="60" height="69" alt=""/></th>
+    </tr>
+    <tr>
+      <th width="60" height="69" align="center" valign="middle" scope="row"><img src="atlante/images/clip/Omira_clip_03.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 03"/></th>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_04.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 04"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_05.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 05"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/clip.png" width="60" height="69" alt=""/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/clip.png" width="60" height="69" alt=""/></td>
+    </tr>
+    <tr>
+      <th width="60" height="69" align="center" valign="middle" scope="row"><img src="atlante/images/clip/Omira_clip_06.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 06"/></th>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_07.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 07"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_08.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 08"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/clip.png" width="60" height="69" alt=""/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/clip.png" width="60" height="69" alt=""/></td>
+    </tr>
+    <tr>
+      <th width="60" height="69" align="center" valign="middle" scope="row"><img src="atlante/images/clip/Omira_clip_09.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 09"/></th>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_10.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 10"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_11.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 11"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_12.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 12"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/clip.png" width="60" height="69" alt=""/></td>
+    </tr>
+    <tr>
+      <th width="60" height="69" align="center" valign="middle" scope="row"><img src="atlante/images/clip/Omira_clip_12_bis.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 12 bis"/></th>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_13.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 13"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_14.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 14"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_15.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 15"/></td>
+      <td width="60" height="69" align="center" valign="middle"><img src="atlante/images/clip/Omira_clip_16.jpg" alt="" width="80" height="92" class="clip_omira" title="Omira Tavola 16"/></td>
+    </tr>
+  </tbody>
+</table> </p>
+      </div>     
+       <!-- Tab IRTA -->
+      <div class="sidebar-pane" id="irta">
+        <h2 class="sidebar-header">Carta Tecnica Irta<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+        <p class="lorem"><strong>Data:</strong> 1955-1957 <strong>scala:</strong> 1:5000 <br>
+        Supporto e tecnica di riproduzione: digitale numero fogli: 12<br><br>
+           Comparazione tra carta tecnica IRTA del 1955 con oggi. 
+L&rsquo;effetto &ldquo;occhio di bue&ldquo; ci permette di vedere come era la città al tempo in un particolare punto.<br><br>
+  <strong>Descrizione:</strong> Al 1955 risalgono le riprese in bianco e nero effettuate dall’Istituto Rilievi Terrestri Aerei di Milano (IRTA) e conservate dalla C.G.R. di Parma da cui l’Aerofo-toteca.<br>La cartografia è composta da 4296 fotogrammi in bianco e nero, riprodotti sia su supporto cartaceo che digitale, che rappresentano gran parte delle province di Palermo, Trapani e Agrigento. Queste immagini, riprese sia ad alta che a bassa quota, documentano nitidamente una vasta porzione di territorio siciliano prima delle grandi trasformazioni urbani-stico-edilizie intervenute a partire dagli anni ’60.<br>Negli anni Ottanta, ha acquisito i fotogrammi comprendenti l’area della città di Palermo; è un volo di straordinario interesse in quanto documenta, con grande nitidezza e ricchezza di dettaglio, la città ed il territorio nel momento precedente la grande espansione urbanistico-edilizia. <br> <br>Dal libro <a href="http://www.cricd.it/files/pages/Repertorio_cart.pdf" title="Repertorio in formato PDF" target="_blank"> Repertorio cartografico & aerofotografico</a> - CRICD Palermo 01/03/2010</p>
+<p class="lorem"><strong>Bibliografia:</strong><br> 
+  REPERTORIO CARTOGRAFICO E AEROFOTOGRAFICO<br> 
+  <a href="http://www.cricd.it/" title="Assessorato dei Beni Culturali e dell'Identità Siciliana - Dipartimento dei Beni Culturali e dell'Identità Siciliana - Centro Regionale per l'inventario, la catalogazione e la documentazione" target="_blank">CRicd</a> - <strong>Centro regionale</strong> per l'iventario, la catalogazione e la documentazione dei beni culturali e ambientali. <br>Servizio Documentazione - Unità Operativa X - Aerofototeca<br> 
+  <br><strong>Stampa:</strong><br>Priulla, Palermo 2010<br><br>
+  <a href="http://www.cricd.it/pages.php?idpagina=13&idContenuto=3326" title="Centro Regionale per l'inventario, la catalogazione e la documentazione" target="_blank">Qui</a> trovi il file pdf del libro <a href="http://www.cricd.it/files/pages/Repertorio_cart.pdf" title="Repertorio in formato PDF" target="_blank">Repertorio cartografico & aerofotografico</a> - CRICD Palermo 01/03/2010 <br><br> 
+  <img src="atlante/images/irta_01.png" width="400" height="400" class="clip_resize" title=" Carta Tecnica IRTA 1956 (Istituto Rilievi Terrestri Aerei di Milano)"alt="IRTA"/> 
+      </div>
+       <!-- Tab sas -->
+      <div class="sidebar-pane" id="sas">
+        <h2 class="sidebar-header">Carta Tecnica SAS<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+            <p class="lorem"><strong>Data:</strong> 1987 <strong>scala:</strong> 1:5000<br>
+          Supporto e tecnica di riproduzione: digitale numero fogli: 14<br><br>
+            Comparazione tra carta tecnica SAS del 1987 con oggi. 
+L&rsquo;effetto &ldquo;occhio di bue&ldquo; ci permette di vedere come era la città al tempo in un particolare punto.<br><br>
+<strong>Descrizione:</strong> Cartografia realizzata nel 1987 dalla SAS, Societ&agrave; Aerofotogrammetrica Siciliana di Palermo.</p><br><br><br><br><br><br><br><br><br><br>
+   <img src="atlante/images/sas_73_01.png" width="400" height="400" class="clip_resize" title=" Carta Tecnica SAS 1987 (Societa' Aerofotogrammetrica Siciliana - Palermo)"alt="SAS 1987"/> </p>   
+      </div>
+ <!-- Tab ppe -->
+<div class="sidebar-pane" id="ppe">
+<h2 class="sidebar-header">Piano Particolareggiato Esecutivo<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem"><strong>Piano Particolareggiato Esecutivo del Centro Stroico si Palermo</strong></p>
+<p class="lorem">Il Piano Particolareggiato Esecutivo (PPE), voluto dall’Amministrazione comu­nale nella primavera del 1988 ed approvato nel 1993, è lo strumento urbani­stico che norma e regola gli interventi di una vasta parte del centro storico di Palermo. Da esso, infatti, sono stralciate quattro aree pianificate precedentemen­te (Piani di Recupero di Sant’Agostino, del Cassare Alto, di Montevergini, di via Scopari e i Piani Particolareggiati dell’Albergheria e di Castello San Pietro).</p>
+<p class="lorem">Il Piano persegue due obiettivi primari: dare specifiche indicazioni sulle moda­lità d’intervento attuabili sugli immobili appartenenti a soggetti sia pubblici che privati; definire i compiti dell’Amministrazione comunale nel recupero delle aree maggiormente degradate al fine di migliorare l’aspetto fisico e sociale comples­sivo della città, con una particolare attenzione alla sua storia e alla sua antica configurazione.</p>
+<p class="lorem">Le indicazioni di progetto del Piano si basano principalmente sullo studio e l’in­dividuazione delle “categorie tipologiche” degli edifici che definiscono il tessuto storico del centro antico. Esse comprendono: l’edilizia specialistica civile e quel­la religiosa, gli edifici per il culto (chiese, oratori, cappelle, conventi e monaste­ri); l’edilizia residenziale suddivisa in “palazzo”, “palazzetto”, “palazzetto pluri-familiare”, “catoio multiplo” e “catoio semplice”. Sono inoltre individuati gli edi­fici specialistici produttivi, l’edilizia derivante dall’attuazione del Piano di Risa­namento del 1886, quella postbellica, le parti residue delle mura e delle fortifi­cazioni urbiche, gli impianti a verde, le superfetazioni. Le “modalità d’interven­to”, (restauro, ristrutturazione, ripristino filologico, ripristino tipologico, demoli­zione senza ricostruzione), e il ventaglio delle destinazioni d’uso ammissibili de­rivano da tali approfondite analisi. </p>
+<p class="lorem">Tutti gli interventi relativi alla sistemazione degli spazi pubblici competono al­l’Amministrazione Comunale chiamata ad ulteriori approfondimenti e verifiche degli interventi progettuali indicati dal Piano. A recupero completato, il Piano prevede che nel centro storico possano tornare ad abitare circa 50.000 persone.</p>
+<p class="lorem">Il PPE interessa i quartieri Tribunali, Castellammare, Monte di Pietà e Palazzo Reale con le esclusioni delle aree comprese nei seguenti strumenti urbanistici: Piano di recupero Montevergini, Piano di recupero Dicesa della Capre, Piano Particolareggiato Albergheria e i 4 Piani di recupero Sant’Agostino, Capo, Scopari e Cassaro alto. <br> <br> <a href="https://coseerobe.gbvitrano.it/verso-gli-opendata.html" title="tavole in fotmato pdf dei piani" target="_blank">Tutte tavole in fotmato pdf dei piani</a></p>
+ <p class="lorem"> Le tavole dei vari Piani sono realizzate nel formato <a href="https://acrobat.adobe.com/it/it/why-adobe/about-adobe-pdf.html" target="_blank">.pdf</a>, tutti i link delle tavole presenti in questa pagina rinviano al sito ufficiale del <a href="https://www.comune.palermo.it/" title="Comune di Palermo" target="_blank">Comune di Palermo</a> &#45; <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?apt=6" title="Amministrazione Trasparente" target="_blank">Amministrazione Trasparente</a></p><br>
+ <iframe src="legend_prg/stru_urb/ppe01.html" frameborder="0" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:430px;width:100%;position:absolute;top:780px;left:0px;right:0px;bottom:0px" ></iframe>
+          </div>
+	  
+	         <!-- Tab prg62 -->
+      <div class="sidebar-pane" id="prg62">
+        <h2 class="sidebar-header">Piano Regolatore Generale 1962<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+            <p class="lorem"><strong>Data:</strong> 1962 <strong>scala:</strong> 1:5000<br><br>
+      <strong>Descrizione:</strong> PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984.<br><br>
+	  L&rsquo;effetto &ldquo;occhio di bue&ldquo; ci permette di vedere come era la città al tempo in un particolare punto.</p>  <br>
+	<table width="348" height="385" border="0" align="center" cellpadding="1" cellspacing="1" id="AutoNumber1" style="border-collapse: collapse">
+  <tr>
+    <td width="116" valign="bottom"><a href="prg_1962/zip/TAV_1.zip" target="_blank" " onmouseover="MM_swapImage('T5001','','prg_1962/clip/tav_01c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_1.jpg" alt="Tavola 5001" name="T5001" width="116" height="77" id="T5001" title="Tavola 5001 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td width="116" valign="bottom"><span class="Stile5"><span
+  style=''><font face="Verdana" style=""><font face="Verdana" style=""><a href="prg_1962/zip/TAV_2.zip" target="_blank" " onmouseover="MM_swapImage('T5002','','prg_1962/clip/tav_02c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_2.jpg" alt="Tavola 5002" name="T5002" width="116" height="77" id="T5002" title="Tavola 5002 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></font></font></span></span></td>
+    <td colspan="2" align="center" valign="top">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="116" valign="bottom"><a href="prg_1962/zip/TAV_3.zip" target="_blank" " onmouseover="MM_swapImage('T5003','','prg_1962/clip/tav_03c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_3.jpg" alt="Tavola 5003" name="T5003" width="116" height="77" id="T5003" title="Tavola 5003 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td width="116" valign="bottom"><a href="prg_1962/zip/TAV_4.zip" target="_blank" " onmouseover="MM_swapImage('T5004','','prg_1962/clip/tav_04c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_4.jpg" alt="Tavola 5004" name="T5004" width="116" height="77" id="T5004" title="Tavola 5004 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td colspan="2" rowspan="2" align="center" valign="top">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="116"><a href="prg_1962/zip/TAV_5.zip" target="_blank" " onmouseover="MM_swapImage('T5005','','prg_1962/clip/tav_05c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_5.jpg" alt="Tavola 5005" name="T5005" width="116" height="77" id="T5005" title="Tavola 5005 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td width="116"><a href="prg_1962/zip/TAV_6.zip" target="_blank" " onmouseover="MM_swapImage('T5006','','prg_1962/clip/tav_06c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_6.jpg" alt="Tavola 5006" name="T5006" width="116" height="77" id="T5006" title="Tavola 5006 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+  </tr>
+  <tr>
+    <td width="116"><a href="prg_1962/zip/TAV_7.zip" target="_blank" " onmouseover="MM_swapImage('T5007','','prg_1962/clip/tav_07c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_7.jpg" alt="Tavola 5007" name="T5007" width="116" height="77" id="T5007" title="Tavola 5007 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td width="116"><a href="prg_1962/zip/TAV_8.zip" target="_blank" " onmouseover="MM_swapImage('T5008','','prg_1962/clip/tav_08c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_8.jpg" alt="Tavola 5008" name="T5008" width="116" height="77" id="T5008" title="Tavola 5008 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td width="116"><a href="prg_1962/zip/TAV_9.zip" target="_blank" " onmouseover="MM_swapImage('T5009','','prg_1962/clip/tav_09c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_9.jpg" alt="Tavola 5009" name="T5009" width="116" height="77" id="T5009" title="Tavola 5009 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="116" align="center" valign="middle"><a href="prg_1962/zip/TAV_10.zip" target="_blank" " onmouseover="MM_swapImage('T5010','','prg_1962/clip/tav_10c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_10.jpg" alt="Tavola 5010" name="T5012" width="116" height="77" id="T5010" title="Tavola 5010 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td width="116"><a href="prg_1962/zip/TAV_11.zip" target="_blank" " onmouseover="MM_swapImage('T5011','','prg_1962/clip/tav_11c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_11.jpg" alt="Tavola 5011" name="T5011
+			" width="116" height="77" id="T5011" title="Tavola 5011 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+    <td colspan="2"><a href="prg_1962/zip/TAV_12.zip" target="_blank" " onmouseover="MM_swapImage('T5013','','prg_1962/clip/tav_12c.jpg',1)" onmouseout="MM_swapImgRestore()"><img src="prg_1962/clip/TAV_12.jpg" alt="Tavola 5012" name="T5013
+			" width="116" height="77" id="T5013" title="Tavola 5012 - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" border="0" /></a></td>
+  </tr>
+</table><br>
+ <p class="lorem"><strong>N. B.</strong> Le tavole sono in formato JPG, frutto di scansione delle tavole cartacee.<br>
+<a href="prg_1962/pdf/NTA_PRG_62.pdf"  title="Scarica le Norme Techiche di attuazione in formato pdf" target="_blank">Norme Techiche di </a><a href="prg_1962/pdf/NTA_PRG_62.pdf"  title="Scarica le Norme Techiche di attuazione in formato pdf" target="_blank">attuazione (NTA)</a><br>
+          <a href="prg_1962/pdf/Legenda_PRG_5000_62.pdf"  title="Scarica la legenda del PRG in formato pdf"target="_blank">Legenda PRG 1962</a><br>
+          <a href="https://mapwarper.net/maps/52666/export.tif" title="GeoTiff" target="_blank">Download rectified GeoTiff</a><br>
+          <a href="https://mapwarper.net/maps/wms/52666?request=GetCapabilities&amp;service=WMS&amp;version=1.1.1" title="WMS Capabilities URL" target="_blank">WMS Capabilities URL</a><br>
+          <a href="https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.png" title="Tiles">Tiles (Google/OSM scheme)</a><br>
+          <a href="https://mapwarper.net/maps/52666.kml" title="KML file" target="_blank">Download KML file</a><br><br>
+		  <strong>Fonte dati:</strong> <a href="https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1287" title="Comune di Palermo - Portale Opendata - Urbanistica" target="_blank">Comune di Palermo - Portale Opendata - Urbanistica</a> - Licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC BY 4.0 IT" target="_blank">CC BY 4.0 IT</a></p>   
+      </div>
+ <!-- Tab prg -->
+<div class="sidebar-pane" id="prg">
+<h2 class="sidebar-header">Varinate Generale al P.R.G.<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem"><strong>Zonizzazione: e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D atto Delibera 7/2004</strong></p>
+<p class="lorem">La Variante Generale al P.R.G. &egrave; stata redatta secondo le direttive generali del Consiglio Comunale di cui alla delibera 179/94. Il Progetto di Piano &egrave; elaborato dall'Ufficio del Piano che si &egrave; avvalso delle consulenze del Prof. P.L. Cervellati per gli aspetti urbanistici, dei Prof. G. Zambrini e M.R. Cittadini per gli aspetti della mobilt&agrave;, del Prof. A. Roccella per gli aspetti giuridici e del Prof. F. Mazzola per le analisi socio-economiche. Con la delibera 315/94 il Consiglio Comunale ha adottato lo Schema di Massima e con delibera 45/97 gli elaborati finali della Variante Generale.</p>
+<p class="lorem">La Variante Generale &egrave; stata successivamente adeguata alle prescrizioni e al parere reso dall'Ufficio del Genio Civile e riadottata con del Commissario ad Acta n&deg; 470/2001 ed approvata definitivamente dall'Assessorato Regionale al Territorio con D. Dir. 124 e 558/DRU/02. Con delibera n&deg; 7 del 21/01/04 il Consiglio Comunale prende atto delle modifiche apportate alla Variante Generale disposte dai decreti regionali di approvazione. Da quel momento diviene a tutti gli effetti vigente.</p>
+<p class="lorem">Principi esenziali della Variante Generale sono: la salvaguardia, il recupero e la valorizzazione del patrimonio edilizio storico del territorio comunale, la tutela del patrimonio ambientale, delle emergenze paesaggistiche, dei parchi naturali e del tessuto agricolo residuo, la valorizzazione del fronte a mare ed il raggiungimento della dotazione minima di servizi pubblici, la riqualificazione della periferia attraverso l'istituzioni delle Municipalit&agrave;.<br> <br> Progetto PRG  Palermo – <a href="https://qgiscloud.com/gbvitrano/Prg_2004_Pa/" title="Mappa" target="_blank">Mappa</a> e <a href="https://qgiscloud.com/gbvitrano/Prg_2004_Pa/wms?SERVICE=WMS&REQUEST=GetCapabilities" title="WMS" target="_blank">Servizio WMS</a> con <a href="https://qgiscloud.com/" title="QGISCLOUD" target="_blank">QGISCLOUD</a><br> <br>
+<a href="https://coseerobe.gbvitrano.it/verso-gli-opendata.html" title="tavole in fotmato pdf dei piani" target="_blank">Tutte tavole in fotmato pdf dei piani</a></p>
+ <p class="lorem"> Le tavole dei vari Piani sono realizzate nel formato <a href="https://acrobat.adobe.com/it/it/why-adobe/about-adobe-pdf.html" target="_blank">.pdf</a>, tutti i link delle tavole presenti in questa pagina rinviano al sito ufficiale del <a href="https://www.comune.palermo.it/" title="Comune di Palermo" target="_blank">Comune di Palermo</a> &#45; <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?apt=6" title="Amministrazione Trasparente" target="_blank">Amministrazione Trasparente</a> &#45; <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19" title="Pianificazione e Governo del Territorio" target="_blank">Pianificazione e Governo del Territorio</a></p> <br>
+<iframe src="legend_prg/stru_urb/prg.html" frameborder="0" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:430px;width:100%;position:absolute;top:600px;left:0px;right:0px;bottom:0px" ></iframe>
+          </div>
+
+<!-- usarmymap -->
+      <div class="sidebar-pane" id="usarmymap">
+        <h2 class="sidebar-header">U.S. Army Map Service, 1941-1944<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+		 <p class="lorem"><strong>Grazie a <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a> </strong> per la segnalazione della mappe d'Italia del 1941 negli di archivi USA negli archivi online <a href="https://www.lib.utexas.edu/"target="_blank" title="University of Texas Libraries | The University of Texas at Austin">University of Texas Libraries | The University of Texas at Austin</a> sezione <a href="https://legacy.lib.utexas.edu/maps/italy.html"target="_blank" title="Perry-Castañeda Library Map Collection | Italy Maps">Perry-Castañeda Library Map Collection | Italy Maps</a> con licenza <strong> <a href="https://legacy.lib.utexas.edu/usage_statement.html"target="_blank" title="Public Domain">Public Domain</a></strong><br>
+		 <p class="lorem"><strong>Descrizione: Nell'archivio online dell'University of Texas Libraries | The University of Texas at Austin si trovano molte mappe prodotte dalla US Central Intelligence Agency, se non diversamente indicato, di diverse città italiane del 1940 (circa). Le scale variano dal 1:500k a 1:5k </strong><br> <p class="lorem"><strong>Alcuni esempi</strong></p> 
+		 <p class="lorem"><a href="http://legacy.lib.utexas.edu/maps/ams/italy_city_plans/txu-pclmaps-oclc-10083173-palermo.jpg" title="Palermo 1:10k | Italy City Plans - U.S. Army Map Service, 1943-1944" target="_blank"><img src="atlante/images/City_Plans_Palermo_clip.jpg" class="clip_resize" title="Palermo 1:10k | Italy City Plans - U.S. Army Map Service, 1943-1944"alt="Palermo 1:10k | Italy City Plans - U.S. Army Map Service, 1943-1944"/></a><br>	 
+		 <strong>- <a href="http://legacy.lib.utexas.edu/maps/ams/italy_city_plans/"target="_blank" title="Italy City Plans 1943-1944 U.S. Army Map Service">Italy City Plans 1943-1944 U.S. Army Map Service</a></strong><br><br>        
+		 <a href="http://legacy.lib.utexas.edu/maps/ams/italy_25k/txu-pclmaps-oclc-6540771-catania-270-iv-se.jpg" title="Catania | Italy 1:25,000 | Series 4228, U.S. Army Map Service, 1943" target="_blank"><img src="atlante/images/catania_25k.jpg" class="clip_resize" title="Catania | Italy 1:25,000 | Series 4228, U.S. Army Map Service, 1943"alt="Catania | Italy 1:25,000 | Series 4228, U.S. Army Map Service, 1943"/></a><br>
+		  <strong>- <a href="http://legacy.lib.utexas.edu/maps/ams/italy_25k/"target="_blank" title="Italy 1:25,000 | Series 4228, U.S. Army Map Service, 1943">Italy 1:25,000 | Series 4228, U.S. Army Map Service, 1943</a></strong><br><br>		 
+		 <a href="http://legacy.lib.utexas.edu/maps/ams/italy_50k/txu-pclmaps-oclc-6540719-palermo-249-2.jpg" title="Palermo | Italy 1:50,000 | Series 4229, U.S. Army Map Service, 1941" target="_blank"><img src="atlante/images/palermo_50k.jpg" class="clip_resize" title="Palermo | Italy 1:50,000 | Series 4229, U.S. Army Map Service, 1941"alt="Italy 1:50,000 | Series 4229, U.S. Army Map Service, 1941"/></a><br>
+		  <strong>- <a href="http://legacy.lib.utexas.edu/maps/ams/italy_50k/"target="_blank" title="Italy 1:50,000 | Series 4229, U.S. Army Map Service, 1941">Italy 1:50,000 | Series 4229, U.S. Army Map Service, 1941</a></strong></p>  
+      </div>
+ 
+  <!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem2">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>                
+
+             <!-- Tab info -->
+      <div class="sidebar-pane" id="info">
+      <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+ <p class="lorem"> <strong>Realizzato da:</strong><br><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a><br><br>per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong><br><br>
+Le cartografie storiche in dotazione al <a href="https://www.comune.palermo.it/" title="Portale ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> e presenti nel <a href="http://geosrv.comune.palermo.it/carto/" title="Portale Cartografico curato da Sispi.spa" target="_blank">Portale Cartografico</a>  dalla società comunale in house per i servizi informatici <a href="http://www.sispi.it/" title="SISPI - Sistema Palermo Informatica" target="_blank">SISPI SPA</a>, sono state scansionate e georeferenziate dal Geometra Liborio Plazza del Comune di Palermo<br><br><a href="http://geosrv.comune.palermo.it/carto/" title="Portale Cartografico curato da Sispi.spa" target="_blank">Portale Cartografico</a> a cura di: <a href="http://www.sispi.it/" title="SISPI - Sistema Palermo Informatica" target="_blank">SISPI SPA</a> <br><br>
+<a href="https://github.com/SiciliaHub/mappe"  title="Mappa create dagli utenti della comunità OpenDataSicilia" target="_blank">SiciliaHub/mappe</a>: <a href="https://github.com/SiciliaHub/mappe" title="SiciliaHub/mappe" target="_blank">repo github</a> in cui si trovano le mappa create dagli utenti della comunità <a href="http://opendatasicilia.it/" title="OpenDataSicilia.it" target="_blank">OpenDataSicilia.it</a><br><br>
+<strong>Pianta della Città di Palermo e dintorni, redatta dall'Ufficio Tecnico Municipale - 19xx - scala 1:8000 - Fonte Map Warper - <a href="http://mapwarper.net/users/6031" target="_blank"> Uploaded by utente</a></strong><br><br>
+Un ringraziamento particolare va a <a href="https://twitter.com/napo" target="_blank" title="Maurizio Napolitano">@napo</a> che con il lavoro: <a href="https://medium.com/@napo/mappa-di-trento-1915-da-un-libro-di-cesare-battisti-84935794b1ed#.w7hqdcsuv" target="_blank" title="mappa di Trento 1915 - da un libro di Cesare Battisti">mappa di Trento 1915 - da un libro di Cesare Battisti</a> ci ha fatto riscoprire la bellezza e l'importanza delle mappa storiche.</p>
+   <br />  <hr><br />
+<p class="lorem">   <a href="http://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato è distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />
+<a href="http://creativecommons.org/licenses/by/4.0/" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Internazionale</a> - <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Italia</a> </p>
+      </div>
+      <!-- Tab condividi -->
+            <div class="sidebar-pane" id="share">
+                <h1 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1><br><br>
+                <p class="lorem"><strong>Puoi condividere online la mappe con altre persone.</strong></p>
+                <p class="lorem"><strong>Condividi:</strong></p >
+<div id="social"><p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="atlante/images/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="atlante/images/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="atlante/images/gp.png"width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="atlante/images/in.png"width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="atlante/images/pin.png" width="32" height="32"alt="pinterest"></a></p>
+</div>
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "http://siciliahub.github.io/palermohub/index_atlante.html",});
+			});
+		</script><br>
+ <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://goo.gl/LCbpMW" readonly><br>
+<hr>
+<br>
+<p class="lorem"><strong>Includi la mappa</strong></p>   
+       <textarea name="atlante" maxlength="2000" autofocus readonly id="iframe" title="Atlante Cartografico di Palermo"><iframe width="100%" height="600px" frameBorder="0" src="http://siciliahub.github.io/palermohub/index_atlante.html"></iframe><a href="http://siciliahub.github.io/palermohub/index_atlante.html" title="Visualizza l&rsquo;Atlante delle carte tecniche storiche di Palermo a schermo intero">Visualizza a schermo intero</a>
+</textarea><br><br>
+     <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+            </div>
+            
+             <!-- Tab strumenti -->
+      <div class="sidebar-pane" id="tools">
+      <h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+        <p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p><br>
+        <ul>
+           <li><p class="lorem"><a href="https://medium.com/tantotanto/dati-da-un-server-wms-scaricarli-riproiettarli-comprimerli-e-tassellarli-da-riga-di-comando-a34cb6fe13e0" title="Dati da un server WMS: scaricarli, riproiettarli, comprimerli, tassellarli e piramidarli da riga di comando" target="_blank">Dati da un server WMS:</a> scaricarli, riproiettarli, comprimerli, tassellarli e piramidarli da riga di comando, di <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>; <br><br></li></p>  
+          <li><p class="lorem"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping; <br><br></li></p>
+          <li><p class="lorem"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet-hash" target="_blank">Leaflet-hash</a>, per generare URL che contengono livello di zoom e posizione corrente;<br><br></li></p>
+           <li><p class="lorem"><a href="https://github.com/frogcat/leaflet-tileoverlay-mask" title="Leaflet-tileoverlay-mask" target="_blank">Leaflet-tileoverlay-mask</a>, per la sovrapposizione delle tile con effetto svg maschera, una sorta di effetto &ldquo;occhio di bue&ldquo; che ci permette di vedere come era la città al tempo in un particolare punto;<br><br></li> </p>
+          <li><p class="lorem"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar-v2" target="_blank">Sidebar-v2</a>, per creare questa sidebar a scomparsa;<br><br></li></p>
+          <li><p class="lorem"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet.MousePosition" target="_blank">Leaflet.MousePosition</a>, è un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;<br><br></li></p>
+          <li><p class="lorem"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet-graphicscale" target="_blank">Leaflet-graphicscale</a>, è un semplice barra di scala con effetto animato al cambio dello zoom;<br><br></li></p>
+                   <li><p class="lorem"><a href="http://mapwarper.net/" title="Map Warper" target="_blank">Map Warper</a>, è uno strumento open source per georeferenziare immagini, nato grazie al <a href="https://github.com/timwaters/mapwarper" title="timwaters/mapwarper" target="_blank">contributo</a> del progetto <a href="https://github.com/nypl-spacetime/" title="progetto spacetime" target="_blank">spacetime</a> della <a href="https://github.com/NYPL" title="Biblioteca Comunale di New York" target="_blank">Biblioteca Comunale di New York</a>,  sviluppato, ospitato e mantenuto da <a href="https://twitter.com/tim_waters" title="Tim Waters" target="_blank">Tim Waters</a>;<br><br></li></p>
+          <li><p class="lorem"><a href="https://github.com/mrmrs/btns" title="btns" target="_blank">Btns</a>, è un piccolo modulo CSS che permette di inserire pulsanti reattivi.<br><br></li></p>
+          <li><p class="lorem"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet.Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa.<br><br></li>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+          </p>
+        </ul>
+      </div>
+    </div>
+</div>
+  <div id="map" class="sidebar-map"></div>
+          
+  <!-- carto Storica -->
+<script type="text/JavaScript">
+        var southWest = L.latLng(38.098969492479725, 13.41679573059082),
+            northEast = L.latLng(38.13779704369437, 13.310022354125977),
+    	      bounds = L.latLngBounds(southWest, northEast);
+
+        var map = L.map('map', {attributionControl:true}).setView([38.11127,13.3534422], 14 );
+var basemaps = [
+		  		L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+     attribution:'&copy;<a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+      minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+	  label: 'OpenStreetMap'
+        }),
+		
+  L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+  attribution: 'Source: Google Road - Map data ©2015 Google',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+	 	  label: 'Google Road'
+              }),
+	
+  L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+  attribution: 'Source: Google Satellite - Map data ©2015 Google',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Google Satellite'
+              }),		  
+
+<!-- carte storiche -->	
+	
+ L.tileLayer('https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Città di Palermo 1882',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Nuova pianta della Città di Palermo 1882',
+ iconURL: 'legend/basemap/1882_clip.jpg'
+              }),	
+
+ L.tileLayer('https://mapwarper.net/maps/tile/19658/{z}/{x}/{y}.png ', {
+ attribution: 'Base cartografica: Carta tecnica 1893',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Carta tecnica 1893',
+ iconURL: 'legend/basemap/1893_clip.jpg'
+              }),	
+	
+ L.tileLayer('http://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Omira 1935',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Omira 1935',
+ iconURL: 'legend/basemap/omira_clip.jpg'
+              }),	  
+			
+ L.tileLayer('http://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Carta Tecnica di Palermo - Ufficio Tecnico Comunale  19??',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Carta Tecnica di Palermo - Ufficio Tecnico Comunale  19??',
+ iconURL: 'legend/basemap/ctc_clip.jpg'
+              }),	
+	
+	
+  L.tileLayer('http://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Carta Tecnica di Palermo - Irta 1956',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Carta Tecnica di Palermo - Irta 1956',
+  iconURL: 'legend/basemap/irta_clip.jpg'
+              }),
+	
+  L.tileLayer('https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Piano Regolatore Generale 1962',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Piano Regolatore Generale 1962',
+  iconURL: 'legend/basemap/prg62_clip.jpg'
+              }),	
+	
+  L.tileLayer('http://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Carta Tecnica di Palermo - Sas 1987',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Carta Tecnica di Palermo - Sas 1987',
+  iconURL: 'legend/basemap/sas_clip.jpg'}),	
+	
+  L.tileLayer('https://mapwarper.net/maps/tile/56402/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Variante Generale 2004',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Variante Generale 2004',
+  iconURL: 'legend/basemap/prg04_clip.jpg'}),
+	
+  L.tileLayer('https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: P.P.E. del centro storico 1993',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'P.P.E. del centro storico 1993',
+  iconURL: 'legend/basemap/ppe_clip.jpg'}),
+	
+  L.tileLayer('https://mapwarper.net/maps/tile/45321/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: U.S. Army Map Service, 1941 Series 4229 | Palermo',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'U.S. Army Map Service, 1941 Series 4229 | Palermo',
+  iconURL: 'legend/basemap/us41_clip.jpg'}),
+	
+  L.tileLayer('https://mapwarper.net/maps/tile/45304/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: U.S. Army Map Service, 1943-1944 | City Plans Palermo',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'U.S. Army Map Service, 1943-1944 | City Plans Palermo',
+  iconURL: 'legend/basemap/us43_clip.jpg'}),
+	     
+	 ];
+	<!-- fine base mappa -->	
+		
+	<!-- scala mappa -->		
+		var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);
+		
+<!-- muose coordinate -->
+L.control.mousePosition().addTo(map);				
+  map.on("mousemove", function(e) {
+  nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  sas.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  prg04.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); osm.setCenter(e.containerPoint.x, e.containerPoint.y); google.setCenter(e.containerPoint.x, e.containerPoint.y); googlesat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         })
+	
+  var osm = L.tileLayer.mask("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  attribution:'&copy;<a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
+	
+ var google = L.tileLayer.mask("https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
+ attribution:'Source: Google Road - Map data ©2021 Google',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
+	
+ var googlesat = L.tileLayer.mask("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
+ attribution:'Source: Google Satellite - Map data ©2021 Google',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
+	        
+var nuova = L.tileLayer.mask("https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Nuova pianta della Città di Palermo 1:1k | Seconda edizione Riveduta 1882 Luigi Pedone Laurieri - Editore | Lit. Bizzarrelli & Sanzò - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, }).addTo(map);
+	  
+	  var palermo1893 = L.tileLayer.mask("https://mapwarper.net/maps/tile/19658/{z}/{x}/{y}.png ", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - 1893 | 1:13K - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 16, maxNativeZoom: 16,});
+   							
+var omira = L.tileLayer.mask("http://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Omira 1935 | 1:5K - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
+
+var irta = L.tileLayer.mask("http://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Irta 1956 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
+	
+var prg62 = L.tileLayer.mask("https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});	
+
+var prg04 = L.tileLayer.mask("https://siciliahub.github.io/mappe/palermo_hub/data/prg2004/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Variante Generale al P.R.G. vigente al 2016 | 1:5k - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, tms: true, });
+	
+var sas = L.tileLayer.mask("http://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Sas 1987 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, });
+
+var ctc = L.tileLayer.mask("http://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Ufficio Tecnico Comunale 1:8k | 19?? - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
+
+var City_Plans_Palermo = L.tileLayer.mask("https://mapwarper.net/maps/tile/45304/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - City Plans Palermo 1:10k- U.S. Army Map Service, 1943-1944 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,});
+
+var Palermo_50k = L.tileLayer.mask("https://mapwarper.net/maps/tile/45321/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Palermo 1:50k | Series 4229, U.S. Army Map Service, 1941 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,});
+
+var ppecs = L.tileLayer.mask("https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Piano Particolareggiato Esecutivo del centro storico di Palermo - Palermo 1:500 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
+
+var overlaysmap = {'Nuova pianta della Città di Palermo 1882 | 1:1k':nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893,  'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Municipale 19?? | 1:8k': ctc,
+                    'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Variante Generale 2004 | 1:5k (max zoom 17)': prg04, 
+					'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500': ppecs, 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k':City_Plans_Palermo,
+					'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k <hr>' : Palermo_50k, 'OpenStreetMap':osm, 'Google':google, 'Google satellite':googlesat,
+				   };
+
+var layerControl = new L.Control.Layers(overlaysmap);
+         layerControl.addTo(map);
+			var hash = new L.Hash(map);
+			var sidebar = L.control.sidebar('sidebar').addTo(map);
+	   map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1,
+		    }));
+
+        </script>
+         <!-- header -->       
+<div id="titolo"class="leaflet-control"> 
+<a href="teca_digitale.html#15/38.1234/13.3613" title="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia" class="btn btn--s btn--orange" target="_parent">#viaggioneltempo</a><br>
+   </div> 
+   
+      
+   <!-- loghi -->    
+<div id="tavolab"></div>           
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div> 
+ <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+</body>
+</html>
