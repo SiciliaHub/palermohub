@@ -487,7 +487,26 @@ var basemaps = [
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
   label: 'Google Satellite'
               }),		  
-			  
+
+<!-- carte storiche -->	
+	
+ L.tileLayer('https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Città di Palermo 1882',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Nuova pianta della Città di Palermo 1882',
+ iconURL: 'legend/basemap/1882_clip.jpg'
+              }),	
+
+ L.tileLayer('https://mapwarper.net/maps/tile/19658/{z}/{x}/{y}.png ', {
+ attribution: 'Base cartografica: Carta tecnica 1893',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Carta tecnica 1893',
+ iconURL: 'legend/basemap/1893_clip.jpg'
+              }),	
+	
+	
+	
+	
  L.tileLayer('http://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png', {
  attribution: 'Base cartografica: Omira 1935',
  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
