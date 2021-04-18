@@ -504,9 +504,6 @@ var basemaps = [
  iconURL: 'legend/basemap/1893_clip.jpg'
               }),	
 	
-	
-	
-	
  L.tileLayer('http://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png', {
  attribution: 'Base cartografica: Omira 1935',
  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
@@ -514,6 +511,14 @@ var basemaps = [
  iconURL: 'legend/basemap/omira_clip.jpg'
               }),	  
 			
+ L.tileLayer('http://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Carta Tecnica di Palermo - Ufficio Tecnico Comunale  19??',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Carta Tecnica di Palermo - Ufficio Tecnico Comunale  19??',
+ iconURL: 'legend/basemap/ctc_clip.jpg'
+              }),	
+	
+	
   L.tileLayer('http://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png', {
   attribution: 'Base cartografica: Carta Tecnica di Palermo - Irta 1956',
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
@@ -521,11 +526,24 @@ var basemaps = [
   iconURL: 'legend/basemap/irta_clip.jpg'
               }),
 	
-  L.tileLayer('http://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: Carta Tecnica di Palermo - Sas 1987 ',
+  L.tileLayer('https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Piano Regolatore Generale 1962',
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'Carta Tecnica di Palermo - Sas 1987 ',
-  iconURL: 'legend/basemap/sas_clip.jpg'}),
+  label: 'Piano Regolatore Generale 1962',
+  iconURL: 'legend/basemap/prg62_clip.jpg'
+              }),	
+	
+  L.tileLayer('http://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Carta Tecnica di Palermo - Sas 1987',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Carta Tecnica di Palermo - Sas 1987',
+  iconURL: 'legend/basemap/sas_clip.jpg'}),	
+	
+  L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/prg2004/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Variante Generale 2004',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Variante Generale 2004',
+  iconURL: 'legend/basemap/prg04_clip.jpg'}),
 	
 		       
 	 ];
