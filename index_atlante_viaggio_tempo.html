@@ -545,7 +545,24 @@ var basemaps = [
   label: 'Variante Generale 2004',
   iconURL: 'legend/basemap/prg04_clip.jpg'}),
 	
-		       
+  L.tileLayer('https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: P.P.E. del centro storico 1993',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'P.P.E. del centro storico 1993',
+  iconURL: 'legend/basemap/ppe_clip.jpg'}),
+	
+  L.tileLayer('https://mapwarper.net/maps/tile/45321/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: U.S. Army Map Service, 1941 Series 4229 | Palermo',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'U.S. Army Map Service, 1941 Series 4229 | Palermo',
+  iconURL: 'legend/basemap/us41_clip.jpg'}),
+	
+  L.tileLayer('https://mapwarper.net/maps/tile/45304/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: U.S. Army Map Service, 1943-1944 | City Plans Palermo',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'U.S. Army Map Service, 1943-1944 | City Plans Palermo',
+  iconURL: 'legend/basemap/us43_clip.jpg'}),
+	     
 	 ];
 	<!-- fine base mappa -->	
 		
