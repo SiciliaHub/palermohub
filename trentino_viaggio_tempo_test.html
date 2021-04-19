@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Trento Travel Time Maps</title>
+  <meta charset="utf-8" />
+<meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+<meta name="description" content="Trento Travel Time Maps">
+<meta name="keywords" content="Open Data Trento, cartografia stroica,">
+<meta http-equiv="content-language" content="IT">
+<meta name="robots" content="index,follow">
+<meta name="creation_Date" content="28/03/2017">
+<meta name="revisit-after" content="7 days"> 
+<link rel="shortcut icon" href="http://siciliahub.github.io/mappe/atlante_carto_pa/favicon.ico"/> 
+<link rel="icon" href="http://siciliahub.github.io/mappe/atlante_carto_pa/favicon.png" type="image/png"/> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes"> -->
+
+<!-- Open Graph Protocol -->
+<meta property="og:title" content="Trento Travel Time Maps" />
+<meta property="og:description" content="Osservare il cambiamento di una città grazie alla cartografia: il caso di Trento" />
+<meta property="og:url" content="http://siciliahub.github.io/palermohub/index_atlante.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/atlante.jpg" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Trento Travel Time Maps">
+<meta name="twitter:description" content="Osservare il cambiamento di una città grazie alla cartografia: il caso di Trento">
+<meta name="twitter:image" content="ttp://siciliahub.github.io/mappe/palermo_hub/clip_index/atlante.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+ <!-- css -->
+<link href="atlante/css/base_ods.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
+
+<link href="atlante/css/leaflet.css" rel="stylesheet" type="text/css"> 
+<link href="atlante/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="atlante/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+
+<link href="atlante/ss/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Basemaps2.css" rel="stylesheet" type="text/css">
+
+<!--[if lte IE 8]><link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
+ <!-- script -->
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes 
+<script type="text/javascript" src="script.js"></script> -->
+
+
+<script type="text/javascript" src="atlante/js/leaflet/leaflet.js"></script>
+<script type="text/javascript" src="atlante/js/sidebar/leaflet-sidebar.js"></script>
+<script src="atlante/js/hash/leaflet-hash.js"></script>
+<script src="atlante/js/tileoverlay/leaflet-tileoverlay-mask.js"></script>
+<script src="atlante/js/social/jquery_csbuttons.js"></script>
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+
+<script src="atlante/js/basemap/L.Control.Basemaps_02.js"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+	<script type="text/javascript">
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+</script>
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>    
+</head>
+<body onload="MM_preloadImages('prg_1962/tav_03c.jpg','prg_1962/tav_04c.jpg','prg_1962/clip/tav_08c.jpg.jpg','prg_1962/clip/tav_01c.jpg','prg_1962/clip/tav_02c.jpg','prg_1962/clip/tav_03c.jpg','prg_1962/clip/tav_04c.jpg','prg_1962/clip/tav_05c.jpg','prg_1962/clip/tav_06c.jpg','prg_1962/clip/tav_07c.jpg','prg_1962/clip/tav_09c.jpg')">
+
+
+ <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_atlante.html" title="Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo"><strong>Atlante Storico</strong></a>
+  <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe Storiche&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="teca_digitale.html#15/38.1234/13.3613" title="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia" target="_parent"><strong>Teca Digitale e bene comune</strong></a>
+ </div>
+	 <script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
+</header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script> 
+<div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+            <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+            </ul>
+          <ul role="tablist">
+         <li><a href="#tools" title="Configurazione" role="tab"><i class="fa fa-cog" aria-hidden="true"></i></a></li>
+         </ul></div>
+	
+    <!-- Tab panes -->
+    <div class="sidebar-content active">
+      <div class="sidebar-pane" id="home">
+        <h2 class="sidebar-header">Trento Travel Time Maps<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+        <p class="legenda"> <strong>Osservare il cambiamento di una città grazie alla cartografia:</strong> <a href="#">il caso di Trento</a></p>
+        <p class="lorem">Il bello di questa mappa è scoprire come questa città sia cambiata e ognuno troverà degli esempi diversi nei luoghi che conosce meglio.</p>  
+      
+       </div>  
+
+		<!-- Tab strumenti -->
+      <div class="sidebar-pane" id="tools">
+      <h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+        <p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p><br>
+           </div>
+    </div>
+</div>
+  <div id="map" class="sidebar-map"></div>
+          
+  <!-- carto Storica -->
+<script type="text/JavaScript">
+        var southWest = L.latLng(46.05858084649358, 11.102843284606934),
+            northEast = L.latLng(46.07879771278557, 11.1436128616333),
+    	      bounds = L.latLngBounds(southWest, northEast);
+
+        var map = L.map('map', {attributionControl:true}).setView([46.06847,11.11925], 17 );
+var basemaps = [
+	
+	<!-- carte osm -->	
+	
+		L.tileLayer('https://tiles.openaerialmap.org/60770b0fb85cd80007a01414/0/60770b0fb85cd80007a01415/{z}/{x}/{y}', {
+     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright/it">OpenStreetMap contributors</a>',
+	year:'2019',
+      minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,
+	  label: 'Ortofotocarta Comune di Trento 2019',
+	iconURL: 'legend/basemap/xx_clip.jpg'
+        }),
+	
+  L.tileLayer('https://tile.jawg.io/{z}/{x}/{y}.png?api-key=community', {
+  attribution: 'Tiles courtesy of <a href="https://www.jawg.io/">jawgmaps</a>',
+	year:'2019',
+  minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,
+	 	  label: 'OpenStreetMap/JawgMaps',
+	iconURL: 'legend/basemap/xx_clip.jpg'
+              }),
+		
+		
+<!-- carte storiche -->	
+	
+	 L.tileLayer('http://mapwarper.net/maps/tile/19481/{z}/{x}/{y}.png', {
+ attribution: 'Il Trentino, cenni geografici, storici, economici (C. Battisti) 1915',
+ minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Trento - C. Battisti',
+ iconURL: 'legend/basemap/xx_clip.jpg'
+              }),
+	
+ L.tileLayer('https://mapwarper.net/maps/tile/45342/{z}/{x}/{y}.png', {
+ attribution: 'Esercito USA - 1943',
+ minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Trento - US Army',
+ iconURL: 'legend/basemap/xx_clip.jpg'
+              }),
+	
+ L.tileLayer('https://mapwarper.net/maps/tile/35385/{z}/{x}/{y}.png', {
+ attribution: 'Mappa catasto napoleonico',
+ minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Mappa catasto napoleonico',
+ iconURL: 'legend/basemap/xx_clip.jpg'
+              }),	
+	
+ L.tileLayer('https://mapwarper.net/maps/tile/51028/{z}/{x}/{y}.png', {
+ attribution: 'Francesco Ranzi-Pianta di Trento Antica e Moderna',
+ minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Trento - Francesco Ranzi',
+ iconURL: 'legend/basemap/xx_clip.jpg'
+              }),	
+
+ L.tileLayer('https://mapwarper.net/maps/tile/27221/{z}/{x}/{y}.png', {
+ attribution: 'Trento 1896 - Karl Baedeker',
+ minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Trento 1896 - Karl Baedeker',
+ iconURL: 'legend/basemap/xx_clip.jpg'
+              }),	
+	
+ L.tileLayer('https://mapwarper.net/maps/tile/34968/{z}/{x}/{y}.png', {
+ attribution: 'Mappa di Trento di Wagner & Debes, Leipzig - scala 1:11700',
+ minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Trento - Wagner & Debes, Leipzig - 1911',
+ iconURL: 'legend/basemap/xx_clip.jpg'
+              }),	
+	
+	
+	
+
+	     
+	 ];
+	<!-- fine base mappa -->	
+		
+	<!-- scala mappa -->		
+		var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);
+		
+<!-- muose coordinate -->
+L.control.mousePosition().addTo(map);				
+  map.on("mousemove", function(e) {
+  osm.setCenter(e.containerPoint.x, e.containerPoint.y); orto.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  ceba.setCenter(e.containerPoint.x, e.containerPoint.y); usa.setCenter(e.containerPoint.x, e.containerPoint.y); napol.setCenter(e.containerPoint.x, e.containerPoint.y); trent.setCenter(e.containerPoint.x, e.containerPoint.y); karlb.setCenter(e.containerPoint.x, e.containerPoint.y); wagner.setCenter(e.containerPoint.x, e.containerPoint.y); 
+         })
+	
+  var osm = L.tileLayer.mask("https://tile.jawg.io/{z}/{x}/{y}.png?api-key=community", {
+  attribution:'Tiles courtesy of <a href="https://www.jawg.io/">jawgmaps</a>',
+  minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,});
+	
+ var orto = L.tileLayer.mask("https://tiles.openaerialmap.org/60770b0fb85cd80007a01414/0/60770b0fb85cd80007a01415/{z}/{x}/{y}", {
+ attribution:'Source: Ortofotocarta Comune di Trento 2019 - year: 2019 - license: CC0 ',
+ minZoom: 9,   maxZoom: 18, maxNativeZoom: 18,});
+	
+var ceba = L.tileLayer.mask("http://mapwarper.net/maps/tile/19481/{z}/{x}/{y}.png", {
+      attribution: 'Il Trentino, cenni geografici, storici, economici (C. Battisti) 1915  - year: 1915 - license: public domain', minZoom: 9,   maxZoom: 18, maxNativeZoom: 18, }).addTo(map);
+	  
+var usa = L.tileLayer.mask("https://mapwarper.net/maps/tile/45342/{z}/{x}/{y}.png", {
+      attribution: 'Esercito USA - 1943  - year: 1945 - license: public domain', minZoom: 9,   maxZoom: 18, maxNativeZoom: 18, })  
+
+var napol = L.tileLayer.mask("https://mapwarper.net/maps/tile/35385/{z}/{x}/{y}.png", {
+      attribution: 'Mappa catasto napoleonico  - year: 1813 - license: public domain', minZoom: 9,   maxZoom: 18, maxNativeZoom: 18, })  
+
+
+var trent = L.tileLayer.mask("https://mapwarper.net/maps/tile/51028/{z}/{x}/{y}.png", {
+      attribution: 'Francesco Ranzi-Pianta di Trento Antica e Moderna  - year: 1869 - license: public domain', minZoom: 9,   maxZoom: 18, maxNativeZoom: 18, }) 
+
+var karlb = L.tileLayer.mask("https://mapwarper.net/maps/tile/27221/{z}/{x}/{y}.png", {
+      attribution: 'Trento 1896 - Karl Baedeker  - year: 1896 - license: public domain', minZoom: 9,   maxZoom: 18, maxNativeZoom: 18, })
+
+var wagner = L.tileLayer.mask("https://mapwarper.net/maps/tile/34968/{z}/{x}/{y}.png", {
+      attribution: 'Mappa di Trento di Wagner & Debes, Leipzig - scala 1:11700  - year: 1911 - license:',minZoom: 9,   maxZoom: 18, maxNativeZoom: 18, })
+
+<!-- selettore popup mappe -->
+var overlaysmap = {'Trento - C. Battisti - 1915': ceba, 'Esercito USA - 1943': usa, 'Mappa catasto napoleonico - 1813': napol, 'Trento - Francesco Ranzi - 1869': trent, 'Trento - Karl Baedeker - 1896': karlb, 'Trento - Wagner & Debes, Leipzig - 1911 <hr>': wagner, 'OpenStreetMap/JawgMaps':osm, 'Ortofotocarta Comune di Trento 2019': orto,  
+				   };
+
+var layerControl = new L.Control.Layers(overlaysmap);
+         layerControl.addTo(map);
+			var hash = new L.Hash(map);
+			var sidebar = L.control.sidebar('sidebar').addTo(map);
+	   map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1,
+		    }));
+
+        </script>
+         <!-- header -->       
+     
+   <!-- loghi -->    
+<div id="tavolab"></div>           
+<div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div> 
+ <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+</body>
+</html>
