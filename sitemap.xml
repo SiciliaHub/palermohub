@@ -745,27 +745,33 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-	<url>
+<url>
 <loc>http://palermohub.opendatasicilia.it/cambia-menti2.html</loc>
 <lastmod>2020-03-04</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-		<url>
+<url>
 <loc>http://palermohub.opendatasicilia.it/buoni_pasto.html</loc>
 <lastmod>2021-02-16</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-		<url>
+<url>
 <loc>http://palermohub.opendatasicilia.it/bandiereblu.html</loc>
 <lastmod>2021-05-11</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-		<url>
+<url>
 <loc>http://palermohub.opendatasicilia.it/aggregati_strutturali_pa.html</loc>
 <lastmod>2021-05-11</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>http://palermohub.opendatasicilia.it/valutazioni_ambientali.html</loc>
+<lastmod>2021-08-07</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
