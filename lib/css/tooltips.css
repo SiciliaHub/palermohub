@@ -47,9 +47,9 @@ a {
 .ods_social a:visited {	color: #4E4B4B; text-decoration:none;}
 .ods_social a:hover {color: #FF9900; text-decoration:none; } 
  @media (min-width: 320px) and (max-width: 960px) {.ods_social {font-size: 8px;}}
- 
+ /*
 .clip_tooltips {width: 250px; height: 140px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } 
-.clip_tooltips:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
+.clip_tooltips:hover {opacity: 1;  -webkit-filter: grayscale(100%); }*/
 
 /*@media (min-width: 320px) and (max-width: 767px) {.nofooter { display:none;}}*/
 @media (min-width: 320px) and (max-width: 768px) {.clip_tooltips {width: 185px;height: 104px;}}
