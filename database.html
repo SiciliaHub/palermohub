@@ -42,8 +42,8 @@ body {
 	/*background-color: #FFFFFF;*/
 	overflow-x:hidden;
 	}
-img {max-width: 250px; max-height: 140px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } 
-img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
+.clip_tooltips {max-width: 250px; max-height: 140px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } 
+.clip_tooltips:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 
 </style>
 
@@ -188,7 +188,7 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 								<tr>
 	<td><a ex:href-content=".URL" ex:title-content=".titolo" ex:onclick-subcontent="trackOutboundLink('.URL'); return false;" target="_parent"><strong><span ex:content=".titolo" ></span></strong></a></td>
    									 <td><span ex:content=".descrizione"></td>
-			<td ><a ex:href-content=".URL" ex:title-content=".titolo"  ex:onclick-subcontent="trackOutboundLink('.URL'); return false;" target="_parent"><strong><span class="clip_tooltips" ex:content=".immago" ></span></strong></a></td>
+			<td ><a ex:href-content=".URL" ex:title-content=".titolo"  ex:onclick-subcontent="trackOutboundLink('.URL'); return false;" target="_parent"><strong><span ex:content=".immago" class="clip_tooltips"></span></strong></a></td>
 									<td><span ex:content=".categoria"></td>
                                     <td><span ex:content=".tag"></span></td>
                                     <td><span ex:content=".collaborazione"></span></td>
