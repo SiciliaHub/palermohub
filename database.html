@@ -81,7 +81,8 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 	<link rel="exhibit/data" 
     type="text/csv"
 	data-ex-value-separator=","
-    href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc0EPi8VOFO7ePO_aWf-R8km8rd212WY-gxs0SephNTNi-fqnN6sZ8jo4QKbOaVbfua2g0y1_vdHIP/pub?output=csv" /> --> 
+    href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc0EPi8VOFO7ePO_aWf-R8km8rd212WY-gxs0SephNTNi-fqnN6sZ8jo4QKbOaVbfua2g0y1_vdHIP/pub?output=csv" 
+	ex:converter="googleSpreadsheets" /> --> 
 	
 	const spreadsheetId = '1A-U8JCbH8Rh2PHoIHG2DL3uPNncR8DpGm3_nzBxRbHA'
 fetch(`https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json`)
