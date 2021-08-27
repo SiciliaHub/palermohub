@@ -70,26 +70,17 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 <script type="text/javascript" src="lib/js/dist/bootstrap.min.js"></script>
 <script type="text/javascript" src="lib/js/dist/scripts.js"></script>
 
-<!-- <link rel="exhibit/data" type="text/tsv" data-ex-value-separator=";" href="PalermoHub.txt"/>-->
-
 <!-- <link rel="exhibit/data"
     type="application/jsonp"
     href="https://spreadsheets.google.com/feeds/list/1A-U8JCbH8Rh2PHoIHG2DL3uPNncR8DpGm3_nzBxRbHA/od6/public/basic?alt=json-in-script"
     ex:converter="googleSpreadsheets" />  -->
 	
-	 <!-- exhibit catalogo 
+	 <!-- exhibit catalogo  -->
 	<link rel="exhibit/data" 
     type="text/csv"
 	data-ex-value-separator=","
     href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc0EPi8VOFO7ePO_aWf-R8km8rd212WY-gxs0SephNTNi-fqnN6sZ8jo4QKbOaVbfua2g0y1_vdHIP/pub?output=csv" 
-	ex:converter="googleSpreadsheets" /> --> 
-	
-	const spreadsheetId = '1A-U8JCbH8Rh2PHoIHG2DL3uPNncR8DpGm3_nzBxRbHA'
-fetch(`https://docs.google.com/spreadsheets/d/${spreadsheetId}/gviz/tq?tqx=out:json`)
-    .then(res => res.text())
-    .then(text => {
-        const json = JSON.parse(text.substr(47).slice(0, -2))
-    })
+	ex:converter="googleSpreadsheets" /> 
 	
     <script src="lib/js/dist/exhibit-api.js?locale=it"></script>
 
