@@ -177,8 +177,8 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 					<div ex:role="exhibit-view"
 					ex:viewClass="Exhibit.TabularView"
 					ex:label="Table"
-					ex:columns=".titolo,.descrizione,.anno,.immago,.categoria,.collaborazione,.primamappa,.titolo_pm,.fontedati"
-					ex:columnLabels="Titolo, Descrizione, Anno, Immagine, Categoria, Autore, Prima mappa, Fonte Dati,"
+					ex:columns=".anno,.titolo,.descrizione,.immago,.categoria,.collaborazione,.primamappa,.titolo_pm,.fontedati"
+					ex:columnLabels="Anno, Titolo, Descrizione,  Immagine, Categoria, Autore, Prima mappa, Fonte Dati,"
 					ex:columnFormats="list,list,list,list,list,list,list,list"
 					ex:sortColumn="3"
 					ex:sortAscending="true"
@@ -187,10 +187,10 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 					<div class="table-responsive">
 							<table class="table" ex:class-content=".territorio">
 								<tr>
+								<td><span ex:content=".anno"></td>
 	<td><a ex:href-content=".URL" ex:title-content=".titolo" ex:onclick-subcontent="trackOutboundLink('.URL'); return false;" target="_parent"><strong><span ex:content=".titolo" ></span></strong></a></td>
    									 <td><span ex:content=".descrizione"></td>
-									 <td><span ex:content=".anno"></td>
-			<td ><a ex:href-content=".URL" ex:title-content=".titolo"  ex:onclick-subcontent="trackOutboundLink('.URL'); return false;" target="_parent"><strong><span ex:content=".immago" class="clip_tooltips"></span></strong></a></td>
+  <td ><a ex:href-content=".URL" ex:title-content=".titolo"  ex:onclick-subcontent="trackOutboundLink('.URL'); return false;" target="_parent"><strong><span ex:content=".immago" class="clip_tooltips"></span></strong></a></td>
 					<td><span ex:content=".categoria"></td>
                                   <!--  <td><span ex:content=".tag"></span></td> -->
                                     <td><span ex:content=".collaborazione"></span></td>
