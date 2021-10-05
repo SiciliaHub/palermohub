@@ -550,6 +550,12 @@ var basemaps = [
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
   label: 'Carta Tecnica di Palermo - Sas 1987',
   iconURL: 'legend/basemap/sas_clip.jpg'}),	
+    
+    L.tileLayer('https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: P.P.E. del centro storico 1993',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'P.P.E. del centro storico 1993',
+  iconURL: 'legend/basemap/ppe_clip.jpg'}),
 	
   L.tileLayer('https://mapwarper.net/maps/tile/56402/{z}/{x}/{y}.png', {
   attribution: 'Base cartografica: Variante Generale 2004',
@@ -557,11 +563,6 @@ var basemaps = [
   label: 'Variante Generale 2004',
   iconURL: 'legend/basemap/prg04_clip.jpg'}),
 	
-  L.tileLayer('https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: P.P.E. del centro storico 1993',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'P.P.E. del centro storico 1993',
-  iconURL: 'legend/basemap/ppe_clip.jpg'}),
 	
   L.tileLayer('https://mapwarper.net/maps/tile/45321/{z}/{x}/{y}.png', {
   attribution: 'Base cartografica: U.S. Army Map Service, 1941 Series 4229 | Palermo',
@@ -649,9 +650,8 @@ var ppecs = L.tileLayer.mask("https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.
 minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
 
 var overlaysmap = {'Nuova pianta della Città di Palermo 1882 | 1:1k':nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Omira 1935 | 1:5k': omira, 
-                    'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Variante Generale 2004 | 1:5k (max zoom 17)': prg04, 
-					'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500': ppecs, 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k':City_Plans_Palermo,
-					'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k <hr>' : Palermo_50k, 'OpenStreetMap':osm, 'Google':google, 'Google satellite':googlesat,
+                    'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500 ': ppecs, 'Variante Generale 2004 | 1:5k (max zoom 17) <hr> <strong>U.S. Army:</strong> <br>': prg04, 'Map Service, 1941 Series 4229 | Palermo 1:50k ' : Palermo_50k, 			
+					'Map Service, 1943-1944 | City Plans Palermo 1:10k <hr>':City_Plans_Palermo, 'OpenStreetMap':osm, 'Google':google, 'Google satellite':googlesat,
 				   };
 
 var layerControl = new L.Control.Layers(overlaysmap);
