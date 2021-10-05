@@ -516,6 +516,13 @@ var basemaps = [
  label: 'Carta tecnica 1893',
  iconURL: 'legend/basemap/1893_clip.jpg'
               }),	
+			  
+ L.tileLayer('http://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Carta Tecnica di Palermo - Ufficio Tecnico Comunale  19??',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Carta Tecnica di Palermo - Ufficio Tecnico Comunale  19??',
+ iconURL: 'legend/basemap/ctc_clip.jpg'
+              }),				  
 	
  L.tileLayer('http://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png', {
  attribution: 'Base cartografica: Omira 1935',
@@ -524,14 +531,6 @@ var basemaps = [
  iconURL: 'legend/basemap/omira_clip.jpg'
               }),	  
 			
- L.tileLayer('http://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Carta Tecnica di Palermo - Ufficio Tecnico Comunale  19??',
- minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
- label: 'Carta Tecnica di Palermo - Ufficio Tecnico Comunale  19??',
- iconURL: 'legend/basemap/ctc_clip.jpg'
-              }),	
-	
-	
   L.tileLayer('http://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png', {
   attribution: 'Base cartografica: Carta Tecnica di Palermo - Irta 1956',
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
@@ -649,7 +648,7 @@ var ppecs = L.tileLayer.mask("https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Piano Particolareggiato Esecutivo del centro storico di Palermo - Palermo 1:500 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
 
-var overlaysmap = {'Nuova pianta della Città di Palermo 1882 | 1:1k':nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893,  'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Municipale 19?? | 1:8k': ctc,
+var overlaysmap = {'Nuova pianta della Città di Palermo 1882 | 1:1k':nuova, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Omira 1935 | 1:5k': omira, 
                     'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Variante Generale 2004 | 1:5k (max zoom 17)': prg04, 
 					'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500': ppecs, 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k':City_Plans_Palermo,
 					'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k <hr>' : Palermo_50k, 'OpenStreetMap':osm, 'Google':google, 'Google satellite':googlesat,
