@@ -322,12 +322,12 @@ var bounds_group = new L.featureGroup([]);
 	  
 <!-- mappe di base -->	  
 var basemaps = [ 
-L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 10,  maxZoom: 17, maxNativeZoom: 17, label: 'Google Terrain'}), 
+L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 10,   maxZoom: 17, maxNativeZoom: 17,  label: 'Google Terrain'}), 
 
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 10,  maxZoom: 17, maxNativeZoom: 17,label: 'Map tiles by CartoDB'}),
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 10,   maxZoom: 17, maxNativeZoom: 17,  label: 'Map tiles by CartoDB'}),
 
 L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
-				minZoom: 10,  maxZoom: 17, maxNativeZoom: 17, label: 'Google Satellite'}),
+				minZoom: 10,   maxZoom: 17, maxNativeZoom: 17,  label: 'Google Satellite'}),
 ];
  	
 	<!-- scala mappa -->		
@@ -412,7 +412,6 @@ L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 
         tms: true,
         attribution: 'Cartografia 1:10000', 
       }) .addTo(map);	
-
 	  	
 <!-- mappe tiles 2k -->
   
