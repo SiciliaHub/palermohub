@@ -169,22 +169,25 @@ $(document).ready(function(){
 <div class="sidebar-content">
 <div class="sidebar-pane" id="home">
 <h2 class="sidebar-header">Palermo Hub - Strumenti urbanistici<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
-<p class="legenda"> <strong>Misilmeri | Piano regolatore generale.</strong>
-<p class="lorem">Vengono pubblicati qui di seguito il regolamento edilizio, le norme tecniche di attuazione e le tavole (in scala 1:10.000 e 1:2.000) del vigente Piano Regolatore Generale del Comune di Misilmeri, approvato con decreto del Dirigente generale della Regione Siciliana - Assessorato Territorio e Ambiente - Dipartimento regionale urbanistica, n. 1216/D.R.U. del 18/06/2006, (GURS del 5 dicembre 2007, parte I, n. 1), con la seguente avvertenza: gli elaborati grafici (tavole) e testuali (regolamento edilizio e norme tecniche di attuazione) del PRG contengono alcuni errori materiali di graficizzazione e di adeguamento puntuale rispetto ad alcune prescrizioni del decreto di approvazione.</p>
-<p class="lorem"><strong>Per tali ragioni, precisando che la consultazione online di questi elaborati è a scopo puramente informativo, si fornisce anche il link diretto al <a href="http://www.gurs.regione.sicilia.it/Gazzette/g07-01/g07-01-p21.html" target="_blank">Decreto ARTA di approvazione </a> e si rimanda caso per caso al rilascio del certificato di destinazione urbanistica da richiedere, ai sensi dell'art. 30 del D.P.R. 380/01, tramite il portale <a href="https://www.impresainungiorno.gov.it/web/guest/comune?codCatastale=F246" target="_blank">Impresa in un giorno</a>. </strong></p>
- <!-- Inizio Legenda Piani -->
-<h2>Legenda Piano Regolatore 1:1000</h2>
-<a href="legend/legenda_10k.jpg" title="Legenda Piano Regolatore 10k"target="_blank"><img src="legend/legenda_10k.jpg" class="clip_resize2" title="Legenda Piano Regolatore 10k" border="0" /> </a><br>
-<h2>Legenda Piano Regolatore 1:2000</h2>
-<a href="legend/legenda_2k.jpg" title="Legenda Piano Regolatore 2k"target="_blank"><img src="legend/legenda_2k.jpg" class="clip_resize2" title="Legenda Piano Regolatore 2k" border="0" /> </a>
- <!-- Inizio Legenda Piani -->
- <br>
-<p class="lorem"> Le tavole dei vari Piani sono realizzate nel formato <a href="https://acrobat.adobe.com/it/it/why-adobe/about-adobe-pdf.html" target="_blank">.pdf</a>, tutti i link delle tavole presenti in queste pagina rinviano al sito ufficiale del <a href="https://www.comune.palermo.it/" title="Comune di Palermo" target="_blank">Comune di Palermo</a> &#45; <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?apt=6" title="Amministrazione Trasparente" target="_blank">Amministrazione Trasparente</a> &#45;<br><br>
-  <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
-  <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em><br>
-  <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em>  <br>
-  <p class="lorem"> <strong>Questa mappa è una versione beta test 2.0 NON VERIFICATA! Realizzata per studiare l'applicativo <a href="http://qgis.org/it/site/forusers/download.html" title="Scarica QGIS per il tuo Sistema Operativo" target="_blank">Qgis</a> e modalità webgis offerta dai plugin <a href="http://leafletjs.com/" title="Leaflet an open-source JavaScript library" target="_blank">Leaflet</a> e <a href="https://github.com/nextgis/QTiles" title="QGIS plugin to generate multi-level tilesets from a project." target="_blank">QTiles</a></strong></p> 
-
+<p class="legenda"> <strong>Carta Tecnica Regionale 10K (C.T.R.)</strong>
+<p class="lorem">Carta Tecnica Regionale in scala 1:10.000 edizione 2012-2013 della regione siciliana. Shapefile generati a partire dai file ASCII RSI e RSE. Sistema di coordinate ETRS89 Fuso 33 Nord (EPSG: 25833)<br>
+Le entità sono suddivise in strati informativi, raggruppandole per affinità logiche.<br>
+Per la realizzazione della CTR numerica in scala 1:10.000 sono stati previsti i seguenti strati:<br>
+<ul>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_A_Comunicazioni.zip" target="_blank">A Sistema delle comunicazioni</a></strong></li>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_B_Edificato.zip" target="_blank">B Edificato ed altre strutture</a></strong></li>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_C_Acque.zip" target="_blank">C Acque</a></strong></li>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_D_TraspProdEnergia.zip" target="_blank">D Strutture connesse alla produzione e trasporto di energia</a></strong></li>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_E_ElemDivisoriSostegno.zip" target="_blank">E Elementi divisori e di sostegno</a></strong></li>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_F_Morfologia.zip" target="_blank">F Morfologia</a></strong></li>
+  <li><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_G_Vegetazione.zip" target="_blank"><strong>G Vegetazione</strong></a></li>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_H_Orografia.zip" target="_blank">H Orografia</a></strong></li>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_L_Toponimi.zip" target="_blank">L Toponimi</a></strong></li>
+  <li><strong><a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/CTR_ATA_2012_2013_M_PuntiInquadramento.zip" target="_blank">M Punti di inquadramento</a></strong></li>
+</ul>
+</br>
+Licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Attribuzione - Condividi allo stesso modo 4.0 Italia (CC BY-SA 4.0 IT)" target="_blank">Creative Commons Attribuzione - Condividi allo stesso modo – 4.0 italia - (CC-BY SA 4.0)</a></p><br>
+  <p class="lorem">Progetto Qgis per la rappresentazione cartografica (vestizione) della CTR 10k di: <a href="https://twitter.com/gbvitrano" title="Giovan Battista Vitrano" target="_blank">@gbvitrano</a> - <a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">opendatasicilia.it</a></p>
 </div>        
            
 <!-- Tab info -->
