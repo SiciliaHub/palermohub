@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW 2019 (64-Bit) -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="65.2327mm" height="73.4308mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 5069.01 5706.06"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil1 {fill:none}
+    .fil0 {fill:#4D4D4D}
+   ]]>
+  </style>
+     <clipPath id="id0">
+      <path d="M801.65 0l4194.95 0 0 5706.06 -4194.95 0 0 -5706.06z"/>
+     </clipPath>
+ </defs>
+ <g id="Livello_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_1494662126096">
+   <g>
+    <g style="clip-path:url(#id0)">
+     <image x="801.65" y="0" width="4194.95" height="5706.06" xlink:href="logo_cs_Images\logo_cs_ImgID1.png"/>
+    </g>
+   </g>
+   <path class="fil0" d="M1319.43 590.14l657.1 -138.34 366.6 -138.33 78.11 65.09 0 2075.88 -1452.28 0c25.54,-76.55 53,-152.65 66.9,-231.94 21.15,-120.7 4.2,-246.31 27.66,-366.59 32.15,-164.75 113.37,-318.19 138.33,-484.17l117.59 -781.6zm1247.46 -90.19l315.75 263.11c124.5,11.52 248.62,40.83 373.5,34.58l415.01 -20.75 504.93 311.25c-57.64,172.92 -131.85,341.18 -172.92,518.76 -37.7,162.99 -89.76,332.99 -62.25,498.01l58.26 349.52 -1432.27 0 0 -1954.49zm1431.41 2100.15c-26.47,178.41 -54.74,356.59 -78.15,535.43 -14.44,110.32 -12.76,222.9 -34.58,332 -22.18,110.87 -72.97,214.57 -96.84,325.09l-186.75 864.6 -394.26 -110.67c-53.03,-154.47 -122.47,-297.45 -175.51,-451.93 -63.74,-301.32 -492.01,-175.73 -357.09,133.76 29.97,55.33 59.94,110.67 89.92,166l20.75 172.92 27.67 48.42 -110.67 124.5 -135.91 3.57 0 -2143.7 1431.41 0zm-1577.06 2147.53l-506.96 13.34c-101.45,29.97 -202.89,59.94 -304.34,89.92 -170.61,66.86 -341.23,133.72 -511.84,200.58 -46.11,-737.79 -105.52,-1474.87 -138.34,-2213.37l-10.58 -238.01 1472.05 0 0 2147.53z"/>
+   <rect class="fil1" x="0" y="156.47" width="5069.01" height="5069.01"/>
+  </g>
+ </g>
+</svg>

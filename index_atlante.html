@@ -161,6 +161,7 @@ $(document).ready(function(){
         <div class="sidebar-tabs">
             <ul role="tablist">
         <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+	    <li> <a href="#storia" title="Cenni storici" role="tab"><img src="legend/storia/logo_cs.svg" alt="OSD" width="30" height="45"/></a></li>
         <li> <a href="#omira" title="Carta Tecnica Omira 1935" role="tab"><strong style="font-size: 10px; font-family: 'fontawesome';">OMIRA</strong></a></li>
         <li> <a href="#irta" title="Carta Tecnica IRTA 1959" role="tab"><strong style="font-size: 11px; font-family: 'fontawesome';">IRTA</strong></a></li>
 		<li> <a href="#prg62" title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" role="tab"><strong style="font-size: 13px; font-family: 'fontawesome';">62</strong></a></li>
@@ -168,7 +169,6 @@ $(document).ready(function(){
         <li> <a href="#sas" title="Carta Tecnica SAS 1987" role="tab"><strong style="font-size: 13px; font-family: 'fontawesome';">S.A.S.</strong></a></li>
 		<li> <a href="#ppe" title="P.P.E. del centro storico di Palermo" role="tab"><strong style="font-size: 13px; font-family: 'fontawesome';">P.P.E.</strong></a></li>
 		<li> <a href="#usarmymap" title="U.S. Army Map Service, 1943-1944" role="tab"><strong style="font-size: 13px; font-family: 'fontawesome';">U.S.</strong></a></li>
-		 <li> <a href="#storia" title="Cenni storici" role="tab"><img src="legend/storia/palermo.png" alt="OSD" width="40" height="40"/></a></li>
         <li> <a href="http://www.cricd.it/pages.php?idpagina=13&idContenuto=3326" title="Book - Repertorio cartografico & aerofotografico" target="_blank" role="tab"><i class="fa fa-book" aria-hidden="true"></i></a></li>
         <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
         <li> <a href="http://opendatasicilia.it/2017/04/06/osservare-il-cambiamento-di-una-citta-grazie-alla-cartografia-il-caso-di-palermo" title="Leggi l'aticolo su #opendatasicilia.it" target="_blank" role="tab"><i class="fa fa-bookmark"></i></a></li>  
@@ -288,7 +288,7 @@ L&rsquo;effetto &ldquo;occhio di bue&ldquo; ci permette di vedere come era la ci
  <iframe src="legend_prg/stru_urb/ppe01.html" frameborder="0" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:430px;width:100%;position:absolute;top:780px;left:0px;right:0px;bottom:0px" ></iframe>
           </div>
 	  
-	         <!-- Tab prg62 -->
+<!-- Tab prg62 -->
       <div class="sidebar-pane" id="prg62">
         <h2 class="sidebar-header">Piano Regolatore Generale 1962<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
             <p class="lorem"><strong>Data:</strong> 1962 <strong>scala:</strong> 1:5000<br><br>
@@ -413,10 +413,14 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 
 <!-- Tab Storia -->
       <div class="sidebar-pane" id="storia">
-      <h2 class="sidebar-header">Cenni storici<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
-<!-- palermo Merelli -->	
+      <h2 class="sidebar-header">Cenni storici<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+	  <!-- palermo Merelli -->	
  	  <p class="lorem"> <strong>Gabriele Merelli. Descrittione del Regno di Sicilia..., 1677. Pianta di Palermo. Torino. Biblioteca Reale</strong></p>  
-	  <img src="legend/storia/Merelli.jpg" width="370" height="auto" title=">Gabriele Merelli. Descrittione del Regno di Sicilia..., 1677. Pianta di Palermo. Torino. Biblioteca Reale" class="clip_resize" alt="Gabriele Merelli. Descrittione del Regno di Sicilia..., 1677. Pianta di Palermo. Torino. Biblioteca Reale"/>   <br />  
+	  <img src="legend/storia/Merelli.jpg" width="370" height="auto" title=">Gabriele Merelli. Descrittione del Regno di Sicilia..., 1677. Pianta di Palermo. Torino. Biblioteca Reale" class="clip_resize" alt="Gabriele Merelli. Descrittione del Regno di Sicilia..., 1677. Pianta di Palermo. Torino. Biblioteca Reale"/>   <br /> 
+<p class="lorem"><strong>Libro consigliato:<br /><a href="https://www.laterza.it/scheda-libro/?isbn=9788842016618" Title="Le città nella storia d'Italia | Palermo" target="_blank">Le città nella storia d'Italia | Palermo</a> </strong> di Cesare De Seta e Leonardo Di Mauro - Editori Laterza.<br />
+La morfologia primo del territorio. L'insediamento punico. La città romana e bizantina.<br />La città islamica: le moschee, le fortezze, i bagni e i mercati. Età normanno sveva e le nuove scelte urbanistiche. Splendore e decadenza durante il regno di Federico II. Le grandi famiglie feudali del XIV e XV secolo. Le attività economiche e la vita culturale nel viceregno aragonese.<br /> Il viceregno spagnolo, la Controriforma e lo sviluppo dell'edilizia religiosa.<br />Il riformismo settecentesco. La dominazione sabauda e quella austriaca. Le ville extra-urbane e i giardini. La restaurazione ottocentesca. I moti del '48 e l'Unità.<br />I nuovi piani. Ernesto Basile e la città dei primi decenni del Novecento.
+</p>
+	  <br />  
 	    <hr>	 
 <!-- palermo 1580 -->	  
 		 <p class="lorem"> <strong>Città di Palermo 1580 - carta di Maiocco e Bonifacio | Fonte: gallica.bnf.fr / BnF</strong></p>  
@@ -449,9 +453,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 	    <img src="legend/storia/palermo_1882.jpg" width="370" height="auto" title="Città di Palermo 1882 | 1:1000 -  Fonte: gallica.bnf.fr / BnF" class="clip_resize" alt="Città di Palermo 1882 | 1:1000"/>   <br />
 	  <p class="lorem">E' la "Nuova Pianta della Città di Palermo" nell'edizione del 1882, realizzata dai litografi Bizzarrilli & Sanzò per l’editore Luigi Pedone Lauriel.<br />Una carta di produzione interamente palermitana, con una grafica sicuramente più “spartana” rispetto ad altre dell’epoca, mancando ad esempio una rappresentazione sistematica dei giardini.<br />D’altro canto, appare molto accurato l’elenco di voci descrittive, con una suddivisione per tipologia particolarmente varia (sono presenti tra gli altri gli “Istituti di educazione e di istruzione”, gli “Stabilimenti industriali”, gli “Istituti scientifici” ed un breve elenco di servizi “Pel viaggiatore”); tale caratteristica della pianta mi sembra molto compatibile con la sua natura di prodotto “a chilometro zero”. La tabella si conclude con una «Osservazione.<br />Le vie segnate con linee puntegiate sono quelle percorse dai Tramways».<br />Che erano i tram a cavalli, con sette linee ferrate attivate tra il 1878 e il 1881; la carta di Pedone Lauriel è la prima a riportare tale nuova rete di trasporto pubblico. <br /><br />	Post Facebook di: <strong><a href="https://www.facebook.com/groups/palermodiunavolta/posts/10159661832978007/" Title="Piero Genova" target="_blank">Piero Genova</a> per il Gruppo   <a href="https://www.facebook.com/groups/palermodiunavolta" Title="Palermo di Una Volta" target="_blank">Palermo di Una Volta</a></strong></p> 
 	  <hr>
-<p class="lorem"><strong>Libro consigliato:<br /><a href="https://www.laterza.it/scheda-libro/?isbn=9788842016618" Title="Le città nella storia d'Italia | Palermo" target="_blank">Le città nella storia d'Italia | Palermo</a> </strong> di Cesare De Seta e Leonardo Di Mauro - Editori Laterza.<br />
-La morfologia primo del territorio. L'insediamento punico. La città romana e bizantina.<br />La città islamica: le moschee, le fortezze, i bagni e i mercati. Età normanno sveva e le nuove scelte urbanistiche. Splendore e decadenza durante il regno di Federico II. Le grandi famiglie feudali del XIV e XV secolo. Le attività economiche e la vita culturale nel viceregno aragonese.<br /> Il viceregno spagnolo, la Controriforma e lo sviluppo dell'edilizia religiosa.<br />Il riformismo settecentesco. La dominazione sabauda e quella austriaca. Le ville extra-urbane e i giardini. La restaurazione ottocentesca. I moti del '48 e l'Unità.<br />I nuovi piani. Ernesto Basile e la città dei primi decenni del Novecento.
-</p>
+
  </div>
  
  <!-- Tab info -->
