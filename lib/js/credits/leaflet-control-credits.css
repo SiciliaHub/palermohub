@@ -10,9 +10,10 @@
     background-position:100% 0;
 
     background-color:#ffffff00;
-   /* opacity:0.90;*/
+   /* opacity:0.90;
+   border:1px solid rgba(255, 153, 0, 0.5); */
     border-radius:3px;
-    border:1px solid rgba(255, 153, 0, 0.5);
+    
 
     cursor:pointer;
 }
@@ -33,4 +34,5 @@
     border-radius:3px;
     margin-top:0px;
     line-height:19px;
+	 border:1px solid rgba(255, 153, 0, 0.5);
 }
