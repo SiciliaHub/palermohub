@@ -76,6 +76,10 @@
 a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
 </style>       
 
+ <!-- creditis  -->
+<link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
+<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
+
 <!-- script mappa -->
 <script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
 <script src="lib/js/qgi2web/leaflet.js"></script>
@@ -469,6 +473,14 @@ L.control.layers({},{'<span class="legenda1">&nbsp;#OpenDataSicilia - Palermo Hu
             tileY: 0,
             tileZ: 1
         }));
+		
+		<!-- credits -->   
+var credctrl = L.controlCredits({
+    image: "lib/images/opendatasicilia_dredits.png",
+    link: "http://opendatasicilia.it/",
+    text: "Interactive mapping<br/>by opendatasicilia"
+}).addTo(map);
+		
         </script>
 
  
@@ -476,10 +488,10 @@ L.control.layers({},{'<span class="legenda1">&nbsp;#OpenDataSicilia - Palermo Hu
 
 <script src="lib/js/social/jquery_csbuttons.js"></script>
 </div>  
-   <!-- loghi -->    
+   <!-- loghi  
 <div id="tavolab"></div>           
 <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
-<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  
+<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>   -->  
 <!-- beta version    
  <div id="beta"><img src="legend/beta.png" alt="beta version" width="80" border="0" title="beta version"></a></div> --> 
    <!-- Go to www.addthis.com/dashboard to customize your tools --> 

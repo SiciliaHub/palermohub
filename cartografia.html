@@ -65,6 +65,10 @@
 <link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
 <link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
 
+ <!-- creditis  -->
+<link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
+<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
+
 <!-- css remoto -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
@@ -881,16 +885,22 @@ L.control.layers(baseMaps,{'<span class="legenda1">&nbsp;#OpenDataSicilia - Pale
             tileZ: 1
         }));
 		
+		<!-- credits -->   
+var credctrl = L.controlCredits({
+    image: "lib/images/opendatasicilia_dredits.png",
+    link: "http://opendatasicilia.it/",
+    text: "Interactive mapping<br/>by opendatasicilia"
+}).addTo(map);
 
         </script>
       
 
 <script src="lib/js/social/jquery_csbuttons.js"></script>
 </div>  
-   <!-- loghi -->    
+   <!-- loghi  
 <div id="tavolab"></div>           
 <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
-<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  
+<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  -->   
 <!-- beta version     
  <div id="beta"><img src="legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> -->
    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
