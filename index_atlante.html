@@ -55,7 +55,7 @@
 <link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Basemaps2.css" rel="stylesheet" type="text/css">
-
+<link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
  <!-- css popup  -->
   <!--  -->
   <link rel="stylesheet" href="lib/js/popup/jquery.flythat.css" /> 
@@ -78,7 +78,7 @@
 <script src="atlante/js/tileoverlay/leaflet-tileoverlay-mask.js"></script>
 <script src="atlante/js/social/jquery_csbuttons.js"></script>
 <script src="lib/js/mouseposition/LControlMousePosition.js"></script>
-
+<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
 <script src="atlante/js/basemap/L.Control.Basemaps_02.js"></script>
 
   <!-- script automatico mobile/desktop --> 
@@ -523,6 +523,7 @@ Un ringraziamento particolare va a <a href="https://twitter.com/napo" target="_b
                    <li><p class="lorem"><a href="http://mapwarper.net/" title="Map Warper" target="_blank">Map Warper</a>, è uno strumento open source per georeferenziare immagini, nato grazie al <a href="https://github.com/timwaters/mapwarper" title="timwaters/mapwarper" target="_blank">contributo</a> del progetto <a href="https://github.com/nypl-spacetime/" title="progetto spacetime" target="_blank">spacetime</a> della <a href="https://github.com/NYPL" title="Biblioteca Comunale di New York" target="_blank">Biblioteca Comunale di New York</a>,  sviluppato, ospitato e mantenuto da <a href="https://twitter.com/tim_waters" title="Tim Waters" target="_blank">Tim Waters</a>;<br><br></li></p>
           <li><p class="lorem"><a href="https://github.com/mrmrs/btns" title="btns" target="_blank">Btns</a>, è un piccolo modulo CSS che permette di inserire pulsanti reattivi.<br><br></li></p>
           <li><p class="lorem"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet.Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa.<br><br></li>
+		  <li><p class="lorem2"><a href="https://github.com/GreenInfo-Network/Leaflet-Control-Credits" title="Leaflet pattern" target="_blank">Leaflet Credits</a>, plugin per leaflet per la visualizzazione dei crediti nell'angolo;<br><br></li></p>
 <li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
 <li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
           </p>
@@ -758,7 +759,12 @@ var layerControl = new L.Control.Layers(overlaysmap);
             tileY: 0,
             tileZ: 1,
 		    }));
-
+<!-- credits -->   
+var credctrl = L.controlCredits({
+    image: "lib/images/opendatasicilia_dredits.png",
+    link: "http://opendatasicilia.it/",
+    text: "Interactive mapping<br/>by opendatasicilia"
+}).addTo(map);
         </script>
          <!-- header -->       
 <div id="titolo"class="leaflet-control"> 
@@ -768,10 +774,10 @@ var layerControl = new L.Control.Layers(overlaysmap);
     <!-- popup --> 
 <script src="lib/js/popup/jquery.flythat.min.js"></script>
        
-   <!-- loghi -->    
+   <!-- loghi    
 <div id="tavolab"></div>           
 <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
-<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div> 
+<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div> --> 
  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
 </body>
