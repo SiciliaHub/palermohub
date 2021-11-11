@@ -65,9 +65,8 @@
 <link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
 <link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
 
- <!-- creditis  -->
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
-<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
+
 
 <!-- css remoto -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -106,6 +105,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <script src="lib/js/basemap/L.Control.Basemaps.js"></script>
 <script src="lib/js/print/leaflet.easyPrint.js"></script>
 <script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
 
   <!-- script automatico mobile/desktop --> 
 <script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
@@ -855,7 +855,8 @@ L.control.layers(baseMaps,{'<span class="legenda1">&nbsp;#OpenDataSicilia - Pale
 '<img src="legend/5k_1.png" /><span class="legenda1">&nbsp;&nbsp;5k</span>': layer_5k_1,
 '<img src="legend/10k_0.png" /><span class="legenda1">&nbsp;&nbsp;10k</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia"><br /><br />': layer_10k_0,
 
- 
+
+
 }).addTo(map);
       setBounds();
 		
@@ -890,7 +891,7 @@ var credctrl = L.controlCredits({
     image: "lib/images/opendatasicilia_dredits.png",
     link: "http://opendatasicilia.it/",
     text: "Interactive mapping<br/>by opendatasicilia"
-}).addTo(map);
+	}).addTo(map);
 
         </script>
       
