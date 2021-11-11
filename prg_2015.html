@@ -10,12 +10,14 @@
 		<!-- <script src="http://joker-x.github.io/Leaflet.geoCSV/lib/leaflet.js"></script>
     <script src="http://labmod.org/maps/trento1915/leaflet-hash.js"></script>
     <script src="http://frogcat.github.io/leaflet-tilelayer-mask/leaflet-tilelayer-mask.js"></script>-->
+	
+<link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
     
 <script type="text/javascript" src="atlante/js/leaflet/leaflet.js"></script>
 <script src="atlante/js/hash/leaflet-hash.js"></script>
 <script src="atlante/js/tileoverlay/leaflet-tileoverlay-mask.js"></script>
-    <script src="http://joker-x.github.io/Leaflet.geoCSV/lib/jquery.js"></script>
-
+<script src="http://joker-x.github.io/Leaflet.geoCSV/lib/jquery.js"></script>
+<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
     <style type="text/css">
         body, html {
             height: 100%;
@@ -88,11 +90,17 @@ var zoniz =L.tileLayer('https://gbvitrano.it/qgis/variante_generale/tiles/zoniz/
          }).zoomControl.setPosition("topleft");
 
 	        var hash = new L.Hash(map);
+<!-- credits -->   
+var credctrl = L.controlCredits({
+    image: "lib/images/opendatasicilia_dredits.png",
+    link: "http://opendatasicilia.it/",
+    text: "Interactive mapping<br/>by opendatasicilia"
+}).addTo(map);
 
         </script>
-         <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<!--         <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
 <img src="prg_2025/legend/opendatasicilia.png" width="48px" title="opendatasicilia.it" alt="opendatasicilia"></a></div>
-<div id="legenda"><a class="legenda" href="#leg" title="Legenda dello schema di massima del PRG Palermo 2025"><img src="prg_2025/legend/ico_leg.png" width="64" height="64" alt=""/></a></div>
+<div id="legenda"><a class="legenda" href="#leg" title="Legenda dello schema di massima del PRG Palermo 2025"><img src="prg_2025/legend/ico_leg.png" width="64" height="64" alt=""/></a></div>--> 
 <div id="leg" class="overlay">
   <div class="popup">
     <a class="close" href="#" title="Clicca qui per chiudere">&times;</a>
