@@ -455,11 +455,20 @@ La morfologia primo del territorio. L'insediamento punico. La città romana e bi
 	  <!-- palermo 1862 -->	
  <p class="lorem"> <strong>Nuova pianta della Città di Palermo 1862 1:10k | Fonte: Harvard Map Collection, Harvard University</strong></p>  
 	    <img src="legend/storia/palermo_1862.jpg" width="370" height="auto" title="Nuova pianta della Città di Palermo 1862 1:10k | Fonte: Harvard Map Collection, Harvard University" class="clip_resize" alt="Nuova pianta della Città di Palermo 1891"/>   <br /><br />
-	  <p class="lorem">La carta, quasi certamente di produzione italiana (non riporta alcuna informazione relativa all'edizione), risale agli anni Sessanta dell’Ottocento.<br />L'indubbio modello è la carta, la prima dell'epoca post-unitaria, fatta redarre nel 1862 dal prefetto Torelli (grazie per la correzione ad Antonino D'Amico); ne riporta anche un clamoroso errore, “Piano degli Otto” per “Piano degli Orti”.<br /> Rispetto al modello la rappresentazione è, fatto singolare, del tutto priva dei territori extramurari a sud e ad ovest; l’estensione verso nord è, in compenso, più ampia di quanto necessario per comprendere il porto.<br /> Un aspetto interessante per una carta generale della città (ma non inedito: è presente in particolare nella “Pianta geometrica” del Villabianca, 1777), è la presenza del “colore bleu (che) corrisponde alle parti della città le quali fino alla seconda metà del 12° secolo erano occupate dal mare”.<br /> Ultima annotazione: le vie della città murata sono indicate con un numero, ma il file che ho disposizione non contiene la relativa legenda. Il post comprende la pianta intera ed una selezione di particolari.
+	  <p class="lorem">La carta, quasi certamente di produzione italiana (non riporta alcuna informazione relativa all'edizione), risale agli anni Sessanta dell’Ottocento.<br />L'indubbio modello è la carta, la prima dell'epoca post-unitaria, fatta redarre nel 1862 dal prefetto Torelli (grazie per la correzione ad Antonino D'Amico); ne riporta anche un clamoroso errore, “Piano degli Otto” per “Piano degli Orti”.<br /> Rispetto al modello la rappresentazione è, fatto singolare, del tutto priva dei territori extramurari a sud e ad ovest; l’estensione verso nord è, in compenso, più ampia di quanto necessario per comprendere il porto.<br /> Un aspetto interessante per una carta generale della città (ma non inedito: è presente in particolare nella “Pianta geometrica” del Villabianca, 1777), è la presenza del “colore bleu (che) corrisponde alle parti della città le quali fino alla seconda metà del 12° secolo erano occupate dal mare”.<br /> Ultima annotazione: le vie della città murata sono indicate con un numero, ma il file che ho disposizione non contiene la relativa legenda. 
 	  <br /><br />Descrizione di: <strong><a href="https://www.facebook.com/groups/palermodiunavolta/posts/10159657462548007/" Title="Piero Genova" target="_blank">Piero Genova</a> per il Gruppo   <a href="https://www.facebook.com/groups/palermodiunavolta" Title="Palermo di Una Volta" target="_blank">Palermo di Una Volta</a></strong></p> 
 	 <p class="lorem"><strong> KML: </strong><a href="https://mapwarper.net/maps/60203.kml" Title="Scarica il file KML per visualizzarlo con Google Earth" target="_blank">Download KML file </a></p> 
-
 	  <hr>		
+	  <!-- palermo 1877 -->	
+ <p class="lorem"> <strong>Costa nord, Baia di Palermo 1877 1:36,417 | Fonte: Wisconsin-Milwaukee University</strong></p>  
+	    <img src="legend/storia/palermo_1877.jpg" width="370" height="auto" title="Costa nord, Baia di Palermo 1877 1:36,417 | Fonte: Wisconsin-Milwaukee University" class="clip_resize" alt="Costa nord, Baia di Palermo 1877"/>   <br /><br />
+	  <p class="lorem">La mappa non riguardando la sola città ma un territorio molto più vasto, con l'intera Conca d'Oro e dintorni. “Palermo Bay” (con all’interno, in una scala di tre volte maggiore, “Port of Palermo”) è una splendida carta nautica inglese del 1877 (con “correzioni” fino al 1899), pubblicata dall’Ammiragliato britannico.<br />
+	  La ricchezza di particolari, che in questo genere di carte è più che altro limitata ai fondali marini ed alla linea costiera, qui è in un certo qual modo estesa anche all'entroterra (non mancando comunque le imprecisioni, in parte consistenti in fantasiose storpiature dei nomi, un classico delle carte straniere d’epoca). L’immagine intera è seguita da una serie (incompleta) di particolari.<br />
+	  N.B. Le quote sul livello del mare sono espresse in piedi (un piede equivale a 0,3048 metri) e le misurazioni dei fondali in braccia (un braccio equivale a sei piedi).
+	 <br /><br />Descrizione di: <strong><a href="https://www.facebook.com/groups/palermodiunavolta/posts/10159675725518007/" Title="Piero Genova" target="_blank">Piero Genova</a> per il Gruppo   <a href="https://www.facebook.com/groups/palermodiunavolta" Title="Palermo di Una Volta" target="_blank">Palermo di Una Volta</a></strong></p> 
+	 <p class="lorem"><strong> KML: </strong><a href="https://mapwarper.net/maps/60399.kml" Title="Scarica il file KML per visualizzarlo con Google Earth" target="_blank">Download KML file </a></p> 
+	  <hr>	
+
 	  <!-- palermo 1882 -->	
  <p class="lorem"> <strong>Città di Palermo 1882 | 1:1000 -  Fonte: gallica.bnf.fr / BnF</strong></p>  
 	    <img src="legend/storia/palermo_1882.jpg" width="370" height="auto" title="Città di Palermo 1882 | 1:1000 -  Fonte: gallica.bnf.fr / BnF" class="clip_resize" alt="Città di Palermo 1882 | 1:1000"/>   <br /><br />
@@ -593,7 +602,14 @@ var basemaps = [
  minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
  label: 'Pianta topografica | Palermo 1860 circa | Harvard Map Collection, Harvard University',
  iconURL: 'legend/basemap/1860_clip.jpg'
-              }),				  			  
+              }),				  			
+
+ L.tileLayer('https://mapwarper.net/maps/tile/60203/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Costa nord, Baia di Palermo 1877',
+ minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
+ label: 'Costa nord, Baia di Palermo 1877 1:36,417 | Fonte: Wisconsin-Milwaukee University',
+ iconURL: 'legend/basemap/1877_clip.jpg'
+              }),	
 			  
  L.tileLayer('https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png', {
  attribution: 'Base cartografica: Città di Palermo 1882',
@@ -687,7 +703,7 @@ var basemaps = [
 <!-- muose coordinate -->
 L.control.mousePosition().addTo(map);				
   map.on("mousemove", function(e) {
-  palermo1580.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1754.setCenter(e.containerPoint.x, e.containerPoint.y); nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1860.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1891.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  palermo1580.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1754.setCenter(e.containerPoint.x, e.containerPoint.y); nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1860.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1877.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1891.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); 
   sas.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y);  City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); 
   prg04.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); osm.setCenter(e.containerPoint.x, e.containerPoint.y); google.setCenter(e.containerPoint.x, e.containerPoint.y); googlesat.setCenter(e.containerPoint.x, e.containerPoint.y);
          })
@@ -712,13 +728,15 @@ var palermo1754 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60176/{z}/{x
 
 var palermo1860 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60203/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Pianta topografica | Palermo 1860 circa | Fonte: Harvard Map Collection, Harvard University - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, });
-
+	  
+var palermo1877 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60399/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Costa nord, Baia di Palermo 1877 1:36,417 | Fonte: Wisconsin-Milwaukee University - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, });	  
+	  
 var nuova = L.tileLayer.mask("https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Nuova pianta della Città di Palermo 1:1k | Seconda edizione Riveduta 1882 Luigi Pedone Laurieri - Editore | Lit. Bizzarrelli & Sanzò - Fonte: gallica.bnf.fr / BnF Bibliothèque nationale de France - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, });
 	  
 var palermo1891 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60209/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Nuova pianta della Città di Palermo 1891 1:10k | Carlo Clausen, editore | Fonte: Harvard Map Collection, Harvard University - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, });
-
 	  
  var palermo1893 = L.tileLayer.mask("https://mapwarper.net/maps/tile/19658/{z}/{x}/{y}.png ", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - 1893 | 1:13K - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
@@ -758,7 +776,7 @@ var ppecs = L.tileLayer.mask("https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Piano Particolareggiato Esecutivo del centro storico di Palermo - Palermo 1:500 - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
 
-var overlaysmap = {'Città di Palermo 1580 | Fonte: gallica.bnf.fr / BnF':palermo1580, 'Città di Palermo 1754 | Fonte: Library of Congress Geography and Map Division Washington':palermo1754, 'Pianta topografica | Palermo 1860 circa | Fonte: Harvard Map Collection, Harvard University ': palermo1860,  'Città di Palermo 1882 | 1:1k Fonte: gallica.bnf.fr / BnF':nuova, 'Nuova pianta della Città di Palermo 1891 1:10k | Fonte: Harvard Map Collection, Harvard University': palermo1891, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500 ': ppecs, 'Variante Generale 2004 | 1:5k (max zoom 17) <hr> <strong>U.S. Army:</strong> <br>': prg04, 'Map Service, 1941 Series 4229 | Palermo 1:50k ' : Palermo_50k, 			
+var overlaysmap = {'Città di Palermo 1580 | Fonte: gallica.bnf.fr / BnF':palermo1580, 'Città di Palermo 1754 | Fonte: Library of Congress Geography and Map Division Washington':palermo1754, 'Pianta topografica | Palermo 1860 circa | Fonte: Harvard Map Collection, Harvard University ': palermo1860,  'Città di Palermo 1882 | 1:1k Fonte: gallica.bnf.fr / BnF':nuova, 'Costa nord, Baia di Palermo 1877 1:36,417 | Fonte: Wisconsin-Milwaukee University': palermo1877, 'Nuova pianta della Città di Palermo 1891 1:10k | Fonte: Harvard Map Collection, Harvard University': palermo1891, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500 ': ppecs, 'Variante Generale 2004 | 1:5k (max zoom 17) <hr> <strong>U.S. Army:</strong> <br>': prg04, 'Map Service, 1941 Series 4229 | Palermo 1:50k ' : Palermo_50k, 			
 					'Map Service, 1943-1944 | City Plans Palermo 1:10k <hr>':City_Plans_Palermo, 'OpenStreetMap':osm, 'Google':google, 'Google satellite':googlesat,
 				   };
 <!-- credits -->   
