@@ -122,28 +122,32 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 			<div   ex:role="facet"
 				ex:facetClass="Cloud"
 				ex:expression=".tag"
-			     ex:facetLabel="Tag">
-			<!--	ex:sortMode="count" -->
+			     ex:facetLabel="Tag"
+				ex:sortMode="count">
 			</div> 
      			</div>
 			<div class="col-md-2 column"><br />
 				<div ex:role="facet"
 				ex:expression=".collaborazione"
-				ex:facetLabel="Autore">
+				ex:facetLabel="Autore" 
+				ex:sortDescending="true">
 				<!--	ex:sortMode="count" -->
 				</div>
 			</div>
             <div class="col-md-2 column"><br />
 				<div ex:role="facet"
 				ex:expression=".categoria"
-				ex:facetLabel="Categoria">
+				ex:facetLabel="Categoria"
+				ex:sortDescending="true">
 				<!--	data-ex-missing-label="Non specificato" -->
 				</div>
 			</div>
              <div class="col-md-2 column"><br />
 				<div ex:role="facet"
 				ex:expression=".territorio"
-				ex:facetLabel="Territorio" >
+				ex:facetLabel="Territorio" 
+				ex:sortDescending="true"
+				>
 				<!--	data-ex-missing-label="Non specificato" -->
 				</div>
 			</div>
@@ -168,7 +172,8 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
                <div class="col-md-2 column"><br />
 				<div ex:role="facet"
 				ex:expression=".fontedati"
-				ex:facetLabel="Fonte Dati">
+				ex:facetLabel="Fonte Dati"
+				ex:sortDescending="true">
 				<!--	data-ex-missing-label="Non specificato" -->
 				<!-- ex:sortMode="count"-->  
 				</div>
