@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Easy example | CartoDB.js</title>
+    <title>Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2020</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
     <style> html, body, #map { height:100%; padding:0; margin:0 } </style>
     <link rel="stylesheet" href="https://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
   </head>
@@ -16,7 +17,7 @@
 
     <script>
       function main() {
-        var url = 'https://gbvitrano.carto.com/api/v2/viz/ded425b1-42be-48d2-ad39-57f18c5dae0e/viz.json';
+        var url = 'https://palermohub.opendatasicilia.it/viz.json';
 
 
         cartodb.createVis('map', url, {
@@ -25,15 +26,7 @@
           layer_selector: true,
           https: true
         })
-        .done(function(vis, layers) {
 
-          // Set max zoom
-          vis.map.set({
-            minZoom: 11,
-            maxZoom: 14
-          });
-
-        })
         .error(function(err) {
           console.log(err);
         });
