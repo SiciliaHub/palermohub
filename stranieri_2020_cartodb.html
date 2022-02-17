@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2020 Mappa a densità di punti - Rielaborazione dati OpenDataSicilia</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+   <!--  <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" /> -->
+    <style> html, body, #map { height:100%; padding:0; margin:0 } </style>
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+  </head>
+  <body>
+    <div id="map"></div>
+    
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+    <script>
+      function main() {
+        var url = 'https://gbvitrano.carto.com/api/v2/viz/ded425b1-42be-48d2-ad39-57f18c5dae0e/viz.json';
+
+
+        cartodb.createVis('map', url, {
+          search: true,
+          tiles_loader: true,
+          layer_selector: true,
+          https: true
+        })
+        .done(function(vis, layers) {
+
+          // Set max zoom
+          vis.map.set({
+            minZoom: 12,
+            maxZoom: 14
+          });
+
+        })
+        .error(function(err) {
+          console.log(err);
+        });
+      }
+ 
+      window.onload = main;
+    </script>
+  </body>
+</html>
