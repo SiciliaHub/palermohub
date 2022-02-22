@@ -1,6 +1,6 @@
 # PalermoHub
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <a href="https://siciliahub.github.io/palermohub/index.html/"><img width="1000" src="https://coseerobe.gbvitrano.it/rec/wp-content/uploads/2016/11/palermo_hub01-1.jpg" Title="Palermo Hub è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali." /></a><br>
 
@@ -23,6 +23,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://medium.com/@aborruso"><img src="https://avatars.githubusercontent.com/u/30607?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrea Borruso</b></sub></a><br /><a href="#question-aborruso" title="Answering Questions">💬</a> <a href="#ideas-aborruso" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-aborruso" title="Project Management">📆</a></td>
+    <td align="center"><a href="https://github.com/for"><img src="https://avatars.githubusercontent.com/u/7262123?v=4?s=100" width="100px;" alt=""/><br /><sub><b>for</b></sub></a><br /><a href="#ideas-for" title="Ideas, Planning, & Feedback">🤔</a></td>
   </tr>
 </table>
 
