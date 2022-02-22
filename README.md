@@ -1,4 +1,7 @@
 # PalermoHub
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <a href="https://siciliahub.github.io/palermohub/index.html/"><img width="1000" src="https://coseerobe.gbvitrano.it/rec/wp-content/uploads/2016/11/palermo_hub01-1.jpg" Title="Palermo Hub è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali." /></a><br>
 
 Palermo Hub di [**opendatasicilia.it**](http://opendatasicilia.it/) è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali. <br> a cura di
@@ -9,3 +12,23 @@ Palermo Hub di [**opendatasicilia.it**](http://opendatasicilia.it/) è un conten
 
 [![foto](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
 Attribuzione - Condividi allo stesso modo 4.0 Internazionale [(CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://medium.com/@aborruso"><img src="https://avatars.githubusercontent.com/u/30607?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Andrea Borruso</b></sub></a><br /><a href="#question-aborruso" title="Answering Questions">💬</a> <a href="#ideas-aborruso" title="Ideas, Planning, & Feedback">🤔</a> <a href="#projectManagement-aborruso" title="Project Management">📆</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

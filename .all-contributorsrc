@@ -1,0 +1,26 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "aborruso",
+      "name": "Andrea Borruso",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30607?v=4",
+      "profile": "https://medium.com/@aborruso",
+      "contributions": [
+        "question",
+        "ideas",
+        "projectManagement"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "palermohub",
+  "projectOwner": "SiciliaHub",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
