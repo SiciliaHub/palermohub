@@ -15,6 +15,15 @@
         "ideas",
         "projectManagement"
       ]
+    },
+    {
+      "login": "cirospat",
+      "name": "ciro spataro",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3757525?v=4",
+      "profile": "http://cirospat.readthedocs.io",
+      "contributions": [
+        "ideas"
+      ]
     }
   ],
   "contributorsPerLine": 7,
