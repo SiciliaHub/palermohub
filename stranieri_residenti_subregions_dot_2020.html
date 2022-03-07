@@ -15,22 +15,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="shortcut icon" href="favicon.ico"/> 
         <link rel="icon" href="favicon.png" type="image/png"/> 
-
- <!-- css menu  -->
-<!-- Bootstrap -->
-
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="lib/css/extra_ods.css" rel="stylesheet" type="text/css">
-<link href="lib/css/tooltips.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-body {
-	background-color: #FFFFFF;
-	 overflow-y:hidden;
-		}
-
-</style>
-
+	
   <!-- script mappa remoto -->  
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 
@@ -49,7 +34,7 @@ body {
 <meta property="og:description" content="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2020 Mappa a densità di punti - Rielaborazione dati OpenDataSicilia"" />
 <meta property="og:url" content="http://siciliahub.github.io/palermohub/stranieri_residenti_subregions_dot_2020.html" />
 <meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
-<meta property="og:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/stranieri_residenti_subregions_dot_2020.jpg" />
+<meta property="og:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/stranieri_residenti_subregions_dot_2020_01.jpg" />
 <meta property="og:site_name" content="palermohub.opendatasicilia.it" />
 <!-- Open Graph Protocol -->
 
@@ -57,13 +42,31 @@ body {
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
 <meta name="twitter:description" content="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2020 Mappa a densità di punti - Rielaborazione dati OpenDataSicilia"">
-<meta name="twitter:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/stranieri_residenti_subregions_dot_2020.jpg">
+<meta name="twitter:image" content="http://siciliahub.github.io/palermohub/legend/clip_index/stranieri_residenti_subregions_dot_2020_01.jpg">
 <meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
 <meta name="twitter:site" content="palermohub.opendatasicilia.it" />
 <meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
-<!-- twitter --> 
+<!-- twitter --> 	
+	
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
 
-</head>
+		<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
+<!-- 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> -->
+
+  </head>
+
 <body>
  <!-- header -->    
 <header>
@@ -73,15 +76,18 @@ body {
 
   <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe simili&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="stranieri_residenti_suregions.html" title="Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018" target="_parent"><strong>Stranieri residenti a Palermo aggregati per Circoscrizioni e Subregions - 2018</ strong></a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="stranieri_residenti_subregions_dot.html" title="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018 Mappa a densità di punti (official data)" target="_parent"><strong>Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2018</strong></a><br>
     </div>
-	 <script>
+ <script>
 $(document).ready(function(){
   $("#vn-click").click(function(){
     $("#vn-info").slideToggle(250);
   });
 });
 </script> 
+</div> 
+     
 </header>
- <iframe src="https://palermohub.opendatasicilia.it/stranieri_2020_cartodb.html" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:91.8%;width:100%;position:absolute;top:75px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+	  
+	  
 <script>
     $(document).ready(function () {
         $("div[data-includeHTML]").each(function () {                
@@ -89,7 +95,257 @@ $(document).ready(function(){
         });
     });
 </script>
-   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+
+   <div id="sidebar" class="sidebar collapsed">
+         <!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li ><a href="https://opendatasicilia.github.io/palermomeltingpot/" title="Palermo Melting Pot | 2020" target="_blank" role="tab"><i class="fa fa-link"></i></a></li>
+				 <li><a href="#bar"  title="Informazioni"role="tab"><i class="fa fa-bar-chart"></i></a></li>
+				<li><a href="#immago"  title="Immagini"role="tab"><i class="fa fa-picture-o"></i></a></li>
+				<li> <a href="https://data.world/gbvitrano/popolazione-residente-a-palermo-2020" target="_blank" title="Palermo | popolazione residente per cittadinanza e quartiere - 2020" role="tab"><i class="fa fa-database"></i></a></li>
+               <li><a href="https://github.com/opendatasicilia/palermomeltingpot" role="tab" title="Palermo Residenti Stranieri | 2020" target="_blank"><i class="fa fa-github"></i></a></li>
+			  
+            </ul>
+            <ul role="tablist">
+			 <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+<li> <a href="http://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+ <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+          <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="home">
+                <h1 class="sidebar-header">
+                    Palermo Hub - Residenti Stranieri
+                    <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
+                </h1>
+				<p class="legenda">Da dove vengono gli stranieri che vivono a Palermo?"</p> 
+				<p class="lorem2">Gli stranieri residenti a Palermo nel 2020 sono 25.400 e rappresentano 130 Nazionalità provenienti da 5 Continenti, oggi sono il 3,89% della popolazione totale (653.570) e lo 0.7% del totale nazionale, dato che colloca Palermo in decima posizione tra le 14 Città metropolitane per numero di residenti stranieri regolari.</p>
+
+				<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/world_clip.jpg" class="clip_resize" title="Da dove vengono gli stranieri che vivono a Palermo?" border="0" /><br><br>
+				
+<p class="legenda" id="paese-di-provenienza">Paese di provenienza<a href="http://localhost:8000/palermomeltingpot/dove/provenienza/#paese-di-provenienza" title="Permanent link">↵</a></p>
+ <p class="lorem2">I cittadini stranieri, comunitari e non, residenti a Palermo nel 2020 sono <strong>25.400</strong> arrivano da 5 <a href="https://it.wikipedia.org/wiki/Continente" target="_blank">Continenti</a> e rappresentano <strong>130</strong> <a href="https://it.wikipedia.org/wiki/Geoschema_delle_Nazioni_Unite" target="_blank">Nazioni</a>, cosi suddivise:</p>
+<ul>
+  <li>Africa <strong>40</strong></li>
+  <li>America <strong>23</strong></li>
+  <li>Asia <strong>26</strong></li>
+  <li>Europa <strong>39</strong></li>
+  <li>Oceania <strong>2</strong></li>
+</ul>
+ <p class="lorem2">oggi sono il <strong>3,89%</strong> della popolazione totale (653.715).</p>
+  <div class="flourish-embed flourish-hierarchy" data-src="visualisation/8901250"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+ </div>
+
+<!-- Tab info -->
+       <div class="sidebar-pane" id="bar">
+       <h2 class="sidebar-header">Grafici<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2></br>
+	    <p class="lorem2">Per maggiori dettagli, visita: <a href="https://opendatasicilia.github.io/palermomeltingpot/">Residenti stranieri a Palermo - Palermo Melting Pot | 2020 (opendatasicilia.github.io)</a></p>
+		<div class="flourish-embed flourish-hierarchy" data-src="visualisation/8902097"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+		<hr>
+	  <div class="flourish-embed flourish-bar-chart-race" data-src="visualisation/8901734"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+	   <hr>
+	   <div class="flourish-embed flourish-chart" data-src="visualisation/8901754"><script src="https://public.flourish.studio/resources/embed.js"></script></div>
+	    </div>
+		
+		
+		<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+	   </br>
+<p class="lorem2"><strong>Rielaborazione di: </strong><a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a> per <strong><a href="http://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong></p> 
+ <p class="lorem2"><strong>Fonte dati:</strong> <br>
+ <a href="https://opendata.comune.palermo.it/index.php" target="_blank">Portale opendata</a> del <a href="https://www.comune.palermo.it/" target="_blank">Comune di Palermo</a> posiamo scaricare un file <strong><a href="https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1304" target="_blank">zip</a></strong>, con licenza <a href="http://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">CC BY 4.0 IT</a> all'interno si trovano 14 file <a href="https://it.wikipedia.org/wiki/Comma-separated_values" target="_blank">csv</a> con i dati sui residenti stranieri e un file <a href="https://it.wikipedia.org/wiki/Microsoft_Excel" target="_blank">xlsx</a> dove vengono descritti i datadet.</p>
+ <p class="lorem2"><strong>Gli stranieri a Palermo nel 2020 (Analisi del Comune di Palermo)</strong> <br>
+<a href="https://www.comune.palermo.it/palermo-informa-dettaglio.php?id=32307&tipo=1#:~:text=%22A%20Palermo%20risiedono%2025.445%20stranieri,stranieri%20%2D%20scrivono%20nel%20file%20%2D."  target="_blank">Informazioni Statistiche. Gli stranieri a Palermo nel 2020 - Comune di Palermo</a></p>
+ <br><br><br><br><br><br><br><br><br><br><br><br><br><br> <br><br> <br><br> <br>
+ <p class="lorem2"><strong>Licenza <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" Title="CC BY-SA 4.0 - Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0) tranne diversa indicazione" target="_blank">CC BY-SA 4.0</a></strong> - Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0). </p>
+<br>
+<p class="lorem2">  <strong>Note:</strong><br>
+   <em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
+   <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p>
+	    </div>
+
+<!-- Tab immago https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/ -->
+
+<div class="sidebar-pane" id="immago">
+<h2 class="sidebar-header">Residenti Stranieri<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="legenda">Stranieri residenti a Palermo - 2020</p>          
+<p class="lorem2">Stranieri residenti a Palermo aggregati per Aggregati strutturali</p>    
+<p class="lorem2">Per maggiori dettagli, visita: <a href="https://opendatasicilia.github.io/palermomeltingpot/">Residenti stranieri a Palermo - Palermo Melting Pot | 2020 (opendatasicilia.github.io)</a></p>
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/italia_clip.jpg" class="clip_resize" title="Residenti italiani - 628.170" border="0" /><br><br>
+<p class="lorem2">Residenti italiani - 628.170"</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Subregion_clip.jpg" class="clip_resize" title="Residenti stranieri - 25.400" border="0" /><br><br>
+<p class="lorem2">Residenti stranieri - 25.400</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Subregion_Ita_clip.jpg" class="clip_resize" title="Residenti  - 653.570" border="0" /><br><br>
+<p class="lorem2">Residenti - 653.570</p> 
+<hr>
+<p class="lorem2">Stranieri residenti a Palermo aggregati per Aggregati strutturali e Sub-Regions - 2020</p>    
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Africa_settentrionale_clip.jpg" class="clip_resize" title="Africa settentrionale | Northern Africa - 2.193 (8.63%)" border="0" /><br><br>
+<p class="lorem2">Africa settentrionale | Northern Africa - 2.193 (8.63%)</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Africa_subsahariana_clip.jpg" class="clip_resize" title="Africa subsahariana | Sub-Saharan Africa - 5.853 (23.04%)" border="0" /><br><br>
+<p class="lorem2">Africa subsahariana | Sub-Saharan Africa - 5.853 (23.04%)</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/America_Latina_clip.jpg" class="clip_resize" title="America Latina e Caraibi  | Latin America and the Caribbean - 733  (2.89%)" border="0" /><br><br>
+<p class="lorem2">America Latina e Caraibi  | Latin America and the Caribbean - 733  (2.89%)</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Asia_meridionale_clip.jpg" class="clip_resize" title="Asia meridionale | Southern Asia - 8.812 (34.69%)" border="0" /><br><br>
+<p class="lorem2">Asia meridionale | Southern Asia - 8.812 (34.69%)</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Asia_orientale_clip.jpg" class="clip_resize" title="Asia orientale | Eastern Asia - 1.008 (3.97%)" border="0" /><br><br>
+<p class="lorem2">Asia orientale | Eastern Asia - 1.008 (3.97%)</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Asia_sud-orientale_clip.jpg" class="clip_resize" title="Asia sud-orientale | South-eastern Asia - 1.797 (7.07%)" border="0" /><br><br>
+<p class="lorem2">Asia sud-orientale | South-eastern Asia - 1.797 (7.07%)</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Unione_Europea_clip.jpg" class="clip_resize" title="Unione Europea | EU 27 - 4.057 (15.97%)" border="0" /><br><br>
+<p class="lorem2">Unione Europea | EU 27 - 4.057 (15.97%)</p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Stati_fuori_Unione_Europea_clip.jpg" class="clip_resize" title="Stati fuori dall'Unione | Europeans out of EU - 678  (2.67%)" border="0" /><br><br>
+<p class="lorem2">Stati fuori dall'Unione | Europeans out of EU - 678  (2.67%) </p> 
+<img src="https://raw.githubusercontent.com/opendatasicilia/palermomeltingpot/main/docs/img/Other_clip.jpg" class="clip_resize" title="Altre Subregioni | Other Subregion - 269 (1.06%)" border="0" /><br><br>
+<p class="lorem2">Altre Subregioni | Other Subregion - 269 (1.06%)</p> 
+<hr>
+<p class="lorem2">Dalle mappe e dai grafici emerge che nel centro stroico (quartieri <strong>Palazzo Reale</strong> 2.843– <strong>Monte di Pietà</strong> e <strong>Tribunali</strong> 2.151) c&rsquo;è la maggior presenza di residenti stranieri con 4.994 residenti pari al 19.62% , seguono i quartieri di:</p>
+<p class="lorem2"><ul>
+  <li>Oreto Stazione 4.261 residenti – 16.75%;</li>
+  <li>Politeama 3.556 residenti – 13.98%;</li>
+  <li>Zisa 2.511 residenti – 9.87%;</li>
+  <li>Noce 2.226 residenti – 8.75%;</li>
+  <li>Libertà 1.505 residenti – 5.91%.</li>
+</ul></p>
+<p class="lorem2">che da soli ospitano <strong>19.053</strong> residenti, pari al <strong>74.87%</strong> del totale dei residenti (25.400)</p>
+</div>	
+	
+	
+	<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem2">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="http://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+
+<li><p class="lorem2"><a href="http://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
+<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
+<li><p class="lorem2"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a>plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</li></p>
+<li><p class="lorem2"><a href="http://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem2"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem2"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar v2" target="_blank">Sidebar v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet MousePosition" target="_blank">Leaflet MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet graphicscale" target="_blank">Leaflet graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;</li></p>
+<li><p class="lorem2"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet PolylineMeasure" target="_blank">Leaflet PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</li></p>
+<li><p class="lorem2"><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet zoomhome" target="_blank">Leaflet zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem2"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</li></p>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="http://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+      </ul> </div></div> </div>  
+
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+    <!-- include cartodb.js library -->
+    <script src="https://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+
+      <script>
+      function main() {
+        var map = new L.Map('map', {
+          zoomControl: true,
+          center: [38.1,13.4],
+        zoom: 12
+        });
+
+        L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
+          attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
+		  minZoom: 12, maxZoom: 15,
+        }).addTo(map);
+
+        cartodb.createLayer(map, 'https://gbvitrano.carto.com/api/v2/viz/ded425b1-42be-48d2-ad39-57f18c5dae0e/viz.json', {
+		 minZoom: 12, maxZoom: 15,
+		 shareable: true,
+        description: false,
+            search: true,
+		 })
+            .addTo(map)
+         .on('done', function(layer) {
+
+          layer.setInteraction(true);
+
+          layer.on('featureOver', function(e, latlng, pos, data) {
+            cartodb.log.log(e, latlng, pos, data);
+          });
+
+          layer.on('error', function(err) {
+            cartodb.log.log('error: ' + err);
+          });
+        }).on('error', function() {
+          cartodb.log.log("some error occurred");
+        });
+      }
+
+      // you could use $(window).load(main);
+      window.onload = main;
+	  
+	  var sidebar = L.control.sidebar('sidebar').addTo(map);
+    </script>
+		
+		</div>  
+		   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
-</body>
+  </body>
 </html>
