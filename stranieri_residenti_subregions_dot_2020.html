@@ -64,6 +64,7 @@
 <link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits_carto.css" />
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
 <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> -->
    
@@ -315,6 +316,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 <script src="lib/js/sidebar/leaflet-sidebar.js"></script>
 <script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>   
 <script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>  
       <script>
       function main() {
         var map = new L.Map('map', {
@@ -322,9 +324,10 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
           center: [38.15,13.35],
         zoom: 12
         });
-	
-		var hash = new L.Hash(map);	
-      var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+	<!-- Controlli mappa -->  
+	var hash = new L.Hash(map);	
+     var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		
 		<!-- credits -->   
 var credctrl = L.controlCredits({
     image: "lib/images/opendatasicilia_dredits.png",
@@ -332,11 +335,32 @@ var credctrl = L.controlCredits({
     text: "Interactive mapping<br/>by opendatasicilia"
 }).addTo(map);
 		
-		L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
+		<!-- L.control.basemaps --> 
+var basemaps = [ 
+L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
-		  minZoom: 12, maxZoom: 15,
-        }).addTo(map);
+		  minZoom: 12, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
+		 //  iconURL: 'legend/basemap/cartodb.png'
+		 }),
+
+L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 12,  maxZoom: 15, maxNativeZoom: 15,label: 'Map tiles by CartoDB'}),
+
+  L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+  attribution: 'Source: Google Satellite - Map data ©2022 Google',
+   minZoom: 12,  maxZoom: 15, maxNativeZoom: 15,
+  label: 'Google Satellite'
+              }),
+			  
+        		]; 
+			
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
 		
+		<!-- mappa cartodb --> 
         cartodb.createLayer(map, 'https://gbvitrano.carto.com/api/v2/viz/ded425b1-42be-48d2-ad39-57f18c5dae0e/viz.json', {
 		 minZoom: 12, maxZoom: 15,
 		 shareable: true,
