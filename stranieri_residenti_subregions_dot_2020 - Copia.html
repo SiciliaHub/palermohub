@@ -373,10 +373,11 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attri
         }));
 		
 		<!-- mappa cartodb --> 
-        cartodb.createLayer(map, 'https://gbvitrano.carto.com/api/v2/viz/ded425b1-42be-48d2-ad39-57f18c5dae0e/viz.json', {
+       cartodb.createVis('map', 'https://gbvitrano.carto.com/api/v2/viz/9a1acd5f-bbd1-41b6-a01d-33d66eceb064/viz.json', {
 		 minZoom: 12, maxZoom: 15,
 		 shareable: true,
-        description: true,
+		  title: false,
+        description: false,
             search: true,
 		 })
             .addTo(map)
