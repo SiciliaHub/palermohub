@@ -55,16 +55,17 @@
         margin: 0;
       }
     </style>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 <link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
 <link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
-
-		<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
-<!-- 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> -->
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
 
+<!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> -->
+   
   </head>
 
 <body>
@@ -298,23 +299,30 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 
 <!-- Mappa  -->
 <div id="map" class="sidebar-map"></div>
-    <!-- include cartodb.js library -->
-    <script src="https://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+<!-- include cartodb.js library -->
+<script src="https://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
+   <!-- script funzioni --> 
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
 <script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>   
 
       <script>
       function main() {
         var map = new L.Map('map', {
-          zoomControl: true,
+          zoomControl: false,
           center: [38.15,13.35],
         zoom: 12
         });
+	
+		var hash = new L.Hash(map);	
+      var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
 
-        L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
+		
+		L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
 		  minZoom: 12, maxZoom: 15,
         }).addTo(map);
-
+		
         cartodb.createLayer(map, 'https://gbvitrano.carto.com/api/v2/viz/ded425b1-42be-48d2-ad39-57f18c5dae0e/viz.json', {
 		 minZoom: 12, maxZoom: 15,
 		 shareable: true,
@@ -340,8 +348,11 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 
       // you could use $(window).load(main);
       window.onload = main;
-	  
+
+	   <!--sidebar -->	
 	  var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+
     </script>
 		
 		</div>  
