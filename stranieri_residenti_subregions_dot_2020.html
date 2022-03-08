@@ -54,7 +54,8 @@
         padding: 0;
         margin: 0;
       }
-    </style>
+	  </style>
+
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
 <link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
@@ -62,7 +63,7 @@
 <link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
-
+<link rel="stylesheet" href="lib/js/credits/leaflet-control-credits_carto.css" />
 <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> -->
    
@@ -305,7 +306,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 <script src="lib/js/qgi2web/leaflet-hash.js"></script>
 <script src="lib/js/sidebar/leaflet-sidebar.js"></script>
 <script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>   
-
+<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
       <script>
       function main() {
         var map = new L.Map('map', {
@@ -316,7 +317,12 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 	
 		var hash = new L.Hash(map);	
       var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
-
+		<!-- credits -->   
+var credctrl = L.controlCredits({
+    image: "lib/images/opendatasicilia_dredits.png",
+    link: "http://opendatasicilia.it/",
+    text: "Interactive mapping<br/>by opendatasicilia"
+}).addTo(map);
 		
 		L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
