@@ -351,9 +351,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 <div id="map" class="sidebar-map"></div>
     <div id="layer_selector" class="cartodb-infobox">
       <ul>
-        <li id="all" class="selected">Tutti i layer</li>
-         <li id="upl">UPL</li>
-	   <li id="sub">One-Person-One-Dot</li>
+        <li id="all" class="selected" title="Palermo Melting Pot | 2020" >Tutti i layer</li>
+         <li id="upl" title="Unità di primo livello" >UPL</li>
+	   <li id="sub" title="One-Person-One-Dot">One-Person-One-Dot</li>
       
       </ul>
     </div>
@@ -434,13 +434,13 @@ var credctrl = L.controlCredits({
 var basemaps = [ 
 L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
-		  minZoom: 11, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
+		  minZoom: 11, maxZoom: 15, label: 'Dark Matter [no labels]',
 		 //  iconURL: 'legend/basemap/cartodb.png'
 		 }),
 		 
 		 L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
-		  minZoom: 11, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
+		  minZoom: 11, maxZoom: 15, label: 'Dark Matter',
 		 //  iconURL: 'legend/basemap/cartodb.png'
 		 }),
 
