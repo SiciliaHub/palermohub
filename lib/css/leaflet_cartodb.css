@@ -141,9 +141,11 @@
 .leaflet-bottom .leaflet-control {
 	margin-bottom: 10px;
 	}
-.leaflet-left .leaflet-control {
-	margin-left: 10px;
-	}
+.leaflet-left .leaflet-control {margin-left: 10px;	}
+	
+ @media (min-width: 320px) and (max-width: 915px) { .leaflet-left .leaflet-control {margin-left: 45px; }}	
+	
+	
 .leaflet-right .leaflet-control {
 	margin-right: 10px;
 	}
