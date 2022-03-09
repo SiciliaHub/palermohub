@@ -407,7 +407,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
         var map = L.map('map', { 
           zoomControl: false,
           center: [38.165,13.35],
-          zoom: 12
+          zoom: 11
         });
         // get the currently selected style
         selectedStyle = $('li.selected').attr('id');
@@ -434,13 +434,13 @@ var credctrl = L.controlCredits({
 var basemaps = [ 
 L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
-		  minZoom: 12, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
+		  minZoom: 11, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
 		 //  iconURL: 'legend/basemap/cartodb.png'
 		 }),
 		 
 		 L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
-		  minZoom: 12, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
+		  minZoom: 11, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
 		 //  iconURL: 'legend/basemap/cartodb.png'
 		 }),
 
@@ -448,7 +448,7 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attri
 
   L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
   attribution: 'Source: Google Satellite - Map data ©2022 Google',
-   minZoom: 12,  maxZoom: 15, maxNativeZoom: 15,
+   minZoom: 11,  maxZoom: 15, maxNativeZoom: 15,
   label: 'Google Satellite'
               }),
 			  
@@ -463,7 +463,7 @@ L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attri
 		
 		<!-- mappa cartodb --> 
         cartodb.createLayer(map, 'https://gbvitrano.carto.com/api/v2/viz/9f2e4db0-b586-4f37-b0fc-78cd3ff5fb8a/viz.json', {
-		 minZoom: 12, maxZoom: 15,
+		 minZoom: 11, maxZoom: 15,
 		 })
             .addTo(map)
          .done(function(layers) {
