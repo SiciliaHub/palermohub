@@ -52,47 +52,17 @@
       html, body, #map {
         height: 100%;
         padding: 0;
-        margin: 0;      }
-		
-		div.cartodb-layer-selector-box { margin: 100px 20px 0 0!important; }
+        margin: 0;
+      }
+	  
+	    div.cartodb-zoom {float: right!important; margin: 20px 20px 0 0px!important; }
+	   	div.cartodb-layer-selector-box { margin: 100px 20px 0 0!important; }
 		div.cartodb-searchbox {    margin: 100px 20px 0 0!important; }
 		div.cartodb-share a { margin: 80px 0px 0 0!important; }
 		
-      #layer_selector {
-        position: absolute;
-        top: 150px;
-        right: 20px;
-        padding: 0;
-		z-index: 1800;
-      }
- 	 @media (min-width: 320px) and (max-width:915px) { #layer_selector  {display: none!important;  }}
- 
-      #layer_selector ul {
-        padding: 0; margin: 0;
-        list-style-type: none;
-      }
- 
-      #layer_selector li {
-        border-bottom: 1px solid #999;
-        padding: 10px 15px;
-        font-family: "Helvetica", Arial;
-        font-size: 10px;
-        color: #2a2a2a;
-        cursor: auto;
-      }
- 
-      #layer_selector li:hover {
-        background-color: #ff9900;
-        cursor: pointer;
-      }
- 
-      #layer_selector li.selected {
-        background-color: #EEE;
-      }
- @media (min-width: 320px) and (max-width: 915px) { div.cartodb-legend-stack {display: none!important;  }}
- @media (min-width: 320px) and (max-width: 915px) {  div.cartodb-legend:last-child  {display: none!important;  }}
-	  
-	  </style>
+
+	</style>
+	
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://libs.cartocdn.com/cartodb.js/v3/3.15/themes/css/cartodb.css" />
@@ -100,13 +70,12 @@
 <link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
 <link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/base_ods.css" rel="stylesheet" type="text/css">
-<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits_carto.css" />
-<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
-<link href="lib/css/Leaflet_GraphicScale_min_cartodb.css" rel="stylesheet" type="text/css">
+
 <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" /> -->
-   
+ 
   </head>
 
 <body>
@@ -128,6 +97,7 @@ $(document).ready(function(){
 </div> 
      
 </header>
+	  
 	  
 <script>
     $(document).ready(function () {
@@ -347,147 +317,66 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 
 <!-- Mappa  -->
 <div id="map" class="sidebar-map"></div>
-    <div id="layer_selector" class="cartodb-infobox">
-      <ul>
-        <li id="all" class="selected">Tutti i layer</li>
-         <li id="upl">UPL</li>
-	   <li id="sub">Sub-Region dots</li>
-      
-      </ul>
-    </div>
- 
 <!-- include cartodb.js library -->
 <script src="https://libs.cartocdn.com/cartodb.js/v3/3.15/cartodb.js"></script>
    <!-- script funzioni --> 
-<script src="lib/js/qgi2web/leaflet-hash.js"></script>
 <script src="lib/js/sidebar/leaflet-sidebar.js"></script>
-<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>   
 <script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
-<script src="lib/js/basemap/L.Control.Basemaps.js"></script>  
-  <!-- script automatico mobile/desktop --> 
-<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile_carto.js"><\/script>'); } </script>
-<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_carto.js"><\/script>'); } </script> 
 
       <script>
-      var selectedLayer;
-      // create layer selector
-      function createSelector(layers) {
-        var sql = new cartodb.SQL({ user: 'documentation' });
- 
-        var $options = $('#layer_selector li');
-        $options.click(function(e) {
-          // get the area of the selected layer
-          var $li = $(e.target);
-          var layer = $li.attr('id');
-          if(selectedLayer != layer ){
-            // definitely more elegant ways to do this, but went for
-            // ease of understanding
-            if (layer == 'all'){
-              layers.getSubLayer(0).show(); // UPL
-              layers.getSubLayer(1).show(); // Sub-Region dots
-             
-            }
-            else if (layer == 'sub') {
-              layers.getSubLayer(0).show();
-              layers.getSubLayer(1).hide();
-                         }
-            else {
-              layers.getSubLayer(0).hide();
-              layers.getSubLayer(1).show();
-              
-            }
-          }
-        });
-      }
- 
-      var layerN = {};
       function main() {
-        var map = L.map('map', { 
+        var map = new L.Map('map', {
           zoomControl: false,
           center: [38.15,13.35],
-          zoom: 12
+        zoom: 12,
+		minZoom: 12, 
+		maxZoom: 15,
         });
-        // get the currently selected style
-        selectedStyle = $('li.selected').attr('id');
-
-	<!-- Controlli mappa -->  
-	var hash = new L.Hash(map);	
-     var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
-	 
-	 	<!-- scala mappa -->		
-    var graphicScale = L.control.graphicScale({
-		doubleLine: true,
-		fill: 'hollow',
-        showSubunits: true
-	}).addTo(map);
-		
-		<!-- credits -->   
+				<!-- credits -->   
 var credctrl = L.controlCredits({
     image: "lib/images/opendatasicilia_dredits.png",
     link: "http://opendatasicilia.it/",
     text: "Interactive mapping<br/>by opendatasicilia"
 }).addTo(map);
+
+
 		
-		<!-- L.control.basemaps --> 
-var basemaps = [ 
 L.tileLayer('http://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
 		  minZoom: 12, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
-		 //  iconURL: 'legend/basemap/cartodb.png'
-		 }),
-		 
-		 L.tileLayer('http://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
-          attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
-		  minZoom: 12, maxZoom: 15, label: 'Dark Matter [no labels] (retina)',
-		 //  iconURL: 'legend/basemap/cartodb.png'
-		 }),
-
-L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="http://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 12,  maxZoom: 15, maxNativeZoom: 15,label: 'Map tiles by CartoDB'}),
-
-  L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-  attribution: 'Source: Google Satellite - Map data ©2022 Google',
-   minZoom: 12,  maxZoom: 15, maxNativeZoom: 15,
-  label: 'Google Satellite'
-              }),
-			  
-        		]; 
-			
-		 map.addControl(L.control.basemaps({
-            basemaps: basemaps,
-            tileX: 0,
-            tileY: 0,
-            tileZ: 1
-        }));
-		
+		  });
+		  
 		<!-- mappa cartodb --> 
-        cartodb.createLayer(map, 'https://gbvitrano.carto.com/api/v2/viz/9f2e4db0-b586-4f37-b0fc-78cd3ff5fb8a/viz.json', {
-		 minZoom: 12, maxZoom: 15,
-		 })
-            .addTo(map)
-         .done(function(layers) {
-			 createSelector(layers);
-         // layer.setInteraction(true);
+ cartodb.createVis('map', 'https://gbvitrano.carto.com/api/v2/viz/9f2e4db0-b586-4f37-b0fc-78cd3ff5fb8a/viz.json', {
+		shareable: true,  
+		search: false,
+          tiles_loader: true,
+          layer_selector: true,
+          https: true,
+		  Zoom: 12
+        })
+        .done(function(vis, layers) {
 
-          layer.on('featureOver', function(e, latlng, pos, data) {
-            cartodb.log.log(e, latlng, pos, data);
+          // Set max zoom
+          vis.map.set({
+            minZoom: 12,
+            maxZoom: 15
           });
 
-          layer.on('error', function(err) {
-            cartodb.log.log('error: ' + err);
-          });
-        }).on('error', function() {
-          cartodb.log.log("some error occurred");
+        })
+        .error(function(err) {
+          console.log(err);
         });
       }
 
       // you could use $(window).load(main);
       window.onload = main;
 
+
 	   <!--sidebar -->	
 	  var sidebar = L.control.sidebar('sidebar').addTo(map);
-
-
-    </script>
+	
+   </script>
 		
 		</div>  
 		   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
