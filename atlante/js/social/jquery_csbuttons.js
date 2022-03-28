@@ -8,7 +8,7 @@
  *
  * Social customs counter buttons (Facebook, Twitter, Google+, LinkedIn, Pinterest)
  * Made by Mathieu ORLANDO, contact@acrow.fr, Acrow, FRANCE
- * Website: http://csbuttons.acrow.fr/
+ * Website: https://csbuttons.acrow.fr/
  */
 (function($)
 {
@@ -79,7 +79,7 @@
 					if(count)
 					{
 						$('span.csbuttons-count', twitter).text(0);
-						$.getJSON('http://cdn.api.twitter.com/1/urls/count.json?url=' + $URL + '&callback=?', function( twitdata ) {
+						$.getJSON('https://cdn.api.twitter.com/1/urls/count.json?url=' + $URL + '&callback=?', function( twitdata ) {
 							$('span.csbuttons-count', twitter).text(twitdata.count);
 							totalShare += (isNaN(parseInt(twitdata.count))) ? 0 : parseInt(twitdata.count);
 							if(parametres.total != null && i == nbButtons)
@@ -133,7 +133,7 @@
 								}
 							};
 
-							$.getScript( 'http://share.yandex.ru/gpp.xml?url=' + $URL + '&callback=?', function(){
+							$.getScript( 'https://share.yandex.ru/gpp.xml?url=' + $URL + '&callback=?', function(){
 								$('span.csbuttons-count', google).text(window['gplusnb'+jg]);
 								totalShare += (isNaN(parseInt(window['gplusnb'+jg]))) ? 0 : parseInt(window['gplusnb'+jg]);
 								if(parametres.total != null && i == nbButtons)
@@ -151,7 +151,7 @@
 					if(count)
 					{
 						$('span.csbuttons-count', linkedin).text(0);
-						$.getJSON('http://www.linkedin.com/countserv/count/share?url=' + $URL + '&callback=?', function( indata ) {
+						$.getJSON('https://www.linkedin.com/countserv/count/share?url=' + $URL + '&callback=?', function( indata ) {
 							$('span.csbuttons-count', linkedin).text(indata.count);
 							totalShare += (isNaN(parseInt(indata.count))) ? 0 : parseInt(indata.count);
 							if(parametres.total != null && i == nbButtons)
@@ -163,7 +163,7 @@
 					var pinterest = $(this);
 					popupWidth 	= 1000;
 					popupHeight = 617;
-					shareUrl	= 'http://www.pinterest.com/pin/create/button/?url=' + url;
+					shareUrl	= 'https://www.pinterest.com/pin/create/button/?url=' + url;
 					shareUrl 	= (media != null) ? shareUrl + '&media=' + media : shareUrl;
 					shareUrl 	= (txt != null) ? shareUrl + '&description=' + txt : shareUrl;
 
@@ -187,7 +187,7 @@
 					if(count)
 					{
 						$('span.csbuttons-count', facebook).text(0);
-						$.getJSON('http://graph.facebook.com/?id=' + $URL, function( fbdata ) {
+						$.getJSON('https://graph.facebook.com/?id=' + $URL, function( fbdata ) {
 							$('span.csbuttons-count', facebook).text(fbdata.shares);
 							
 							totalShare += (isNaN(parseInt(fbdata.shares))) ? 0 : parseInt(fbdata.shares);

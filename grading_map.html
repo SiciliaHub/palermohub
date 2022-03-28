@@ -6,8 +6,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
-  <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+  <link rel="stylesheet" href="https://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+  <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
   <style type="text/css">
   html, body, #map {width: 100%; height: 100%; padding: 0; margin: 0; font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif; background-color: #e2e2e2;}
     #basemapslidercontainer {
@@ -26,10 +26,10 @@
 
 
   </style>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-  <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
-  <script src="http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/leaflet-hash.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+  <script src="https://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
+  <script src="https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/leaflet-hash.js"></script>
   <script>
     $(document).ready(function () {
       $("#basemapslider").slider({
@@ -56,7 +56,7 @@
       var baselayer = L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 9,  maxZoom: 13, maxNativeZoom: 13, label: 'Google Terrain'})
       .addTo(map);
 
-      var mytile =L.tileLayer('http://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/grading_map/{z}/{x}/{y}.png', {minZoom: 9, maxZoom: 13, maxNativeZoom: 13,
+      var mytile =L.tileLayer('https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/grading_map/{z}/{x}/{y}.png', {minZoom: 9, maxZoom: 13, maxNativeZoom: 13,
         tms: true,
         attribution: ' - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a> - QTiles'
       }).addTo(map);

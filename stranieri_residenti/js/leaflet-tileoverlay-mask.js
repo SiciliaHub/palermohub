@@ -52,7 +52,7 @@
       mask.setAttribute("id", "leaflet-svg-mask-" + L.stamp(this));
       image.setAttribute("width", this.options.maskWidth);
       image.setAttribute("height", this.options.maskHeight);
-      image.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", this.options.maskUrl);
+      image.setAttributeNS("https://www.w3.org/1999/xlink", "xlink:href", this.options.maskUrl);
       this._rootGroup.setAttribute("mask", "url(#" + mask.getAttribute("id") + ")");
       this._image = image;
       this._container.insertBefore(defs, this._rootGroup);
@@ -120,7 +120,7 @@
       tile.setAttribute("height", tileSize.y);
       tile.setAttribute("x", tilePos.x);
       tile.setAttribute("y", tilePos.y);
-      tile.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", url);
+      tile.setAttributeNS("https://www.w3.org/1999/xlink", "xlink:href", url);
 
       this._tiles[key] = {
         el: tile,

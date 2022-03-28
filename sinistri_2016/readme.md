@@ -1,8 +1,8 @@
 # Palermo - Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo su base opendata
 
-<a href="http://github.gbvitrano.it/sinistri_2016/index.html"><img width="1000" src="http://github.gbvitrano.it/sinistri_2016/legend/sinistri_2016_800.jpg" Title=" Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo." alt="Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo." /></a>
+<a href="https://github.gbvitrano.it/sinistri_2016/index.html"><img width="1000" src="https://github.gbvitrano.it/sinistri_2016/legend/sinistri_2016_800.jpg" Title=" Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo." alt="Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo." /></a>
 
-Rielaborazione dataset [Mappa](http://github.gbvitrano.it/sinistri_2016/index.html), elaborata con #Qgis e il plugin #qgis2web con gli [Opendata del Comune di Palermo](https://www.comune.palermo.it/opendata_dld.php?id=523) 
+Rielaborazione dataset [Mappa](https://github.gbvitrano.it/sinistri_2016/index.html), elaborata con #Qgis e il plugin #qgis2web con gli [Opendata del Comune di Palermo](https://www.comune.palermo.it/opendata_dld.php?id=523) 
 
 Dataset: [Sinistri stradali rilevati nel territorio comunale di Palermo nell'anno 2016 dalla polizia municipale di Palermo.](https://www.comune.palermo.it/opendata_dld.php?id=523) 
 

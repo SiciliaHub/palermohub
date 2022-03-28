@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: http://palermohub.opendatasicilia.it/sitemap.xml
+Sitemap: https://palermohub.opendatasicilia.it/sitemap.xml

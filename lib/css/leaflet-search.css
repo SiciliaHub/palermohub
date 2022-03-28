@@ -3,12 +3,12 @@
  * 
  * Copyright 2016 Stefano Cudini 
  * stefano.cudini@gmail.com 
- * http://labs.easyblog.it/ 
+ * https://labs.easyblog.it/ 
  * 
  * Licensed under the MIT license. 
  * 
  * Demo: 
- * http://labs.easyblog.it/maps/leaflet-search/ 
+ * https://labs.easyblog.it/maps/leaflet-search/ 
  * 
  * Source: 
  * git@github.com:stefanocudini/leaflet-search.git 

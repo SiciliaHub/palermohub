@@ -2,7 +2,7 @@
 * jquery.postitall.js v1.0
 * jQuery Post It All Plugin - released under MIT License
 * Author: Javi Filella <txusko@gmail.com>
-* http://github.com/txusko/PostItAll
+* https://github.com/txusko/PostItAll
 * Copyright (c) 2015 Javi Filella
 *
 * Permission is hereby granted, free of charge, to any person
@@ -976,7 +976,7 @@ var delay = (function(){
             var id = data.id;
             var obj = $($.fn.postitall.globals.prefix + id);
 
-            //Recovers object selector (http://stackoverflow.com/questions/2420970/how-can-i-get-selector-from-jquery-object/14093425#14093425)
+            //Recovers object selector (https://stackoverflow.com/questions/2420970/how-can-i-get-selector-from-jquery-object/14093425#14093425)
             var get_selector = function (element) {
                 var $el = element;
                 var id = $el.attr("id");

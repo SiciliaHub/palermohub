@@ -1,5 +1,5 @@
 /*!
- * Bootstrap v4.0.0-alpha (http://getbootstrap.com)
+ * Bootstrap v4.0.0-alpha (https://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */

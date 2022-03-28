@@ -322,7 +322,7 @@ function hsv2keyword(args) {
   return rgb2keyword(hsv2rgb(args));
 }
 
-// http://dev.w3.org/csswg/css-color/#hwb-to-rgb
+// https://dev.w3.org/csswg/css-color/#hwb-to-rgb
 function hwb2rgb(hwb) {
   var h = hwb[0] / 360,
       wh = hwb[1] / 100,
@@ -1348,7 +1348,7 @@ Color.prototype = {
    },
 
    luminosity: function() {
-      // http://www.w3.org/TR/WCAG20/#relativeluminancedef
+      // https://www.w3.org/TR/WCAG20/#relativeluminancedef
       var rgb = this.values.rgb;
       var lum = [];
       for (var i = 0; i < rgb.length; i++) {
@@ -1360,7 +1360,7 @@ Color.prototype = {
    },
 
    contrast: function(color2) {
-      // http://www.w3.org/TR/WCAG20/#contrast-ratiodef
+      // https://www.w3.org/TR/WCAG20/#contrast-ratiodef
       var lum1 = this.luminosity();
       var lum2 = color2.luminosity();
       if (lum1 > lum2) {
@@ -1379,7 +1379,7 @@ Color.prototype = {
    },
 
    dark: function() {
-      // YIQ equation from http://24ways.org/2010/calculating-color-contrast
+      // YIQ equation from https://24ways.org/2010/calculating-color-contrast
       var rgb = this.values.rgb,
           yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
       return yiq < 128;
@@ -1436,7 +1436,7 @@ Color.prototype = {
 
    greyscale: function() {
       var rgb = this.values.rgb;
-      // http://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
+      // https://en.wikipedia.org/wiki/Grayscale#Converting_color_to_grayscale
       var val = rgb[0] * 0.3 + rgb[1] * 0.59 + rgb[2] * 0.11;
       this.setValues("rgb", [val, val, val]);
       return this;
@@ -1719,8 +1719,8 @@ var convertFuncs = {
 
 // Distance in meters
 // Always positive regardless of direction
-// Calculation based on Haversine Formula http://en.wikipedia.org/wiki/Haversine_formula
-// Another method is @ http://www.movable-type.co.uk/scripts/latlong-vincenty.html but seems way overcomplicated
+// Calculation based on Haversine Formula https://en.wikipedia.org/wiki/Haversine_formula
+// Another method is @ https://www.movable-type.co.uk/scripts/latlong-vincenty.html but seems way overcomplicated
 var calcDistance = function (coord1, coord2) {
   var deltaLng = units.degrees.toRadians(coord1[0] - coord2[0]),
       deltaLat = units.degrees.toRadians(coord1[1] - coord2[1]),
@@ -1828,7 +1828,7 @@ exports.degrees = {
 };
 },{}],15:[function(require,module,exports){
 //     Underscore.js 1.5.2
-//     http://underscorejs.org
+//     https://underscorejs.org
 //     (c) 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
 
@@ -2113,7 +2113,7 @@ exports.degrees = {
   };
 
   // Shuffle an array, using the modern version of the 
-  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
+  // [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
   _.shuffle = function(obj) {
     var rand;
     var index = 0;
@@ -2396,7 +2396,7 @@ exports.degrees = {
 
   // Generate an integer Array containing an arithmetic progression. A port of
   // the native Python `range()` function. See
-  // [the Python documentation](http://docs.python.org/library/functions.html#range).
+  // [the Python documentation](https://docs.python.org/library/functions.html#range).
   _.range = function(start, stop, step) {
     if (arguments.length <= 1) {
       stop = start || 0;
@@ -2704,7 +2704,7 @@ exports.degrees = {
   // Internal recursive comparison function for `isEqual`.
   var eq = function(a, b, aStack, bStack) {
     // Identical objects are equal. `0 === -0`, but they aren't identical.
-    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    // See the [Harmony `egal` proposal](https://wiki.ecmascript.org/doku.php?id=harmony:egal).
     if (a === b) return a !== 0 || 1 / a == 1 / b;
     // A strict comparison is necessary because `null == undefined`.
     if (a == null || b == null) return a === b;
@@ -3586,7 +3586,7 @@ exports.degrees = {
  * @author  John Resig <jeresig@gmail.com>
  * @author  Originally by Marcus Spiegel <marcus.spiegel@gmail.com>
  * @link    https://github.com/jeresig/i18n-node
- * @license http://opensource.org/licenses/MIT
+ * @license https://opensource.org/licenses/MIT
  *
  * @version 0.4.7
  */
@@ -4469,7 +4469,7 @@ process.umask = function() { return 0; };
 },{}],21:[function(require,module,exports){
 /**
 sprintf() for JavaScript 0.7-beta1
-http://www.diveintojavascript.com/projects/javascript-sprintf
+https://www.diveintojavascript.com/projects/javascript-sprintf
 
 Copyright (c) Alexandru Marasteanu <alexaholic [at) gmail (dot] com>
 All rights reserved.
@@ -4508,7 +4508,7 @@ Changelog:
 2010.05.22 - 0.6:
  - reverted to 0.4 and fixed the bug regarding the sign of the number 0
  Note:
- Thanks to Raphael Pigulla <raph (at] n3rd [dot) org> (http://www.n3rd.org/)
+ Thanks to Raphael Pigulla <raph (at] n3rd [dot) org> (https://www.n3rd.org/)
  who warned me about a bug in 0.5, I discovered that the last update was
  a regress. I appologize for that.
 
@@ -4719,7 +4719,7 @@ sprintf.vsprintf = vsprintf;
 
 },{}],22:[function(require,module,exports){
 //     Underscore.js 1.8.3
-//     http://underscorejs.org
+//     https://underscorejs.org
 //     (c) 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 //     Underscore may be freely distributed under the MIT license.
 
@@ -4850,7 +4850,7 @@ sprintf.vsprintf = vsprintf;
 
   // Helper for collection methods to determine whether a collection
   // should be iterated as an array or as an object
-  // Related: http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
+  // Related: https://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength
   // Avoids a very nasty iOS 8 JIT bug on ARM-64. #2094
   var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
   var getLength = property('length');
@@ -5066,7 +5066,7 @@ sprintf.vsprintf = vsprintf;
   };
 
   // Shuffle a collection, using the modern version of the
-  // [Fisher-Yates shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
+  // [Fisher-Yates shuffle](https://en.wikipedia.org/wiki/Fisher–Yates_shuffle).
   _.shuffle = function(obj) {
     var set = isArrayLike(obj) ? obj : _.values(obj);
     var length = set.length;
@@ -5394,7 +5394,7 @@ sprintf.vsprintf = vsprintf;
 
   // Generate an integer Array containing an arithmetic progression. A port of
   // the native Python `range()` function. See
-  // [the Python documentation](http://docs.python.org/library/functions.html#range).
+  // [the Python documentation](https://docs.python.org/library/functions.html#range).
   _.range = function(start, stop, step) {
     if (stop == null) {
       stop = start || 0;
@@ -5814,7 +5814,7 @@ sprintf.vsprintf = vsprintf;
   // Internal recursive comparison function for `isEqual`.
   var eq = function(a, b, aStack, bStack) {
     // Identical objects are equal. `0 === -0`, but they aren't identical.
-    // See the [Harmony `egal` proposal](http://wiki.ecmascript.org/doku.php?id=harmony:egal).
+    // See the [Harmony `egal` proposal](https://wiki.ecmascript.org/doku.php?id=harmony:egal).
     if (a === b) return a !== 0 || 1 / a === 1 / b;
     // A strict comparison is necessary because `null == undefined`.
     if (a == null || b == null) return a === b;
@@ -7081,7 +7081,7 @@ L.Control.Measure = L.Control.extend({
     activeColor: '#101110',     // base color for map features while actively measuring
     completedColor: '#636463',  // base color for permenant features generated from completed measure
     captureZIndex: 10000,       // z-index of the marker used to capture measure events
-    popupOptions: {             // standard leaflet popup options http://leafletjs.com/reference.html#popup-options
+    popupOptions: {             // standard leaflet popup options https://leafletjs.com/reference.html#popup-options
       className: 'leaflet-measure-resultpopup',
       autoPanPadding: [10, 10]
     }

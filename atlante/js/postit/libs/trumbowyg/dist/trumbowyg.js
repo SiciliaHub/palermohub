@@ -2,7 +2,7 @@
  * Trumbowyg v2.5.1 - A lightweight WYSIWYG editor
  * Trumbowyg core file
  * ------------------------
- * @link http://alex-d.github.io/Trumbowyg
+ * @link https://alex-d.github.io/Trumbowyg
  * @license MIT
  * @author Alexandre Demode (Alex-D)
  *         Twitter : @AlexandreDemode
@@ -1488,7 +1488,7 @@ jQuery.trumbowyg = {
                 return;
             }
 
-            if (metaRange && metaRange.start !== metaRange.end) { // Algorithm from http://jsfiddle.net/WeWy7/3/
+            if (metaRange && metaRange.start !== metaRange.end) { // Algorithm from https://jsfiddle.net/WeWy7/3/
                 var charIndex = 0,
                     nodeStack = [t.$ed[0]],
                     node,
