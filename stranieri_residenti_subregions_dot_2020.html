@@ -433,13 +433,13 @@ var credctrl = L.controlCredits({
 var basemaps = [ 
 L.tileLayer('https://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
-		  minZoom: 11, maxZoom: 14, label: 'Dark Matter [no labels]',
+		  minZoom: 11, maxZoom: 15, label: 'Dark Matter [no labels]',
 		 //  iconURL: 'legend/basemap/cartodb.png'
 		 }),
 		 
 		 L.tileLayer('https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
-		  minZoom: 11, maxZoom: 14, label: 'Dark Matter',
+		  minZoom: 11, maxZoom: 15, label: 'Dark Matter',
 		 //  iconURL: 'legend/basemap/cartodb.png'
 		 }),
 
@@ -447,7 +447,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attr
 
   L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
   attribution: 'Source: Google Satellite - Map data ©2022 Google',
-   minZoom: 11,  maxZoom: 14, maxNativeZoom: 14,
+   minZoom: 11,  maxZoom: 14, maxNativeZoom: 15,
   label: 'Google Satellite'
               }),
 			  
@@ -462,7 +462,7 @@ L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attr
 		
 		<!-- mappa cartodb --> 
         cartodb.createLayer(map, 'https://gbvitrano.carto.com/api/v2/viz/9f2e4db0-b586-4f37-b0fc-78cd3ff5fb8a/viz.json', {
-		 minZoom: 11, maxZoom: 14,
+		 minZoom: 11, maxZoom: 15,
 		 })
             .addTo(map)
          .done(function(layers) {
