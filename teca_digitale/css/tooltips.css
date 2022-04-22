@@ -1,0 +1,137 @@
+/* foglio di stile atlante cartografico palermo -
+giovan battista vitrano per opendatasicilia.it */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+a.tooltips {
+  position: relative;
+  display: inline;
+}
+a.tooltips span {
+  position: absolute;
+  color: #000000;
+  background: transparent;
+  height: 140px;
+  width:250px;
+  /*line-height: 100px;
+  text-align: center;*/
+  visibility: hidden;
+}
+a.tooltips span:after {
+  content: '';
+  position: absolute;
+ top: 50%;
+  right: 100%;
+  margin-top: 0px;
+  width: 0; height: 0;
+  /*border-right: 8px solid #FFFFFF;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;*/
+ }
+a:hover.tooltips span {
+  visibility: visible;
+  opacity: 1;
+  left: 100%;
+  top: 50%;
+  margin-top: 13px;
+  margin-left: -98%;
+/*margin-right: 0px;*/
+  z-index: 999;
+  
+}
+ icone social 
+a {
+    color: #4E4B4B ;
+}
+.ods_social {font-style: italic; color: #4E4B4B; font-size: 12px;}
+.ods_social a:link{color: #4E4B4B;	text-decoration:none;}
+.ods_social a:visited {	color: #4E4B4B; text-decoration:none;}
+.ods_social a:hover {color: #FF9900; text-decoration:none; } 
+ @media (min-width: 320px) and (max-width: 960px) {.ods_social {font-size: 8px;}}
+ 
+.clip_tooltips {width: 250px; height: 140px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } 
+.clip_tooltips:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
+
+/*@media (min-width: 320px) and (max-width: 767px) {.nofooter { display:none;}}*/
+@media (min-width: 320px) and (max-width: 768px) {.clip_tooltips {width: 185px;height: 104px;}}
+ 
+@media (min-width: 320px) and (max-width: 768px) {.clip_socialr {width: 24px;height: 24px;}}
+ 
+.lorem0 {
+	font-style: normal;
+	color: #4E4B4B;
+	text-align:justify;
+	font-family: "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}.awesome {font-style:fontawesome;  color: #4E4B4B; }
+ 
+@media (min-width: 320px) and (max-width: 768px) {.lorem0 {font-size: 9px; color: #4E4B4B; text-align: justify;}}
+/*@media (min-width: 320px) and (max-width: 768px) {.footermobile {font-size: 10px; color: #4E4B4B; text-align: justify;}}
+@media (min-width: 768px)  {.footermobile { display:none;}}*/
+
+/* Jquery Slide Toggle*/
+#vn-click{
+/*position: fixed; height: 25px;padding-left:12px; padding-top:5px;margin: 0;top: 50px; right: 0px;	z-index: 1010;*/
+padding:0px 10px;
+/*background:#ff9900;*/
+color:#4E4B4B;
+font-weight:normal;
+/*font-size:14px;*/
+cursor:pointer;
+display:inline-block;
+ border-radius: 3px;
+ height:20px;
+}
+@media (min-width: 320px) and (max-width: 736px) { #vn-click {padding:3px 5px;  }}
+
+#vn-info{
+	/*width:97%;
+	position:fixed;
+	left:130px;*/
+display:none;
+text-align:justify;
+background:rgba(248,248,248,0.98);
+color:#4E4B4B;
+padding:5px 5px;
+box-shadow: 0 1px 1.5px rgba(0,0,0,0.65);
+}
+
+
+/*scroll bar*/
+/* width */
+::-webkit-scrollbar {
+  width: 8px; 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; border-radius: 16px; 
+  
+}
+
+/* Handle on hover */
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px; border-radius: 16px; 
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff; border-radius: 16px; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; border-radius: 16px; 
+  
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 153, 0); border-radius: 16px; 
+}

@@ -1,0 +1,32 @@
+/* contenitore menù 100% */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+.container {
+    width: 100%;}
+	.caret {color: #4E4B4B; }
+	
+	 .nav .open>a, .nav .open>a:focus, .nav .open>a:hover{background-color:rgba(255,153,0,0.50) }
+	 
+	 
+	 .navbar-default .navbar-toggle {font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;
+    border-color: #f8f8f8;}
+	
+	.dropdown-menu {font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; font-size:11px!important; }
+	
+	.dropdown-menu > li > a  {color: #4E4B4B; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; padding: 0px 5px 0px 5px !important;}
+.dropdown-menu > li > a:focus, .dropdown-menu > li > a:hover {color: #000; background-color:rgba(149, 147, 144, 0.5)}
+
+
+a:focus, a:hover {color: #4E4B4B; }
+
+ @media (min-width: 320px) and (max-width: 1023px)    {.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus, .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover {color: #4E4B4B; text-decoration:underline!important; background-color:rgba(255,153,0,0.75)!important;}}
+ 
+@media (min-width: 767px) {
+    .caret-right {
+        width: 0; 
+        height: 0; 
+        border-top: 4px solid rgba(0, 0, 0, 0);
+        border-bottom: 4px solid rgba(0, 0, 0, 0);
+        border-left: 4px solid #777777;
+    }
+}

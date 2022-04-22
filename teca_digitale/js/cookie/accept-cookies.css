@@ -1,0 +1,236 @@
+/* Plugin Styles */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans');
+.cookie-popup {
+    display: none;
+    position: fixed;
+    left: 0;
+    z-index: 2500;
+    width: 100%;
+    background-color: #fafafa;
+    color: #000;
+    font-family: 'Roboto', 'Noto Sans', sans-serif;
+    line-height: initial;
+    box-sizing: initial;
+}    
+.cookie-popup-inner {
+    display: table;
+    width: 100%;
+}
+.cookie-popup-left {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 15px;
+}
+.cookie-popup-headline {
+    font-size: 16px;
+}
+.cookie-popup-sub-headline {
+    font-size: 11px;
+}
+.cookie-popup-right {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 10px 15px;
+    text-align: right;
+}
+.cookie-popup-accept-cookies {
+    display: inline-block;
+    position: relative;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    white-space: nowrap;
+    padding: 9px 12px;
+    font-size: 13px;
+    line-height: 1.49;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    padding: 2px 14px;
+    font-size: 16px;
+    min-width: 64px;
+    line-height: 1.5;
+    border-radius: 2px;
+    text-decoration: none;
+    color: #000;
+    background-color: #c7c7c7;
+    border-color: rgba(0,0,0,.1) rgba(0,0,0,.12) rgba(0,0,0,.15);
+    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+}    
+.cookie-popup-accept-cookies:hover {
+    bottom: 1px;
+    text-decoration: none;
+    color: inherit;
+}
+.cookie-popup-accept-cookies:active {
+    bottom: 0;
+    color: initial;
+}
+.cookie-popup-learn-more {
+    display: block;
+    clear: both;
+    font-size: 11px;
+    margin-top: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: #000;
+    opacity: 0.75;
+}
+.cookie-popup-learn-more:hover {
+    opacity: 1;
+    text-decoration: none;    
+}
+.cookie-popup-learn-more:active,
+.cookie-popup-learn-more:focus {
+    text-decoration: none;
+}
+.cookie-popup-lower {
+    padding: 15px;
+    font-size: 11px;
+}
+
+
+/* Positions */
+.cookie-popup.position-bottom {
+    bottom: 0;
+    box-shadow: 0 -4px 6px rgba(50,50,93,.11), 0 -1px 3px rgba(0,0,0,.08);
+}
+.cookie-popup.position-top {
+    top: 0;
+    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+}
+.cookie-popup.position-bottomright {
+    width: 300px;
+    right: 10px;
+    bottom: 10px;
+    left: inherit;
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+}
+.cookie-popup.position-bottomright .cookie-popup-right {
+    width: initial;
+}
+.cookie-popup.position-bottomleft {
+    width: 300px;
+    left: 10px;
+    bottom: 10px;
+    right: inherit;
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+}
+.cookie-popup.position-bottomleft .cookie-popup-right {
+    width: initial;
+}
+.cookie-popup.position-topright {
+    width: 300px;
+    right: 10px;
+    top: 10px;
+    left: inherit;
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+}
+.cookie-popup.position-topright .cookie-popup-right {
+    width: initial;
+}
+.cookie-popup.position-topleft {
+    width: 300px;
+    left: 10px;
+    top: 10px;
+    box-shadow: 0 2px 10px 0px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+}
+.cookie-popup.position-topleft .cookie-popup-right {
+    width: initial;
+}
+
+
+/* Themes */
+.theme-light .cookie-popup { background-color: #fafafa; color: #000; }
+.theme-light .cookie-popup-accept-cookies { background-color: #c7c7c7; color: #000; }
+.theme-light .cookie-popup-learn-more { color: #000; }
+
+.theme-dark .cookie-popup { background-color: #484848; color: #fff; }
+.theme-dark .cookie-popup-accept-cookies { background-color: #212121; color: #fff; }
+.theme-dark .cookie-popup-learn-more { color: #fff; }
+
+.theme-red .cookie-popup { background-color: #ef5350; color: #fff; }
+.theme-red .cookie-popup-accept-cookies { background-color: #b61827;  color: #fff; }
+.theme-red .cookie-popup-learn-more { color: #fff; }
+
+.theme-pink .cookie-popup { background-color: #ec407a; color: #fff; }
+.theme-pink .cookie-popup-accept-cookies { background-color: #b4004e; color: #fff; }
+.theme-pink .cookie-popup-learn-more { color: #000; color: #fff; }
+
+.theme-purple .cookie-popup{ background-color: #ab47bc; color: #fff; }
+.theme-purple .cookie-popup-accept-cookies { background-color: #790e8b; color: #fff; }
+.theme-purple .cookie-popup-learn-more { color: #fff; }
+
+.theme-deeppurple .cookie-popup { background-color: #7e57c2; color: #fff; }
+.theme-deeppurple .cookie-popup-accept-cookies { background-color: #4d2c91; color: #fff; }
+.theme-deeppurple .cookie-popup-learn-more { color: #fff; }
+
+.theme-indigo .cookie-popup { background-color: #5c6bc0; color: #fff; }
+.theme-indigo .cookie-popup-accept-cookies { background-color: #23408e; color: #fff; }
+.theme-indigo .cookie-popup-learn-more { color: #fff; }
+
+.theme-blue .cookie-popup { background-color: #42a5f5; color: #fff; }
+.theme-blue .cookie-popup-accept-cookies { background-color: #0077c2; color: #fff; }
+.theme-blue .cookie-popup-learn-more { color: #fff; }
+
+.theme-lightblue .cookie-popup { background-color: #29b6f6; color: #000; }
+.theme-lightblue .cookie-popup-accept-cookies { background-color: #0086c3; color: #000; }
+.theme-lightblue .cookie-popup-learn-more { color: #000; }
+
+.theme-cyan .cookie-popup { background-color: #26c6da; color: #000; }
+.theme-cyan .cookie-popup-accept-cookies { background-color: #0095a8; color: #000; }
+.theme-cyan .cookie-popup-learn-more { color: #000; }
+
+.theme-teal .cookie-popup { background-color: #26a69a; color: #fff; }
+.theme-teal .cookie-popup-accept-cookies { background-color: #00766c; color: #fff; }
+.theme-teal .cookie-popup-learn-more { color: #000; color: #fff; }
+
+.theme-green .cookie-popup { background-color: #66bb6a; color: #000; }
+.theme-green .cookie-popup-accept-cookies { background-color: #338a3e; color: #000; }
+.theme-green .cookie-popup-learn-more { color: #000; }
+
+.theme-lightgreen .cookie-popup { background-color: #9ccc65; color: #000; }
+.theme-lightgreen .cookie-popup-accept-cookies { background-color: #6b9b37; color: #000; }
+.theme-lightgreen .cookie-popup-learn-more { color: #000; }
+
+.theme-lime .cookie-popup { background-color: #d4e157; color: #000; }
+.theme-lime .cookie-popup-accept-cookies { background-color: #a0af22; color: #000; }
+.theme-lime .cookie-popup-learn-more { color: #000; }
+
+.theme-yellow .cookie-popup { background-color: #ffee58; color: #000; }
+.theme-yellow .cookie-popup-accept-cookies { background-color: #c9bc1f; color: #000; }
+.theme-yellow .cookie-popup-learn-more { color: #000; }
+
+.theme-amber .cookie-popup { background-color: #ffca28; color: #000; }
+.theme-amber .cookie-popup-accept-cookies { background-color: #c79a00; color: #000; }
+.theme-amber .cookie-popup-learn-more { color: #000; }
+
+.theme-orange .cookie-popup { background-color: #ffa726; color: #000; }
+.theme-orange .cookie-popup-accept-cookies { background-color: #c77800; color: #000; }
+.theme-orange .cookie-popup-learn-more { color: #000; }
+
+.theme-deeporange .cookie-popup { background-color: #ff7043; color: #fff; }
+.theme-deeporange .cookie-popup-accept-cookies { background-color: #c63f17; color: #fff; }
+.theme-deeporange .cookie-popup-learn-more { color: #fff; }
+
+.theme-brown .cookie-popup { background-color: #8d6e63; color: #fff; }
+.theme-brown .cookie-popup-accept-cookies { background-color: #5f4339; color: #fff; }
+.theme-brown .cookie-popup-learn-more { color: #fff; }
+
+.theme-grey .cookie-popup { background-color: #bdbdbd; color: #000; }
+.theme-grey .cookie-popup-accept-cookies { background-color: #8d8d8d; color: #000; }
+.theme-grey .cookie-popup-learn-more { color: #000; }
+
+.theme-bluegrey .cookie-popup { background-color: #78909c; color: #fff; }
+.theme-bluegrey .cookie-popup-accept-cookies { background-color: #4b636e; color: #fff; }
+.theme-bluegrey .cookie-popup-learn-more { color: #fff; }

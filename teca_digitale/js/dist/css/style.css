@@ -1,0 +1,78 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+#db {position: absolute; left: 0.5%; right:0.5%; top: 0px;  width: 99%; overflow-x:hidden;}
+.exhibit-tileView-body { list-style: none; }
+.exhibit-collectionView-group-count { display: none; }
+
+div.app-thumbnail {
+   float:      left;
+   width:      19.7em;
+   height:     16em;
+   border:     1px solid #BCB79E;
+   background: #F2F2F2;
+   padding:    1em;
+   margin:     0.3em;
+   overflow-y:auto;
+
+}
+
+/*hr { display: block; height: 1px;
+ border: 0; border-top: 1px solid #FF9900;
+ margin: 1em 0; padding: 0; } */
+ 
+hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900; margin-top:10px;margin-bottom:10px;}
+
+ .petrosino {
+  color: #FF9900 !important;
+}
+
+.highlight {
+  padding: 9px 14px;
+  margin-bottom: 14px;
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  border-radius: 4px;
+}
+
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  display: inline;
+}
+
+.logo {
+  padding: 0px 15px !important;
+}
+
+ul.nav li a, ul.nav li a:visited {
+    color: #4E4B4B !important;
+}
+
+ul.nav li a:hover, ul.nav li a:active {
+    color: #4E4B4B !important;
+}
+
+ul.nav li.active a {
+    color: #4E4B4B !important;
+}
+ @media (min-width: 320px) and (max-width: 1024px) {body {font-size: 9px; color: #4E4B4B;}}
+/*a {
+    color: #FF9900 !important;
+}*/
+
+/* rimosso momentaneamente export tool */
+.exhibit-toolboxWidget-button {
+    visibility: hidden !important;
+}
+/* rimosso momentaneamente export tool */
+
+footer {background: #dbdbdb; border-top: 1px solid #aeaeae; width: 100%;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 1030; 
+	/* 	color: white; text-align: center;*/
+ 
+    
+    
+}
