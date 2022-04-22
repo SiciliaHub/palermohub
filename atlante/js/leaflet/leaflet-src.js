@@ -1,5 +1,5 @@
 /*
- Leaflet 1.0.3+ed36a04, a JS library for interactive maps. https://leafletjs.com
+ Leaflet 1.0.3+ed36a04, a JS library for interactive maps. http://leafletjs.com
  (c) 2010-2016 Vladimir Agafonkin, (c) 2010-2011 CloudMade
 */
 (function (window, document, undefined) {
@@ -234,7 +234,7 @@ L.Util = {
 };
 
 (function () {
-	// inspired by https://paulirish.com/2011/requestanimationframe-for-smart-animating/
+	// inspired by http://paulirish.com/2011/requestanimationframe-for-smart-animating/
 
 	function getPrefixed(name) {
 		return window['webkit' + name] || window['moz' + name] || window['ms' + name];
@@ -1652,7 +1652,7 @@ L.LatLng.prototype = {
 	},
 
 	// @method distanceTo(otherLatLng: LatLng): Number
-	// Returns the distance (in meters) to the given `LatLng` calculated using the [Haversine formula](https://en.wikipedia.org/wiki/Haversine_formula).
+	// Returns the distance (in meters) to the given `LatLng` calculated using the [Haversine formula](http://en.wikipedia.org/wiki/Haversine_formula).
 	distanceTo: function (other) {
 		return L.CRS.Earth.distance(this, L.latLng(other));
 	},
@@ -2041,7 +2041,7 @@ L.Projection.SphericalMercator = {
  * Abstract class that defines coordinate reference systems for projecting
  * geographical points into pixel (screen) coordinates and back (and to
  * coordinates in other units for [WMS](https://en.wikipedia.org/wiki/Web_Map_Service) services). See
- * [spatial reference system](https://en.wikipedia.org/wiki/Coordinate_reference_system).
+ * [spatial reference system](http://en.wikipedia.org/wiki/Coordinate_reference_system).
  *
  * Leaflet defines the most usual CRSs by default. If you want to use a
  * CRS not defined by default, take a look at the
@@ -2217,7 +2217,7 @@ L.CRS.Earth = L.extend({}, L.CRS, {
 
 	// Mean Earth Radius, as recommended for use by
 	// the International Union of Geodesy and Geophysics,
-	// see https://rosettacode.org/wiki/Haversine_formula
+	// see http://rosettacode.org/wiki/Haversine_formula
 	R: 6371000,
 
 	// distance between two geographical points using spherical law of cosines approximation
@@ -3525,7 +3525,7 @@ L.Map = L.Evented.extend({
 		var pos = this._getMapPanePos();
 		if (Math.max(Math.abs(pos.x), Math.abs(pos.y)) >= this.options.transform3DLimit) {
 			// https://bugzilla.mozilla.org/show_bug.cgi?id=1203873 but Webkit also have
-			// a pixel offset on very high values, see: https://jsfiddle.net/dg6r5hhb/
+			// a pixel offset on very high values, see: http://jsfiddle.net/dg6r5hhb/
 			this._resetView(this.getCenter(), this.getZoom());
 		}
 	},
@@ -4497,7 +4497,7 @@ L.PosAnimation = L.Evented.extend({
 	// @method run(el: HTMLElement, newPos: Point, duration?: Number, easeLinearity?: Number)
 	// Run an animation of a given element to a new position, optionally setting
 	// duration in seconds (`0.25` by default) and easing linearity factor (3rd
-	// argument of the [cubic bezier curve](https://cubic-bezier.com/#0,0,.5,1),
+	// argument of the [cubic bezier curve](http://cubic-bezier.com/#0,0,.5,1),
 	// `0.5` by default).
 	run: function (el, newPos, duration, easeLinearity) {
 		this.stop();
@@ -5516,7 +5516,7 @@ L.gridLayer = function (options) {
  * @example
  *
  * ```js
- * L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(map);
+ * L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?{foo}', {foo: 'bar'}).addTo(map);
  * ```
  *
  * @section URL template
@@ -5525,7 +5525,7 @@ L.gridLayer = function (options) {
  * A string of the following form:
  *
  * ```
- * 'https://{s}.somedomain.com/blabla/{z}/{x}/{y}{r}.png'
+ * 'http://{s}.somedomain.com/blabla/{z}/{x}/{y}{r}.png'
  * ```
  *
  * `{s}` means one of the available subdomains (used sequentially to help with browser parallel requests per domain limitation; subdomain values are specified in options; `a`, `b` or `c` by default, can be omitted), `{z}` — zoom level, `{x}` and `{y}` — tile coordinates. `{r}` can be used to add @2x to the URL to load retina tiles.
@@ -5533,7 +5533,7 @@ L.gridLayer = function (options) {
  * You can use custom keys in the template, which will be [evaluated](#util-template) from TileLayer options, like this:
  *
  * ```
- * L.tileLayer('https://{s}.somedomain.com/{foo}/{z}/{x}/{y}.png', {foo: 'bar'});
+ * L.tileLayer('http://{s}.somedomain.com/{foo}/{z}/{x}/{y}.png', {foo: 'bar'});
  * ```
  */
 
@@ -5651,7 +5651,7 @@ L.TileLayer = L.GridLayer.extend({
 
 		/*
 		 Alt tag is set to empty string to keep screen readers from reading URL and for compliance reasons
-		 https://www.w3.org/TR/WCAG20-TECHS/H67
+		 http://www.w3.org/TR/WCAG20-TECHS/H67
 		*/
 		tile.alt = '';
 
@@ -5800,7 +5800,7 @@ L.tileLayer = function (url, options) {
  * @example
  *
  * ```js
- * var nexrad = L.tileLayer.wms("https://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
+ * var nexrad = L.tileLayer.wms("http://mesonet.agron.iastate.edu/cgi-bin/wms/nexrad/n0r.cgi", {
  * 	layers: 'nexrad-n0r-900913',
  * 	format: 'image/png',
  * 	transparent: true,
@@ -5815,7 +5815,7 @@ L.TileLayer.WMS = L.TileLayer.extend({
 	// @aka TileLayer.WMS options
 	// If any custom options not documented here are used, they will be sent to the
 	// WMS server as extra parameters in each request URL. This can be useful for
-	// [non-standard vendor WMS parameters](https://docs.geoserver.org/stable/en/user/services/wms/vendor.html).
+	// [non-standard vendor WMS parameters](http://docs.geoserver.org/stable/en/user/services/wms/vendor.html).
 	defaultWmsParams: {
 		service: 'WMS',
 		request: 'GetMap',
@@ -5933,7 +5933,7 @@ L.tileLayer.wms = function (url, options) {
  * @example
  *
  * ```js
- * var imageUrl = 'https://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
+ * var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
  * 	imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
  * L.imageOverlay(imageUrl, imageBounds).addTo(map);
  * ```
@@ -8440,11 +8440,11 @@ L.LineUtil = {
 	// @function simplify(points: Point[], tolerance: Number): Point[]
 	// Dramatically reduces the number of points in a polyline while retaining
 	// its shape and returns a new array of simplified points, using the
-	// [Douglas-Peucker algorithm](https://en.wikipedia.org/wiki/Douglas-Peucker_algorithm).
+	// [Douglas-Peucker algorithm](http://en.wikipedia.org/wiki/Douglas-Peucker_algorithm).
 	// Used for a huge performance boost when processing/displaying Leaflet polylines for
 	// each zoom level and also reducing visual noise. tolerance affects the amount of
 	// simplification (lesser value means higher quality but slower and with more points).
-	// Also released as a separated micro-library [Simplify.js](https://mourner.github.com/simplify-js/).
+	// Also released as a separated micro-library [Simplify.js](http://mourner.github.com/simplify-js/).
 	simplify: function (points, tolerance) {
 		if (!tolerance || !points.length) {
 			return points.slice();
@@ -8473,7 +8473,7 @@ L.LineUtil = {
 		return this._sqClosestPointOnSegment(p, p1, p2);
 	},
 
-	// Douglas-Peucker simplification, see https://en.wikipedia.org/wiki/Douglas-Peucker_algorithm
+	// Douglas-Peucker simplification, see http://en.wikipedia.org/wiki/Douglas-Peucker_algorithm
 	_simplifyDP: function (points, sqTolerance) {
 
 		var len = points.length,
@@ -8762,7 +8762,7 @@ L.Polyline = L.Path.extend({
 	},
 
 	// @method getCenter(): LatLng
-	// Returns the center ([centroid](https://en.wikipedia.org/wiki/Centroid)) of the polyline.
+	// Returns the center ([centroid](http://en.wikipedia.org/wiki/Centroid)) of the polyline.
 	getCenter: function () {
 		// throws error when not yet added to map as this center calculation requires projected coordinates
 		if (!this._map) {
@@ -9440,7 +9440,7 @@ L.circle = function (latlng, options, legacyOptions) {
  * Allows vector layers to be displayed with [SVG](https://developer.mozilla.org/docs/Web/SVG).
  * Inherits `Renderer`.
  *
- * Due to [technical limitations](https://caniuse.com/#search=svg), SVG is not
+ * Due to [technical limitations](http://caniuse.com/#search=svg), SVG is not
  * available in all web browsers, notably Android 2.x and 3.x.
  *
  * Although SVG is not available on IE7 and IE8, these browsers support
@@ -9631,7 +9631,7 @@ L.extend(L.SVG, {
 	// corresponding to the class name passed. For example, using 'line' will return
 	// an instance of [SVGLineElement](https://developer.mozilla.org/docs/Web/API/SVGLineElement).
 	create: function (name) {
-		return document.createElementNS('https://www.w3.org/2000/svg', name);
+		return document.createElementNS('http://www.w3.org/2000/svg', name);
 	},
 
 	// @function pointsToPath(rings: Point[], closed: Boolean): String
@@ -9839,7 +9839,7 @@ if (L.Browser.vml) {
  * Allows vector layers to be displayed with [`<canvas>`](https://developer.mozilla.org/docs/Web/API/Canvas_API).
  * Inherits `Renderer`.
  *
- * Due to [technical limitations](https://caniuse.com/#search=canvas), Canvas is not
+ * Due to [technical limitations](http://caniuse.com/#search=canvas), Canvas is not
  * available in all web browsers, notably IE8, and overlapping geometries might
  * not display properly in some edge cases.
  *
@@ -10630,19 +10630,19 @@ var PointToGeoJSON = {
 
 // @namespace Marker
 // @method toGeoJSON(): Object
-// Returns a [`GeoJSON`](https://en.wikipedia.org/wiki/GeoJSON) representation of the marker (as a GeoJSON `Point` Feature).
+// Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the marker (as a GeoJSON `Point` Feature).
 L.Marker.include(PointToGeoJSON);
 
 // @namespace CircleMarker
 // @method toGeoJSON(): Object
-// Returns a [`GeoJSON`](https://en.wikipedia.org/wiki/GeoJSON) representation of the circle marker (as a GeoJSON `Point` Feature).
+// Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the circle marker (as a GeoJSON `Point` Feature).
 L.Circle.include(PointToGeoJSON);
 L.CircleMarker.include(PointToGeoJSON);
 
 
 // @namespace Polyline
 // @method toGeoJSON(): Object
-// Returns a [`GeoJSON`](https://en.wikipedia.org/wiki/GeoJSON) representation of the polyline (as a GeoJSON `LineString` or `MultiLineString` Feature).
+// Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the polyline (as a GeoJSON `LineString` or `MultiLineString` Feature).
 L.Polyline.prototype.toGeoJSON = function () {
 	var multi = !L.Polyline._flat(this._latlngs);
 
@@ -10656,7 +10656,7 @@ L.Polyline.prototype.toGeoJSON = function () {
 
 // @namespace Polygon
 // @method toGeoJSON(): Object
-// Returns a [`GeoJSON`](https://en.wikipedia.org/wiki/GeoJSON) representation of the polygon (as a GeoJSON `Polygon` or `MultiPolygon` Feature).
+// Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the polygon (as a GeoJSON `Polygon` or `MultiPolygon` Feature).
 L.Polygon.prototype.toGeoJSON = function () {
 	var holes = !L.Polyline._flat(this._latlngs),
 	    multi = holes && !L.Polyline._flat(this._latlngs[0]);
@@ -10690,7 +10690,7 @@ L.LayerGroup.include({
 	},
 
 	// @method toGeoJSON(): Object
-	// Returns a [`GeoJSON`](https://en.wikipedia.org/wiki/GeoJSON) representation of the layer group (as a GeoJSON `GeometryCollection`).
+	// Returns a [`GeoJSON`](http://en.wikipedia.org/wiki/GeoJSON) representation of the layer group (as a GeoJSON `GeometryCollection`).
 	toGeoJSON: function () {
 
 		var type = this.feature && this.feature.geometry && this.feature.geometry.type;
@@ -10726,7 +10726,7 @@ L.LayerGroup.include({
 // @namespace GeoJSON
 // @factory L.geoJSON(geojson?: Object, options?: GeoJSON options)
 // Creates a GeoJSON layer. Optionally accepts an object in
-// [GeoJSON format](https://geojson.org/geojson-spec.html) to display on the map
+// [GeoJSON format](http://geojson.org/geojson-spec.html) to display on the map
 // (you can alternatively add it later with `addData` method) and an `options` object.
 L.geoJSON = function (geojson, options) {
 	return new L.GeoJSON(geojson, options);
@@ -11491,7 +11491,7 @@ L.extend(L.DomEvent, {
 	_pointersCount: 0,
 
 	// Provides a touch events wrapper for (ms)pointer events.
-	// ref https://www.w3.org/TR/pointerevents/ https://www.w3.org/Bugs/Public/show_bug.cgi?id=22890
+	// ref http://www.w3.org/TR/pointerevents/ https://www.w3.org/Bugs/Public/show_bug.cgi?id=22890
 
 	addPointerListener: function (obj, type, handler, id) {
 
@@ -12593,7 +12593,7 @@ L.Control.Attribution = L.Control.extend({
 
 		// @option prefix: String = 'Leaflet'
 		// The HTML text shown before the attributions. Pass `false` to disable.
-		prefix: '<a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
+		prefix: '<a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>'
 	},
 
 	initialize: function (options) {
@@ -12840,7 +12840,7 @@ L.control.scale = function (options) {
  * @aka L.Control.Layers
  * @inherits Control
  *
- * The layers control gives users the ability to switch between different base layers and switch overlays on/off (check out the [detailed example](https://leafletjs.com/examples/layers-control.html)). Extends `Control`.
+ * The layers control gives users the ability to switch between different base layers and switch overlays on/off (check out the [detailed example](http://leafletjs.com/examples/layers-control.html)). Extends `Control`.
  *
  * @example
  *
@@ -13129,7 +13129,7 @@ L.Control.Layers = L.Control.extend({
 		}
 	},
 
-	// IE7 bugs out if you create a radio dynamically, so you have to do it this hacky way (see https://bit.ly/PqYLBe)
+	// IE7 bugs out if you create a radio dynamically, so you have to do it this hacky way (see http://bit.ly/PqYLBe)
 	_createRadioElement: function (name, checked) {
 
 		var radioHtml = '<input type="radio" class="leaflet-control-layers-selector" name="' +

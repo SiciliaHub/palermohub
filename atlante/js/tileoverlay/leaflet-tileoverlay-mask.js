@@ -35,12 +35,12 @@
 		var id = "_leaflet_tilelayer_mask_" + (count++);
 		if (document.getElementById(id) != null)
 			return $e(name, attr);
-		var e = document.createElementNS("https://www.w3.org/2000/svg", name);
+		var e = document.createElementNS("http://www.w3.org/2000/svg", name);
 		e.setAttribute("id", id);
 		if (attr)
 			for (key in attr)
 				if (key == "href")
-					e.setAttributeNS("https://www.w3.org/1999/xlink", key, attr[key]);
+					e.setAttributeNS("http://www.w3.org/1999/xlink", key, attr[key]);
 				else
 					e.setAttribute(key, attr[key]);
 		return e;
