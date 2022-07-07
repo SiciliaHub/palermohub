@@ -63,10 +63,29 @@ body {
 <!-- twitter --> 
 </head>
 <body>
+ <!-- header -->    
 <header>
-  <div data-includeHTML="menu.html"></div>
-  <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="sicilia_spiagge_accessibili_2022.html" title="Sicilia, spiagge accessibili 2022 - Sicily, accessible beaches 2022"><strong>Sicilia, spiagge accessibili 2022</strong></a></div>
+     <div data-includeHTML="menu.html"></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="sicilia_spiagge_accessibili_2022.html" title="Sicilia, spiagge accessibili 2022 - Sicily, accessible beaches 2022" target="_parent"><strong>Sicilia, spiagge accessibili 2022</strong></a>
+  <div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre Mappe simili&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="sicilia_spiagge_accessibili.html" title="Sicilia, spiagge accessibili 2019" target="_parent"><strong>Sicilia, spiagge accessibili 2019</ strong></a> 
+  </div>
+	 <script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
 </header>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+
  <iframe src="https://umap.openstreetmap.fr/it/map/spiagge-accessibili-in-sicilia-2022_784734" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:91.8%;width:100%;position:absolute;top:75px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
 
 <script>
