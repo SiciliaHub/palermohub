@@ -841,8 +841,15 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
 <loc>https://palermohub.opendatasicilia.it/acque_balneazione_2023.html</loc>
 <lastmod>2023-04-30</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+<url>
+<loc>https://palermohub.opendatasicilia.it/divieti_balneazione_palermo.html</loc>
+<lastmod>2023-05-02</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
@@ -852,5 +859,4 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>  --> 
-
 </urlset>
