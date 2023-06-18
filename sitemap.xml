@@ -871,6 +871,13 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>https://palermohub.opendatasicilia.it/borghi_2023.html</loc>
+<lastmod>2023-06-18</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
 
 <!--- <url>
 <loc>https://palermohub.opendatasicilia.it/xxxx.html</loc>
