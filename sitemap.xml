@@ -883,7 +883,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-
+<url>
+<loc>https://palermohub.opendatasicilia.it/nasa_firms.html</loc>
+<lastmod>2023-08-30</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 <!--- <url>
 <loc>https://palermohub.opendatasicilia.it/xxxx.html</loc>
 <lastmod>2018-01-28</lastmod>
