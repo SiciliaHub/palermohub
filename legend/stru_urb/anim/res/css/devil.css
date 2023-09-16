@@ -1,0 +1,83 @@
+P {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	PADDING-BOTTOM: 0px;
+	MARGIN: 0px;
+	LINE-HEIGHT: 1.8;
+	PADDING-TOP: 0px;
+	color: #888888;
+}
+A {
+	COLOR: #FF9900; TEXT-DECORATION: underline
+}
+DIV#container {
+	MARGIN: 0px auto;
+	WIDTH: 520px;
+	min-width: 80px;
+	height: 40px;
+}
+UL#minitabs {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	FONT-WEIGHT: bold;
+	PADDING-BOTTOM: 15px;
+	MARGIN: 0px;
+	PADDING-TOP: 5px;
+	BORDER-BOTTOM: #373737 1px solid;
+	WHITE-SPACE: nowrap;
+	LIST-STYLE-TYPE: none;
+	TEXT-ALIGN: center;
+
+}
+
+UL#minitabs LI {
+	DISPLAY: inline;
+	MARGIN: 0px 2px;
+	
+}
+UL#minitabs A {
+	PADDING-RIGHT: 0px;
+	PADDING-LEFT: 0px;
+	PADDING-BOTTOM: 5px;
+	COLOR: #888888;
+	PADDING-TOP: 0px;
+	BORDER-BOTTOM: #fff 2px solid;
+	TEXT-DECORATION: none;
+	border-bottom-color: #000000;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+UL#minitabs A#current {
+	BORDER-LEFT-COLOR: #FF9900;
+	BORDER-BOTTOM-COLOR: #FF9900;
+	COLOR: #FF9900;
+	BORDER-TOP-COLOR: #FF9900;
+	BORDER-RIGHT-COLOR: #FF9900;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-style: normal;
+}
+UL#minitabs A:hover {
+	BORDER-LEFT-COLOR: #FF9900;
+	BORDER-BOTTOM-COLOR: #FF0000;
+	COLOR: #ffffff;
+	BORDER-TOP-COLOR: #FF9900;
+	BORDER-RIGHT-COLOR: #FF9900;}
+	
+.xsmalltxt {
+	color: #888888;
+	font-size: 8pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+}
+.celle_top {
+	border: 1px solid;
+	border-top-color: #373737;
+	border-right-style: none;
+	border-left-style: none;
+	border-bottom-style: none;
+	font-size: 8pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}	

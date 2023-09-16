@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<buttontemplate>
+  <templatename>pulsante2</templatename>
+  <customtemplate>True</customtemplate>
+  <text>
+  </text>
+  <font>Tahoma, 36, 1</font>
+  <textcolor>255, 255, 255, 255</textcolor>
+  <textpositionalign>1</textpositionalign>
+  <textpositionvalign>1</textpositionvalign>
+  <textoffsetx>0</textoffsetx>
+  <textoffsety>0</textoffsety>
+  <textoutline>False</textoutline>
+  <textoutlinesize>1</textoutlinesize>
+  <usetextshadow>True</usetextshadow>
+  <textshadowposx>1</textshadowposx>
+  <textshadowposy>1</textshadowposy>
+  <textshadowcolor>255, 0, 0, 0</textshadowcolor>
+  <textshadowalphablending>100</textshadowalphablending>
+  <buttonautosize>False</buttonautosize>
+  <buttonheight>112</buttonheight>
+  <buttonwidth>174</buttonwidth>
+  <roundedcornerradius>10</roundedcornerradius>
+  <buttontype>0</buttontype>
+  <colortype>1</colortype>
+  <buttonstartcolor>255, 10, 15, 20</buttonstartcolor>
+  <buttonendcolor>255, 10, 15, 20</buttonendcolor>
+  <buttongradientdirection>0</buttongradientdirection>
+  <texturewrapmode>0</texturewrapmode>
+  <textureimage>F:\gbvitrano.eu\cspa\ppe\clip\pulsanti\jpg\Nuova cartella\sintesi.jpg</textureimage>
+  <glossytype>2</glossytype>
+  <buttonglossycolor>255, 0, 0, 51</buttonglossycolor>
+  <buttonglossyalphablending>55</buttonglossyalphablending>
+  <usebuttonshadow>True</usebuttonshadow>
+  <buttonshadowposx>4</buttonshadowposx>
+  <buttonshadowposy>4</buttonshadowposy>
+  <buttonshadowcolor>255, 0, 0, 51</buttonshadowcolor>
+  <buttonshadowalphablending>50</buttonshadowalphablending>
+  <usebuttonglow>False</usebuttonglow>
+  <buttonglowcolor>255, 255, 0, 0</buttonglowcolor>
+  <buttonglowsize>3</buttonglowsize>
+  <usebuttonstroke>False</usebuttonstroke>
+  <buttonstrokecolor>255, 0, 0, 51</buttonstrokecolor>
+  <buttonstrokesize>1</buttonstrokesize>
+  <usepulsing>False</usepulsing>
+  <usegrayscale>False</usegrayscale>
+  <iconfilename>F:\gbvitrano.eu\cspa\ppe\clip\aquila1.png</iconfilename>
+  <iconpositionalign>7</iconpositionalign>
+  <iconalphablending>92</iconalphablending>
+  <iconoffsetx>0</iconoffsetx>
+  <iconoffsety>0</iconoffsety>
+  <useiconshadow>True</useiconshadow>
+  <iconshadowposx>-1</iconshadowposx>
+  <iconshadowposy>-1</iconshadowposy>
+  <iconshadowcolor>255, 0, 0, 51</iconshadowcolor>
+  <iconshadowalphablending>35</iconshadowalphablending>
+  <usebuttoninnerstroke>False</usebuttoninnerstroke>
+  <buttoninnerstrokecolor>255, 255, 215, 0</buttoninnerstrokecolor>
+  <buttoninnerstrokesize>2</buttoninnerstrokesize>
+  <usebuttonlighteffect>False</usebuttonlighteffect>
+  <buttonlighteffectcolor>255, 0, 0, 255</buttonlighteffectcolor>
+  <buttonlighteffectalphablending>100</buttonlighteffectalphablending>
+  <usetextrotation>False</usetextrotation>
+  <textrotationdegree>45</textrotationdegree>
+  <buttonlighteffecthorizontal>50</buttonlighteffecthorizontal>
+  <buttonlighteffectvertical>100</buttonlighteffectvertical>
+  <usemirroreffect>False</usemirroreffect>
+  <mirroreffectheight>55</mirroreffectheight>
+  <mirroreffectdistance>-4</mirroreffectdistance>
+</buttontemplate>

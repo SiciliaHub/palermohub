@@ -1,0 +1,116 @@
+# This file is created by JAlbum. It sets custom file filtering and ordering for this image directory.
+# Each row indicate a file and it's order. Files not listed here are added to the end of the album
+# Rows beginning with "-" indicate excluded files.
+# Rows containing a tab character indicate links, where the text before the tab is the logical file name
+# and the path to the right is the target path.
+# Note: This file allows absolute paths to files and directories in other locations and thereby
+# allows you to compile albums consisting of files from several different locations.
+
+-14_00.jpg
+-14_00_bn.jpg
+-14_01.jpg
+orto.png	F:\gbvitrano.eu\cspa\ppe\clip\pulsanti\orto.png
+sint_cat.png	F:\gbvitrano.eu\cspa\ppe\clip\pulsanti\sint_cat.png
+tav_13.png	F:\gbvitrano.eu\cspa\ppe\clip\pulsanti\tav_13.png
+tav_14.png	F:\gbvitrano.eu\cspa\ppe\clip\pulsanti\tav_14.png
+-14_01_bn.jpg
+-14_02.jpg
+-14_02_bn.jpg
+-14_03.jpg
+-14_03_bn.jpg
+-14_04.jpg
+-14_04_bn.jpg
+-14_05.jpg
+-14_05_bn.jpg
+-14_06.jpg
+-14_06_bn.jpg
+-14_07.jpg
+-14_07_bn.jpg
+-14_08.jpg
+-14_08_bn.jpg
+-14_09.jpg
+-14_09_bn.jpg
+-14_10.jpg
+-14_10_bn.jpg
+-14_11.jpg
+-14_11_bn.jpg
+-14_12.jpg
+-14_12_bn.jpg
+-14_13.jpg
+-14_13_bn.jpg
+-14_14.jpg
+-14_14_bn.jpg
+-14_15.jpg
+-14_15_bn.jpg
+-14_16.jpg
+-14_16_bn.jpg
+-adobe.png
+-aquila.png
+-back.gif
+-basi
+-clip.png
+-Copia di sf_1.jpg
+-int.gif
+-int.png
+-mn.gif
+-orto.jpg
+-ppe.png
+-sfondo.png
+-sf_1.jpg
+-sf_2.jpg
+-tav_13.jpg
+-tav_14.jpg
+-13_00.jpg
+-13_00_bn.jpg
+-13_01.jpg
+-13_01_bn.jpg
+-13_02.jpg
+-13_02_bn.jpg
+-13_03.jpg
+-13_03_bn.jpg
+-13_04.jpg
+-13_04_bn.jpg
+-13_05.jpg
+-13_05_bn.jpg
+-13_06.jpg
+-13_06_bn.jpg
+-13_07.jpg
+-13_07_bn.jpg
+-13_08.jpg
+-13_08_bn.jpg
+-13_09.jpg
+-13_09_bn.jpg
+-13_10.jpg
+-13_10_bn.jpg
+-13_11.jpg
+-13_11_bn.jpg
+-13_12.jpg
+-13_12_bn.jpg
+-13_13.jpg
+-13_13_bn.jpg
+-13_14.jpg
+-13_14_bn.jpg
+-13_15.jpg
+-13_15_bn.jpg
+-13_16.jpg
+-13_16_bn.jpg
+-aquila1.png
+-cm.jpg
+-cm_n.jpg
+-loading.gif
+-mp.jpg
+-mp_n.jpg
+-pr.jpg
+-pr_n.jpg
+-sintesi.jpg
+-sintesi_n.jpg
+-sint_cat.jpg
+-tr.jpg
+-tr_n.jpg
+-cat_1887.jpg
+-cat_1887_n.jpg
+-cat_1930.jpg
+-cat_1930_n.jpg
+-cat_1954.jpg
+-cat_1954_n.jpg
+-pulsanti

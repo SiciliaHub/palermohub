@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<buttontemplate>
+  <templatename>pulsante_laterale</templatename>
+  <customtemplate>True</customtemplate>
+  <text>
+  </text>
+  <font>Arial, 19, 3</font>
+  <textcolor>255, 255, 255, 255</textcolor>
+  <textpositionalign>0</textpositionalign>
+  <textpositionvalign>2</textpositionvalign>
+  <textoffsetx>4</textoffsetx>
+  <textoffsety>-4</textoffsety>
+  <textoutline>False</textoutline>
+  <textoutlinesize>1</textoutlinesize>
+  <usetextshadow>True</usetextshadow>
+  <textshadowposx>1</textshadowposx>
+  <textshadowposy>1</textshadowposy>
+  <textshadowcolor>255, 64, 64, 64</textshadowcolor>
+  <textshadowalphablending>50</textshadowalphablending>
+  <buttonautosize>False</buttonautosize>
+  <buttonheight>140</buttonheight>
+  <buttonwidth>285</buttonwidth>
+  <roundedcornerradius>5</roundedcornerradius>
+  <buttontype>0</buttontype>
+  <colortype>1</colortype>
+  <buttonstartcolor>255, 10, 15, 20</buttonstartcolor>
+  <buttonendcolor>255, 10, 15, 20</buttonendcolor>
+  <buttongradientdirection>0</buttongradientdirection>
+  <texturewrapmode>3</texturewrapmode>
+  <textureimage>C:\xampp\htdocs\portale_cs\images\pcs\clip\mappa_oopp_03.jpg</textureimage>
+  <glossytype>1</glossytype>
+  <buttonglossycolor>255, 192, 192, 192</buttonglossycolor>
+  <buttonglossyalphablending>30</buttonglossyalphablending>
+  <usebuttonshadow>True</usebuttonshadow>
+  <buttonshadowposx>4</buttonshadowposx>
+  <buttonshadowposy>4</buttonshadowposy>
+  <buttonshadowcolor>255, 0, 0, 51</buttonshadowcolor>
+  <buttonshadowalphablending>50</buttonshadowalphablending>
+  <usebuttonglow>False</usebuttonglow>
+  <buttonglowcolor>255, 255, 0, 0</buttonglowcolor>
+  <buttonglowsize>3</buttonglowsize>
+  <usebuttonstroke>True</usebuttonstroke>
+  <buttonstrokecolor>255, 255, 255, 255</buttonstrokecolor>
+  <buttonstrokesize>1</buttonstrokesize>
+  <usepulsing>False</usepulsing>
+  <usegrayscale>False</usegrayscale>
+  <iconfilename>I:\Archivio Lavori\Web\portale_cs\Joomla 3.2.1_installato sul server cst05 - host - host - settorecittastorica.comune.palermo.it\images\pcs\cspa\ppe\clip\aquila1.png</iconfilename>
+  <iconpositionalign>5</iconpositionalign>
+  <iconalphablending>92</iconalphablending>
+  <iconoffsetx>0</iconoffsetx>
+  <iconoffsety>0</iconoffsety>
+  <useiconshadow>True</useiconshadow>
+  <iconshadowposx>-1</iconshadowposx>
+  <iconshadowposy>-1</iconshadowposy>
+  <iconshadowcolor>255, 0, 0, 51</iconshadowcolor>
+  <iconshadowalphablending>35</iconshadowalphablending>
+  <usebuttoninnerstroke>False</usebuttoninnerstroke>
+  <buttoninnerstrokecolor>255, 255, 215, 0</buttoninnerstrokecolor>
+  <buttoninnerstrokesize>2</buttoninnerstrokesize>
+  <usebuttonlighteffect>False</usebuttonlighteffect>
+  <buttonlighteffectcolor>255, 0, 0, 255</buttonlighteffectcolor>
+  <buttonlighteffectalphablending>100</buttonlighteffectalphablending>
+  <usetextrotation>False</usetextrotation>
+  <textrotationdegree>90</textrotationdegree>
+  <buttonlighteffecthorizontal>50</buttonlighteffecthorizontal>
+  <buttonlighteffectvertical>100</buttonlighteffectvertical>
+  <usemirroreffect>False</usemirroreffect>
+  <mirroreffectheight>55</mirroreffectheight>
+  <mirroreffectdistance>-4</mirroreffectdistance>
+</buttontemplate>

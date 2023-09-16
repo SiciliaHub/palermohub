@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<buttontemplate>
+  <templatename>pulsante5</templatename>
+  <customtemplate>True</customtemplate>
+  <text>Tavole P.P.E. </text>
+  <font>Arial Unicode MS, 15, 1</font>
+  <textcolor>255, 255, 255, 255</textcolor>
+  <textpositionalign>1</textpositionalign>
+  <textpositionvalign>1</textpositionvalign>
+  <textoffsetx>0</textoffsetx>
+  <textoffsety>0</textoffsety>
+  <textoutline>False</textoutline>
+  <textoutlinesize>1</textoutlinesize>
+  <usetextshadow>False</usetextshadow>
+  <textshadowposx>1</textshadowposx>
+  <textshadowposy>1</textshadowposy>
+  <textshadowcolor>255, 0, 0, 0</textshadowcolor>
+  <textshadowalphablending>100</textshadowalphablending>
+  <buttonautosize>False</buttonautosize>
+  <buttonheight>25</buttonheight>
+  <buttonwidth>120</buttonwidth>
+  <roundedcornerradius>35</roundedcornerradius>
+  <buttontype>0</buttontype>
+  <colortype>0</colortype>
+  <buttonstartcolor>255, 0, 0, 51</buttonstartcolor>
+  <buttonendcolor>255, 0, 0, 51</buttonendcolor>
+  <buttongradientdirection>2</buttongradientdirection>
+  <texturewrapmode>0</texturewrapmode>
+  <textureimage>
+  </textureimage>
+  <glossytype>2</glossytype>
+  <buttonglossycolor>255, 255, 255, 255</buttonglossycolor>
+  <buttonglossyalphablending>50</buttonglossyalphablending>
+  <usebuttonshadow>True</usebuttonshadow>
+  <buttonshadowposx>4</buttonshadowposx>
+  <buttonshadowposy>4</buttonshadowposy>
+  <buttonshadowcolor>255, 0, 0, 0</buttonshadowcolor>
+  <buttonshadowalphablending>50</buttonshadowalphablending>
+  <usebuttonglow>False</usebuttonglow>
+  <buttonglowcolor>255, 255, 0, 0</buttonglowcolor>
+  <buttonglowsize>13</buttonglowsize>
+  <usebuttonstroke>True</usebuttonstroke>
+  <buttonstrokecolor>255, 0, 0, 51</buttonstrokecolor>
+  <buttonstrokesize>2</buttonstrokesize>
+  <usepulsing>False</usepulsing>
+  <usegrayscale>False</usegrayscale>
+  <iconfilename>
+  </iconfilename>
+  <iconpositionalign>0</iconpositionalign>
+  <iconalphablending>100</iconalphablending>
+  <iconoffsetx>0</iconoffsetx>
+  <iconoffsety>0</iconoffsety>
+  <useiconshadow>True</useiconshadow>
+  <iconshadowposx>1</iconshadowposx>
+  <iconshadowposy>1</iconshadowposy>
+  <iconshadowcolor>255, 0, 0, 0</iconshadowcolor>
+  <iconshadowalphablending>50</iconshadowalphablending>
+  <usebuttoninnerstroke>True</usebuttoninnerstroke>
+  <buttoninnerstrokecolor>255, 0, 0, 51</buttoninnerstrokecolor>
+  <buttoninnerstrokesize>0</buttoninnerstrokesize>
+  <usebuttonlighteffect>False</usebuttonlighteffect>
+  <buttonlighteffectcolor>255, 255, 255, 255</buttonlighteffectcolor>
+  <buttonlighteffectalphablending>100</buttonlighteffectalphablending>
+  <usetextrotation>False</usetextrotation>
+  <textrotationdegree>45</textrotationdegree>
+  <buttonlighteffecthorizontal>50</buttonlighteffecthorizontal>
+  <buttonlighteffectvertical>100</buttonlighteffectvertical>
+  <usemirroreffect>False</usemirroreffect>
+  <mirroreffectheight>40</mirroreffectheight>
+  <mirroreffectdistance>0</mirroreffectdistance>
+</buttontemplate>

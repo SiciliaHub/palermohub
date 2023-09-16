@@ -1,0 +1,228 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #888888;
+	text-align:center;
+	margin-top: 0px;
+	font-size: 8pt;
+	font-style: normal;
+	padding: 10px 0px 0px 0px;
+	background-color: #FFFFFF;
+	}
+
+/*html {
+	scrollbar-face-color:#000033;
+	scrollbar-highlight-color:#000033;
+	scrollbar-3dlight-color:#000033;
+	scrollbar-darkshadow-color:#000033;
+	scrollbar-shadow-color:#000033;
+	scrollbar-arrow-color:#9999FF;
+	scrollbar-track-color:#000033;
+}*/
+a:link {
+	text-decoration: none;
+	color: #FF9900;
+	font-size: 8pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+a:visited {
+	text-decoration: none;
+	color: #FF9900;
+	font-size: 8pt;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #333333;
+}
+
+.current {
+	font-weight: bold;
+	color: #AAAAAA;
+	background-color: #114488;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+}
+
+/* Suggerimenti per i layout elastici 
+1. Poiché le dimensioni generali dei layout elastici sono basate sulla dimensione predefinita del carattere dell'utente, il risultato di questi layout è meno prevedibile. Se usati correttamente, risultano più accessibili per gli utenti che hanno bisogno di visualizzare i caratteri con dimensioni maggiori, perché la lunghezza delle righe rimane proporzionale.
+2. Le dimensioni dei div di questo layout sono basate sul 100% della dimensione del carattere nell'elemento body. Se si riduce la dimensione generale del testo specificando font-size: 80% nell'elemento body o in #container, ricordarsi che l'intero layout si ridurrà in proporzione. Per compensare eventualmente questo effetto, si può aumentare la larghezza dei vari div.
+3. Se le dimensioni dei caratteri vengono modificate in modo diverso per ogni div anziché a livello globale (ovvero, se si assegna a #sidebar1 una dimensione di carattere del 70% e a #mainContent dell'85%), le dimensioni generali di ciascun div verranno modificate in modo proporzionale. È possibile adattare il risultato in base alle dimensioni finali dei caratteri.
+*/
+.twoColElsRtHdr #container {
+	width: 950px;
+	margin: 0 auto;
+	text-align: left;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: 50% 0px;
+}
+
+.twoColElsRtHdr #header {
+	padding: 0px  0px 0px  0px;  /* questo padding corrisponde all'allineamento a sinistra degli elementi nei div sottostanti. Se in #header viene utilizzata un'immagine anziché un testo, può essere utile rimuovere il padding. */
+	width: 950px;
+	height: 90px;
+	text-align: justify;
+} 
+.twoColElsRtHdr #header h1 {
+	margin: 0; /* azzerando il valore margin dell'ultimo elemento del div #header si evita la compressione del margine, con la creazione di uno spazio inspiegabile tra i div. Se il div è circondato da un bordo, questo accorgimento non è necessario perché anche il bordo impedisce la compressione del margine */
+	padding: 10px 0; /* l'uso del valore padding al posto di margin consente di distanziare l'elemento dai bordi del div */
+}
+
+/* Suggerimenti per mainContent:
+1. Se si assegna a questo div #mainContent un valore font-size diverso dal div #sidebar1, i margini del div #mainContent e la larghezza del div #sidebar1 saranno basati sui rispettivi valori font-size. Può essere utile modificare i valori di questi div.
+2. Lo spazio tra mainContent e sidebar1 viene creato con il margine sinistro del div mainContent.  Indipendentemente dalla quantità di contenuto presente nel div sidebar1, lo spazio della colonna rimane inalterato. È possibile rimuovere questo margine sinistro se si desidera che il testo del div #mainContent riempia lo spazio di #sidebar1 quando il contenuto di #sidebar1 finisce.
+3. Per evitare il problema del 'float drop', può essere necessario eseguire una prova per determinare le dimensioni massime approssimative dell'immagine o elemento, poiché questo layout è basato sulle dimensioni di carattere dell'utente combinate con i valori impostati. Tuttavia, se nel browser dell'utente la dimensione del carattere è impostata su un valore più basso del normale, nel div #mainContent sarà disponibile meno spazio di quello evidenziato nella prova.
+4. Nel commento condizionale di Internet Explorer riportato di seguito, la proprietà zoom viene utilizzata per assegnare "hasLayout" a mainContent, al fine di evitare vari bug specifici di IE che potrebbero verificarsi.
+*/
+.twoColElsRtHdr #mainContent {
+	margin: 5px 0px 0px 0px; /* il margine destro di questo elemento div crea la colonna sul lato destro della pagina; indipendentemente dalla quantità di contenuto presente nel div sidebar1, lo spazio della colonna rimane inalterato. È possibile rimuovere questo margine se si desidera che il testo del div #mainContent riempia lo spazio di #sidebar1 quando il contenuto di #sidebar1 finisce. */
+	padding: 0px 0px 0px opx;
+	border-top-style: none;
+	border-left-style: none;
+	border-bottom-style: none;
+	width: 950px;
+	height: 565px;
+	margin-bottom: 0px;
+	caption-side: left;
+	clear: left;
+	zoom: 1;
+} 
+.twoColFixRtHdr #mainContentmap {
+	margin: 15px 2px 0px 0px; /* il margine destro di questo elemento div crea la colonna sul lato destro della pagina; indipendentemente dalla quantità di contenuto presente nel div sidebar1, lo spazio della colonna rimane inalterato. È possibile rimuovere questo margine se si desidera che il testo del div #mainContent riempia lo spazio di #sidebar1 quando il contenuto di #sidebar1 finisce. */
+	padding: 0px 0px;
+	width: 950px;
+	height: 950px;
+	zoom: 1;
+	margin-bottom: 0px;
+	text-align: justify;
+} 
+.twoColElsRtHdr #footer01 {
+	padding: 0px  0px 0px  0px;
+	width: 950px;
+	height: 40px;
+	margin-top: 0px;
+	text-align: justify;
+} 
+.twoColElsRtHdr #footer01 p {
+	margin: 0px; /* azzerando il valore margin del primo elemento del footer si evita il rischio di compressione del margine, con la creazione di uno spazio tra i div */
+	padding: 10px 0; /* il padding di questo elemento crea uno spazio, così come avverrebbe specificando un valore margin, senza il problema della compressione del margine */
+}
+
+/* Classi varie riutilizzabili */
+.fltrt { /* questa classe può essere utilizzata per rendere mobile un elemento a destra nella pagina. L'elemento reso mobile deve precedere l'elemento al quale deve essere affiancato sulla pagina. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* questa classe può essere utilizzata per rendere mobile un elemento a sinistra nella pagina.*/
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* questa classe deve essere inserita in un elemento div o break e deve essere l'elemento finale prima della chiusura di un contenitore che deve contenere per intero un elemento mobile */
+	clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+
+H1 {
+	color: #FF9900;
+	font-weight: bold;
+	font-size: 12pt;
+	text-align: justify;
+}
+H2 {
+	color: #FF9900;
+	font-weight: bold;
+	font-size: 10pt;
+	text-align: justify;
+}	
+	.testo_corpo {
+	color: #888888;
+	font-size: 8pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+}
+	.testo_arancio {
+	color: #333333;
+	font-size: 8pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+}
+.sitemap {
+	color: #FF9900;
+	font-size: 12pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+}
+.sitemap:link {
+	color: #CCCCCC;
+	font-size: 12pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+}
+.sitemap:visited {
+	color: #CCCCCC;
+	font-size: 12pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;	
+}
+.sitemap:hover {
+	color: #FF9900;
+	font-size: 12pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+}
+.info {
+	color: #000000;
+	font-size: 13pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+	text-decoration: none;
+}
+.info:link {
+	color: #000000;
+	font-size: 13pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+}
+.info:visited {
+	color: #000000;
+	font-size: 13pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+}
+
+.info:hover {
+	color: #FFFFFF;
+	font-size: 13pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: justify;
+}
+
+#scrollbar{
+	border-bottom:1px solid #ffffff;
+}
+#shadowbox_body{
+	border: 2px solid #ffffff;
+}
+#shadowbox_title{
+	height: 30px;
+}
+#shadowbox_title_inner{
+	font: 15px Arial, Helvetica, sans-serif;
+	color: #9999ff;
+}
+#shadowbox_toolbar{
+	height: 22px;
+}
+#shadowbox_toolbar_inner div{
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #9999ff;
+}
+#shadowbox_toolbar_inner div a {
+  color: #9999ff;
+}
+#shadowbox_toolbar_inner div a:hover {
+  text-decoration: underline;
+}

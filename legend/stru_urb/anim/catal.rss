@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0"
+     xmlns:media="http://search.yahoo.com/mrss/"
+     xmlns:jalbum="http://jalbum.net/jalbumrss">
+
+    <channel>
+        <title></title>
+   	<link>.</link>
+   	
+          
+        <item>
+            <title>Ortofoto Centro Storico di Palermo</title>
+            <link>orto.html</link>
+            <pubDate>Sat, 08 Nov 2008 14:01:49 +0100</pubDate>
+            <generator>Jalbum 8.0</generator>
+            
+            <media:thumbnail url="ppe/clip/orto.png" width="244" height="240"/>
+            <media:content url="orto.html" width="400" height="400"/>
+            
+            <guid isPermaLink="false">orto.html</guid>
+        </item>
+        
+        <item>
+            <title>Tavola 13 del P.P.E. - Scala 1:500</title>
+            <link>pt.html</link>
+            <pubDate>Sat, 08 Nov 2008 14:01:49 +0100</pubDate>
+            <generator>Jalbum 8.0</generator>
+            
+            <media:thumbnail url="ppe/clip/tav_13.png" width="244" height="240"/>
+            <media:content url="pt.html" width="400" height="400"/>
+            
+            <guid isPermaLink="false">pt.html</guid>
+        </item>
+        
+        <item>
+            <title>Tavola 14 del P.P.E. - Scala 1:500</title>
+            <link>ppe.html</link>
+            <pubDate>Sat, 08 Nov 2008 14:01:49 +0100</pubDate>
+            <generator>Jalbum 8.0</generator>
+            
+            <media:thumbnail url="ppe/clip/tav_14.png" width="244" height="240"/>
+            <media:content url="ppe.html" width="400" height="400"/>
+            
+            <guid isPermaLink="false">ppe.html</guid>
+         </item>
+        
+		
+		 <item>
+            <title>Sintesti storica dei mutamenti catastali, tavole 4,5,6 e 7</title>
+            <link>catasto.html</link>
+            <pubDate>Sat, 08 Nov 2008 14:01:49 +0100</pubDate>
+            <generator>Jalbum 8.0</generator>
+            
+            <media:thumbnail url="ppe/clip/sint_cat.png" width="244" height="240"/>
+            <media:content url="catasto.html" width="400" height="350"/>
+            
+            <guid isPermaLink="false">catasto.html</guid>
+        </item>
+
+		<item>
+			<title>Tavola 9 - La tipologia edilizia storica</title>
+			<link>tav9.html</link>
+			<pubDate>Sat, 10 Nov 2008 14:01:49 +0100</pubDate>
+			<generator>Jalbum 8.0</generator>
+
+			<media:thumbnail url="ppe/clip/tav_9.png" width="244" height="240"/>
+			<media:content url="tav9.html" width="400" height="350"/>
+
+			<guid isPermaLink="false">tav_9.html</guid>
+		</item>
+
+		<item>
+			<title>Tavola 10 - Gli interventi nuovi dal Piano Giarrusso al 1989</title>
+			<link>tav10.html</link>
+			<pubDate>Sat, 10 Nov 2008 14:01:49 +0100</pubDate>
+			<generator>Jalbum 8.0</generator>
+			
+			<media:thumbnail url="ppe/clip/tav_10.png" width="244" height="240"/>
+			<media:content url="tav10.html" width="400" height="350"/>
+			
+			<guid isPermaLink="false">tav_10.html</guid>
+		</item>
+				
+		<item>
+			<title>Tavola 12 - Tavola 12 - Piano di inquadramento generale</title>
+			<link>tav12.html</link>
+			<pubDate>Sat, 10 Nov 2008 14:01:49 +0100</pubDate>
+			<generator>Jalbum 8.0</generator>
+			
+			<media:thumbnail url="ppe/clip/tav_12.png" width="244" height="240"/>
+			<media:content url="tav12.html" width="400" height="350"/>
+			
+			<guid isPermaLink="false">tav_12.html</guid>
+		</item>
+    </channel>
+</rss>

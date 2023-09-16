@@ -1,0 +1,81 @@
+    body {
+	background-color: #FFFFFF;
+	margin-top: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color: #FFFFFF;
+    }
+    .click-menu {
+    }
+    .click-menu .box1 {
+	color: #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	padding: 20px 10px 20px 5px;
+	background-image: url(ppe/clip/ppe1.png);
+	background-repeat: no-repeat;
+    }
+    .click-menu .box1-hover {
+	color: #9999FF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	padding: 20px 10px 20px 5px;
+	background-image: url(ppe/clip/ppe2.png);
+	background-repeat: no-repeat;
+    }
+    .click-menu .box1-open {
+	color: #000033;
+	padding: 20px 10px 20px 5px;
+	background-image: url(ppe/clip/ppe3.png);
+	background-repeat: no-repeat;
+    }
+    .click-menu .box1-open-hover {
+	color: #000033;
+	padding: 20px 10px 20px 5px;
+	background-image: url(ppe/clip/ppe3.png);
+	background-repeat: no-repeat;
+    }
+    .click-menu .box1,
+    .click-menu .box1-hover,
+    .click-menu .box1-open,
+    .click-menu .box1-open-hover {
+	text-indent: 8px;
+	font-weight: bold;
+	font-size: 8pt;
+	line-height: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	cursor: pointer;
+	width: 100px;
+    }
+    .click-menu .section {
+	background-color: #000033;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	line-height: 8pt;
+	padding: 3px 3px 3px 3px;
+	display: none;
+	color: #FFFFFF;
+    }
+    .click-menu .section a {
+	color: #9999FF;
+	text-decoration: none;
+	white-space: nowrap;
+    }
+    .click-menu .section a:hover {
+        color: #FFFFFF;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+    .click-menu .box2 {
+	border-color: #373737;
+	border-width: 1px;
+	border-style: solid none none none;
+	padding: 5px 5px 2px 5px;
+    }
+    .click-menu .box2-hover {
+	border-color: #373737;
+	border-width: 1px;
+	border-style: solid none none none;
+	padding: 5px 5px 2px 5px;
+	background: #000033;
+    }
