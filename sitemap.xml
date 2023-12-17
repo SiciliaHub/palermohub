@@ -894,12 +894,18 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
 <loc>https://palermohub.opendatasicilia.it/Palermo_incidenti_2022_felt.html</loc>
 <lastmod>2023-10-24</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
-
+<url>
+<loc>https://palermohub.opendatasicilia.it/depositi_nucleari.html</loc>
+<lastmod>2023-12-17</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 <!--- <url>
 <loc>https://palermohub.opendatasicilia.it/xxxx.html</loc>
