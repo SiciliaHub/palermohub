@@ -906,6 +906,13 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>https://palermohub.opendatasicilia.it/punti_ricarica.html</loc>
+<lastmod>2024-03-30</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
 
 <!--- <url>
 <loc>https://palermohub.opendatasicilia.it/xxxx.html</loc>
