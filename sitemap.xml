@@ -918,6 +918,12 @@
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
+<url>
+<loc>https://palermohub.opendatasicilia.it/distretti_amap_pa.html</loc>
+<lastmod>2024-04-24</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
 
 <!--- <url>
 <loc>https://palermohub.opendatasicilia.it/xxxx.html</loc>
