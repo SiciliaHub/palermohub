@@ -687,7 +687,14 @@ var basemaps = [
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
   label: 'U.S. Army Map Service, 1943-1944 | City Plans Palermo',
   iconURL: 'legend/basemap/us43_clip.jpg'}),
-	     
+
+<!-- crt 10k -->	     
+  L.tileLayer('https://siciliahub.github.io/palermohub/carto/ctr_pa_10k/{z}/{x}/{y}.png', {
+  attribution: 'Base cartografica: Carta Tecnica Regionale 10k 2012/13',
+  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+  label: 'Carta Tecnica Regionale 10k',
+  iconURL: 'legend/basemap/ctr_clip.jpg'}),		
+  
 	 ];
 	<!-- fine base mappa -->	
 		
@@ -703,7 +710,7 @@ L.control.mousePosition().addTo(map);
   map.on("mousemove", function(e) {
   palermo1580.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1754.setCenter(e.containerPoint.x, e.containerPoint.y); nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1860.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1877.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1891.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); 
   sas.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); 
-  prg04.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); osm.setCenter(e.containerPoint.x, e.containerPoint.y); google.setCenter(e.containerPoint.x, e.containerPoint.y); googlesat.setCenter(e.containerPoint.x, e.containerPoint.y);
+  prg04.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); osm.setCenter(e.containerPoint.x, e.containerPoint.y); google.setCenter(e.containerPoint.x, e.containerPoint.y); googlesat.setCenter(e.containerPoint.x, e.containerPoint.y); ctr10k.setCenter(e.containerPoint.x, e.containerPoint.y); 
          })
 	
   var osm = L.tileLayer.mask("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -753,6 +760,9 @@ var prg62 = L.tileLayer.mask("https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.
 minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});	
 
 var prg04 = L.tileLayer.mask("https://siciliahub.github.io/mappe/palermo_hub/data/prg2004/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Variante Generale al P.R.G. vigente al 2016 | 1:5k - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, tms: true, });
+
+var ctr10k = L.tileLayer.mask("https://siciliahub.github.io/mappe/palermo_hub/data/ctr10k/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Carta Tecnica Regionale 10k 2012/13 | 1:10k - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>', minZoom: 12,   maxZoom: 17, maxNativeZoom: 17, tms: true, });
+
 	
 var sas = L.tileLayer.mask("https://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Sas 1987 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
@@ -774,8 +784,7 @@ var ppecs = L.tileLayer.mask("https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask">Leaflet-tileoverlay-mask</a> - Piano Particolareggiato Esecutivo del centro storico di Palermo - Palermo 1:500 - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,});
 
-var overlaysmap = {'Città di Palermo 1580 | Fonte: gallica.bnf.fr / BnF':palermo1580, 'Città di Palermo 1754 | Fonte: Library of Congress Geography and Map Division Washington':palermo1754, 'Pianta topografica | Palermo 1860 circa | Fonte: Harvard Map Collection, Harvard University ': palermo1860,  'Città di Palermo 1882 | 1:1k Fonte: gallica.bnf.fr / BnF':nuova, 'Costa nord, Baia di Palermo 1877 | 1:36,417 | Fonte: Wisconsin-Milwaukee University': palermo1877, 'Nuova pianta della Città di Palermo 1891 1:10k | Fonte: Harvard Map Collection, Harvard University': palermo1891, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500 ': ppecs, 'Variante Generale 2004 | 1:5k (max zoom 17) <hr> <strong>U.S. Army:</strong> <br>': prg04, 'Map Service, 1941 Series 4229 | Palermo 1:50k ' : Palermo_50k, 			
-					'Map Service, 1943-1944 | City Plans Palermo 1:10k <hr>':City_Plans_Palermo, 'OpenStreetMap':osm, 'Google':google, 'Google satellite':googlesat,
+var overlaysmap = {'Città di Palermo 1580 | Fonte: gallica.bnf.fr / BnF':palermo1580, 'Città di Palermo 1754 | Fonte: Library of Congress Geography and Map Division Washington':palermo1754, 'Pianta topografica | Palermo 1860 circa | Fonte: Harvard Map Collection, Harvard University ': palermo1860,  'Città di Palermo 1882 | 1:1k Fonte: gallica.bnf.fr / BnF':nuova, 'Costa nord, Baia di Palermo 1877 | 1:36,417 | Fonte: Wisconsin-Milwaukee University': palermo1877, 'Nuova pianta della Città di Palermo 1891 1:10k | Fonte: Harvard Map Collection, Harvard University': palermo1891, 'Carta tecnica 1893 | 1:13k (max zoom 16)': palermo1893, 'Carta tecnica Municipale 19?? | 1:8k': ctc, 'Carta tecnica Omira 1935 | 1:5k': omira, 'Carta tecnica Irta 1956 | 1:5k': irta, 'Piano Regolatore Generale 1962 | 1:5k': prg62, 'Carta tecnica Sas 1987 | 1:5k': sas, 'P.P.E. del centro storico 1993 | 1:500 ': ppecs, 'Variante Generale 2004 | 1:5k (max zoom 17)': prg04, 'Carta Tecnica Regionale | 1:10k 2012/13 (max zoom 17) <hr> <strong>U.S. Army:</strong> <br>' : ctr10k,'Map Service, 1941 Series 4229 | Palermo 1:50k ' : Palermo_50k, 'Map Service, 1943-1944 | City Plans Palermo 1:10k <hr>':City_Plans_Palermo, 'OpenStreetMap':osm, 'Google':google, 'Google satellite':googlesat,
 				   };
 <!-- credits -->   
 var credctrl = L.controlCredits({
