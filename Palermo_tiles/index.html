@@ -2,11 +2,14 @@
 <html lang="en">
     <head>
 	<title>Cartografie Tiles Palermo </title>
+	<meta name="description" content="Cartografia tecnica - Comune di Palermo - Scala 1:2000 e 1:10000">
+	 <meta name="keywords" content="CTR, CTC, Palermo, Cartografia">
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="author" content="@gbvitrano">    
         <link rel="stylesheet" href="css/leaflet.css">
         <link rel="stylesheet" href="css/L.Control.Layers.Tree.css">
         <link rel="stylesheet" href="css/L.Control.Locate.min.css">
@@ -42,7 +45,7 @@
         <script src="js/leaflet-measure.js"></script>
         <script>
         var map = L.map('map', {
-            zoomControl:false, maxZoom:18, minZoom:12
+            zoomControl:false, maxZoom:20, minZoom:12
         }).fitBounds([[38.027187647536756,13.160656631486773],[38.252307051171286,13.51493560641645]]);
         var hash = new L.Hash(map);
         map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
@@ -78,7 +81,7 @@
         var zoomControl = L.control.zoom({
             position: 'topleft'
         }).addTo(map);
-        L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
+        L.control.locate({locateOptions: {maxZoom: 20}}).addTo(map);
         var measureControl = new L.Control.Measure({
             position: 'topleft',
             primaryLengthUnit: 'meters',
@@ -154,7 +157,7 @@
         .title += 'Search for a place';
         var baseMaps = {};
         var overlaysTree = [
-            {label: "Palermo CTC 2k | Zoom 12-18", layer: layer_PalermoCTC2k_3},
+            {label: "Palermo CTC 2k | Zoom 12-20", layer: layer_PalermoCTC2k_3},
             {label: "Palermo CTR 10K | Zoom 12-18", layer: layer_PalermoCTR10K_2},
             {label: "OSM Standard", layer: layer_OSMStandard_1},
             {label: "Google Satellite", layer: layer_GoogleSatellite_0},]
