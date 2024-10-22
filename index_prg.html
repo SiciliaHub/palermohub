@@ -516,12 +516,15 @@ map.getPane('ctr2k').style.zIndex = 400;
 		 pane:'ctr2k',
       }) .addTo(map);	
 	  
-map.createPane('cs');
-map.getPane('cs').style.zIndex = 401;
-var cs =L.tileLayer('https://siciliahub.github.io/Tiles/cs_05k/{z}/{x}/{y}.png', {minZoom: 16,  maxZoom: 19, maxNativeZoom: 19, tms: false, attribution: '',  pane:'cs', }).addTo(map);
+// map.createPane('cs');
+// map.getPane('cs').style.zIndex = 401;
+// var cs =L.tileLayer('https://siciliahub.github.io/Tiles/cs_05k/{z}/{x}/{y}.png', {minZoom: 16,  maxZoom: 19, maxNativeZoom: 19, tms: false, attribution: '',  pane:'cs', }).addTo(map);
 	  	
 <!-- mappe tiles -->
 
+map.createPane('cs');
+map.getPane('cs').style.zIndex = 401;
+var cs =L.tileLayer('https://siciliahub.github.io/Tiles/CS/{z}/{x}/{y}.png', {minZoom: 12,  maxZoom: 15, maxNativeZoom: 15, tms: false, attribution: '',  pane:'cs', }).addTo(map);
 
 map.createPane('zoniz');
 map.getPane('zoniz').style.zIndex = 402;
