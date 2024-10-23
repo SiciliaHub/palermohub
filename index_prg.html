@@ -242,7 +242,7 @@ Progetto Qgis per la rappresentazione cartografica (vestizione) della CTR 10k di
 <!-- Tab Carto-->
 <div class="sidebar-pane" id="carto">
 <h2 class="sidebar-header">Tiles - Cartografia tecnica 2k - 10k<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
-<p class="lorem"><strong>Carta tecnica comunale in scala 1:2.000 realizzato dalla Compagnia Generale Ripreseaeree S.p.A., con riprese eseguite in data 15 maggio 2006</strong></p>
+<p class="lorem"><strong>Carta Tecnica Comunale in scala 1:2.000 realizzato dalla Compagnia Generale Ripreseaeree S.p.A., con riprese eseguite in data 15 maggio 2006</strong></p>
   <p class="lorem">Le coordinate piane sono riferite al sistema nazionale Gauss-Boaga.( EPSG:3004)<br><br>Fonte dati: <strong><a href="https://geocatalog.comune.palermo.it/geonetwork/srv/ita/catalog.search#/metadata/25562f02-587f-49ca-b5b6-21018efe7c78" target="_blank">Città di Palermo - CTC - Carta tecnica comunale – anno 2006 - Fogli in formato DWG 2D e 3D</a></strong><br><br>Conversione dal formato DWG in formato OGC realizzata con <strong><a href="https://www.qgis.org/" target="_blank">QGIS</a></strong><br><br>Nuovo sistema di coordinate piane: <strong>ETRS89/UTM zone 33N, Codice EPSG: 25833</strong><br><br> Zoom operativo da 13 a 20<br><br> <a href="https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png" target="_blank">XYZ Tiles - https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png</a> 
     </p> <br>
 	<hr>
@@ -253,14 +253,19 @@ Progetto Qgis per la rappresentazione cartografica (vestizione) della CTR 10k di
  data a OpenStreetMap dalla Regione Siciliana vale anche per questi dati.<br><br> Nuovo sistema di coordinate piane: <strong>ETRS89/UTM zone 33N, Codice EPSG: 25833</strong><br><br> Zoom operativo da 12 a 17<br><br> <a href="https://siciliahub.github.io/Tiles/ctr_pa_10k/{z}/{x}/{y}.png" target="_blank">XYZ Tiles - https://siciliahub.github.io/Tiles/ctr_pa_10k/{z}/{x}/{y}.png</a></p> <br>	
 	<hr>
 	<br>	
- 
- <p class="lorem"><strong>Zonizzazione: e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D atto Delibera 7/2004 (scala 1:5000)</strong></p>
+	<p class="lorem"><strong>Carta Tecnica Comunale 1989/91 2K  </strong></p>
+	  <p class="lorem">Realizzazione:<strong> CONSULTIG SURVEYS GROUP VICENZA scansione da originali in astralon (CSG) </strong><br><br>Le coordinate piane sono riferite al sistema nazionale Gauss-Boaga.( EPSG:3004)
+<br><br> Nuovo sistema di coordinate piane: <strong>ETRS89/UTM zone 33N, Codice EPSG: 25833</strong><br><br> Zoom operativo da 16 a 18<br><br> <a href="https://palermohub.github.io/PRG2004/CSG/{z}/{x}/{y}.png" target="_blank">XYZ Tiles - https://palermohub.github.io/PRG2004/CSG/{z}/{x}/{y}.png</a></p> <br>	
+	<hr>
+	<br>	
+	
+<p class="lorem"><strong>Zonizzazione: e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D atto Delibera 7/2004 (scala 1:5000)</strong></p>
    <p class="lorem">
 <b>ZTO:</b>  <a href="https://palermohub.github.io/PRG2004/ZTO/{z}/{x}/{y}.png" rel="nofollow">https://palermohub.github.io/PRG2004/ZTO/{z}/{x}/{y}.png</a><br>	<br>
 
 <b>Vincoli areali:</b>  <a href="https://palermohub.github.io/PRG2004/VA/{z}/{x}/{y}.png" rel="nofollow">https://palermohub.github.io/PRG2004/VA/{z}/{x}/{y}.png</a><br>	<br>
 
-<b>Vincoli lineari:</b> <a href="https://palermohub.github.io/VL/ZTO/{z}/{x}/{y}.png" rel="nofollow">https://palermohub.github.io/VL/ZTO/{z}/{x}/{y}.png</a><br>	<br>
+<b>Vincoli lineari:</b> <a href="https://palermohub.github.io/VL/ZTO/{z}/{x}/{y}.png" rel="nofollow">https://palermohub.github.io/PRG2004/VL/{z}/{x}/{y}.png</a><br>	<br>
 
 Sistema di coordinate piane: <strong>ETRS89/UTM zone 33N, Codice EPSG: 25833</strong><br><br> Zoom operativo da 12 a 19
 
@@ -515,6 +520,20 @@ map.getPane('ctr2k').style.zIndex = 400;
         attribution: 'Rielaborazione Cartografia Giovan Battista Vitrano | 2017 | Fonte dati Opendata SITR Sicilia', 
 		 pane:'ctr2k',
       }) .addTo(map);	
+	  
+//mappa csg2k
+map.createPane('csg2k');
+map.getPane('ctr2k').style.zIndex = 390;
+		var csg2k = L.tileLayer('https://palermohub.github.io/PRG2004/CSG/{z}/{x}/{y}.png', {
+		minZoom: 12,
+        maxZoom: 18,
+        maxNativeZoom: 18,
+        tms: false,
+        attribution: 'Rielaborazione Cartografia Giovan Battista Vitrano | 2024| Fonte dati Comune di Palermo', 
+		 pane:'csg2k',
+      }); //.addTo(map);		  
+	  
+	  
 	  
 // map.createPane('cs');
 // map.getPane('cs').style.zIndex = 401;
@@ -895,8 +914,9 @@ L.control.layers({},{'<span class="legenda1">&nbsp;#OpenDataSicilia - Palermo Hu
 '<span class="legenda1">&nbsp;&nbsp;Etichetta Vincoli lineari</span> <hr><span class="legenda1">Piano Partic.to Esecutivo</span><br>': layer_Vincolilineari_0,
 '<span class="legenda1">&nbsp;&nbsp;P.P.E.&nbsp;&nbsp;&nbsp;</span><span class="legenda3">(rielaborazione in progress)</span><hr><span class="legenda1">&nbsp;Carta Tecnica Regionale</span>':ppe,
 
-'<img src="legend/ctr10k.png" /><span class="legenda1">&nbsp;&nbsp;Palermo 10k (Zoom 12-15)</span>':ctr10k,	
-'<img src="legend/ctr2k.png" /><span class="legenda1">&nbsp;&nbsp;Palermo 2k (Zoom 16-17)</span>':ctr2k,	
+'<img src="legend/ctr10k.png" /><span class="legenda1">&nbsp;&nbsp;Carta Tecnica Regionale 10k 2012/13 (Zoom 12-15)</span>':ctr10k,	
+'<img src="legend/ctr2k.png" /><span class="legenda1">&nbsp;&nbsp;Carta Tecnica Comunale 2k 2007/09 (Zoom 16-19)</span>':ctr2k,	
+'<img src="legend/ctr2k.png" /><span class="legenda1">&nbsp;&nbsp;Carta Tecnica Comunale CSG 2k 1989/91 (Zoom 12-18)</span>':csg2k,	
 '<img src="legend/osm_confine_palermo_epsg_3004_0.png" />&nbsp;&nbsp;Confine Comunale': layer_osm_confine_palermo_epsg_3004_0,
 
 '<img src="legend/5k_1.png" /><span class="legenda1">&nbsp;&nbsp;Quadro unione 5k</span><hr><span class="legenda3">Seleziona i layer di tuo interesse.<br>La visualizzazione del PPE è automatica dallo zoom 16</span><br><span class="legenda2">Le legenda si trovano nella sidebar a sinistra dello schermo</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia">':layer_5k_1,
