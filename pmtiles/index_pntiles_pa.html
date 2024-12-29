@@ -21,7 +21,7 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
 <meta property="og:title" content="Palermo hub - Palermo 3D pmtiles" />
 <meta property="og:description" content="Palermo hub - Palermo 3D pmtiles" />
 <meta property="og:site_name" content="palermohub.opendatasicilia.it" />
-<meta property="og:image" content="https://gbvitrano.codeberg.page/Parco_della_Favorita/3d/social_card.jpg" />
+<meta property="og:image" content="https://palermohub.github.io/pmtiles/social_card.jpg" />
 <meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
 <!-- Open Graph Protocol -->
 
@@ -31,7 +31,7 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
 <meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
 <meta name="twitter:title" content="Palermo hub - Palermo 3D pmtiles">
 <meta name="twitter:description" content="Palermo hub - Palermo 3D pmtiles">
-<meta name="twitter:image" content="https://gbvitrano.codeberg.page/Parco_della_Favorita/3d/social_card.jpg">
+<meta name="twitter:image" content="https://palermohub.github.io/pmtiles/social_card.jpg">
 <meta name="twitter:site" content="palermohub.opendatasicilia.it" />
 <meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
 <!-- twitter -->
@@ -60,8 +60,8 @@ mustache/mustache.mjs:
     var data = {"mapOptions": {"bearing": -17,  "hash": true, "center": [13.36435,38.11144], "pitch": 60, "style": {"version": 8, "sources": {"osm": {"type": "raster", "tiles": ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"], "tileSize": 256, "attribution": "&copy; OpenStreetMap Contributors", "maxzoom": 16}, 
 	
 // DSM	
-	"terrainSource": {"type": "raster-dem", "url": "https://palermohub.github.io/pmtiles/tiles.json", "tileSize": 256}, 
-	"hillshadeSource": {"type": "raster-dem", "url": "https://palermohub.github.io/pmtiles/tiles.json", "tileSize":256}}, "layers": [{"id": "osm", "type": "raster", "source": "osm"}, {"id": "DSM", "type": "hillshade", "source": "hillshadeSource", "layout": {"visibility": "visible"}, "paint": {"hillshade-shadow-color": "#473B24"}}], "terrain": {"source": "terrainSource", "exaggeration": 1}}, "zoom": 13},
+	"terrainSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize": 256}, 
+	"hillshadeSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize":256}}, "layers": [{"id": "osm", "type": "raster", "source": "osm"}, {"id": "DSM", "type": "hillshade", "source": "hillshadeSource", "layout": {"visibility": "visible"}, "paint": {"hillshade-shadow-color": "#473B24"}}], "terrain": {"source": "terrainSource", "exaggeration": 1}}, "zoom": 13},
 	
 	
 	
