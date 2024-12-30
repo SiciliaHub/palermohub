@@ -52,7 +52,7 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
 	"terrainSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize": 256}, 
 	"hillshadeSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize":256}}, "layers": [{"id": "osm", "type": "raster", "source": "osm"}, {"id": "Rilievo ombreggiato", "type": "hillshade", "source": "hillshadeSource", "layout": {"visibility": "visible"}, "paint": {"hillshade-shadow-color": "#473B24"}}], "terrain": {"source": "terrainSource", "exaggeration": 1}}, "zoom": 13},
 	
-	"calls": [["addControl", ["NavigationControl", {"showCompass": true, "showZoom": true, "visualizePitch": false}, "top-right"]], ["addControl", ["FullscreenControl", {}, "top-right"]], ["addControl", ["ScaleControl", {"unit": "metric"}, "bottom-right"]],  ["addControl", ["TerrainControl", {}, "top-right"]], ["addControl", ["GeolocateControl", {}, "top-right"]], 
+	"calls": [["addControl", ["NavigationControl", {"showCompass": true, "showZoom": true, "visualizePitch": false}, "top-right"]], ["addControl", ["FullscreenControl", {}, "top-right"]], ["addControl", ["ScaleControl", {"unit": "metric"}, "bottom-right"]],  ["addControl", ["GeolocateControl", {}, "top-right"]], ["addControl", ["TerrainControl", { source: "terrainSource"}, "top-right"]],
 	
 	["addLayer", [{"id": "OpenStreetMap", "type": "raster", "source": { "maxzoom": 19, "minzoom": 0, "tileSize": 256, "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setPaintProperty", ["OpenStreetMap", "raster-opacity", 1.0]], ["setLayoutProperty", ["OpenStreetMap", "visibility", "none"]], 
 		
@@ -77,6 +77,7 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
  // layers
  ["addControl", ["LayerSwitcherControl", {"layerIds": ["Rilievo ombreggiato", "Volumi edifici", "OpenStreetMap", "Esri.WorldImagery", "Zonizzazione", "PPE", "Carta tecnica"], "theme": "default", "cssText": "padding: 5px; border: 1px solid darkgrey; border-radius: 4px;"}, "top-left"]],
  
+ // logo
  ["addControl", ["InfoBoxControl", {"content": "<img src=\"https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png\" title=\"@opendatasicilia\">", "cssText": "font-size: 20px; color: black;\n        font-weight: normal; padding: 5px;\n        background-color: transparent; border-radius: 5px; box-shadow: none;"}, "bottom-right"]]]};
  
  
