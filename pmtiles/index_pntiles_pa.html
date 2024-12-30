@@ -60,14 +60,17 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
 		
 	["addLayer", [{"id": "Esri.WorldImagery", "type": "raster", "source": {"attribution": "Tiles (C) Esri -- Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community", "maxzoom":19, "minzoom": 0, "tileSize": 256, "tiles": ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"], "type": "raster"}}, null]], ["setLayoutProperty", ["Esri.WorldImagery", "visibility", "visible"]], ["setPaintProperty", ["Esri.WorldImagery", "raster-opacity", 1.0]], ["setPaintProperty", ["Esri.WorldImagery", "raster-opacity", 1.0]], ["setLayoutProperty", ["Esri.WorldImagery", "visibility", "none"]],
 
+
+	// cs
+	["addLayer", [{"id": "cs", "type": "raster", "source": {"attribution": "ZTO Variante Generale P.R.G. 2004", "maxzoom": 14, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/CS/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setLayoutProperty", ["cs", "visibility", "visible"]], ["setPaintProperty", ["cs", "raster-opacity", 0.15]], ["setPaintProperty", ["cs", "raster-opacity", 0.15]], ["setLayoutProperty", ["cs", "visibility", "visible"]], 
+
 // zto	
 	["addLayer", [{"id": "Zonizzazione", "type": "raster", "source": {"attribution": "ZTO Variante Generale P.R.G. 2004", "maxzoom": 19, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/ZTO/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setLayoutProperty", ["Zonizzazione", "visibility", "visible"]], ["setPaintProperty", ["Zonizzazione", "raster-opacity", 1.0]], ["setPaintProperty", ["Zonizzazione", "raster-opacity", 1.0]], ["setLayoutProperty", ["Zonizzazione", "visibility", "visible"]], 
 	
 	// ppe	
 	["addLayer", [{"id": "PPE", "type": "raster", "source": {"attribution": "Piano Particolareggiato Esecutivo Centro storico", "maxzoom": 19, "minzoom": 16, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/ppe/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setLayoutProperty", ["ppe", "visibility", "visible"]], ["setPaintProperty", ["ppe", "raster-opacity", 1.0]], ["setPaintProperty", ["ppe", "raster-opacity", 1.0]], ["setLayoutProperty", ["ppe", "visibility", "visible"]], 
 
-	// cs
-	["addLayer", [{"id": "cs", "type": "raster", "source": {"attribution": "ZTO Variante Generale P.R.G. 2004", "maxzoom": 15, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/CS/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setLayoutProperty", ["cs", "visibility", "visible"]], ["setPaintProperty", ["cs", "raster-opacity", 0.75]], ["setPaintProperty", ["cs", "raster-opacity", 0.75]], ["setLayoutProperty", ["cs", "visibility", "visible"]], 
+
 
 
 // ctc 2k
