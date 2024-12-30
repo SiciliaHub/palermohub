@@ -46,13 +46,11 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
 <!-- script configurazione mappa -->
 <script type="text/javascript">
 (() => {
-    var data = {"mapOptions": {"bearing": -17,  "hash": true, "center": [13.36435,38.11144], "pitch": 60, "style": {"version": 8, "sources": {"osm": {"type": "raster", "tiles": ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"], "tileSize": 256, "attribution": "&copy; OpenStreetMap Contributors", "maxzoom": 16}, 
+    var data = {"mapOptions": {"bearing": -17,  "hash": true, "center": [13.36435,38.11144], "pitch": 45, "style": {"version": 8, "sources": {"osm": {"type": "raster", "tiles": ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"], "tileSize": 256, "attribution": "&copy; OpenStreetMap Contributors", "maxzoom": 16}, 
 	
 // DSM	
 	"terrainSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize": 256}, 
 	"hillshadeSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize":256}}, "layers": [{"id": "osm", "type": "raster", "source": "osm"}, {"id": "Rilievo ombreggiato", "type": "hillshade", "source": "hillshadeSource", "layout": {"visibility": "visible"}, "paint": {"hillshade-shadow-color": "#473B24"}}], "terrain": {"source": "terrainSource", "exaggeration": 1}}, "zoom": 13},
-	
-	
 	
 	"calls": [["addControl", ["NavigationControl", {"showCompass": true, "showZoom": true, "visualizePitch": false}, "top-right"]], ["addControl", ["FullscreenControl", {}, "top-right"]], ["addControl", ["ScaleControl", {"unit": "metric"}, "bottom-right"]],  ["addControl", ["TerrainControl", {}, "top-right"]], ["addControl", ["GeolocateControl", {}, "top-right"]], 
 	
@@ -78,7 +76,7 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
 
 // edifici
 
- ["addSource", ["example_source", {"type": "vector", "url": "pmtiles://https://palermohub.opendatasicilia.it/carto/buildings_pa.pmtiles", "attribution": "PMTiles - Palermo @opendatasicilia"}]], ["addLayer", [{"id": "Volumi edifici", "type": "fill-extrusion", "filter": [">", ["get", "height"], 0], "paint": {"fill-extrusion-color": ["interpolate", ["linear"], ["get", "height"], 0, "#cecece", 70, "#ff0000",], "fill-extrusion-height": ["*", ["get", "height"], 1]}, "source": "example_source", "source-layer": "buildings"}, null]], ["setLayoutProperty", ["buildings", "visibility", "visible"]], ["setPaintProperty", ["buildings", "fill-extrusion-opacity", 0.5]], ["setLayoutProperty", ["buildings", "visibility", "visible"]], ["setPaintProperty", ["buildings", "fill-extrusion-opacity", 0.5]], ["addTooltip", ["buildings", null, "Altezza: {{height}}<br>Tipo: {{type}}"]], 
+ ["addSource", ["example_source", {"type": "vector", "url": "pmtiles://https://palermohub.opendatasicilia.it/carto/buildings_pa.pmtiles", "attribution": "PMTiles - Palermo @opendatasicilia"}]], ["addLayer", [{"id": "Volumi edifici", "type": "fill-extrusion", "filter": [">", ["get", "height"], 0], "paint": {"fill-extrusion-color": ["interpolate", ["linear"], ["get", "height"], 0, "#cecece", 70, "#ff0000",], "fill-extrusion-height": ["*", ["get", "height"], 1.25]}, "source": "example_source", "source-layer": "buildings"}, null]], ["setLayoutProperty", ["buildings", "visibility", "visible"]], ["setPaintProperty", ["buildings", "fill-extrusion-opacity", 0.5]], ["setLayoutProperty", ["buildings", "visibility", "visible"]], ["setPaintProperty", ["buildings", "fill-extrusion-opacity", 0.5]], ["addTooltip", ["buildings", null, "Altezza: {{height}}<br>Tipo: {{type}}"]], 
  
  // layers
  ["addControl", ["LayerSwitcherControl", {"layerIds": ["Rilievo ombreggiato", "Volumi edifici", "OpenStreetMap", "Esri.WorldImagery", "Zonizzazione", "PPE", "Carta tecnica"], "theme": "default", "cssText": "padding: 5px; border: 1px solid darkgrey; border-radius: 4px;"}, "top-left"]]]};
