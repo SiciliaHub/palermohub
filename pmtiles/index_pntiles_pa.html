@@ -75,7 +75,12 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
  ["addSource", ["Volumi edifici", {"type": "vector", "url": "pmtiles://https://palermohub.opendatasicilia.it/carto/buildings_pa.pmtiles", "attribution": "PMTiles - Palermo @opendatasicilia"}]], ["addLayer", [{"id": "Volumi edifici", "type": "fill-extrusion", "filter": [">", ["get", "height"], 0], "paint": {"fill-extrusion-color": ["interpolate", ["linear"], ["get", "height"], 0, "#cecece", 70, "#ff0000",], "fill-extrusion-height": ["*", ["get", "height"], 1.25]}, "source": "Volumi edifici", "source-layer": "buildings"}, null]], ["setLayoutProperty", ["buildings", "visibility", "visible"]], ["setPaintProperty", ["buildings", "fill-extrusion-opacity", 0.5]], ["addTooltip", ["buildings", null, "Altezza: {{height}}<br>Tipo: {{type}}"]], 
  
  // layers
- ["addControl", ["LayerSwitcherControl", {"layerIds": ["Rilievo ombreggiato", "Volumi edifici", "OpenStreetMap", "Esri.WorldImagery", "Zonizzazione", "PPE", "Carta tecnica"], "theme": "default", "cssText": "padding: 5px; border: 1px solid darkgrey; border-radius: 4px;"}, "top-left"]]]};
+ ["addControl", ["LayerSwitcherControl", {"layerIds": ["Rilievo ombreggiato", "Volumi edifici", "OpenStreetMap", "Esri.WorldImagery", "Zonizzazione", "PPE", "Carta tecnica"], "theme": "default", "cssText": "padding: 5px; border: 1px solid darkgrey; border-radius: 4px;"}, "top-left"]],
+ 
+ ["addControl", ["InfoBoxControl", {"content": "<img src=\"https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png\" title=\"@opendatasicilia\">", "cssText": "font-size: 20px; color: black;\n        font-weight: normal; padding: 5px;\n        background-color: transparent; border-radius: 5px; box-shadow: none;"}, "bottom-right"]]]};
+ 
+ 
+ 
     pymaplibregl(data);
 })();
 
