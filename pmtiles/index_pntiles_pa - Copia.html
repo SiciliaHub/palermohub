@@ -43,8 +43,8 @@ html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; he
 <!-- script configurazione mappa -->
 <script type="text/javascript">
 (() => {
-    var data = {"mapOptions": {"bearing": -17,  "hash": true, "center": [13.36435,38.11144], "maxBounds": [[13.140160209, 38.0391060456], [13.4984503497, 38.2277793856]],  "pitch": 45, "style": {"version": 8, "sources": {"osm": {"type": "raster", "tiles": ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"], "tileSize": 256, "attribution": "&copy; OpenStreetMap Contributors", "maxzoom": 16}, 
-	
+    var data = {"mapOptions": {"bearing": -17,  "hash": true, "center": [13.36435,38.11144], "maxBounds": [[13.1, 37.9785], [13.55, 38.2919]],  "pitch": 45, "style": {"version": 8, "sources": {"osm": {"type": "raster", "tiles": ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"], "tileSize": 256, "attribution": "&copy; OpenStreetMap Contributors", "maxzoom": 16}, 
+
 // DSM	
 	"terrainSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize": 256}, 
 	"hillshadeSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize":256}}, "layers": [{"id": "osm", "type": "raster", "source": "osm"}, {"id": "Rilievo ombreggiato", "type": "hillshade", "source": "hillshadeSource", "layout": {"visibility": "visible"}, "paint": {"hillshade-shadow-color": "#473B24"}}], "terrain": {"source": "terrainSource", "exaggeration": 1}}, "zoom": 13},
