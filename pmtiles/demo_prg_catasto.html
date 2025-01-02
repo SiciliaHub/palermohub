@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="it">
+<meta charset="UTF-8">
+<title>DEMO - Variante Generale e Particelle catastali - By OpenDataSicilia</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+<!--
+<script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css"/>
+
+<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css"/>-->
+
+<link rel='stylesheet' href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css' />
+<script src='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js'></script>
+
+<link href="js/gb.css" rel="stylesheet">
+<link href="js/introLoader.css" rel="stylesheet">  
+
+<!-- Open Graph Protocol -->
+<meta property="og:url" content="https://gbvitrano.codeberg.page/Parco_della_Favorita/3d/test_prg_catasto.html#13.4/38.11855/13.35267/-14.4/40" />
+<meta property="og:title" content="Palermo hub - Palermo 3D pmtiles - No DSM" />
+<meta property="og:description" content="Palermo hub - DEMO - Variante Generale e Particelle catastali" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<meta property="og:image" content="https://gbvitrano.codeberg.page/Parco_della_Favorita/3d/social_card_02.jpg" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="coseerobe.gbvitrano.it" />
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:title" content="Palermo hub - DEMO - Variante Generale e Particelle catastali">
+<meta name="twitter:description" content="Palermo hub - Palermo 3D pmtiles">
+<meta name="twitter:image" content="https://gbvitrano.codeberg.page/Parco_della_Favorita/3d/social_card_02.jpg">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->
+
+<body>
+
+
+<div id="pymaplibregl">
+<div id="right" class="sidebar flex-center right collapsed">
+    <div class="sidebar-content rounded-rect flex-center">
+        <div class="top-div">
+		<h2 style="color: red; font-weight: bold; margin-top: 0;">Variante Generale al PRG e dati catastali</h2>
+<p><em><strong>Dal 1° gennaio 2025, l&rsquo;accesso telematico alle banche dati </strong>ipotecarie e <strong>catastali diventa gratuito</strong>, segnando un&rsquo;importante semplificazione per professionisti, pubbliche amministrazioni e cittadini. <br>La novità è contenuta nel <a href="https://www.agenziaentrate.gov.it/portale/web/guest/-/provvedimento-del-30-dicembre-20-3">provvedimento</a> dell&rsquo;Agenzia delle Entrate del 30 dicembre 2024, che attua le disposizioni introdotte dall&rsquo;articolo 7 del decreto legislativo n. 139/2024.</em></p> <br>			
+<p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R - Sistema Informativo Territoriale Regionale" target="_blank">S.I.T.R - Sistema Informativo Territoriale Regionale - </a> <em>Aggiornamento 10/2024</em><br><br>
+L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza CC-BY 4.0</a>. L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
+<hr>
+<p><strong>Disclaimer:</strong> Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili. Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali. Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</p><br><br><br><br>
+         
+		  
+        </div>
+        <div class="sidebar-toggle rounded-rect right"
+            onclick="toggleSidebar('right')"  >
+                <img src="js/caret-left.svg" alt="" width="20" height="20" title="Attiva/Disattiva il pannello"/>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script>
+// popup laterale //
+const map = new maplibregl.Map({
+        container: 'pymaplibregl',
+		});
+    new maplibregl.Marker().setLngLat(center).addTo(map);
+
+    function toggleSidebar(id) {
+        const elem = document.getElementById(id);
+        const classes = elem.className.split(' ');
+        const collapsed = classes.indexOf('collapsed') !== -1;
+
+        const padding = {};
+
+        if (collapsed) {
+            // Remove the 'collapsed' class from the class list of the element, this sets it back to the expanded state.
+            classes.splice(classes.indexOf('collapsed'), 1);
+
+            padding[id] = 300; // In px, matches the width of the sidebars set in .sidebar CSS class
+            map.easeTo({
+                padding,
+                duration: 1000 // In ms, CSS transition duration property for the sidebar matches this value
+            });
+        } else {
+            padding[id] = 0;
+            // Add the 'collapsed' class to the class list of the element
+            classes.push('collapsed');
+
+            map.easeTo({
+                padding,
+                duration: 1000
+            });
+        }
+
+        // Update the class list on the element
+        elem.className = classes.join(' ');
+    }
+
+    map.on('load', () => {
+        toggleSidebar('left');
+    });
+</script>
+
+<!-- script base mappa -->
+<script type="text/javascript" src="js/maplibre_leafmap.js"></script>
+<!-- script configurazione mappa -->
+<script type="text/javascript">
+(() => { 
+
+    var data = {
+        "mapOptions": {
+            "bearing": 0,
+            "center": [13.36435, 38.11144],
+            "maxBounds": [[13.1, 37.9785], [13.55, 38.2919]],
+            "hash": true,
+            "pitch": 0,
+            "style": "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+            "maxzoom": 19,
+            "minzoom": 12
+        },
+        "calls": [
+		   ["addControl", ["ScaleControl", {"unit": "metric"}, "bottom-left"]],
+		   ["addControl", ["InfoBoxControl", {
+           "content": "<img src=\"https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png\" title=\"@opendatasicilia\">",
+           "cssText": "font-size: 20px; color: black;\n        font-weight: normal; padding: 5px;\n        background-color: transparent; border-radius: 5px; box-shadow: none;"  }, "bottom-left"]],
+		   ["addControl", ["FullscreenControl", {}, "bottom-left"]],
+           ["addControl", ["NavigationControl", {"showCompass": true, "showZoom": true, "visualizePitch": false}, "bottom-left"]],
+           			
+			// OSM
+            ["addLayer", [{"id": "OpenStreetMap", "type": "raster", "source": { "maxzoom": 19, "minzoom": 12, "tileSize": 256, "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"], "type": "raster"}}, null]],
+            ["setPaintProperty", ["OpenStreetMap", "raster-opacity", 1.0]], 
+            ["setLayoutProperty", ["OpenStreetMap", "visibility", "none"]], 
+                    
+            // Esri
+            ["addLayer", [{"id": "Esri.WorldImagery", "type": "raster", "source": {"attribution": "Tiles (C) Esri -- Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community", "maxzoom":19, "minzoom": 12, "tileSize": 256, "tiles": ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"], "type": "raster"}}, null]],
+            ["setPaintProperty", ["Esri.WorldImagery", "raster-opacity", 1.0]], 
+            ["setLayoutProperty", ["Esri.WorldImagery", "visibility", "none"]],
+            
+            // ctc 2k
+            ["addLayer", [{"id": "Carta tecnica", "type": "raster", "source": {"attribution": "CTC - Carta tecnica comunale 2k – 2006", "maxzoom": 19, "minzoom": 12, "tileSize": 256, "tiles": ["https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png"], "type": "raster"}}, null]], 
+			["setPaintProperty", ["Carta tecnica", "raster-opacity", 1.0]], 
+            ["setLayoutProperty", ["Carta tecnica",  "visibility", "none"]],
+            
+            // vincoli lineari
+            ["addLayer", [{"id": "Vincoli lineari", "type": "raster", "source": { "maxzoom": 19, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/VL/{z}/{x}/{y}.png"], "type": "raster"}}, null]], 
+			["setLayoutProperty", ["Vincoli lineari", "visibility", "visible"]],
+            ["setPaintProperty", ["Vincoli lineari", "raster-opacity", 1.0]], 
+            
+            // vincoli areali
+            ["addLayer", [{"id": "Vincoli areali", "type": "raster", "source": { "maxzoom": 19, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/VA/{z}/{x}/{y}.png"], "type": "raster"}}, null]], 
+			["setLayoutProperty", ["Vincoli areali", "visibility", "visible"]], 
+            ["setPaintProperty", ["Vincoli areali", "raster-opacity", 1.0]], 
+            
+            
+            // zto	
+            ["addLayer", [{"id": "Zonizzazione", "type": "raster", "source": {"attribution": "ZTO Variante Generale P.R.G. 2004", "maxzoom": 19, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/ZTO/{z}/{x}/{y}.png"], "type": "raster"}}, null]], 
+			["setLayoutProperty", ["Zonizzazione", "visibility", "visible"]], 
+            ["setPaintProperty", ["Zonizzazione", "raster-opacity", 1.0]], 
+            
+            
+            // cs
+            ["addLayer", [{"id": "cs1", "type": "raster", "source": {"attribution": "ZTO Variante Generale P.R.G. 2004", "maxzoom": 15, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/CS/{z}/{x}/{y}.png"], "type": "raster"}}, null]], 
+            ["setLayoutProperty", ["cs1", "visibility", "visible"]], 
+            ["setPaintProperty", ["cs1", "raster-opacity", 1]], 
+            
+		// prg vettoriale
+
+			 ["addSource", ["prg", {"type": "vector", "url": "pmtiles://https://palermohub.github.io/PRG2004/particelle/prg.pmtiles"}]],
+            ["addLayer", [{"id": "cs", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "cs"}, null]],
+            ["setLayoutProperty", ["cs", "visibility", "visible"]],
+            ["setPaintProperty", ["cs", "fill-opacity", 0]],	
+            ["addTooltip", ["cs", null,   "<b>{{Circoscriz}}</b> " ]], 
+			
+			// vincoli areali
+			["addLayer", [{"id": "va", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "va"}, null]],
+            ["setLayoutProperty", ["va", "visibility", "visible"]],
+            ["setPaintProperty", ["va", "fill-opacity", 0]],	
+            ["addTooltip", ["va", null,    "<b>{{tipo}}</b> <br>Descrizione: {{descrizone}},<br>Note: {{note}}" ]], 
+
+
+			// vincoli lineari
+			["addLayer", [{"id": "vl", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "vl"}, null]],
+            ["setLayoutProperty", ["vl", "visibility", "none"]],
+            ["setPaintProperty", ["vl", "fill-opacity", 0]],	
+            ["addTooltip", ["vl", null,    "<b>{{TIPO}}</b> <br>Descrizione: {{DESCRIZION}}},<br>Note: {{note}}" ]], 
+			
+			// netto storico
+			 ["addLayer", [{"id": "ns", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "ns"}, null]],
+            ["setLayoutProperty", ["ns", "visibility", "visible"]],
+            ["setPaintProperty", ["ns", "fill-opacity", 0]],	
+            ["addTooltip", ["ns", null,    "<b>Netto storico</b> <br>ZTO: {{ZTO}}<br>Descrizione: {{DESCRIZION}}" ]], 
+			
+			// zto
+			 ["addLayer", [{"id": "zto", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "zto"}, null]],
+            ["setLayoutProperty", ["zto", "visibility", "visible"]],
+            ["setPaintProperty", ["zto", "fill-opacity", 0]],	
+            ["addTooltip", ["zto", null,    "<b>Zonizzazione</b> <br>ZTO: {{ZTO}}<br>Descrizione: {{DESCRIZION}}" ]], 
+			["fitBounds", [[[13.140160209, 38.0391060456], [13.4984503497, 38.2277793856]], {"animate": true}]],
+
+            // Catasto
+            ["addSource", ["Catasto", {"type": "vector", "url": "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle.pmtiles", "attribution": "PMTiles"}]],
+            ["addLayer", [{"id": "Particelle catastali", "type": "fill", "paint": {"fill-color": "#ffffff75", "fill-outline-color": "#000",}, "source": "Catasto", "source-layer": "particelle"}, null]],
+            ["setLayoutProperty", ["Particelle catastali", "visibility", "none"]],
+            ["setPaintProperty", ["Particelle catastali", "fill-opacity", 1]],
+            ["addTooltip", ["Particelle catastali", null,  "<b>Particelle catastali</b> <br> <br>Foglio: {{Foglio}}<br>Particella: {{Paricella}}" ]],
+            ["fitBounds", [[[13.140160209, 38.0391060456], [13.4984503497, 38.2277793856]], {"animate": true}]],
+
+            // elenco layers 
+            ["addControl", ["LayerSwitcherControl", {
+                "layerIds": [ 
+                    "OpenStreetMap",
+                    "Esri.WorldImagery",
+                    "Particelle catastali",
+                    "Vincoli areali",
+                    "Vincoli lineari",
+                    "Carta tecnica"
+                ],
+                "theme": "default",
+                "cssText": "padding: 5px; border: 1px solid darkgrey; border-radius: 4px;"
+            }, "top-left"]],
+
+        ["addControl", ["InfoBoxControl", {"content": "<img src=\"js/demo.png\">", "cssText": "font-size: 20px; color: black;\n        font-weight: normal; padding: 5px;\n        background-color: transparent; border-radius: 5px; box-shadow: none;"  }, "top-left"]],
+		   
+        ]};
+
+var map = pymaplibregl(data);
+
+})();
+</script>
+
+		<!-- Caricamento -->
+<!-- jQuery, Helpers and jqueryIntrLoader -->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script src="js/jquery.easing.1.3.js"></script>
+        <script src="js/spin.min.js"></script>
+        <script src="js/jquery.introLoader.js"></script>
+		<div id="element" class="introLoading"></div>
+				<script>
+			$(document).on('ready', function() {
+				$("#element").introLoader({
+                    animation: {
+                        name: 'lettersLoader',
+                        options: {
+                            ease: "easeInOutCirc",
+                            style: 'light',
+                            delayBefore: 500,
+                            delayAfter: 0,
+                            exitTime: 300,
+                            loaderText: 'Variante Generale e Particelle catastali', 
+                            lettersDelayTime: 0.25
+														                        }
+                    },
+                    spinJs: {
+                        lines: 50, // The number of lines to draw
+                        length: 50, // The length of each line
+                        radius: 80, // The radius of the inner circle
+                        width: 3, // The line thickness
+                        color: '#333' // #rgb or #rrggbb or array of colors
+                    }
+                });
+			});
+		</script>
+</body>
+</html>
+</body>
+</html>
