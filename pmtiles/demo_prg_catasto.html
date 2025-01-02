@@ -14,11 +14,16 @@
 <link rel='stylesheet' href='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css' />
 <script src='https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js'></script>
 
-<link href="js/gb.css" rel="stylesheet">
-<link href="js/introLoader.css" rel="stylesheet">  
+
+<link rel="stylesheet" href="js/gb.css" rel="stylesheet">
+<link rel="stylesheet" href="js/01.css" rel="stylesheet">
+<link rel="stylesheet" href="js/02.css" rel="stylesheet">
+<link rel="stylesheet" href="js/03.css" rel="stylesheet">
+
+<link rel="stylesheet" href="js/introLoader.css" rel="stylesheet">  
 
 <!-- Open Graph Protocol -->
-<meta property="og:url" content="https://gbvitrano.codeberg.page/Parco_della_Favorita/3d/test_prg_catasto.html#13.4/38.11855/13.35267/-14.4/40" />
+<meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/demo_prg_catasto.html#13.5/38.1162/13.36671/-80/53" />
 <meta property="og:title" content="Palermo hub - Palermo 3D pmtiles - No DSM" />
 <meta property="og:description" content="Palermo hub - DEMO - Variante Generale e Particelle catastali" />
 <meta property="og:site_name" content="palermohub.opendatasicilia.it" />
@@ -38,8 +43,6 @@
 <!-- twitter -->
 
 <body>
-
-
 <div id="pymaplibregl">
 <div id="right" class="sidebar flex-center right collapsed">
     <div class="sidebar-content rounded-rect flex-center">
@@ -50,9 +53,7 @@
 L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza CC-BY 4.0</a>. L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
 <hr>
 <p><strong>Disclaimer:</strong> Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili. Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali. Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</p><br><br><br><br>
-         
-		  
-        </div>
+ </div>
         <div class="sidebar-toggle rounded-rect right"
             onclick="toggleSidebar('right')"  >
                 <img src="js/caret-left.svg" alt="" width="20" height="20" title="Attiva/Disattiva il pannello"/>
@@ -61,7 +62,9 @@ L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/
     </div>
 
 </div>
-<script>
+	
+		
+<script> 
 // popup laterale //
 const map = new maplibregl.Map({
         container: 'pymaplibregl',
@@ -108,6 +111,7 @@ const map = new maplibregl.Map({
 <script type="text/javascript" src="js/maplibre_leafmap.js"></script>
 <!-- script configurazione mappa -->
 <script type="text/javascript">
+
 (() => { 
 
     var data = {
@@ -175,29 +179,29 @@ const map = new maplibregl.Map({
             ["addTooltip", ["cs", null,   "<b>{{Circoscriz}}</b> " ]], 
 			
 			// vincoli areali
-			["addLayer", [{"id": "va", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "va"}, null]],
-            ["setLayoutProperty", ["va", "visibility", "visible"]],
-            ["setPaintProperty", ["va", "fill-opacity", 0]],	
-            ["addTooltip", ["va", null,    "<b>{{tipo}}</b> <br>Descrizione: {{descrizone}},<br>Note: {{note}}" ]], 
+			["addLayer", [{"id": "Info Vin. areali", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "va"}, null]],
+            ["setLayoutProperty", ["Info Vin. areali", "visibility", "none"]],
+            ["setPaintProperty", ["Info Vin. areali", "fill-opacity", 0]],	
+            ["addTooltip", ["Info Vin. areali", null,    "<b>{{tipo}}</b> <br>Descrizione: {{descrizone}},<br>Note: {{note}}" ]], 
 
 
 			// vincoli lineari
-			["addLayer", [{"id": "vl", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "vl"}, null]],
-            ["setLayoutProperty", ["vl", "visibility", "none"]],
-            ["setPaintProperty", ["vl", "fill-opacity", 0]],	
-            ["addTooltip", ["vl", null,    "<b>{{TIPO}}</b> <br>Descrizione: {{DESCRIZION}}},<br>Note: {{note}}" ]], 
+			["addLayer", [{"id": "Info Vin. lineari", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "vl"}, null]],
+            ["setLayoutProperty", ["Info Vin. lineari", "visibility", "none"]],
+            ["setPaintProperty", ["Info Vin. lineari", "fill-opacity", 0]],	
+            ["addTooltip", ["Info Vin. lineari", null,    "<b>{{TIPO}}</b> <br>Descrizione: {{DESCRIZION}}},<br>Note: {{note}}" ]], 
 			
 			// netto storico
-			 ["addLayer", [{"id": "ns", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "ns"}, null]],
-            ["setLayoutProperty", ["ns", "visibility", "visible"]],
-            ["setPaintProperty", ["ns", "fill-opacity", 0]],	
-            ["addTooltip", ["ns", null,    "<b>Netto storico</b> <br>ZTO: {{ZTO}}<br>Descrizione: {{DESCRIZION}}" ]], 
+			 ["addLayer", [{"id": "Info Netto storico", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "ns"}, null]],
+            ["setLayoutProperty", ["Info Netto storico", "visibility", "none"]],
+            ["setPaintProperty", ["Info Netto storico", "fill-opacity", 0]],	
+            ["addTooltip", ["Info Netto storico", null,    "<b>Netto storico</b> <br>ZTO: {{ZTO}}<br>Descrizione: {{DESCRIZION}}" ]], 
 			
 			// zto
-			 ["addLayer", [{"id": "zto", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "zto"}, null]],
-            ["setLayoutProperty", ["zto", "visibility", "visible"]],
-            ["setPaintProperty", ["zto", "fill-opacity", 0]],	
-            ["addTooltip", ["zto", null,    "<b>Zonizzazione</b> <br>ZTO: {{ZTO}}<br>Descrizione: {{DESCRIZION}}" ]], 
+			 ["addLayer", [{"id": "Info ZTO", "type": "fill", "paint": {"fill-color": "#ffffff00", "fill-outline-color": "#ffffff00",}, "source": "prg", "source-layer": "zto"}, null]],
+            ["setLayoutProperty", ["Info ZTO", "visibility", "visible"]],
+            ["setPaintProperty", ["Info ZTO", "fill-opacity", 0]],	
+            ["addTooltip", ["Info ZTO", null,    "<b>Zonizzazione</b> <br>ZTO: {{ZTO}}<br>Descrizione: {{DESCRIZION}}" ]], 
 			["fitBounds", [[[13.140160209, 38.0391060456], [13.4984503497, 38.2277793856]], {"animate": true}]],
 
             // Catasto
@@ -213,10 +217,13 @@ const map = new maplibregl.Map({
                 "layerIds": [ 
                     "OpenStreetMap",
                     "Esri.WorldImagery",
-                    "Particelle catastali",
-                    "Vincoli areali",
-                    "Vincoli lineari",
-                    "Carta tecnica"
+                    "Particelle catastali", 
+					
+					  "Info ZTO",
+					"Info Netto storico",  
+                    "Info Vin. areali",
+                    "Info Vin. lineari",
+                    "Carta tecnica",
                 ],
                 "theme": "default",
                 "cssText": "padding: 5px; border: 1px solid darkgrey; border-radius: 4px;"
@@ -229,8 +236,10 @@ const map = new maplibregl.Map({
 var map = pymaplibregl(data);
 
 })();
-</script>
 
+
+</script>
+			
 		<!-- Caricamento -->
 <!-- jQuery, Helpers and jqueryIntrLoader -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
@@ -251,7 +260,7 @@ var map = pymaplibregl(data);
                             exitTime: 300,
                             loaderText: 'Variante Generale e Particelle catastali', 
                             lettersDelayTime: 0.25
-														                        }
+							                        }
                     },
                     spinJs: {
                         lines: 50, // The number of lines to draw
@@ -262,8 +271,7 @@ var map = pymaplibregl(data);
                     }
                 });
 			});
-		</script>
-</body>
-</html>
+		</script>	
+
 </body>
 </html>
