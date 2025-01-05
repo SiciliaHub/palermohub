@@ -946,6 +946,14 @@
 <priority>0.8</priority>
 </url>
 
+<url>
+<loc>https://palermohub.opendatasicilia.it/prg_part_catastali.html</loc>
+<lastmod>2024-01-05</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+
 
 <!--- <url>
 <loc>https://palermohub.opendatasicilia.it/xxxx.html</loc>
