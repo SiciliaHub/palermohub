@@ -66,10 +66,11 @@
     <div id="map"></div>
     <div class="layer-switcher">
         <h3>Attiva/Disattiva Layer</h3>
-        <button id="vincoli_lin" class="active">Vincoli Lineari (Raster)</button>
-        <button id="vincoli_ar" class="active">Vincoli Areali (Raster)</button>
-        <button id="particelle" class="active">Particelle Catastali</button>
-        <button id="carta_tecnica">Carta Tecnica 2k - 2007/09</button>
+        <button id="vincoli_lin" class="active" title="Vincoli Lineari" >Vincoli Lineari (Raster)</button>
+        <button id="vincoli_ar" class="active" title="Vincoli Areali" >Vincoli Areali (Raster)</button>
+        <button id="particelle" class="active" title="Particelle Catastali" >Particelle Catastali</button>
+        <button id="carta_tecnica" title="Carta Tecnica 2k - 2007/09" >Carta Tecnica 2k - 2007/09</button>
+		<button id="satellite" class="active" title="Esri.WorldImagery" >Satellite</button> 
     </div>
     <div class="logo">
         <a href="https://opendatasicilia.it/" title="@opendatasicilia" target="_blank">
@@ -82,7 +83,7 @@
         <div style="display: flex; gap: 10px;">
             <input type="number" id="foglio" placeholder="Foglio" style="width: 80px; padding: 5px;" min="1">
             <input type="number" id="particella" placeholder="Particella" style="width: 80px; padding: 5px;" min="1">
-            <button onclick="searchParticella()">Cerca</button>
+            <button onclick="searchParticella()" title=" Cerca">Cerca</button>
         </div>
         <div id="search-error" style="color: red; margin-top: 5px; font-size: 0.9em;"></div>
     </div>
@@ -257,7 +258,13 @@
                         tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png'],
                         tileSize: 256,
                         attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, © <a href="https://carto.com/attributions">CARTO</a>'
-                    }
+                    },
+					'satellite': {
+						type: 'raster',
+						tiles: ['https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+						tileSize: 256,
+						attribution: '© Esri — Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+					}
                 },
                 layers: [
                     {
@@ -266,14 +273,25 @@
                         source: 'raster-tiles',
                         minzoom: 10,
                         maxzoom: 22
-                    }
+                    },
+					{
+					id: 'satellite-layer',
+					type: 'raster',
+					source: 'satellite',
+					minzoom: 10,
+					maxzoom: 22,
+					layout: {
+						visibility: 'none'
+					}
+				}
                 ] 
             },
             center: [13.33225, 38.14074], // Centro iniziale della mappa
             zoom: 12, // Zoom iniziale
             maxBounds: [[13.1, 37.9785], [13.55, 38.2919]], // Bounds della mappa
             hash: true, // Abilita l'URL hash per condividere la posizione della mappa
-            pitch: 0
+            pitch: 0,
+			 dragRotate: false // Disabilita la rotazione 3D
         });
 
         // Aggiungi controlli alla mappa
@@ -463,7 +481,8 @@
                 vincoli_lin: 'vincoli_lin',
                 vincoli_ar: 'vincoli_ar',
                 particelle: 'Particelle catastali',
-                carta_tecnica: 'carta_tecnica'
+                carta_tecnica: 'carta_tecnica',
+				satellite: 'satellite-layer'
             };
 
             Object.keys(buttons).forEach(id => {
