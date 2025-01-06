@@ -64,8 +64,8 @@
             height: 0.5px;
             background: #ff0000 !important;
             background-image: linear-gradient(to right, #fff, #ff91002e, #fff) !important;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
        /* Riduci il font nei tooltip e applica il font Titillium Web */
         .maplibregl-popup-content {

@@ -44,7 +44,7 @@
     }
     </style>
 	
-	 <!-- Open Graph Protocol -->
+		 <!-- Open Graph Protocol -->
    <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
@@ -59,7 +59,7 @@
   <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
   <meta name="twitter:description" content="DEMO - Variante Generale e Particelle catastali - By OpenDataSicilia">
   <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card_04.jpg">
-<!-- twitter --> 	
+<!-- twitter --> 
 	
 </head>
 <body>
@@ -497,9 +497,9 @@
                     if (feature.layer.id === 'cs') {
                         content = `<b> Strumento Urbanistico:</b> PPE<br><b>Circoscrizione:</b> ${feature.properties.Circoscriz || 'N/A'}`;
                     } else if (feature.layer.id === 'Info Vin. areali') {
-                        content = `<b>Vicolo lineare</b><br><b>Tipo:</b> ${feature.properties.tipo || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.descrizone || 'N/A'}<br><b>Note:</b> ${feature.properties.note || 'N/A'}`;
+                        content = `<b>Vicolo lineare</b><br><b>Tipo:</b> ${feature.properties.tipo || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.descrizone || 'N/A'}`;
                     } else if (feature.layer.id === 'Info Vin. lineari') {
-                        content = `<b>Vicolo areale</b><b>Tipo:</b> ${feature.properties.TIPO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}<br><b>Note:</b> ${feature.properties.note || 'N/A'}`;
+                        content = `<b>Vicolo areale</b><b>Tipo:</b> ${feature.properties.TIPO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}`;
                     } else if (feature.layer.id === 'Info Netto storico') {
                         content = `<b>Netto storico</b><br><b>ZTO:</b> ${feature.properties.ZTO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}`;
                     } else if (feature.layer.id === 'Info ZTO') {
