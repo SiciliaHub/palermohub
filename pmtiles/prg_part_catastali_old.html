@@ -13,36 +13,7 @@
     <link rel="stylesheet" href="js/introLoader.css">
     <!-- Font Awesome per le icone -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Add this CSS to the existing styles -->
-    <style>
-        .search-container input::-webkit-outer-spin-button,
-        .search-container input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0px;
-        }
-        .search-container input[type=number] {
-            -moz-appearance: textfield;
-        }
-        .search-container button {
-            padding: 5px 10px;
-            background: #ff9100; /* Colore di base */
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.3s ease; /* Aggiungi una transizione per un effetto fluido */
-        }
-        .search-container button:hover {
-            background:#516c50; /* Cambia colore al passaggio del mouse */
-        }
-        .search-container button:active {
-            background: #3d8b40; /* Cambia colore quando il pulsante è premuto */
-        }
-		   /* Aggiungi queste regole CSS */
-    .layer-switcher, .search-container {
-        transition: right 0.3s ease; /* Aggiungi una transizione fluida */
-    }
-    </style>
+	
 	
 	 <!-- Open Graph Protocol -->
    <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
@@ -59,33 +30,24 @@
   <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
   <meta name="twitter:description" content="DEMO - Variante Generale e Particelle catastali - By OpenDataSicilia">
   <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card_04.jpg">
-<!-- twitter --> 	
+<!-- twitter --> 
 	
-</head>
+	</head>
 <body>
     <div id="map"></div>
     <div class="layer-switcher">
         <h3>Attiva/Disattiva Layer</h3>
-        <button id="vincoli_lin" class="active">Vincoli Lineari (Raster)</button>
-        <button id="vincoli_ar" class="active">Vincoli Areali (Raster)</button>
-        <button id="particelle" class="active">Particelle Catastali</button>
-        <button id="carta_tecnica">Carta Tecnica 2k - 2007/09</button>
+        <button id="vincoli_lin" class="active" title="Attiva/Disattiva Vincoli Lineari" >Vincoli Lineari (Raster)</button>
+        <button id="vincoli_ar" class="active" title="Attiva/Disattiva Vincoli Areali">Vincoli Areali (Raster)</button>
+        <button id="particelle" class="active" title="Attiva/Disattiva Particelle Catastali">Particelle Catastali</button>
+        <button id="carta_tecnica" title="Attiva/Disattiva Carta Tecnica 2k - 2007/09">Carta Tecnica 2k - 2007/09</button>
     </div>
     <div class="logo">
         <a href="https://opendatasicilia.it/" title="@opendatasicilia" target="_blank">
             <img src="https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png" width="40" height="40" title="@opendatasicilia" alt="OpenDataSicilia">
         </a>
     </div>
-    <!-- First, add this HTML form after the layer-switcher div -->
-    <div class="search-container" style="position: absolute; top: 20px; right: 220px; z-index: 1; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-        <h3 style="margin: 0 0 10px 0;">Ricerca Particella</h3>
-        <div style="display: flex; gap: 10px;">
-            <input type="number" id="foglio" placeholder="Foglio" style="width: 80px; padding: 5px;" min="1">
-            <input type="number" id="particella" placeholder="Particella" style="width: 80px; padding: 5px;" min="1">
-            <button onclick="searchParticella()">Cerca</button>
-        </div>
-        <div id="search-error" style="color: red; margin-top: 5px; font-size: 0.9em;"></div>
-    </div>
+
     <!-- Sidepanel -->
     <div id="sidepanel">
         <div id="sidepanel-tab" onclick="toggleSidepanel()">
@@ -94,39 +56,39 @@
         <div id="sidepanel-content">
             <div id="sidepanel-tabs">
                 <button onclick="showSection('section1')" title="Note informative" class="active">Note</button>
-                <button onclick="showSection('section2')" title="I principali strumenti usati per realizzare la mappa">Strumenti</button>
+                <button onclick="showSection('section2')" title="I principali strumenti usati per realizzare la mappa" >Strumenti</button>
             </div>
             <div id="section1" class="sidepanel-section active">
                 <h2 style="color: red; font-weight: bold; margin-top: 0;">Variante Generale al PRG e dati catastali</h2>
-                <p><em><strong>Dal 1° gennaio 2025, l&rsquo;accesso telematico alle banche dati </strong>ipotecarie e <strong>catastali diventa gratuito</strong>, segnando un&rsquo;importante semplificazione per professionisti, pubbliche amministrazioni e cittadini. <br>La novità è contenuta nel <a href="https://www.agenziaentrate.gov.it/portale/web/guest/-/provvedimento-del-30-dicembre-20-3">provvedimento</a> dell&rsquo;Agenzia delle Entrate del 30 dicembre 2024, che attua le disposizioni introdotte dall&rsquo;articolo 7 del decreto legislativo n. 139/2024.</em></p> <hr>		
-                <p><strong>Variente Generle al P.R.G.</strong> - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br>
-                Rielaborazione a cura di @opendatasicilia su opendata del Comune di Palermo. <br><br>				
-                <strong> Fonte dati Zonizzazione e vincoli -</strong> <br><a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=11" title="Opendata Palermo - Urbanistica" target="_blank">Urbanistica</a>   <br>
-                <a href="https://www.comune.palermo.it/opendata_dld.php?id=320t" title="Perimetrazione Zonizzazione P.R.G. vigente" target="_blank" > Perimetrazione Zonizzazione P.R.G. vigente;</a><br>
-                <a href="https://www.comune.palermo.it/opendata_dld.php?id=321" title="Vincoli vigenti della Variante al P.R.G." target="_blank" >Vincoli vigenti della Variante al P.R.G.</a> 
-                  <p class="lorem"><strong>La variante Generale al P.R.G. è stata redatta dal Settore Urbanistica nel 2004 oggi Area Urbanistica della rigenerazione urbana, della mobilità e del centro storico</strong><br>
-                    <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=103" target="_blank">Qui gli elaborati della Variante Generale</a></p> 
-                     <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br> 
-                     <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p> 
-                   <hr>				
-                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>ottobre 2024</strong>.<br><br>
-                    L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
-                    <hr>
-                    <p><strong>Disclaimer:</strong> Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili. Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali. Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</p><br><br>
+				<p><em><strong>Dal 1° gennaio 2025, l&rsquo;accesso telematico alle banche dati </strong>ipotecarie e <strong>catastali diventa gratuito</strong>, segnando un&rsquo;importante semplificazione per professionisti, pubbliche amministrazioni e cittadini. <br>La novità è contenuta nel <a href="https://www.agenziaentrate.gov.it/portale/web/guest/-/provvedimento-del-30-dicembre-20-3">provvedimento</a> dell&rsquo;Agenzia delle Entrate del 30 dicembre 2024, che attua le disposizioni introdotte dall&rsquo;articolo 7 del decreto legislativo n. 139/2024.</em></p> <hr>		
+
+				<p><strong>Variente Generle al P.R.G.</strong> - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br>
+				Rielaborazione a cura di @opendatasicilia su opendata del Comune di Palermo. <br><br>				
+				<strong> Fonte dati Zonizzazione e vincoli -</strong> <br><a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=11" title="Opendata Palermo - Urbanistica" target="_blank">Urbanistica</a>   <br>
+				<a href="https://www.comune.palermo.it/opendata_dld.php?id=320t" title="Perimetrazione Zonizzazione P.R.G. vigente" target="_blank" > Perimetrazione Zonizzazione P.R.G. vigente;</a><br>
+				<a href="https://www.comune.palermo.it/opendata_dld.php?id=321" title="Vincoli vigenti della Variante al P.R.G." target="_blank" >Vincoli vigenti della Variante al P.R.G.</a> 
+				  <p class="lorem"><strong>La variante Generale al P.R.G. è stata redatta dal Settore Urbanistica nel 2004 oggi Area Urbanistica della rigenerazione urbana, della mobilità e del centro storico</strong><br>
+					<a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=103" target="_blank">Qui gli elaborati della Variante Generale</a></p> 
+					 <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br> 
+					 <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p> 
+				   <hr>				
+					<p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>ottobre 2024</strong>.<br><br>
+					L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
+					<hr>
+					<p><strong>Disclaimer:</strong> Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili. Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali. Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</p><br><br>
             </div>
-             <div id="section2" class="sidepanel-section">
+            <div id="section2" class="sidepanel-section">
 			<h2>Nuova mappa con particelle catastali e strumenti urbanistici vigenti di Palermo</h2>
 			<p> La nuova versione è completamente riprogettata e ottimizzata, grazie all'aiuto di <a href="https://x.com/deepseek_ai" title="DeepSeek AI" target="_blank">@deepseek_ai</a>, per offrire una migliore esperienza utente.</p>
 			<h2>Principali miglioramenti</h2>
 			<h3>Gestione avanzata dei tooltip</h3>
-			<p>La novità più significativa riguarda la gestione dei tooltip. Nella versione precedente, in presenza di elementi sovrapposti nei livelli PMTiles, i tooltip si sovrapponevano creando confusione. Ora, lo script genera automaticamente un tooltip unificato che integra in modo ordinato le informazioni di tutti gli elementi presenti in un punto specifico.<br> Inoltre, è stato integrato un pratico modulo di ricerca che permette di individuare rapidamente fogli e particelle specifiche.</p>
+			<p>La novità più significativa riguarda la gestione dei tooltip. Nella versione precedente, in presenza di elementi sovrapposti nei livelli PMTiles, i tooltip si sovrapponevano creando confusione. Ora, lo script genera automaticamente un tooltip unificato che integra in modo ordinato le informazioni di tutti gli elementi presenti in un punto specifico.</p>
 			<h3>Aspetti tecnici</h3>
 			<p>Il codice è stato completamente ristrutturato per garantire:</p>
 			<ul depth="0">
 			  <li index="0">Maggiore stabilità e riduzione dei bug</li>
 			  <li index="1">Performance ottimizzate</li>
 			  <li index="2">Migliore gestione della visualizzazione dei dati</li>
-			  <li index="2">Modulo di ricerca per Foglio e particella catastale</li>
 			</ul>
 			<h3>Ringraziamenti</h3>
 			<p>Un sentito ringraziamento va a <a href="https://x.com/aborruso" title="Andrea Borruso" target="_blank"><em>@aborruso</em></a> e <a href="https://x.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a>, i cui insegnamenti e la costante condivisione di conoscenze hanno contribuito in modo determinante alla realizzazione di questo progetto. Il loro supporto mi permette di implementare e migliorarmi nel campo della cartografia digitale.</p>			
@@ -137,88 +99,22 @@
             </div>
         </div>
     </div>
-    <!-- Barra di ricerca -->
-    <script>
-        function searchParticella() {
-            const foglio = document.getElementById('foglio').value;
-            const particella = document.getElementById('particella').value;
-            const errorDiv = document.getElementById('search-error');
-            
-            if (!foglio || !particella) {
-                errorDiv.textContent = 'Inserire sia il Foglio che la Particella';
-                return;
-            }
-            
-            // Interroga le funzionalità per trovare una corrispondenza
-            const features = map.querySourceFeatures('catasto', {
-                sourceLayer: 'particelle',
-                filter: ['all',
-                    ['==', 'Foglio', foglio],
-                    ['==', 'Paricella', particella]
-                ]
-            });
-            
-            if (features.length > 0) {
-                errorDiv.textContent = '';
-                
-                // Ottieni i limiti della funzionalità
-                const coordinates = features[0].geometry.coordinates[0];
-                const bounds = coordinates.reduce((bounds, coord) => {
-                    return bounds.extend(coord);
-                }, new maplibregl.LngLatBounds(coordinates[0], coordinates[0]));
-                
-                // Adatta la mappa ai limiti dell'elemento
-                map.fitBounds(bounds, {
-                    padding: 50,
-                    maxZoom: 19
-                });
-                
-                // Evidenzia il poligono trovato
-                map.setFilter('highlighted-polygon', [
-                    'all',
-                    ['==', 'Foglio', foglio],
-                    ['==', 'Paricella', particella]
-                ]);
-                
-                // Crea un popup per l'elemento trovato
-                new maplibregl.Popup()
-                    .setLngLat(bounds.getCenter())
-                    .setHTML(`<b>Particelle catastali</b><br><b>Foglio:</b> ${foglio}<br><b>Particella:</b> ${particella}`)
-                    .addTo(map);
-                    
-            } else {
-                errorDiv.textContent = 'Nessuna particella trovata con i parametri specificati';
-                // Clear any existing highlight
-                map.setFilter('highlighted-polygon', ['==', 'id', '']);
-            }
-        }
 
-        // Add event listeners for Enter key
-        document.getElementById('foglio').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') searchParticella();
-        });
-        document.getElementById('particella').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') searchParticella();
-        });
-    </script>
     <script>
         // Funzione per aprire/chiudere il sidepanel
         function toggleSidepanel() {
             const sidepanel = document.getElementById('sidepanel');
             const layerSwitcher = document.querySelector('.layer-switcher');
-            const searchContainer = document.querySelector('.search-container');
             const tabIcon = document.getElementById('tab-icon');
 
             if (sidepanel.style.right === '0px') {
                 sidepanel.style.right = '-400px';
                 layerSwitcher.style.right = '20px'; // Riporta lo switcher alla posizione originale
-                searchContainer.style.right = '220px'; // Riporta la barra di ricerca alla posizione originale
                 tabIcon.classList.remove('fa-chevron-right');
                 tabIcon.classList.add('fa-chevron-left'); // Cambia icona per indicare chiusura
             } else {
                 sidepanel.style.right = '0px';
                 layerSwitcher.style.right = '420px'; // Sposta lo switcher a sinistra del sidepanel
-                searchContainer.style.right = '620px'; // Sposta la barra di ricerca a sinistra del sidepanel
                 tabIcon.classList.remove('fa-chevron-left');
                 tabIcon.classList.add('fa-chevron-right'); // Cambia icona per indicare apertura
             }
@@ -273,7 +169,7 @@
             zoom: 12, // Zoom iniziale
             maxBounds: [[13.1, 37.9785], [13.55, 38.2919]], // Bounds della mappa
             hash: true, // Abilita l'URL hash per condividere la posizione della mappa
-            pitch: 0
+			pitch: 0
         });
 
         // Aggiungi controlli alla mappa
@@ -499,7 +395,7 @@
                     } else if (feature.layer.id === 'Info Vin. areali') {
                         content = `<b>Vicolo lineare</b><br><b>Tipo:</b> ${feature.properties.tipo || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.descrizone || 'N/A'}<br><b>Note:</b> ${feature.properties.note || 'N/A'}`;
                     } else if (feature.layer.id === 'Info Vin. lineari') {
-                        content = `<b>Vicolo areale</b><b>Tipo:</b> ${feature.properties.TIPO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}<br><b>Note:</b> ${feature.properties.note || 'N/A'}`;
+                        content = `<b>Vicolo areale</b><br><b>Tipo:</b> ${feature.properties.TIPO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}<br><b>Note:</b> ${feature.properties.note || 'N/A'}`;
                     } else if (feature.layer.id === 'Info Netto storico') {
                         content = `<b>Netto storico</b><br><b>ZTO:</b> ${feature.properties.ZTO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}`;
                     } else if (feature.layer.id === 'Info ZTO') {
