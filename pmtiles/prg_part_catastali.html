@@ -658,36 +658,19 @@
     </script>
 
     <!-- Caricamento -->
-    <!-- jQuery, Helpers e jqueryIntrLoader -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-    <script src="js/jquery.easing.1.3.js"></script>
-    <script src="js/spin.min.js"></script>
-    <script src="js/jquery.introLoader.js"></script>
-    <div id="element" class="introLoading"></div>
+    <!-- Loader personalizzato -->
+    <div class="custom-loader" id="custom-loader">
+        <div class="spinner"></div>
+        <div class="loader-text">Elaborazione dei dati cartografici in corso...<br><br>
+           <h2> Variante Generale al P.R.G. e Particelle catastali</h2>
+        </div>
+    </div>
+
     <script>
-        $(document).on('ready', function() {
-            $("#element").introLoader({
-                animation: {
-                    name: 'lettersLoader',
-                    options: {
-                        ease: "easeInOutCirc",
-                        style: 'light',
-                        delayBefore: 500,
-                        delayAfter: 0,
-                        exitTime: 300,
-                        loaderText: 'Variante Generale e Particelle catastali',
-                        lettersDelayTime: 0.25
-                    }
-                },
-                spinJs: {
-                    lines: 50,
-                    length: 50,
-                    radius: 80,
-                    width: 3,
-                    color: '#333'
-                }
-            });
-        });
+        // Simula un caricamento (puoi rimuovere questo timeout in produzione)
+        setTimeout(function() {
+            document.getElementById('custom-loader').style.display = 'none';
+        }, 4000); // Nasconde il loader dopo 3 secondi
     </script>
 </body>
-</html>
+</html> 
