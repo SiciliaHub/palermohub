@@ -9,21 +9,18 @@
     <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
     <script src="https://unpkg.com/pmtiles@2.4.0/dist/index.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="js/gb_extra.css">
+	 <link rel="stylesheet" href="js/gb_extra.css">
     <link rel="stylesheet" href="js/introLoader.css">
-    <!-- Font Awesome per le icone -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- Interact.js per trascinamento e ridimensionamento -->
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-    <!-- Stili aggiuntivi -->
-   
-    <!-- Open Graph Protocol -->
+    <style>
+
+    </style>
     <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
     <meta property="og:description" content="DEMO 2 - Variante Generale e Particelle catastali - By OpenDataSicilia">
     <meta property="og:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card_04.jpg">
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
     <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
@@ -33,14 +30,12 @@
 </head>
 <body>
     <div id="map"></div>
-    <!-- Crocino nella mappa principale -->
     <div class="crosshair-main"></div>
     <div id="satellite-overlay">
         <div id="satellite-map" style="width: 100%; height: 100%;"></div>
-        <!-- Crocino nella minimappa -->
         <div class="crosshair-minimap"></div>
     </div>
-    <div class="overlay-button" style="position: absolute; bottom: 45px; left: 10px; z-index: 2; background: #ff9100; padding: 6px; border-radius: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <div class="overlay-button" style="position: absolute; bottom: 45px; left: 10px; z-index: 2; background: #ff9100; padding: 8px; border-radius: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
         <button onclick="toggleSatelliteOverlay()" title="Apri/Chiudi mappa satellitare" data-state="closed"></button>
     </div>
     <div class="layer-switcher">
@@ -49,21 +44,24 @@
         <button id="vincoli_ar" class="active" title="Vincoli Areali">Vincoli Areali (Raster)</button>
         <button id="particelle" class="active" title="Particelle Catastali">Particelle Catastali</button>
         <button id="carta_tecnica" title="Carta Tecnica 2k - 2007/09">Carta Tecnica 2k - 2007/09</button>
-        <button id="satellite"  title="Google Maps">Satellite</button>
+        <button id="satellite" title="Google Maps">Satellite</button>
     </div>
     <div class="logo">
         <a href="https://opendatasicilia.it/" title="@opendatasicilia" target="_blank">
             <img src="https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png" width="40" height="40" title="@opendatasicilia" alt="OpenDataSicilia">
         </a>
     </div>
-    <div class="search-container" style="position: absolute; top: 20px; right: 220px; z-index: 1; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
-        <h3 style="margin: 0 0 10px 0;">Ricerca Particella</h3>
-        <div style="display: flex; gap: 10px;">
-            <input type="number" id="foglio" placeholder="Foglio" style="width: 80px; padding: 5px;" min="1">
-            <input type="number" id="particella" placeholder="Particella" style="width: 80px; padding: 5px;" min="1">
-            <button onclick="searchParticella()" title="Cerca">Cerca</button>
-        </div>
-        <div id="search-error" style="color: red; margin-top: 5px; font-size: 0.9em;"></div>
+    <!-- Pulsante a linguetta per la barra di ricerca -->
+    <div class="search-tab" onclick="toggleSearchPopup()" title="Attiva/Disattiva - Cerca paricella catastale">
+        <i class="fas fa-search"></i>
+    </div>
+    <!-- Popup di ricerca -->
+    <div class="search-popup" id="search-popup">
+        <h3>Ricerca Particella</h3>
+        <input type="number" id="foglio" placeholder="Foglio" min="1">
+        <input type="number" id="particella" placeholder="Particella" min="1">
+        <button onclick="searchParticella()">Cerca</button>
+        <div id="search-error"></div>
     </div>
     <!-- Sidepanel -->
     <div id="sidepanel">
@@ -253,6 +251,13 @@
             setupInteract();
         });
 
+        // Funzione per attivare/disattivare il popup di ricerca
+        function toggleSearchPopup() {
+            const searchPopup = document.getElementById('search-popup');
+            searchPopup.classList.toggle('active');
+        }
+
+        // Funzione per cercare la particella
         function searchParticella() {
             const foglio = document.getElementById('foglio').value;
             const particella = document.getElementById('particella').value;
@@ -300,6 +305,8 @@
                     .setHTML(`<b>Particelle catastali</b><br><b>Foglio:</b> ${foglio}<br><b>Particella:</b> ${particella}`)
                     .addTo(map);
 
+                // Chiudi il popup di ricerca dopo aver trovato la particella
+                toggleSearchPopup();
             } else {
                 errorDiv.textContent = 'Nessuna particella trovata con i parametri specificati';
                 // Clear any existing highlight
