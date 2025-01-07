@@ -257,3 +257,10 @@
         #sidepanel.active {
             right: 0; /* Mostra il sidepanel */
         }
+		
+/* Media query per dispositivi mobili (ad esempio, larghezza massima di 768px) */
+@media only screen and (max-width: 768px) {
+    .overlay-button button, .search-container, #sidepanel {
+        display: none; /* Nasconde l'oggetto su dispositivi mobili */
+    }
+}		
