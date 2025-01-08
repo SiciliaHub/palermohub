@@ -2,25 +2,153 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>DEMO 2 - Variante Generale e Particelle catastali - By OpenDataSicilia</title>
+    <title>DEMO - Variante Generale e Particelle catastali - By OpenDataSicilia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="favicon.ico">
     <script src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
     <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
     <script src="https://unpkg.com/pmtiles@2.4.0/dist/index.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
-	 <link rel="stylesheet" href="js/gb_extra.css">
+    <link rel="stylesheet" href="js/gb_extra.css">
     <link rel="stylesheet" href="js/introLoader.css">
+    <!-- Font Awesome per le icone -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Interact.js per trascinamento e ridimensionamento -->
     <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <!-- Stili aggiuntivi -->
     <style>
-
+        .search-container input::-webkit-outer-spin-button,
+        .search-container input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0px;
+        }
+        .search-container input[type=number] {
+            -moz-appearance: textfield;
+        }
+        .search-container button {
+            padding: 5px 10px;
+            background: #ff9100;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        .search-container button:hover {
+            background: #516c50;
+        }
+        .search-container button:active {
+            background: #3d8b40;
+        }
+        .layer-switcher, .search-container {
+            transition: right 0.3s ease;
+        }
+        #satellite-overlay {
+            resize: none; /* Disabilita il ridimensionamento predefinito */
+            overflow: hidden; /* Nasconde il contenuto che supera le dimensioni del div */
+            min-width: 200px; /* Dimensione minima */
+            min-height: 150px; /* Dimensione minima */
+            border: 2px solid #ccc; /* Bordo per migliorare la visibilità */
+            background: white; /* Sfondo bianco */
+            cursor: move; /* Cambia il cursore per indicare che è trascinabile */
+            position: absolute; /* Posizione assoluta per il trascinamento libero */
+            display: none; /* Nascondi di default */
+            width: 350px; /* Larghezza iniziale */
+            height: 350px; /* Altezza iniziale */
+			margin-left: 50px;
+			margin-bottom: 50px;
+			}
+					
+        /* Stile per il pulsante circolare */
+        .overlay-button button {
+            width: 50px; /* Larghezza del pulsante */
+            height: 50px; /* Altezza del pulsante */
+            border-radius: 50%; /* Rende il pulsante circolare */
+            background-color: #ff9100; /* Colore di sfondo predefinito */
+             border: 2px solid #FFF;
+            cursor: pointer;
+            transition: background-color 0.3s ease, background-image 0.3s ease;
+            background-size: cover; /* Adatta l'immagine di sfondo al pulsante */
+            background-position: center; /* Centra l'immagine di sfondo */
+			 box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+        }
+        /* Immagine di sfondo quando il pulsante è chiuso */
+        .overlay-button button[data-state="closed"] {
+            background-image: url('js/layer_off.jpg'); /* Sostituisci con il percorso dell'immagine */
+        }
+        /* Immagine di sfondo quando il pulsante è aperto */
+        .overlay-button button[data-state="open"] {
+            background-image: url('js/layer_on.jpg'); /* Sostituisci con il percorso dell'immagine */
+        }
+        /* Stile per il crocino nella mappa principale */
+        .crosshair-main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            pointer-events: none; /* Impedisce al crocino di interferire con i clic */
+            display: none; /* Nascondi il crocino di default */
+        }
+        .crosshair-main::before,
+        .crosshair-main::after {
+            content: '';
+            position: absolute;
+            background: red;
+        }
+        .crosshair-main::before {
+            width: 100%;
+            height: 4px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        .crosshair-main::after {
+            width: 4px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        /* Stile per il crocino nella minimappa */
+        .crosshair-minimap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            pointer-events: none; /* Impedisce al crocino di interferire con i clic */
+        }
+        .crosshair-minimap::before,
+        .crosshair-minimap::after {
+            content: '';
+            position: absolute;
+            background: red;
+        }
+        .crosshair-minimap::before {
+            width: 100%;
+            height: 3px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+        .crosshair-minimap::after {
+            width: 3px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     </style>
+    <!-- Open Graph Protocol -->
     <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
     <meta property="og:description" content="DEMO 2 - Variante Generale e Particelle catastali - By OpenDataSicilia">
     <meta property="og:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card_04.jpg">
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
     <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
@@ -30,12 +158,14 @@
 </head>
 <body>
     <div id="map"></div>
+    <!-- Crocino nella mappa principale -->
     <div class="crosshair-main"></div>
     <div id="satellite-overlay">
         <div id="satellite-map" style="width: 100%; height: 100%;"></div>
+        <!-- Crocino nella minimappa -->
         <div class="crosshair-minimap"></div>
     </div>
-    <div class="overlay-button" style="position: absolute; bottom: 45px; left: 10px; z-index: 2; background: #ff9100; padding: 8px; border-radius: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+    <div class="overlay-button" style="position: absolute; bottom: 45px; left: 10px; z-index: 2; background: #ff9100; padding: 3px; border-radius: 30px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
         <button onclick="toggleSatelliteOverlay()" title="Apri/Chiudi mappa satellitare" data-state="closed"></button>
     </div>
     <div class="layer-switcher">
@@ -44,25 +174,21 @@
         <button id="vincoli_ar" class="active" title="Vincoli Areali">Vincoli Areali (Raster)</button>
         <button id="particelle" class="active" title="Particelle Catastali">Particelle Catastali</button>
         <button id="carta_tecnica" title="Carta Tecnica 2k - 2007/09">Carta Tecnica 2k - 2007/09</button>
-        <button id="satellite" title="Google Maps">Satellite</button>
+        <button id="satellite"  title="Google Maps">Satellite</button>
     </div>
     <div class="logo">
         <a href="https://opendatasicilia.it/" title="@opendatasicilia" target="_blank">
             <img src="https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png" width="40" height="40" title="@opendatasicilia" alt="OpenDataSicilia">
         </a>
     </div>
-    <!-- Pulsante a linguetta per la barra di ricerca -->
-    <div class="search-tab" onclick="toggleSearchPopup()" title="Attiva/Disattiva - Cerca paricella catastale">
-        <i class="fas fa-search"></i>
-    </div>
-    <!-- Popup di ricerca -->
-    <div class="search-popup" id="search-popup">
-        <h3>Ricerca Particella</h3>
-		<p style="font-size: 14px; font-family: 'Titillium Web', sans-serif; font-weight: 700; text-align:center;"> Assicurati che la particella richiesta rientri nell'area visualizzata. </p>
-        <input type="number" id="foglio" placeholder="Foglio" min="1">
-        <input type="number" id="particella" placeholder="Particella" min="1">
-        <button onclick="searchParticella()">Cerca</button>
-        <div id="search-error"></div>
+    <div class="search-container" style="position: absolute; top: 20px; right: 220px; z-index: 1; background: white; padding: 10px; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+        <h3 style="margin: 0 0 10px 0;">Ricerca Particella</h3>
+        <div style="display: flex; gap: 10px;">
+            <input type="number" id="foglio" placeholder="Foglio" style="width: 80px; padding: 5px;" min="1">
+            <input type="number" id="particella" placeholder="Particella" style="width: 80px; padding: 5px;" min="1">
+            <button onclick="searchParticella()" title="Cerca">Cerca</button>
+        </div>
+        <div id="search-error" style="color: red; margin-top: 5px; font-size: 0.9em;"></div>
     </div>
     <!-- Sidepanel -->
     <div id="sidepanel">
@@ -73,7 +199,6 @@
             <div id="sidepanel-tabs">
                 <button onclick="showSection('section1')" title="Note informative" class="active">Note</button>
                 <button onclick="showSection('section2')" title="I principali strumenti usati per realizzare la mappa">Strumenti</button>
-				 <button onclick="showSection('section3')" title="Ricerca particelle">Ricerca</button>
             </div>
             <div id="section1" class="sidepanel-section active">
                 <h2 style="color: red; font-weight: bold; margin-top: 0;">Variante Generale al PRG e dati catastali</h2>
@@ -116,34 +241,6 @@
                 <p>Coming soon...</p>
                 <img src="js/demo2.png" width="366" height="128" alt=""/>
             </div>
-			<div id="section3" class="sidepanel-section">
-			 <h2 style="color: red; font-weight: bold; margin-top: 0;">Ricerca geografica dellee particelle catastali</h2>
-			 <p> Il layer <b>Particelle Catastali</b> viene esposto in formato PMTiles.</p>
-			 <p> Il <b>PMTiles</b> è un formato di file progettato per archiviare e servire dati geospaziali, come mappe vettoriali o raster, in modo efficiente. È un formato basato su tessere (tiles), che permette di suddividere i dati in piccole porzioni (tiles) per un accesso rapido e selettivo. <br> La particolarità di PMTiles è che è un formato monolitico, cioè tutti i dati sono contenuti in un unico file, a differenza di altri formati che richiedono molteplici file separati. Questo lo rende più semplice da gestire e distribuire, ad esempio su un server web o su un CDN (Content Delivery Network).
-			 </p>
-			  <h2 style="color: red; font-weight: bold; margin-top: 0;">Cerca una Particella</h2>
-			  <p> Viste le caratteristiche del PMTiles, Durante la ricerca con PMTiles, è necessario che la particella da visualizzare sia compresa nell'area mostrata sullo schermo del proprio dispositivo (PC desktop o mobile). In caso contrario, poiché il dato non sarà stato caricato, verrà mostrato un messaggio di errore.</p>
-				<h2 style="color: red; font-weight: bold; margin-top: 0;">Ricerca con PMTiles</h2>
-			 <p>Dato che il formato <strong>PMTiles</strong> è progettato per caricare solo le <strong>porzioni di dati</strong> (tiles) necessarie per visualizzare l'area attualmente visibile sullo schermo (monitor del PC o display del dispositivo), è fondamentale assicurarsi che la particella o l'oggetto geospaziale richiesto rientri nell'area visualizzata.</p>
-			<h2>Come funziona il processo:</h2>
-			<ol>
-			<li><strong>Visualizzazione dell'area</strong>: Quando apri una mappa, il software (ad esempio, un'applicazione web basata su MapLibre o Leaflet) carica solo le tiles corrispondenti all'area visibile sullo schermo. Questo riduce il tempo di caricamento e il consumo di risorse.</li>
-			<li><strong>Ricerca di una particella</strong>: Se cerchi una particella o un oggetto specifico, il sistema verifica se i dati relativi a quell'oggetto sono già stati caricati (cioè, se rientrano nelle tiles visualizzate).</li>
-			<li><strong>Messaggio di errore</strong>: Se la particella richiesta <span class="highlight">non rientra</span> nell'area visualizzata, il sistema non avrà caricato i dati necessari per rispondere alla richiesta. In questo caso, verrà restituito un messaggio di errore, ad esempio:  
-            <ul>
-                <li><em>"Dato non disponibile: la particella richiesta non è visibile nell'area corrente."</em></li>
-            </ul>
-        </li>
-    </ol>
-
-    <h2>Come evitare l'errore:</h2>
-    <ul>
-        <li><strong>Zoom o spostamento</strong>: Assicurati di zoommare o spostare la mappa in modo che l'area contenente la particella richiesta sia visibile sullo schermo.</li>
-        <li><strong>Ricerca geografica</strong>: Se l'applicazione lo supporta, utilizza una funzione di ricerca geografica che carica automaticamente l'area corretta quando cerchi una particella.</li>
-    </ul>
-
-    <p>In sintesi, il formato PMTiles è ottimizzato per l'efficienza, ma richiede che l'area di interesse sia visibile per accedere ai dati corretti. Se non lo è, il sistema non può recuperare le informazioni necessarie, generando un messaggio di errore.</p>
-			</div>
         </div>
     </div>
     <script>
@@ -281,13 +378,6 @@
             setupInteract();
         });
 
-        // Funzione per attivare/disattivare il popup di ricerca
-        function toggleSearchPopup() {
-            const searchPopup = document.getElementById('search-popup');
-            searchPopup.classList.toggle('active');
-        }
-
-        // Funzione per cercare la particella
         function searchParticella() {
             const foglio = document.getElementById('foglio').value;
             const particella = document.getElementById('particella').value;
@@ -335,10 +425,8 @@
                     .setHTML(`<b>Particelle catastali</b><br><b>Foglio:</b> ${foglio}<br><b>Particella:</b> ${particella}`)
                     .addTo(map);
 
-                // Chiudi il popup di ricerca dopo aver trovato la particella
-                toggleSearchPopup();
             } else {
-                errorDiv.textContent = 'Nessuna particella trovata con i parametri specificati o particella richiesta non è visibile nell area corrente';
+                errorDiv.textContent = 'Nessuna particella trovata con i parametri specificati';
                 // Clear any existing highlight
                 map.setFilter('highlighted-polygon', ['==', 'id', '']);
             }
@@ -688,19 +776,36 @@
     </script>
 
     <!-- Caricamento -->
-    <!-- Loader personalizzato -->
-    <div class="custom-loader" id="custom-loader">
-        <div class="spinner"></div>
-        <div class="loader-text">Elaborazione dei dati cartografici in corso...<br><br>
-           <h2> Variante Generale al P.R.G. e Particelle catastali</h2>
-        </div>
-    </div>
-
+    <!-- jQuery, Helpers e jqueryIntrLoader -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/spin.min.js"></script>
+    <script src="js/jquery.introLoader.js"></script>
+    <div id="element" class="introLoading"></div>
     <script>
-        // Simula un caricamento (puoi rimuovere questo timeout in produzione)
-        setTimeout(function() {
-            document.getElementById('custom-loader').style.display = 'none';
-        }, 4000); // Nasconde il loader dopo 3 secondi
+        $(document).on('ready', function() {
+            $("#element").introLoader({
+                animation: {
+                    name: 'lettersLoader',
+                    options: {
+                        ease: "easeInOutCirc",
+                        style: 'light',
+                        delayBefore: 500,
+                        delayAfter: 0,
+                        exitTime: 300,
+                        loaderText: 'Variante Generale e Particelle catastali',
+                        lettersDelayTime: 0.25
+                    }
+                },
+                spinJs: {
+                    lines: 50,
+                    length: 50,
+                    radius: 80,
+                    width: 3,
+                    color: '#333'
+                }
+            });
+        });
     </script>
 </body>
-</html> 
+</html>

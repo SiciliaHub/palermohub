@@ -1,259 +1,205 @@
-       body { margin: 0; padding: 0; font-family: 'Open Sans';font-size: 10px; overflow: hidden;}
-	   
+        body { margin: 0; padding: 0; font-family: 'Open Sans'; font-size: 10px; overflow: hidden; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
-		
-			.maplibregl-ctrl.maplibregl-ctrl-attrib {
-		background-color: hsl(0deg 0% 100% / 80%);
-		margin: 0;
-		padding: 0 5px;
-}
-		
+        .maplibregl-ctrl.maplibregl-ctrl-attrib { background-color: hsl(0deg 0% 100% / 80%); margin: 0; padding: 0 5px; }
         .layer-switcher {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ffffffa8;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-            z-index: 1000;
-			 font-family: 'Titillium Web', sans-serif;
-            font-weight: 600;
+            position: absolute; top: 10px; right: 10px; background: #ffffffa8; padding: 10px; border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); z-index: 1000; font-family: 'Titillium Web', sans-serif; font-weight: 600;
         }
-        .layer-switcher h3 {
-            margin: 0 0 10px 0;
-            font-size: 14px;
-        }
+        .layer-switcher h3 { margin: 0 0 10px 0; font-size: 14px; }
         .layer-switcher button {
-            display: block;
+            display: block; width: 100%; padding: 8px; margin: 5px 0; border: none; border-radius: 4px;
+            background-color: white; color: #333; font-size: 12px; cursor: pointer; transition: background-color 0.3s, box-shadow 0.3s;
+            font-family: 'Titillium Web', sans-serif; font-weight: 700;
+        }
+        .layer-switcher button.active { background-color: #ff9100; color: white; box-shadow: 0 0 8px rgba(255, 145, 0, 0.6); }
+        .layer-switcher button:hover { background-color: #516c50; color: white; }
+        .logo { position: absolute; bottom: 10px; right: 10px; z-index: 1000; }
+        .logo img { width: 40px; height: auto; margin-bottom: 20px; }
+        hr { border: 0; height: 0.5px; background: #ff0000 !important; background-image: linear-gradient(to right, #fff, #ff91002e, #fff) !important; margin-top: 5px; margin-bottom: 5px; }
+        .maplibregl-popup-content { font-size: 12px; font-family: 'Titillium Web', sans-serif; font-weight: 400; }
+        #sidepanel-content { height: 100%; overflow-y: auto; padding: 10px; }
+        #sidepanel {
+            position: fixed; top: 0; right: -400px; width: 400px; height: 100%; background-color: #fff; transition: right 0.3s ease;
+            z-index: 1000; box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); font-weight: 400; font-size: 12px;
+        }
+        #sidepanel-tab {
+            position: absolute; left: -20px; top: 50%; transform: translateY(-50%); width: 20px; height: 50px; background-color: #ff9100;
+            cursor: pointer; border-radius: 5px 0 0 5px; display: flex; align-items: center; justify-content: center;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); transition: background-color 0.3s ease; font-weight: 700;
+        }
+        #sidepanel-tab:hover { background-color: #516c50; }
+        #sidepanel-tab i { font-size: 20px; color: #333; transition: transform 0.3s ease; }
+        #sidepanel-content { padding: 20px 0 0 0; }
+        #sidepanel-tabs { width: 100%; display: flex; padding-bottom: 15px; }
+        #sidepanel-tabs button {
+            flex: 1; margin: -20px 0 0px 0px; padding: 10px; background-color: #fff; border: none; cursor: pointer; text-align: center;
+            font-size: 16px; color: #333; transition: background-color 0.3s ease, color 0.3s ease; box-shadow: 0 1px 0px rgb(0 0 0 / 24%);
+            font-family: 'Titillium Web', sans-serif; font-weight: 700;
+        }
+        #sidepanel-tabs button:hover { background-color: #516c50; color: #fff; }
+        #sidepanel-tabs button.active { background-color: #ff9100; color: #fff; font-family: 'Titillium Web', sans-serif; font-weight: 700; }
+        .sidepanel-section { display: none; padding: 15px; }
+        .sidepanel-section.active { display: block; padding: 15px; }
+        .layer-switcher { position: fixed; top: 20px; right: 20px; z-index: 1001; transition: right 0.3s ease; }
+        #map { position: absolute; top: 0; bottom: 0; width: 100%; }
+        .search-bar {
+            position: absolute; top: 20px; right: 240px; z-index: 1000; background: rgba(228, 255, 255, 0.9); padding: 10px;
+            border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); display: flex; gap: 10px; transition: right 0.3s ease;
+        }
+        .search-bar input { padding: 5px; border: 1px solid #ccc; border-radius: 3px; font-size: 14px; }
+        .search-bar button { padding: 5px 10px; background-color: #007bff; color: white; border: none; border-radius: 3px; cursor: pointer; font-size: 14px; }
+        .search-bar button:hover { background-color: #0056b3; }
+        .layer-switcher { position: absolute; top: 20px; right: 20px; z-index: 1000; background: rgba(228, 228, 228, 0.9); padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); transition: right 0.3s ease; }
+        .search-container input::-webkit-outer-spin-button, .search-container input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0px; }
+        .search-container input[type=number] { -moz-appearance: textfield; }
+        .search-container button { padding: 5px 10px; background: #ff9100; color: white; border: none; border-radius: 4px; cursor: pointer; transition: background 0.3s ease; }
+        .search-container button:hover { background: #516c50; }
+        .search-container button:active { background: #3d8b40; }
+        .layer-switcher, .search-container { transition: right 0.3s ease; }
+        #satellite-overlay {
+            resize: none; overflow: hidden; min-width: 200px; min-height: 150px; border: 2px solid #ccc; background: white; cursor: move;
+            position: absolute; display: none; width: 350px; height: 350px; margin-left: 50px; margin-bottom: 50px;
+        }
+        .overlay-button button {
+            width: 50px; height: 50px; border-radius: 50%; background-color: #ff9100; border: 2px solid #FFF; cursor: pointer;
+            transition: background-color 0.3s ease, background-image 0.3s ease; background-size: cover; background-position: center;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+        }
+        .overlay-button button[data-state="closed"] { background-image: url('layer_off.jpg'); }
+        .overlay-button button[data-state="open"] { background-image: url('layer_on.jpg'); }
+        .crosshair-main {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; pointer-events: none; display: none;
+        }
+        .crosshair-main::before, .crosshair-main::after { content: ''; position: absolute; background: red; }
+        .crosshair-main::before { width: 100%; height: 4px; top: 50%; left: 0; transform: translateY(-50%); }
+        .crosshair-main::after { width: 4px; height: 100%; top: 0; left: 50%; transform: translateX(-50%); }
+        .crosshair-minimap {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 30px; height: 30px; pointer-events: none;
+        }
+        .crosshair-minimap::before, .crosshair-minimap::after { content: ''; position: absolute; background: red; }
+        .crosshair-minimap::before { width: 100%; height: 3px; top: 50%; left: 0; transform: translateY(-50%); }
+        .crosshair-minimap::after { width: 3px; height: 100%; top: 0; left: 50%; transform: translateX(-50%); }
+        @media screen and (max-width: 768px) {
+            #satellite-overlay { width: 92% !important; height: 150px !important; margin-left: 5px !important; margin-bottom: 65px !important; }
+            .maplibregl-ctrl-attrib.maplibregl-compact .maplibregl-ctrl-attrib-button, .maplibregl-ctrl-attrib.maplibregl-compact-show .maplibregl-ctrl-attrib-inner { display: none; }
+            .search-container { display: none; }
+            .overlay-button { padding: 9px !important; }
+            #sidepanel { max-width: 75vw !important; width: 75vw !important; right: -75vw; }
+            #sidepanel.active { right: 0; }
+            #sidepanel-tab { position: fixed !important; left: auto !important; right: 0 !important; top: 50% !important; transform: translateY(-50%) !important; z-index: 1001; width: 20px; height: 50px; background-color: #ff9100; border-radius: 5px 0 0 5px; }
+            #sidepanel-content { padding: 15px; font-size: 14px; }
+            #sidepanel-content h2 { font-size: 18px; }
+            #sidepanel-content h3 { font-size: 16px; }
+            #sidepanel-content p { font-size: 14px; line-height: 1.4; }
+            #sidepanel, .search-container, #satellite-overlay, .layer-switcher { transition: all 0.3s ease-in-out; }
+        }
+        @media screen and (max-width: 375px) {
+            #sidepanel { max-width: 85vw !important; width: 85vw !important; right: -85vw; }
+        }
+        /* Stile per il pulsante a linguetta della barra di ricerca */
+        .search-tab {
+            position: fixed; left: 0; top: 50%; transform: translateY(-50%); width: 30px; height: 50px; background-color: #ff9100;
+            cursor: pointer; border-radius: 0 5px 5px 0; display: flex; align-items: center; justify-content: center;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); z-index: 1001; transition: background-color 0.3s ease;  }
+        }
+        .search-tab:hover { background-color: #516c50; }
+        .search-tab i { font-size: 20px; color: #fff; }
+        /* Stile per il popup di ricerca */
+        .search-popup {
+            display: none; /* Nascondi di default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(228, 228, 228, 0.9);
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 1002; /* Assicurati che sia sopra tutto */
+            width: 90%;
+            max-width: 300px; 
+        }
+        .search-popup.active {
+            display: block; /* Mostra il popup quando attivo */
+        }
+        .search-popup h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            text-align: center;  font-family: 'Titillium Web', sans-serif; font-weight: 800;
+        }
+        .search-popup input {
             width: 100%;
             padding: 8px;
-            margin: 5px 0;
-            border: none;
-            border-radius: 4px;
-            background-color: white;
-            color: #333;
-            font-size: 12px;
-            cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
-			 font-family: 'Titillium Web', sans-serif;
-            font-weight: 700;
-        }
-        .layer-switcher button.active {
-            background-color: #ff9100;
-            color: white;
-            box-shadow: 0 0 8px rgba(255, 145, 0, 0.6);
-        }
-        .layer-switcher button:hover {
-            background-color: #516c50;
-            color: white;
-        }
-        .logo {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            z-index: 1000;
-        }
-        .logo img {
-            width: 40px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-        hr {
-            border: 0;
-            height: 0.5px;
-            background: #ff0000 !important;
-            background-image: linear-gradient(to right, #fff, #ff91002e, #fff) !important;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-       /* Riduci il font nei tooltip e applica il font Titillium Web */
-        .maplibregl-popup-content {
-            font-size: 12px;
-            font-family: 'Titillium Web', sans-serif;
-            font-weight: 400;
-        }
-        /* Sidepanel */
-		
-	#sidepanel-content {
-    height: 100%; /* Occupa tutta l'altezza disponibile */
-    overflow-y: auto; /* Abilita lo scroll verticale */
-    padding: 10px; /* Aggiungi un po' di padding per migliorare l'aspetto */
-}	
-		
-	       #sidepanel {
-            position: fixed;
-            top: 0;
-            right: -400px; /* Nasconde il pannello inizialmente */
-            width: 400px;
-            height: 100%;
-            background-color: #fff;
-            transition: right 0.3s ease;
-            z-index: 1000;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-			font-weight: 400;
-            font-size: 12px;
-			
-        }
-
-        /* Linguetta */
-        #sidepanel-tab {
-            position: absolute;
-            left: -20px; /* Posiziona la linguetta fuori dal pannello */
-            top: 50%;
-            transform: translateY(-50%);
-            width: 20px;
-            height: 50px;
-            background-color: #ff9100;
-            cursor: pointer;
-            border-radius: 5px 0 0 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease;
-			font-weight: 700;
-		     }
-
-        #sidepanel-tab:hover {
-            background-color: #516c50; /* Cambia colore al passaggio del mouse */
-        }
-
-        #sidepanel-tab i {
-            font-size: 20px;
-            color: #333;
-            transition: transform 0.3s ease;
-        }
-
-        /* Contenuto del sidepanel */
-        #sidepanel-content {
-               padding: 20px 0 0 0;
-			      }
-
-        /* Tabs */
-        #sidepanel-tabs { width: 100%;
-            display: flex;
-			padding-bottom: 15px;
-          /*  gap: 10px;
-            border-bottom: 2px solid #ccc;
-			 margin-bottom: 20px;
-			 margin-top: -20px;*/
-        }
-
-        #sidepanel-tabs button {
-            flex: 1;
-			margin: -20px 0 0px 0px;
-            padding: 10px;
-            background-color: #fff;
-            border: none;
-            cursor: pointer;
-            text-align: center;
-            font-size: 16px;
-            color: #333;
-            transition: background-color 0.3s ease, color 0.3s ease;
-            /*box-shadow: 0 2px 4px rgba(0, 0, 0.1);*/
-			box-shadow: 0 1px 0px rgb(0 0 0 / 24%);
-			font-family: 'Titillium Web', sans-serif; font-weight: 700;
-        }
-
-        #sidepanel-tabs button:hover {
-            background-color:#516c50; /* Verde al passaggio del mouse */
-            color: #fff;
-        }
-
-        #sidepanel-tabs button.active {
-            background-color: #ff9100; /* Arancione quando attivo */
-            color: #fff;
-			font-family: 'Titillium Web', sans-serif; font-weight: 700;
-        }
-
-        /* Sezioni */
-        .sidepanel-section {
-            display: none;     padding: 15px;
-        }
-
-        .sidepanel-section.active {
-            display: block;     padding: 15px;
-        }
-
-        /* Layer Switcher */
-        .layer-switcher {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001; /* Assicurati che sia sopra il sidepanel */
-            transition: right 0.3s ease;
-        }
-
-        /* Mappa */
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 100%;
-        }
-		
-        /* Stili per la barra di ricerca */
-        .search-bar {
-            position: absolute;
-            top: 20px;
-            right: 240px; /* Posizione iniziale: 20px a sinistra del layer-switcher */
-            z-index: 1000; /* Assicurati che sia sopra la mappa */
-            background: rgba(255, 255, 255, 0.9); /* Sfondo semi-trasparente */
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            display: flex;
-            gap: 10px;
-            transition: right 0.3s ease; /* Animazione per lo spostamento */
-        }
-
-        .search-bar input {
-            padding: 5px;
+            margin-bottom: 10px;
             border: 1px solid #ccc;
-            border-radius: 3px;
-            font-size: 14px;
+            border-radius: 5px;
+            font-size: 14px; font-family: 'Titillium Web', sans-serif;
         }
-
-        .search-bar button {
-            padding: 5px 10px;
-            background-color: #007bff;
+        .search-popup button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff9100;
             color: white;
             border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .search-bar button:hover {
-            background-color: #0056b3;
-        }
-
-        /* Stili per il layer-switcher */
-        .layer-switcher {
-            position: absolute;
-            top: 20px;
-            right: 20px; /* Posizione iniziale */
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.9);
-            padding: 10px;
             border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-            transition: right 0.3s ease; /* Animazione per lo spostamento */
+            cursor: pointer;
+            font-size: 14px; font-family: 'Titillium Web', sans-serif;
         }
-
-        /* Stili per il sidepanel */
-        #sidepanel {
-            position: absolute;
+        .search-popup button:hover {
+            background-color: #516c50;
+        }
+        .search-popup #search-error {
+            color: red;
+            margin-top: 10px;
+            font-size: 12px;
+            text-align: center;
+        }
+		
+  /* Stile per il loader personalizzato */
+        .custom-loader {
+            position: fixed;
             top: 0;
-            right: -400px; /* Inizialmente nascosto */
-            width: 400px;
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.9); /* Sfondo semi-trasparente */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             z-index: 1000;
-            transition: right 0.3s ease; /* Animazione per l'apertura/chiusura */
         }
 
-        #sidepanel.active {
-            right: 0; /* Mostra il sidepanel */
+        /* Spinner con gradienti e ombre */
+        .custom-loader .spinner {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #ff9100 0%,
+                #ff5100 25%,
+                #ff0055 50%,
+                #ff9100 75%,
+                #ff5100 100%
+            );
+            animation: spin 1.5s linear infinite;
+            box-shadow: 0 0 20px rgba(255, 145, 0, 0.6);
         }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Testo del loader */
+        .custom-loader .loader-text {
+            margin-top: 20px;
+            font-family: 'Titillium Web', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.5;
+            color: #333;
+        }
+    </style>
