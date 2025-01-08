@@ -52,7 +52,7 @@
         </a>
     </div>
     <!-- Pulsante a linguetta per la barra di ricerca -->
-    <div class="search-tab" onclick="toggleSearchPopup()" title="Attiva/Disattiva - Cerca paricella catastale">
+    <div class="search-tab" onclick="toggleSearchPopup()" title="Attiva/Disattiva - Cerca particella catastale">
         <i class="fas fa-search"></i>
     </div>
     <!-- Popup di ricerca -->
@@ -62,6 +62,8 @@
         <input type="number" id="foglio" placeholder="Foglio" min="1">
         <input type="number" id="particella" placeholder="Particella" min="1">
         <button onclick="searchParticella()">Cerca</button>
+		<p style="font-size: 14px; font-family: 'Titillium Web', sans-serif; font-weight: 700; text-align:center;"> 
+		Dati catastali aggiornati a Gennaio 2025<br> (S.I.T.R. Sicilia)</p>
         <div id="search-error"></div>
     </div>
     <!-- Sidepanel -->
@@ -89,7 +91,7 @@
                      <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br>
                      <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p>
                    <hr>
-                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>ottobre 2024</strong>.<br><br>
+                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Gennaio 2025</strong>.<br><br>
                     L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
                     <hr>
                     <p><strong>Disclaimer:</strong> Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili. Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali. Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</p><br><br>
@@ -459,7 +461,7 @@
             // Aggiungi il sorgente PMTiles per le particelle catastali
             map.addSource('catasto', {
                 type: 'vector',
-                url: 'pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle.pmtiles',
+                url: 'pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0125.pmtiles',
                 attribution: 'Particelle catastali - fonte dati <b>SITR Sicilia</b>'
             });
 
