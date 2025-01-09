@@ -679,9 +679,9 @@
                     if (feature.layer.id === 'cs') {
                         content = `<b> Strumento Urbanistico:</b> PPE<br><b>Circoscrizione:</b> ${feature.properties.Circoscriz || 'N/A'}`;
                     } else if (feature.layer.id === 'Info Vin. areali') {
-                        content = `<b>Vicolo lineare</b><br><b>Tipo:</b> ${feature.properties.tipo || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.descrizone || 'N/A'}`;
+                        content = `<b>Vicolo areale</b><br><b>Tipo:</b> ${feature.properties.tipo || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.descrizone || 'N/A'}`;
                     } else if (feature.layer.id === 'Info Vin. lineari') {
-                        content = `<b>Vicolo areale</b><b>Tipo:</b> ${feature.properties.TIPO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}`;
+                        content = `<b>Vicolo lineare</b><b>Tipo:</b> ${feature.properties.TIPO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}`;
                     } else if (feature.layer.id === 'Info Netto storico') {
                         content = `<b>Netto storico</b><br><b>ZTO:</b> ${feature.properties.ZTO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}`;
                     } else if (feature.layer.id === 'Info ZTO') {
