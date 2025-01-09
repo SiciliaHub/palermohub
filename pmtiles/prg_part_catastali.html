@@ -530,61 +530,68 @@
                 });
             });
 
-            // Aggiungi i layer vettoriali (poligoni)
-            const layers = [
-                { id: 'cs', source: 'prg', sourceLayer: 'cs', color: '#ffffff', tooltip: "<b>Circoscrizione:</b> {{Circoscriz}}" },
-                { id: 'Info Vin. areali', source: 'prg', sourceLayer: 'va', color: '#ffffff', tooltip: "<b>Tipo:</b> {{tipo}}<br><b>Descrizione:</b> {{descrizone}}<br><b>Note:</b> {{note}}" },
-                { id: 'Info Vin. lineari', source: 'prg', sourceLayer: 'vl', color: '#ffffff', tooltip: "<b>Tipo:</b> {{TIPO}}<br><b>Descrizione:</b> {{DESCRIZION}}<br><b>Note:</b> {{note}}" },
-                { id: 'Info Netto storico', source: 'prg', sourceLayer: 'ns', color: '#ffffff', tooltip: "<b>Netto storico</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}" },
-                { id: 'Info ZTO', source: 'prg', sourceLayer: 'zto', color: '#ffffff', tooltip: "<b>Zonizzazione</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}" },
-                { id: 'Particelle catastali', source: 'catasto', sourceLayer: 'particelle', color: '#ffffff', tooltip: "<b>Particelle catastali</b><br><b>Foglio:</b> {{Foglio}}<br><b>Particella:</b> {{Paricella}}" }
-            ];
-            layers.forEach(layer => {
-                map.addLayer({
-                    id: layer.id,
-                    type: 'fill',
-                    source: layer.source,
-                    'source-layer': layer.sourceLayer,
-                    paint: {
-                        'fill-color': layer.color,
-                        'fill-opacity': layer.id === 'Particelle catastali' ? 0.60 : 0,
-                        'fill-outline-color': layer.id === 'Particelle catastali' ? '#000' : 'transparent'
-                    }
-                });
-            });
+				// Aggiungi i layer vettoriali (poligoni)
+				const layers = [
+					{ id: 'cs', source: 'prg', sourceLayer: 'cs', color: '#ffffff', tooltip: "<b>Circoscrizione:</b> {{Circoscriz}}" },
+					{ id: 'Info Vin. areali', source: 'prg', sourceLayer: 'va', color: '#ffffff', tooltip: "<b>Tipo:</b> {{tipo}}<br><b>Descrizione:</b> {{descrizone}}<br><b>Note:</b> {{note}}" },
+					{ id: 'Info Vin. lineari', source: 'prg', sourceLayer: 'vl', color: '#ffffff', tooltip: "<b>Tipo:</b> {{TIPO}}<br><b>Descrizione:</b> {{DESCRIZION}}<br><b>Note:</b> {{note}}" },
+					{ id: 'Info Netto storico', source: 'prg', sourceLayer: 'ns', color: '#ffffff', tooltip: "<b>Netto storico</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}" },
+					{ id: 'Info ZTO', source: 'prg', sourceLayer: 'zto', color: '#ffffff', tooltip: "<b>Zonizzazione</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}" },
+					{ id: 'Particelle catastali', source: 'catasto', sourceLayer: 'particelle', color: '#ffffff', tooltip: "<b>Particelle catastali</b><br><b>Foglio:</b> {{Foglio}}<br><b>Particella:</b> {{Paricella}}" }
+				];
+				layers.forEach(layer => {
+					map.addLayer({
+						id: layer.id,
+						type: 'fill',
+						source: layer.source,
+						'source-layer': layer.sourceLayer,
+						paint: {
+							'fill-color': layer.color,
+							'fill-opacity': layer.id === 'Particelle catastali' ? 0.60 : 0,
+							'fill-outline-color': layer.id === 'Particelle catastali' ? '#000' : 'transparent'
+						}
+					});
+				});
 
-            // Aggiungi le etichette per le particelle catastali
-            map.addLayer({
-                id: 'particelle-labels',
-                type: 'symbol',
-                source: 'catasto',
-                'source-layer': 'particelle',
-                layout: {
-                    'text-field': [
-                        'concat',
-                        'F. ', ['get', 'Foglio'], ' - ',
-                        'P. ', ['get', 'Paricella']
-                    ],
-                    'text-size': [
-                        'interpolate',
-                        ['linear'],
-                        ['zoom'],
-                        15, 5,
-                        19, 12
-                    ],
-                    'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
-                    'text-allow-overlap': false,
-                    'text-ignore-placement': false,
-                    'text-anchor': 'center',
-                    'text-offset': [0, 0.5],
-                },
-                paint: {
-                    'text-color': '#000000',
-                    'text-halo-color': '#ffffff',
-                    'text-halo-width': 1
-                },
-                minzoom: 15
-            });
+				// Aggiungi le etichette per le particelle catastali
+				map.addLayer({
+					id: 'particelle-labels',
+					type: 'symbol',
+					source: 'catasto',
+					'source-layer': 'particelle',
+					layout: {
+						'text-field': [
+							'concat',
+							'F. ', ['get', 'Foglio'], ' - ',
+							'P. ', ['get', 'Paricella']
+						],
+						'text-size': [
+							'interpolate',
+							['linear'],
+							['zoom'],
+							15, 5,
+							19, 12
+						],
+						'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'],
+						'text-allow-overlap': false,
+						'text-ignore-placement': false,
+						'text-anchor': 'center',
+						'text-offset': [0, 0.5],
+						'visibility': 'none' // Inizialmente nascoste
+					},
+					paint: {
+						'text-color': '#000000',
+						'text-halo-color': '#ffffff',
+						'text-halo-width': 1
+					},
+					minzoom: 15
+				});
+
+				// Controlla se il layer "Particelle catastali" è attivo all'avvio
+				const particelleButton = document.getElementById('particelle');
+				if (particelleButton.classList.contains('active')) {
+					map.setLayoutProperty('particelle-labels', 'visibility', 'visible');
+				}
 
             // Aggiungi un layer temporaneo per evidenziare il poligono selezionato
             map.addLayer({
@@ -619,25 +626,32 @@
                 map.setFilter('highlighted-polygon', ['==', 'id', '']);
             });
 
-            // Gestione dei pulsanti
-            const buttons = {
-                vincoli_lin: 'vincoli_lin',
-                vincoli_ar: 'vincoli_ar',
-                particelle: 'Particelle catastali',
-                carta_tecnica: 'carta_tecnica',
-                satellite: 'satellite-layer'
-            };
+			// Gestione dei pulsanti
+			const buttons = {
+				vincoli_lin: 'vincoli_lin',
+				vincoli_ar: 'vincoli_ar',
+				particelle: 'Particelle catastali',
+				carta_tecnica: 'carta_tecnica',
+				satellite: 'satellite-layer'
+			};
 
-            Object.keys(buttons).forEach(id => {
-                const button = document.getElementById(id);
-                const layerId = buttons[id];
+			Object.keys(buttons).forEach(id => {
+				const button = document.getElementById(id);
+				const layerId = buttons[id];
 
-                button.addEventListener('click', () => {
-                    const isActive = button.classList.contains('active');
-                    button.classList.toggle('active', !isActive);
-                    map.setLayoutProperty(layerId, 'visibility', isActive ? 'none' : 'visible');
-                });
-            });
+				button.addEventListener('click', () => {
+					const isActive = button.classList.contains('active');
+					button.classList.toggle('active', !isActive);
+
+					// Imposta la visibilità del layer principale
+					map.setLayoutProperty(layerId, 'visibility', isActive ? 'none' : 'visible');
+
+					// Se il layer è "Particelle catastali", gestisci anche le etichette
+					if (layerId === 'Particelle catastali') {
+						map.setLayoutProperty('particelle-labels', 'visibility', isActive ? 'none' : 'visible');
+					}
+				});
+			});
 
             // Gestione del clic sulla voce principale "Vincoli"
             document.getElementById('vincoli-main').addEventListener('click', function() {
