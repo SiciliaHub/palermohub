@@ -1,7 +1,9 @@
         body { margin: 0; padding: 0; font-family: 'Open Sans'; font-size: 10px; overflow: hidden; }
         #map { position: absolute; top: 0; bottom: 0; width: 100%; }
         .maplibregl-ctrl.maplibregl-ctrl-attrib { background-color: hsl(0deg 0% 100% / 80%); margin: 0; padding: 0 5px; }
-        .layer-switcher {
+     
+
+	 .layer-switcher {
             position: absolute; top: 10px; right: 10px; background: #ffffffa8; padding: 10px; border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.4); z-index: 1000; font-family: 'Titillium Web', sans-serif; font-weight: 600;
         }
@@ -13,6 +15,46 @@
         }
         .layer-switcher button.active { background-color: #ff9100; color: white; box-shadow: 0 0 8px rgba(255, 145, 0, 0.6); }
         .layer-switcher button:hover { background-color: #516c50; color: white; }
+		
+		        .vincoli-container {
+            position: relative;
+        }
+
+        .vincoli-submenu {
+            display: none;
+            margin-left: 20px;
+        }
+
+        .vincoli-container.active .vincoli-submenu {
+            display: block;
+        }
+
+        .vincoli-container button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Simbolo ▼ per il pulsante principale "Vincoli" */
+        #vincoli-main::after {
+            content: '▼';
+            margin-left: 10px;
+            font-size: 12px;
+        }
+
+        /* Simbolo ▲ quando il sottomenu è aperto */
+        .vincoli-container.active #vincoli-main::after {
+            content: '▲';
+        }
+
+        /* Rimuovi simboli dai sottomenu */
+        .vincoli-submenu button::after {
+            content: none;
+        }
+
+
+		
+		
         .logo { position: absolute; bottom: 10px; right: 10px; z-index: 1000; }
         .logo img { width: 40px; height: auto; margin-bottom: 20px; }
         hr { border: 0; height: 0.5px; background: #ff0000 !important; background-image: linear-gradient(to right, #fff, #ff91002e, #fff) !important; margin-top: 5px; margin-bottom: 5px; }
