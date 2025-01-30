@@ -28,7 +28,55 @@ body {
 	background-color: #FFFFFF;
 	 overflow-y:hidden;
 		}
+/* Stile per il popup */
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
 
+#popup img {
+    max-width: 100%;
+    height: auto;
+}
+
+#popup a {
+  
+    text-align: justify;
+    margin-top: 0;
+    color: #ff0000;
+    text-decoration: none;
+	
+}
+
+#popup a:hover {
+    text-decoration: underline;
+}
+
+#popup-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000;
+}
+#popup p {
+    text-align: justify;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+	font-weight: 600;
+	padding:10px
+	
+}
 </style>
 
   <!-- script mappa remoto -->  
@@ -79,5 +127,33 @@ body {
 </script>
    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Popup -->
+<div id="popup">
+    <span id="popup-close">&times;</span>
+    <a href="https://palermohub.opendatasicilia.it/prg_part_catastali.html" target="_blank">
+        <img src="https://palermohub.opendatasicilia.it/pmtiles/social_card_05.jpg" title="Consulta la nuova versione della Variante Generale al PRG con particelle catastali" alt="Popup Image"> </a>
+	<p>Consulta la nuova versione della <a href="https://palermohub.opendatasicilia.it/prg_part_catastali.html" target="_blank" title="Consulta la nuova versione della Variante Generale al PRG con particelle catastali">Variante Generale al PRG con particelle catastali</a>.<br><br>La novità più significativa riguarda la gestione dei tooltip, è stato integrato un pratico modulo di ricerca che permette di individuare rapidamente fogli e particelle specifiche con possibilità di generare automaticamente un documento PDF che include una mappa dettagliata con la particella evidenziata.<br> Infine è stata implementata una finestra dinamica che visualizza una mappa satellitare, la quale si sincronizza automaticamente con la mappa principale. Questa funzionalità inquadra il centro dell'area visualizzata sul monitor e può essere attivata mediante un pulsante posizionato nell'angolo inferiore sinistro dell'interfaccia. </p>
+
+</div>
+<script>
+    // Mostra il popup al caricamento della pagina
+    document.addEventListener("DOMContentLoaded", function() {
+        var popup = document.getElementById("popup");
+        var closeButton = document.getElementById("popup-close");
+
+        // Mostra il popup
+        popup.style.display = "block";
+
+        // Chiudi il popup dopo 5 secondi
+        setTimeout(function() {
+            popup.style.display = "none";
+        }, 5000);
+
+        // Chiudi il popup quando l'utente clicca sul pulsante di chiusura
+        closeButton.addEventListener("click", function() {
+            popup.style.display = "none";
+        });
+    });
+</script>
 </body>
 </html>
