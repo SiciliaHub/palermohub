@@ -1,0 +1,146 @@
+name: Sync CSV from Google Sheet PalermoHub
+
+on:
+  schedule:
+    # Esegui alle 12:00 e 16:00 UTC (14:00 e 18:00 ora italiana in inverno)
+  #  - cron: '35 * * * *'  # Ogni ora al minuto 32
+     - cron: '00 12 * * *'  # 12:00 UTC 
+   #  - cron: '00 16 * * *'  # 16:00 UTC
+  workflow_dispatch: # Permette esecuzione manuale
+
+jobs:
+  sync-csv:
+    runs-on: ubuntu-latest
+    # Esegui solo sul branch PH-release-v2.0
+    if: github.ref == 'refs/heads/PH-release-v2.0'
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Download CSV from Google Sheet
+      run: |
+        # URL del tuo Google Sheet
+        SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc0EPi8VOFO7ePO_aWf-R8km8rd212WY-gxs0SephNTNi-fqnN6sZ8jo4QKbOaVbfua2g0y1_vdHIP/pub?gid=606956795&single=true&output=csv"
+        
+        echo "📄 Scaricamento CSV da Google Sheets..."
+        
+        # Scarica seguendo redirect con retry
+        for i in {1..3}; do
+          curl -L -s --fail \
+            -H "User-Agent: Mozilla/5.0 (compatible; GitHub-Actions)" \
+            -H "Accept: text/csv,application/csv,*/*" \
+            -H "Cache-Control: no-cache" \
+            "$SHEET_URL" -o new_palermo-hub.csv
+            
+          if [ $? -eq 0 ] && [ -s new_palermo-hub.csv ]; then
+            break
+          else
+            echo "⚠️ Tentativo $i fallito, riprovo..."
+            sleep 5
+          fi
+        done
+        
+        # Verifica finale
+        if [ ! -s new_palermo-hub.csv ]; then
+          echo "❌ Errore: File CSV vuoto dopo tutti i tentativi"
+          exit 1
+        fi
+        
+        # Controlla che non sia HTML
+        if grep -q -i "<html>\|<head>\|<body>" new_palermo-hub.csv; then
+          echo "❌ Errore: Ricevuto HTML invece di CSV"
+          echo "🔍 Contenuto ricevuto:"
+          head -10 new_palermo-hub.csv
+          exit 1
+        fi
+        
+        # Validazione CSV base
+        LINES=$(wc -l < new_palermo-hub.csv)
+        if [ "$LINES" -lt 1 ]; then
+          echo "❌ CSV vuoto o invalido"
+          exit 1
+        fi
+        
+        echo "✅ CSV scaricato con successo"
+        echo "📊 Righe totali: $LINES"
+        echo "🔍 Prima riga:"
+        head -1 new_palermo-hub.csv
+        
+    - name: Check for changes
+      id: changes
+      run: |
+        # Crea cartella dati-palermo-hub se non esiste
+        mkdir -p dati-palermo-hub
+        
+        if [ -f "dati-palermo-hub/palermo-hub.csv" ]; then
+          if cmp -s "dati-palermo-hub/palermo-hub.csv" "new_palermo-hub.csv"; then
+            echo "changes=false" >> $GITHUB_OUTPUT
+            echo "📊 Nessuna modifica rilevata"
+          else
+            echo "changes=true" >> $GITHUB_OUTPUT
+            echo "🔄 Modifiche rilevate"
+          fi
+        else
+          echo "changes=true" >> $GITHUB_OUTPUT
+          echo "🆕 Primo caricamento"
+        fi
+        
+    - name: Backup and update files
+      if: steps.changes.outputs.changes == 'true'
+      run: |
+        # Timestamp italiano (UTC+1 in inverno, UTC+2 in estate)
+        DATE=$(date -u +"%Y-%m-%d")
+        TIME=$(date -u +"%H-%M")
+        HOUR=$(date -u +"%H")
+        
+        # Crea directory per backup se non esiste
+        mkdir -p "backups/$DATE"
+        
+        # Se esiste il file principale, fai backup
+        if [ -f "dati-palermo-hub/palermo-hub.csv" ]; then
+          BACKUP_FILE="backups/$DATE/palermo-hub_pa_$TIME.csv"
+          if [ ! -f "$BACKUP_FILE" ]; then
+            cp "dati-palermo-hub/palermo-hub.csv" "$BACKUP_FILE"
+            echo "💾 Backup creato: $BACKUP_FILE"
+          fi
+        fi
+        
+        # Aggiorna il file principale nella cartella dati-palermo-hub
+        mv "new_palermo-hub.csv" "dati-palermo-hub/palermo-hub.csv"
+        echo "🔄 File principale aggiornato: dati-palermo-hub/palermo-hub.csv"
+        
+        # Determina se è l'esecuzione serale (22:30 UTC = ultima della giornata)
+        if [ "$HOUR" = "22" ]; then
+          echo "🧹 Esecuzione serale - pulizia giornaliera..."
+          # Mantieni solo l'ultimo file della giornata
+          LATEST_FILE=$(ls -t "backups/$DATE"/palermo-hub_*.csv 2>/dev/null | head -1)
+          if [ -n "$LATEST_FILE" ]; then
+            # Conta quanti file ci sono prima della pulizia
+            FILES_BEFORE=$(ls "backups/$DATE"/palermo-hub_*.csv 2>/dev/null | wc -l)
+            # Elimina tutti tranne l'ultimo
+            find "backups/$DATE" -name "palermo-hub_*.csv" -not -path "$LATEST_FILE" -delete
+            echo "✅ Pulizia completata. Mantenuto solo: $(basename "$LATEST_FILE")"
+            echo "🗑️ Rimossi $(($FILES_BEFORE - 1)) file precedenti"
+          fi
+        else
+          echo "📋 Esecuzione pomeridiana - backup mantenuto"
+        fi
+        
+    - name: Commit and push changes
+      if: steps.changes.outputs.changes == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        git add .
+        git commit -m "🔄 Aggiornamento palermo-hub.csv $(date -u '+%Y-%m-%d %H:%M UTC')"
+        git push
+        
+        echo "✅ Modifiche salvate su GitHub"
+        
+    - name: No changes
+      if: steps.changes.outputs.changes == 'false'
+      run: |
+        echo "ℹ️ Nessuna modifica da salvare"
+        rm -f new_palermo-hub.csv
