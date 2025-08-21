@@ -1,4 +1,4 @@
-name: Sync CSV from Google Sheet PalermoHub
+name: Sync CSV json from Google Sheet PalermoHub
 
 on:
   schedule:
