@@ -18,13 +18,14 @@ background-image:url(../images/ods_02.png); background-size: 30px 30px;backgroun
 /* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it  */
 
 
- #map { height: calc(100vh - 102px); top:0px; /*top:-86px;*/ /*menu seconda versione font: 11px "Open Sans", Helvetica Neue, fontawesome, Arial, Helvetica, sans-serif;background-color: #fff; */z-index: 1; }
+ #map { height: calc(100vh - 102px); top:0px; /*top:-86px;*/ /*menu seconda versione font: 11px "Open Sans", Helvetica Neue, fontawesome, Arial, Helvetica, sans-serif;background-color: #fff; */z-index: 100; }
  
+ /*
 #foia { position:fixed; bottom:80px; left:60px; z-index: 1020;}
 
 .beta{width: 70px; height: 70px; border-radius: 35px;  -moz-border-radius: 35px;  -webkit-border-radius: 35px; box-shadow: 0 1px 5px rgba(0,0,0,0.6); 
 	}
-#beta { position:fixed; bottom:80px; left:60px; z-index: 800;}
+#beta { position:fixed; bottom:80px; left:60px; z-index: 800;}*/
   	/*  spento su display 4" */
 	@media screen and (width: 320px) {  #beta {left:80px;} .beta{width: 42px; height: 42px;}}
 	@media screen and (width: 480px) {  #beta {left:85px; bottom:40px; }.beta{width: 42px; height: 42px;}}
@@ -126,7 +127,7 @@ a:active {color: #FF0000; text-decoration:none; } */
 .legenda1 {font-style: normal; font-weight:bold; font-size:12px; color: #4E4B4B; text-align: justify;}
 
  @media (min-width: 320px) and (max-width: 1024px) { .legenda1 {font-style: normal; font-weight:bold; font-size:9px; color: #4E4B4B; text-align: justify; }}
-
+/*
 .legenda1 a:link{color: #4E4B4B;	text-decoration:none;}
 .legenda1 a:visited {	color: #4E4B4B;}
 .legenda1 a:hover {color: #FFFFFF; text-decoration:underline; } 
@@ -135,7 +136,7 @@ a:active {color: #FF0000; text-decoration:none; } */
 .legenda2 a:link{color: #4E4B4B;	text-decoration:none;}
 .legenda2 a:visited {	color: #4E4B4B;}
 .legenda2 a:hover {color: #FF9900; text-decoration:underline; } 
-.legenda3 {font-style: normal; font-weight:normal; font-size:10px; color: #4E4B4B; text-align: justify; }
+.legenda3 {font-style: normal; font-weight:normal; font-size:10px; color: #4E4B4B; text-align: justify; }*/
 
 #leg3d {	position: fixed; width: 120;	height: 101px;	background-color: /*rgba(255,255,255,1);*/ rgba(255,255,255,0.80);	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	padding: 0;	top: 60px; right: 20px;	z-index: 1000;}
 
@@ -337,7 +338,7 @@ hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900;}
 
 .social {font-style: italic; color: #4E4B4B; font-size: 24px;}*/
 
- /* scrollbar*/
+ /* scrollbar
 
 ::-webkit-scrollbar {
     width: 7px;
@@ -355,7 +356,7 @@ background-color: rgba(0,0,0,0.2);
 border: 1px solid rgba(0,0,0,0.2);
 -webkit-border-radius: 6px;
 max-height:100px;
-}
+}*/
 
 /* posizione icone sidebar per google chrome*/
 ul {
