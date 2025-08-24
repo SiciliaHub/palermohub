@@ -141,9 +141,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <header>
      <div data-includeHTML="menu.html"></div>
       <!-- breadcrumbs --> 
-<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_prg.html#14/38.1185/13.3595" title="Strumenti Urbanistici - Variante Generale al PRG - PPE Centro Storico" target="_parent"><strong>Variante Generale al PRG - PPE Centro Storico</strong></a><div id="vn-click">
-	
-	<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre mappe P.R.G.&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info">
+<div id="vn-info">
 	
 	<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="qu_prg_62.html" title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984">Quadro unione PRG 1962</a><br>
 	
@@ -166,13 +164,7 @@ $(document).ready(function(){
 </header>
 	  
 	  
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script>
+
  <div id="sidebar" class="sidebar collapsed">
 <!-- Nav tabs -->
         <div class="sidebar-tabs">
@@ -909,5 +901,9 @@ var credctrl = L.controlCredits({
  <div id="beta"><img src="legend/beta.png" alt="beta version" width="80" border="0" title="beta version"></a></div>
    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>

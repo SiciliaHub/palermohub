@@ -144,13 +144,7 @@ $(document).ready(function(){
 });
 </script> 
 </header>
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script> 
+ 
 <div id="sidebar" class="sidebar collapsed">
         <!-- Nav tabs -->
         <div class="sidebar-tabs">
@@ -806,5 +800,9 @@ var layerControl = new L.Control.Layers(overlaysmap);
 <img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div> --> 
  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>

@@ -68,9 +68,7 @@
 <header>
   <div data-includeHTML="menu.html"></div>
       <!-- breadcrumbs --> 
-<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="3d_naso.html" title="3D Grading Map Naso - EMSR213 - 2017" target="_parent"><strong>11 Naso 3D</strong></a>
-<div id="vn-click">
-<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre mappe EMSR213&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div>
+
 <div id="vn-info">
 <i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="index_incendi_sicilia.html" title="Grading Map Sicilia - EMSR213 - 2017" target="_parent">Quadro Unione</a><br>
 <i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="caltagirone.html" title="Grading Map Caltagirone - EMSR213 - 2017" target="_parent">02 Caltagirone</a><br>
@@ -110,13 +108,7 @@ $(document).ready(function(){
 </script> 
 </div>   
 </header>
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script> 
+ 
 
 <div id="webgl"></div>
 
@@ -430,5 +422,9 @@ var sidebar = L.control.sidebar('sidebar').addTo(map);
 <div id="leg3d"><img src="https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/legend/legenda.png" width="120" title="Fire Grading" alt="Fire Grading"></a></div>
  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>  
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>

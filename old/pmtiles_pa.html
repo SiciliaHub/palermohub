@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="it">
+    <head>
+ <title>Palermo Hub - Palermo - Strumenti Urbanistici - Modello 3D - MapLibree</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Palermo Hub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
+
+        <meta name="keywords" content="Open Data, Sicilia, tram, metropolitana, metro, bus, parcheggi, Palermo">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="index,follow">
+        <meta name="creation_Date" content="22/07/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+ <!-- css menu  -->
+<!-- Bootstrap -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="lib/css/extra_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/tooltips.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+body {
+	background-color: #FFFFFF;
+	 overflow-y:hidden;
+		}
+/* Stile per il popup */
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+#popup img {
+    max-width: 100%;
+    height: auto;
+}
+
+#popup a {
+  
+    text-align: justify;
+    margin-top: 0;
+    color: #ff0000;
+    text-decoration: none;
+	
+}
+
+#popup a:hover {
+    text-decoration: underline;
+}
+
+#popup-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000;
+}
+#popup p {
+    text-align: justify;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+	font-weight: 600;
+	padding:10px
+	
+}
+</style>
+
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+
+ <!-- Open Graph Protocol -->
+   <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles_pa.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+  <meta property="og:description" content="Palermo - Strumenti Urbanistici - Modello 3D - MapLibree">
+  <meta property="og:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card.jpg">
+ <!-- Open Graph Protocol -->
+
+<!-- twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+  <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/pmtiles_pa.html">
+  <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+  <meta name="twitter:description" content="Palermo - Strumenti Urbanistici - Modello 3D - MapLibree">
+  <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card.jpg">
+<!-- twitter --> 
+
+
+</head>
+<body>
+<header>
+  <div data-includeHTML="menu.html"></div>
+</header>
+  <!-- <div data-includeHTML="database.html"></div> -->
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="pmtiles_pa.html" title="Palermo - Strumenti Urbanistici - Modello 3D - MapLibree"><strong>Palermo - Strumenti Urbanistici - Modello 3D - MapLibree</strong></a></div>
+ <iframe src="pmtiles/index_pntiles_pa.html#13/38.11144/13.36435/-17/60" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:91.8%;width:100%;position:absolute;top:75px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Popup -->
+<div id="popup">
+    <span id="popup-close">&times;</span>
+    <a href="https://palermohub.opendatasicilia.it/prg_part_catastali.html" target="_blank">
+        <img src="https://palermohub.opendatasicilia.it/pmtiles/social_card_05.jpg" title="Consulta la nuova versione della Variante Generale al PRG con particelle catastali" alt="Popup Image"> </a>
+	<p>Consulta la nuova versione della <a href="https://palermohub.opendatasicilia.it/prg_part_catastali.html" target="_blank" title="Consulta la nuova versione della Variante Generale al PRG con particelle catastali">Variante Generale al PRG con particelle catastali</a>.<br><br>La novità più significativa riguarda la gestione dei tooltip, è stato integrato un pratico modulo di ricerca che permette di individuare rapidamente fogli e particelle specifiche con possibilità di generare automaticamente un documento PDF che include una mappa dettagliata con la particella evidenziata.<br> Infine è stata implementata una finestra dinamica che visualizza una mappa satellitare, la quale si sincronizza automaticamente con la mappa principale. Questa funzionalità inquadra il centro dell'area visualizzata sul monitor e può essere attivata mediante un pulsante posizionato nell'angolo inferiore sinistro dell'interfaccia. </p>
+
+</div>
+<script>
+    // Mostra il popup al caricamento della pagina
+    document.addEventListener("DOMContentLoaded", function() {
+        var popup = document.getElementById("popup");
+        var closeButton = document.getElementById("popup-close");
+
+        // Mostra il popup
+        popup.style.display = "block";
+
+        // Chiudi il popup dopo 5 secondi
+        setTimeout(function() {
+            popup.style.display = "none";
+        }, 5000);
+
+        // Chiudi il popup quando l'utente clicca sul pulsante di chiusura
+        closeButton.addEventListener("click", function() {
+            popup.style.display = "none";
+        });
+    });
+</script>
+</body>
+</html>

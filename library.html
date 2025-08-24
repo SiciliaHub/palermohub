@@ -64,18 +64,16 @@ body {
 <body>
 <header>
   <div data-includeHTML="menu.html"></div>
-  <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="library.html" title="Nella mappa sono riportate le immagni dei progetti Teca digitale che il Sistema Bibliotecario Cittadino di Palermo dal 26 ottobre del 2017 ha iniziato a pubblicare su flickr. Sono le foto della Collezione fotografica di Enrico Di Benedetto, scattate a Palermo tra il XIX ed il XX secolo, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso."><strong>Biblioteche e bene comune digitale</strong></a></div>
+  
 </header>
  <iframe src="https://umap.openstreetmap.fr/it/map/biblioteche-e-bene-comune-digitale_301213#15/38.1182/13.3706" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:91.8%;width:100%;position:absolute;top:75px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
 
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script>
+
  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>

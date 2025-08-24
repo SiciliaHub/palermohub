@@ -1,39 +1,28 @@
 <!doctype html>
 <html lang="it">
-    <head>
- <title>PalermoHub - I principali strumenti usati per realizzare le mappe</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
-
-        <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
-        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
-        <meta http-equiv="content-language" content="IT">
-        <meta name="robots" content="index,follow">
-        <meta name="creation_Date" content="22/07/2017">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="shortcut icon" href="favicon.ico"/> 
-        <link rel="icon" href="favicon.png" type="image/png"/> 
-
- <!-- css menu  -->
-<!-- Bootstrap -->
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="lib/css/extra_ods.css" rel="stylesheet" type="text/css">
-<link href="lib/css/tooltips.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-body {
-	background-color: #FFFFFF;
-	 overflow-y:hidden;
-		}
-.gb { font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif  !important; font-style: normal !important; color: #4E4B4B; text-align: justify;   font-size: 11.2px !important;}
-</style>
-
-  <!-- script mappa remoto -->  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>PalermoHub - I principali strumenti usati per realizzare le mappe</title>
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <META HTTP-EQUIV="refresh" CONTENT="600">  
+    <meta name="description" content="PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l'unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
+    <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+    <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+    <meta http-equiv="content-language" content="IT">
+    <meta name="robots" content="index,follow">
+    <meta name="creation_Date" content="20/08/2025>
+	
+    <link rel="shortcut icon" href="favicon.ico"/> 
+	<link rel="icon" href="favicon.png" type="image/png"/> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" />
+     <!--	  -->
+	 <link rel="stylesheet" href="lib/css/page.css"> 
+	 
+	 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
 <script>
@@ -44,110 +33,278 @@ body {
   gtag('config', 'UA-87653723-4');
 </script>
 
- <!-- Open Graph Protocol -->
-<meta property="og:title" content="PalermoHub" />
-<meta property="og:description" content="PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo." />
-<meta property="og:url" content="https://siciliahub.github.io/palermohub/index.html" />
-<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
-<meta property="og:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/phhome.jpg" />
-<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
-<!-- Open Graph Protocol -->
-
-<!-- twitter -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="PalermoHub">
-<meta name="twitter:description" content="PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo.">
-<meta name="twitter:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/phhome.jpg">
-<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
-<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
-<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
-<!-- twitter --> 
-
+    <!-- Meta tags per social sharing pen Graph Protocol -->
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PalermoHub">
+    <meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/phhome.jpg">
+	<!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/">
+    <meta name="twitter:title" content="PalermoHub">
+    <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/phhome.jpg">
 
 </head>
 <body>
-<header>
-  <div data-includeHTML="menu.html"></div>
-    <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="strumenti.html" title="I principali strumenti usati per realizzare le mappe"><strong>I principali strumenti usati per realizzare le mappe</strong></a></div>
-       <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
-  <tbody>
-    <tr>
-      <td>
-        
-      </td></tr>
-    <tr>
-      <td>         <!-- <div data-includeHTML="database.html"></div> -->
- <iframe src="strumenti_base.html" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:65px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe></td>
-    </tr>
-    <tr>
-      <td></td>
-    </tr>
-    <tr>
-      <td align="center" valign="middle"></td>
-    </tr>
-  </tbody>
-</table>
-</header>
-<footer>
-<!-- tabella footer desktop/mobile -->
-<table width="100%" border="0" cellpadding="1" cellspacing="1" class="footermobile">
-    <tr>
-      <td>&nbsp;</td>
-      <td colspan="2" align="left" valign="middle"><span class="gb"><strong>PalermoHub&nbsp;</strong> è un'iniziativa di <a href="https://opendatasicilia.it" title="opendatasicilia.it" target="_parent"><strong>&nbsp;opendatasicilia.it</strong></a></span></td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td width="1%">&nbsp;</td>
-      <td width="49%" align="right" valign="middle"><table width="10%" border="0" align="left" cellpadding="0" cellspacing="0" class="ods_social" >
-        <tbody>
-          <tr>
-            <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a></td>
-            <td>&nbsp;</td>
-            <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></td>
-            <td>&nbsp;</td>
-            <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a></td>
-            <td>&nbsp;</td>
-            <td><a href="https://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-globe fa-stack-1x fa-inverse"></i></span></a></td>
-            <td>&nbsp;</td>
-            <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i></span></a></td>
-            <td>&nbsp;</td>
-            <td><span class="lorem0"><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="license noopener"><img class="alignnone" style="border-width: 0;" title="Tutto il materiale rielaborato per PalermoHub di OpenDataSicilia.it è distribuito con licenza Creative Commons Attribuzione - Condividi allo stesso modo 4.0 Internazionale (CC BY-SA 4.0) tranne diversa indicazione." src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" alt="Licenza Creative Commons" /></a></span></td>
-          </tr>
-        </tbody>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-        </tr>
-      </table></td>
-      <td width="49%" align="right" valign="bottom">&nbsp;</td>
-      <td width="1%">&nbsp;</td>
-    </tr>
+    <!-- Breadcrumbs Navigation -->
+    <nav class="breadcrumbs-nav">
+        <div class="breadcrumbs-container">
+            <div class="breadcrumb-item home">
+                <span class="breadcrumb-icon"><i class="fas fa-home"></i></span>
+                <span class="breadcrumb-text">Home</span>
+            </div>
+            <span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-text">Documenti</span>
+            </div>
+        </div>
+    </nav>
 
-    </tr>
-  </table>
-  </footer>
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="content-container">
+            <!-- Header del contenuto
+            <header class="content-header">
+                <h1 class="content-title">Titolo del Documento</h1>
+                <p class="content-subtitle">Sottotitolo descrittivo del contenuto</p>
+                <div class="content-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>23 Agosto 2025</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-user"></i>
+                        <span>Autore</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-clock"></i>
+                        <span>10 min di lettura</span>
+                    </div>
+                </div>
+            </header> -->
+
+            <!-- Capitolo 1 -->
+            <section class="chapter">
+                <h2 class="chapter-title">Open Data trasformati in mappe per tutti</h2>
+                
+                <div class="section">           
+                    <div class="subsection">
+                        <p class="content-text">
+                            Cosa succede quando passione civica, competenze tecniche e open data si incontrano? <br>Nasce <b>PalermoHub</b>, un progetto straordinario di <b>Open Data Sicilia</b> che trasforma dati pubblici in mappe interattive accessibili a tutti.
+                        </p>
+                       <h2 class="chapter-title">Il Progetto</h2>  
+						<p class="content-text">
+                            PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l'unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.<br>
+							Il progetto nasce dall'idea di centralizzare in un unico hub tutte le elaborazioni cartografiche più richieste: L'Atlante delle Carte Tecniche storiche di Palermo, la Variante Generale vigente di Palermo, la Cartografia e Ortofoto di base e Piano Stralcio di Bacino per l'Assetto Idrogeologico (P.A.I.) Regione Sicilia sono tra le risorse più popolari.
+                        </p>
+						  <h3 class="section-title">Gli Strumenti Utilizzati</h3>  
+                       <p class="content-text">
+                            PalermoHub utilizza una combinazione di strumenti professionali e tecnologie web moderne:
+                        </p>
+					     <h3 class="section-title">Software GIS Desktop</h3>  
+                        <p class="content-text">
+                           <b>QGIS:</b> Le mappe rialaborate con gli opendata sono realizzate con passione e sacrifici, fatte esclusivamente per IMPARARE ad usare strumenti Gis e WebGis. QGIS rappresenta il cuore dell'elaborazione dati, permettendo analisi complesse e la creazione di cartografia tematica
+                        </p>						
+                    <h3 class="section-title">Tecnologie Web</h3>  
+                        <p class="content-text">
+                            <b>Leaflet:</b> Libreria JavaScript per mappe web interattive, utilizzata per rendere accessibili online le elaborazioni cartografiche<br>
+<b>Tecnologie 3D:</b> Il progetto include anche Palermo 3D Maps © WRLD and partners, offrendo visualizzazioni tridimensionali del territorio
+                        </p>
+                         <h3 class="section-title">Filosofia Open Source</h3>    
+                        <p class="content-text">
+                            Tutto il materiale da me rielaborato e pubblicato su github può essere clonato ed adattato liberamente ai propri scopi, con licenza: CC BY-SA 4.0, dimostrando l'impegno verso la condivisione della conoscenza.
+                        </p>
+						 <h3 class="section-title">AI - Intelligenza Artificiale</h3>    
+                        <p class="content-text">
+                            Tecnologia ibrida, sviluppata attraverso una collaborazione human-AI, dove Claude AI (Anthropic) e Deepseek hanno supportato lo sviluppo dell'architettura modulare, l'ottimizzazione del codice e l'implementazione di funzionalità avanzate di visualizzazione.
+                        </p>
+						
+                      <h3 class="section-title">Impatto e Valore</h3> 
+                        <p class="content-text">
+                            PalermoHub rappresenta un esempio virtuoso di come i civic hacker possano trasformare dati pubblici spesso difficili da interpretare in strumenti di conoscenza del territorio accessibili a cittadini, amministratori e ricercatori. Un laboratorio di democrazia digitale che dimostra le potenzialità degli open data quando vengono valorizzati dalla comunità.
+                        </p>
+                    </div>
+       <span class="highlight">Il messaggio è chiaro: i dati pubblici diventano davvero pubblici solo quando sono comprensibili e utilizzabili da tutti.</span> 
+
+                </div>
+            </section>
+			<hr class="content-separator">
+     
+            <!-- Capitolo 3 -->
+            <section class="chapter">
+                <h2 class="chapter-title">I principali strumenti usati per realizzare le mappe</h2>
+                
+                <div class="section">
+               <div class="subsection">
+                        <h4 class="subsection-title">Elenco software open source </h4>
+                    
+                        <ol class="content-list numbered-list">
+                       <li>
+    <p><a href="https://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</p>
+  </li>
+  <li>
+    <p><a href="https://code.visualstudio.com/" title="Visual Studio Code" target="_blank">Visual Studio Code,</a> è un editor di codice sorgente sviluppato da Microsoft per Windows, Linux e macOS</p>
+  </li>
+  <li>
+    <p><a href="https://www.adobe.com/it/products/dreamweaver/free-trial-download.html" title="Adobe Dreamweaver" target="_blank">Adobe Dreamweaver,</a> crea e gestisci siti web che garantiscono una resa ottimale</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web,</a> plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</p>
+  </li>
+  <li>
+    <p><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a> plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/minorua/Qgis2threejs" title="Qgis2threejs" target="_blank">Qgis2threejs, </a>il plugin Qgis2threejs esporta i dati del terreno, mappa l'immagine della tela e i dati vettoriali nel browser web;</p>
+  </li>
+  <li>
+    <p><a href="https://mapwarper.net/" title="Map Warper" target="_blank">Map Warper</a>, è uno strumento open source per georeferenziare immagini, nato grazie al <a href="https://github.com/timwaters/mapwarper" title="timwaters/mapwarper" target="_blank">contributo</a> del progetto <a href="https://github.com/nypl-spacetime/" title="progetto spacetime" target="_blank">spacetime</a> della <a href="https://github.com/NYPL" title="Biblioteca Comunale di New York" target="_blank">Biblioteca Comunale di New York</a>, sviluppato, ospitato e mantenuto da <a href="https://twitter.com/tim_waters" title="Tim Waters" target="_blank">Tim Waters</a>;</p>
+  </li>
+  <li>
+    <p><a href="https://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/frogcat/leaflet-tileoverlay-mask" title="Leaflet-tileoverlay-mask" target="_blank">Leaflet-tileoverlay-mask</a>, per la sovrapposizione delle tile con effetto svg maschera, una sorta di effetto &ldquo;occhio di bue&ldquo; che ci permette di vedere come era la città al tempo in un particolare punto;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar v2" target="_blank">Sidebar v2</a>, per creare questa sidebar a scomparsa;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet MousePosition" target="_blank">Leaflet MousePosition</a>, è un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet graphicscale" target="_blank">Leaflet graphicscale</a>, è un semplice barra di scala con effetto animato al cambio dello zoom;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet PolylineMeasure" target="_blank">Leaflet PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet zoomhome" target="_blank">Leaflet zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/GreenInfo-Network/Leaflet-Control-Credits" title="Leaflet pattern" target="_blank">Leaflet Credits</a>, plugin per leaflet per la visualizzazione dei crediti nell'angolo;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</p>
+  </li>
+  <li>
+    <p><a href="https://docs.eegeo.com/wrld.js/latest/docs/api/" title="3D Maps Anywhere with wrld.js" target="_blank">WRLD</a> per creare l'interfaccia di 3D web mapping;</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/mrmrs/btns" title="btns" target="_blank">Btns</a>, è un piccolo modulo CSS che permette di inserire pulsanti reattivi.</p>
+  </li>
+  <li>
+    <p><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</p>
+  </li>
+  <li>
+    <p><a href="https://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</p>
+  </li>
+  <li>
+    <p><a href="https://www.jqueryscript.net/menu/jQuery-Plugin-For-Multilevel-Bootstrap-Dropdown-Navigation.html" title="jQuery Plugin For Multilevel Bootstrap Dropdown Navigation" target="_blank">Menu jQuery</a>, jQuery Plugin For Multilevel Bootstrap Dropdown Navigation;</p>
+  </li>
+  <li>
+    <p><a href="https://www.jqueryscript.net/menu/Responsive-Multi-level-Off-Screen-Navigation-Plugin-For-jQuery-cbFlyout.html" title="Responsive Multi-level Off Screen Navigation Plugin For jQuery - cbFlyout" target="_blank">Menu jQuery</a>, Responsive Multi-level Off Screen Navigation Plugin For jQuery - cbFlyout.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/stevenwanderski/bxslider-4" title="The fully-loaded, responsive jQuery content slider" target="_blank">Bxslider-4</a>, The fully-loaded, responsive jQuery content slider.</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/wimagguc/jquery-eu-cookie-law-popup" title="Responsive jQuery EU Cookie Law popups" target="_blank">jQuery</a>, EU Cookie Law popups</p>
+  </li>
+  <li>
+    <p><a href="https://github.com/mburakerman/prognroll" title="Plugin jQuery piccolo e leggero che crea una barra di avanzamento della pagina sulla pagina" target="_blank">Prognroll</a>, Un plugin jQuery piccolo e leggero che crea una barra di avanzamento della pagina sulla pagina.</p>
+  </li>
+  <li>
+    <p><a href="https://www.tableau.com/" title="Tableau" target="_blank">Tableau</a>, software leader per la business intelligence: analisi veloci, facili, con qualsiasi sorgente di dati, su qualsiasi dispositivo.</p>
+  </li>
+  <li>
+    <p><a href="https://www.google.com/intl/it/maps/about/mymaps/" title="Crea e condividi mappe personalizzate con Google My Maps" target="_blank">My Google Maps</a>, crea e condividi mappe personalizzate con Google My Maps</p>
+  </li>
+  <li>
+    <p><a href="https://umap.openstreetmap.fr/it/" title="uMap permette di creare mappe, che fanno uso di OpenStreetMap come sfondo, da inserire nel proprio sito in un minuto." target="_blank">uMap</a>, permette di creare mappe, che fanno uso di OpenStreetMap come sfondo, da inserire nel proprio sito in un minuto</p>
+  </li>
+  <li>
+    <p><a href="https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/earthexplorer.usgs.gov" title="Modelli digitale del terreno - DEM" target="_blank">USGS - EarthExplorer</a>, Modello digitale del terreno</p>
+  </li>
+  <li>
+    <p><a href="https://www.gimp.org/" title="GIMP - GNU Image Manipulation Program" target="_blank">Gimp</a>, GNU Image Manipulation Program;</p>
+  </li>
+  <li>
+    <p><a href="https://inkscape.org/it/" title="Inkscape, disegna in libertà" target="_blank">Inkscape</a>, disegna in libertà;</p>
+  </li>
+  <li>
+    <p><a href="https://it.libreoffice.org/" title="LibreOffice 6.2" target="_blank">LibreOffice 6.2</a>, Software libero di produttività personale multipiattaforma prodotto da The Document Foundation, nato dal fork di OpenOffice.org;</p>
+  </li>
+  <li>
+    <p>Icone per le tue mappe <a href="https://mapicons.mapsmarker.com/category/markers/stores/" title="The Map Icons Collection " target="_blank"><img src="https://mapicons.mapsmarker.com/wp-content/uploads/2011/03/miclogo-88x31.gif" title="The Map Icons Collection " alt="The Map Icons Collection " width="88" height="31" border="0"></a></p>
+  </li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Torna in cima">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Script per il pulsante "torna in cima"
+        const backToTopBtn = document.getElementById('back-to-top');
+        const mainContent = document.querySelector('.main-content');
+
+        mainContent.addEventListener('scroll', function() {
+            if (mainContent.scrollTop > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
         });
-    });
-</script>
- <!-- Go to www.addthis.com/dashboard to customize your tools --> 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+
+        backToTopBtn.addEventListener('click', function() {
+            mainContent.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+	
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
+<script>
+// Aggiungi questo nelle pagine mappa
+document.addEventListener('DOMContentLoaded', function() {
+    // Leggi parametri URL e crea breadcrumbs
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('mapTitle')) {
+        // Il codice creerà automaticamente i breadcrumbs
+        initMapPageBreadcrumbs();
+    }
+});	
 </body>
 </html>

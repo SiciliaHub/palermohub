@@ -129,7 +129,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <header>
      <div data-includeHTML="menu.html"></div>
       <!-- breadcrumbs --> 
-<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_pai.html#14/38.1185/13.3595" title="P.A.I. - Mappa delle Pericolosità e del Rischio Geomorfologico" target="_parent"><strong>Pericolosità e Rischio Geomorfologico</strong></a><div id="vn-click"><i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre mappe P.A.I.&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<strong>Pericolosità e Rischio Geomorfologico</strong><br>
+<div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<strong>Pericolosità e Rischio Geomorfologico</strong><br>
 <i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="dissesti.html#14/38.1185/13.3595" title="P.A.I. - Mappa dei Dissesti" target="_parent">Dissesti</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="idraulica.html#14/38.1185/13.3595" title="P.A.I. - Mappa delle Pericolosità e Rischio Idraulico per fenomeni di esondazione">Pericolosità e Rischio Idraulico</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="pericolosità_idrogeologica.html#14/38.1185/13.3595" title="P.A.I. - Mappa della Pericolosità idrogeologica">Pericolosità idrogeologica</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="rischio_idrogeologico.html#14/38.1185/13.3595" title="P.A.I. - Mappa del Rischio idrogeologico">Rischio idrogeologico</a> </div>
 <script>
 $(document).ready(function(){
@@ -141,13 +141,7 @@ $(document).ready(function(){
 </div> 
      
 </header>
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script> 
+ 
 <!-- Sidebar SX -->
 <div id="sidebar" class="sidebar collapsed">
 <!-- Nav tabs -->
@@ -1083,5 +1077,9 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/
    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
   
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>  

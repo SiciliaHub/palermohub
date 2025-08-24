@@ -125,15 +125,9 @@
  <!-- header -->    
 <header>
      <div data-includeHTML="menu.html"></div>
-     <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="comuniafuoco.html" title="#FoiaeFiamme - Richiesta di accesso civico - La mappa permette a chiunque di compilare, in modo semplice e immediato, una richiesta di accesso civico con la quale chiedere ad un Comune il catasto delle terre bruciate"><strong>#FoiaeFiamme - Richiesta di accesso civico</strong></a></div>
+     
 </header>
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script>    
+    
 <div id="sidebar" class="sidebar collapsed">
 <!-- Nav tabs -->
         <div class="sidebar-tabs">
@@ -578,5 +572,9 @@ function pop_comunieventilink0(feature, layer) {
 <img src="legend/italiaafuoco_clip.png" width="40" title="italiaafuoco.info" alt="italiaafuoco.info"></a></div>  
    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>  

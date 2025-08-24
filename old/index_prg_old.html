@@ -1,0 +1,913 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<meta name="reply-to" content="gbvitrano@gmail.com">
+<meta name="author" content="Giovan Battista Vitrano per Open Data Sicilia">
+<link rel="shortcut icon" href="favicon.ico"/> 
+<link rel="icon" href="favicon.png" type="image/png"/>  
+<meta http-equiv="X-UA-Compatible" content="IE=11; IE=10; IE=9; IE=8; IE=7; IE=EDGE"/>
+<meta http-equiv="X-UA-Compatible" content="chrome=1"/>
+<meta name="robots" content="index,follow" />
+<meta name="creation_Date" content="30/03/2017">
+<meta name="description" content="Palermo hub - Strumenti urbanistici di attuazione - Vigenti al 2016 - Rielabolazione Opendata" />
+  <title>Palermo - Strumenti Urbanistici Generali</title>
+<!-- Open Graph Protocol -->
+<meta property="og:url" content="https://siciliahub.github.io/palermohub/index_prg.html#14/38.1185/13.3595" />
+<meta property="og:title" content="Palermo hub - Variante Generale al P.R.G. e PPE centro strorico" />
+<meta property="og:description" content="Palermo hub - Strumenti urbanistici di attuazione - Vigenti al 2016" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<meta property="og:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/prg.jpg" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="coseerobe.gbvitrano.it" />
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:title" content="Palermo hub - Variante Generale al P.R.G. e PPE centro strorico">
+<meta name="twitter:description" content="Palermo hub - Strumenti urbanistici di attuazione - Vigenti al 2016">
+<meta name="twitter:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/prg.jpg">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+
+ <!-- css mappa -->
+<link href="lib/css/base_ods_prg.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Locate.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="lib/css/qgis2web.css">
+<link href="lib/css/leaflet-search.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.css" rel="stylesheet" type="text/css">
+<link href="lib/css/MarkerCluster.Default.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-measure.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.Control.Basemaps.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
+<link href="lib/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="lib/css/gmaps-sidebar.css" rel="stylesheet" type="text/css">
+
+<link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
+<link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
+
+ <!-- creditis  -->
+<link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
+
+
+<!-- css remoto -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
+
+<style type="text/css">
+a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
+</style>       
+
+<!-- script mappa -->
+<script src="lib/js/qgi2web/qgis2web_expressions.js"></script>
+<script src="lib/js/qgi2web/leaflet.js"></script>
+<script src="lib/js/qgi2web/L.Control.Locate.min.js"></script>
+<script src="lib/js/qgi2web/multi-style-layer.js"></script>
+<script src="lib/js/qgi2web/leaflet-heat.js"></script>
+<script src="lib/js/qgi2web/leaflet-svg-shape-markers.min.js"></script>
+<script src="lib/js/qgi2web/leaflet.rotatedMarker.js"></script>
+<script src="lib/js/qgi2web/OSMBuildings-Leaflet.js"></script>
+<script src="lib/js/qgi2web/leaflet-hash.js"></script>
+<script src="lib/js/qgi2web/leaflet-tilelayer-wmts.js"></script>
+<script src="lib/js/qgi2web/Autolinker.min.js"></script>
+<script src="lib/js/qgi2web/leaflet-measure.js"></script>
+<script src="lib/js/qgi2web/leaflet.markercluster.js"></script>
+<script src="lib/js/qgi2web/leaflet-search.js"></script>  
+<script src="lib/js/sidebar/leaflet-sidebar.js"></script>
+<script src="lib/js/qgi2web/leaflet.pattern.js"></script>
+<script src="lib/js/qgi2web/rbush.min.js"></script>
+<script src="lib/js/qgi2web/labelgun.min.js"></script>
+<script src="lib/js/qgi2web/labels.js"></script>
+
+  <!-- script funzioni --> 
+<script src="lib/js/mouseposition/LControlMousePosition.js"></script>
+<script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<script src="lib/js/print/leaflet.easyPrint.js"></script>
+<script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
+<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
+
+  <!-- script automatico mobile/desktop --> 
+<script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
+<script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min.js"><\/script>'); } </script> 
+ 
+  <!-- script mappa remoto -->  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+ 
+<!-- script menu includes -->
+<script type="text/javascript" src="script.js"></script>
+
+<!-- script dati mappa -->
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/poligonoisola0.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/osm_confine_palermo_epsg_3004_0.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/5k_1.js"></script>
+<!-- script prg trasparenti -->
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/Zonizzazione_0.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/NettoStorico_1.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/CentroStorico_2.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/Vincolilineari_0.js"></script>
+<script src="https://siciliahub.github.io/mappe/palermo_hub/data/Vincoliareali_0.js"></script>
+
+</head>
+
+  <body>
+	  
+	  	 <!-- header -->    
+<header>
+     <div data-includeHTML="menu.html"></div>
+      <!-- breadcrumbs --> 
+<div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="index_prg.html#14/38.1185/13.3595" title="Strumenti Urbanistici - Variante Generale al PRG - PPE Centro Storico" target="_parent"><strong>Variante Generale al PRG - PPE Centro Storico</strong></a><div id="vn-click">
+	
+	<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;Altre mappe P.R.G.&nbsp;<i class="fa fa-chevron-down" aria-hidden="true"></i></div><div id="vn-info">
+	
+	<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="qu_prg_62.html" title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984">Quadro unione PRG 1962</a><br>
+	
+	<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<strong>Variante Generale al PRG - PPE Centro Storico</strong><br>
+	
+<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="cambia-menti2.html" title="Cambia-menti…#Palermo…Variante Generale PRG 2004 vs PRG 1962" target="_parent">Cambia-menti…#Palermo…Variante Generale PRG 2004 vs PRG 1962</a> <br>
+	
+	<i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="cambia-menti.html" title="Cambia-menti…#Palermo…Variante Generale PRG 2004 vs Schema di massima del PRG 2025">Cambia-menti…#Palermo…Variante Generale PRG 2004 vs Schema di massima del PRG 2025</a> <br>
+	
+ </div>
+<script>
+$(document).ready(function(){
+  $("#vn-click").click(function(){
+    $("#vn-info").slideToggle(250);
+  });
+});
+</script> 
+</div> 
+     
+</header>
+	  
+	  
+<script>
+    $(document).ready(function () {
+        $("div[data-includeHTML]").each(function () {                
+            $(this).load($(this).attr("data-includeHTML"));
+        });
+    });
+</script>
+ <div id="sidebar" class="sidebar collapsed">
+<!-- Nav tabs -->
+        <div class="sidebar-tabs">
+            <ul role="tablist">
+      <li><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
+    <li> <a href="#prg" title="Variante Generale al PRG di Palermo" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">V</strong></a></li>
+   <li> <a href="#ppe" title="Piano Particolareggiato Esecutivo del Centro Stroico si Palermo" role="tab"><strong style="font-size: 20px; font-family: 'fontawesome';">P</strong></a></li>
+   <li> <a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it" role="tab"><i class="fa fa-envelope"></i></a></li>
+                 <li><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
+                 <li><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+            </ul>
+            <ul role="tablist">
+            <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
+       <li> <a href="https://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+                <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
+            </ul>
+        </div>
+        
+ <!-- Tab intro -->
+<div class="sidebar-content">
+<div class="sidebar-pane" id="home">
+<h2 class="sidebar-header">Palermo Hub - Strumenti urbanistici<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="legenda"> <strong>Strumenti urbanistici di attuazione.</strong>
+<p class="lorem2">Variente Generle l P.R.G. - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br><br>
+  <a href="https://coseerobe.gbvitrano.it/verso-gli-opendata.html" title="tavole in fotmato pdf dei piani" target="_blank">Tutte tavole in fotmato pdf dei piani</a></p>
+<h1 class="lorem">Legenda - coming soon...</h1>
+ <!-- Inizio Legenda Piani -->
+<span class="legenda1">Zonizzazione</span><br /><table cellpadding="2" cellspacing="2" class="lorem1"><tr><td valign="top" style="text-align: center;"><img src="legend_prg/AreeedimmobilisogettiatutelaambientaleCittaStorica5.png" /></td><td>&nbsp;&nbsp;Aree ed immobili sogetti a tutela ambientale - Netto Storico</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione3_A10.png" /></td><td>&nbsp;&nbsp;A1 - Manufatti storici e relative pertinenze e<br>fondi di rilevante pregio storico ed ambientale</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione3_A21.png" /></td><td>&nbsp;&nbsp;A2 - Tessuti urbani storici</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_B0a3.png" /></td><td>&nbsp;&nbsp;B0a - Aree urbane che ripropongono e proseguono<br>l&rsquo;impianto urbanistico delle zone A2 facenti parte del<br>centro urbano di Palermo</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione3_B0b4.png" /></td><td>&nbsp;&nbsp;B0b - Aree urbane che ripropongono e proseguono<br>l&rsquo;impianto urbanistico delle zone A2 facenti parte<br>delle borgate</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione3_B15.png" /></td><td>&nbsp;&nbsp;B1 - Aree urbane caratterizzate da edilizia residenziale a<br>bassa densit&agrave; con tipologia a casa unifamiliare</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_B26.png" /></td><td>&nbsp;&nbsp;B2 - Aree urbane caratterizzate da edilizia residenziale<br>con densit&agrave;  pari o inferiore a 4mc/mq.</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione3_B37.png" /></td><td>&nbsp;&nbsp;B3 - Aree urbane caratterizzate da edilizia residenziale<br>con densit&agrave;  superiore a 4mc/mq.</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione3_B4A8.png" /></td><td>&nbsp;&nbsp;B4A - Parte di territorio urbanizzate sulla base di piani<br>di edilizia economica e popolare o sovvenzionata realizzate<br>fino agli anni 50.</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_B4b9.png" /></td><td>&nbsp;&nbsp;B4B - Parte di territorio urbanizzate sulla base di piani<br>di edilizia economica e popolare o sovvenzionata realizzate<br>dopo gli anni 50.</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_B510.png" /></td><td>&nbsp;&nbsp;B5 - Parti di territoiro agricolo che hanno subito<br>massiccia edificazione</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_Ca12.png" /></td><td>&nbsp;&nbsp;Ca - Aree di nuova edificazione</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_Cb13.png" /></td><td>&nbsp;&nbsp;Cb - Aree di nuova edificazione che discendono<br>dal declassamento delle B1</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_D115.png" /></td><td>&nbsp;&nbsp;D1 - Aree di indiamenti produttivi esistenti</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_D216.png" /></td><td>&nbsp;&nbsp;D2 - Nuove aree per insediamenti Produttivi<br>da assogettare a PIP o a PE</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_E118.png" /></td><td>&nbsp;&nbsp;E1 - Parti di territorio prevalentemente pianeggianti<br>caratterizzati da colture agricole</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_E219.png" /></td><td>&nbsp;&nbsp;E2 - Parti di territorio prevalentemente collinari<br>caratterizzati da vegetazione di tipo spontaneo</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_F2F1239.png" /></td><td>&nbsp;&nbsp;Zone F - Spazi ed attrezzature di interesse generale</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_IC1F1454.png" /></td><td>&nbsp;&nbsp;Zone IC - Attrezzature di interesse comune</td></tr><tr><td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_Parcheggi79.png" /></td><td>&nbsp;&nbsp;Parcheggi</td></tr><tr>  <td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_S180.png" /></td><td>&nbsp;&nbsp;Istruzione</td></tr><tr>  <td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_V288.png" /></td><td>&nbsp;&nbsp;Verde pubblico</td></tr><tr>  <td valign="top" style="text-align: center;"><img src="legend_prg/Zonizzazione0_VerdeStorico98.png" /></td><td>&nbsp;&nbsp;Verde Storico</td></table><hr><img src="legend_prg/AreeedimmobilisogettiatutelaambientaleCittaStorica5.png" /> <span class="legenda1">Citta Storica</span><hr><span class="legenda1">Vincoli areali</span><table cellpadding="2" cellspacing="2" class="lorem1"><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areaaeroportuale0.png" /></td><td>&nbsp;&nbsp;Area aeroportuale</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_AreaDemanioMontepellegrino1.png" /></td><td>&nbsp;&nbsp;Area Demanio Montepellegrino</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areeboscateartificiali2.png" /></td><td>&nbsp;&nbsp;Aree boscate artificiali</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areeboscatenaturali3.png" /></td><td>&nbsp;&nbsp;Aree boscate naturali</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areecaveattivedicoltivazione4.png" /></td><td>&nbsp;&nbsp;Aree cave attive di coltivazione</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_AreeCaveStoriche5.png" /></td><td>&nbsp;&nbsp;Aree Cave Storiche</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areediinteressearcheologico6.png" /></td><td>&nbsp;&nbsp;Aree di interesse archeologico</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areefaldeacquifere7.png" /></td><td>&nbsp;&nbsp;Aree falde acquifere</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areeinondazioni8.png" /></td><td>&nbsp;&nbsp;Aree inondazioni</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areeinterdette9.png" /></td><td>&nbsp;&nbsp;Aree interdette</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_AreeQanat10.png" /></td><td>&nbsp;&nbsp;Aree Qanat</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_AreeRischioIdraulicoefrana11.png" /></td><td>&nbsp;&nbsp;Aree Rischio Idraulico e frana</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Areeristagniacqua12.png" /></td><td>&nbsp;&nbsp;Aree ristagni acqua</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Attivitestrattiva13.png" /></td><td>&nbsp;&nbsp;Attivit&agrave; estrattiva</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Fascedirispettofaglieesovrascorrimenti14.png" /></td><td>&nbsp;&nbsp;Fasce di rispetto faglie e sovrascorrimenti</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Fasciabattigia15.png" /></td><td>&nbsp;&nbsp;Fascia battigia</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Fasciadirispettoareeboscateartificiali16.png" /></td><td>&nbsp;&nbsp;Fascia di rispetto aree boscate artificiali</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_FasciadirispettoAreeboscatenaturali17.png" /></td><td>&nbsp;&nbsp;Fascia di rispetto Aree boscate naturali</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Fasciadirispettocimiterialeedepuratori18.png" /></td><td>&nbsp;&nbsp;Fascia di rispetto cimiteriale e depuratori</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Fasciadirispettocorsidacqua19.png" /></td><td>&nbsp;&nbsp;Fascia di rispetto corsi d\'acqua</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Fasciadirispettoferrovia20.png" /></td><td>&nbsp;&nbsp;Fascia di rispetto ferrovia</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_ImmobiliVincoliLegge108939Cimiteri21.png" /></td><td>&nbsp;&nbsp;Immobili Vincoli Legge 1089/39 - Cimiteri</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_ImmobiliVincoliLegge108939Quanat22.png" /></td><td>&nbsp;&nbsp;Immobili Vincoli Legge 1089/39 - Quanat</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_ImmobiliVincoliLegge108939Ville23.png" /></td><td>&nbsp;&nbsp;Immobili Vincoli Legge 1089/39 - Ville</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_Pozziidricinonpotabili24.png" /></td><td>&nbsp;&nbsp;Pozzi idrici non potabili</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_SitidiImportanzaComunitaria25.png" /></td><td>&nbsp;&nbsp;Siti di Importanza Comunitaria</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_VincolopaesaggisticoL149726.png" /></td><td>&nbsp;&nbsp;Vincolo paesaggistico L. 1497</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_VincolopaesaggisticoL43127.png" /></td><td>&nbsp;&nbsp;Vincolo paesaggistico L. 431</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_ZonaARiserva28.png" /></td><td>&nbsp;&nbsp;Zona A - Riserva</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_ZonaBPreriserva29.png" /></td><td>&nbsp;&nbsp;Zona B - Preriserva</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincoliareali2_ZonaB1Preriserva30.png" /></td><td>&nbsp;&nbsp;Zona B1 - Preriserva</td></tr></table><hr><span class="legenda1"> Vincoli lineari</span> <table cellpadding="2" cellspacing="2" class="lorem1"><tr><td style="text-align: center;"><img src="legend_prg/vincolilinari1_Corsidacqua0.png" /></td><td>&nbsp;&nbsp;Corsi d\'acqua</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincolilinari1_Corsidacquainterrati1.png" /></td><td>&nbsp;&nbsp;Corsi d\'acqua interrati</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincolilinari1_FaglieeSovrascorrimenti2.png" /></td><td>&nbsp;&nbsp;Faglie e Sovrascorrimenti</td></tr><tr><td style="text-align: center;"><img src="legend_prg/vincolilinari1_RegieTrazzere3.png" /></td><td>&nbsp;&nbsp;Regie Trazzere</td></tr></table><hr><span class="legenda">Piano Particolareggiato Esecutivo</span><br><br><span class="legenda1">Legenda PPE in costruzione</span><hr>
+ <!-- Inizio Legenda Piani -->
+ 
+<p class="lorem"> Le tavole dei vari Piani sono realizzate nel formato <a href="https://acrobat.adobe.com/it/it/why-adobe/about-adobe-pdf.html" target="_blank">.pdf</a>, tutti i link delle tavole presenti in queste pagina rinviano al sito ufficiale del <a href="https://www.comune.palermo.it/" title="Comune di Palermo" target="_blank">Comune di Palermo</a> &#45; <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?apt=6" title="Amministrazione Trasparente" target="_blank">Amministrazione Trasparente</a> &#45;<br><br> 
+  <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
+  <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em><br>
+  <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em>  <br><br>
+  <p class="lorem"> <strong>Questa è una versione beta test 2.0 NON VERIFICATA! Realizzata per studiare l'applicativo <a href="https://qgis.org/it/site/forusers/download.html" title="Scarica QGIS per il tuo Sistema Operativo" target="_blank">Qgis</a> e modalità webgis offerta dai plugin <a href="https://leafletjs.com/" title="Leaflet an open-source JavaScript library" target="_blank">Leaflet</a> e <a href="https://github.com/nextgis/QTiles" title="QGIS plugin to generate multi-level tilesets from a project." target="_blank">QTiles</a></strong></p> 
+
+</div>        
+ <!-- Tab prg -->
+<div class="sidebar-pane" id="prg">
+<h2 class="sidebar-header">Varinate Generale al P.R.G.<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem"><strong>Zonizzazione: e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D atto Delibera 7/2004</strong></p>
+<p class="lorem">La Variante Generale al P.R.G. &egrave; stata redatta secondo le direttive generali del Consiglio Comunale di cui alla delibera 179/94. Il Progetto di Piano &egrave; elaborato dall'Ufficio del Piano che si &egrave; avvalso delle consulenze del Prof. P.L. Cervellati per gli aspetti urbanistici, dei Prof. G. Zambrini e M.R. Cittadini per gli aspetti della mobilt&agrave;, del Prof. A. Roccella per gli aspetti giuridici e del Prof. F. Mazzola per le analisi socio-economiche. Con la delibera 315/94 il Consiglio Comunale ha adottato lo Schema di Massima e con delibera 45/97 gli elaborati finali della Variante Generale.</p>
+<p class="lorem">La Variante Generale &egrave; stata successivamente adeguata alle prescrizioni e al parere reso dall'Ufficio del Genio Civile e riadottata con del Commissario ad Acta n&deg; 470/2001 ed approvata definitivamente dall'Assessorato Regionale al Territorio con D. Dir. 124 e 558/DRU/02. Con delibera n&deg; 7 del 21/01/04 il Consiglio Comunale prende atto delle modifiche apportate alla Variante Generale disposte dai decreti regionali di approvazione. Da quel momento diviene a tutti gli effetti vigente.</p>
+<p class="lorem">Principi esenziali della Variante Generale sono: la salvaguardia, il recupero e la valorizzazione del patrimonio edilizio storico del territorio comunale, la tutela del patrimonio ambientale, delle emergenze paesaggistiche, dei parchi naturali e del tessuto agricolo residuo, la valorizzazione del fronte a mare ed il raggiungimento della dotazione minima di servizi pubblici, la riqualificazione della periferia attraverso l'istituzioni delle Municipalit&agrave;.<br> <br> Progetto PRG  Palermo – <a href="https://qgiscloud.com/gbvitrano/Prg_2004_Pa/" title="Mappa" target="_blank">Mappa</a> e <a href="https://qgiscloud.com/gbvitrano/Prg_2004_Pa/wms?SERVICE=WMS&REQUEST=GetCapabilities" title="WMS" target="_blank">Servizio WMS</a> con <a href="https://qgiscloud.com/" title="QGISCLOUD" target="_blank">QGISCLOUD</a><br> <br>
+<a href="https://coseerobe.gbvitrano.it/verso-gli-opendata.html" title="tavole in fotmato pdf dei piani" target="_blank">Tutte tavole in fotmato pdf dei piani</a></p>
+ <p class="lorem"> Le tavole dei vari Piani sono realizzate nel formato <a href="https://acrobat.adobe.com/it/it/why-adobe/about-adobe-pdf.html" target="_blank">.pdf</a>, tutti i link delle tavole presenti in questa pagina rinviano al sito ufficiale del <a href="https://www.comune.palermo.it/" title="Comune di Palermo" target="_blank">Comune di Palermo</a> &#45; <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?apt=6" title="Amministrazione Trasparente" target="_blank">Amministrazione Trasparente</a> &#45; <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19" title="Pianificazione e Governo del Territorio" target="_blank">Pianificazione e Governo del Territorio</a></p> <br>
+<iframe src="legend_prg/stru_urb/prg.html" frameborder="0" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:430px;width:100%;position:absolute;top:600px;left:0px;right:0px;bottom:0px" ></iframe>
+          </div>
+          
+ <!-- Tab ppe -->
+<div class="sidebar-pane" id="ppe">
+<h2 class="sidebar-header">Piano Particolareggiato Esecutivo<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
+<p class="lorem"><strong>Piano Particolareggiato Esecutivo del Centro Stroico si Palermo</strong></p>
+<p class="lorem">Il Piano Particolareggiato Esecutivo (PPE), voluto dall’Amministrazione comu­nale nella primavera del 1988 ed approvato nel 1993, è lo strumento urbani­stico che norma e regola gli interventi di una vasta parte del centro storico di Palermo. Da esso, infatti, sono stralciate quattro aree pianificate precedentemen­te (Piani di Recupero di Sant’Agostino, del Cassare Alto, di Montevergini, di via Scopari e i Piani Particolareggiati dell’Albergheria e di Castello San Pietro).</p>
+<p class="lorem">Il Piano persegue due obiettivi primari: dare specifiche indicazioni sulle moda­lità d’intervento attuabili sugli immobili appartenenti a soggetti sia pubblici che privati; definire i compiti dell’Amministrazione comunale nel recupero delle aree maggiormente degradate al fine di migliorare l’aspetto fisico e sociale comples­sivo della città, con una particolare attenzione alla sua storia e alla sua antica configurazione.</p>
+<p class="lorem">Le indicazioni di progetto del Piano si basano principalmente sullo studio e l’in­dividuazione delle “categorie tipologiche” degli edifici che definiscono il tessuto storico del centro antico. Esse comprendono: l’edilizia specialistica civile e quel­la religiosa, gli edifici per il culto (chiese, oratori, cappelle, conventi e monaste­ri); l’edilizia residenziale suddivisa in “palazzo”, “palazzetto”, “palazzetto pluri-familiare”, “catoio multiplo” e “catoio semplice”. Sono inoltre individuati gli edi­fici specialistici produttivi, l’edilizia derivante dall’attuazione del Piano di Risa­namento del 1886, quella postbellica, le parti residue delle mura e delle fortifi­cazioni urbiche, gli impianti a verde, le superfetazioni. Le “modalità d’interven­to”, (restauro, ristrutturazione, ripristino filologico, ripristino tipologico, demoli­zione senza ricostruzione), e il ventaglio delle destinazioni d’uso ammissibili de­rivano da tali approfondite analisi. </p>
+<p class="lorem">Tutti gli interventi relativi alla sistemazione degli spazi pubblici competono al­l’Amministrazione Comunale chiamata ad ulteriori approfondimenti e verifiche degli interventi progettuali indicati dal Piano. A recupero completato, il Piano prevede che nel centro storico possano tornare ad abitare circa 50.000 persone.</p>
+<p class="lorem">Il PPE interessa i quartieri Tribunali, Castellammare, Monte di Pietà e Palazzo Reale con le esclusioni delle aree comprese nei seguenti strumenti urbanistici: Piano di recupero Montevergini, Piano di recupero Dicesa della Capre, Piano Particolareggiato Albergheria e i 4 Piani di recupero Sant’Agostino, Capo, Scopari e Cassaro alto. <br> <br> <a href="https://coseerobe.gbvitrano.it/verso-gli-opendata.html" title="tavole in fotmato pdf dei piani" target="_blank">Tutte tavole in fotmato pdf dei piani</a></p>
+ <p class="lorem"> Le tavole dei vari Piani sono realizzate nel formato <a href="https://acrobat.adobe.com/it/it/why-adobe/about-adobe-pdf.html" target="_blank">.pdf</a>, tutti i link delle tavole presenti in questa pagina rinviano al sito ufficiale del <a href="https://www.comune.palermo.it/" title="Comune di Palermo" target="_blank">Comune di Palermo</a> &#45; <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?apt=6" title="Amministrazione Trasparente" target="_blank">Amministrazione Trasparente</a></p><br>
+ <iframe src="legend_prg/stru_urb/ppe.html" frameborder="0" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:430px;width:100%;position:absolute;top:780px;left:0px;right:0px;bottom:0px" ></iframe>
+          </div>
+          
+<!-- Tab info -->
+       <div class="sidebar-pane" id="info">
+       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+ <p class="lorem"> <strong>Rielaborato da:</strong> <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano">@gbvitrano</a><br>per <strong><a href="https://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank">Open Data Sicilia</a></strong></p>
+ 
+ <p class="lorem"><a href="https://blog.spaziogis.it/static/palermo_prg/#14/38.1114/13.3571" title="Piano Regolatore di Palermo" target="_blank">Piano Regolatore di Palermo</a>, rielaborazione opendata di:<br><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a> e <a href="https://www.facebook.com/pigreco314?fref=ts"target="_blank" title="Salvatore Fiandaca">@pigreco</a> (studio di riferimento)</p>
+<p class="lorem2"><strong>- Carta Tecnica Regionale 10K (C.T.R.) -</strong><br>
+<a href="https://www.sitr.regione.sicilia.it/?page_id=419" title="Download Cartografia" target="_blank">sitr.regione.sicilia.it</a> - con licenza <a href="https://creativecommons.org/licenses/by-sa/3.0/it/" title="Attribuzione - Condividi allo stesso modo 3.0 Italia (CC BY-SA 3.0 IT)" target="_blank">Creative Commons Attribuzione - Condividi allo stesso modo – 3.0 italia - (CC-BY SA 3.0)</a><br><br>
+Progetto Qgis per la rappresentazione cartografica (vestizione) della CTR 10k di: <a href="https://twitter.com/aborruso" title="Andrea Borruso" target="_blank">@aborruso</a>, <a href="https://twitter.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a> e <a href="https://twitter.com/gbvitrano" title="Giovan Battista Vitrano" target="_blank">@gbvitrano</a> - <a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">opendatasicilia.it</a></p>
+   <p class="lorem"><strong>- Fonte dati Zonizzazione e vincoli -</strong> <br><a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=11" title="Opendata Palermo - Urbanistica" target="_blank">Urbanistica</a>   <br>
+<a href="https://www.comune.palermo.it/opendata_dld.php?id=320t" title="Perimetrazione Zonizzazione P.R.G. vigente" target="_blank" > Perimetrazione Zonizzazione P.R.G. vigente;</a><br>
+<a href="https://www.comune.palermo.it/opendata_dld.php?id=321" title="Vincoli vigenti della Variante al P.R.G." target="_blank" >Vincoli vigenti della Variante al P.R.G.</a></p> 
+  <p class="lorem"><strong>La variante Generale al P.R.G. è stata redatta dal Settore Urbanistica nel 2004 oggi Area della pianificazione del territorio</strong><br>
+    <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=103" target="_blank">Qui gli elaborati della Variante Generale</a></p> 
+     <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br> 
+     <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a><br> <br> <a href="https://coseerobe.gbvitrano.it/verso-gli-opendata.html" title="tavole in fotmato pdf dei piani" target="_blank">Tutte tavole in fotmato pdf dei piani</a></p> 
+   <hr>
+<p class="lorem"> <strong>Questa mappa è una versione beta test 2.0  (non verificata) degli strumenti urbanistici di attuazione vigenti al 2016. Variante Generale al PRG e PPE del centro storico di Palermo. La mappa è stata realizzata per studiare l'applicativo <a href="https://qgis.org/it/site/forusers/download.html" title="Scarica QGIS per il tuo Sistema Operativo" target="_blank">Qgis</a> e modalità webgis offerta dai plugin <a href="https://leafletjs.com/" title="Leaflet an open-source JavaScript library" target="_blank">Leaflet</a> e <a href="https://github.com/nextgis/QTiles" title="QGIS plugin to generate multi-level tilesets from a project." target="_blank">QTiles</a></strong></p> 
+<strong>Note:</strong><br>
+   <em>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</em><br>
+   <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.></em><br>
+   <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.></em><br><br>
+<strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p> <hr><br>
+<p class="lorem">   <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato è distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />
+<a href="https://creativecommons.org/licenses/by/4.0/" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Internazionale</a> - <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Italia</a> </p> 
+
+</div>
+
+<!-- Tab email -->
+<div class="sidebar-pane" id="messages">
+<h2 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+</div>
+<!-- Tab condividi -->
+<div class="sidebar-pane" id="share">
+<h2 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>Puoi condividere online la mappe con altre persone</strong></p>
+<p class="lorem"><strong>Condividi:</strong></p >
+<div id="social">  <p >
+		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="legend_prg/fb.png" alt="facebook" width="32" height="32"></a>&nbsp;&nbsp;
+	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="legend_prg/tw.png" alt="twitter" width="32" height="32"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="legend_prg/gp.png"width="32" height="32" alt="google"></a>&nbsp;&nbsp;
+		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="legend_prg/in.png"width="32" height="32" alt="linkedin"></a>&nbsp;&nbsp;
+    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="legend_prg/pin.png" width="32" height="32"alt="pinterest"></a></p>
+</div>
+<script>
+			$(document).ready(function(){
+				$('.csbuttons').cSButtons({total : "#total","url" 	: "https://siciliahub.github.io/palermohub/index_prg.html#14/38.1185/13.3595",});
+			});
+		</script><br>
+ <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://goo.gl/fEVaUT" readonly></p><br>
+<hr>
+<br>
+<p class="lorem"><strong>Includi la mappa</strong></p>   
+       <textarea name="iframe" maxlength="2000" autofocus readonly id="iframe" title="iframe"><iframe width="100%" height="600px" frameBorder="0" src="https://siciliahub.github.io/palermohub/index_prg.html#14/38.1185/13.3595"></iframe><p><a href="https://siciliahub.github.io/palermohub/index_prg.html#14/38.1185/13.3595" title="Visualizza gili Strumenti Urbanistici Generali di Palermo a schermo intero">Visualizza a schermo intero</a>
+      </textarea><br><br>
+           <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+            </div>
+            
+<!-- Tab about -->
+<div class="sidebar-pane" id="about">
+<h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<strong>Chi siamo</strong>  <br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tbody>
+    <tr>
+      <td><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank" style="text-align: center"><img src="lib/images/ods.svg" width="280" title="opendatasicilia.it" alt="opendatasicilia"></a></td>
+    </tr>
+  </tbody>
+</table>
+<br><br>
+<p class="lorem2">Ci trovi in questi luoghi: </p> <br>
+  <table width="10%" border="0" align="center" cellpadding="0" cellspacing="0" class="ods_social" >
+  <tbody>
+    <tr>
+      <td><a href="https://www.facebook.com/groups/opendatasicilia/" target="_blank" title="Facebook"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://github.com/SiciliaHub" target="_blank" title="GitHub"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://twitter.com/opendatasicilia" target="_blank" title="Twitter"> <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+      <td>&nbsp;</td>
+      <td><a href="https://opendatasicilia.it/" target="_blank" title="OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-globe fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+            <td>&nbsp;</td>
+      <td><a href="https://groups.google.com/d/forum/opendatasicilia" target="_blank" title="mailing list OpenDataSicilia.it"><span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope-open fa-stack-1x fa-inverse"></i>
+              </span>
+            </a></td>
+    </tr>
+  </tbody>
+</table>
+</div>            
+            
+ <!-- Tab strumenti -->
+ <div class="sidebar-pane" id="settings">
+<h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
+<p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
+<ul>
+<li><p class="lorem"><a href="https://blog.spaziogis.it/static/palermo_prg/#14/38.1114/13.3571" title="Piano Regolatore di Palermo" target="_blank">Piano Regolatore di Palermo</a>, rielaborazione opendata di:<br><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a> e <a href="https://www.facebook.com/pigreco314?fref=ts"target="_blank" title="Salvatore Fiandaca">@pigreco</a> (studio di riferimento)</li></p>
+<li><p class="lorem2"><a href="https://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
+<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
+<li><p class="lorem2"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a>plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</li></p>
+<li><p class="lorem2"><a href="https://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
+<li><p class="lorem2"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
+<li><p class="lorem2"><a href="https://github.com/turbo87/sidebar-v2/" title="Sidebar v2" target="_blank">Sidebar v2</a>, per creare questa sidebar a scomparsa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ardhi/Leaflet.MousePosition" title="Leaflet MousePosition" target="_blank">Leaflet MousePosition</a>, &egrave;  un semplice controllo della posizione del mouse. Esso mostra le coordinate geografiche del puntatore del mouse, mentre viene spostato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/nerik/leaflet-graphicscale" title="leaflet graphicscale" target="_blank">Leaflet graphicscale</a>, &egrave;  un semplice barra di scala con effetto animato al cambio dello zoom;</li></p>
+<li><p class="lorem2"><a href="https://github.com/consbio/Leaflet.Basemaps" title="Leaflet Basemaps" target="_blank">Leaflet.Basemaps</a>, consente di creare un controllo dell'interfaccia utente per la scelta della mappa di base utilizzato sulla mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ppete2/Leaflet.PolylineMeasure" title="Leaflet PolylineMeasure" target="_blank">Leaflet PolylineMeasure</a>, consente di misurare distanze con linee semplici, sistema metrico (metri, chilometri);</li></p>
+<li><p class="lorem2"><a href="https://github.com/teastman/Leaflet.pattern" title="Leaflet pattern" target="_blank">Leaflet pattern</a>, plugin per leaflet che consente l'utilizzo di pattern di riempimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/torfsen/leaflet.zoomhome" title="Leaflet zoomhome" target="_blank">Leaflet zoomhome</a>, aggiunge un pulsante Home al controllo zoom per ripristinare la visualizzazione;</li></p>
+<li><p class="lorem2"><a href="https://github.com/rowanwins/leaflet-easyPrint" title="Leaflet-easyPrint" target="_blank">Leaflet-easyPrint</a>, un semplice plugin che aggiunge un'icona per stampare la mappa;</li></p>
+<li><p class="lorem2"><a href="https://github.com/dalbrx/Leaflet.ResizableControl" title="Leaflet ResizableControl" target="_blank">Leaflet ResizableControl</a>, un semplice pannello di controllo ridimensionabile e scorrimento;</li></p>
+<li><p class="lorem2"><a href="https://github.com/ahalota/Leaflet.CountrySelect/" title="Leaflet CountrySelect" target="_blank">Leaflet CountrySelect</a>, un semplice puglin per selezionare il Stato/Regione/Provincia/Comune desiderato;</li></p>
+<li><p class="lorem2"><a href="https://www.jqueryscript.net/menu/Creating-Collapsible-Bootstrap-Navbars-With-jQuery-Responsive-collapse-js.html" title="Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js" target="_blank">Menu jQuery</a>, Creating Collapsible Bootstrap Navbars With jQuery - Responsive-collapse.js;</li></p>
+<li><p class="lorem2"><a href="https://unitegallery.net/" title="unitegallery.net" target="_blank">UNITE Gallery</a>, Unite Gallery, touch enabled reponsive image and video web gallery width zoom effect.</li></p>
+      </ul> </div></div> </div>  
+
+<!-- Mappa  -->
+<div id="map" class="sidebar-map"></div>
+        <script>
+        var highlightLayer;
+        function highlightFeature(e) {
+            highlightLayer = e.target;
+
+            if (e.target.feature.geometry.type === 'LineString') {
+              highlightLayer.setStyle({
+                color: '#ff9900',
+              });
+            } else {
+              highlightLayer.setStyle({
+                fillColor: '#ff9900',
+                fillOpacity: 0.5
+              });
+            }
+        }
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });	
+		  
+var map = L.map('map', { zoomControl:false, maxZoom:20, minZoom:12}).fitBounds([[38.0391060456,13.140160209],[38.2277793856,13.4984503497]]);
+map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
+var bounds_group = new L.featureGroup([]);
+	  
+<!-- mappe di base -->	  
+var basemaps = [ 
+L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 7,  maxZoom: 20, maxNativeZoom: 20, label: 'Google Terrain'}), 
+
+L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 7,  maxZoom: 20, maxNativeZoom: 20,label: 'Map tiles by CartoDB'}),
+
+L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
+				minZoom: 7,  maxZoom: 20, maxNativeZoom: 20, label: 'Google Satellite'}),
+
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Source: &#9400; ESRI Satellite', minZoom: 7,  maxZoom: 19, maxNativeZoom: 19, label: 'ESRI Satellite - Max zoom 19'}),
+];
+ 	
+	<!-- scala mappa -->		
+    var graphicScale = L.control.graphicScale({
+		doubleLine: true,
+		fill: 'hollow',
+        showSubunits: true
+	}).addTo(map);	
+		
+<!-- muose coordinate -->	
+		   L.control.mousePosition().addTo(map);
+	    map.on("mousemove", function(e) {
+		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
+         }) 		
+			
+<!-- funzioni mappa -->
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+			  
+		<!-- Poligono fantasma  inizio -->	
+        function pop_poligonoisola0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    layer.setStyle(style_poligonoisola0_0(feature));
+
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_poligonoisola0_0() {
+            return {
+                pane: 'pane_poligonoisola0',
+                opacity: 0,
+                color: 'rgba(0,0,0,0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_poligonoisola0');
+        map.getPane('pane_poligonoisola0').style.zIndex = 1;
+        map.getPane('pane_poligonoisola0').style['mix-blend-mode'] = 'normal';
+    var layer_poligonoisola0 = new L.geoJson(json_poligonoisola0, {
+        attribution: '<a href=""></a>',
+        pane: 'pane_poligonoisola0',
+        onEachFeature: pop_poligonoisola0,
+        style: style_poligonoisola0_0,
+    });
+        bounds_group.addLayer(layer_poligonoisola0);
+        // map.addLayer(layer_poligonoisola0);		
+<!-- Poligono fantasma  fine -->
+
+//mappa ctr10k
+		 var ctr10k =L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/ctr10k/{z}/{x}/{y}.png', {
+        minZoom: 12,
+        maxZoom: 17,
+        maxNativeZoom: 17,
+        tms: true,
+        attribution: 'Carta Tecnica Regionale 10k', 
+      }) .addTo(map);	
+
+	  	
+<!-- mappe tiles -->
+var cs =L.tileLayer('https://gbvitrano.it/qgis/variante_generale/tiles/cs/{z}/{x}/{y}.png', {minZoom: 12,  maxZoom: 17, maxNativeZoom: 17, tms: true, attribution: '', }).addTo(map);
+var zoniz =L.tileLayer('https://gbvitrano.it/qgis/variante_generale/tiles/zoniz/{z}/{x}/{y}.png', {minZoom: 12,  maxZoom: 17, maxNativeZoom: 17, tms: true, attribution: '' }).addTo(map);	
+var vincoli_areali =L.tileLayer('https://gbvitrano.it/qgis/variante_generale/vincoli_areali/{z}/{x}/{y}.png', {minZoom: 12,  maxZoom: 17, maxNativeZoom: 17, tms: true, attribution: '' });
+var vincoli_lineari =L.tileLayer('https://gbvitrano.it/qgis/variante_generale/vincoli_lineari/{z}/{x}/{y}.png',{minZoom: 12,  maxZoom: 17, maxNativeZoom: 17, tms: true, attribution: '' });
+var ppe =L.tileLayer('https://gbvitrano.it/qgis/variante_generale/tiles/ppe/{z}/{x}/{y}.png', {minZoom: 16,  maxZoom: 18, maxNativeZoom: 18, tms: true, attribution: ''  }).addTo(map); 
+	  
+// Quadro Unione 5k
+        function pop_5k_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			 <tr>\
+			  <th scope="row"><img src="legend/5k_1.png" /><span class="legenda1">&nbsp;&nbsp;Quadro unione<spam /></th>\
+                        <td><span class="legenda1">- 5k<spam /> <br /><br /></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Tavola n°:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Tavola'] !== null ? Autolinker.link(String(feature.properties['Tavola'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_5k_1_0() {
+            return {
+                pane: 'pane_5k_1',
+                opacity: 1,
+                color: 'rgba(0,181,15,0.5)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,255,0.0)',
+            }
+        }
+        map.createPane('pane_5k_1');
+        map.getPane('pane_5k_1').style.zIndex = 401;
+        map.getPane('pane_5k_1').style['mix-blend-mode'] = 'normal';
+        var layer_5k_1 = new L.geoJson(json_5k_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_5k_1',
+            onEachFeature: pop_5k_1,
+            style: style_5k_1_0,
+        });
+        bounds_group.addLayer(layer_5k_1);
+
+// Perimetro OSM
+        function pop_osm_confine_palermo_epsg_3004_0(feature, layer) {
+            var popupContent = '<table>\
+						                    <tr>\
+			  <th scope="row"><img src="legend/osm_confine_palermo_epsg_3004_0.png" /><span class="legenda1">&nbsp;&nbsp;Confine Comunale<spam /></th>\
+                        <td><span class="legenda1">- OSM<spam /> <br /><br /></td>\
+                    </tr>\
+                      <tr>\
+                        <th scope="row">Nome:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['name'] !== null ? Autolinker.link(String(feature.properties['name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_osm_confine_palermo_epsg_3004_0_0() {
+            return {
+                pane: 'pane_osm_confine_palermo_epsg_3004_0',
+                opacity: 1,
+                color: 'rgba(215,25,28,1.0)',
+                dashArray: '10,5',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(224,209,134,0.0)',
+            }
+        }
+        map.createPane('pane_osm_confine_palermo_epsg_3004_0');
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style.zIndex = 400;
+        map.getPane('pane_osm_confine_palermo_epsg_3004_0').style['mix-blend-mode'] = 'normal';
+        var layer_osm_confine_palermo_epsg_3004_0 = new L.geoJson(json_osm_confine_palermo_epsg_3004_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_osm_confine_palermo_epsg_3004_0',
+            onEachFeature: pop_osm_confine_palermo_epsg_3004_0,
+            style: style_osm_confine_palermo_epsg_3004_0_0,
+        });
+        bounds_group.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		 map.addLayer(layer_osm_confine_palermo_epsg_3004_0);
+		 
+		 		// Zonizzazione
+        function pop_Zonizzazione_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			 <tr>\
+			  <th scope="row"><span class="legenda1">Zonizzazione<spam /></th>\
+                        <td><span class="legenda1">- Variante Generale al P.R.G. 2004<spam /> <br /><br /></td>\
+                    </tr>\
+                         <tr>\
+                        <th scope="row">Zonizzazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['ZTO'] !== null ? Autolinker.link(String(feature.properties['ZTO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Descrizione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DESCRIZION'] !== null ? Autolinker.link(String(feature.properties['DESCRIZION'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Note:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['NOTE'] !== null ? Autolinker.link(String(feature.properties['NOTE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Zonizzazione_0_0() {
+            return {
+                pane: 'pane_Zonizzazione_0',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,0.0)',
+            }
+        }
+        map.createPane('pane_Zonizzazione_0');
+        map.getPane('pane_Zonizzazione_0').style.zIndex = 400;
+        map.getPane('pane_Zonizzazione_0').style['mix-blend-mode'] = 'normal';
+        var layer_Zonizzazione_0 = new L.geoJson(json_Zonizzazione_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Zonizzazione_0',
+            onEachFeature: pop_Zonizzazione_0,
+            style: style_Zonizzazione_0_0,
+        });
+        bounds_group.addLayer(layer_Zonizzazione_0);
+        map.addLayer(layer_Zonizzazione_0);
+		
+		// Netto Storico
+        function pop_NettoStorico_1(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\
+			  <th scope="row"><span class="legenda1">Zonizzazione<spam /></th>\
+                        <td><span class="legenda1">- Variante Generale al P.R.G. 2004<spam /> <br /><br /></td>\
+                    </tr>\
+                      <tr>\
+                        <th scope="row">Zonizzazione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['ZTO'] !== null ? Autolinker.link(String(feature.properties['ZTO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Descrizione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DESCRIZION'] !== null ? Autolinker.link(String(feature.properties['DESCRIZION'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_NettoStorico_1_0() {
+            return {
+                pane: 'pane_NettoStorico_1',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,0.0)',
+            }
+        }
+        map.createPane('pane_NettoStorico_1');
+        map.getPane('pane_NettoStorico_1').style.zIndex = 401;
+        map.getPane('pane_NettoStorico_1').style['mix-blend-mode'] = 'normal';
+        var layer_NettoStorico_1 = new L.geoJson(json_NettoStorico_1, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_NettoStorico_1',
+            onEachFeature: pop_NettoStorico_1,
+            style: style_NettoStorico_1_0,
+        });
+        bounds_group.addLayer(layer_NettoStorico_1);
+        map.addLayer(layer_NettoStorico_1);
+		
+		// Centro storico
+        function pop_CentroStorico_2(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+			<tr>\
+			  <th scope="row"><span class="legenda1">Zonizzazione<spam /></th>\
+                        <td><span class="legenda1">- Variante Generale al P.R.G. 2004<spam /> <br /><br /></td>\
+                    </tr>\
+                        <th scope="row">Circoscrizione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['Circoscriz'] !== null ? Autolinker.link(String(feature.properties['Circoscriz'])) : '') + '</td>\
+                    </tr>\
+                    </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_CentroStorico_2_0() {
+            return {
+                pane: 'pane_CentroStorico_2',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,0.0)',
+            }
+        }
+        map.createPane('pane_CentroStorico_2');
+        map.getPane('pane_CentroStorico_2').style.zIndex = 402;
+        map.getPane('pane_CentroStorico_2').style['mix-blend-mode'] = 'normal';
+        var layer_CentroStorico_2 = new L.geoJson(json_CentroStorico_2, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_CentroStorico_2',
+            onEachFeature: pop_CentroStorico_2,
+            style: style_CentroStorico_2_0,
+        });
+        bounds_group.addLayer(layer_CentroStorico_2);
+        map.addLayer(layer_CentroStorico_2);
+		
+				// Vincoli lineari
+        function pop_Vincolilineari_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+						<tr>\
+			  <th scope="row"><span class="legenda1">Vincoli<spam /></th>\
+                        <td><span class="legenda1">- Variante Generale al P.R.G. 2004<spam /> <br /><br /></td>\
+                    </tr>\
+                          <tr>\
+                        <th scope="row">Vincolo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['TIPO'] !== null ? Autolinker.link(String(feature.properties['TIPO'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Descrizione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['DESCRIZION'] !== null ? Autolinker.link(String(feature.properties['DESCRIZION'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Note:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['NOTE'] !== null ? Autolinker.link(String(feature.properties['NOTE'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+ function style_Vincolilineari_0_0() {
+            return {
+                pane: 'pane_Vincolilineari_0',
+                opacity: 1,
+                color: 'rgba(255,255,255,0.0)',
+                dashArray: '',
+                lineCap: 'square',
+                lineJoin: 'bevel',
+                weight: 3.0,
+                fillOpacity: 0,
+            }
+        }
+        map.createPane('pane_Vincolilineari_0');
+        map.getPane('pane_Vincolilineari_0').style.zIndex = 500;
+        map.getPane('pane_Vincolilineari_0').style['mix-blend-mode'] = 'normal';
+        var layer_Vincolilineari_0 = new L.geoJson(json_Vincolilineari_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Vincolilineari_0',
+            onEachFeature: pop_Vincolilineari_0,
+            style: style_Vincolilineari_0_0,
+        });
+        bounds_group.addLayer(layer_Vincolilineari_0);
+       // map.addLayer(layer_Vincolilineari_0);
+	   
+	   		// Vincoli areali
+        function pop_Vincoliareali_0(feature, layer) {
+            layer.on({
+                mouseout: function(e) {
+                    for (i in e.target._eventParents) {
+                        e.target._eventParents[i].resetStyle(e.target);
+                    }
+                },
+                mouseover: highlightFeature,
+            });
+            var popupContent = '<table>\
+                    <tr>\
+			  <th scope="row"><span class="legenda1">Vincoli<spam /></th>\
+                        <td><span class="legenda1">- Variante Generale al P.R.G. 2004<spam /> <br /><br /></td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Vincolo:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['tipo'] !== null ? Autolinker.link(String(feature.properties['tipo'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Descrizione:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['descrizone'] !== null ? Autolinker.link(String(feature.properties['descrizone'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Note:&nbsp;&nbsp;</th>\
+                        <td>' + (feature.properties['note'] !== null ? Autolinker.link(String(feature.properties['note'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Vincoliareali_0_0() {
+            return {
+                pane: 'pane_Vincoliareali_0',
+                stroke: false, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(227,26,28,0.0)',
+            }
+        }
+        map.createPane('pane_Vincoliareali_0');
+        map.getPane('pane_Vincoliareali_0').style.zIndex = 510;
+        map.getPane('pane_Vincoliareali_0').style['mix-blend-mode'] = 'normal';
+        var layer_Vincoliareali_0 = new L.geoJson(json_Vincoliareali_0, {
+            attribution: '<a href=""></a>',
+            pane: 'pane_Vincoliareali_0',
+            onEachFeature: pop_Vincoliareali_0,
+            style: style_Vincoliareali_0_0,
+        });
+        bounds_group.addLayer(layer_Vincoliareali_0);
+        //map.addLayer(layer_Vincoliareali_0);
+		
+		
+<!-- Legenda mappa -->
+L.control.layers({},{'<span class="legenda1">&nbsp;#OpenDataSicilia - Palermo Hub</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strumenti Urbanistici di attuazione<hr><span class="legenda1">&nbsp;Variente Generale al P.R.G.</span>':layer_poligonoisola0,
+'<span class="legenda1">&nbsp;&nbsp;Zonizzazione</span><br />':zoniz,
+'<span class="legenda1">&nbsp;&nbsp;Città Storica</span>':cs,
+// '<img src="legend_prg/AreeedimmobilisogettiatutelaambientaleCittaStorica5.png" /> <span class="legenda1">&nbsp;&nbsp;Città Storica</span>':cs,
+// '<img src="legend/sfonfo_tra.png" /> <span class="legenda1">&nbsp;&nbsp;Etichetta Città Storica</span>':layer_CentroStorico_2,
+'<span class="legenda1">&nbsp;&nbsp;Vincoli areali</span>':vincoli_areali,
+'<span class="legenda1">&nbsp;&nbsp;Etichette Vincoli areali': layer_Vincoliareali_0,
+'<span class="legenda1">&nbsp;&nbsp;Vincoli lineari</span>':vincoli_lineari,
+'<span class="legenda1">&nbsp;&nbsp;Etichetta Vincoli lineari</span> <hr><span class="legenda1">Piano Partic.to Esecutivo</span><br>': layer_Vincolilineari_0,
+'<span class="legenda1">&nbsp;&nbsp;P.P.E.&nbsp;&nbsp;&nbsp;</span><span class="legenda3">(rielaborazione in progress)</span><hr><span class="legenda1">&nbsp;Carta Tecnica Regionale</span>':ppe,
+
+ '<img src="legend/ctr_02.png" /><span class="legenda1">&nbsp;&nbsp;Palermo 10k</span>':ctr10k,	
+'<img src="legend/osm_confine_palermo_epsg_3004_0.png" />&nbsp;&nbsp;Confine Comunale': layer_osm_confine_palermo_epsg_3004_0,
+
+'<img src="legend/5k_1.png" /><span class="legenda1">&nbsp;&nbsp;Quadro unione 5k</span><hr><span class="legenda3">Seleziona i layer di tuo interesse.<br>La visualizzazione del PPE è automatica dallo zoom 16</span><br><span class="legenda2">Le legenda si trovano nella sidebar a sinistra dello schermo</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia">':layer_5k_1,
+}).addTo(map);
+
+	   setBounds();
+		
+		<!-- strumenti di leaflet -->
+		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
+		var hash = new L.Hash(map);
+		
+		  var sidebar = L.control.sidebar('sidebar').addTo(map);
+
+		 <!--.zoomControl.setPosition("topleft") -->;
+		 L.control.locate().addTo(map);
+		var measureControl = new L.Control.Measure({
+            primaryLengthUnit: 'meters',
+            secondaryLengthUnit: 'kilometers',
+            primaryAreaUnit: 'sqmeters',
+            secondaryAreaUnit: 'hectares'
+        });
+        measureControl.addTo(map);
+		
+		L.easyPrint({title: 'Stampa la mappa',	position: 'topleft'}).addTo(map);
+		 map.addControl(L.control.basemaps({
+            basemaps: basemaps,
+            tileX: 0,
+            tileY: 0,
+            tileZ: 1
+        }));
+		
+		<!-- credits -->   
+var credctrl = L.controlCredits({
+    image: "lib/images/opendatasicilia_dredits.png",
+    link: "https://opendatasicilia.it/",
+    text: "Interactive mapping<br/>by opendatasicilia"
+}).addTo(map);
+		
+        </script>
+
+ 
+       
+
+<script src="lib/js/social/jquery_csbuttons.js"></script>
+</div>  
+   <!-- loghi   
+<div id="tavolab"></div>           
+<div id="ods"><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>   --> 
+<!-- beta version   -->  
+ <div id="beta"><img src="legend/beta.png" alt="beta version" width="80" border="0" title="beta version"></a></div>
+   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+</body>
+</html>

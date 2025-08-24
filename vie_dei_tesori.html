@@ -66,18 +66,16 @@ body {
 <body>
 <header>
   <div data-includeHTML="menu.html"></div>
-  <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="vie_dei_tesori.html" title="Rielaborazione della mappa le Vie dei Tesori Città di Palermo"><strong>Le vie dei Tesori</strong></a></div>
+  
 </header>
  <iframe src="https://umap.openstreetmap.fr/it/map/palermo-le-vie-dei-tesori-2016-visite-nei-luoghi_105079#12/38.1312/13.3728" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:91.8%;width:100%;position:absolute;top:75px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
 
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script>
+
    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>

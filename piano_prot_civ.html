@@ -132,15 +132,9 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
  <!-- header -->    
 <header>
      <div data-includeHTML="menu.html"></div>
-          <div id="breadcrumbs" class="breadcrumbs">Stai consultando&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp;<a href="piano_prot_civ.html" title="Aree di Emergenza - Protezione Civile - Regione Sicilia"><strong>Piano di emergenza Protezione Civile - Regione Sicilia</strong></a></div>
+          
 </header>
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script>
+
 <!-- Sidebar SX -->
 <div id="sidebar" class="sidebar collapsed">
 <!-- Nav tabs -->
@@ -1748,5 +1742,9 @@ var select = L.countrySelect({title:"Seleziona il Comune di interesse!"});
 <img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>    
    <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>  

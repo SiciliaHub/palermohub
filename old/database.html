@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="it">
+    <head>
+<title>Database - Palermo hub - contenitore di mappe su Palermo realizzato da opendatasicilia.it </title>        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="Palermo hub db">       
+     <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="noindex,nofollow">
+        <meta name="creation_Date" content="05/01/2018">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+
+	<!-- CSS Palermo hub  -->
+<link href="lib/css/tooltips.css" rel="stylesheet" type="text/css">
+<link href="lib/js/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/js/dist/css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="lib/js/top/jquerysctipttop.css" rel="stylesheet" type="text/css" />
+<link href="lib/js/top/backTop.css" rel="stylesheet" type="text/css" />
+
+<!-- bxSlider CSS file -->
+<link href="lib/js/bxslider/jquery.bxslider.css" rel="stylesheet" />
+
+ <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>  
+
+<style type="text/css">
+body {
+	/*background-color: #FFFFFF;*/
+	overflow-x:hidden;
+	}
+img {border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } 
+img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
+
+/* immagine no bordo/ no ombra */
+.immagonobox {box-shadow: none !important; border: none !important;	border-radius:  none !important;	moz-border-radius: none !important; -webkit-border-radius: none !important;	background-color: transparent !important;	}	
+</style>
+
+	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
+	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
+	<!--script src="js/less-1.3.3.min.js"></script-->
+	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
+
+	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+  	<!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
+    
+ <!-- Script -->
+<script type="text/javascript" src="lib/js/dist/jquery.min.js"></script>  
+<script type="text/javascript" src="lib/js/dist/bootstrap.min.js"></script>
+<script type="text/javascript" src="lib/js/dist/scripts.js"></script>
+
+<!-- <link rel="exhibit/data"
+    type="application/jsonp"
+    href="https://spreadsheets.google.com/feeds/list/1A-U8JCbH8Rh2PHoIHG2DL3uPNncR8DpGm3_nzBxRbHA/od6/public/basic?alt=json-in-script"
+    ex:converter="googleSpreadsheets" />  -->
+	
+	 <!-- exhibit catalogo  -->
+	<link rel="exhibit/data" 
+	ex:valueSeparator=","
+    type="text/csv"
+	href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc0EPi8VOFO7ePO_aWf-R8km8rd212WY-gxs0SephNTNi-fqnN6sZ8jo4QKbOaVbfua2g0y1_vdHIP/pub?output=csv"  /> 
+
+	
+    <script src="lib/js/dist/exhibit-api.js?locale=it"></script>
+
+    <script type="text/javascript">
+    var tableStyler = function(table, database) {
+    	$(table).addClass("table table-condensed table-striped");
+    };
+    </script>
+
+</head>
+<body>
+<!-- <div class="container"> -->
+<div id="db"><br />
+<p class="lorem0"> <strong>PalermoHub </strong>di <a href="https://opendatasicilia.it" title="opendatasicilia.it" target="_parent" class="tooltips">opendatasicilia.it<span><img src="legend/clip_index/ods.jpg" class="clip_tooltips"  /></span></a> è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo,&nbsp;&nbsp;non ha alcun intento commerciale,&nbsp;&nbsp;l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli <a title="Da Wikipedia, l'enciclopedia libera" href="https://it.wikipedia.org/wiki/Dati_aperti" target="_blank" rel="noopener noreferrer">open data</a> o   <a href="https://medium.com/open-data-stories/non-open-data-ma-dati-pubblici-la-metafora-dellacqua-b09ff1c24fe3" title="Non “open data”, ma “dati pubblici”: la metafora dell’acqua" target="_parent" class="tooltips">dati pubblici<span><img src="https://cdn-images-1.medium.com/max/2000/1*iQIt7bAThmJXh5hEU_Q9qg.jpeg" class="clip_tooltips"  /></span>  </a> comunali, regionali,  nazionali e tutti possono contribuire alla crescita e alla divulgazione.</p><br />
+	<!--
+<p class="lorem0"><strong style="font-size: 15px !important">Covid 19 | Palermo e provincia – live</strong></p>
+<iframe title="COVID-19, provincia di Palermo" aria-label="Map" id="datawrapper-chart-Ed389" src="https://datawrapper.dwcdn.net/Ed389/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="516"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"])for(var e in a.data["datawrapper-height"]){var t=document.getElementById("datawrapper-chart-"+e)||document.querySelector("iframe[src*='"+e+"']");t&&(t.style.height=a.data["datawrapper-height"][e]+"px")}}))}();
+</script>
+<br /><br /><br /> --> 
+<div class="bxslider no_mobile">
+<!-- <div><a href="https://ods2021.opendatasicilia.it/" target="_blank"><img src="legend/slider/ods2021.jpg" title="Partecipa a #ODS2021! @OpenDataSicilia 2021 / Online Edition: OpenData, Competenze Digitali, Trasparenza, Partecipazione." /></a></div> -->
+
+<div><a href="https://palermohub.github.io/cspa/" target="_blank"><img src="legend/slider/socio_econ.jpg" class="immagonobox" title="Studio Demografico e Socio-Economico del Centro Storico di Palermo" /></a></div>
+
+<div><a href="https://palermohub.opendatasicilia.it/prg_part_catastali.html" target="_blank"><img src="legend/slider/prg_part_catastali_pdf.jpg" class="immagonobox" title="DEMO 2 - Variante Generale e Particelle catastali - MapLibre e un pizzico di AI" /></a></div>
+
+
+<div><a href="https://palermohub.opendatasicilia.it/prg_catasto.html" target="_blank"><img src="legend/slider/prg_catasto.jpg" class="immagonobox" title="DEMO - Variante Generale e Particelle catastali - MapLibre" /></a></div>
+
+<div><a href="https://palermohub.opendatasicilia.it/pmtiles_pa.html" target="_blank"><img src="legend/slider/pmtiles_pa.jpg" class="immagonobox" title="Palermo - Strumenti Urbanistici - Modello 3D - MapLibre" /></a></div>
+
+<div><a href="https://palermohub.opendatasicilia.it/palermo_amap.html" target="_blank"><img src="legend/slider/palermo_amap.jpg" class="immagonobox" title="Amap, Palermo - Mappa Distretti razionamento idrico dal 7 Ottobre 2024" /></a></div>
+
+<div><a href="https://palermohub.opendatasicilia.it/distretti_amap_pa.html" target="_blank"><img src="legend/slider/distretti_amap_pa.jpg" class="immagonobox" title="Palermo, mappa dei distretti gestiti dall'AMAP S.p.A. soggetti a riduzione della pressione idrica" /></a></div>
+
+<div><a href="https://palermohub.opendatasicilia.it/Palermo_incidenti_2022_felt.html" target="_blank"><img src="legend/slider/sinistri_palermo_2022.jpg" class="immagonobox" title="Sinistri stradali avvenuti nel territorio di Palermo nell'anno 2022 rilevati dalla Polizia Municipale" /></a></div>
+
+<div><a href="https://palermohub.opendatasicilia.it/nasa_firms.html" target="_blank"><img src="legend/slider/nasa_firms.jpg" class="immagonobox" title="Italia | Incendi attivi VIIRS 375m / S-NPP" /></a></div>
+
+<div><a href="https://palermohub.opendatasicilia.it/bellolampo_diossina.html" target="_blank"><img src="legend/slider/bellolampo_diossina.jpg" class="immagonobox" title="Comuni, territorio e popolazione coinvolta (circa 61.800) nelle misure cautelative che interessano un’area con un raggio di 4 km dal sito della discarica di Bellolampo del Comune di Palermo dopo l'incendio del 24 luglio 2023" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/beni_alienati_pa_2023.html" target="_blank"><img src="legend/slider/beni_alienati_pa_2023.jpg" class="immagonobox" title="Palermo 2023 | Geolocalizzazione degli Immobili da Alienare e da Valorizzare" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/bandiere_blu_2023.html" target="_blank"><img src="legend/slider/bandiere_blu_2023.jpg" class="immagonobox" title="Italia- Approdi e Spiagge Blu 2023" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/acque_balneazione_2023.html" target="_blank"><img src="legend/slider/ab_2023.jpg" class="immagonobox" title="Sicilia – Qualità delle acque di balneazione nel 2023" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/sicilia_spiagge_accessibili_2022.html" target="_blank"><img src="legend/slider/spiagge_2022.jpg" class="immagonobox" title="Sicilia, spiagge accessibili 2022 - Sicily, accessible beaches 2022" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/stranieri_residenti_subregions_dot_2020.html" target="_blank"><img src="legend/slider/stranieri_2020.jpg" class="immagonobox" title="Palermo, popolazione residente per cittadinanza, UPL , Quartiere e Circoscrizione - 2020 Mappa a densità di punti" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/qu_prg_62.html" target="_blank"><img src="legend/slider/prg_62.jpg" class="immagonobox" title="PRG aggionato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/index_atlante.html#14/38.1113/13.3534" target="_blank"><img src="legend/slider/atlante.jpg" class="immagonobox" title="Atlante Storico e Viaggio nel tempo" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/cartografia.html#14/38.1185/13.3595" target="_blank"><img src="legend/slider/ctr_10k_Pa.jpg" class="immagonobox"  title="Palermo | CTR 10k e Ortofoto di base" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595" target="_blank"><img src="legend/slider/prg.jpg"  class="immagonobox" title="Variante Generale al PRG - PPE Centro Storico, vigenti al 2016" /></a></div>
+<div><a href="https://palermohub.opendatasicilia.it/index_pai.html#14/38.1185/13.3595" target="_blank"><img src="legend/slider/pai2.jpg"  class="immagonobox"  title="Piano Assetto Idrogeologico Palermo" /></a></div>  
+<div><a href="https://palermohub.opendatasicilia.it/vulnerabilit%C3%A0_sismica_3D.html" target="_blank"><img src="legend/slider/vulnerabilita.jpg"  class="immagonobox"  title="Palermo | Studio Vulnerabilità sismica - Mappa 3D" /></a></div>  
+
+
+
+</div><br />
+<hr>
+<div class="row clearfix">
+  <div class="col-md-12 column"><br />
+	<strong><i class="fa fa-search fa-2x" aria-hidden="true"></i> Cerca</strong><div ex:role="facet" ex:facetClass="TextSearch"></div><br />
+			</div>
+		</div>
+		<div class="row clearfix">
+	    	<div class="col-md-12 column">
+			<div   ex:role="facet"
+				ex:facetClass="Cloud"
+				ex:expression=".tag"
+			     ex:facetLabel="Tag"
+				ex:sortMode="count">
+			</div> 
+     			</div>
+			<div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".collaborazione"
+				ex:facetLabel="Autore" 
+				ex:sortDescending="true">
+				<!--	ex:sortMode="count" -->
+				</div>
+			</div>
+            <div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".categoria"
+				ex:facetLabel="Categoria"
+				ex:sortDescending="true">
+				<!--	data-ex-missing-label="Non specificato" -->
+				</div>
+			</div>
+             <div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".territorio"
+				ex:facetLabel="Territorio" 
+				ex:sortDescending="true"
+				>
+				<!--	data-ex-missing-label="Non specificato" -->
+				</div>
+			</div>
+            	<div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".mese"
+				ex:facetLabel="Anno-Mese"
+				ex:sortDirection="reverse">
+				<!-- ex:sortDescending="true"
+					data-ex-missing-label="Non specificato" -->
+				</div>
+			</div>
+            	<div class="col-md-1 column"><br />
+				<div ex:role="facet"
+				ex:expression=".anno"
+				ex:facetLabel="Anno"
+				ex:sortDirection="reverse">
+			<!--	ex:sortDescending="true"
+				data-ex-missing-label="Non specificato" -->
+				</div>
+			</div>
+               <div class="col-md-2 column"><br />
+				<div ex:role="facet"
+				ex:expression=".fontedati"
+				ex:facetLabel="Fonte Dati"
+				ex:sortDescending="true">
+				<!--	data-ex-missing-label="Non specificato" -->
+				<!-- ex:sortMode="count"-->  
+				</div>
+		</div>
+              <div class="col-md-1 column"><br /><br /><br />
+				<!-- <img src="legend/beta.png" width="60" title="beta version" alt="beta version"> -->
+			</div>
+</div>
+        
+		<div class="row clearfix">
+			<div class="col-md-12 column">
+            	<div ex:role="viewPanel" style="padding: 0in;">
+					<div ex:role="exhibit-view"
+					ex:viewClass="Exhibit.TabularView"
+					ex:label="Table"
+					ex:columns=".anno,.titolo,.descrizione,.immago,.categoria,.collaborazione,.primamappa,.titolo_pm,.fontedati"
+					ex:columnLabels="Anno, Titolo, Descrizione, Immagine, Categoria, Autore, Prima mappa, Fonte Dati,"
+					ex:columnFormats="list,list,list,list,list,list,list,list"
+					ex:sortColumn="1"
+					ex:sortAscending="true"
+					ex:tableStyler="tableStyler">
+					<div ex:role="exhibit-lens">
+					<div class="table-responsive">
+							<table class="table" ex:class-content=".territorio">
+								<tr>
+								<td><span ex:content=".anno"></td>
+	<td><a ex:href-content=".URL" ex:title-content=".titolo" ex:onclick-subcontent="trackOutboundLink('.URL'); return false;" target="_parent"><strong><span ex:content=".titolo" ></span></strong></a></td>
+   									 <td><span ex:content=".descrizione"></td>
+  <td ><a ex:href-content=".URL" ex:title-content=".titolo"  ex:onclick-subcontent="trackOutboundLink('.URL'); return false;" target="_parent"><strong><span ex:content=".immago" class="clip_tooltips"></span></strong></a></td>
+					<td><span ex:content=".categoria"></td>
+                                  <!--  <td><span ex:content=".tag"></span></td> -->
+                                    <td><span ex:content=".collaborazione"></span></td>
+									<td><a ex:href-content=".primamappa" ex:onclick-subcontent="trackOutboundLink('.primamappa'); return false;" title="Prima mappa rielaborata"  target="_blank"><strong><span ex:content=".titolo_pm" ></span></strong></a></td>
+                                    <td><span ex:content=".fontedati"></td>
+								</tr>
+							</table> 
+					  </div>
+
+					</div>
+				</div>
+			</div>
+		</div><br ><br ><br ><br ><br ><br ><br ><br ><br >
+        </div>
+        
+
+<a id='backTop'>Back To Top</a>
+ <!-- script toptoback automatico mobile/desktop -->  
+ <script type="text/javascript" src="lib/js/top/jquery.backTop.min.js"></script>
+<script>
+            $(document).ready( function() {
+                $('#backTop').backTop({
+                    'position' : 400,
+                    'speed' : 300,
+                    'color' : 'red',
+					
+					                });
+            });
+        </script>
+        <!-- Reading Progress Bar on Scroll - disattivare jquery-3.1.1.min.js se nella stessa pagina si usa top to back -->
+<!--  <script type="text/javascript" src="lib/js/prognroll/jquery.3.1.1.min.js"></script> -->
+<!-- jQuery library -->
+	<!-- opendatasicilia -->
+
+<!-- <script src="lib/js/bxslider/jquery-3.1.1.min.js"></script> -->
+
+<!-- bxSlider Javascript file -->
+<script src="lib/js/bxslider/jquery.bxslider.js"></script>
+<script>
+$(function(){
+  $('.bxslider').bxSlider({
+	auto: false,
+	pager: true,
+    mode: 'horizontal',
+    captions: true,
+	shrinkItems: true,
+	slideWidth: 0,
+	speed: 2000,
+	  });
+});
+</script>
+
+ <script type="text/javascript" src="lib/js/prognroll/prognroll_home.js"></script>
+<script>
+    $(function() {
+      $("body").prognroll({
+        height: 4, //Progress bar height in pixels
+        color: "#ff9900", //Progress bar background color
+      });
+    });
+</script>
+</body>
+</html>

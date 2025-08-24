@@ -70,7 +70,7 @@ body {
 <body>
 <header>
   <div data-includeHTML="menu.html"></div>
-  <div id="breadcrumbs" class="breadcrumbs">Benvenuto su Palermo Hub!</div>
+  
      <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tbody>
     <tr>
@@ -78,7 +78,7 @@ body {
         
       </td></tr>
     <tr>
-      <td>         <!-- <div data-includeHTML="database.html"></div> -->
+      <td>         
  <iframe src="database.html" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:80px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe></td>
     </tr>
     <tr>
@@ -90,14 +90,12 @@ body {
   </tbody>
 </table>
 </header>
-<script>
-    $(document).ready(function () {
-        $("div[data-includeHTML]").each(function () {                
-            $(this).load($(this).attr("data-includeHTML"));
-        });
-    });
-</script>
+
  <!-- Go to www.addthis.com/dashboard to customize your tools --> 
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
 </body>
 </html>
