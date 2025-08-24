@@ -1,87 +1,28 @@
 <!doctype html>
 <html lang="it">
-    <head>
- <title>Palermo Hub - Palermo - Strumenti Urbanistici - Modello 3D - MapLibree</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Palermo Hub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
-
-        <meta name="keywords" content="Open Data, Sicilia, tram, metropolitana, metro, bus, parcheggi, Palermo">
-        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
-        <meta http-equiv="content-language" content="IT">
-        <meta name="robots" content="index,follow">
-        <meta name="creation_Date" content="22/07/2017">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="shortcut icon" href="favicon.ico"/> 
-        <link rel="icon" href="favicon.png" type="image/png"/> 
-
- <!-- css menu  -->
-<!-- Bootstrap -->
-
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="lib/css/extra_ods.css" rel="stylesheet" type="text/css">
-<link href="lib/css/tooltips.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-body {
-	background-color: #FFFFFF;
-	 overflow-y:hidden;
-		}
-/* Stile per il popup */
-#popup {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    background-color: white;
-    padding: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    border-radius: 5px;
-}
-
-#popup img {
-    max-width: 100%;
-    height: auto;
-}
-
-#popup a {
-  
-    text-align: justify;
-    margin-top: 0;
-    color: #ff0000;
-    text-decoration: none;
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Palermo Hub - Palermo - Strumenti Urbanistici - Modello 3D - MapLibree</title>
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <META HTTP-EQUIV="refresh" CONTENT="600">  
+    <meta name="description" content="PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l'unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
+    <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+    <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+    <meta http-equiv="content-language" content="IT">
+    <meta name="robots" content="index,follow">
+    <meta name="creation_Date" content="20/08/2025>
 	
-}
-
-#popup a:hover {
-    text-decoration: underline;
-}
-
-#popup-close {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    color: #000;
-}
-#popup p {
-    text-align: justify;
-    margin-top: 10px;
-    font-size: 16px;
-    color: #333;
-	font-weight: 600;
-	padding:10px
-	
-}
-</style>
-
-  <!-- script mappa remoto -->  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
+    <link rel="shortcut icon" href="favicon.ico"/> 
+	<link rel="icon" href="favicon.png" type="image/png"/> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" />
+     <!--	  -->
+	 <link rel="stylesheet" href="lib/css/page.css"> 
+	 
+	 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
 <script>
@@ -109,47 +50,143 @@ body {
   <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card.jpg">
 <!-- twitter --> 
 
-
+    <!-- CSS per iframe tra header e footer -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Layout principale */
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header PalermoHub - altezza automatica */
+        .ph-header {
+            flex-shrink: 0;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            z-index: 1000;
+        }
+        
+        /* Container iframe - occupa tutto lo spazio rimanente */
+        .iframe-container {
+            flex: 1;
+            display: flex;
+            width: 100%;
+            min-height: 0; /* Importante per il flex */
+        }
+        
+        /* Iframe che riempie il container */
+        #main-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        /* Footer PalermoHub - altezza automatica */
+        .ph-footer {
+            flex-shrink: 0;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            z-index: 1000;
+        }
+        
+        /* Nasconde scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Layout di fallback se gli script PH non caricano */
+        .fallback-header {
+            height: 60px;
+            background: #343a40;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-weight: bold;
+        }
+        
+        .fallback-footer {
+            height: 50px;
+            background: #6c757d;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header PalermoHub -->
+    <div class="ph-header">
+        <!-- Il contenuto dell'header verrà inserito qui dagli script -->
+    </div>
+    
+    <!-- Container per iframe - occupa tutto lo spazio tra header e footer -->
+    <div class="iframe-container">
+        <iframe id="main-iframe" 
+                src="pmtiles/index_pntiles_pa.html" 
+                title="Palermo Hub - Palermo - Strumenti Urbanistici - Modello 3D - MapLibree"
+                allowfullscreen
+                loading="lazy">
+        </iframe>
+    </div>
+    
+    <!-- Footer PalermoHub -->
+    <div class="ph-footer">
+        <!-- Il contenuto del footer verrà inserito qui dagli script -->
+    </div>
 
-  
-
- <iframe src="pmtiles/index_pntiles_pa.html#13/38.11144/13.36435/-17/60" frameborder="0" style="overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:91.8%;width:100%;position:absolute;top:75px;left:0px;right:0px;bottom:0px" height="100%" width="100%"></iframe>
-
-   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
-<!-- Popup -->
-<div id="popup">
-    <span id="popup-close">&times;</span>
-    <a href="https://palermohub.opendatasicilia.it/prg_part_catastali.html" target="_blank">
-        <img src="https://palermohub.opendatasicilia.it/pmtiles/social_card_05.jpg" title="Consulta la nuova versione della Variante Generale al PRG con particelle catastali" alt="Popup Image"> </a>
-	<p>Consulta la nuova versione della <a href="https://palermohub.opendatasicilia.it/prg_part_catastali.html" target="_blank" title="Consulta la nuova versione della Variante Generale al PRG con particelle catastali">Variante Generale al PRG con particelle catastali</a>.<br><br>La novità più significativa riguarda la gestione dei tooltip, è stato integrato un pratico modulo di ricerca che permette di individuare rapidamente fogli e particelle specifiche con possibilità di generare automaticamente un documento PDF che include una mappa dettagliata con la particella evidenziata.<br> Infine è stata implementata una finestra dinamica che visualizza una mappa satellitare, la quale si sincronizza automaticamente con la mappa principale. Questa funzionalità inquadra il centro dell'area visualizzata sul monitor e può essere attivata mediante un pulsante posizionato nell'angolo inferiore sinistro dell'interfaccia. </p>
-
-</div>
-<script>
-    // Mostra il popup al caricamento della pagina
-    document.addEventListener("DOMContentLoaded", function() {
-        var popup = document.getElementById("popup");
-        var closeButton = document.getElementById("popup-close");
-
-        // Mostra il popup
-        popup.style.display = "block";
-
-        // Chiudi il popup dopo 5 secondi
-        setTimeout(function() {
-            popup.style.display = "none";
-        }, 5000);
-
-        // Chiudi il popup quando l'utente clicca sul pulsante di chiusura
-        closeButton.addEventListener("click", function() {
-            popup.style.display = "none";
-        });
-    });
-</script>
 <!-- Inclusione header e footer PalermoHub -->
 <link rel="stylesheet" href="lib/css/ph-css.css">
 <script src="lib/js/client/ph-header.js"></script>
 <script src="lib/js/client/ph-footer.js"></script>
+<script>
+// Gestione layout con header e footer PalermoHub
+document.addEventListener('DOMContentLoaded', function() {
+    // Leggi parametri URL e crea breadcrumbs
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('mapTitle')) {
+        // Il codice creerà automaticamente i breadcrumbs
+        if (typeof initMapPageBreadcrumbs === 'function') {
+            initMapPageBreadcrumbs();
+        }
+    }
+    
+    // Verifica se header e footer sono stati caricati correttamente
+    setTimeout(function() {
+        const header = document.querySelector('.ph-header');
+        const footer = document.querySelector('.ph-footer');
+        
+        // Se gli elementi PH non sono stati popolati, usa layout alternativo
+        if (!header?.innerHTML || !footer?.innerHTML) {
+            console.log('Layout PalermoHub non disponibile, uso layout alternativo');
+            document.body.classList.add('no-ph-layout');
+        }
+    }, 1000);
+    
+    // Esempio di come cambiare il src dell'iframe
+    // document.getElementById('main-iframe').src = 'https://example.com';
+});	
+</script>
+</script>
 </body>
 </html>

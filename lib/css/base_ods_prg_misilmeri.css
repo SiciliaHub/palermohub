@@ -10,7 +10,7 @@ url("fonts/fontawesome-webfont.ttf") format("truetype"),
 url("fontst/fontawesome-webfont.svg#fontawesome") format("svg");
 font-weight:normal; font-style:normal;}
 
-html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; background-color:#ffffff; 
+html, body {padding: 0; overflow: hidden;    margin: 0; height: 100%; font: 12px "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; background-color:#ffffff; 
 /*background-image:url(../images/ods_02.png); background-size: 30px 30px;background-repeat:no-repeat;background-position:5px 3px;background-attachment: fixed;*/}
 
 #header { margin-top:0px;}
@@ -55,11 +55,11 @@ html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; background-
 .lorem1 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
 
  @media (min-width: 320px) and (max-width: 1024px) { .lorem1 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 8.5px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
- /*
+ 
 a:link {color: #FF9900;	text-decoration:none;}
 a:visited {	color: #FF9900;}/* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it */
-/*a:hover {color: ##4E4B4B; text-decoration:underline; } 
-a:active {color: #FF0000; text-decoration:none; } */
+a:hover {color: ##4E4B4B; text-decoration:underline; } 
+a:active {color: #FF0000; text-decoration:none; } 
 .clip_omira {width: 60px; height: 69px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px; border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) }
 .clip_omira:hover {opacity: 1;  -webkit-filter: grayscale(100%); } 
 .clip_irta {width: 370px; height: 524px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } 
@@ -301,16 +301,15 @@ hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900;}
 
 .clip_resize2 {width: 99%; /*height: 100%;*/margin-left: 3px; border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc; background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) }
 
-/* nuove classi per footer 
+/* nuove classi per footer */
 .lorem {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}
 .awesome {font-style:fontawesome;  color: #4E4B4B;  }
 .footer {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; font-size: 14px;}
 
  .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 12px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
  
-  @media (min-width: 320px) and (max-width: 1024px) { .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 9.8px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}*/
+  @media (min-width: 320px) and (max-width: 1024px) { .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 9.8px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
   
- /* 
 .ods_footer {
 	font-style: italic;
 	color: #F5F5F5;
@@ -323,18 +322,18 @@ hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900;}
 
 .ods_footer a:link{color: #FF9900;	text-decoration:none;}
 .ods_footer a:visited {	color: #FF9900; text-decoration:none;}
-.ods_footer a:hover {color: #FF9900; text-decoration:underline; } */
+.ods_footer a:hover {color: #FF9900; text-decoration:underline; } 
 
 /* icone social */
-/*.ods_social {font-style: italic; color: #4E4B4B; font-size: 14px;}
+.ods_social {font-style: italic; color: #4E4B4B; font-size: 14px;}
 .ods_social a:link{color: #4E4B4B;	text-decoration:none;}
 .ods_social a:visited {	color: #4E4B4B; text-decoration:none;}
 .ods_social a:hover {color: #FF9900; text-decoration:none; } 
  @media (min-width: 320px) and (max-width: 736px) {.ods_social {font-size: 10px;}}
 
-.social {font-style: italic; color: #4E4B4B; font-size: 24px;}*/
+.social {font-style: italic; color: #4E4B4B; font-size: 24px;}
 
- /* scrollbar
+ /* scrollbar*/
 
 ::-webkit-scrollbar {
     width: 7px;
@@ -351,10 +350,10 @@ height: 50px;
 background-color: rgba(0,0,0,0.2);
 border: 1px solid rgba(0,0,0,0.2);
 -webkit-border-radius: 6px;
-max-height:100px;*/
+max-height:100px;
 }
 
-/* posizione icone sidebar per google chrome
+/* posizione icone sidebar per google chrome*/
 ul {
   list-style: none;
   padding: 0;
@@ -371,7 +370,7 @@ ul li {
 .pull-right {
   float: right;
 }
-*/
+
 
 /* Jquery Slide Toggle*/
 #vn-click{
