@@ -132,7 +132,7 @@ body {
 .footer-content {
     padding: 0 2rem;
     display: grid;
-    grid-template-columns: 1fr auto auto 1fr;
+    grid-template-columns: 1fr auto 1fr;
     gap: 2rem;
     align-items: center;
 }
@@ -235,124 +235,6 @@ body {
    /* text-decoration: underline;*/
 }
 
-/* ========================================
-   FOOTER QUICK MAP NAVIGATION DROPDOWN
-   ======================================== */
-
-.footer-maps-dropdown {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    min-width: 250px;
-}
-
-.dropdown-header {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--text-secondary);
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.dropdown-header i {
-    color: var(--primary-color);
-    font-size: 0.9rem;
-}
-
-.dropdown-header label {
-    cursor: pointer;
-    margin: 0;
-}
-
-.quick-map-selector {
-    padding: 0.6rem 0.8rem;
-    border: 2px solid var(--border-color);
-    border-radius: 8px;
-    background: var(--white);
-    color: var(--text-primary);
-    font-size: 0.8rem;
-    font-family: var(--font-family);
-    font-weight: 500;
-    width: 100%;
-    max-width: 280px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    
-    /* Styling per il dropdown arrow */
-    appearance: none;
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234A5568' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-    background-repeat: no-repeat;
-    background-position: right 0.8rem center;
-    background-size: 16px;
-    padding-right: 2.5rem;
-}
-
-.quick-map-selector:hover {
-    border-color: var(--primary-color);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.15);
-}
-
-.quick-map-selector:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.2);
-}
-
-/* Styling delle opzioni */
-.quick-map-selector option {
-    padding: 0.5rem;
-    font-size: 0.8rem;
-    background: var(--white);
-    color: var(--text-primary);
-    border: none;
-}
-
-.quick-map-selector option:hover,
-.quick-map-selector option:checked {
-    background: var(--primary-bg);
-    color: var(--primary-color);
-}
-
-/* Contatore mappe */
-.maps-counter {
-    font-size: 0.65rem;
-    color: var(--text-muted);
-    font-weight: 500;
-    opacity: 0.8;
-    text-align: center;
-    font-style: italic;
-}
-
-/* Stati di caricamento */
-.quick-map-selector:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-    background: #f5f5f5;
-}
-
-.quick-map-selector:disabled::after {
-    content: '';
-    position: absolute;
-    width: 12px;
-    height: 12px;
-    border: 2px solid var(--border-color);
-    border-top: 2px solid var(--primary-color);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-/* Animazione di caricamento */
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 /* Responsive */
 @media (max-width: 768px) {
     .header-content {
@@ -363,7 +245,7 @@ body {
 
     .footer-content {
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto auto auto;
+        grid-template-rows: auto auto auto;
         gap: 1rem;
         text-align: center;
         padding: 0 1rem;
@@ -373,27 +255,13 @@ body {
         order: 1;
     }
 
-    .footer-maps-dropdown {
-        order: 2;
-        min-width: auto;
-        width: 100%;
-    }
-
     .footer-social {
-        order: 3;
+        order: 2;
     }
 
     .footer-credits {
-        order: 4;
+        order: 3;
         text-align: center;
-    }
-
-    .quick-map-selector {
-        max-width: none;
-        width: 100%;
-        font-size: 0.85rem;
-        padding: 0.7rem 0.9rem;
-        padding-right: 2.5rem;
     }
 
     .social-buttons {
@@ -1211,61 +1079,6 @@ body {
 }
 
 /* ========================================
-   DARK MODE FOOTER DROPDOWN
-   ======================================== */
-
-[data-theme="dark"] .footer-maps-dropdown {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .dropdown-header {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .dropdown-header i {
-    color: var(--primary-color);
-}
-
-[data-theme="dark"] .quick-map-selector {
-    background: var(--white);
-    color: var(--text-primary);
-    border: 2px solid var(--border-color);
-    
-    /* Dark mode arrow */
-    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bdc1c6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
-}
-
-[data-theme="dark"] .quick-map-selector:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 4px 15px rgba(255, 167, 38, 0.15);
-}
-
-[data-theme="dark"] .quick-map-selector:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(255, 167, 38, 0.2);
-}
-
-[data-theme="dark"] .quick-map-selector option {
-    background: #2d2d2d;
-    color: var(--text-primary);
-}
-
-[data-theme="dark"] .quick-map-selector option:hover,
-[data-theme="dark"] .quick-map-selector option:checked {
-    background: var(--primary-bg);
-    color: var(--primary-color);
-}
-
-[data-theme="dark"] .maps-counter {
-    color: var(--text-muted);
-}
-
-[data-theme="dark"] .quick-map-selector:disabled {
-    background: #2d2d2d;
-    color: var(--text-muted);
-}
-
-/* ========================================
    DARK MODE PRIVACY POPUP
    ======================================== */
 
@@ -1455,12 +1268,6 @@ body {
     order: -1;
 }
 
-/* Focus states per accessibility */
-.theme-toggle:focus-within {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
 /* Mobile adjustments */
 @media (max-width: 768px) {
     .theme-label {
@@ -1509,6 +1316,12 @@ body {
     .ph-nav .theme-toggle:hover .theme-label {
         color: #ff9900;
     }
+}
+
+/* Focus states per accessibility */
+.theme-toggle:focus-within {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
 /* ========================================
