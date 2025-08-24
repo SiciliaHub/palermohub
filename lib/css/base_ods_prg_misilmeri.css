@@ -9,9 +9,9 @@ url("fonts/fontawesome-webfont.woff2") format("woff2"),
 url("fonts/fontawesome-webfont.ttf") format("truetype"),
 url("fontst/fontawesome-webfont.svg#fontawesome") format("svg");
 font-weight:normal; font-style:normal;}
-
+/*
 html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; background-color:#ffffff; 
-/*background-image:url(../images/ods_02.png); background-size: 30px 30px;background-repeat:no-repeat;background-position:5px 3px;background-attachment: fixed;*/}
+background-image:url(../images/ods_02.png); background-size: 30px 30px;background-repeat:no-repeat;background-position:5px 3px;background-attachment: fixed;*/}
 
 #header { margin-top:0px;}
 
