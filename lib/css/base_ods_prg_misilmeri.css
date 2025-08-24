@@ -310,7 +310,7 @@ hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900;}
  .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 12px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
  
   @media (min-width: 320px) and (max-width: 1024px) { .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 9.8px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
-  
+/*  
 .ods_footer {
 	font-style: italic;
 	color: #F5F5F5;
@@ -325,14 +325,14 @@ hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900;}
 .ods_footer a:visited {	color: #FF9900; text-decoration:none;}
 .ods_footer a:hover {color: #FF9900; text-decoration:underline; } 
 
-/* icone social */
+ icone social 
 .ods_social {font-style: italic; color: #4E4B4B; font-size: 14px;}
 .ods_social a:link{color: #4E4B4B;	text-decoration:none;}
 .ods_social a:visited {	color: #4E4B4B; text-decoration:none;}
 .ods_social a:hover {color: #FF9900; text-decoration:none; } 
  @media (min-width: 320px) and (max-width: 736px) {.ods_social {font-size: 10px;}}
 
-.social {font-style: italic; color: #4E4B4B; font-size: 24px;}
+.social {font-style: italic; color: #4E4B4B; font-size: 24px;}*/
 
  /* scrollbar*/
 
