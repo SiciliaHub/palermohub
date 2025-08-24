@@ -397,10 +397,8 @@
     <script src="lib/js/client/ph-footer.js"></script>
 
     <!-- Sostituzione della funzione loadMapsData con versione ottimizzata -->
-<!-- Parte dello script in index.html da sostituire - solo la sezione processCachedData e loadFromCSV -->
-
-<script>
-    // ========= SISTEMA DI CACHING PER DATI CSV - VERSIONE AGGIORNATA =========
+    <script>
+    // ========= SISTEMA DI CACHING PER DATI CSV =========
     const CACHE_KEY = 'palermoHubCSVData';
     const CACHE_DURATION = 30 * 60 * 1000; // 30 minuti
 
@@ -453,7 +451,6 @@
         }
     }
 
-    // AGGIORNATA: Funzione per processare dati cached con sincronizzazione footer
     function processCachedData(cachedData) {
         window.allMaps = cachedData;
         window.filteredMaps = [...cachedData];
@@ -464,33 +461,8 @@
         window.initializeSmartSearch();
         window.initializeSlider();
         window.updateBreadcrumbs();
-        
-        // NUOVO: Sincronizzazione con footer search
-        console.log('📡 Dati processati, sincronizzando con footer search...');
-        
-        // Trigger evento personalizzato per il footer
-        document.dispatchEvent(new CustomEvent('mapsDataLoaded', { 
-            detail: { maps: cachedData, count: cachedData.length } 
-        }));
-        
-        // Aggiorna direttamente il footer se la funzione esiste
-        if (typeof window.updateFooterMapData === 'function') {
-            setTimeout(() => {
-                console.log('🔄 Chiamando updateFooterMapData...');
-                window.updateFooterMapData();
-            }, 100);
-        }
-        
-        // Aggiorna anche loadFooterMapData se esiste
-        if (typeof window.loadFooterMapData === 'function') {
-            setTimeout(() => {
-                console.log('🔄 Chiamando loadFooterMapData...');
-                window.loadFooterMapData();
-            }, 200);
-        }
     }
 
-    // AGGIORNATA: Funzione per caricare da CSV con sincronizzazione footer
     async function loadFromCSV() {
         const csvFilePath = 'dati-palermo-hub/palermo-hub.csv';
         
@@ -517,8 +489,6 @@
             complete: function(results) {
                 window.allMaps = results.data.filter(row => row.titolo && row.titolo.trim() !== '');
                 
-                console.log(`📊 Caricati ${window.allMaps.length} record dal CSV`);
-                
                 // Salva i dati in cache
                 try {
                     const cacheData = {
@@ -526,7 +496,6 @@
                         timestamp: Date.now()
                     };
                     localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-                    console.log('💾 Dati salvati in cache');
                 } catch (e) {
                     console.warn('Impossibile salvare nella cache, spazio esaurito?', e);
                 }
@@ -539,33 +508,8 @@
                 window.initializeSmartSearch();
                 window.initializeSlider();
                 window.updateBreadcrumbs();
-                
-                // NUOVO: Sincronizzazione con footer search
-                console.log('📡 CSV caricato, sincronizzando con footer search...');
-                
-                // Trigger evento personalizzato per il footer
-                document.dispatchEvent(new CustomEvent('mapsDataLoaded', { 
-                    detail: { maps: window.allMaps, count: window.allMaps.length } 
-                }));
-                
-                // Aggiorna direttamente il footer se la funzione esiste
-                if (typeof window.updateFooterMapData === 'function') {
-                    setTimeout(() => {
-                        console.log('🔄 Chiamando updateFooterMapData dopo CSV load...');
-                        window.updateFooterMapData();
-                    }, 100);
-                }
-                
-                // Aggiorna anche loadFooterMapData se esiste
-                if (typeof window.loadFooterMapData === 'function') {
-                    setTimeout(() => {
-                        console.log('🔄 Chiamando loadFooterMapData dopo CSV load...');
-                        window.loadFooterMapData();
-                    }, 200);
-                }
             },
             error: function(error) {
-                console.error('❌ Errore nel parsing CSV:', error);
                 document.getElementById('maps-container').innerHTML = 
                     '<div class="no-results">⚠ Errore nel parsing del CSV</div>';
             }
@@ -579,20 +523,16 @@
             // Controlla se la cache è scaduta
             const cachedData = getCachedData();
             if (!cachedData) {
-                console.log('🔄 Cache scaduta, aggiornamento automatico...');
                 window.loadMapsData(true);
             } else {
                 // Aggiorna solo l'indicatore temporale
                 window.updateLastUpdateTime();
-                console.log('✅ Cache ancora valida, nessun aggiornamento necessario');
             }
         }, 30 * 60 * 1000); // Controlla ogni 30 minuti
     };
 
     // Funzione per forzare l'aggiornamento dei dati
     function forceRefreshData() {
-        console.log('🔄 Forzatura aggiornamento dati...');
-        
         // Rimuovi la cache
         localStorage.removeItem(CACHE_KEY);
         
@@ -609,27 +549,8 @@
         }
     }
 
-    // NUOVO: Funzione per debug footer search
-    function debugFooterConnection() {
-        console.log('🔍 DEBUG Footer Connection:', {
-            windowAllMaps: window.allMaps ? window.allMaps.length : 'undefined',
-            updateFooterMapDataExists: typeof window.updateFooterMapData === 'function',
-            loadFooterMapDataExists: typeof window.loadFooterMapData === 'function',
-            debugFooterSearchExists: typeof window.debugFooterSearch === 'function'
-        });
-        
-        if (typeof window.debugFooterSearch === 'function') {
-            window.debugFooterSearch();
-        }
-    }
-
-    // Esponi la funzione di debug globalmente
-    window.debugFooterConnection = debugFooterConnection;
-
-    // Inizializzazione - AGGIORNATA con migliore sincronizzazione
+    // Inizializzazione
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('🚀 Inizializzazione index.html...');
-        
         // Aggiungi listener per il pulsante di aggiornamento
         const refreshBtn = document.getElementById('refresh-data');
         if (refreshBtn) {
@@ -638,14 +559,9 @@
         
         // Il resto dell'inizializzazione rimane invariato
         if (window.initBackToTop) window.initBackToTop();
+        if (window.loadMapsData) window.loadMapsData();
         if (window.setupAutoUpdate) window.setupAutoUpdate();
         if (window.pauseSliderOnHover) window.pauseSliderOnHover();
-
-        // Carica i dati delle mappe
-        if (window.loadMapsData) {
-            console.log('📊 Caricamento dati mappe...');
-            window.loadMapsData();
-        }
 
         // Filtri tradizionali
         if (document.querySelectorAll('.filter-select')) {
@@ -740,12 +656,6 @@
             document.getElementById('pagination-controls').style.display = 'none';
         }
 
-        // NUOVO: Debug automatico dopo 5 secondi
-        setTimeout(() => {
-            console.log('🔍 Debug automatico dopo 5 secondi...');
-            debugFooterConnection();
-        }, 5000);
-
         // Pulizia al chiudere la finestra
         window.addEventListener('beforeunload', function() {
             if (window.autoUpdateInterval) {
@@ -756,7 +666,7 @@
             }
         });
     });
-</script>
+    </script>
 
 <!-- Carica home.js dopo aver sovrascritto le funzioni necessarie -->
  <script src="lib/js/client/home.js"></script>
