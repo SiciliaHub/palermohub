@@ -26,7 +26,7 @@ jobs:
     - name: Download CSV from Google Sheet
       run: |
         # URL del tuo Google Sheet
-        SHEET_URL="https://docs.google.com/spreadsheets/d/e/2PACX-1vTc0EPi8VOFO7ePO_aWf-R8km8rd212WY-gxs0SephNTNi-fqnN6sZ8jo4QKbOaVbfua2g0y1_vdHIP/pub?gid=1491024401&single=true&output=csv"
+        SHEET_URL="https://docs.google.com/spreadsheets/d/1A-U8JCbH8Rh2PHoIHG2DL3uPNncR8DpGm3_nzBxRbHA/view?gid=1491024401#gid=1491024401"
         
         echo "📄 Scaricamento CSV da Google Sheets..."
         
