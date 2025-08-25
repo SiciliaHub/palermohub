@@ -155,9 +155,9 @@ body {
 .footer-content {
     display: grid;
     grid-template-columns: 2fr auto auto 2fr;
-    gap: 2rem;
+    gap: 1.2rem;
     align-items: center;
-    padding: 1.5rem 2rem;
+    padding: 0.5rem 1rem;
     width: 100%;
     max-width: none;
     margin: 0;
@@ -170,7 +170,7 @@ body {
 .footer-text {
     color: var(--text-primary);
     line-height: 1.4;
-    font-size: 0.75rem;
+    font-size: 0.65rem;
 }
 
 /* ========================================
@@ -505,7 +505,7 @@ body {
 .footer-credits {
     text-align: right;
     color: var(--text-secondary);
-    font-size: 0.75rem;
+    font-size: 0.65rem;
 }
 
 .footer-credits a {
