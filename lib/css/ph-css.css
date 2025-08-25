@@ -255,7 +255,7 @@ body {
    ======================================== */
 .footer-search {
    position: relative;
-    min-width: 500px; /* Aumenta da 280px */
+    min-width: calc(50vw - 100px); /* Aumenta da 280px */ 
     flex-grow: 1; /* Aggiungi questa proprietà */
 }
 
@@ -1933,6 +1933,7 @@ body {
     color: var(--text-primary);
     white-space: nowrap;
     order: -1;
+	display: none;
 }
 
 /* Mobile adjustments */
