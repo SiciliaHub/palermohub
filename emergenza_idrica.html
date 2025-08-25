@@ -17,6 +17,9 @@
    <!-- favicon -->
  <link rel="shortcut icon" href="https://gbvitrano.github.io/startbootstrap-scrolling-nav-gh-pages/favicon.ico"/> 
  <link rel="icon" href="https://gbvitrano.github.io/startbootstrap-scrolling-nav-gh-pages/favicon.png" type="image/png"/> 
+	   <link rel="stylesheet" href="lib/css/template.css">
+	   	   <link rel="stylesheet" href="lib/css/footer-fix-css.css">
+
 
   <!-- Bootstrap core CSS -->
   <link href="https://gbvitrano.github.io/startbootstrap-scrolling-nav-gh-pages/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -212,7 +215,9 @@
       <p class="m-0 text-center text-white">2021 - <a href="https://twitter.com/opendatasicilia" title="@OpenDataSicilia" target="_blank">@OpenDataSicilia</a> - I contenuti di questa pagina sono pubblicati con <a href="http://creativecommons.org/licenses/by/4.0/" title="Attribution 4.0 International (CC BY 4.0)" target="_blank">licenza CC BY 4.0</a><br>
          Template di base: <a href="https://startbootstrap.com/template/scrolling-nav" target="_blank" title="An attractive one page Bootstrap theme perfect for creative portfolios and businesses">Start Bootstrap - Creative</a></p>
     </div>
-    <!-- /.container -->
+     <!--	 
+	 <link rel="stylesheet" href="lib/css/page.css">  -->
+	 	   <link rel="stylesheet" href="lib/css/template.css">
 	  
   </footer>
  <!--  Script vari -->
@@ -252,5 +257,36 @@
       });
     });
 </script>
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
+<script>
+// Gestione layout con header e footer PalermoHub
+document.addEventListener('DOMContentLoaded', function() {
+    // Leggi parametri URL e crea breadcrumbs
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('mapTitle')) {
+        // Il codice creerà automaticamente i breadcrumbs
+        if (typeof initMapPageBreadcrumbs === 'function') {
+            initMapPageBreadcrumbs();
+        }
+    }
+    
+    // Verifica se header e footer sono stati caricati correttamente
+    setTimeout(function() {
+        const header = document.querySelector('.ph-header');
+        const footer = document.querySelector('.ph-footer');
+        
+        // Se gli elementi PH non sono stati popolati, usa layout alternativo
+        if (!header?.innerHTML || !footer?.innerHTML) {
+            console.log('Layout PalermoHub non disponibile, uso layout alternativo');
+            document.body.classList.add('no-ph-layout');
+        }
+    }, 1000);
+    
+    // Esempio di come cambiare il src dell'iframe
+    // document.getElementById('main-iframe').src = 'https://example.com';
+});	
 </body>
 </html>
