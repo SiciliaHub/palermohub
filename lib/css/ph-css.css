@@ -154,7 +154,7 @@ body {
 /* Footer Content - Layout a 4 colonne */
 .footer-content {
     display: grid;
-    grid-template-columns: 2fr auto auto 2fr;
+    grid-template-columns:  12fr 0fr 0fr 5fr;
     gap: 1.2rem;
     align-items: center;
     padding: 0.5rem 1rem;
@@ -254,8 +254,9 @@ body {
    COLONNA 3 - RICERCA INTELLIGENTE
    ======================================== */
 .footer-search {
-    position: relative;
-    min-width: 280px;
+   position: relative;
+    min-width: 500px; /* Aumenta da 280px */
+    flex-grow: 1; /* Aggiungi questa proprietà */
 }
 
 .footer-search-wrapper {
@@ -694,9 +695,9 @@ body {
 /* Mobile portrait */
 @media (max-width: 768px) {
     .footer-content {
-        grid-template-columns: 1fr;
+         grid-template-columns: 1.5fr auto auto 1.5fr; /* Modifica da 2fr */
         grid-template-rows: auto auto auto auto;
-        gap: 1.5rem;
+        gap: 2rem;
         text-align: center;
         padding: 1.5rem 1rem;
     }
