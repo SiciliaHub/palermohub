@@ -111,8 +111,8 @@ class FooterSmartSearch {
 
     async loadData() {
         try {
-            // URL CORRETTO del CSV GitHub
-            const csvFilePath = 'https://raw.githubusercontent.com/SiciliaHub/palermohub/refs/heads/PH-release-v2.0/dati-palermo-hub/palermo-hub.csv';
+            // CORREZIONE: URL completo GitHub invece di percorso relativo
+            const csvFilePath = 'https://raw.githubusercontent.com/SiciliaHub/palermohub/PH-release-v2.0/dati-palermo-hub/palermo-hub.csv';
             
             console.log('Caricamento CSV da:', csvFilePath);
             const response = await fetch(csvFilePath);
@@ -152,37 +152,6 @@ class FooterSmartSearch {
             }
         } catch (error) {
             console.error('Errore nel caricamento dati per footer search:', error);
-            
-            // Fallback: prova il percorso locale
-            try {
-                console.log('Tentativo con percorso locale...');
-                const localResponse = await fetch('dati-palermo-hub/palermo-hub.csv');
-                if (localResponse.ok) {
-                    const csvText = await localResponse.text();
-                    if (typeof Papa !== 'undefined') {
-                        Papa.parse(csvText, {
-                            header: true,
-                            skipEmptyLines: true,
-                            delimiter: ',',
-                            quotes: true,
-                            quoteChar: '"',
-                            escapeChar: '"',
-                            transformHeader: (header) => header.trim().toLowerCase(),
-                            transform: (value) => value ? value.trim() : '',
-                            complete: (results) => {
-                                this.allMaps = results.data.filter(row => row.titolo && row.titolo.trim() !== '');
-                                this.buildSearchIndex();
-                                this.isInitialized = true;
-                                console.log(`Footer Search (locale): Loaded ${this.allMaps.length} maps`);
-                            }
-                        });
-                    } else {
-                        this.parseCSVSimple(csvText);
-                    }
-                }
-            } catch (localError) {
-                console.error('Errore anche con percorso locale:', localError);
-            }
         }
     }
 
@@ -513,44 +482,38 @@ function displayFooterSuggestions(results, query) {
     });
 }
 
-// FUNZIONE CORRETTA per selezionare un suggerimento
 function selectFooterSuggestion(index) {
     if (index >= 0 && index < footerSearchSuggestions.length) {
         const result = footerSearchSuggestions[index];
         
+        // Debug: mostra tutti i dati disponibili
         console.log('Debug mappa selezionata:', result.map);
         console.log('Campi disponibili:', Object.keys(result.map));
         
+        // CORREZIONE: Cerca in più campi possibili per l'URL
+        const possibleUrlFields = [
+            'url', 'URL', 'link', 'href', 'mappa', 'collegamento', 'sito', 
+            'pagina', 'indirizzo', 'web', 'website', 'map', 'cartografia'
+        ];
+        
         let mapUrl = '';
         
-        // PRIORITÀ ASSOLUTA: campo 'link-search'
-        if (result.map['link-search'] && result.map['link-search'].trim() !== '') {
-            mapUrl = result.map['link-search'].trim();
-            console.log('URL trovato in link-search:', mapUrl);
-        } 
-        // Fallback: altri possibili campi URL
-        else {
-            const possibleUrlFields = [
-                'url', 'URL', 'link', 'href', 'mappa', 'collegamento', 'sito', 
-                'pagina', 'indirizzo', 'web', 'website', 'map', 'cartografia'
-            ];
-            
-            for (const field of possibleUrlFields) {
-                if (result.map[field] && result.map[field].trim() !== '') {
-                    mapUrl = result.map[field].trim();
-                    console.log(`URL trovato nel campo: ${field} = ${mapUrl}`);
-                    break;
-                }
+        // Cerca in tutti i possibili campi
+        for (const field of possibleUrlFields) {
+            if (result.map[field] && result.map[field].trim() !== '') {
+                mapUrl = result.map[field].trim();
+                console.log(`URL trovato nel campo: ${field} = ${mapUrl}`);
+                break;
             }
-            
-            // Ultimo fallback: cerca qualsiasi campo che contenga "http"
-            if (!mapUrl) {
-                for (const [key, value] of Object.entries(result.map)) {
-                    if (value && typeof value === 'string' && value.includes('http')) {
-                        mapUrl = value.trim();
-                        console.log(`URL trovato nel campo generico: ${key} = ${mapUrl}`);
-                        break;
-                    }
+        }
+        
+        // Fallback: cerca qualsiasi campo che contenga "http"
+        if (!mapUrl) {
+            for (const [key, value] of Object.entries(result.map)) {
+                if (value && typeof value === 'string' && value.includes('http')) {
+                    mapUrl = value.trim();
+                    console.log(`URL trovato nel campo generico: ${key} = ${mapUrl}`);
+                    break;
                 }
             }
         }
@@ -560,19 +523,10 @@ function selectFooterSuggestion(index) {
             if (!mapUrl.startsWith('http://') && !mapUrl.startsWith('https://')) {
                 mapUrl = 'https://' + mapUrl;
             }
-            
-            console.log('Apertura URL finale:', mapUrl);
-            
-            // LOGICA APERTURA FINESTRE:
-            // palermohub.opendatasicilia.it -> stessa finestra
-            // altri -> nuova finestra
-            if (mapUrl.includes('palermohub.opendatasicilia.it')) {
-                window.location.href = mapUrl;
-            } else {
-                window.open(mapUrl, '_blank');
-            }
+            console.log('Apertura URL:', mapUrl);
+            window.open(mapUrl, '_blank');
         } else {
-            alert(`Link non disponibile per: ${result.map.titolo || 'questa mappa'}\nControlla la console per debug.`);
+            alert(`Link non disponibile per: ${result.map.titolo || 'questa mappa'}\nControlla la console per vedere tutti i campi disponibili.`);
         }
         
         hideFooterSuggestions();
