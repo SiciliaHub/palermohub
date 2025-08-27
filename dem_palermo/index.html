@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="description" content="#DTM Modello digitale del terreno – noto anche come #DEM Digital Elevation Model del territorio di Palermo" />
+		<title>#DTM Modello digitale del terreno – noto anche come #DEM Digital Elevation Model del territorio di Palermo (test Qgis)</title>
+        <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<link rel="stylesheet" type="text/css" href="./Qgis2threejs.css">
+<link rel="shortcut icon" href="https://www.gbvitrano.it/favicon.ico"/> 
+<link rel="icon" href="https://www.gbvitrano.it/favicon.png" type="image/png"/>  
+<style>
+
+#box {
+background-color: #ffffff;
+opacity: 0.70;
+filter: alpha(opacity=70); /* For IE8 and earlier */
+/*padding: 3px 3px;*/
+position:fixed;
+bottom:0px;
+right:0px;
+width:100%;
+z-index: 999;
+border-radius: 2px;
+-moz-border-radius: 2px;
+-webkit-border-radius: 2px;
+border: 2px solid #808080;
+border: 2px solid #fffff0;
+padding:2px;
+box-shadow: 0 3px 14px rgba(0,0,0,0.4)
+	}
+	
+h3 {
+	display: block;
+	-webkit-margin-before: 0.83em;
+	-webkit-margin-after: 0.83em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	font-weight: bold;
+	font: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #000000;
+	margin: 0 0 5px;
+	text-align: center;
+	z-index: 1001;
+}
+#ods {
+position:fixed;
+bottom:90px;
+right:17px;
+z-index: 999;}
+
+	a:link {
+	color: #FF0000;
+}
+a:visited {
+	color: #FF0000;
+}
+a:hover {
+	color: #FF0000;
+}
+a:active {
+	color: #FF0000;
+}
+</style>
+</head>
+<body>
+<div id="webgl"></div>
+
+<!-- popup -->
+<div id="popup" style="display:none;">
+<div id="closebtn">&times;</div>
+<div id="popupbar"></div>
+<div id="popupbody">
+ <div id="popupcontent"></div>
+ <div id="pageinfo">
+  <h1>Current View URL</h1>
+  <div><input id="urlbox" type="text"></div>
+
+  <h1>Usage</h1>
+  <div id="usage"></div>
+
+  <h1>About</h1>
+  <div id="about">This page was made with <a href="http://www.qgis.org/" target="_blank">QGIS</a> and <a href="https://github.com/minorua/Qgis2threejs" target="_blank">Qgis2threejs</a> plugin, 
+and uses the following library:
+  <ul>
+  <li>three.js <a href="http://threejs.org/" target="_blank">http://threejs.org/</a> <a href="./threejs/LICENSE" target="_blank" class="license">(LICENSE)</a></li>
+  <li>dat-gui <a href="https://code.google.com/p/dat-gui/" target="_blank">https://code.google.com/p/dat-gui/</a> <a href="./dat-gui/license.txt" target="_blank" class="license">(LICENSE)</a></li>
+  <li id="lib_proj4js" style="display: none;">Proj4js <a href="http://trac.osgeo.org/proj4js/" target="_blank">http://trac.osgeo.org/proj4js/</a> <a href="./proj4js/LICENSE.md" target="_blank" class="license">(LICENSE)</a></li>
+  </ul>
+  </div>
+ </div>
+</div></div>
+
+<!-- footer -->
+<div id="footer"> </div>
+
+<script src="./threejs/three.min.js"></script>
+<script src="./Qgis2threejs.js"></script>
+<script src="./threejs/OrbitControls.js"></script>
+<script>
+var option = Q3D.Options;
+
+</script>
+<script src="./20170315204024.js"></script>
+<script>
+if (typeof proj4 !== "undefined") document.getElementById("lib_proj4js").style.display = "list-item";
+
+var container = document.getElementById("webgl");
+// initialize application
+var app = Q3D.application;
+app.init(container);
+
+// load the project
+app.loadProject(project);
+
+app.addEventListeners();
+app.start();
+
+</script>
+<script src="./dat-gui/dat.gui.min.js"></script>
+<script src="./dat-gui_panel.js"></script>
+<script>
+// initialize dat-gui panel
+Q3D.gui.init();
+</script>
+ <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="legend/opendatasicilia.png" width="48px" title="opendatasicilia.it" alt="opendatasicilia"></a></div>
+<div id="box">
+<h3>&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a> - Qgis2threejs - <a href="http://www.sitr.regione.sicilia.it/geoportale/it/metadata/details/502" title="Modello digitale del terreno 2m Regione Siciliana - Servizio WCS - GAUSS BOAGA" target="_blank">Modello digitale del terreno 2m Regione Siciliana</a> - <a href="https://twitter.com/gbvitrano" title="Giovan Battista Vitrano">@gbvitrano</a> <img src="https://gbvitrano.it/clip/gb/gb_01.png" width="24" height="24" Title=" Rielaborazione Opendata - Giovan Battista Vitrano" alt="Giovan Battista Vitrano"/></a>&nbsp;</h3></div>
+</body>
+</html>

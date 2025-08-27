@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta name="description" content="Test 3d volumetrie centro storico di Palermo, con Qgis e Leaflet|qgis2web" />
+		<title>Test 3d volumetrie centro storico di Palermo, con Qgis e Leaflet|qgis2web </title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css" />
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+        <link rel="shortcut icon" href="https://www.gbvitrano.it/favicon.ico"/> 
+<link rel="icon" href="https://www.gbvitrano.it/favicon.png" type="image/png"/> 
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+			#ods {
+position:fixed;
+bottom:90px;
+right: 17px;
+z-index: 999;}
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-heat.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/OSMBuildings-Leaflet.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/leaflet-tilelayer-wmts.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/centrostorico0.js"></script>
+        <script>
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[38.1113981816,13.3543119002],[38.1192895329,13.3717932092]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var bounds_group = new L.featureGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a> - <a href="https://twitter.com/gbvitrano" title="Giovan Battista Vitrano">@gbvitrano</a> <a href="http://coseerobe.gbvitrano.it/" target="_blank"><img src="https://gbvitrano.it/clip/gb/gb_01.png" width="24" height="24" Title="Rielaborazione Opendata - Giovan Battista Vitrano" alt="Giovan Battista Vitrano"/></a></a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function pop_centrostorico0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">id_0</th>\
+                        <td>' + (feature.properties['id_0'] !== null ? Autolinker.link(String(feature.properties['id_0'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">id</th>\
+                        <td>' + (feature.properties['id'] !== null ? Autolinker.link(String(feature.properties['id'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">id_un_vol</th>\
+                        <td>' + (feature.properties['id_un_vol'] !== null ? Autolinker.link(String(feature.properties['id_un_vol'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">quota_gron</th>\
+                        <td>' + (feature.properties['quota_gron'] !== null ? Autolinker.link(String(feature.properties['quota_gron'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">quota_pied</th>\
+                        <td>' + (feature.properties['quota_pied'] !== null ? Autolinker.link(String(feature.properties['quota_pied'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">altezza</th>\
+                        <td>' + (feature.properties['altezza'] !== null ? Autolinker.link(String(feature.properties['altezza'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">area</th>\
+                        <td>' + (feature.properties['area'] !== null ? Autolinker.link(String(feature.properties['area'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">volume</th>\
+                        <td>' + (feature.properties['volume'] !== null ? Autolinker.link(String(feature.properties['volume'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">piano urba</th>\
+                        <td>' + (feature.properties['piano urba'] !== null ? Autolinker.link(String(feature.properties['piano urba'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        map.createPane('pane_centrostorico0');
+        map.getPane('pane_centrostorico0').style.zIndex = 600;
+        map.getPane('pane_centrostorico0').style['mix-blend-mode'] = 'normal';
+        var osmb = new OSMBuildings(map).date(new Date());
+        osmb.set(json_centrostorico0);
+        setBounds();
+        </script>
+            <div id="ods"><a href="http://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
+<img src="legend/opendatasicilia.png" width="48px" title="opendatasicilia.it" alt="opendatasicilia"></a></div>
+    </body>
+</html>

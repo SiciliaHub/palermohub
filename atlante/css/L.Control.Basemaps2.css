@@ -1,6 +1,6 @@
 .basemaps {
     padding: 0px;
-	top:-38px;
+	top:20px;
 }
 .basemaps.closed .basemap {
     display: none;
