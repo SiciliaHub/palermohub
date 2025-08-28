@@ -1435,3 +1435,292 @@ a:hover {
         padding: 0.4rem 0.75rem;
     }
 }
+
+/* ========================================
+   RESPONSIVE CONTENT IMAGES CLASS
+   Da aggiungere al file page.css
+   ======================================== */
+
+/* Classe specifica per immagini di contenuto responsive */
+.responsive-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease;
+    display: block;
+    margin: 1.5rem auto;
+    border: 1px solid var(--border-color);
+}
+
+/* Effetto hover per immagini responsive */
+.responsive-image:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.18);
+    border-color: var(--primary-color);
+}
+
+/* Container per immagini con didascalia */
+.image-container {
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.image-container .responsive-image {
+    margin-bottom: 0.75rem;
+}
+
+.image-caption {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 0 1rem;
+    line-height: 1.4;
+}
+
+/* Varianti della classe responsive */
+.responsive-image.full-width {
+    width: 100%;
+    max-width: none;
+    margin: 2rem -2rem;
+    border-radius: 0;
+}
+
+.responsive-image.inline {
+    display: inline-block;
+    margin: 0.5rem 1rem 0.5rem 0;
+    max-width: 200px;
+    vertical-align: top;
+}
+
+.responsive-image.small {
+    max-width: 300px;
+}
+
+.responsive-image.medium {
+    max-width: 500px;
+}
+
+.responsive-image.large {
+    max-width: 800px;
+}
+
+/* Galleria di immagini responsive */
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.image-gallery .responsive-image {
+    margin: 0;
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: 16/9;
+}
+
+/* ========================================
+   DARK MODE RESPONSIVE IMAGES
+   ======================================== */
+
+[data-theme="dark"] .responsive-image {
+    border-color: var(--border-color);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .responsive-image:hover {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .image-caption {
+    color: var(--text-secondary);
+}
+
+/* Filtro per migliorare la leggibilità delle immagini in dark mode */
+[data-theme="dark"] .responsive-image {
+    filter: brightness(0.9) contrast(1.1);
+}
+
+[data-theme="dark"] .responsive-image:hover {
+    filter: brightness(1) contrast(1);
+}
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+   ======================================== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .responsive-image {
+        margin: 1rem auto;
+        border-radius: 8px;
+    }
+    
+    .responsive-image.full-width {
+        margin: 1.5rem -1.5rem;
+    }
+    
+    .image-gallery {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .responsive-image.inline {
+        max-width: 150px;
+        margin: 0.5rem 0.5rem 0.5rem 0;
+    }
+    
+    .responsive-image.small {
+        max-width: 250px;
+    }
+    
+    .responsive-image.medium {
+        max-width: 400px;
+    }
+    
+    .responsive-image.large {
+        max-width: 600px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .responsive-image {
+        margin: 0.75rem auto;
+        border-radius: 6px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .responsive-image.full-width {
+        margin: 1rem -1rem;
+    }
+    
+    .image-gallery {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+    
+    .responsive-image.inline {
+        display: block;
+        max-width: 100%;
+        margin: 1rem auto;
+    }
+    
+    .image-caption {
+        font-size: 0.85rem;
+        padding: 0 0.5rem;
+    }
+    
+    .responsive-image.small,
+    .responsive-image.medium,
+    .responsive-image.large {
+        max-width: 100%;
+    }
+}
+
+/* ========================================
+   ACCESSIBILITY & PERFORMANCE
+   ======================================== */
+
+/* Lazy loading support */
+.responsive-image[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.responsive-image[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* Riduce motion per utenti che preferiscono meno animazioni */
+@media (prefers-reduced-motion: reduce) {
+    .responsive-image {
+        transition: none;
+    }
+    
+    .responsive-image:hover {
+        transform: none;
+    }
+}
+
+/* Alt text styling per accessibilità quando le immagini non caricano */
+.responsive-image[alt] {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+    padding: 0rem;
+   /* background: var(--secondary-blue);*/
+    border: 1px solid #4d4d4d5c;
+}
+
+/* ========================================
+   PRINT STYLES
+   ======================================== */
+
+@media print {
+    .responsive-image {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        page-break-inside: avoid;
+        max-height: 80vh;
+    }
+    
+    .image-gallery {
+        display: block;
+    }
+    
+    .image-gallery .responsive-image {
+        margin-bottom: 1rem;
+        page-break-after: avoid;
+    }
+}
+
+/* Regole specifiche per sovrascrivere gli stili del contenitore .section 
+   mantenendo lo stile originale di content-list numbered-list */
+
+.section .content-list.numbered-list li {
+    /* Mantiene la posizione base ma rimuove le decorazioni del .section li */
+    margin: 0.75rem 0;                    /* Mantiene margine standard */
+    padding: 0.5rem 0;                    /* Padding ridotto e pulito */
+    background: none !important;          /* Sovrascrive sfondo colorato del .section li */
+    border: none !important;              /* Rimuove bordo arancione del .section li */
+    border-left: none !important;         /* Esplicitamente rimuove border-left */
+    border-radius: 0 !important;          /* Rimuove angoli arrotondati */
+    transition: none !important;          /* Rimuove transizioni */
+    box-shadow: none !important;          /* Rimuove ombre */
+    transform: none !important;           /* Rimuove trasformazioni */
+}
+
+.section .content-list.numbered-list li:hover {
+    /* Sovrascrive completamente gli effetti hover del .section li */
+    background: none !important;          /* Nessun cambio di sfondo al hover */
+    transform: none !important;           /* Nessun movimento al hover */
+    box-shadow: none !important;          /* Nessuna ombra al hover */
+}
+
+/* Assicura che la numerazione dell'ol funzioni correttamente */
+.section .content-list.numbered-list {
+  list-style: decimal;                  /* Mantiene numerazione decimale */
+    margin-left: 0;                       /* Reset margine del contenitore */
+    padding-left: 2rem;    
+}
+
+.section .content-list.numbered-list li::before {
+    /* Assicura che non ci siano pseudo-elementi che interferiscono */
+   content: counter(list-counter);
+    background: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+    position: absolute;
+    left: -30px;
+    top: 0.3rem;
+}
