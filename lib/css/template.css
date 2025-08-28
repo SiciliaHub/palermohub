@@ -254,7 +254,7 @@ body {
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
-    bottom: 2rem;
+    bottom: calc(1rem + 80px + 1rem);
     right: 2rem;
     width: 50px;
     height: 50px;
