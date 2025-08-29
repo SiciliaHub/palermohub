@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" />
      <!--	  -->
 	 <link rel="stylesheet" href="lib/css/page.css"> 
-	     <link rel="stylesheet" href="lib/css/template.css">
+	 <link rel="stylesheet" href="lib/css/template.css">
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
@@ -53,7 +53,23 @@
             box-sizing: border-box;
         }
 
+/* Title Capitalization Rules - Only first letter uppercase */
+h1, h2, h3, h4, h5, h6,
+.content-title, .chapter-title, .section-title, .subsection-title {
+    text-transform: lowercase;
+}
 
+h1::first-letter, h2::first-letter, h3::first-letter, 
+h4::first-letter, h5::first-letter, h6::first-letter,
+.content-title::first-letter, .chapter-title::first-letter, 
+.section-title::first-letter, .subsection-title::first-letter {
+    text-transform: uppercase;
+}
+
+/* Exception for PalermoHub brand name */
+.brand-name {
+    text-transform: none !important;
+}
         @keyframes movePattern {
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -381,21 +397,45 @@
     <div class="container">
         <div class="content">
           
-  <section >
-            <div class="section animation-delay-1 ">
-                <h2 >Struttura della piattaforma</h2>
-                <p>PalermoHub si presenta come una <strong>piattaforma web per esplorare mappe territoriali</strong> di Palermo, organizzata con diversi elementi funzionali per garantire un'esperienza utente completa e intuitiva.</p>
+<!-- Chapter 1 -->
+            <div class="chapter">
+                <h2 class="chapter-title brand-name">Che cos'è PalermoHub - guida utente</h2>
+                <div class="content-text">
+                    PalermoHub è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili.
+                </div>
+                <div class="content-text">
+                    Il bello è che tutte queste mappe sono create con <span class="highlight">"dati aperti"</span> - informazioni che il Comune, la Regione e altri enti pubblici mettono a disposizione di tutti gratuitamente. È come se la città aprisse i suoi archivi e dicesse: "Ecco tutto quello che sappiamo, usate pure questi dati per creare qualcosa di utile".
+                </div>
+            </div>
 
-                <h3>Sezioni principali</h3>
-                <ul>
-                    <li><strong>Esplora le Mappe:</strong> sezione principale per la navigazione attraverso le diverse mappe disponibili</li>
-                    <li><strong>Contatori dinamici:</strong> dashboard che mostra statistiche in tempo reale su numero totale di mappe, categorie disponibili, territori coperti e autori coinvolti</li>
-                </ul>
-				</div>
-               <div class="subsection">
-			<strong>Pannello di controllo (Dashboard) </strong>
-			<img src="legend/funzionalita/funz_01.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
-                        <ol class="content-list numbered-list"> <p>  
+            <hr class="chapter-separator">
+
+            <!-- Chapter 2 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Il Primo Incontro: Cosa Succede Quando Arrivi sul Sito</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Il Caricamento Intelligente</h3>
+                    <div class="content-text">
+                        Quando apri PalermoHub per la prima volta, succede qualcosa di interessante dietro le quinte. Il sito scarica un file che contiene tutte le informazioni sulle mappe disponibili - un po' come scaricare l'indice di una biblioteca.
+                    </div>
+                    
+                    <div class="note">
+                        <div class="note-content">
+                            <strong>Ma ecco la parte intelligente:</strong> una volta scaricato, questo "indice" viene conservato nella memoria del tuo browser per 30 minuti. È come se il bibliotecario ti desse una copia dell'elenco dei libri da tenere con te, così la prossima volta non deve rifarlo da capo. <strong>Risultato?</strong> Il sito si carica molto più velocemente nei tuoi prossimi accessi.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Lo Slider delle Mappe in Evidenza</h3>
+                    <div class="content-text">
+                        In cima alla pagina trovi uno slider che mostra a rotazione 5 mappe interessanti, di solito le più recenti. Funziona come una vetrina di un negozio: ti fa vedere subito cosa c'è di nuovo e interessante. Puoi cliccare sulle frecce per navigare manualmente, o lasciare che scorra da solo ogni 5 secondi.
+                    </div>
+                </div>
+            </div>
+<img src="legend/funzionalita/funz_01.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+ <ol class="content-list numbered-list"> <p>  
                   <li>Statistiche; </li>
 						<li>Selettori filtri, per Categoria, Territorio, Fonte dati, anno, tag e autore/i delle mappe; </li>
 						<li>Ricerca intelligente (Smart search)trova le mappe specifiche attraverso parole chiave </li>
@@ -403,21 +443,81 @@
 						<li>Strumenti per la visualizzazione e la navigazione nell'elenco delle mappe:</li>
 						<li>Indicazione dell'ultimo aggiornamento</li></p>
                          </ol>
-						  </div> 
-						  </div>		  
-						  <hr class="content-separator">
-			<div class="section animation-delay-1 ">			  
-                <h3>Sistema di ricerca e filtri</h3>
-                <ul>
-                    <li><strong>Barra di ricerca:</strong> strumento per trovare mappe specifiche attraverso parole chiave</li>
-                    <li><strong>Sistema di risultati:</strong> interfaccia che mostra il numero di risultati trovati con indicazioni chiare</li>
-					<strong>Esempio di Smart search </strong>					  
-					<img src="legend/funzionalita/funz_02.jpg" class="responsive-image" Title="Esempio di Smart search " alt=""/>	
-					<li><strong>Paginazione:</strong> sistema per navigare agevolmente tra i risultati quando sono numerosi</li>
-                			
-			<strong>Tipi di visualizzazioni </strong>
-			<img src="legend/funzionalita/funz_03.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
-			           <ol class="content-list numbered-list"> <p>  
+            <hr class="chapter-separator">
+
+            <!-- Chapter 3 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Come Cercare Quello Che Ti Interessa</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">La Ricerca Intelligente</h3>
+                    <div class="content-text">
+                        La barra di ricerca di PalermoHub non è una ricerca normale. È più come avere un assistente che capisce quello che vuoi anche se non lo dici perfettamente.
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4 class="subsection-title">Come funziona in pratica:</h4>
+                        <ul class="content-list numbered-list">
+                            <li><strong>Tollera gli errori</strong>Se scrivi "traffico" invece di "traffico", ti trova comunque quello che cerchi</li>
+                            <li><strong>Capisce i sinonimi</strong> Se cerchi "biciclette" ti trova anche le mappe delle "bici" e delle "piste ciclabili"</li>
+                            <li><strong>Suggerisce mentre scrivi</strong>Dopo che hai digitato almeno 2 lettere, inizia a mostrarti i risultati più probabili</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <h4 class="subsection-title">Il sistema di punteggio:</h4>
+                        <div class="content-text">Ogni mappa riceve un "voto" basato su quanto corrisponde alla tua ricerca:</div>
+                        <ul class="content-list numbered-list">
+                            <li>Se la parola è nel titolo → voto alto</li>
+                            <li>Se è nella descrizione → voto medio</li>
+                            <li>Se è nei tag o nelle informazioni aggiuntive → voto più basso</li>
+                        </ul>
+                        <div class="content-text">I risultati vengono ordinati dal voto più alto al più basso, così trovi subito quello che cerchi.</div>
+                    </div>
+                </div>
+<img src="legend/funzionalita/funz_02.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+                <div class="section">
+                    <h3 class="section-title">I Filtri: Come un Sistema di Classificazione</h3>
+                    <div class="content-text">
+                        Oltre alla ricerca, puoi usare i filtri per restringere i risultati. È come in una biblioteca dove puoi cercare per argomento, autore, anno di pubblicazione:
+                    </div>
+                    <ul class="content-list numbered-list">
+                        <li><strong>Categoria</strong> Trasporti, Ambiente, Cultura, ecc.</li>
+                        <li><strong>Territorio</strong> Palermo Centro, Periferie, Provincia, Sicilia</li>
+                        <li><strong>Anno</strong> Quando è stata creata la mappa</li>
+                        <li><strong>Autore</strong> Chi l'ha realizzata</li>
+                        <li><strong>Fonte dati</strong> Da dove vengono i dati (Comune, Regione, ecc.)</li>
+                        <li><strong>Tag</strong> Parole chiave associate</li>
+                    </ul>
+                    
+                    <div class="important">
+                        <strong>La magia dei filtri interconnessi:</strong> Quando selezioni un filtro, gli altri si aggiornano automaticamente. Se scegli "Trasporti" come categoria, il filtro "Territorio" ti mostrerà solo le zone per cui esistono mappe sui trasporti. È come se il sistema eliminasse automaticamente le combinazioni che non portano a nessun risultato.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Le Statistiche in Tempo Reale</h3>
+                    <div class="content-text">
+                        In alto vedi sempre quante mappe ci sono in totale, quante categorie, quanti autori e - soprattutto - quanti risultati corrispondono ai tuoi filtri attuali. È un modo per capire subito se stai restringendo troppo la ricerca o se hai ancora molte opzioni tra cui scegliere.
+                    </div>
+                </div>
+            </div>
+
+            <hr class="chapter-separator">
+
+            <!-- Chapter 4 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Come Navigare tra le Mappe</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Due Modi di Vedere i Risultati</h3>
+                    <div class="content-text">PalermoHub ti offre due modi per esplorare le mappe:</div>
+                    
+                    <div class="content-text">
+                        <strong>Vista a Griglia</strong> (predefinita): Le mappe sono mostrate come delle "carte" con immagine, titolo e informazioni principali. È più visuale e ti permette di vedere subito di cosa si tratta.
+                    </div>
+                    <img src="legend/funzionalita/funz_03.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+							           <ol class="content-list numbered-list"> <p>  
                   <li>Visualizzazione scroll infinito; </li>
 						<li>Visualizzazione a pagine; </li>
 						<li>Reset filtri usati</li>
@@ -426,129 +526,221 @@
 						<li>Navigazione: numerazione pagine e pulsanti:</li></p>
 						<li>Selettore per il numero di mappe da caricare per pagina.</li></p>
                          </ol> 
-						<strong>Layout Lista</strong>
-						<img src="legend/funzionalita/funz_04.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>		
-							<hr class="content-separator">					
-				<h3>Funzionalità dinamiche</h3>
-                <ul>
-                    <li><strong>Aggiornamento automatico:</strong> i dati vengono aggiornati automaticamente per garantire informazioni sempre attuali</li>
-                    <li><strong>Timestamp:</strong> indicazione dell'ultimo aggiornamento per trasparenza sui dati</li>
-                    <li><strong>Caricamento asincrono:</strong> le mappe vengono caricate dinamicamente per ottimizzare le prestazioni</li>
-								<strong>Breadcrumbs e funzione cerca </strong>
-			<img src="legend/funzionalita/funz_05.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
-			           <ol class="content-list numbered-list"> <p>  
-                   	<li>Breadcrumbs, mostra il percorso gerarchico della pagina in cui si trova; </li>
-						<li>Sistema di navigazione e classificazione delle mappe con Breadcrumbs</li>
-						<li>Barra di ricerca intelligente sincronizzata con la home page. Permette di cercare per titolo, descrizione, autore e altri criteri. La ricerca restituisce risultati direttamente nella home page, mostrando le mappe che corrispondono ai criteri di ricerca selezionati. </li></p>
-                         </ol> 
-						<p> 
-						Ogni mappa nella piattaforma è classificata secondo criteri specifici (categoria, difficoltà, autore, tag, ecc.) che ne determinano la raggiungibilità attraverso diversi percorsi di navigazione.<br>
-						
-						<strong>Breadcrumbs intelligente:</strong> Nella barra di navigazione (breadcrumbs) vengono visualizzati tutti i filtri applicati che hanno portato alla mappa corrente. Ogni elemento del percorso rappresenta un criterio di classificazione specifico.<br>
-						
-						<strong>Navigazione interattiva:</strong> Cliccando su qualsiasi filtro nella sequenza dei breadcrumbs, l'utente accede immediatamente all'elenco completo delle mappe che corrispondono a quel particolare criterio di filtraggio. Questo permette di esplorare facilmente mappe correlate o alternative senza dover tornare indietro nel percorso di navigazione.				
-						</p>  			 
-                </ul>
-            </div>
-						
- <hr class="content-separator">
-            <div class="section animation-delay-2">
-                <h2>Come può essere utilizzato</h2>
-
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-icon">🏘️</div>
-                        <div class="stat-title">Cittadini</div>
+                    <div class="content-text">
+                        <strong>Vista Lista</strong>: Informazioni più dettagliate disposte in righe, utile quando vuoi confrontare rapidamente molte mappe.
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">🎓</div>
-                        <div class="stat-title">Ricercatori</div>
+                </div>
+<img src="legend/funzionalita/funz_04.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+                <div class="section">
+                    <h3 class="section-title">Paginazione vs Scorrimento Infinito</h3>
+                    <div class="content-text">Puoi scegliere come navigare tra i risultati:</div>
+                    
+                    <div class="content-text">
+                        <strong>Paginazione</strong> (predefinita): I risultati sono divisi in pagine da 12, 24, 36 o 48 mappe ciascuna. È come sfogliare un catalogo: vedi chiaramente dove sei (pagina 3 di 15) e puoi saltare direttamente a una pagina specifica.
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">🏛️</div>
-                        <div class="stat-title">PA</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-icon">💻</div>
-                        <div class="stat-title">Developer</div>
+                    
+                    <div class="content-text">
+                        <strong>Scorrimento infinito</strong>: Tutte le mappe si caricano in una lunga lista che puoi scorrere all'infinito. Comodo per esplorare senza pensare alle pagine.
                     </div>
                 </div>
 
-                <h3>Per cittadini e residenti</h3>
-                <ul>
-                    <li><strong>Esplorare il territorio:</strong> navigare Palermo attraverso diverse prospettive cartografiche per una comprensione completa della città</li>
-                    <li><strong>Trovare informazioni specifiche:</strong> localizzare quartieri, servizi pubblici, infrastrutture e punti di interesse</li>
-                    <li><strong>Visualizzare dati territoriali:</strong> accedere a informazioni geografiche in modo intuitivo e interattivo</li>
-                </ul>
-
-                <h3>Per ricercatori e studiosi</h3>
-                <ul>
-                    <li><strong>Accesso organizzato:</strong> consultare datasets cartografici multipli in un unico punto di accesso</li>
-                    <li><strong>Confronto tra rappresentazioni:</strong> analizzare diverse rappresentazioni del territorio palermitano per studi comparativi</li>
-                    <li><strong>Ricerca tematica:</strong> filtrare per categorie specifiche di interesse per ricerche mirate</li>
-                </ul>
-
-                <h3>Per amministrazione pubblica</h3>
-                <ul>
-                    <li><strong>Consultazione integrata:</strong> accedere a mappe da diverse fonti in un'interfaccia unificata</li>
-                    <li><strong>Supporto decisionale:</strong> utilizzare visualizzazioni territoriali per decisioni informate</li>
-                    <li><strong>Condivisione di dati:</strong> facilitare la trasparenza e l'accesso ai dati con cittadini e stakeholder</li>
-                </ul>
-
-                <h3>Per sviluppatori e data analyst</h3>
-                <ul>
-                    <li><strong>Hub centralizzato:</strong> punto di riferimento per mappe e dati geografici relativi a Palermo</li>
-                    <li><strong>Accesso programmatico:</strong> possibile integrazione con altri sistemi e applicazioni</li>
-                    <li><strong>Riferimento per progetti:</strong> base dati per progetti che necessitano di informazioni territoriali palermitane</li>
-                </ul>
+                <div class="section">
+                    <h3 class="section-title">Come Aprire le Mappe</h3>
+                    <div class="content-text">Ogni mappa può essere aperta in diversi modi:</div>
+                    <ul class="content-list numbered-list">
+                        <li><strong>Click normale</strong> Si apre nella stessa finestra</li>
+                        <li><strong>Ctrl+Click</strong> (o Cmd+Click su Mac) Si apre in una nuova finestra</li>
+                        <li><strong>Click con rotella del mouse</strong> Si apre in una nuova scheda</li>
+                    </ul>
+                    <div class="content-text">È lo stesso comportamento che conosci dai link normali del web.</div>
+                </div>
             </div>
- <hr class="content-separator">
-            <div class="section animation-delay-3">
-                <h2>Conclusioni</h2>
+
+            <hr class="chapter-separator">
+
+            <!-- Chapter 5 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Le Funzionalità Intelligenti</h2>
                 
-                <h3>Valore strategico della piattaforma</h3>
-                <p><strong>PalermoHub rappresenta un modello innovativo di democrazia digitale territoriale</strong>. Non è semplicemente un portale di mappe, ma un ecosistema informativo che democratizza l'accesso ai dati geografici della città, trasformando informazioni spesso frammentate in conoscenza accessibile e utilizzabile.</p>
-
-                <h3>Punti di forza identificati</h3>
-                <ul>
-                    <li><strong>Approccio multistakeholder:</strong> La piattaforma è progettata per servire efficacemente cittadini, ricercatori, amministrazione pubblica e sviluppatori, dimostrando una visione inclusiva della governance urbana digitale</li>
-                    <li><strong>Architettura scalabile:</strong> L'aggiornamento automatico, il caricamento asincrono e la paginazione indicano una progettazione tecnica solida, preparata per gestire volumi crescenti di dati e utenti</li>
-                    <li><strong>Trasparenza operativa:</strong> La visualizzazione dei timestamp degli aggiornamenti e dei contatori in tempo reale evidenzia un impegno verso la trasparenza e l'accountability</li>
-                </ul>
-
-                <h3>Potenziale di impatto</h3>
-                <ul>
-                    <li><strong>Per la partecipazione civica:</strong> PalermoHub può fungere da catalizzatore per una cittadinanza più informata e partecipativa, fornendo gli strumenti conoscitivi necessari per un engagement territoriale consapevole</li>
-                    <li><strong>Per l'innovazione urbana:</strong> La centralizzazione e standardizzazione dei dati geografici può accelerare lo sviluppo di soluzioni innovative per le sfide urbane di Palermo</li>
-                    <li><strong>Per la ricerca e l'accademia:</strong> La piattaforma può diventare un riferimento per studi urbani, geografici e sociologici sul territorio palermitano</li>
-                </ul>
-
-                <h3>Considerazioni critiche</h3>
-                <ul>
-                    <li><strong>Dipendenza dalla qualità dei dati:</strong> L'efficacia della piattaforma dipende intrinsecamente dalla qualità, completezza e aggiornamento costante dei dataset sottostanti</li>
-                    <li><strong>Necessità di governance:</strong> Il successo a lungo termine richiederà protocolli chiari per la gestione, validazione e aggiornamento dei contenuti</li>
-                    <li><strong>Digital divide:</strong> L'utilità della piattaforma potrebbe essere limitata per quei segmenti di popolazione con minore alfabetizzazione digitale</li>
-                </ul>
-
-                <h3>Visione d'insieme</h3>
-         
-                <div class="conclusion-grid">
-                    <div class="conclusion-card">
-                        <h4>🎯 Obiettivo</h4>
-                        <p>Trasformare la tecnologia in strumento di trasparenza, partecipazione e sviluppo territoriale sostenibile</p>
+                <div class="section">
+                    <h3 class="section-title">I Breadcrumbs (Le Briciole di Pane)</h3>
+                    <div class="content-text">
+                        In cima alla pagina, quando hai dei filtri attivi, appaiono delle "etichette" che mostrano il percorso che hai seguito. È come le briciole di pane di Hansel e Gretel: ti permettono di vedere dove sei e di tornare indietro facilmente.
                     </div>
-                    <div class="conclusion-card">
-                        <h4>📊 Misurazione del successo</h4>
-                        <p>Capacità di trasformare i dati in decisioni e la conoscenza geografica in azioni concrete</p>
-                    </div>
-                    <div class="conclusion-card">
-                        <h4>🏙️ Impatto finale</h4>
-                        <p>Miglioramento della qualità della vita urbana attraverso una governance più informata e partecipativa</p>
+					
+					                   
+                    <div class="content-text">
+                        Per esempio, se hai filtrato per "Categoria: Trasporti" e "Anno: 2024", vedrai due etichette cliccabili. Puoi cliccare sulla X di una di esse per rimuovere solo quel filtro, mantenendo gli altri.
+						<img src="legend/funzionalita/funz_05.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+					<div class="content-text">	
+					<h3 class="section-title">	Breadcrumbs e funzione cerca nelle pagine delle mappe</h3>
+						  <ul class="content-list numbered-list">
+						<li>Breadcrumbs, mostra il percorso gerarchico della pagina in cui si trova;</li>
+						<li>Sistema di navigazione e classificazione delle mappe con Breadcrumbs</li>
+						<li>Barra di ricerca intelligente sincronizzata con la home page. Permette di cercare per titolo, descrizione, autore e altri criteri. La ricerca restituisce risultati direttamente nella home page, mostrando le mappe che corrispondono ai criteri di ricerca selezionati.</li>
+						 </ul>
+					Ogni mappa nella piattaforma è classificata secondo criteri specifici (categoria, difficoltà, autore, tag, ecc.) che ne determinano la raggiungibilità attraverso diversi percorsi di navigazione.<br>
+
+					<b>Breadcrumbs intelligente:</b> Nella barra di navigazione (breadcrumbs) vengono visualizzati tutti i filtri applicati che hanno portato alla mappa corrente. Ogni elemento del percorso rappresenta un criterio di classificazione specifico.<br>
+
+					<b>Navigazione interattiva:</b> Cliccando su qualsiasi filtro nella sequenza dei breadcrumbs, l'utente accede immediatamente all'elenco completo delle mappe che corrispondono a quel particolare criterio di filtraggio. Questo permette di esplorare facilmente mappe correlate o alternative senza dover tornare indietro nel percorso di navigazione.	</div>
+						
                     </div>
                 </div>
+
+                <div class="section">
+                    <h3 class="section-title">La Sincronizzazione tra Componenti</h3>
+                    <div class="content-text">
+                        Se usi la ricerca nella barra principale e poi scorri in fondo alla pagina, troverai che anche la barra di ricerca nel footer si è aggiornata automaticamente con lo stesso termine. È un dettaglio piccolo, ma rende l'esperienza più fluida.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">L'Ordinamento Intelligente</h3>
+                    <div class="content-text">
+                        Le mappe sono ordinate per data, con le più recenti in cima. Ma puoi invertire l'ordine con un click sul pulsante "Data". È utile per vedere l'evoluzione storica dei dati o per trovare informazioni di un periodo specifico.
+                    </div>
+                </div>
+            </div>
+
+            <hr class="content-separator">
+
+            <!-- Chapter 6 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Perché È Importante</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Trasparenza dei Dati Pubblici</h3>
+                    <div class="content-text">
+                        PalermoHub rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare. È un po' come tradurre il "burocratese" in linguaggio normale e presentarlo in modo visivamente comprensibile.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Citizen Science</h3>
+                    <div class="content-text">
+                        Molte delle mappe sono create da cittadini volontari che prendono i dati grezzi e li trasformano in qualcosa di utile per la comunità. È un esempio di come la tecnologia possa democratizzare l'accesso alle informazioni.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Riutilizzo Creativo</h3>
+                    <div class="content-text">
+                        Ogni mappa presente su PalermoHub può ispirare altri progetti. Un giornalista potrebbe usare una mappa del traffico per un articolo, uno studente per una tesi, un'associazione per una campagna di sensibilizzazione.
+                    </div>
+                </div>
+            </div>
+
+            <hr class="content-separator">
+			
+       <!-- Chapter 7 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Come il sito si adatta a te</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Modalità scura/chiara</h3>
+                    <div class="content-text">
+                        PalermoHub rileva automaticamente se preferisci la modalità scura o chiara dal tuo sistema operativo. Ma puoi anche cambiarla manualmente con l'interruttore nel menu. La preferenza viene ricordata per le prossime visite.onali difficili da navigare. È un po' come tradurre il "burocratese" in linguaggio normale e presentarlo in modo visivamente comprensibile.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Responsive design: dallo schermo grande al telefono</h3>
+                    <div class="content-text">
+                        Il sito si adatta automaticamente al dispositivo che stai usando:
+						<p><strong>Su computer</strong>: Layout a più colonne, tutti i controlli visibili, menu orizzontale</p>
+<p><strong>Su tablet</strong>: Layout ottimizzato per il touch, dimensioni più grandi per i pulsanti</p>
+<p><strong>Su smartphone</strong>: - Menu a hamburger (le tre lineette) - Ricerca e filtri ripiegabili - Layout a colonna singola - Controlli ottimizzati per il dito</p>		
+</div>	
+ <h3 class="section-title">Accessibilità</h3>
+                    <div class="content-text">
+                        PalermoHub è progettato per essere usabile da tutti:
+						<p><strong>Navigazione da tastiera</strong>: Puoi usare Tab, Enter, spazio e le frecce per navigare</p>
+<p><strong>Screen reader</strong>: Le informazioni sono organizzate per essere lette correttamente dai software per non vedenti</p>
+<p><strong>Contrasti</strong>:I colori rispettano gli standard di accessibilità per chi ha difficoltà visive</p>		
+</div>	
+			
+<hr class="content-separator">			
+			
+			
+       <!-- Chapter 8 -->
+            <div class="chapter">
+                <h2 class="chapter-title">La tecnica... Spiegata in modo semplice</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Come vengono gestiti i dati¶</h3>
+                    <div class="content-text">
+                        Tutte le informazioni sulle mappe sono contenute in un file CSV (come un foglio di calcolo) che viene aggiornato regolarmente. Quando apri il sito:
+						 <ul class="content-list numbered-list">
+						<li>Il browser controlla se ha già una copia recente dei dati</li>
+						<li>Se sì, li usa immediatamente (velocità massima)</li>
+						<li>Se no, scarica la versione aggiornata</li>
+						<li>I dati vengono "processati" per creare gli indici di ricerca</li>
+						 </ul>
+						 
+						   <h3 class="section-title">Il sistema di ricerca</h3>
+						 <div class="content-text">
+						 Quando digiti nella barra di ricerca, succede questo:
+						 	 <ul class="content-list numbered-list">
+							 <li>Il sistema aspetta 300 millisecondi dopo che hai smesso di scrivere (così non fa troppe ricerche mentre stai ancora digitando)</li>
+							<li>Divide la tua query in parole e le "pulisce" (rimuove articoli come "il", "la", ecc.)</li>
+							<li>Cerca queste parole in tutti i campi di tutte le mappe</li>
+							<li>Calcola un punteggio per ogni risultato</li>
+							<li>Ordina i risultati per punteggio e te li mostra</li>
+							 </ul>
+						 </div>
+						 
+						 
+					<h3 class="section-title">La gestione degli errori</h3>
+						 <div class="content-text">
+						 Il sito è progettato per funzionare anche quando qualcosa va storto:
+						 	 <ul class="content-list numbered-list">
+							<li><b>Connessione lenta:</b> Mostra indicatori di caricamento</li>
+							<li><b>Immagini mancanti:</b> Genera automaticamente un'immagine placeholder</li>
+							<li><b>Dati corrotti:</b> Salta gli elementi problematici e continua</li>
+							<li><b>Cache danneggiata:</b> Si ripulisce automaticamente e ricarica i dati
+							 </ul>
+</div>
+						 
+								<h3 class="section-title">Privacy e Cookie</h3>
+						 <div class="content-text">
+						 Il sito rispetta rigorosamente la privacy:
+						 	 <ul class="content-list numbered-list">
+							<li><b>Cookie necessari:</b> Solo quelli indispensabili per il funzionamento (preferenze tema, cache)</li>
+							<li><b>Cookie analitici:</b> Solo se dai il consenso, per capire come migliorare il sito</li>
+							<li><b>Controllo granulare:</b> Puoi scegliere esattamente quali cookie accettare</li>
+							<li><b>Modifiche:</b> Puoi cambiare idea in qualsiasi momento dal link nel footer</li>
+							 </ul>
+</div>			 
+			 
+                    </div>
+                </div>
+			
+<hr class="content-separator">			
+            <!-- Final Chapter -->
+            <div class="chapter">
+                <h2 class="chapter-title">L'Esperienza Utente in Sintesi</h2>
+                <div class="content-text">
+                    PalermoHub è progettato attorno a un principio semplice: <span class="highlight">rendere facile trovare quello che cerchi, anche se non sai esattamente cosa stai cercando</span>.
+                </div>
+                <div class="content-text">È come avere un bibliotecario digitale molto paziente che:</div>
+                <ul class="content-list numbered-list">
+                    <li>Capisce quello che dici anche se non lo dici perfettamente</li>
+                    <li>Ricorda le tue preferenze</li>
+                    <li>Ti suggerisce cose correlate che potrebbero interessarti</li>
+                    <li>Si adatta al dispositivo che stai usando</li>
+                    <li>Rispetta la tua privacy</li>
+                </ul>
+                <div class="content-text">
+                    Il risultato è una piattaforma che invita all'esplorazione e rende i dati pubblici veramente pubblici - cioè accessibili a tutti, non solo agli addetti ai lavori. <br> <br>
+					<p>Spero di essere stato chiaro e di aver coperto tutti gli aspetti essenziali... Buona esplorazione &#128512;</p>
+					<p><i>Grazie OpenDataSicilia</i>  ❤️</p>
+                </div>
+
+                </div> 
             </div>
         </div>
-   </div>
+   </div> 
     </main>
 
     <!-- Back to Top Button -->
