@@ -1,0 +1,17 @@
+.leaflet-container .leaflet-control-mouseposition {
+	background-color: rgba(255, 255, 255, 0.9);
+	box-shadow: 0 0 5px #bbb;
+	border-radius: 2px;
+	padding: 0 5px;
+	width:110px;
+/*  margin:0;
+    left:10px;*/
+	right: 0px;
+	bottom: -6px;
+	color: #4E4B4B;
+	font: 11px/1.5 "Helvetica Neue", Arial, Helvetica, sans-serif;
+	text-align:center;
+}
+
+/* foglio di stile atlante cartografico palermo -
+ giovan battista vitrano per opendatasicilia.it */

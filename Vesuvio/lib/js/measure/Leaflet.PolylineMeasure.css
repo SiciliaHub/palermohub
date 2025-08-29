@@ -1,0 +1,30 @@
+.polyline-measure-tooltip {
+	font: 10px Arial, Helvetica, sans-serif;
+    line-height: 10px;
+	background-color: rgba(255, 255, 160, 0.7);
+    border-radius: 3px;
+	box-shadow: 1px 1px 4px #888;
+	margin: 0;
+	padding: 2px;
+	width: auto !important;
+	height: auto !important;
+	white-space: nowrap;
+}
+
+.polyline-measure-tooltip-total {
+	color: #006;
+    font-weight: bold;
+}
+
+.polyline-measure-tooltip-difference {
+	color: #060;
+}
+
+.polyline-measure-unicode-icon {
+	font-size: 19px;
+	font-weight: bold;
+	
+	}
+.leaflet-control {
+	cursor: pointer;
+}
