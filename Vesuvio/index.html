@@ -227,7 +227,7 @@ var bounds_group = new L.featureGroup([]);
 var basemaps = [
 L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 12,  maxZoom: 18, maxNativeZoom: 18, label: 'Google Terrain'}),
 	  
-	   L.tileLayer('http://a.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {attribution: '&#9400; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',minZoom: 12,  maxZoom: 18, maxNativeZoom: 18,label: 'OpenStreetMap monochrome'}),
+	   L.tileLayer('https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_all/{z}/{x}/{y}.png', {attribution: '&#9400; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',minZoom: 12,  maxZoom: 18, maxNativeZoom: 18,label: 'OpenStreetMap monochrome'}),
 	  
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: 'Source: &#9400; ESRI Satellite', minZoom: 12,  maxZoom: 18, maxNativeZoom: 18, label: 'ESRI Satellite'}), ];
 
