@@ -8,7 +8,7 @@
         <meta name="keywords" content="Open Data Sicilia, aminato, cemento, rimozione, palermo,">
         <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
         <meta http-equiv="content-language" content="IT">
-        <meta name="robots" content="index,follow">
+        <meta name="robots" content="noindex,nofollow">
         <meta name="creation_Date" content="07/05/2017">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
@@ -34,8 +34,8 @@
 <meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
 <meta name="twitter:site" content="palermohub.opendatasicilia.it" />
 <meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
-<!-- twitter -->    
-
+<!-- twitter -->      
+  	   <link rel="stylesheet" href="lib/css/template.css">
  <!-- css mappa -->
 <link href="rim_ami/base_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
@@ -94,7 +94,7 @@
 <script src="lib/js/print/leaflet.easyPrint.js"></script>
 
         <!-- script dati mappa -->
-<script src="rim_ami/2014/data/Rimozioneaminato20140.js"></script>
+<script src="rim_ami/2010_13/data/Rimozioneaminato2010130.js"></script>
  <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
 <script>
@@ -104,24 +104,85 @@
 
   gtag('config', 'UA-87653723-4');
 </script> 
+
+        <style type="text/css">
+/* Menu dropdown in alto a destra */
+.top-menu {
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    z-index: 9999; /* Molto più alto */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+	pointer-events: auto; /* Mantieni eventi nel dropdown */
+	margin-right: 200px;
+}
+
+.dropdown-btn {
+    background-color: #fff;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	
+}
+
+.dropdown-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 10000;
+	 pointer-events: auto; /* Mantieni eventi nel menu */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+/* Quando il dropdown è aperto, evita conflitti */
+.dropdown:hover {
+    isolation: isolate;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
     </head>
     <body>
- <!-- header -->    
-<header>
-     <div data-includeHTML="menu.html"></div>
-           <!-- breadcrumbs --> 
-<div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="2016_rim_ami.html" title="Rimozione di cemento amianto - Anno 2016" target="_parent">Rimozione di cemento amianto - Anno 2016</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="2015_rim_ami.html" title="Rimozione di cemento amianto - Anno 2015" target="_parent">Rimozione di cemento amianto - Anno 2015</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<strong>Rimozione di cemento amianto - Anno 2014</strong> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="2010_13_rim_ami.html" title="Rimozione di cemento amianto - Anno 2010/13" target="_parent">Rimozione di cemento amianto - Anni 2010/13</a> </div>
-<script>
-$(document).ready(function(){
-  $("#vn-click").click(function(){
-    $("#vn-info").slideToggle(250);
-  });
-});
-</script> 
-</div> 
-</header>
 
 <div id="legenda"><a class="legenda" href="#chart" title="Grafici rimozione di cemento amianto negli spazi pubblici comunali"><img src="legend/tra.png" alt="" width="42" height="42" border="0"/></a></div>
+<div class="top-menu">
+    <div class="dropdown">
+        <div class="dropdown-btn">Altre mappe disponibili ▼</div>
+        <div class="dropdown-content">
+            <a href="2016_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2016" target="_self">Rimozione amianto 2016</a>
+            <a href="2015_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2015" target="_self">Rimozione amianto 2015</a>
+            <a href="2014_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2014" target="_self">Rimozione amianto 2014</a>
+            <a href="2010_13_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2010/13" target="_self">Rimozione amianto 2010-13</a>
+        </div>
+    </div>
+</div>
  <div id="sidebar" class="sidebar collapsed">
    <!-- popup grafico -->  
 <div id="chart" class="overlay">
@@ -205,7 +266,7 @@ I dataset  attribuiscono ad ogni quartiere della città di Palermo il dato relat
 			});
 		</script><br>
  <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
-<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://goo.gl/CWbvz2" readonly><br>
+<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://goo.gl/erQBKe" readonly><br>
 <hr>
 <br>
 <p class="lorem"><strong>Includi la mappa</strong></p>   
@@ -214,7 +275,7 @@ I dataset  attribuiscono ad ogni quartiere della città di Palermo il dato relat
            <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
             </div>
             
-  <!-- Tab about -->
+ <!-- Tab about -->
 <div class="sidebar-pane" id="about">
 <h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
 <p class="lorem2"><strong>Che cos’è</strong><br>
@@ -266,7 +327,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
   </tbody>
 </table>
 </div>
-          
+           
             
  <!-- Tab strumenti -->
  <div class="sidebar-pane" id="settings">
@@ -307,6 +368,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
             maxZoom: 17
         });
         basemap0.addTo(map);
+		
 			<!-- scala mappa -->		
     var graphicScale = L.control.graphicScale({
 		doubleLine: true,
@@ -324,7 +386,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 		
         function setBounds() {
         }
-        function pop_Rimozioneaminato20140(feature, layer) {
+        function pop_Rimozioneaminato2010130(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
                         <th scope="row">Quartiere:</th>\
@@ -332,21 +394,21 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                     </tr>\
                     <tr>\
                         <th scope="row">Rimozione anni 2010/13 (Kg):</th>\
-                        <td>' + (feature.properties['2010-2013'] !== null ? Autolinker.link(String(feature.properties['2010-2013'])) : '') + '</td>\
+                        <td>' + (feature.properties['2010-2013'] !== null ? Autolinker.link(String(feature.properties['2010-2013'])) : '') + ' (Anno di riferimento)</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Rimozione anno 2014 (Kg):</th>\
-                        <td>' + (feature.properties['2014'] !== null ? Autolinker.link(String(feature.properties['2014'])) : '') + ' (Anno di riferimento)</td>\
+                        <td>' + (feature.properties['2014'] !== null ? Autolinker.link(String(feature.properties['2014'])) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <th scope="row">Rimozione anno 2015 (Kg):</th>\
+                        <th scope="row">Rimozione anno 2015 (Kg)</th>\
                         <td>' + (feature.properties['2015'] !== null ? Autolinker.link(String(feature.properties['2015'])) : '') + '</td>\
                     </tr>\
                     <tr>\
                         <th scope="row">Rimozione anno 2016 (Kg):</th>\
                         <td>' + (feature.properties['2016_1'] !== null ? Autolinker.link(String(feature.properties['2016_1'])) : '') + '</td>\
                     </tr>\
-					                    <tr>\
+										                    <tr>\
                         <th scope="row"><hr></th>\
                         <td><hr></td>\
                     </tr>\
@@ -358,11 +420,11 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
             layer.bindPopup(popupContent);
         }
 
-        function style_Rimozioneaminato20140(feature) {
-            switch(feature.properties['2014']) {
-                case '21380':
+        function style_Rimozioneaminato2010130(feature) {
+            switch(feature.properties['2010-2013']) {
+                case '16237':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -373,9 +435,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(215,48,39,0.75)',
             }
                     break;
-                case '18190':
+                case '14077':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -386,9 +448,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(215,48,39,0.75)',
             }
                     break;
-                case '16660':
+                case '12816':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -399,9 +461,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(215,48,39,0.75)',
             }
                     break;
-                case '10260':
+                case '10354':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -412,9 +474,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(252,141,89,0.75)',
             }
                     break;
-                case '7600':
+                case '9364':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -425,9 +487,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(252,141,89,0.75)',
             }
                     break;
-                case '7040':
+                case '9252':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -438,9 +500,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(252,141,89,0.75)',
             }
                     break;
-                case '5060':
+                case '8681':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -451,9 +513,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(252,141,89,0.75)',
             }
                     break;
-                case '3980':
+                case '8403':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -464,9 +526,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(254,224,139,0.75)',
             }
                     break;
-                case '3540':
+                case '7220':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -477,9 +539,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(254,224,139,0.75)',
             }
                     break;
-                case '3110':
+                case '7131':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -490,9 +552,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(254,224,139,0.75)',
             }
                     break;
-                case '2980':
+                case '6903':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -503,9 +565,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(255,255,191,0.75)',
             }
                     break;
-                case '2220':
+                case '6412':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -516,9 +578,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(255,255,191,0.75)',
             }
                     break;
-                case '2161':
+                case '5943':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -529,9 +591,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(255,255,191,0.75)',
             }
                     break;
-                case '2160':
+                case '4890':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -542,9 +604,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(255,255,191,0.75)',
             }
                     break;
-                case '1920':
+                case '4857':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -555,9 +617,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(217,239,139,0.75)',
             }
                     break;
-                case '1660':
+                case '3481':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -568,9 +630,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(217,239,139,0.75)',
             }
                     break;
-                case '1650':
+                case '3149':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -581,9 +643,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(217,239,139,0.75)',
             }
                     break;
-                case '1620':
+                case '3054':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -594,9 +656,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(145,207,96,0.75)',
             }
                     break;
-                case '1310':
+                case '2560':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -607,9 +669,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(145,207,96,0.75)',
             }
                     break;
-                case '1200':
+                case '2506':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -620,9 +682,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(145,207,96,0.75)',
             }
                     break;
-                case '720':
+                case '2262':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -633,9 +695,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(145,207,96,0.75)',
             }
                     break;
-                case '440':
+                case '1949':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -646,9 +708,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(26,152,80,0.75)',
             }
                     break;
-                case '298':
+                case '1356':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -659,9 +721,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(26,152,80,0.75)',
             }
                     break;
-                case '200':
+                case '1353':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -672,9 +734,9 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                 fillColor: 'rgba(26,152,80,0.75)',
             }
                     break;
-                case '140':
+                case '1053':
                     return {
-                pane: 'pane_Rimozioneaminato20140',
+                pane: 'pane_Rimozioneaminato2010130',
                 opacity: 1,
                 color: 'rgba(215,25,28,0.75)',
                 dashArray: '10,5',
@@ -687,19 +749,19 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
                     break;
             }
         }
-        map.createPane('pane_Rimozioneaminato20140');
-        map.getPane('pane_Rimozioneaminato20140').style.zIndex = 400;
-        map.getPane('pane_Rimozioneaminato20140').style['mix-blend-mode'] = 'normal';
-    var layer_Rimozioneaminato20140 = new L.geoJson(json_Rimozioneaminato20140, {
+        map.createPane('pane_Rimozioneaminato2010130');
+        map.getPane('pane_Rimozioneaminato2010130').style.zIndex = 400;
+        map.getPane('pane_Rimozioneaminato2010130').style['mix-blend-mode'] = 'normal';
+    var layer_Rimozioneaminato2010130 = new L.geoJson(json_Rimozioneaminato2010130, {
         attribution: '<a href=""></a>',
-        pane: 'pane_Rimozioneaminato20140',
-        onEachFeature: pop_Rimozioneaminato20140,
-        style: style_Rimozioneaminato20140
+        pane: 'pane_Rimozioneaminato2010130',
+        onEachFeature: pop_Rimozioneaminato2010130,
+        style: style_Rimozioneaminato2010130
     });
-        bounds_group.addLayer(layer_Rimozioneaminato20140);
-        map.addLayer(layer_Rimozioneaminato20140);
+        bounds_group.addLayer(layer_Rimozioneaminato2010130);
+        map.addLayer(layer_Rimozioneaminato2010130);
         var baseMaps = {};
-        L.control.layers(baseMaps,{'Rimozione aminato 2014<br /><table><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_21380kgBrancaccioCiaculli0.png" /></td><td>21.380 kg - Brancaccio – Ciaculli</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_18190kgPallavicino1.png" /></td><td>18.190 kg - Pallavicino</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_16660kgCruillasCep2.png" /></td><td>16.660 kg - Cruillas - Cep</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_10260kgPartannaMondello3.png" /></td><td>10.260 kg - Partanna Mondello</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_7600kgUditorePassodiRigano4.png" /></td><td>7.600 kg - Uditore - Passo di Rigano</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_7040kgVillagraziaFalsomiele5.png" /></td><td>70.40 kg - Villagrazia – Falsomiele</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_5060kgResuttanaSLorenzo6.png" /></td><td>5.060 kg - Resuttana - S. Lorenzo</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_3980kgTribunaliCastellammare7.png" /></td><td>3.980 kg - Tribunali – Castellammare</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_3540kgZisa8.png" /></td><td>3.540 kg - Zisa</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_3110kgSettecannoli9.png" /></td><td>3.110 kg - Settecannoli</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_2980kgMontegrappaSRosalia10.png" /></td><td>2.980 kg - Montegrappa – S. Rosalia</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_2220kgCubaCalatafimi11.png" /></td><td>2.220 kg - Cuba – Calatafimi</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_2160kgOretoStazione12.png" /></td><td>2.160 kg - Oreto-Stazione</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_2160kgPalazzoRealeMontediPiet13.png" /></td><td>2.160 kg - Palazzo Reale - Monte di Pietà</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_1920kgBoccadifalco14.png" /></td><td>1.920 kg - Boccadifalco</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_1660kgMezzomonrealeVillaTasca15.png" /></td><td>1.660 kg - Mezzomonreale – Villa Tasca</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_1650kgTommasoNataleSferracavallo16.png" /></td><td>1.650 kg - Tommaso Natale – Sferracavallo</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_1620kgNoce17.png" /></td><td>1.620 kg - Noce</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_1310kgBorgoNuovo18.png" /></td><td>1.310 kg - Borgo Nuovo</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_1200kgPoliteama19.png" /></td><td>1.200 kg - Politeama</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_720kgLibert20.png" /></td><td>720 kg - Libertà</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_440kgMalaspinaPalagonia21.png" /></td><td>440 kg - Malaspina – Palagonia</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_298kgMontePellegrino22.png" /></td><td>298 kg - Monte Pellegrino</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_200kgAltarello23.png" /></td><td>200 kg - Altarello</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2014/legend/Rimozioneaminato20140_140kgArenellaVergineMaria24.png" /></td><td>140 kg - Arenella – Vergine Maria</td></tr></table>': layer_Rimozioneaminato20140,}).addTo(map);
+        L.control.layers(baseMaps,{'Rimozione aminato 2010/13<br /><table><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_16237kgMontegrappaSRosalia0.png" /></td><td>16.237 kg - Montegrappa – S. Rosalia</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_14077kgVillagraziaFalsomiele1.png" /></td><td>14.077 kg - Villagrazia – Falsomiele</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_12816kgBrancaccioCiaculli2.png" /></td><td>12.816 kg - Brancaccio – Ciaculli</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_10354kgSettecannoli3.png" /></td><td>10.354 kg - Settecannoli</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_9364kgPartannaMondello4.png" /></td><td>9.364 kg - Partanna Mondello</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_9252kgPallavicino5.png" /></td><td>9.252 kg - Pallavicino</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_8681kgUditorePassodiRigano6.png" /></td><td>8.681 kg - Uditore - Passo di Rigano</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_8403kgOretoStazione7.png" /></td><td>8.403 kg - Oreto-Stazione</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_7220kgCruillasCep8.png" /></td><td>7.220 kg - Cruillas - Cep</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_7131kgResuttanaSLorenzo9.png" /></td><td>7.131 kg - Resuttana - S. Lorenzo</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_6903kgTommasoNataleSferracavallo10.png" /></td><td>6.903 kg - Tommaso Natale – Sferracavallo</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_6412kgMezzomonrealeVillaTasca11.png" /></td><td>6.412 kg - Mezzomonreale – Villa Tasca</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_5943kgZisa12.png" /></td><td>5.943 kg - Zisa</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_4890kgMontePellegrino13.png" /></td><td>4.890 kg - Monte Pellegrino</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_4857kgPalazzoRealeMontediPiet14.png" /></td><td>4.857 kg - Palazzo Reale - Monte di Pietà</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_3481kgPoliteama15.png" /></td><td>3.481 kg - Politeama</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_3149kgCubaCalatafimi16.png" /></td><td>3.149 kg - Cuba – Calatafimi</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_3054kgMalaspinaPalagonia17.png" /></td><td>3.054 kg - Malaspina – Palagonia</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_2560kgNoce18.png" /></td><td>2.560 kg - Noce</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_2506kgAltarello19.png" /></td><td>2.506 kg - Altarello</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_2262kgArenellaVergineMaria20.png" /></td><td>2.262 kg - Arenella – Vergine Maria</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_1949kgTribunaliCastellammare21.png" /></td><td>1.949 kg - Tribunali – Castellammare</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_1356kgLibert22.png" /></td><td>1.356 kg - Libertà</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_1353kgBoccadifalco23.png" /></td><td>1.353 kg - Boccadifalco</td></tr><tr><td style="text-align: center;"><img src="rim_ami/2010_13/legend/Rimozioneaminato2010130_1053kgBorgoNuovo24.png" /></td><td>1.053 kg - Borgo Nuovo</td></tr></table>': layer_Rimozioneaminato2010130,}).addTo(map);
         setBounds();
 				<!-- strumenti di leaflet -->
 		
@@ -715,13 +777,22 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 <div id="tavolab"></div>           
 <div id="ods"><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
 <img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  
-<!-- beta version     
- <div id="beta"><img src="legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> -->
-   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
-    <!-- Inclusione header e footer PalermoHub -->
-<link rel="stylesheet" href="lib/css/ph-css.css">
-<script src="lib/js/client/ph-header.js"></script>
-<script src="lib/js/client/ph-footer.js"></script>
+<script>
+$(document).ready(function() {
+    // Handler solo per il bottone dropdown
+    $(document).on('click', '.dropdown-btn', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation(); // Più specifico di stopPropagation
+        $('.dropdown-content').toggle();
+    });
+    
+    // Chiudi solo se click è fuori dal dropdown
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.dropdown').length) {
+            $('.dropdown-content').hide();
+        }
+    });
+});
+</script>
 </body>
 </html>

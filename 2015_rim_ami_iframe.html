@@ -8,7 +8,7 @@
         <meta name="keywords" content="Open Data Sicilia, aminato, cemento, rimozione, palermo,">
         <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
         <meta http-equiv="content-language" content="IT">
-        <meta name="robots" content="index,follow">
+        <meta name="robots" content="noindex,nofollow">
         <meta name="creation_Date" content="07/05/2017">
         <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
         <meta name="mobile-web-app-capable" content="yes">
@@ -104,24 +104,86 @@
 
   gtag('config', 'UA-87653723-4');
 </script> 
+        <style type="text/css">
+/* Menu dropdown in alto a destra */
+.top-menu {
+    position: absolute;
+    top: 10px;
+    right: 60px;
+    z-index: 9999; /* Molto più alto */
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+	pointer-events: auto; /* Mantieni eventi nel dropdown */
+	margin-right: 200px;
+}
+
+.dropdown-btn {
+    background-color: #fff;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	
+}
+
+.dropdown-btn:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 4px;
+    z-index: 10000;
+	 pointer-events: auto; /* Mantieni eventi nel menu */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #ddd;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+/* Quando il dropdown è aperto, evita conflitti */
+.dropdown:hover {
+    isolation: isolate;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+</style>
+
     </head>
     <body>
- <!-- header -->    
-<header>
-     <div data-includeHTML="menu.html"></div>
-           <!-- breadcrumbs --> 
-<div id="vn-info"><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="2016_rim_ami.html" title="Rimozione di cemento amianto - Anno 2016" target="_parent">Rimozione di cemento amianto - Anno 2016</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<strong>Rimozione di cemento amianto - Anno 2015</strong><br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="2014_rim_ami.html" title="Rimozione di cemento amianto - Anno 2014" target="_parent">Rimozione di cemento amianto - Anno 2014</a> <br><i class="fa fa-map-o" aria-hidden="true"></i>&nbsp;<a href="2010_13_rim_ami.html" title="Rimozione di cemento amianto - Anno 2010/13" target="_parent">Rimozione di cemento amianto - Anni 2010/13</a> </div>
-<script>
-$(document).ready(function(){
-  $("#vn-click").click(function(){
-    $("#vn-info").slideToggle(250);
-  });
-});
-</script> 
-</div> 
-</header>
+
 
 <div id="legenda"><a class="legenda" href="#chart" title="Grafici rimozione di cemento amianto negli spazi pubblici comunali"><img src="legend/tra.png" alt="" width="42" height="42" border="0"/></a></div>
+<div class="top-menu">
+    <div class="dropdown">
+        <div class="dropdown-btn">Altre mappe disponibili ▼</div>
+        <div class="dropdown-content">
+            <a href="2016_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2016" target="_self">Rimozione amianto 2016</a>
+            <a href="2015_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2015" target="_self">Rimozione amianto 2015</a>
+            <a href="2014_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2014" target="_self">Rimozione amianto 2014</a>
+            <a href="2010_13_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2010/13" target="_self">Rimozione amianto 2010-13</a>
+        </div>
+    </div>
+</div>
  <div id="sidebar" class="sidebar collapsed">
    <!-- popup grafico -->  
 <div id="chart" class="overlay">
@@ -726,13 +788,22 @@ function style_Rimozioneaminato20150(feature) {
 <div id="tavolab"></div>           
 <div id="ods"><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
 <img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  
-<!-- beta version     
- <div id="beta"><img src="legend/beta.png" width="80" title="beta version" alt="beta version"></a></div> -->
-   <!-- Go to www.addthis.com/dashboard to customize your tools --> 
-<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5b56cbd38a5ba708"></script>
-    <!-- Inclusione header e footer PalermoHub -->
-<link rel="stylesheet" href="lib/css/ph-css.css">
-<script src="lib/js/client/ph-header.js"></script>
-<script src="lib/js/client/ph-footer.js"></script>
+<script>
+$(document).ready(function() {
+    // Handler solo per il bottone dropdown
+    $(document).on('click', '.dropdown-btn', function(e) {
+        e.preventDefault();
+        e.stopImmediatePropagation(); // Più specifico di stopPropagation
+        $('.dropdown-content').toggle();
+    });
+    
+    // Chiudi solo se click è fuori dal dropdown
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.dropdown').length) {
+            $('.dropdown-content').hide();
+        }
+    });
+});
+</script>
 </body>
 </html>
