@@ -81,8 +81,6 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
  
-<!-- script menu includes -->
-<script type="text/javascript" src="script.js"></script> 
       
 <script src="lib/js/sidebar/leaflet-sidebar.js"></script>
 <script src="lib/js/social/jquery_csbuttons.js"></script>
@@ -104,86 +102,171 @@
 
   gtag('config', 'UA-87653723-4');
 </script> 
-        <style type="text/css">
-/* Menu dropdown in alto a destra */
-.top-menu {
-    position: absolute;
-    top: 10px;
-    right: 60px;
-    z-index: 9999; /* Molto più alto */
-}
+  <style type="text/css">
+        /* 1. Menu FAB (Floating Action Button) - CORRETTO */
+        .fab-menu {
+            position: fixed; /* Cambiato da absolute a fixed */
+            bottom: 20px;
+            left: 50%; /* Centrato orizzontalmente */
+            transform: translateX(-50%); /* Centrato perfettamente */
+            z-index: 10001; /* Z-index più alto di Leaflet */
+        }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
-	pointer-events: auto; /* Mantieni eventi nel dropdown */
-	margin-right: 200px;
-}
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff9900;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10002;
+        }
 
-.dropdown-btn {
-    background-color: #fff;
-    border: 2px solid rgba(0,0,0,0.2);
-    border-radius: 4px;
-    padding: 5px 10px;
-    cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.65);
-	
-}
+        .fab-main:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 153, 0, 0.6);
+			
+        }
 
-.dropdown-btn:hover {
-    background-color: #f1f1f1;
-}
+        /* Previeni interferenze con la mappa */
+        .fab-main, .fab-option {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: auto;
+        }
 
-.dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    border-radius: 4px;
-    z-index: 10000;
-	 pointer-events: auto; /* Mantieni eventi nel menu */
-}
+        /* Previeni propagazione eventi verso la mappa */
+        .fab-menu * {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);  
+        }
 
-.dropdown-content a {
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    border-bottom: 1px solid #ddd;
-}
+        .fab-options {
+            position: absolute;
+            bottom: 70px; /* Sopra il pulsante principale */
+            left: 50%;
+            transform: translateX(-50%); /* Centrato rispetto al pulsante */
+            transform-origin: bottom center; /* Origine dell'animazione al centro */
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10001;
+            display: flex;
+            flex-direction: column-reverse; /* Opzioni dal basso verso l'alto */
+            gap: 10px;
+        }
 
-.dropdown-content a:hover {
-    background-color: #f1f1f1;
-}
-/* Quando il dropdown è aperto, evita conflitti */
-.dropdown:hover {
-    isolation: isolate;
-}
+        .fab-menu.active .fab-options {
+            opacity: 1;
+            pointer-events: all;
+        }
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-</style>
+        .fab-option {
+            display: flex;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #ff9900;
+            color: #ff9900;
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            position: relative;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10001; /* CORRETTO: rimosso il duplicato */
+        }
+
+        .fab-option:hover {
+            background: #ff9900;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .fab-option::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 60px; /* Cambiato da right a left per centrare */
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+            z-index: 10003;
+        }
+
+        .fab-option:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Overlay per chiudere i menu - MIGLIORATO */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10000;
+            pointer-events: none; /* IMPORTANTE: previene interferenze quando nascosto */
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all; /* Riattiva eventi solo quando attivo */
+        }
+
+        /* Assicuriamo che la mappa non interferisca */
+        .sidebar-map {
+            position: relative;
+            z-index: 1;
+        }
+        </style>
 
     </head>
     <body>
 
 
 <div id="legenda"><a class="legenda" href="#chart" title="Grafici rimozione di cemento amianto negli spazi pubblici comunali"><img src="legend/tra.png" alt="" width="42" height="42" border="0"/></a></div>
-<div class="top-menu">
-    <div class="dropdown">
-        <div class="dropdown-btn">Altre mappe disponibili ▼</div>
-        <div class="dropdown-content">
-            <a href="2016_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2016" target="_self">Rimozione amianto 2016</a>
-            <a href="2015_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2015" target="_self">Rimozione amianto 2015</a>
-            <a href="2014_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2014" target="_self">Rimozione amianto 2014</a>
-            <a href="2010_13_rim_ami_iframe.html" Title="Rimozione di cemento amianto 2010/13" target="_self">Rimozione amianto 2010-13</a>
+        <!-- Menu FAB corretto -->
+        <div class="demo-section">
+            <div class="fab-menu" id="fabMenu">
+                <button class="fab-main" onclick="toggleFabMenu()" title="Altre mappe disponibili">
+                    <i class="fa fa-calendar"></i>
+                </button>
+                <div class="fab-options">
+                    <a href="2016_rim_ami_iframe.html" class="fab-option" data-label="Rimozione amianto 2016">2016</a>
+                    <a href="2015_rim_ami_iframe.html" class="fab-option" data-label="Rimozione amianto 2015">2015</a>
+                    <a href="2014_rim_ami_iframe.html" class="fab-option" data-label="Rimozione amianto 2014">2014</a>
+                    <a href="2010_13_rim_ami_iframe.html" class="fab-option" data-label="Rimozione amianto 2010-13">2013</a>
+                </div>
+            </div>
         </div>
-    </div>
-</div>
+
+        <!-- Overlay per chiudere i menu -->
+        <div class="overlay" id="overlay" onclick="closeAllMenus()"></div>
+		
  <div id="sidebar" class="sidebar collapsed">
    <!-- popup grafico -->  
 <div id="chart" class="overlay">
@@ -788,22 +871,70 @@ function style_Rimozioneaminato20150(feature) {
 <div id="tavolab"></div>           
 <div id="ods"><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
 <img src="lib/images/ods.svg" alt="opendatasicilia" width="80" border="0" title="opendatasicilia.it"></a></div>  
-<script>
-$(document).ready(function() {
-    // Handler solo per il bottone dropdown
-    $(document).on('click', '.dropdown-btn', function(e) {
-        e.preventDefault();
-        e.stopImmediatePropagation(); // Più specifico di stopPropagation
-        $('.dropdown-content').toggle();
-    });
-    
-    // Chiudi solo se click è fuori dal dropdown
-    $(document).on('click', function(e) {
-        if (!$(e.target).closest('.dropdown').length) {
-            $('.dropdown-content').hide();
+        <script>
+        function toggleFabMenu(event) {
+            // Previeni propagazione eventi alla mappa
+            if (event) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+            
+            console.log('Toggle menu clicked'); // Debug
+            const fabMenu = document.getElementById('fabMenu');
+            const overlay = document.getElementById('overlay');
+            
+            if (fabMenu && overlay) {
+                fabMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                console.log('Menu toggled:', fabMenu.classList.contains('active')); // Debug
+            } else {
+                console.error('Elementi del menu non trovati'); // Debug
+            }
         }
-    });
-});
-</script>
+
+        function closeAllMenus() {
+            console.log('Closing all menus'); // Debug
+            const fabMenu = document.getElementById('fabMenu');
+            const overlay = document.getElementById('overlay');
+            
+            if (fabMenu) fabMenu.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+        }
+
+        // Chiudi menu con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAllMenus();
+            }
+        });
+
+        // Previeni interferenze con la mappa
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM caricato');
+            console.log('FAB Menu:', document.getElementById('fabMenu'));
+            console.log('Overlay:', document.getElementById('overlay'));
+            
+            // Aggiungi event listeners per prevenire propagazione
+            const fabMenu = document.getElementById('fabMenu');
+            if (fabMenu) {
+                fabMenu.addEventListener('mousedown', function(e) {
+                    e.stopPropagation();
+                });
+                fabMenu.addEventListener('mouseup', function(e) {
+                    e.stopPropagation();
+                });
+                fabMenu.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+                // Previeni anche eventi touch per mobile
+                fabMenu.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                });
+                fabMenu.addEventListener('touchend', function(e) {
+                    e.stopPropagation();
+                });
+            }
+        });
+        </script>
 </body>
 </html>

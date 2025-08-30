@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="it">
+    <head>
+            <title>Palermo - Rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2016</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="Palermo - Rimozione di cemento amianto negli spazi pubblici comunali nell'anno 2016 su base opendata">
+        <meta name="keywords" content="Open Data Sicilia, aminato, cemento, rimozione, palermo,">
+        <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+        <meta http-equiv="content-language" content="IT">
+        <meta name="robots" content="noindex,nofollow">
+        <meta name="creation_Date" content="07/05/2017">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="shortcut icon" href="favicon.ico"/> 
+        <link rel="icon" href="favicon.png" type="image/png"/> 
+        <style type="text/css">
+        /* 1. Menu FAB (Floating Action Button) - CORRETTO */
+        .fab-menu {
+            position: fixed; /* Cambiato da absolute a fixed */
+            bottom: 20px;
+            left: 50%; /* Centrato orizzontalmente */
+            transform: translateX(-50%); /* Centrato perfettamente */
+            z-index: 10001; /* Z-index più alto di Leaflet */
+        }
+
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff9900;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10002;
+        }
+
+        .fab-main:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 153, 0, 0.6);
+        }
+
+        .fab-options {
+            position: absolute;
+            bottom: 70px; /* Sopra il pulsante principale */
+            left: 50%;
+            transform: translateX(-50%); /* Centrato rispetto al pulsante */
+            transform-origin: bottom center; /* Origine dell'animazione al centro */
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10001;
+            display: flex;
+            flex-direction: column-reverse; /* Opzioni dal basso verso l'alto */
+            gap: 10px;
+        }
+
+        .fab-menu.active .fab-options {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .fab-option {
+            display: flex;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #ff9900;
+            color: #ff9900;
+            text-decoration: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            position: relative;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 10001; /* CORRETTO: rimosso il duplicato */
+        }
+
+        .fab-option:hover {
+            background: #ff9900;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .fab-option::before {
+            content: attr(data-label);
+            position: absolute;
+            left: 60px; /* Cambiato da right a left per centrare */
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+            z-index: 10003;
+        }
+
+        .fab-option:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Overlay per chiudere i menu */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 10000; /* Sotto il menu ma sopra la mappa */
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Assicuriamo che la mappa non interferisca */
+        .sidebar-map {
+            position: relative;
+            z-index: 1;
+        }
+        </style>
+        
+<!-- Open Graph Protocol -->
+<meta property="og:title" content="Rimozione di cemento amianto negli spazi pubblici comunali" />
+<meta property="og:description" content="Palermo - Rimozione di cemento amianto negli spazi pubblici comunali dall'anno 2010 al 2016 su base opendata." />
+<meta property="og:url" content="https://siciliahub.github.io/palermohub/2016_rim_ami.html" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<meta property="og:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/amianto.jpg" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Rimozione di cemento amianto negli spazi pubblici comunali">
+<meta name="twitter:description" content="Palermo - Rimozione di cemento amianto negli spazi pubblici comunali dall'anno 2010 al 2016 su base opendata.">
+<meta name="twitter:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/amianto.jpg">
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+
+<!-- CSS per Font Awesome (per le icone) -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+
+<style type="text/css">
+a:link {color: #FF9900; text-decoration:none;} 
+a:visited {color: #FF9900;}
+a:hover {color: #FF9900; text-decoration:underline; }
+a:active {color: #FF0000; text-decoration:none; } 
+
+/* Stili per il contenuto della pagina */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+#map {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+}
+
+.demo-section {
+    position: relative;
+    z-index: 10001;
+}
+</style>   
+    </head>
+    <body>
+        <!-- Menu FAB corretto -->
+        <div class="demo-section">
+            <div class="fab-menu" id="fabMenu">
+                <button class="fab-main" onclick="toggleFabMenu()">
+                    <i class="fa fa-calendar"></i>
+                </button>
+                <div class="fab-options">
+                    <a href="2016_rim_ami_iframe.html" class="fab-option" data-label="Rimozione amianto 2016">2016</a>
+                    <a href="2015_rim_ami_iframe.html" class="fab-option" data-label="Rimozione amianto 2015">2015</a>
+                    <a href="2014_rim_ami_iframe.html" class="fab-option" data-label="Rimozione amianto 2014">2014</a>
+                    <a href="2010_13_rim_ami_iframe.html" class="fab-option" data-label="Rimozione amianto 2010-13">2013</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay per chiudere i menu -->
+        <div class="overlay" id="overlay" onclick="closeAllMenus()"></div>
+
+        <!-- Contenuto della mappa (semplificato per il test) -->
+        <div id="map" class="sidebar-map">
+            <!-- Qui dovrebbe andare la mappa Leaflet -->
+            <div style="height: 100%; background: #e6f3ff; display: flex; align-items: center; justify-content: center; color: #666;">
+                <p>Mappa Leaflet (da implementare con i tuoi dati geografici)</p>
+            </div>
+        </div>
+
+        <script>
+        function toggleFabMenu() {
+            console.log('Toggle menu clicked'); // Debug
+            const fabMenu = document.getElementById('fabMenu');
+            const overlay = document.getElementById('overlay');
+            
+            if (fabMenu && overlay) {
+                fabMenu.classList.toggle('active');
+                overlay.classList.toggle('active');
+                console.log('Menu toggled:', fabMenu.classList.contains('active')); // Debug
+            } else {
+                console.error('Elementi del menu non trovati'); // Debug
+            }
+        }
+
+        function closeAllMenus() {
+            console.log('Closing all menus'); // Debug
+            const fabMenu = document.getElementById('fabMenu');
+            const overlay = document.getElementById('overlay');
+            
+            if (fabMenu) fabMenu.classList.remove('active');
+            if (overlay) overlay.classList.remove('active');
+        }
+
+        // Chiudi menu con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAllMenus();
+            }
+        });
+
+        // Debug: verifica che gli elementi esistano al caricamento
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM caricato');
+            console.log('FAB Menu:', document.getElementById('fabMenu'));
+            console.log('Overlay:', document.getElementById('overlay'));
+        });
+        </script>
+    </body>
+</html>

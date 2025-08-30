@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alternative Menu Eleganti</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .demo-section {
+            position: relative;
+            height: 400px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin: 30px 0 20px 0;
+            padding: 0 20px;
+        }
+
+        p {
+            padding: 0 20px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* 1. Menu FAB (Floating Action Button) */
+        .fab-menu {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .fab-main {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #ff9900;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255, 153, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .fab-main:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 153, 0, 0.6);
+        }
+
+        .fab-options {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            transform-origin: bottom right;
+            transition: all 0.3s ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .fab-menu.active .fab-options {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .fab-option {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid #ff9900;
+            color: #ff9900;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: all 0.2s ease;
+            position: relative;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .fab-option:hover {
+            background: #ff9900;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .fab-option::before {
+            content: attr(data-label);
+            position: absolute;
+            right: 60px;
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.2s ease;
+            pointer-events: none;
+        }
+
+        .fab-option:hover::before {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* 2. Menu Timeline Orizzontale */
+        .timeline-menu {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 10px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .timeline-items {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #666;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .timeline-item.active {
+            background: #ff9900;
+            color: white;
+            box-shadow: 0 2px 8px rgba(255, 153, 0, 0.3);
+        }
+
+        .timeline-item:hover:not(.active) {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 10px;
+            height: 2px;
+            background: #ddd;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        /* 3. Menu Slide Panel */
+        .slide-panel-trigger {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .slide-panel-trigger:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .slide-panel {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1001;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-panel.active {
+            right: 0;
+        }
+
+        .slide-panel-header {
+            padding: 20px;
+            background: #ff9900;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .slide-panel-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .slide-panel-content {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .slide-panel-item {
+            display: block;
+            padding: 15px;
+            text-decoration: none;
+            color: #333;
+            border-bottom: 1px solid #eee;
+            transition: all 0.2s ease;
+        }
+
+        .slide-panel-item:hover {
+            background: #f8f8f8;
+            padding-left: 25px;
+        }
+
+        /* 4. Menu Cards Floating */
+        .cards-menu-trigger {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .cards-menu-trigger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .cards-menu {
+            position: absolute;
+            top: 70px;
+            left: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 180px);
+            gap: 15px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+
+        .cards-menu.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .card-item {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .card-year {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff9900;
+            margin-bottom: 5px;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* 5. Menu Tabs Verticali */
+        .vertical-tabs {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .vertical-tab {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #666;
+            border-bottom: 1px solid #eee;
+            transition: all 0.3s ease;
+            position: relative;
+            writing-mode: vertical-lr;
+            text-orientation: mixed;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vertical-tab:last-child {
+            border-bottom: none;
+        }
+
+        .vertical-tab:hover {
+            background: #f8f8f8;
+            color: #333;
+        }
+
+        .vertical-tab.active {
+            background: #ff9900;
+            color: white;
+        }
+
+        .vertical-tab::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #ff9900;
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+
+        .vertical-tab:hover::before {
+            transform: scaleY(1);
+        }
+
+        .vertical-tab.active::before {
+            transform: scaleY(1);
+            background: white;
+        }
+
+        /* Overlay per chiudere i menu */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-container">
+        <h2>Alternative Menu Eleganti per Mappa Rimozione Amianto Palermo</h2>
+        
+        <!-- 1. FAB Menu -->
+        <div class="demo-section">
+            <span>Demo: Menu FAB (Floating Action Button)</span>
+            <div class="fab-menu" id="fabMenu">
+                <button class="fab-main" onclick="toggleFabMenu()">
+                    <i class="fa fa-calendar"></i>
+                </button>
+                <div class="fab-options">
+                    <a href="#" class="fab-option" data-label="Anno 2016">16</a>
+                    <a href="#" class="fab-option" data-label="Anno 2015">15</a>
+                    <a href="#" class="fab-option" data-label="Anno 2014">14</a>
+                    <a href="#" class="fab-option" data-label="Anni 2010-13">13</a>
+                </div>
+            </div>
+        </div>
+
+        <p><strong>Menu FAB:</strong> Ottimo per mobile, non ingombra la vista della mappa, design moderno con animazioni fluide. I tooltip mostrano l'anno completo al hover.</p>
+
+        <!-- 2. Timeline Menu -->
+        <div class="demo-section">
+            <span>Demo: Menu Timeline Orizzontale</span>
+            <div class="timeline-menu">
+                <div class="timeline-items">
+                    <a href="#" class="timeline-item">2010-13</a>
+                    <a href="#" class="timeline-item">2014</a>
+                    <a href="#" class="timeline-item">2015</a>
+                    <a href="#" class="timeline-item active">2016</a>
+                </div>
+            </div>
+        </div>
+
+        <p><strong>Menu Timeline:</strong> Rappresentazione cronologica intuitiva, mostra la progressione temporale dei dati. Ideale per dati storici sequenziali.</p>
+
+        <!-- 3. Slide Panel -->
+        <div class="demo-section">
+            <span>Demo: Menu Slide Panel</span>
+            <button class="slide-panel-trigger" onclick="toggleSlidePanel()">
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="slide-panel" id="slidePanel">
+                <div class="slide-panel-header">
+                    <h3>Seleziona Anno</h3>
+                    <button class="slide-panel-close" onclick="toggleSlidePanel()">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                <div class="slide-panel-content">
+                    <a href="#" class="slide-panel-item">Rimozione Amianto 2016</a>
+                    <a href="#" class="slide-panel-item">Rimozione Amianto 2015</a>
+                    <a href="#" class="slide-panel-item">Rimozione Amianto 2014</a>
+                    <a href="#" class="slide-panel-item">Rimozione Amianto 2010-13</a>
+                </div>
+            </div>
+        </div>
+
+        <p><strong>Slide Panel:</strong> Spazio generoso per descrizioni dettagliate, può contenere anche statistiche o filtri aggiuntivi.</p>
+
+        <!-- 4. Cards Menu -->
+        <div class="demo-section">
+            <span>Demo: Menu Cards Floating</span>
+            <button class="cards-menu-trigger" onclick="toggleCardsMenu()">
+                <i class="fa fa-calendar-o"></i> Seleziona Anno
+            </button>
+            <div class="cards-menu" id="cardsMenu">
+                <a href="#" class="card-item">
+                    <div class="card-year">2016</div>
+                    <div class="card-desc">Dati più recenti</div>
+                </a>
+                <a href="#" class="card-item">
+                    <div class="card-year">2015</div>
+                    <div class="card-desc">Anno precedente</div>
+                </a>
+                <a href="#" class="card-item">
+                    <div class="card-year">2014</div>
+                    <div class="card-desc">Confronto</div>
+                </a>
+                <a href="#" class="card-item">
+                    <div class="card-year">2010-13</div>
+                    <div class="card-desc">Dati storici</div>
+                </a>
+            </div>
+        </div>
+
+        <p><strong>Cards Menu:</strong> Design visualmente accattivante, permette di aggiungere descrizioni o statistiche rapide per ogni anno.</p>
+
+        <!-- 5. Vertical Tabs -->
+        <div class="demo-section">
+            <span>Demo: Menu Tabs Verticali</span>
+            <div class="vertical-tabs">
+                <a href="#" class="vertical-tab active">2016</a>
+                <a href="#" class="vertical-tab">2015</a>
+                <a href="#" class="vertical-tab">2014</a>
+                <a href="#" class="vertical-tab">2010-13</a>
+            </div>
+        </div>
+
+        <p><strong>Tabs Verticali:</strong> Soluzione compatta che rimane sempre visibile, ottima per switching rapido tra anni.</p>
+
+        <h2>Integrazione con Sidebar Esistente</h2>
+        <p>Un'alternativa ancora più elegante sarebbe integrare la selezione dell'anno direttamente nella sidebar esistente come nuova tab, mantenendo coerenza con il design attuale e liberando spazio sulla mappa.</p>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeAllMenus()"></div>
+
+    <script>
+        function toggleFabMenu() {
+            const fabMenu = document.getElementById('fabMenu');
+            const overlay = document.getElementById('overlay');
+            fabMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function toggleSlidePanel() {
+            const slidePanel = document.getElementById('slidePanel');
+            const overlay = document.getElementById('overlay');
+            slidePanel.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function toggleCardsMenu() {
+            const cardsMenu = document.getElementById('cardsMenu');
+            const overlay = document.getElementById('overlay');
+            cardsMenu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
+        function closeAllMenus() {
+            document.getElementById('fabMenu').classList.remove('active');
+            document.getElementById('slidePanel').classList.remove('active');
+            document.getElementById('cardsMenu').classList.remove('active');
+            document.getElementById('overlay').classList.remove('active');
+        }
+
+        // Chiudi menu con ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeAllMenus();
+            }
+        });
+    </script>
+</body>
+</html>
