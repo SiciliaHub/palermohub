@@ -47,6 +47,55 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 
 /* immagine no bordo/ no ombra */
 .immagonobox {box-shadow: none !important; border: none !important;	border-radius:  none !important;	moz-border-radius: none !important; -webkit-border-radius: none !important;	background-color: transparent !important;	}	
+/* Stile per il popup */
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+}
+
+#popup img {
+    max-width: 100%;
+    height: auto;
+}
+
+#popup a {
+  
+    text-align: justify;
+    margin-top: 0;
+    color: #ff0000;
+    text-decoration: none;
+	
+}
+
+#popup a:hover {
+    text-decoration: underline;
+}
+
+#popup-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #000;
+}
+#popup p {
+    text-align: justify;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #333;
+	font-weight: 600;
+	padding:10px
+	
+} 
 </style>
 
 	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
@@ -246,6 +295,17 @@ img:hover {opacity: 1;  -webkit-filter: grayscale(100%); }
 <a id='backTop'>Back To Top</a>
  <!-- script toptoback automatico mobile/desktop -->  
  <script type="text/javascript" src="lib/js/top/jquery.backTop.min.js"></script>
+ <!-- Popup -->
+<div id="popup">
+    <span id="popup-close">&times;</span>
+    <a href="https://palermohub.opendatasicilia.it/prg_part_catastali.html" target="_blank">
+        <img src="legend\clip_index\PH2.jpg" title="Consulta la nuova versione della Variante Generale al PRG con particelle catastali" alt="Popup Image"> </a>
+	<p> 
+Dal <b><span style="color: #e74c3c; font-weight: bold;">15 settembre 2025</span></b>, dopo quasi otto anni di attività intensa iniziata nel 2017, questa versione di PalermoHub si prepara al meritato riposo. Durante questo lungo percorso, decine di mappe tematiche e migliaia di visualizzazioni hanno guidato cittadini e visitatori alla scoperta della nostra città. <br> <i><b>Coming soon: <span style="color: #e74c3c; font-weight: bold;">Qualcosa di nuovo sta arrivando...</span></b></bi>
+</p>
+
+
+</div>
 <script>
             $(document).ready( function() {
                 $('#backTop').backTop({
@@ -286,6 +346,26 @@ $(function(){
         height: 4, //Progress bar height in pixels
         color: "#ff9900", //Progress bar background color
       });
+    });
+</script>
+<script>
+    // Mostra il popup al caricamento della pagina
+    document.addEventListener("DOMContentLoaded", function() {
+        var popup = document.getElementById("popup");
+        var closeButton = document.getElementById("popup-close");
+
+        // Mostra il popup
+        popup.style.display = "block";
+
+        // Chiudi il popup dopo 5 secondi
+        setTimeout(function() {
+            popup.style.display = "none";
+        }, 8000);
+
+        // Chiudi il popup quando l'utente clicca sul pulsante di chiusura
+        closeButton.addEventListener("click", function() {
+            popup.style.display = "none";
+        });
     });
 </script>
 </body>
