@@ -1,4 +1,19 @@
-/* styles.css - Contiene tutti gli stili necessari */
+/*!
+ * PalermoHub - Core Styles
+ * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
+ * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ * 
+ * Licensed under CC BY-SA 4.0
+ * https://creativecommons.org/licenses/by-sa/4.0/
+ * 
+ * Attribution required:
+ * - Keep this header intact in any derivative work
+ * - Credit original authors
+ * - Link back to: https://palermohub.opendatasicilia.it
+ * 
+ * Source: https://github.com/SiciliaHub/palermohub
+ * Build: PH-2025-gbv-ods
+ */
 
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css');
 
@@ -1983,6 +1998,13 @@ body {
     color-scheme: light;
 }
 
+/* Watermark: PH-gbv-ods-2025 */
+body::before {
+    content: "";
+    display: none;
+    /* PalermoHub-Original-gbvitrano-opendatasicilia */
+}
+
 /* Improve performance durante le transizioni */
 [data-theme] * {
     backface-visibility: hidden;
@@ -2252,6 +2274,23 @@ body {
     margin-top: 0.6rem; /* RIDOTTO da 0.75rem */
     padding-top: 0.4rem; /* RIDOTTO da 0.5rem */
 }
+
+/*!
+ * PalermoHub - Core Styles
+ * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
+ * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ * 
+ * Licensed under CC BY-SA 4.0
+ * https://creativecommons.org/licenses/by-sa/4.0/
+ * 
+ * Attribution required:
+ * - Keep this header intact in any derivative work
+ * - Credit original authors
+ * - Link back to: https://palermohub.opendatasicilia.it
+ * 
+ * Source: https://github.com/SiciliaHub/palermohub
+ * Build: PH-2025-gbv-ods
+ */
 
 /* ========================================
    DARK MODE SUPPORT FOR CLICKABLE ELEMENTS - VERSIONE PULITA

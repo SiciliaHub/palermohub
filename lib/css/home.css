@@ -1,3 +1,21 @@
+/*!
+ * PalermoHub - Core Styles
+ * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
+ * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ * 
+ * Licensed under CC BY-SA 4.0
+ * https://creativecommons.org/licenses/by-sa/4.0/
+ * 
+ * Attribution required:
+ * - Keep this header intact in any derivative work
+ * - Credit original authors
+ * - Link back to: https://palermohub.opendatasicilia.it
+ * 
+ * Source: https://github.com/SiciliaHub/palermohub
+ * Build: PH-2025-gbv-ods
+ */
+
+
 /* CSS COMPLETO CON LE NUOVE FUNZIONALITÀ */
 :root {
     /* Colori principali */
@@ -1725,6 +1743,13 @@ select {
     color: var(--text-primary);
 }
 
+/* Watermark: PH-gbv-ods-2025 */
+body::before {
+    content: "";
+    display: none;
+    /* PalermoHub-Original-gbvitrano-opendatasicilia */
+}
+
 /* ========================================
    DARK MODE HERO SLIDER
    ======================================== */
@@ -2223,6 +2248,22 @@ select {
     border: 3px solid var(--border-color);
     border-top: 3px solid var(--primary-color);
 }
+/*!
+ * PalermoHub - Core Styles
+ * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
+ * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ * 
+ * Licensed under CC BY-SA 4.0
+ * https://creativecommons.org/licenses/by-sa/4.0/
+ * 
+ * Attribution required:
+ * - Keep this header intact in any derivative work
+ * - Credit original authors
+ * - Link back to: https://palermohub.opendatasicilia.it
+ * 
+ * Source: https://github.com/SiciliaHub/palermohub
+ * Build: PH-2025-gbv-ods
+ */
 
 /* ========================================
    DARK MODE SCROLLBARS

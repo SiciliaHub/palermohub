@@ -1,4 +1,21 @@
-        /* CSS Base dal design originale */
+/*!
+ * PalermoHub - Core Styles
+ * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
+ * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ * 
+ * Licensed under CC BY-SA 4.0
+ * https://creativecommons.org/licenses/by-sa/4.0/
+ * 
+ * Attribution required:
+ * - Keep this header intact in any derivative work
+ * - Credit original authors
+ * - Link back to: https://palermohub.opendatasicilia.it
+ * 
+ * Source: https://github.com/SiciliaHub/palermohub
+ * Build: PH-2025-gbv-ods
+ */
+
+       /* CSS Base dal design originale */
         :root {
             --primary-color: #ff9900;
             --primary-hover: #e6870a;
@@ -890,6 +907,13 @@ a:hover {
     color: #000;
 }
 
+/* Watermark: PH-gbv-ods-2025 */
+body::before {
+    content: "";
+    display: none;
+    /* PalermoHub-Original-gbvitrano-opendatasicilia */
+}
+
 [data-theme="dark"] .sort-btn {
     border-color: var(--secondary-green);
     background: var(--secondary-green);
@@ -1440,6 +1464,23 @@ a:hover {
    RESPONSIVE CONTENT IMAGES CLASS
    Da aggiungere al file page.css
    ======================================== */
+
+/*!
+ * PalermoHub - Core Styles
+ * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
+ * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ * 
+ * Licensed under CC BY-SA 4.0
+ * https://creativecommons.org/licenses/by-sa/4.0/
+ * 
+ * Attribution required:
+ * - Keep this header intact in any derivative work
+ * - Credit original authors
+ * - Link back to: https://palermohub.opendatasicilia.it
+ * 
+ * Source: https://github.com/SiciliaHub/palermohub
+ * Build: PH-2025-gbv-ods
+ */
 
 /* Classe specifica per immagini di contenuto responsive */
 .responsive-image {

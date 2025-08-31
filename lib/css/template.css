@@ -1,3 +1,20 @@
+/*!
+ * PalermoHub - Core Styles
+ * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
+ * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ * 
+ * Licensed under CC BY-SA 4.0
+ * https://creativecommons.org/licenses/by-sa/4.0/
+ * 
+ * Attribution required:
+ * - Keep this header intact in any derivative work
+ * - Credit original authors
+ * - Link back to: https://palermohub.opendatasicilia.it
+ * 
+ * Source: https://github.com/SiciliaHub/palermohub
+ * Build: PH-2025-gbv-ods
+ */
+
 /* ========================================
    PALERMOHUB TEMPLATE CSS
    Template pulito basato su PalermoHub
@@ -415,6 +432,13 @@ body {
     }
 }
 
+/* Watermark: PH-gbv-ods-2025 */
+body::before {
+    content: "";
+    display: none;
+    /* PalermoHub-Original-gbvitrano-opendatasicilia */
+}
+
 @media (max-width: 480px) {
     .main-content {
         padding: 0.75rem;
@@ -567,6 +591,23 @@ body {
     background: rgba(28, 28, 30, 0.95);
     border-top: 1px solid var(--border-color);
 }
+
+/*!
+ * PalermoHub - Core Styles
+ * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
+ * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ * 
+ * Licensed under CC BY-SA 4.0
+ * https://creativecommons.org/licenses/by-sa/4.0/
+ * 
+ * Attribution required:
+ * - Keep this header intact in any derivative work
+ * - Credit original authors
+ * - Link back to: https://palermohub.opendatasicilia.it
+ * 
+ * Source: https://github.com/SiciliaHub/palermohub
+ * Build: PH-2025-gbv-ods
+ */
 
 /* ========================================
    SMOOTH TRANSITIONS
