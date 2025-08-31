@@ -90,7 +90,7 @@ a:active {color: #FF0000; text-decoration:none; }
 
 #tavola {position:fixed; left:3px; width: 5%;  top:50px; z-index: 1000; opacity: 1;  -webkit-filter: invert(100%); /* Safari */ filter: invert(100%); }
 
-#tavolab {position:fixed; left: 50px; width: 125px;  top:55px; z-index: 1000;/* border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:2px; box-shadow: 0 2px 5px rgba(0,0,0,0.2)*/ }
+#tavolab {position:fixed; left: 100px; width: 125px;  top:25px; z-index: 1000;/* border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:2px; box-shadow: 0 2px 5px rgba(0,0,0,0.2)*/ }
 
 #logo {position:fixed; left:1%; width: 5%;  top:2px; z-index: 1000;}
 #titolo  {

@@ -16,7 +16,8 @@
         <link rel="shortcut icon" href="favicon.ico"/> 
         <link rel="icon" href="favicon.png" type="image/png"/> 
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+	 <link rel="stylesheet" href="lib/css/copernicus.css">  
+	 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -43,7 +44,7 @@
 <meta name="twitter:site" content="palermohub.opendatasicilia.it" />
 <meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
 <!-- twitter -->       
-
+	 <link rel="stylesheet" href="lib/css/copernicus.css">  
  <!-- css -->
 <link href="lib/css/base_incendi_sicilia.css" rel="stylesheet" type="text/css">
 <link href="lib/css/leaflet_ods.css" rel="stylesheet" type="text/css">
@@ -66,7 +67,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
 
-<style type="text/css">a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; } </style>       
+    
             <!-- script mappa -->
 <script src="https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/qgis2web_expressions.js"></script>
 <script src="https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/qgi2web/leaflet.js"></script>
@@ -96,7 +97,6 @@
   <script src="https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/data/Centroidi0.js"></script>
     </head>
     <body>
-          
  <div id="sidebar" class="sidebar collapsed">
 <!-- Nav tabs -->
         <div class="sidebar-tabs">
@@ -346,7 +346,60 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 </div>  
   
 <!-- Mappa  -->
-<div id="map" class="sidebar-map"></div>
+
+<div id="map" class="sidebar-map">  <button class="dashboard-trigger" Title="Seleziona la mappa di tuo interesse - EMSR213: Forest Fire in Southern Italy - 2017" onclick="toggleDashboard()">
+                <i class="fa fa-th"></i>
+            </button>
+            <div class="dashboard-menu" id="dashboardMenu">
+                <div class="dashboard-header">
+                    <h2> EMSR213: Forest Fire in Southern Italy - 2017</h2>
+                    <button class="dashboard-close" onclick="toggleDashboard()">
+                        <i class="fa fa-times"></i>
+                    </button>
+                </div>
+                <div class="dashboard-content">
+                    <div class="widget-grid">
+                        <div class="widget" style="background: linear-gradient(135deg, #ff9900 0%, rgba(255, 255, 255, 0.95) 100%);">
+                            <div class="widget-title">Grading Map</div>
+                            <div class="widget-links">
+                                <a href="avola_iframe.html" Title="Grading Map - Avola" class="widget-link">Avola</a>
+                                <a href="biancavilla_iframe.html" Title="Grading Map - Biancavilla" class="widget-link">Biancavilla</a>
+                                <a href="blufi_iframe.html" Title="Grading Map - Blufi" class="widget-link">Blufi</a>
+                                <a href="caltagirone_iframe.html" Title="Grading Map - Caltagirone" class="widget-link">Caltagirone</a>
+								<a href="etna_nord_iframe.html" Title="Grading Map - Etna Nord" class="widget-link">Etna Nord</a>
+								<a href="francofonte_iframe.html" Title="Grading Map - Francofonte" class="widget-link">Francofonte</a>
+								<a href="messina_iframe.html" Title="Grading Map - Messina " class="widget-link">Messina</a>
+								<a href="mistretta_iframe.html" Title="Grading Map - Mistretta" class="widget-link">Mistretta</a>
+								<a href="monreale_iframe.html" Title="Grading Map - Monreale" class="widget-link">Monreale</a>
+								<a href="naso_iframe.html" Title="Grading Map - Naso" class="widget-link">Naso</a>
+								<a href="piazza_armerina_iframe.html" Title="Grading Map - Piazza Armerina " class="widget-link">Piazza Armerina</a>
+								<a href="san_vito_lo_capo_iframe.html" Title="Grading Map - San Vito Lo Capo" class="widget-link">San Vito Lo Capo</a>
+								<a href="sciacca.html" Title="Grading Map - Sciacca" class="widget-link">Sciacca</a>
+								
+                            </div>
+                        </div>
+                        <div class="widget" style="background: linear-gradient(135deg, rgb(174 167 167 / 95%) 0%, #fff 100%);">
+                            <div class="widget-title">Grading Map 3D</div>
+                            <div class="widget-links">
+                                <a href="3d_avola_iframe.html" Title="Grading Map 3D - Avola" class="widget-link">Avola</a>
+                                <a href="3d_biancavilla_iframe.html" Title="Grading Map 3D - Biancavilla" class="widget-link">Biancavilla</a>
+                                <a href="3d_blufi_iframe.html" Title="Grading Map 3D - Blufi" class="widget-link">Blufi</a>
+                                <a href="3d_caltagirone_iframe.html" Title="Grading Map 3D - Caltagirone" class="widget-link">Caltagirone</a>
+								<a href="3d_etna_nord_iframe.html" Title="Grading Map 3D - Etna Nord" class="widget-link">Etna Nord</a>
+								<a href="3d_francofonte_iframe.html" Title="Grading Map 3D - Francofonte" class="widget-link">Francofonte</a>
+								<a href="3d_messina_iframe.html" Title="Grading Map 3D - Messina " class="widget-link">Messina</a>
+								<a href="3d_mistretta_iframe.html" Title="Grading Map 3D - Mistretta" class="widget-link">Mistretta</a>
+								<a href="3d_monreale_iframe.html" Title="Grading Map 3D - Monreale" class="widget-link">Monreale</a>
+								<a href="3d_naso_iframe.html" Title="Grading Map 3D - Naso" class="widget-link">Naso</a>
+								<a href="3d_piazza_armerina_iframe.html" Title="Grading Map 3D - Piazza Armerina " class="widget-link">Piazza Armerina</a>
+								<a href="3d_san_vito_lo_capo_iframe.html" Title="Grading Map 3D - San Vito Lo Capo" class="widget-link">San Vito Lo Capo</a>
+								<a href="3d_sciacca.html" Title="Grading Map 3D - Sciacca" class="widget-link">Sciacca</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<div class="overlay" id="overlay" onclick="closeAllMenus()"></div></div>
+        
         <script>
         var highlightLayer;
         function highlightFeature(e) {
@@ -709,7 +762,7 @@ function pop_Centroidi0(feature, layer) {
         }));
  
         </script>
- 
+
 <script src="https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/lib/js/social/jquery_csbuttons.js"></script>      
     <!-- loghi -->             
 <div id="ods"><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank"> 
@@ -717,5 +770,6 @@ function pop_Centroidi0(feature, layer) {
 <div id="itaf"><a href="https://italiaafuoco.info/" title="italiaafuoco.info" target="_blank"> 
 <img src="https://siciliahub.github.io/mappe/EMSR213/incendi_sicilia/legend/italiaafuoco_clip.png" width="40" title="italiaafuoco.info" alt="italiaafuoco.info"></a></div> 
 
+<script src="lib/js/client/copernicus.js"></script> 
 </body>
 </html>
