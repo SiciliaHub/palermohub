@@ -56,6 +56,20 @@ body {
     padding: 0;
     color: var(--text-primary);
 }
+hr {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    margin: .1rem 20px;
+    border: none;
+}
+
+.highlight {
+    background: linear-gradient(120deg, rgba(255, 153, 0, 0.3) 0%, rgba(255, 153, 0, 0.1) 100%);
+    padding: 0 4px;
+    border-radius: 3px;
+    font-weight: 600;
+}
 
 /* Main Content */
 .main-content {

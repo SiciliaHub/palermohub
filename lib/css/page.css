@@ -410,14 +410,14 @@ a:hover {
             margin: 3rem 0;
             border: none;
         }
-
-        .chapter-separator {
-            width: 60%;
-            height: 1px;
-            background: var(--border-color);
-            margin: 4rem auto;
-            border: none;
-        }
+		
+		.chapter-separator {
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    margin: 4rem 0;
+    border: none;
+}
 
         /* Back to top button */
         .back-to-top {
