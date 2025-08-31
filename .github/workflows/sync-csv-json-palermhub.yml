@@ -55,7 +55,7 @@ jobs:
         # Controlla che non sia HTML
         if grep -q -i "<html>\|<head>\|<body>" new_palermo-hub.csv; then
           echo "❌ Errore: Ricevuto HTML invece di CSV"
-          echo "🔍 Contenuto ricevuto:"
+          echo "📋 Contenuto ricevuto:"
           head -10 new_palermo-hub.csv
           exit 1
         fi
@@ -69,7 +69,7 @@ jobs:
         
         echo "✅ CSV scaricato con successo"
         echo "📊 Righe totali: $LINES"
-        echo "🔍 Prima riga:"
+        echo "📋 Prima riga:"
         head -1 new_palermo-hub.csv
         
     - name: Check for changes
@@ -94,139 +94,182 @@ jobs:
     - name: Generate Maps Metadata JSON
       if: steps.changes.outputs.changes == 'true'
       run: |
-        echo "🔄 Generazione maps-metadata.json..."
+        echo "🔄 Generazione maps-metadata.json con parser CSV robusto..."
         
-        # Crea script Node.js per generare il JSON
+        # Crea script Node.js con parser CSV più robusto
         cat > generate-metadata.js << 'EOF'
         const fs = require('fs');
-        const readline = require('readline');
-        
-        async function generateMetadata() {
-          const metadata = {};
-          let lineCount = 0;
-          let processedCount = 0;
+
+        function parseCSV(csvText) {
+          const rows = [];
+          const lines = csvText.split('\n');
           
-          const fileStream = fs.createReadStream('new_palermo-hub.csv');
-          const rl = readline.createInterface({
-            input: fileStream,
-            crlfDelay: Infinity
-          });
-          
-          let headers = [];
-          
-          for await (const line of rl) {
-            lineCount++;
+          for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+            if (!line) continue;
             
-            if (lineCount === 1) {
-              // Prima riga = headers
-              headers = line.split(',').map(h => h.trim().toLowerCase().replace(/"/g, ''));
-              console.log('📋 Headers rilevati:', headers);
-              continue;
-            }
-            
-            // Parse riga CSV con gestione virgolette
-            const values = [];
-            let currentValue = '';
+            const row = [];
+            let current = '';
             let inQuotes = false;
+            let j = 0;
             
-            for (let i = 0; i < line.length; i++) {
-              const char = line[i];
+            while (j < line.length) {
+              const char = line[j];
               
               if (char === '"') {
-                if (inQuotes && line[i + 1] === '"') {
-                  currentValue += '"';
-                  i++; // Salta prossima virgoletta
+                if (inQuotes && line[j + 1] === '"') {
+                  // Escaped quote
+                  current += '"';
+                  j += 2;
                 } else {
+                  // Toggle quote state
                   inQuotes = !inQuotes;
+                  j++;
                 }
               } else if (char === ',' && !inQuotes) {
-                values.push(currentValue.trim());
-                currentValue = '';
+                // End of field
+                row.push(current.trim());
+                current = '';
+                j++;
               } else {
-                currentValue += char;
+                current += char;
+                j++;
               }
             }
-            values.push(currentValue.trim()); // Ultimo valore
             
-            if (values.length !== headers.length) {
-              console.warn(`⚠️ Riga ${lineCount}: numero colonne non corrisponde (${values.length} vs ${headers.length})`);
-              continue;
-            }
-            
-            // Crea oggetto dalla riga
-            const row = {};
-            headers.forEach((header, index) => {
-              row[header] = values[index] || '';
-            });
-            
-            // Estrai URL (cerca campi url, URL, link)
-            const urlField = row.url || row.URL || row.link || '';
-            if (!urlField || urlField.trim() === '') {
-              continue; // Salta righe senza URL
-            }
-            
-            const cleanUrl = urlField.trim().replace(/"/g, '');
-            
-            // Estrai e pulisci i metadati
-            const getFirstItem = (str) => {
-              if (!str) return '';
-              return str.split(',')[0].trim().replace(/"/g, '');
-            };
-            
-            const getTags = (str) => {
-              if (!str) return [];
-              return str.split(',').map(tag => tag.trim().replace(/"/g, '')).filter(tag => tag.length > 0);
-            };
-            
-            metadata[cleanUrl] = {
-              titolo: (row.titolo || '').replace(/"/g, ''),
-              categoria: getFirstItem(row.categoria),
-              territorio: getFirstItem(row.territorio),
-              autore: getFirstItem(row.collaborazione),
-              anno: (row.anno || '').replace(/"/g, ''),
-              tags: getTags(row.tag),
-              fonte: getFirstItem(row.fontedati),
-              descrizione: (row.descrizione || '').replace(/"/g, '').substring(0, 200) // Limita lunghezza
-            };
-            
-            processedCount++;
+            // Add last field
+            row.push(current.trim());
+            rows.push(row);
           }
           
-          console.log(`✅ Processate ${processedCount} mappe su ${lineCount - 1} righe totali`);
-          
-          // Salva il file JSON
-          const outputPath = 'dati-palermo-hub/maps-metadata.json';
-          fs.writeFileSync(outputPath, JSON.stringify(metadata, null, 2));
-          
-          console.log(`💾 File salvato: ${outputPath}`);
-          console.log(`📊 Mappe nel metadata: ${Object.keys(metadata).length}`);
-          
-          // Mostra alcune statistiche
-          const stats = {
-            totaleMappe: Object.keys(metadata).length,
-            conCategoria: Object.values(metadata).filter(m => m.categoria).length,
-            conTerritorio: Object.values(metadata).filter(m => m.territorio).length,
-            conAutore: Object.values(metadata).filter(m => m.autore).length,
-            conAnno: Object.values(metadata).filter(m => m.anno).length
-          };
-          
-          console.log('📈 Statistiche:', JSON.stringify(stats, null, 2));
+          return rows;
         }
-        
-        generateMetadata().catch(console.error);
+
+        async function generateMetadata() {
+          const metadata = {};
+          let processedCount = 0;
+          let skippedCount = 0;
+
+          console.log('🔄 Inizio parsing CSV...');
+          
+          try {
+            // Leggi il file CSV
+            const csvContent = fs.readFileSync('new_palermo-hub.csv', 'utf8');
+            const rows = parseCSV(csvContent);
+            
+            if (rows.length === 0) {
+              throw new Error('CSV vuoto');
+            }
+            
+            // Headers dalla prima riga (convertiti in minuscolo)
+            const headers = rows[0].map(h => h.toLowerCase().replace(/"/g, '').trim());
+            console.log('📋 Headers rilevati:', headers);
+            console.log(`📋 Numero colonne: ${headers.length}`);
+            console.log(`📊 Righe totali: ${rows.length - 1}`);
+            
+            // Verifica che ci sia il campo URL
+            const urlFieldIndex = headers.findIndex(h => h === 'url');
+            if (urlFieldIndex === -1) {
+              throw new Error('Campo URL non trovato negli headers');
+            }
+            
+            // Processa ogni riga (saltando l'header)
+            for (let i = 1; i < rows.length; i++) {
+              const values = rows[i];
+              
+              // Verifica numero colonne
+              if (values.length !== headers.length) {
+                console.warn(`⚠️  Riga ${i + 1}: ${values.length} colonne invece di ${headers.length} - SALTATA`);
+                skippedCount++;
+                continue;
+              }
+              
+              // Crea oggetto riga
+              const row = {};
+              headers.forEach((header, index) => {
+                row[header] = (values[index] || '').replace(/"/g, '').trim();
+              });
+              
+              // Controlla se ha URL valida
+              const urlField = row.url || '';
+              if (!urlField) {
+                skippedCount++;
+                continue;
+              }
+              
+              // Helper functions
+              const getFirstItem = (str) => {
+                if (!str) return '';
+                return str.split(',')[0].trim();
+              };
+              
+              const getTags = (str) => {
+                if (!str) return [];
+                return str.split(',')
+                  .map(tag => tag.trim())
+                  .filter(tag => tag.length > 0);
+              };
+              
+              // Crea metadata entry
+              metadata[urlField] = {
+                titolo: row.titolo || '',
+                categoria: getFirstItem(row.categoria),
+                territorio: getFirstItem(row.territorio),
+                autore: getFirstItem(row.collaborazione),
+                anno: row.anno || '',
+                tags: getTags(row.tag),
+                fonte: getFirstItem(row.fontedati),
+                descrizione: (row.descrizione || '').substring(0, 200)
+              };
+              
+              processedCount++;
+              
+              if (processedCount % 50 === 0) {
+                console.log(`📈 Processate ${processedCount} righe...`);
+              }
+            }
+            
+            console.log(`✅ Parsing completato:`);
+            console.log(`   • Righe processate: ${processedCount}`);
+            console.log(`   • Righe saltate: ${skippedCount}`);
+            console.log(`   • Mappe totali: ${Object.keys(metadata).length}`);
+            
+            // Salva il file JSON
+            const outputPath = 'dati-palermo-hub/maps-metadata.json';
+            fs.writeFileSync(outputPath, JSON.stringify(metadata, null, 2));
+            
+            console.log(`💾 File salvato: ${outputPath}`);
+            
+            // Statistiche
+            const stats = {
+              totaleMappe: Object.keys(metadata).length,
+              conCategoria: Object.values(metadata).filter(m => m.categoria).length,
+              conTerritorio: Object.values(metadata).filter(m => m.territorio).length,
+              conAutore: Object.values(metadata).filter(m => m.autore).length,
+              conAnno: Object.values(metadata).filter(m => m.anno).length
+            };
+            
+            console.log('📈 Statistiche:', JSON.stringify(stats, null, 2));
+            
+          } catch (error) {
+            console.error('❌ Errore:', error.message);
+            process.exit(1);
+          }
+        }
+
+        generateMetadata();
         EOF
         
         # Esegui script
         node generate-metadata.js
         
-        # Verifica che il file sia stato creato
+        # Verifica risultato
         if [ -f "dati-palermo-hub/maps-metadata.json" ]; then
           MAPS_COUNT=$(grep -o '"[^"]*":' dati-palermo-hub/maps-metadata.json | wc -l)
           echo "✅ Metadata JSON generato con $MAPS_COUNT mappe"
           
-          # Mostra dimensione file
           SIZE=$(ls -lah dati-palermo-hub/maps-metadata.json | awk '{print $5}')
-          echo "📏 Dimensione file: $SIZE"
+          echo "📁 Dimensione file: $SIZE"
         else
           echo "❌ Errore: File metadata non generato"
           exit 1
