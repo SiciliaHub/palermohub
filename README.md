@@ -8,7 +8,9 @@ Palermo Hub di [**opendatasicilia.it**](https://opendatasicilia.it/) è un conte
 [@aborruso](https://twitter.com/aborruso), [@cirospat](https://twitter.com/cirospat) e [@gbvitrano](https://twitter.com/gbvitrano) <br> <br> <br>
 [**Link 1 - palermohub.opendatasicilia.it**](https://siciliahub.github.io/palermohub/index.html)<br>
 
-[**Link 2 - siciliahub.github.io/palermohub**](https://siciliahub.github.io/palermohub/index.html) [link developer](https://raw.githack.com/SiciliaHub/palermohub/PH-release-v2.0/index.html)
+[**Link 2 - siciliahub.github.io/palermohub**](https://siciliahub.github.io/palermohub/index.html) 
+
+[link developer](https://raw.githack.com/SiciliaHub/palermohub/PH-release-v2.0/index.html)
 
 [![foto](https://licensebuttons.net/l/by-sa/4.0/80x15.png)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
 Attribuzione - Condividi allo stesso modo 4.0 Internazionale [(CC BY-SA 4.0)](https://creativecommons.org/licenses/by-sa/4.0/deed.it)
