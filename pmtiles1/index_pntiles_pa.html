@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<meta charset="UTF-8">
+<title>Palermo 3D pmtiles - By OpenDataSicilia</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="icon" href="favicon.ico">
+<!--
+<script src="https://unpkg.com/maplibre-gl/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl/dist/maplibre-gl.css"/>
+-->
+<script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css"/>
+<style>.layer-switcher-ctrl{background-color:#fff}.layer-switcher-ctrl a{background-color:#fff;_color:#404040;color:#a9a9a9;display:block;margin:0;padding:5px 10px;text-decoration:none;border-bottom:1px solid black;text-align:center}.layer-switcher-ctrl a:hover{background-color:#f8f8f8;color:#404040}.layer-switcher-ctrl a.active{background-color:#ff9100;color:#fff}.layer-switcher-ctrl a.active:hover{background:#516c50}.layer-switcher-ctrl-simple{background-color:#fff}.layer-switcher-ctrl-simple a{background-color:#fff;color:#a9a9a9;display:block;margin:0;padding:5px 10px;text-decoration:none;border-bottom:1px solid black;text-align:center}.layer-switcher-ctrl-simple a:hover{background-color:#f8f8f8;color:#404040}.layer-switcher-ctrl-simple a.active{color:#404040}.layer-switcher-ctrl-simple a.active:hover{_background:#516c50;color:#a9a9a9}
+html, body {height: 100%; margin: 0; padding: 0;} #pymaplibregl {width: 100%; height: 100%;}
+</style>
+
+
+<!-- Open Graph Protocol -->
+<meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/index_pntiles_pa.html#13/38.11144/13.36435/-17/60" />
+<meta property="og:title" content="Palermo hub - Palermo 3D pmtiles" />
+<meta property="og:description" content="Palermo hub - Palermo 3D pmtiles" />
+<meta property="og:site_name" content="palermohub.opendatasicilia.it" />
+<meta property="og:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card.jpg" />
+<meta property="article:author" content="Giovan Battista Vitrano per Open Data Sicilia" />
+<!-- Open Graph Protocol -->
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="coseerobe.gbvitrano.it" />
+<meta name="twitter:creator" content="@gbvitrano Giovan Battista Vitrano per Open Data Sicilia">
+<meta name="twitter:title" content="Palermo hub - Palermo 3D pmtiles">
+<meta name="twitter:description" content="Palermo hub - Palermo 3D pmtiles">
+<meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card.jpg">
+<meta name="twitter:site" content="palermohub.opendatasicilia.it" />
+<meta name="twitter:url" content="https://palermohub.opendatasicilia.it">
+<!-- twitter -->
+
+
+
+
+<body>
+<div id="pymaplibregl"></div>
+<!-- script base mappa -->
+<script type="text/javascript" src="js/maplibre_leafmap.js"></script>
+<!-- script configurazione mappa -->
+<script type="text/javascript">
+(() => {
+     var data = {"mapOptions": {"bearing": -17,  "hash": true, "center": [13.36435,38.11144], "maxBounds": [[13.1, 37.9785], [13.55, 38.2919]],  "pitch": 45, "style": {"version": 8, "sources": {"osm": {"type": "raster", "tiles": ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"], "tileSize": 256, "attribution": "&copy; OpenStreetMap Contributors", "maxzoom": 16}, 
+	
+// DSM	
+	"terrainSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize": 256}, 
+	"hillshadeSource": {"type": "raster-dem", "url": "https://palermohub.opendatasicilia.it/pmtiles/tiles.json", "tileSize":256}}, "layers": [{"id": "osm", "type": "raster", "source": "osm"}, {"id": "Rilievo ombreggiato", "type": "hillshade", "source": "hillshadeSource", "layout": {"visibility": "visible"}, "paint": {"hillshade-shadow-color": "#473B24"}}], "terrain": {"source": "terrainSource", "exaggeration": 1}}, "zoom": 13},
+	
+	"calls": [["addControl", ["NavigationControl", {"showCompass": true, "showZoom": true, "visualizePitch": false}, "top-right"]], ["addControl", ["FullscreenControl", {}, "top-right"]], ["addControl", ["ScaleControl", {"unit": "metric"}, "bottom-right"]],  ["addControl", ["GeolocateControl", {}, "top-right"]], ["addControl", ["TerrainControl", { source: "terrainSource"}, "top-right"]],
+	
+	["addLayer", [{"id": "OpenStreetMap", "type": "raster", "source": { "maxzoom": 19, "minzoom": 0, "tileSize": 256, "tiles": ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setPaintProperty", ["OpenStreetMap", "raster-opacity", 1.0]], ["setLayoutProperty", ["OpenStreetMap", "visibility", "none"]], 
+		
+	["addLayer", [{"id": "Esri.WorldImagery", "type": "raster", "source": {"attribution": "Tiles (C) Esri -- Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community", "maxzoom":19, "minzoom": 0, "tileSize": 256, "tiles": ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"], "type": "raster"}}, null]], ["setLayoutProperty", ["Esri.WorldImagery", "visibility", "none"]], ["setPaintProperty", ["Esri.WorldImagery", "raster-opacity", 1.0]], 
+
+
+	// cs
+	["addLayer", [{"id": "cs", "type": "raster", "source": {"attribution": "ZTO Variante Generale P.R.G. 2004", "maxzoom": 14, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/CS/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setLayoutProperty", ["cs", "visibility", "visible"]], ["setPaintProperty", ["cs", "raster-opacity", 0.15]], 
+
+// zto	
+	["addLayer", [{"id": "Zonizzazione", "type": "raster", "source": {"attribution": "ZTO Variante Generale P.R.G. 2004", "maxzoom": 19, "minzoom": 12, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/ZTO/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setLayoutProperty", ["Zonizzazione", "visibility", "visible"]], ["setPaintProperty", ["Zonizzazione", "raster-opacity", 1.0]], 
+	
+	// ppe	
+	["addLayer", [{"id": "PPE", "type": "raster", "source": {"attribution": "Piano Particolareggiato Esecutivo Centro storico", "maxzoom": 19, "minzoom": 16, "tileSize": 256, "tiles": ["https://palermohub.github.io/PRG2004/ppe/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setLayoutProperty", ["ppe", "visibility", "visible"]], ["setPaintProperty", ["ppe", "raster-opacity", 1.0]], 
+
+// ctc 2k
+	["addLayer", [{"id": "Carta tecnica", "type": "raster", "source": {"attribution": "CTC - Carta tecnica comunale 2k – 2006", "maxzoom": 19, "minzoom": 16, "tileSize": 256, "tiles": ["https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png"], "type": "raster"}}, null]], ["setPaintProperty", ["CSG", "raster-opacity", 1.0]],  ["setLayoutProperty", ["Carta tecnica",  "visibility", "none"]],
+
+// edifici
+ ["addSource", ["Volumi edifici", {"type": "vector", "url": "pmtiles://https://palermohub.opendatasicilia.it/carto/buildings_pa.pmtiles", "attribution": "PMTiles - Palermo @opendatasicilia"}]], ["addLayer", [{"id": "Volumi edifici", "type": "fill-extrusion", "filter": [">", ["get", "height"], 0], "paint": {"fill-extrusion-color": ["interpolate", ["linear"], ["get", "height"], 0, "#cecece", 70, "#ff0000",], "fill-extrusion-height": ["*", ["get", "height"], 1.25]}, "source": "Volumi edifici", "source-layer": "buildings"}, null]], ["setLayoutProperty", ["buildings", "visibility", "visible"]], ["setPaintProperty", ["buildings", "fill-extrusion-opacity", 0.5]], ["addTooltip", ["buildings", null, "Altezza: {{height}}<br>Tipo: {{type}}"]], 
+ 
+ // layers
+ ["addControl", ["LayerSwitcherControl", {"layerIds": ["Rilievo ombreggiato", "Volumi edifici", "OpenStreetMap", "Esri.WorldImagery", "Zonizzazione", "PPE", "Carta tecnica"], "theme": "default", "cssText": "padding: 5px; border: 1px solid darkgrey; border-radius: 4px;"}, "top-left"]],
+ 
+ // logo
+ ["addControl", ["InfoBoxControl", {"content": "<img src=\"https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png\" title=\"@opendatasicilia\">", "cssText": "font-size: 20px; color: black;\n        font-weight: normal; padding: 5px;\n        background-color: transparent; border-radius: 5px; box-shadow: none;"}, "bottom-right"]]]};
+     pymaplibregl(data);
+})();
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>DEMO - Variante Generale e Particelle catastali - By OpenDataSicilia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <script src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/pmtiles@2.4.0/dist/index.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="js/gb_extra.css">
+    <link rel="stylesheet" href="js/introLoader.css">
+    <!-- Font Awesome per le icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+	
+	
+	 <!-- Open Graph Protocol -->
+   <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+  <meta property="og:description" content="DEMO - Variante Generale e Particelle catastali - By OpenDataSicilia">
+  <meta property="og:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card_04.jpg">
+ <!-- Open Graph Protocol -->
+
+<!-- twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+  <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
+  <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+  <meta name="twitter:description" content="DEMO - Variante Generale e Particelle catastali - By OpenDataSicilia">
+  <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/social_card_04.jpg">
+<!-- twitter --> 
+	
+	</head>
+<body>
+    <div id="map"></div>
+    <div class="layer-switcher">
+        <h3>Attiva/Disattiva Layer</h3>
+        <button id="vincoli_lin" class="active" title="Attiva/Disattiva Vincoli Lineari" >Vincoli Lineari (Raster)</button>
+        <button id="vincoli_ar" class="active" title="Attiva/Disattiva Vincoli Areali">Vincoli Areali (Raster)</button>
+        <button id="particelle" class="active" title="Attiva/Disattiva Particelle Catastali">Particelle Catastali</button>
+        <button id="carta_tecnica" title="Attiva/Disattiva Carta Tecnica 2k - 2007/09">Carta Tecnica 2k - 2007/09</button>
+    </div>
+    <div class="logo">
+        <a href="https://opendatasicilia.it/" title="@opendatasicilia" target="_blank">
+            <img src="https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png" width="40" height="40" title="@opendatasicilia" alt="OpenDataSicilia">
+        </a>
+    </div>
+
+    <!-- Sidepanel -->
+    <div id="sidepanel">
+        <div id="sidepanel-tab" onclick="toggleSidepanel()">
+            <i id="tab-icon" class="fas fa-chevron-left"></i> <!-- Icona Font Awesome -->
+        </div>
+        <div id="sidepanel-content">
+            <div id="sidepanel-tabs">
+                <button onclick="showSection('section1')" title="Note informative" class="active">Note</button>
+                <button onclick="showSection('section2')" title="I principali strumenti usati per realizzare la mappa" >Strumenti</button>
+            </div>
+            <div id="section1" class="sidepanel-section active">
+                <h2 style="color: red; font-weight: bold; margin-top: 0;">Variante Generale al PRG e dati catastali</h2>
+				<p><em><strong>Dal 1° gennaio 2025, l&rsquo;accesso telematico alle banche dati </strong>ipotecarie e <strong>catastali diventa gratuito</strong>, segnando un&rsquo;importante semplificazione per professionisti, pubbliche amministrazioni e cittadini. <br>La novità è contenuta nel <a href="https://www.agenziaentrate.gov.it/portale/web/guest/-/provvedimento-del-30-dicembre-20-3">provvedimento</a> dell&rsquo;Agenzia delle Entrate del 30 dicembre 2024, che attua le disposizioni introdotte dall&rsquo;articolo 7 del decreto legislativo n. 139/2024.</em></p> <hr>		
+
+				<p><strong>Variente Generle al P.R.G.</strong> - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br>
+				Rielaborazione a cura di @opendatasicilia su opendata del Comune di Palermo. <br><br>				
+				<strong> Fonte dati Zonizzazione e vincoli -</strong> <br><a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=11" title="Opendata Palermo - Urbanistica" target="_blank">Urbanistica</a>   <br>
+				<a href="https://www.comune.palermo.it/opendata_dld.php?id=320t" title="Perimetrazione Zonizzazione P.R.G. vigente" target="_blank" > Perimetrazione Zonizzazione P.R.G. vigente;</a><br>
+				<a href="https://www.comune.palermo.it/opendata_dld.php?id=321" title="Vincoli vigenti della Variante al P.R.G." target="_blank" >Vincoli vigenti della Variante al P.R.G.</a> 
+				  <p class="lorem"><strong>La variante Generale al P.R.G. è stata redatta dal Settore Urbanistica nel 2004 oggi Area Urbanistica della rigenerazione urbana, della mobilità e del centro storico</strong><br>
+					<a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=103" target="_blank">Qui gli elaborati della Variante Generale</a></p> 
+					 <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br> 
+					 <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p> 
+				   <hr>				
+					<p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>ottobre 2024</strong>.<br><br>
+					L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
+					<hr>
+					<p><strong>Disclaimer:</strong> Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili. Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali. Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</p><br><br>
+            </div>
+            <div id="section2" class="sidepanel-section">
+			<h2>Nuova mappa con particelle catastali e strumenti urbanistici vigenti di Palermo</h2>
+			<p> La nuova versione è completamente riprogettata e ottimizzata, grazie all'aiuto di <a href="https://x.com/deepseek_ai" title="DeepSeek AI" target="_blank">@deepseek_ai</a>, per offrire una migliore esperienza utente.</p>
+			<h2>Principali miglioramenti</h2>
+			<h3>Gestione avanzata dei tooltip</h3>
+			<p>La novità più significativa riguarda la gestione dei tooltip. Nella versione precedente, in presenza di elementi sovrapposti nei livelli PMTiles, i tooltip si sovrapponevano creando confusione. Ora, lo script genera automaticamente un tooltip unificato che integra in modo ordinato le informazioni di tutti gli elementi presenti in un punto specifico.</p>
+			<h3>Aspetti tecnici</h3>
+			<p>Il codice è stato completamente ristrutturato per garantire:</p>
+			<ul depth="0">
+			  <li index="0">Maggiore stabilità e riduzione dei bug</li>
+			  <li index="1">Performance ottimizzate</li>
+			  <li index="2">Migliore gestione della visualizzazione dei dati</li>
+			</ul>
+			<h3>Ringraziamenti</h3>
+			<p>Un sentito ringraziamento va a <a href="https://x.com/aborruso" title="Andrea Borruso" target="_blank"><em>@aborruso</em></a> e <a href="https://x.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a>, i cui insegnamenti e la costante condivisione di conoscenze hanno contribuito in modo determinante alla realizzazione di questo progetto. Il loro supporto mi permette di implementare e migliorarmi nel campo della cartografia digitale.</p>			
+			<hr>
+			<h2>I principali strumenti usati per realizzare la mappa </h2>
+                <p>Coming soon...</p>
+				<img src="js/demo2.png" width="366" height="128" alt=""/>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funzione per aprire/chiudere il sidepanel
+        function toggleSidepanel() {
+            const sidepanel = document.getElementById('sidepanel');
+            const layerSwitcher = document.querySelector('.layer-switcher');
+            const tabIcon = document.getElementById('tab-icon');
+
+            if (sidepanel.style.right === '0px') {
+                sidepanel.style.right = '-400px';
+                layerSwitcher.style.right = '20px'; // Riporta lo switcher alla posizione originale
+                tabIcon.classList.remove('fa-chevron-right');
+                tabIcon.classList.add('fa-chevron-left'); // Cambia icona per indicare chiusura
+            } else {
+                sidepanel.style.right = '0px';
+                layerSwitcher.style.right = '420px'; // Sposta lo switcher a sinistra del sidepanel
+                tabIcon.classList.remove('fa-chevron-left');
+                tabIcon.classList.add('fa-chevron-right'); // Cambia icona per indicare apertura
+            }
+        }
+
+        // Funzione per mostrare le sezioni nel sidepanel
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.sidepanel-section');
+            const buttons = document.querySelectorAll('#sidepanel-tabs button');
+
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).style.display = 'block';
+            document.querySelector(`button[onclick="showSection('${sectionId}')"]`).classList.add('active');
+        }
+
+        // Inizializza PMTiles
+        const protocol = new pmtiles.Protocol();
+        maplibregl.addProtocol("pmtiles", protocol.tile);
+
+        // Opzioni della mappa
+        const map = new maplibregl.Map({
+            container: 'map',
+            style: {
+                version: 8,
+                glyphs: 'https://api.mapbox.com/fonts/v1/mapbox/{fontstack}/{range}.pbf?access_token=eyJ1IjoiZ2J2aXRyYW5vIiwiYSI6ImNtNWpwMDloejBtN3ozM3F3NzJvZGh2ZG4ifQ.AXXkYYL7XY6RBVXpJ2IrBA', // Glyphs di Mapbox
+                sources: {
+                    'raster-tiles': {
+                        type: 'raster',
+                        tiles: ['https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png'],
+                        tileSize: 256,
+                        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, © <a href="https://carto.com/attributions">CARTO</a>'
+                    }
+                },
+                layers: [
+                    {
+                        id: 'raster-tiles-layer',
+                        type: 'raster',
+                        source: 'raster-tiles',
+                        minzoom: 10,
+                        maxzoom: 22
+                    }
+                ] 
+            },
+            center: [13.33225, 38.14074], // Centro iniziale della mappa
+            zoom: 12, // Zoom iniziale
+            maxBounds: [[13.1, 37.9785], [13.55, 38.2919]], // Bounds della mappa
+            hash: true, // Abilita l'URL hash per condividere la posizione della mappa
+			pitch: 0
+        });
+
+        // Aggiungi controlli alla mappa
+        map.addControl(new maplibregl.NavigationControl({ showCompass: true, showZoom: true }), 'top-left');
+        map.addControl(new maplibregl.FullscreenControl(), 'top-left');
+        map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left');
+
+        // Aggiungi i sorgenti e i layer vettoriali
+        map.on('load', () => {
+            // Aggiungi il sorgente PMTiles per i layer vettoriali del PRG
+            map.addSource('prg', {
+                type: 'vector',
+                url: 'pmtiles://https://palermohub.github.io/PRG2004/particelle/prg.pmtiles'
+            });
+
+            // Aggiungi il sorgente PMTiles per le particelle catastali
+            map.addSource('catasto', {
+                type: 'vector',
+                url: 'pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle.pmtiles',
+                attribution: 'Particelle catastali - fonte dati <b>SITR Sicilia</b>'
+            });
+
+            // Aggiungi i sorgenti raster
+            map.addSource('zto', {
+                type: 'raster',
+                tiles: ['https://palermohub.github.io/PRG2004/ZTO/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                attribution: 'Comune di Palermo - Variente Generle al P.R.G. 2004 - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            map.addSource('ppe', {
+                type: 'raster',
+                tiles: ['https://palermohub.github.io/PRG2004/ppe/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            map.addSource('vincoli_lin', {
+                type: 'raster',
+                tiles: ['https://palermohub.github.io/PRG2004/VL/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            map.addSource('vincoli_ar', {
+                type: 'raster',
+                tiles: ['https://palermohub.github.io/PRG2004/VA/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            map.addSource('carta_tecnica', {
+                type: 'raster',
+                tiles: ['https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png'],
+                tileSize: 256,
+                attribution: '© Carta Tecnica Layer',
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            // Aggiungi i layer raster
+            const rasterLayers = [
+                { id: 'carta_tecnica', source: 'carta_tecnica', visibility: 'none' }, // Disattivato all'avvio
+                { id: 'zto', source: 'zto' },
+                { id: 'ppe', source: 'ppe' },
+                { id: 'vincoli_lin', source: 'vincoli_lin' },
+                { id: 'vincoli_ar', source: 'vincoli_ar' }
+            ];
+
+            rasterLayers.forEach(layer => {
+                map.addLayer({
+                    id: layer.id,
+                    type: 'raster',
+                    source: layer.source,
+                    minzoom: 0,
+                    maxzoom: 22,
+                    layout: {
+                        visibility: layer.visibility || 'visible'
+                    }
+                });
+            });
+
+            // Aggiungi i layer vettoriali (poligoni)
+            const layers = [
+                { id: 'cs', source: 'prg', sourceLayer: 'cs', color: '#ffffff', tooltip: "<b>Circoscrizione:</b> {{Circoscriz}}" },
+                { id: 'Info Vin. areali', source: 'prg', sourceLayer: 'va', color: '#ffffff', tooltip: "<b>Tipo:</b> {{tipo}}<br><b>Descrizione:</b> {{descrizone}}<br><b>Note:</b> {{note}}" },
+                { id: 'Info Vin. lineari', source: 'prg', sourceLayer: 'vl', color: '#ffffff', tooltip: "<b>Tipo:</b> {{TIPO}}<br><b>Descrizione:</b> {{DESCRIZION}}<br><b>Note:</b> {{note}}" },
+                { id: 'Info Netto storico', source: 'prg', sourceLayer: 'ns', color: '#ffffff', tooltip: "<b>Netto storico</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}" },
+                { id: 'Info ZTO', source: 'prg', sourceLayer: 'zto', color: '#ffffff', tooltip: "<b>Zonizzazione</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}" },
+                { id: 'Particelle catastali', source: 'catasto', sourceLayer: 'particelle', color: '#ffffff', tooltip: "<b>Particelle catastali</b><br><b>Foglio:</b> {{Foglio}}<br><b>Particella:</b> {{Paricella}}" }
+            ];
+            layers.forEach(layer => {
+                map.addLayer({
+                    id: layer.id,
+                    type: 'fill',
+                    source: layer.source,
+                    'source-layer': layer.sourceLayer,
+                    paint: {
+                        'fill-color': layer.color,
+                        'fill-opacity': layer.id === 'Particelle catastali' ? 0.60 : 0,
+                        'fill-outline-color': layer.id === 'Particelle catastali' ? '#000' : 'transparent'
+                    }
+                });
+            });
+
+            // Aggiungi le etichette per le particelle catastali
+            map.addLayer({
+                id: 'particelle-labels', // ID del layer delle etichette
+                type: 'symbol',
+                source: 'catasto', // Usa lo stesso sorgente delle particelle catastali
+                'source-layer': 'particelle', // Usa lo stesso source-layer
+                layout: {  
+                    'text-field': [
+                        'concat',
+                        'F. ', ['get', 'Foglio'], ' - ', // Aggiungi "Foglio: " prima del valore
+                        'P. ', ['get', 'Paricella']  // Aggiungi "Particella: " prima del valore
+                    ],
+                    'text-size': [
+                        'interpolate', // Usa un'interpolazione
+                        ['linear'],    // Interpolazione lineare
+                        ['zoom'],      // Basata sul livello di zoom
+                        13, 6,         // A zoom 10, il testo ha dimensione 8
+                        19, 12         // A zoom 16, il testo ha dimensione 12
+                    ],
+                    'text-font': ['Open Sans Regular', 'Arial Unicode MS Regular'], // Font delle etichette
+                    'text-allow-overlap': false, // Evita sovrapposizioni
+                    'text-ignore-placement': false,
+                    'text-anchor': 'center', // Posizione del testo rispetto al punto
+                    'text-offset': [0, 0.5], // Sposta leggermente il testo verso l'alto
+                },
+                paint: {
+                    'text-color': '#000000', // Colore del testo
+                    'text-halo-color': '#ffffff', // Colore dell'alone (per migliorare la leggibilità)
+                    'text-halo-width': 1 // Larghezza dell'alone
+                },
+                minzoom: 17 // Le etichette saranno visibili solo a partire dallo zoom 16
+            });
+
+            // Aggiungi un layer temporaneo per evidenziare il poligono selezionato
+            map.addLayer({
+                id: 'highlighted-polygon',
+                type: 'fill',
+                source: 'catasto',
+                'source-layer': 'particelle',
+                paint: {
+                    'fill-color': '#d3ff00b0', // Colore rosso per il poligono selezionato
+                    'fill-opacity': 0.60,
+                    'fill-outline-color': '#000'
+                },
+                filter: ['==', 'id', ''] // Inizialmente nessun poligono è selezionato
+            });
+
+            // Gestione dell'evento mouseenter per evidenziare il poligono selezionato
+            map.on('mouseenter', 'Particelle catastali', (e) => {
+                if (e.features.length > 0) {
+                    // Cambia il cursore in una mano
+                    map.getCanvas().style.cursor = 'pointer';
+
+                    // Ottieni l'ID del poligono selezionato
+                    const hoveredPolygonId = `${e.features[0].properties.Foglio}-${e.features[0].properties.Paricella}`;
+
+                    // Aggiorna il filtro del layer temporaneo per evidenziare solo il poligono selezionato
+                    map.setFilter('highlighted-polygon', [
+                        'all',
+                        ['==', 'Foglio', e.features[0].properties.Foglio],
+                        ['==', 'Paricella', e.features[0].properties.Paricella]
+                    ]);
+                }
+            });
+
+            // Gestione dell'evento mouseleave per rimuovere l'evidenziazione
+            map.on('mouseleave', 'Particelle catastali', () => {
+                // Ripristina il cursore predefinito
+                map.getCanvas().style.cursor = 'default';
+
+                // Rimuovi l'evidenziazione del poligono
+                map.setFilter('highlighted-polygon', ['==', 'id', '']); // Nessun poligono selezionato
+            });
+
+            // Gestione dei pulsanti
+            const buttons = {
+                vincoli_lin: 'vincoli_lin',
+                vincoli_ar: 'vincoli_ar',
+                particelle: 'Particelle catastali',
+                carta_tecnica: 'carta_tecnica'
+            };
+
+            Object.keys(buttons).forEach(id => {
+                const button = document.getElementById(id);
+                const layerId = buttons[id];
+
+                button.addEventListener('click', () => {
+                    const isActive = button.classList.contains('active');
+                    button.classList.toggle('active', !isActive);
+                    map.setLayoutProperty(layerId, 'visibility', isActive ? 'none' : 'visible');
+                });
+            });
+        });
+
+        // Gestione dei tooltip al click del mouse
+        let currentPopup = null;
+
+        map.on('click', (e) => {
+            const features = map.queryRenderedFeatures(e.point, {
+                layers: ['cs', 'Info Vin. areali', 'Info Vin. lineari', 'Info Netto storico', 'Info ZTO', 'Particelle catastali']
+            });
+
+            if (features.length > 0) {
+                if (currentPopup) {
+                    currentPopup.remove();
+                    currentPopup = null;
+                }
+
+                const unifiedTooltipContent = features.map(feature => {
+                    let content = '';
+                    if (feature.layer.id === 'cs') {
+                        content = `<b> Strumento Urbanistico:</b> PPE<br><b>Circoscrizione:</b> ${feature.properties.Circoscriz || 'N/A'}`;
+                    } else if (feature.layer.id === 'Info Vin. areali') {
+                        content = `<b>Vicolo lineare</b><br><b>Tipo:</b> ${feature.properties.tipo || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.descrizone || 'N/A'}<br><b>Note:</b> ${feature.properties.note || 'N/A'}`;
+                    } else if (feature.layer.id === 'Info Vin. lineari') {
+                        content = `<b>Vicolo areale</b><br><b>Tipo:</b> ${feature.properties.TIPO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}<br><b>Note:</b> ${feature.properties.note || 'N/A'}`;
+                    } else if (feature.layer.id === 'Info Netto storico') {
+                        content = `<b>Netto storico</b><br><b>ZTO:</b> ${feature.properties.ZTO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}`;
+                    } else if (feature.layer.id === 'Info ZTO') {
+                        content = `<b>Zonizzazione</b><br><b>ZTO:</b> ${feature.properties.ZTO || 'N/A'}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || 'N/A'}`;
+                    } else if (feature.layer.id === 'Particelle catastali') {
+                        content = `<b>Particelle catastali</b><br><b>Foglio:</b> ${feature.properties.Foglio || 'N/A'}<br><b>Particella:</b> ${feature.properties.Paricella || 'N/A'}`;
+                    }
+                    return content;
+                }).join('<hr>');
+
+                currentPopup = new maplibregl.Popup({ closeOnClick: true })
+                    .setLngLat(e.lngLat)
+                    .setHTML(unifiedTooltipContent)
+                    .addTo(map);
+            }
+        });
+
+        // Cambia il cursore quando il mouse passa sopra un poligono
+        map.on('mouseenter', ['cs', 'Info Vin. areali', 'Info Vin. lineari', 'Info Netto storico', 'Info ZTO', 'Particelle catastali'], () => {
+            map.getCanvas().style.cursor = 'pointer';
+        });
+
+        map.on('mouseleave', ['cs', 'Info Vin. areali', 'Info Vin. lineari', 'Info Netto storico', 'Info ZTO', 'Particelle catastali'], () => {
+            map.getCanvas().style.cursor = 'default';
+        });
+    </script>
+
+    <!-- Caricamento -->
+    <!-- jQuery, Helpers e jqueryIntrLoader -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/spin.min.js"></script>
+    <script src="js/jquery.introLoader.js"></script>
+    <div id="element" class="introLoading"></div>
+    <script>
+        $(document).on('ready', function() {
+            $("#element").introLoader({
+                animation: {
+                    name: 'lettersLoader',
+                    options: {
+                        ease: "easeInOutCirc",
+                        style: 'light',
+                        delayBefore: 500,
+                        delayAfter: 0,
+                        exitTime: 300,
+                        loaderText: 'Variante Generale e Particelle catastali',
+                        lettersDelayTime: 0.25
+                    }
+                },
+                spinJs: {
+                    lines: 50, // Numero di linee da disegnare
+                    length: 50, // Lunghezza di ogni linea
+                    radius: 80, // Raggio del cerchio interno
+                    width: 3, // Spessore della linea
+                    color: '#333' // Colore
+                }
+            });
+        });
+    </script>
+</body>
+</html>

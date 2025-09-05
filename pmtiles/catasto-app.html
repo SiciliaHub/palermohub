@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Variante Generale e Particelle catastali e stampa scheda pdf - By OpenDataSicilia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <meta name="author" content="Giovan Battista Vitrano per Open Data Sicilia">
+    <script src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/pmtiles@2.4.0/dist/index.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:description" content="Variante Generale e Particelle catastali e stampa scheda pdf - By OpenDataSicilia">
+    <meta property="og:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
+    <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:description" content="Variante Generale e Particelle catastali e stampa scheda pdf - By OpenDataSicilia">
+    <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KHR1GHDRQS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KHR1GHDRQS');
+    </script>
+
+    <link rel="stylesheet" href="css/catasto.css"></head>
+<body>
+    <div id="map"></div>
+    <div class="crosshair-main"></div>
+
+    <!-- Revolutionary Floating Command Bar -->
+    <div class="command-bar">
+        <button class="command-btn" onclick="toggleLayers()" Title="Attiva/Disattiva i layers">
+            <i class="fas fa-layer-group"></i>
+            Layers
+        </button>
+        <button class="command-btn" onclick="toggleSearchPopup()" Title="Cerca una paricella">
+            <i class="fas fa-search"></i>
+            Search
+        </button>
+        <button class="command-btn" id="pdf-cmd" onclick="generatePDF()" style="display: none;" Title="Stampa la particella cercata">
+            <i class="fas fa-file-pdf"></i>
+            PDF
+        </button>
+        <button class="command-btn" onclick="toggleSatelliteOverlay()" Title="Attiva overlay maps">
+            <i class="fas fa-satellite"></i>
+            Satellite
+        </button>
+        <button class="command-btn" onclick="toggleSidepanel()" Title="Apri pannello informativo">
+            <i class="fas fa-info-circle"></i>
+            Info
+        </button>
+    </div>
+
+    <!-- Floating Layer Cards -->
+<div class="layer-switcher" id="layer-panel">
+    <div class="layer-card">
+        <h3><div class="layer-icon"><i class="fas fa-shield-alt"></i></div> Vincoli</h3>
+        <div class="layer-grid">
+            <div class="vincoli-container">
+                <button id="vincoli-main" class="active">
+                    <span>Vincoli Urbanistici</span>
+                    <div class="layer-toggle"></div>
+                </button>
+                <div class="vincoli-submenu">
+                    <button id="vincoli_lin" class="active">
+                        <span>Vincoli Lineari</span>
+                        <div class="layer-toggle"></div>
+                    </button>
+                    <button id="vincoli_ar" class="active">
+                        <span>Vincoli Areali</span>
+                        <div class="layer-toggle"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layer-card">
+        <h3><div class="layer-icon" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);"><i class="fas fa-map"></i></div> Catasto</h3>
+        <div class="layer-grid">
+            <button id="particelle" class="active">
+                <span>Particelle Catastali</span>
+                <div class="layer-toggle"></div>
+            </button>
+        </div>
+    </div>
+
+    <div class="layer-card">
+        <h3><div class="layer-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);"><i class="fas fa-globe"></i></div> Cartografia</h3>
+        <div class="layer-grid">
+            <button id="carta_tecnica">
+                <span>Carta Tecnica 2k</span>
+                <div class="layer-toggle"></div>
+            </button>
+            <button id="satellite">
+                <span>Google Satellite</span>
+                <div class="layer-toggle"></div>
+            </button>
+        </div>
+    </div>
+</div>	
+	
+	
+
+
+
+  <!-- Floating Logo -->
+    <div class="logo">
+        <a href="https://opendatasicilia.it/" title="@opendatasicilia" target="_blank">
+            <img src="https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png" alt="OpenDataSicilia">
+        </a>
+    </div>
+
+    <!-- Revolutionary Search Interface -->
+    <div class="search-tab" onclick="toggleSearchPopup()">
+        <i class="fas fa-search"></i>
+    </div>
+
+    <div class="pdf-tab" id="pdf-tab">
+        <i class="fas fa-file-pdf"></i>
+    </div>
+
+    <!-- Immersive Search Modal -->
+    <div class="search-popup" id="search-popup">
+        <button class="search-close" onclick="toggleSearchPopup()">×</button>
+        <div class="search-container">
+            <h3>Ricerca Particella</h3>
+            <p>Inserisci foglio e particella per iniziare la ricerca nella mappa catastale di Palermo</p>
+            <div class="search-inputs">
+                <input type="number" id="foglio" placeholder="Numero Foglio" min="1">
+                <input type="number" id="particella" placeholder="Numero Particella" min="1">
+            </div>
+            <button onclick="searchParticella()">Avvia Ricerca</button>
+            <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
+                Dati catastali aggiornati a Agosto 2025 (S.I.T.R. Sicilia)
+            </p>
+            <div id="search-error"></div>
+        </div>
+    </div>
+
+    <!-- Picture-in-Picture Satellite  -->
+    <div id="satellite-overlay">
+        <div class="satellite-controls">
+            <button class="satellite-btn" onclick="toggleSatelliteOverlay()" title="Chiudi">×</button>
+        </div>
+        <div id="satellite-map"></div>
+        <div class="crosshair-minimap"></div>
+    </div>
+
+    <div class="overlay-button">
+        <button onclick="toggleSatelliteOverlay()" data-state="closed"></button>
+    </div>
+
+    <!-- Revolutionary Bottom Drawer -->
+    <div id="sidepanel">
+        <div id="sidepanel-tab" onclick="toggleSidepanel()">
+            <i id="tab-icon" class="fas fa-chevron-up"></i>
+            <span>Informazioni</span>
+        </div>
+        <div id="sidepanel-content">
+            <!-- Back to Top Button -->
+            <button id="back-to-top" title="Torna in alto" class="back-to-top-btn" onclick="scrollToTop()">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            <div id="sidepanel-tabs">
+                <button onclick="showSection('section1')" class="active">Info</button>
+                <button onclick="showSection('section2')">Strumenti</button>
+                <button onclick="showSection('section3')">Ricerca</button>
+                <button onclick="showSection('section4')">PDF</button>
+                <button onclick="showSection('section6')">Legenda</button>
+                <button onclick="showSection('section5')">Video</button>
+            </div>
+
+            <div id="section1" class="sidepanel-section active">
+                <h2>Variante Generale e dati catastali</h2>
+                <p><em><strong>Dal 1° gennaio 2025, l'accesso telematico alle banche dati </strong>ipotecarie e <strong>catastali diventa gratuito</strong>, segnando un'importante semplificazione per professionisti, pubbliche amministrazioni e cittadini. <br>La novità è contenuta nel <a href="https://www.agenziaentrate.gov.it/portale/web/guest/-/provvedimento-del-30-dicembre-20-3">provvedimento</a> dell'Agenzia delle Entrate del 30 dicembre 2024, che attua le disposizioni introdotte dall'articolo 7 del decreto legislativo n. 139/2024.</em></p>
+                <hr>
+                <p><strong>Variente Generle al P.R.G.</strong> - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br>
+                Rielaborazione a cura di @opendatasicilia su opendata del Comune di Palermo. <br><br>
+                <strong> Fonte dati Zonizzazione e vincoli -</strong> <br><a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=11" title="Opendata Palermo - Urbanistica" target="_blank">Urbanistica</a>   <br>
+                <a href="https://www.comune.palermo.it/opendata_dld.php?id=320t" title="Perimetrazione Zonizzazione P.R.G. vigente" target="_blank" > Perimetrazione Zonizzazione P.R.G. vigente;</a><br>
+                <a href="https://www.comune.palermo.it/opendata_dld.php?id=321" title="Vincoli vigenti della Variante al P.R.G." target="_blank" >Vincoli vigenti della Variante al P.R.G.</a> -  <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong>
+                  <p class="lorem"><strong>La variante Generale al P.R.G. è stata redatta dal Settore Urbanistica nel 2004 oggi Area Urbanistica della rigenerazione urbana, della mobilità e del centro storico</strong><br>
+                    <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=103" target="_blank">Qui gli elaborati della Variante Generale</a></p>
+                     <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br>
+                     <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p>
+                   <hr>
+                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Agosto 2025</strong>.<br><br>
+                    L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
+                    <hr>
+                    <p><strong>Disclaimer:</strong> I contenuti presenti in questa sezione, compresi testi ed elementi grafici, hanno carattere puramente informativo e divulgativo.  <br><br> Non sono presenti dati personali o sensibili. Si precisa che questi materiali non costituiscono documenti ufficiali né hanno alcun valore legale.  <br> <br>Per consultare la documentazione ufficiale e legalmente vincolante, si prega di fare riferimento agli atti definitivi allegati alle relative deliberazioni degli organi competenti.</p>
+            </div>
+
+            <div id="section2" class="sidepanel-section">
+                <h2>Nuova mappa con particelle catastali e strumenti urbanistici vigenti di Palermo</h2>
+                <p> La nuova versione è completamente riprogettata e ottimizzata, grazie all'aiuto di <a href="https://x.com/deepseek_ai" title="DeepSeek AI" target="_blank">@deepseek_ai</a>, per offrire una migliore esperienza utente.</p>
+                <h3>Principali miglioramenti</h3>
+                <p>La novità più significativa riguarda la gestione dei tooltip. Nella versione precedente, in presenza di elementi sovrapposti nei livelli PMTiles, i tooltip si sovrapponevano creando confusione. Ora, lo script genera automaticamente un tooltip unificato che integra in modo ordinato le informazioni di tutti gli elementi presenti in un punto specifico.<br> Inoltre, è stato integrato un pratico modulo di ricerca che permette di individuare rapidamente fogli e particelle specifiche. <br> Infine è stata implementata una finestra dinamica che visualizza una mappa satellitare, la quale si sincronizza automaticamente con la mappa principale.</p>
+                <h3>Aspetti tecnici</h3>
+                <p>Il codice è stato completamente ristrutturato per garantire:</p>
+                <ul>
+                  <li>Maggiore stabilità e riduzione dei bug</li>
+                  <li>Performance ottimizzate</li>
+                  <li>Migliore gestione della visualizzazione dei dati</li>
+                  <li>Modulo di ricerca per Foglio e particella catastale</li>
+                  <li>Finestra dinamica per visualizzare la mappa satellitare</li>
+                </ul>
+                <h3>Mappa Variante Generale versione base</h3>
+                <p>La prima versione della mappa della Variante Generale rimane disponibile per la consultazione al seguente <a href="https://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595" title="Palermo - Zonizzazione e vincoli sul territorio" target="_blank"><b>indirizzo</b></a>.</p>
+                <h3>Ringraziamenti</h3>
+                <p>Un sentito ringraziamento va a <a href="https://x.com/aborruso" title="Andrea Borruso" target="_blank"><em>@aborruso</em></a> e <a href="https://x.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a>, i cui insegnamenti e la costante condivisione di conoscenze hanno contribuito in modo determinante alla realizzazione di questo progetto. Il loro supporto mi permette di implementare e migliorarmi nel campo della cartografia digitale.</p>
+                <hr>
+                <h3>I principali strumenti usati per realizzare la mappa</h3>
+                <p>Coming soon...</p>
+                <img src="js/demo2.png" width="366" height="128" alt=""/>
+            </div>
+
+            <div id="section3" class="sidepanel-section">
+                <h2>Ricerca geografica delle particelle catastali</h2>
+                <p> Il layer <b>Particelle Catastali</b> viene esposto in formato PMTiles.</p>
+                <p> Il <b>PMTiles</b> è un formato di file progettato per archiviare e servire dati geospaziali, come mappe vettoriali o raster, in modo efficiente. È un formato basato su tessere (tiles), che permette di suddividere i dati in piccole porzioni (tiles) per un accesso rapido e selettivo. <br> La particolarità di PMTiles è che è un formato monolitico, cioè tutti i dati sono contenuti in un unico file, a differenza di altri formati che richiedono molteplici file separati. Questo lo rende più semplice da gestire e distribuire, ad esempio su un server web o su un CDN (Content Delivery Network).</p>
+                <h3>Cerca una Particella</h3>
+                <p> Viste le caratteristiche del PMTiles, Durante la ricerca con PMTiles, è necessario che la particella da visualizzare sia compresa nell'area mostrata sullo schermo del proprio dispositivo (PC desktop o mobile). In caso contrario, poichè il dato non sarà stato caricato, verrà mostrato un messaggio di errore.</p>
+                <h3>Ricerca con PMTiles</h3>
+                <p>Dato che il formato <strong>PMTiles</strong> è progettato per caricare solo le <strong>porzioni di dati</strong> (tiles) necessarie per visualizzare l'area attualmente visibile sullo schermo (monitor del PC o display del dispositivo), è fondamentale assicurarsi che la particella o l'oggetto geospaziale richiesto rientri nell'area visualizzata.</p>
+            </div>
+
+            <div id="section4" class="sidepanel-section">
+                <h2>Stampa PDF</h2>
+                <p>Una volta effettuata la ricerca della particella catastale tramite il pulsante 'Cerca', comparirà una nuova icona sottostante. <br><br>Cliccando su questa icona, il sistema genererà automaticamente un documento PDF che include una mappa dettagliata con la particella evidenziata. <br><br>Il documento contiene inoltre tutte le informazioni catastali della particella selezionata e i relativi dati urbanistici, compresi la zonizzazione dell'area e gli eventuali vincoli esistenti.</p>
+                <hr>
+                <p> <b>N.B. Non è possibile generare file pdf quando si usa un device mobile orientato in verticale (Portrait) </b><br><br>
+                Per generare PDF con le informazioni richieste, ruotare il dispositivo in orientamento orizzontale (modalità landscape).</p>
+            </div>
+
+            <div id="section6" class="sidepanel-section">
+                <h2>Legenda PRG</h2>
+                <img src="legenda.svg" style="width: 100%; height: auto;" alt="Legenda PRG" />
+            </div>
+
+            <div id="section5" class="sidepanel-section">
+                <h2>Video demo</h2>
+                <p>Video di presentazione delle nuove funzionalità introdotte sulla mappa</p>
+                <div style="max-width: 600px; width: 100%; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 20px;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--radius);" src="https://www.youtube.com/embed/N_gdK7NBvU4?si=7yUCGTg8wOD_cJ_2&amp;start=3" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wait Popup -->
+    <div id="pdf-wait-popup" class="wait-popup">
+        <div class="wait-content">
+            <p>Generazione del PDF in corso...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Epic Loading Screen -->
+    <div class="custom-loader" id="custom-loader">
+        <div class="loading-animation">
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+        </div>
+        <div class="loader-text">Elaborazione dei dati cartografici in corso...</div>
+        <h2>Variante Generale al P.R.G. e Particelle catastali</h2>
+        <div class="loading-progress">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Hidden compatibility elements -->
+    <div id="pdf-capture" style="display: none; width: 300px; height: 300px;">
+        <div id="map-capture"></div>
+    </div>
+    <script src="js/catasto_script.js"></script>
+
+</body>
+</html>
