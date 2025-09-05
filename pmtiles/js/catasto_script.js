@@ -536,7 +536,7 @@ by @opendatasicilia`;
                 yPos += 5;
                 areaData.intersections.forEach(intersection => {
                     doc.text(`• Area intersecata con ${intersection.layer}: ${intersection.area} m² (${intersection.percentage}%)`, margin, yPos);
-                    yPos += 3;
+                    yPos += 5;
                 });
             }
             
