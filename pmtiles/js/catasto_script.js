@@ -494,7 +494,7 @@ async function generatePDF() {
             doc.addImage(mapImage, "PNG", margin, margin + 48, imgWidth, imgHeight);
             
             // Disclaimer e fonte dati
-            const disclaimerText = `Fonte dati catastali S.I.T.R. Sicilia - Ultimo aggiornamento Maggio 2025, rilasciati con licenza CC-BY 4.0.
+            const disclaimerText = `Fonte dati catastali S.I.T.R. Sicilia - Ultimo aggiornamento Agosto 2025, rilasciati con licenza CC-BY 4.0.
 Fonte dati ZTO e vincoli: opendata Comune di Palermo, rilasciati con licenza CC-BY 4.0.
 
 L'Agenzia delle entrate è l'amministrazione titolare dei dati, rilasciati con licenza CC-BY 4.0.
@@ -817,7 +817,7 @@ map.on("load", () => {
 
     map.addSource("catasto", {
         type: "vector", 
-        url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0525.pmtiles",
+        url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0825.pmtiles",
         attribution: "Catasto - fonte dati <b>SITR Sicilia</b>"
     });
 
