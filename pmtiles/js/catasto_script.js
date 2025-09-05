@@ -494,7 +494,7 @@ async function generatePDF() {
             doc.addImage(mapImage, "PNG", margin, margin + 48, imgWidth, imgHeight);
             
             // Disclaimer e fonte dati
-            const disclaimerText = `Fonte dati catastali S.I.T.R. Sicilia - Ultimo aggiornamento Agosto 2025, rilasciati con licenza CC-BY 4.0.
+            const disclaimerText = `Fonte dati catastali S.I.T.R. Sicilia - Ultimo aggiornamento Gennaio 2025, rilasciati con licenza CC-BY 4.0.
 Fonte dati ZTO e vincoli: opendata Comune di Palermo, rilasciati con licenza CC-BY 4.0.
 
 L'Agenzia delle entrate è l'amministrazione titolare dei dati, rilasciati con licenza CC-BY 4.0.
