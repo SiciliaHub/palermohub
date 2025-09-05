@@ -817,7 +817,7 @@ map.on("load", () => {
 
     map.addSource("catasto", {
         type: "vector", 
-        url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0125.pmtiles",
+        url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0825.pmtiles",
         attribution: "Catasto - fonte dati <b>SITR Sicilia</b>"
     });
 
