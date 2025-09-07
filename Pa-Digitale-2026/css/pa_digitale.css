@@ -40,7 +40,7 @@
         }
 
         .right-panel {
-            overflow-y: hidden;
+            overflow-y: auto;
             background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.95));
         }
 
