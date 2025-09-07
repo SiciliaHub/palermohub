@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <title>PA Digitale 2026 - Dashboard by @opendatasicilia</title>
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <META HTTP-EQUIV="refresh" CONTENT="600">  
+    <meta name="description" content="PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l'unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
+    <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+    <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+    <meta http-equiv="content-language" content="IT">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="creation_Date" content="06/09/2025>
+    <link rel="shortcut icon" href="favicon.ico"/> 
+	<link rel="icon" href="favicon.png" type="image/png"/> 
+	    <!-- Meta tags per social sharing pen Graph Protocol -->
+    <meta property="og:url" content="https://palermohub.github.io/Pa-Digitale-2026/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PA Digitale 2026 - Dashboard by @opendatasicilia">
+    <meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:image" content="https://palermohub.github.io/Pa-Digitale-2026/img/social_card.jpg">
+	<!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.github.io/Pa-Digitale-2026/">
+    <meta name="twitter:title" content="PA Digitale 2026 - Dashboard by @opendatasicilia">
+    <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:image" content="https://palermohub.github.io/Pa-Digitale-2026/img/social_card.jpg">
+       <!-- app CSS -->
+    <link rel="stylesheet" href="css/pa_digitale.css" />
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- D3.js -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Font Awesome per le icone -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>	
+	
+</head>
+<body>
+    <!-- Logo Beta in basso a sinistra 
+    <img src="https://palermohub.github.io/cspa/img/beta.png" alt="Logo Beta" class="logo-beta">-->
+    
+    <!-- Menu mobile toggle -->
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+    </button>
+    
+    <!-- Modal informativo -->
+    <div class="info-modal-overlay" id="infoModal">
+        <div class="info-modal">
+            <div class="info-modal-header">
+                <button class="info-modal-close" onclick="closeInfoModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="info-title">Dashboard PA Digitale 2026</div>
+                <div class="info-subtitle">Monitoraggio fondi PNRR per la digitalizzazione comunale</div>
+            </div>
+            
+            <div class="info-feature-section">
+                <div class="info-section-title">
+                    <div class="info-icon">F</div>
+                    Funzionalità Principali
+                </div>
+                <ul class="info-feature-list">
+                    <li class="info-feature-item"><strong>Mappa interattiva</strong> con visualizzazione geografica dei progetti finanziati</li>
+                    <li class="info-feature-item"><strong>Grafici dinamici</strong> che si adattano automaticamente ai filtri selezionati</li>
+                    <li class="info-feature-item"><strong>Statistiche real-time</strong> aggiornate in base alle selezioni</li>
+                    <li class="info-feature-item"><strong>Popup dettagliati</strong> con informazioni complete sui progetti comunali</li>
+                </ul>
+            </div>
+            
+            <div class="info-feature-section">
+                <div class="info-section-title">
+                    <div class="info-icon">S</div>
+                    Sistema Filtri Interconnessi
+                </div>
+                <ul class="info-feature-list">
+                    <li class="info-feature-item"><strong>Filtri a cascata:</strong> Regione → Provincia → Comune → Avviso</li>
+                    <li class="info-feature-item"><strong>Ricerca incrementale</strong> per province e comuni con dropdown dinamici</li>
+                    <li class="info-feature-item"><strong>Aggiornamento automatico:</strong> ogni filtro influenza tutti gli altri</li>
+                    <li class="info-feature-item"><strong>Reset intelligente:</strong> cancellazione filtri dipendenti in cascata</li>
+                </ul>
+            </div>
+            
+            <div class="info-highlight">
+                <div class="info-highlight-title">Scaricamento Dati Personalizzato</div>
+                <strong>Tabella dati completa</strong> con paginazione, ordinamento e ricerca. Possibilità di <strong>esportare in CSV</strong> solo i dati che corrispondono ai filtri applicati, mantenendo la selezione corrente per analisi mirate.
+            </div>
+            
+            <div class="info-feature-section">
+                <div class="info-section-title">
+                    <div class="info-icon">M</div>
+                    Design Mobile-First
+                </div>
+                <ul class="info-feature-list">
+                    <li class="info-feature-item"><strong>Layout adattivo</strong> ottimizzato per smartphone e tablet</li>
+                    <li class="info-feature-item"><strong>Menu mobile</strong> con accesso completo a tutti i filtri</li>
+                    <li class="info-feature-item"><strong>Interazioni touch</strong> per navigazione mappa e grafici</li>
+                </ul>
+            </div>
+            
+            <div class="info-data-source">
+                <strong>Fonte dati:</strong> Team Digitale - PA Digitale 2026 OpenData<br/>
+                <strong>Licenza:</strong> Creative Commons BY 4.0<br/>
+                <strong>Aggiornamento:</strong> Quotidiano automatico dal repository GitHub ufficiale<br/>
+				 <strong>Rielaborazione dati:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank">@gbvitrano</a> by <a href="https://x.com/opendatasicilia" title="@opendatasicilia" target="_blank">@opendatasicilia</a> - 2025<br/>
+				<strong>Sviluppo tecnico:</strong> Applicazione web sviluppata attraverso una collaborazione human-<a href="https://claude.ai" target="_blank">Claude AI (Anthropic)</a> e <a href="https://chat.z.ai/" target="_blank"> chatbot Z.ai</a>, che hanno supportato la progettazione dell'architettura modulare, l'ottimizzazione del codice e l'implementazione di funzionalità avanzate.
+				
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal per tabella dati -->
+    <div class="modal-overlay" id="dataModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title"><i class="fas fa-table"></i> Tabella dati filtrati</h2>
+                <button class="modal-close" onclick="closeDataModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-content">
+                <div class="modal-actions">
+                    <div class="modal-info">
+                        <span id="tableRecordCount">0 record trovati</span>
+                    </div>
+                    <button class="download-filtered-btn" onclick="downloadFilteredCSV()">
+                        <i class="fas fa-download"></i> Scarica Dati Filtrati
+                    </button>
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable('regione')">Regione</th>
+                                <th onclick="sortTable('provincia')">Provincia</th>
+                                <th onclick="sortTable('comune')">Comune</th>
+                                <th onclick="sortTable('codice_cup')">Codice CUP</th>
+                                <th onclick="sortTable('avviso')">Avviso</th>
+                                <th onclick="sortTable('data_invio_candidatura')">Data Invio</th>
+                                <th onclick="sortTable('data_finanziamento')">Data Finanziamento</th>
+                                <th onclick="sortTable('importo_finanziamento')">Importo (€)</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                    </table>
+                </div>
+                <div class="pagination" id="tablePagination">
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Menu mobile -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- Logo ODS -->
+        <img src="https://palermohub.github.io/cspa/img/pa_hub_new.png" alt="Logo ODS" class="logo-ods">
+		 <h2>PA Digitale 2026 PNRR - Candidature Finanziate (Comuni)</h2>
+        
+        <h3><i class="fa-solid fa-filter"></i>  Filtri</h3>
+        
+        <div class="filter-group">
+            <label for="regioneFilterMobile">Regione</label>
+            <select id="regioneFilterMobile">
+                <option value="">Tutte le regioni</option>
+            </select>
+        </div>
+
+        <div class="filter-group">
+            <label for="provinciaFilterMobile">Provincia</label>
+            <div class="search-filter">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="provinciaFilterMobile" placeholder="Cerca provincia...">
+                <button class="clear-btn" id="provinciaClearMobile">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="filter-dropdown" id="provinciaDropdownMobile"></div>
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <label for="comuneFilterMobile">Comune</label>
+            <div class="search-filter">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="comuneFilterMobile" placeholder="Cerca comune...">
+                <button class="clear-btn" id="comuneClearMobile">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="filter-dropdown" id="comuneDropdownMobile"></div>
+            </div>
+        </div>
+
+        <div class="filter-group">
+            <label for="avvisoFilterMobile">Avviso</label>
+            <select id="avvisoFilterMobile">
+                <option value="">Tutti gli avvisi</option>
+            </select>
+        </div>
+
+        <div class="action-buttons">
+            <button class="reset-btn" onclick="resetFilters()">Reset</button>
+            <button class="table-btn" onclick="openDataModal()">
+                <i class="fas fa-table"></i> Mostra Tabella
+            </button>
+        </div>
+
+        <!-- Data dell'ultimo aggiornamento -->
+        <div class="last-update">
+            <label>Ultimo aggiornamento:</label>
+            <div id="lastUpdateMobile">Caricamento...</div>
+        </div>
+
+        <!-- Nuova sezione: Dati e Licenze (Mobile) -->
+        <div class="data-sources">
+            <h4><i class="fas fa-database"></i> Dati e Licenze</h4>
+            <div class="sources-grid">
+                <a href="https://github.com/teamdigitale/padigitale2026-opendata" target="_blank" rel="noopener noreferrer" class="source-item">
+                    <div class="source-icon github-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="source-content">
+                        <div class="source-title">Repository GitHub</div>
+                        <div class="source-description">Team Digitale - PA Digitale 2026 OpenData</div>
+                    </div>
+                </a>
+                
+                <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener noreferrer" class="source-item">
+                    <div class="source-icon license-icon">
+                        <i class="fab fa-creative-commons"></i>
+                    </div>
+                    <div class="source-content">
+                        <div class="source-title">Licenza CC BY 4.0</div>
+                        <div class="source-description">Creative Commons - Attribuzione 4.0 Internazionale</div>
+                    </div>
+                </a>
+                
+                <button class="download-btn" onclick="downloadCSV()">
+                    <div class="source-item">
+                        <div class="source-icon download-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div class="source-content">
+                            <div class="source-title">Scarica Dati CSV</div>
+                            <div class="source-description">Candidature PA Digitale 2026 in formato CSV</div>
+                        </div>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- Pannello info comune selezionato -->
+        <div class="info-panel" id="infoPanelMobile">
+            <h4><i class="fa-solid fa-landmark"></i> Dettagli Comune</h4>
+            <div id="infoContentMobile"></div>
+        </div>
+
+        <!-- Debug info -->
+        <div class="debug-info" id="debugInfoMobile">
+            <strong>Debug Info:</strong><br/>
+            <div id="debugContentMobile">Caricamento...</div>
+        </div>
+    </div>
+    
+    <!-- Overlay per menu mobile -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <div class="container">
+        <!-- Pannello sinistro - Filtri -->
+        <div class="panel left-panel" id="desktopLeftPanel">
+            <!-- Logo ODS prima del titolo filtri 
+            <img src="https://raw.githubusercontent.com/SiciliaHub/palermohub/PH-release-v2.0/legend/pa_hub_new_white.png" alt="Logo ODS" class="logo-ods">-->
+            <h2>PA Digitale 2026 PNRR </h2> 
+			<p>Candidature dei Comuni confermate e finanziate nel PNRR con i fondi dedicati alla digitalizzazione della Pubblica Amministrazione -  PA digitale 2026 </p><br>
+            <h3><i class="fa-solid fa-filter"></i> Filtri</h3>
+            
+            <div class="filter-group">
+                <label for="regioneFilter">Regione</label>
+                <select id="regioneFilter">
+                    <option value="">Tutte le regioni</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="provinciaFilter">Provincia</label>
+                <div class="search-filter">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="provinciaFilter" placeholder="Cerca per sigla della provincia...">
+                    <button class="clear-btn" id="provinciaClear">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="filter-dropdown" id="provinciaDropdown"></div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="comuneFilter">Comune</label>
+                <div class="search-filter">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="comuneFilter" placeholder="Cerca comune...">
+                    <button class="clear-btn" id="comuneClear">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div class="filter-dropdown" id="comuneDropdown"></div>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="avvisoFilter">Avviso</label>
+                <select id="avvisoFilter">
+                    <option value="">Tutti gli avvisi</option>
+                </select>
+            </div>
+
+            <div class="action-buttons">
+                <button class="reset-btn" onclick="resetFilters()" title="Reset Filtri"> <i class="fas fa-refresh"></i> Reset</button>
+                <button class="table-btn" onclick="openDataModal()" title="Mostra Tabella Dati">
+                    <i class="fas fa-table"></i> Tabella
+                </button>
+            </div>
+
+            <!-- Aggiunto: Data dell'ultimo aggiornamento -->
+            <div class="last-update">
+                <label>Ultimo aggiornamento:</label>
+                <div id="lastUpdate">Caricamento...</div>
+            </div>
+
+            <!-- Nuova sezione: Dati e Licenze -->
+            <div class="data-sources">
+                <h4><i class="fa-solid fa-database"></i>  Dati e  Licenze <i class="fa-solid fa-closed-captioning"></i> </h4>
+                <div class="sources-grid">
+                    <a href="https://github.com/teamdigitale/padigitale2026-opendata" target="_blank" rel="noopener noreferrer" class="source-item">
+                        <div class="source-icon github-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <div class="source-content">
+                            <div class="source-title">Repository GitHub</div>
+                            <div class="source-description">Team Digitale - PA Digitale 2026 OpenData</div>
+                        </div>
+                    </a>
+                    
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener noreferrer" class="source-item">
+                        <div class="source-icon license-icon">
+                            <i class="fab fa-creative-commons"></i>
+                        </div>
+                        <div class="source-content">
+                            <div class="source-title">Licenza CC BY 4.0</div>
+                            <div class="source-description">Creative Commons - Attribuzione 4.0 Internazionale</div>
+                        </div>
+                    </a>
+                    
+                    <button class="download-btn" onclick="downloadCSV()">
+                        <div class="source-item">
+                            <div class="source-icon download-icon">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <div class="source-content">
+                                <div class="source-title">Scarica Dati CSV</div>
+                                <div class="source-description">Candidature PA Digitale 2026 in formato CSV</div>
+                            </div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pannello info comune selezionato -->
+            <div class="info-panel" id="infoPanel">
+                <h4><i class="fa-solid fa-landmark"></i> Dettagli Comune</h4>
+                <div id="infoContent"></div>
+            </div>
+
+            <!-- Debug info -->
+            <div class="debug-info" id="debugInfo">
+                <strong>Debug Info:</strong><br/>
+                <div id="debugContent">Caricamento...</div>
+            </div>
+        </div>
+
+        <!-- Mappa centrale -->
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="loading" id="loading">
+                <div class="loader"></div>
+                <div>Caricamento dati...</div>
+            </div>
+        </div>
+
+        <!-- Pannello destro - Statistiche e grafico -->
+        <div class="panel right-panel">
+            <div class="stats-header">
+                <h2 class="stats-title"><i class="fa-solid fa-square-poll-horizontal"></i> Statistiche</h2>
+                <button class="info-btn" onclick="openInfoModal()" title="Informazioni Dashboard">
+                    <i class="fas fa-info"></i>
+                </button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="statRegioni">-</div>
+                    <div class="stat-label">Regioni con candidature</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statComuni">-</div>
+                    <div class="stat-label">Comuni candidati</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statProgetti">-</div>
+                    <div class="stat-label">Progetti finanziati</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statImporto">-</div>
+                    <div class="stat-label">Importo totale (€)</div>
+                </div>
+            </div>
+
+            <h3 id="chartTitle"><i class='fa-solid fa-euro-sign'></i> Importi finanziati per regione</h3>
+            
+            <!-- Tab per selezione tipo grafico -->
+            <div class="chart-tabs">
+                <button class="chart-tab active" onclick="switchChartTab('dynamic')" id="tab-dynamic">
+                    Dinamico
+                </button>
+             <button class="chart-tab" onclick="switchChartTab('comuni')" id="tab-comuni">
+                    Per Comune
+                </button>
+                <button class="chart-tab" onclick="switchChartTab('avvisi')" id="tab-avvisi">
+                    Per Avviso
+                </button>
+            </div>
+            
+            <div class="chart-container">
+                <svg id="chart" width="100%"></svg>
+            </div>
+        </div>
+    </div>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- app js -->
+<script src="js/pa_digitale.js"></script>
+</body>
+</html>
