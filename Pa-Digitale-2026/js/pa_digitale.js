@@ -426,8 +426,12 @@
 
         // ========== FUNZIONI ORIGINALI (con alcune modifiche) ==========
 
-        // Setup dei filtri con ricerca
+        // Setup dei filtri con ricerca - AGGIORNATO per includere regione e avviso
         function setupSearchFilters() {
+            // Setup filtri regione (desktop e mobile)
+            setupSearchFilter('regioneFilter', 'regioneDropdown', 'regioneClear', 'regione');
+            setupSearchFilter('regioneFilterMobile', 'regioneDropdownMobile', 'regioneClearMobile', 'regione');
+            
             // Setup filtri provincia (desktop e mobile)
             setupSearchFilter('provinciaFilter', 'provinciaDropdown', 'provinciaClear', 'provincia');
             setupSearchFilter('provinciaFilterMobile', 'provinciaDropdownMobile', 'provinciaClearMobile', 'provincia');
@@ -435,6 +439,10 @@
             // Setup filtri comune (desktop e mobile)
             setupSearchFilter('comuneFilter', 'comuneDropdown', 'comuneClear', 'comune');
             setupSearchFilter('comuneFilterMobile', 'comuneDropdownMobile', 'comuneClearMobile', 'comune');
+            
+            // Setup filtri avviso (desktop e mobile)
+            setupSearchFilter('avvisoFilter', 'avvisoDropdown', 'avvisoClear', 'avviso');
+            setupSearchFilter('avvisoFilterMobile', 'avvisoDropdownMobile', 'avvisoClearMobile', 'avviso');
         }
 
         function setupSearchFilter(inputId, dropdownId, clearId, filterType) {
@@ -482,8 +490,20 @@
                 clearBtn.classList.remove('show');
                 hideDropdown(dropdown);
                 
-                // Reset filtro
-                if (filterType === 'provincia') {
+                // Reset filtro e filtri dipendenti
+                if (filterType === 'regione') {
+                    currentFilters.regione = '';
+                    currentFilters.provincia = '';
+                    currentFilters.comune = '';
+                    // Clear anche l'altro input regione
+                    const otherInput = inputId.includes('Mobile') ? 
+                        document.getElementById('regioneFilter') : 
+                        document.getElementById('regioneFilterMobile');
+                    if (otherInput) otherInput.value = '';
+                    
+                    // Clear anche province e comuni
+                    clearSearchInputs(['provincia', 'comune']);
+                } else if (filterType === 'provincia') {
                     currentFilters.provincia = '';
                     currentFilters.comune = '';
                     // Clear anche l'altro input provincia
@@ -493,13 +513,20 @@
                     if (otherInput) otherInput.value = '';
                     
                     // Clear anche comuni
-                    clearComuneInputs();
+                    clearSearchInputs(['comune']);
                 } else if (filterType === 'comune') {
                     currentFilters.comune = '';
                     // Clear anche l'altro input comune
                     const otherInput = inputId.includes('Mobile') ? 
                         document.getElementById('comuneFilter') : 
                         document.getElementById('comuneFilterMobile');
+                    if (otherInput) otherInput.value = '';
+                } else if (filterType === 'avviso') {
+                    currentFilters.avviso = '';
+                    // Clear anche l'altro input avviso
+                    const otherInput = inputId.includes('Mobile') ? 
+                        document.getElementById('avvisoFilter') : 
+                        document.getElementById('avvisoFilterMobile');
                     if (otherInput) otherInput.value = '';
                 }
                 
@@ -513,16 +540,18 @@
             };
         }
 
-        function clearComuneInputs() {
-            const comuneInputs = ['comuneFilter', 'comuneFilterMobile'];
-            comuneInputs.forEach(id => {
-                const input = document.getElementById(id);
-                if (input) {
-                    input.value = '';
-                    const clearBtnId = id.replace('Filter', 'Clear');
-                    const clearBtn = document.getElementById(clearBtnId);
-                    if (clearBtn) clearBtn.classList.remove('show');
-                }
+        function clearSearchInputs(filterTypes) {
+            filterTypes.forEach(type => {
+                const inputs = [`${type}Filter`, `${type}FilterMobile`];
+                inputs.forEach(id => {
+                    const input = document.getElementById(id);
+                    if (input) {
+                        input.value = '';
+                        const clearBtnId = id.replace('Filter', 'Clear');
+                        const clearBtn = document.getElementById(clearBtnId);
+                        if (clearBtn) clearBtn.classList.remove('show');
+                    }
+                });
             });
         }
 
@@ -532,17 +561,44 @@
             if (options.length === 0) {
                 const noResultsOption = document.createElement('div');
                 noResultsOption.className = 'filter-option no-results';
-                noResultsOption.textContent = `Nessun${filterType === 'provincia' ? 'a provincia' : ' comune'} trovato`;
+                const labelMap = {
+                    'regione': 'regione',
+                    'provincia': 'provincia',
+                    'comune': 'comune',
+                    'avviso': 'avviso'
+                };
+                noResultsOption.textContent = `Nessun${filterType === 'regione' || filterType === 'provincia' ? 'a' : ''} ${labelMap[filterType] || 'risultato'} trovato`;
                 dropdown.appendChild(noResultsOption);
             } else {
                 options.forEach(option => {
                     const optionElement = document.createElement('div');
                     optionElement.className = 'filter-option';
-                    optionElement.textContent = option;
+                    
+                    // Tronca gli avvisi lunghi nel dropdown
+                    if (filterType === 'avviso' && option.length > 60) {
+                        optionElement.textContent = option.substring(0, 60) + '...';
+                        optionElement.title = option; // Tooltip con testo completo
+                    } else {
+                        optionElement.textContent = option;
+                    }
+                    
                     optionElement.addEventListener('click', function() {
                         input.value = option;
                         
-                        if (filterType === 'provincia') {
+                        if (filterType === 'regione') {
+                            currentFilters.regione = option;
+                            currentFilters.provincia = '';
+                            currentFilters.comune = '';
+                            
+                            // Aggiorna anche l'altro input regione
+                            const otherInput = input.id.includes('Mobile') ? 
+                                document.getElementById('regioneFilter') : 
+                                document.getElementById('regioneFilterMobile');
+                            if (otherInput) otherInput.value = option;
+                            
+                            // Clear province e comuni
+                            clearSearchInputs(['provincia', 'comune']);
+                        } else if (filterType === 'provincia') {
                             currentFilters.provincia = option;
                             currentFilters.comune = '';
                             
@@ -553,7 +609,7 @@
                             if (otherInput) otherInput.value = option;
                             
                             // Clear comuni
-                            clearComuneInputs();
+                            clearSearchInputs(['comune']);
                         } else if (filterType === 'comune') {
                             currentFilters.comune = option;
                             
@@ -561,6 +617,14 @@
                             const otherInput = input.id.includes('Mobile') ? 
                                 document.getElementById('comuneFilter') : 
                                 document.getElementById('comuneFilterMobile');
+                            if (otherInput) otherInput.value = option;
+                        } else if (filterType === 'avviso') {
+                            currentFilters.avviso = option;
+                            
+                            // Aggiorna anche l'altro input avviso
+                            const otherInput = input.id.includes('Mobile') ? 
+                                document.getElementById('avvisoFilter') : 
+                                document.getElementById('avvisoFilterMobile');
                             if (otherInput) otherInput.value = option;
                         }
                         
@@ -627,7 +691,7 @@
             map = L.map('map', {
                 zoomControl: false, // Disabilita controlli di default
                 maxBounds: italyBounds,
-                maxBoundsViscosity: 0.8, // Permette un po' di elasticità   
+                maxBoundsViscosity: 0.8, // Permette un po' di elasticità     
                 minZoom: 5,  // Permette di vedere tutta l'Italia
                 maxZoom: 16
             }).setView(initialCenter, initialZoom);
@@ -696,6 +760,66 @@
                 initialMapView.zoom = newInitialZoom;
                 
                 map.setView(newInitialCenter, newInitialZoom);
+            }
+        }
+
+        // Nuova funzione per zoom automatico sui filtri
+        function zoomToFiltered() {
+            if (!map || !comuniLayer) return;
+            
+            const filteredFeatures = [];
+            
+            comuniLayer.eachLayer(function(layer) {
+                const properties = layer.feature.properties;
+                let matchesFilter = true;
+                
+                // Verifica se il comune ha candidature
+                if (!properties.candidature) {
+                    matchesFilter = false;
+                } else {
+                    // Applica i filtri
+                    if (currentFilters.regione && 
+                        properties.candidature.regione !== currentFilters.regione) {
+                        matchesFilter = false;
+                    }
+                    if (currentFilters.provincia && 
+                        properties.candidature.provincia !== currentFilters.provincia) {
+                        matchesFilter = false;
+                    }
+                    if (currentFilters.comune && 
+                        properties.comune !== currentFilters.comune) {
+                        matchesFilter = false;
+                    }
+                    if (currentFilters.avviso) {
+                        let hasMatchingAvviso = false;
+                        properties.candidature.candidature.forEach(c => {
+                            if (c.avviso === currentFilters.avviso) {
+                                hasMatchingAvviso = true;
+                            }
+                        });
+                        if (!hasMatchingAvviso) {
+                            matchesFilter = false;
+                        }
+                    }
+                }
+                
+                if (matchesFilter) {
+                    filteredFeatures.push(layer);
+                }
+            });
+            
+            if (filteredFeatures.length > 0) {
+                // Crea un gruppo con tutti i layer filtrati per calcolare i bounds
+                const group = new L.featureGroup(filteredFeatures);
+                const bounds = group.getBounds();
+                
+                // Effettua lo zoom con padding per non essere troppo stretto
+                map.fitBounds(bounds, {
+                    padding: [20, 20],
+                    maxZoom: currentFilters.comune ? 12 : 
+                            currentFilters.provincia ? 9 : 
+                            currentFilters.regione ? 7 : 6
+                });
             }
         }
 
@@ -1067,60 +1191,15 @@
 
         function populateFilters() {
             updateFilterOptions();
-            
-            // Event listeners per filtri regione
-            const regioneFilters = ['regioneFilter', 'regioneFilterMobile'];
-            regioneFilters.forEach(filterId => {
-                const el = document.getElementById(filterId);
-                if (el) {
-                    el.addEventListener('change', function() {
-                        currentFilters.regione = this.value;
-                        currentFilters.provincia = '';
-                        currentFilters.comune = '';
-                        
-                        resetSearchInputs();
-                        
-                        updateFilterValue('regioneFilter', this.value);
-                        updateFilterValue('regioneFilterMobile', this.value);
-                        
-                        updateFilterOptions();
-                        applyFilters();
-                    });
-                }
-            });
-
-            // Event listeners per filtri avviso
-            const avvisoFilters = ['avvisoFilter', 'avvisoFilterMobile'];
-            avvisoFilters.forEach(filterId => {
-                const el = document.getElementById(filterId);
-                if (el) {
-                    el.addEventListener('change', function() {
-                        currentFilters.avviso = this.value;
-                        
-                        updateFilterValue('avvisoFilter', this.value);
-                        updateFilterValue('avvisoFilterMobile', this.value);
-                        
-                        applyFilters();
-                    });
-                }
-            });
-        }
-
-        function resetSearchInputs() {
-            const searchInputs = ['provinciaFilter', 'provinciaFilterMobile', 'comuneFilter', 'comuneFilterMobile'];
-            searchInputs.forEach(id => {
-                const input = document.getElementById(id);
-                if (input) {
-                    input.value = '';
-                    const clearBtnId = id.replace('Filter', 'Clear');
-                    const clearBtn = document.getElementById(clearBtnId);
-                    if (clearBtn) clearBtn.classList.remove('show');
-                }
-            });
         }
 
         function updateFilterOptions() {
             let filteredData = candidatureData;
+            
+            // Aggiorna Regioni (search inputs)
+            const regioniOptions = [...new Set(candidatureData.map(c => c.regione))].sort();
+            updateSearchOptions('regioneFilter', regioniOptions);
+            updateSearchOptions('regioneFilterMobile', regioniOptions);
             
             if (currentFilters.regione) {
                 filteredData = filteredData.filter(c => c.regione === currentFilters.regione);
@@ -1140,18 +1219,23 @@
             const comuniOptions = [...new Set(filteredData.map(c => c.comune))].sort();
             updateSearchOptions('comuneFilter', comuniOptions);
             updateSearchOptions('comuneFilterMobile', comuniOptions);
-
-            // Regioni (solo la prima volta o quando vuoti)
-            if (shouldUpdateSelect('regioneFilter')) {
-                updateFilterSelect('regioneFilter', candidatureData.map(c => c.regione), currentFilters.regione);
-                updateFilterSelect('regioneFilterMobile', candidatureData.map(c => c.regione), currentFilters.regione);
+            
+            // Filtra per comune se selezionato (per gli avvisi)
+            let avvisiFilteredData = candidatureData;
+            if (currentFilters.regione) {
+                avvisiFilteredData = avvisiFilteredData.filter(c => c.regione === currentFilters.regione);
+            }
+            if (currentFilters.provincia) {
+                avvisiFilteredData = avvisiFilteredData.filter(c => c.provincia === currentFilters.provincia);
+            }
+            if (currentFilters.comune) {
+                avvisiFilteredData = avvisiFilteredData.filter(c => c.comune === currentFilters.comune);
             }
 
-            // Avvisi (solo la prima volta o quando vuoti)
-            if (shouldUpdateSelect('avvisoFilter')) {
-                updateFilterSelect('avvisoFilter', candidatureData.map(c => c.avviso), currentFilters.avviso);
-                updateFilterSelect('avvisoFilterMobile', candidatureData.map(c => c.avviso), currentFilters.avviso);
-            }
+            // Aggiorna Avvisi (search inputs)
+            const avvisiOptions = [...new Set(avvisiFilteredData.map(c => c.avviso))].sort();
+            updateSearchOptions('avvisoFilter', avvisiOptions);
+            updateSearchOptions('avvisoFilterMobile', avvisiOptions);
         }
 
         function updateSearchOptions(inputId, options) {
@@ -1161,71 +1245,36 @@
             }
         }
 
-        function shouldUpdateSelect(selectId) {
-            const select = document.getElementById(selectId);
-            return select && select.children.length <= 1;
-        }
-
-        function updateFilterSelect(selectId, values, selectedValue) {
-            const select = document.getElementById(selectId);
-            if (!select) return;
-            
-            const uniqueValues = [...new Set(values)].sort();
-            
-            const allOption = select.querySelector('option[value=""]');
-            const allOptionText = allOption ? allOption.textContent : '';
-            
-            select.innerHTML = '';
-            
-            const newAllOption = document.createElement('option');
-            newAllOption.value = '';
-            newAllOption.textContent = allOptionText || getDefaultOptionText(selectId);
-            select.appendChild(newAllOption);
-            
-            uniqueValues.forEach(value => {
-                const option = document.createElement('option');
-                option.value = value;
-                
-                if (selectId.includes('avviso') && value.length > 50) {
-                    option.textContent = value.substring(0, 50) + '...';
-                } else {
-                    option.textContent = value;
-                }
-                
-                if (value === selectedValue) option.selected = true;
-                select.appendChild(option);
-            });
-        }
-
-        function getDefaultOptionText(selectId) {
-            if (selectId.includes('regione')) return 'Tutte le regioni';
-            if (selectId.includes('provincia')) return 'Tutte le province';
-            if (selectId.includes('comune')) return 'Tutti i comuni';
-            if (selectId.includes('avviso')) return 'Tutti gli avvisi';
-            return 'Tutti';
-        }
-
         function updateFilterValue(filterId, value) {
             const filterElement = document.getElementById(filterId);
             if (filterElement) {
-                if (filterElement.tagName === 'SELECT') {
-                    filterElement.value = value;
-                } else if (filterElement.tagName === 'INPUT') {
-                    filterElement.value = value;
-                    const clearBtnId = filterId.replace('Filter', 'Clear');
-                    const clearBtn = document.getElementById(clearBtnId);
-                    if (clearBtn) {
-                        if (value) {
-                            clearBtn.classList.add('show');
-                        } else {
-                            clearBtn.classList.remove('show');
-                        }
+                filterElement.value = value;
+                const clearBtnId = filterId.replace('Filter', 'Clear');
+                const clearBtn = document.getElementById(clearBtnId);
+                if (clearBtn) {
+                    if (value) {
+                        clearBtn.classList.add('show');
+                    } else {
+                        clearBtn.classList.remove('show');
                     }
                 }
             }
         }
 
         function applyFilters() {
+            updateStats();
+            updateChart();
+            updateMapLayer();
+            
+            // Aggiungi zoom automatico se ci sono filtri attivi
+            if (currentFilters.regione || currentFilters.provincia || 
+                currentFilters.comune || currentFilters.avviso) {
+                zoomToFiltered();
+            }
+        }
+
+        // Versione senza zoom per evitare doppi zoom quando si seleziona manualmente
+        function applyFiltersWithoutZoom() {
             updateStats();
             updateChart();
             updateMapLayer();
@@ -1396,7 +1445,7 @@
                     }));
                     
                     chartData.sort((a, b) => b.value - a.value);
-                    // Limita ai primi 50 comuni per leggibilità   
+                    // Limita ai primi 50 comuni per leggibilità     
                     chartData = chartData.slice(0, 50);
                     break;
                     
@@ -1534,27 +1583,12 @@
             
             svg.append("g")
                 .attr("class", "axis")
-                .call(d3.axisLeft(y))
-               // .append("text")
-             //   .attr("transform", "rotate(-90)")
-             //   .attr("y", -margin.left + 60)
-              //  .attr("x", -height / 2)
-             //   .attr("dy", "0.71em")
-            //    .attr("class", "axis-label")
-             //   .style("text-anchor", "end")
-            //    .text(yAxisLabel);
+                .call(d3.axisLeft(y));
             
             svg.append("g")
                 .attr("class", "axis")
                 .attr("transform", `translate(0,${height})`)
-                .call(d3.axisBottom(x).ticks(5).tickFormat(d => formatCurrency(d)))
-             //   .append("text")
-             //   .attr("x", width / 2)
-             //   .attr("y", margin.bottom - 20)
-            //    .attr("dy", "0.71em")
-            //    .attr("class", "axis-label")
-            //    .style("text-anchor", "middle")
-            //    .text("Importo (€)");
+                .call(d3.axisBottom(x).ticks(5).tickFormat(d => formatCurrency(d)));
             
            svg.selectAll(".label")
     .data(data)
@@ -1605,12 +1639,18 @@
                 avviso: ''
             };
             
-            const selectIds = ['regioneFilter', 'avvisoFilter', 'regioneFilterMobile', 'avvisoFilterMobile'];
-            selectIds.forEach(id => {
-                updateFilterValue(id, '');
+            // Reset di tutti i search inputs
+            const searchInputs = ['regioneFilter', 'regioneFilterMobile', 'provinciaFilter', 'provinciaFilterMobile', 
+                                'comuneFilter', 'comuneFilterMobile', 'avvisoFilter', 'avvisoFilterMobile'];
+            searchInputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.value = '';
+                    const clearBtnId = id.replace('Filter', 'Clear');
+                    const clearBtn = document.getElementById(clearBtnId);
+                    if (clearBtn) clearBtn.classList.remove('show');
+                }
             });
-            
-            resetSearchInputs();
             
             const infoPanels = document.querySelectorAll('[id^="infoPanel"]');
             infoPanels.forEach(panel => {
