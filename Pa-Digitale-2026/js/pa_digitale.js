@@ -719,7 +719,7 @@
         async function loadData() {
             try {
                 // Carica dati comuni JSON
-                const comuniResponse = await fetch('pmtiles/comuni_italiani_2025_2.json');
+                const comuniResponse = await fetch('https://palermohub.github.io/Pa-Digitale-2026/pmtiles/comuni_italiani_2025_2.json');
                 const comuniGeoJSON = await comuniResponse.json();
                 comuniData = comuniGeoJSON.features;
 
@@ -1465,7 +1465,7 @@
             const xAxisHeight = 50;
             const chartHeight = Math.max(500, data.length * (barHeight + barPadding) + titleHeight + xAxisHeight);
             
-            const margin = { top: 20, right: 30, bottom: 70, left: yAxisLabel === "Comune" ? 180 : 150 };
+            const margin = { top: 20, right: 30, bottom: 70, left: yAxisLabel === "Comune" ? 110 : 110 };
             const chartContainer = document.querySelector(".chart-container");
             const containerWidth = chartContainer.clientWidth;
             const width = containerWidth - margin.left - margin.right;
@@ -1535,38 +1535,56 @@
             svg.append("g")
                 .attr("class", "axis")
                 .call(d3.axisLeft(y))
-                .append("text")
-                .attr("transform", "rotate(-90)")
-                .attr("y", -margin.left + 40)
-                .attr("x", -height / 2)
-                .attr("dy", "0.71em")
-                .attr("class", "axis-label")
-                .style("text-anchor", "end")
-                .text(yAxisLabel);
+               // .append("text")
+             //   .attr("transform", "rotate(-90)")
+             //   .attr("y", -margin.left + 60)
+              //  .attr("x", -height / 2)
+             //   .attr("dy", "0.71em")
+            //    .attr("class", "axis-label")
+             //   .style("text-anchor", "end")
+            //    .text(yAxisLabel);
             
             svg.append("g")
                 .attr("class", "axis")
                 .attr("transform", `translate(0,${height})`)
                 .call(d3.axisBottom(x).ticks(5).tickFormat(d => formatCurrency(d)))
-                .append("text")
-                .attr("x", width / 2)
-                .attr("y", margin.bottom - 20)
-                .attr("dy", "0.71em")
-                .attr("class", "axis-label")
-                .style("text-anchor", "middle")
-                .text("Importo (€)");
+             //   .append("text")
+             //   .attr("x", width / 2)
+             //   .attr("y", margin.bottom - 20)
+            //    .attr("dy", "0.71em")
+            //    .attr("class", "axis-label")
+            //    .style("text-anchor", "middle")
+            //    .text("Importo (€)");
             
-            svg.selectAll(".label")
-                .data(data)
-                .enter().append("text")
-                .attr("class", "label")
-                .attr("x", d => x(d.value) + 5)
-                .attr("y", d => y(d.name) + y.bandwidth() / 2 + 4)
-                .attr("dy", ".35em")
-                .style("font-size", "11px")
-                .style("fill", "#E2E8F0")
-                .style("font-weight", "500")
-                .text(d => formatCurrency(d.value));
+           svg.selectAll(".label")
+    .data(data)
+    .enter().append("text")
+    .attr("class", "label")
+    .attr("x", d => {
+        const barWidth = x(d.value);
+        const textWidth = formatCurrency(d.value).length * 6; // Stima larghezza testo
+        return barWidth > textWidth + 20 ? barWidth - 10 : barWidth + 5;
+    })
+    .attr("y", d => y(d.name) + y.bandwidth() / 2 + 4)
+    .attr("dy", ".35em")
+    .attr("text-anchor", d => {
+        const barWidth = x(d.value);
+        const textWidth = formatCurrency(d.value).length * 6;
+        return barWidth > textWidth + 20 ? "end" : "start";
+    })
+    .style("font-size", "11px")
+    .style("fill", d => {
+        const barWidth = x(d.value);
+        const textWidth = formatCurrency(d.value).length * 6;
+        return barWidth > textWidth + 20 ? "#FFFFFF" : "#E2E8F0";
+    })
+    .style("font-weight", "600")
+    .style("text-shadow", d => {
+        const barWidth = x(d.value);
+        const textWidth = formatCurrency(d.value).length * 6;
+        return barWidth > textWidth + 20 ? "1px 1px 2px rgba(0,0,0,0.5)" : "none";
+    })
+    .text(d => formatCurrency(d.value));
         }
 
         function formatCurrency(value) {
