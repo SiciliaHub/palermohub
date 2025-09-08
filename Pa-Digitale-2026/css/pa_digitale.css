@@ -39,10 +39,18 @@
             background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.95));
         }
 
-        .right-panel {
-            overflow-y: auto;
+       /*.right-panel {
+            overflow-y: hidden;
             background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.95));
-        }
+        }*/
+		
+		.right-panel {
+    overflow-y: hidden;
+    background: linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.95));
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 10px; /* Spazio di 20px dalla base */
+}
 
         .map-container {
             position: relative;
@@ -88,6 +96,7 @@
             margin-bottom: 20px;
             border-bottom: 2px solid rgba(6, 182, 212, 0.3);
             padding-bottom: 8px;
+			flex-shrink: 0;
         }
 
         .stats-title {
@@ -398,12 +407,21 @@
         .filter-option.no-results:hover {
             background: transparent;
         }
+		
+		.right-panel h3 {
+    flex-shrink: 0; /* Non si comprime */
+}
+
+.chart-tabs {
+    flex-shrink: 0; /* Non si comprime */
+}
 
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 16px;
             margin-bottom: 24px;
+			flex-shrink: 0;
         }
 
         .stat-card {
@@ -446,7 +464,7 @@
             z-index: 1;
         }
 
-        .chart-container {
+    /*    .chart-container {
             margin-top: 8px;
             overflow-y: auto;
             overflow-x: hidden;
@@ -455,7 +473,20 @@
             border-radius: 16px;
             padding: 16px;
             border: 1px solid rgba(148, 163, 184, 0.1);
-        }
+        }*/
+		
+		.chart-container {
+    margin-top: 8px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* Rimuoviamo max-height fisso e usiamo flex per adattarsi */
+    flex: 1; /* Prende tutto lo spazio rimanente */
+    min-height: 300px; /* Altezza minima per usabilità */
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+}
 
         .axis text {
             font-size: 11px;
@@ -1134,12 +1165,17 @@
                 height: 60vh;
             }
             
-            .right-panel {
+          /*  .right-panel {
                 flex: 0 0 auto;
                 height: 35vh;
                 max-height: none;
                 overflow-y: auto;
-            }
+            }*/
+			
+			 .right-panel {
+        display: block; /* Torna al layout normale su mobile */
+        padding-bottom: 24px;
+    }
             
             .mobile-menu-toggle {
                 display: flex;
@@ -1183,9 +1219,11 @@
                 font-size: 13px;
             }
             
-            .chart-container {
-                max-height: 200px !important;
-            }
+          .chart-container {
+        flex: none; /* Disabilita flex su mobile */
+        max-height: 200px !important; /* Altezza fissa per mobile come era prima */
+        min-height: auto;
+    }
 
             .action-buttons {
                 flex-direction: column;
@@ -1280,9 +1318,9 @@
             }
             
             .chart-container {
-                max-height: 150px !important;
-                padding: 12px;
-            }
+        max-height: 150px !important;
+        padding: 12px;
+    }
 
             .sources-grid {
                 gap: 8px;
