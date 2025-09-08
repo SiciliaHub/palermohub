@@ -719,7 +719,7 @@
         async function loadData() {
             try {
                 // Carica dati comuni JSON
-                const comuniResponse = await fetch('https://palermohub.github.io/Pa-Digitale-2026/pmtiles/comuni_italiani_2025_2.json');
+                const comuniResponse = await fetch('pmtiles/comuni_italiani_2025_2.json');
                 const comuniGeoJSON = await comuniResponse.json();
                 comuniData = comuniGeoJSON.features;
 
