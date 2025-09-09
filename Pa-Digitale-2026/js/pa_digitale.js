@@ -1514,7 +1514,7 @@
             const xAxisHeight = 50;
             const chartHeight = Math.max(500, data.length * (barHeight + barPadding) + titleHeight + xAxisHeight);
             
-            const margin = { top: 20, right: 30, bottom: 70, left: yAxisLabel === "Comune" ? 110 : 110 };
+            const margin = { top: 20, right: 30, bottom: 10, left: yAxisLabel === "Comune" ? 110 : 110 };
             const chartContainer = document.querySelector(".chart-container");
             const containerWidth = chartContainer.clientWidth;
             const width = containerWidth - margin.left - margin.right;
