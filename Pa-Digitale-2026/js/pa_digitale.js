@@ -1584,11 +1584,12 @@
             svg.append("g")
                 .attr("class", "axis")
                 .call(d3.axisLeft(y));
-            
-            svg.append("g")
-                .attr("class", "axis")
-                .attr("transform", `translate(0,${height})`)
-                .call(d3.axisBottom(x).ticks(5).tickFormat(d => formatCurrency(d)));
+         
+// asse x		 
+        //    svg.append("g")
+         //       .attr("class", "axis")
+          //      .attr("transform", `translate(0,${height})`)
+          //      .call(d3.axisBottom(x).ticks(5).tickFormat(d => formatCurrency(d)));
             
            svg.selectAll(".label")
     .data(data)
