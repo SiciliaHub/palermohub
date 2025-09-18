@@ -248,33 +248,247 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
     filter: url(#chromaKeyWhite);
 }
 
-/* Miglioramento responsive per mobile */
+/* Popup trasparenza */
+.transparency-popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.transparency-popup {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideIn 0.3s ease-out;
+}
+
+.popup-header {
+    background: linear-gradient(135deg, #FF9900, #ff7700);
+    color: white;
+    padding: 20px;
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+}
+
+.popup-header h2 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.popup-header .fa {
+    font-size: 30px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.popup-content {
+    padding: 25px;
+    line-height: 1.6;
+}
+
+.popup-feature {
+    display: flex;
+    align-items: flex-start;
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #FF9900;
+}
+
+.popup-feature .fa {
+    color: #FF9900;
+    font-size: 20px;
+    margin-right: 15px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.popup-feature-content h4 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.popup-feature-content p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.popup-steps {
+    background: #e8f4fd;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    border-left: 4px solid #4a90e2;
+}
+
+.popup-steps h3 {
+    color: #2c5aa0;
+    margin: 0 0 15px 0;
+    font-size: 18px;
+}
+
+.popup-step {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.popup-step-number {
+    background: #4a90e2;
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.popup-step-text {
+    font-size: 14px;
+    color: #2c5aa0;
+}
+
+.popup-footer {
+    padding: 20px 25px;
+    background: #f8f9fa;
+    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.popup-checkbox {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.popup-checkbox input {
+    margin-right: 8px;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.popup-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.popup-btn-primary {
+    background: #FF9900;
+    color: white;
+}
+
+.popup-btn-primary:hover {
+    background: #e68a00;
+    transform: translateY(-1px);
+}
+
+.popup-btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.popup-btn-secondary:hover {
+    background: #5a6268;
+}
+
+.popup-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.popup-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { 
+        opacity: 0;
+        transform: scale(0.8) translateY(-50px);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 @media (max-width: 768px) {
-    .transparency-control,
-    .layer-toggle-control,
-    .white-transparency-control {
-        margin: 10px 0;
-        padding: 10px;
+    .transparency-popup {
+        width: 95%;
+        max-height: 90vh;
     }
     
-    .slider {
-        height: 8px;
+    .popup-content {
+        padding: 20px;
     }
     
-    .slider::-webkit-slider-thumb,
-    .slider::-moz-range-thumb {
-        width: 24px;
-        height: 24px;
+    .popup-header {
+        padding: 15px;
     }
     
-    .filter-option {
+    .popup-header h2 {
+        font-size: 20px;
+    }
+    
+    .popup-footer {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
     }
     
-    .filter-preview {
-        margin-left: 0;
-        margin-top: 3px;
+    .popup-buttons {
+        justify-content: center;
     }
 }
 </style>       
@@ -384,6 +598,88 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
     </filter>
   </defs>
 </svg>
+
+<!-- Popup guida trasparenza -->
+<div id="transparency-popup" class="transparency-popup-overlay">
+    <div class="transparency-popup">
+        <button class="popup-close" onclick="closeTransparencyPopup()">
+            <i class="fa fa-times"></i>
+        </button>
+        
+        <div class="popup-header">
+            <i class="fa fa-magic"></i>
+            <h2>Nuovi Controlli di Trasparenza!</h2>
+        </div>
+        
+        <div class="popup-content">
+            <p><strong>Questa mappa ora include controlli avanzati per regolare la trasparenza dei layer del Piano Regolatore.</strong></p>
+            
+            <div class="popup-feature">
+                <i class="fa fa-eye"></i>
+                <div class="popup-feature-content">
+                    <h4>Filtro Trasparenza Bianco</h4>
+                    <p>Rende trasparente <strong>solo il bianco puro</strong> (#ffffff) e colori simili, mantenendo perfettamente visibili linee e aree colorate del piano.</p>
+                </div>
+            </div>
+            
+            <div class="popup-feature">
+                <i class="fa fa-adjust"></i>
+                <div class="popup-feature-content">
+                    <h4>Controllo Trasparenza Generale</h4>
+                    <p>Regola l'opacità generale di tutti i layer per vedere meglio la mappa di base sottostante.</p>
+                </div>
+            </div>
+            
+            <div class="popup-feature">
+                <i class="fa fa-toggle-on"></i>
+                <div class="popup-feature-content">
+                    <h4>Visibilità Layer Individuali</h4>
+                    <p>Attiva o disattiva singolarmente ogni layer del piano regolatore secondo le tue esigenze.</p>
+                </div>
+            </div>
+            
+            <div class="popup-steps">
+                <h3><i class="fa fa-list-ol"></i> Come utilizzare:</h3>
+                <div class="popup-step">
+                    <div class="popup-step-number">1</div>
+                    <div class="popup-step-text">Clicca sull'icona <strong>ingranaggio</strong> <i class="fa fa-gear"></i> nella sidebar sinistra</div>
+                </div>
+                <div class="popup-step">
+                    <div class="popup-step-number">2</div>
+                    <div class="popup-step-text">Scegli un <strong>"Filtro Trasparenza Bianco"</strong> (consigliato: "Chroma Key bianco")</div>
+                </div>
+                <div class="popup-step">
+                    <div class="popup-step-number">3</div>
+                    <div class="popup-step-text">Regola la <strong>"Trasparenza Generale"</strong> se necessario</div>
+                </div>
+                <div class="popup-step">
+                    <div class="popup-step-number">4</div>
+                    <div class="popup-step-text">Usa le <strong>checkbox</strong> per mostrare/nascondere singoli layer</div>
+                </div>
+            </div>
+            
+            <div style="background: #fff3cd; padding: 15px; border-radius: 5px; border-left: 4px solid #ffc107; margin: 15px 0;">
+                <strong><i class="fa fa-lightbulb-o"></i> Suggerimento:</strong> 
+                Per la migliore esperienza, prova prima il filtro <strong>"Chroma Key bianco"</strong> che renderà trasparenti solo le aree bianche mantenendo perfettamente visibili tutte le informazioni urbanistiche.
+            </div>
+        </div>
+        
+        <div class="popup-footer">
+            <div class="popup-checkbox">
+                <input type="checkbox" id="dont-show-again">
+                <label for="dont-show-again">Non mostrare più questo messaggio</label>
+            </div>
+            <div class="popup-buttons">
+                <button class="popup-btn popup-btn-secondary" onclick="closeTransparencyPopup()">
+                    Chiudi
+                </button>
+                <button class="popup-btn popup-btn-primary" onclick="goToTransparencyControls()">
+                    <i class="fa fa-gear"></i> Vai ai Controlli
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 	  
 	  	 <!-- header -->    
 <header>
@@ -397,6 +693,72 @@ $(document).ready(function(){
   $("#vn-click").click(function(){
     $("#vn-info").slideToggle(250);
   });
+
+// Gestione popup trasparenza
+function showTransparencyPopup() {
+    // Controlla se l'utente ha scelto di non vedere più il popup
+    if (localStorage.getItem('hideTransparencyPopup') === 'true') {
+        return;
+    }
+    
+    const popup = document.getElementById('transparency-popup');
+    if (popup) {
+        popup.style.display = 'flex';
+    }
+}
+
+function closeTransparencyPopup() {
+    const popup = document.getElementById('transparency-popup');
+    const dontShowAgain = document.getElementById('dont-show-again');
+    
+    if (popup) {
+        popup.style.display = 'none';
+    }
+    
+    // Salva preferenza utente
+    if (dontShowAgain && dontShowAgain.checked) {
+        localStorage.setItem('hideTransparencyPopup', 'true');
+    }
+}
+
+function goToTransparencyControls() {
+    closeTransparencyPopup();
+    
+    // Apri la sidebar se chiusa
+    const sidebar = document.querySelector('.sidebar');
+    if (sidebar && sidebar.classList.contains('collapsed')) {
+        // Simula click sul tab settings
+        const settingsTab = document.querySelector('a[href="#settings"]');
+        if (settingsTab) {
+            settingsTab.click();
+        }
+    } else {
+        // Se già aperta, vai direttamente al tab settings
+        const settingsTab = document.querySelector('a[href="#settings"]');
+        if (settingsTab) {
+            settingsTab.click();
+        }
+    }
+}
+
+// Chiudi popup cliccando sull'overlay
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('transparency-popup-overlay')) {
+        closeTransparencyPopup();
+    }
+});
+
+// Chiudi popup con ESC
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeTransparencyPopup();
+    }
+});
+
+// Mostra popup dopo che la mappa è completamente caricata
+setTimeout(() => {
+    showTransparencyPopup();
+}, 2000);
 });
 </script> 
 </div> 
