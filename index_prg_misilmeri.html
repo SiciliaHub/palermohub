@@ -602,7 +602,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <!-- Popup guida trasparenza -->
 <div id="transparency-popup" class="transparency-popup-overlay">
     <div class="transparency-popup">
-        <button class="popup-close" onclick="closeTransparencyPopup()">
+        <button class="popup-close" id="popup-close-btn">
             <i class="fa fa-times"></i>
         </button>
         
@@ -662,6 +662,12 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
                 <strong><i class="fa fa-lightbulb-o"></i> Suggerimento:</strong> 
                 Per la migliore esperienza, prova prima il filtro <strong>"Chroma Key bianco"</strong> che renderà trasparenti solo le aree bianche mantenendo perfettamente visibili tutte le informazioni urbanistiche.
             </div>
+            
+            <div style="background: #d1ecf1; padding: 15px; border-radius: 5px; border-left: 4px solid #17a2b8; margin: 15px 0;">
+                <strong><i class="fa fa-satellite-dish"></i> Trucco PRO:</strong> 
+                L'effetto della trasparenza si nota <strong>molto di più</strong> utilizzando la <strong>foto satellitare di Google</strong>! 
+                Clicca sul pulsante delle mappe di base <i class="fa fa-globe" style="color: #17a2b8;"></i> in alto a destra della mappa e seleziona <strong>"Google Satellite"</strong> per vedere edifici, strade e vegetazione reali sotto i layer del piano regolatore.
+            </div>
         </div>
         
         <div class="popup-footer">
@@ -670,10 +676,10 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
                 <label for="dont-show-again">Non mostrare più questo messaggio</label>
             </div>
             <div class="popup-buttons">
-                <button class="popup-btn popup-btn-secondary" onclick="closeTransparencyPopup()">
+                <button class="popup-btn popup-btn-secondary" id="popup-close-btn2">
                     Chiudi
                 </button>
-                <button class="popup-btn popup-btn-primary" onclick="goToTransparencyControls()">
+                <button class="popup-btn popup-btn-primary" id="popup-goto-controls">
                     <i class="fa fa-gear"></i> Vai ai Controlli
                 </button>
             </div>
@@ -724,39 +730,78 @@ function closeTransparencyPopup() {
 function goToTransparencyControls() {
     closeTransparencyPopup();
     
-    // Apri la sidebar se chiusa
-    const sidebar = document.querySelector('.sidebar');
-    if (sidebar && sidebar.classList.contains('collapsed')) {
-        // Simula click sul tab settings
+    // Apri la sidebar se chiusa e vai al tab settings
+    setTimeout(() => {
         const settingsTab = document.querySelector('a[href="#settings"]');
         if (settingsTab) {
             settingsTab.click();
         }
-    } else {
-        // Se già aperta, vai direttamente al tab settings
-        const settingsTab = document.querySelector('a[href="#settings"]');
-        if (settingsTab) {
-            settingsTab.click();
+        
+        // Se la sidebar è chiusa, aprila prima
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar && sidebar.classList.contains('collapsed')) {
+            // Forza l'apertura della sidebar
+            sidebar.classList.remove('collapsed');
+            
+            // Poi clicca sul tab settings
+            setTimeout(() => {
+                if (settingsTab) {
+                    settingsTab.click();
+                }
+            }, 300);
         }
-    }
+    }, 100);
 }
 
-// Chiudi popup cliccando sull'overlay
-document.addEventListener('click', function(e) {
-    if (e.target.classList.contains('transparency-popup-overlay')) {
-        closeTransparencyPopup();
+// Inizializza gli event listeners per il popup
+function initPopupEventListeners() {
+    // Pulsante chiudi (X)
+    const closeBtn = document.getElementById('popup-close-btn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeTransparencyPopup);
     }
-});
+    
+    // Pulsante chiudi nel footer
+    const closeBtnFooter = document.getElementById('popup-close-btn2');
+    if (closeBtnFooter) {
+        closeBtnFooter.addEventListener('click', closeTransparencyPopup);
+    }
+    
+    // Pulsante "Vai ai controlli"
+    const gotoBtn = document.getElementById('popup-goto-controls');
+    if (gotoBtn) {
+        gotoBtn.addEventListener('click', goToTransparencyControls);
+    }
+    
+    // Chiudi popup cliccando sull'overlay
+    const popupOverlay = document.getElementById('transparency-popup');
+    if (popupOverlay) {
+        popupOverlay.addEventListener('click', function(e) {
+            if (e.target.classList.contains('transparency-popup-overlay')) {
+                closeTransparencyPopup();
+            }
+        });
+    }
+}
 
 // Chiudi popup con ESC
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        closeTransparencyPopup();
+        const popup = document.getElementById('transparency-popup');
+        if (popup && popup.style.display === 'flex') {
+            closeTransparencyPopup();
+        }
     }
+});
+
+// Inizializza tutto dopo il caricamento della pagina
+document.addEventListener('DOMContentLoaded', function() {
+    initPopupEventListeners();
 });
 
 // Mostra popup dopo che la mappa è completamente caricata
 setTimeout(() => {
+    initPopupEventListeners(); // Assicurati che gli event listeners siano impostati
     showTransparencyPopup();
 }, 2000);
 });
