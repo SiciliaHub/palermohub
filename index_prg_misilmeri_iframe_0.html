@@ -66,218 +66,15 @@
 <link href="lib/css/leaflet.zoomhome.css" rel="stylesheet" type="text/css">
 <link href="lib/css/L.countryselect.css" rel="stylesheet" type="text/css">
 
+
+
 <!-- css remoto -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/> 
 
-<style type="text/css">
-a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
 
-/* Stili per il controllo di trasparenza */
-.transparency-control {
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 15px 0;
-}
-
-.transparency-control h3 {
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    color: #333;
-}
-
-.transparency-control label {
-    display: block;
-    font-size: 14px;
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #555;
-}
-
-#transparency-value {
-    color: #FF9900;
-    font-weight: bold;
-}
-
-.slider {
-    width: 100%;
-    height: 6px;
-    border-radius: 5px;
-    background: #ddd;
-    outline: none;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    margin: 10px 0;
-}
-
-.slider:hover {
-    opacity: 1;
-}
-
-.slider::-webkit-slider-thumb {
-    appearance: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #FF9900;
-    cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #FF9900;
-    cursor: pointer;
-    border: none;
-}
-
-.slider-labels {
-    display: flex;
-    justify-content: space-between;
-    font-size: 12px;
-    color: #666;
-    margin-top: 5px;
-}
-
-.layer-toggle-control {
-    background: #f8f9fa;
-    border: 1px solid #dee2e6;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 15px 0;
-}
-
-.layer-toggle-control h3 {
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    color: #333;
-}
-
-.layer-checkbox {
-    display: flex;
-    align-items: center;
-    margin: 8px 0;
-}
-
-.layer-checkbox input[type="checkbox"] {
-    margin-right: 8px;
-}
-
-.layer-checkbox label {
-    font-size: 14px;
-    cursor: pointer;
-    display: inline;
-    margin: 0;
-}
-
-/* Controllo filtri bianco */
-.white-transparency-control {
-    background: #f0f8ff;
-    border: 1px solid #4a90e2;
-    border-radius: 5px;
-    padding: 15px;
-    margin: 15px 0;
-}
-
-.white-transparency-control h3 {
-    margin: 0 0 10px 0;
-    font-size: 16px;
-    color: #2c5aa0;
-}
-
-.filter-option {
-    display: flex;
-    align-items: center;
-    margin: 8px 0;
-    padding: 5px;
-    border-radius: 3px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.filter-option:hover {
-    background-color: rgba(74, 144, 226, 0.1);
-}
-
-.filter-option input[type="radio"] {
-    margin-right: 10px;
-}
-
-.filter-option label {
-    font-size: 14px;
-    cursor: pointer;
-    display: inline;
-    margin: 0;
-    flex: 1;
-}
-
-.filter-preview {
-    font-size: 11px;
-    color: #666;
-    font-style: italic;
-    margin-left: 25px;
-}
-
-/* Filtri SVG per targeting specifico del bianco */
-.tiles-normal {
-    filter: none;
-}
-
-.tiles-white-only-light {
-    filter: url(#whiteToTransparentLight);
-}
-
-.tiles-white-only-medium {
-    filter: url(#whiteToTransparentMedium);
-}
-
-.tiles-white-only-strong {
-    filter: url(#whiteToTransparentStrong);
-}
-
-.tiles-white-only-ultra {
-    filter: url(#whiteToTransparentUltra);
-}
-
-.tiles-chroma-key {
-    filter: url(#chromaKeyWhite);
-}
-
-/* Miglioramento responsive per mobile */
-@media (max-width: 768px) {
-    .transparency-control,
-    .layer-toggle-control,
-    .white-transparency-control {
-        margin: 10px 0;
-        padding: 10px;
-    }
-    
-    .slider {
-        height: 8px;
-    }
-    
-    .slider::-webkit-slider-thumb,
-    .slider::-moz-range-thumb {
-        width: 24px;
-        height: 24px;
-    }
-    
-    .filter-option {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .filter-preview {
-        margin-left: 0;
-        margin-top: 3px;
-    }
-}
-</style>       
 
  <!-- creditis  -->
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
@@ -303,14 +100,13 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <script src="lib/js/qgi2web/rbush.min.js"></script>
 <script src="lib/js/qgi2web/labelgun.min.js"></script>
 <script src="lib/js/qgi2web/labels.js"></script>
-
+<link href="lib/css/map-layout-patch.css" rel="stylesheet" type="text/css">
   <!-- script funzioni --> 
 <script src="lib/js/mouseposition/LControlMousePosition.js"></script>
 <script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
 <script src="lib/js/basemap/L.Control.Basemaps.js"></script>
 <script src="lib/js/print/leaflet.easyPrint.js"></script>
 <script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
-<script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
 
   <!-- script automatico mobile/desktop --> 
 <script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile.js"><\/script>'); } </script>
@@ -322,69 +118,12 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>  
 <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
  
-<!-- script menu includes -->
-<script type="text/javascript" src="script.js"></script>
 
 <!-- script dati mappa -->
 <script src="https://siciliahub.github.io/mappe/palermo_hub/data/poligonoisola0.js"></script>
 
 </head>
-
-  <body>
-
-<!-- Filtri SVG per targeting specifico del bianco -->
-<svg style="position: absolute; width: 0; height: 0;">
-  <defs>
-    <!-- Filtro leggero: rende trasparente solo il bianco puro e quasi-bianco -->
-    <filter id="whiteToTransparentLight" x="0%" y="0%" width="100%" height="100%">
-      <feColorMatrix type="matrix" 
-        values="1 0 0 0 0
-                0 1 0 0 0  
-                0 0 1 0 0
-                -1 -1 -1 2.7 0"/>
-    </filter>
-    
-    <!-- Filtro medio: più aggressivo sui grigi chiari -->
-    <filter id="whiteToTransparentMedium" x="0%" y="0%" width="100%" height="100%">
-      <feColorMatrix type="matrix" 
-        values="1 0 0 0 0
-                0 1 0 0 0  
-                0 0 1 0 0
-                -1.2 -1.2 -1.2 3.1 0"/>
-    </filter>
-    
-    <!-- Filtro forte: targeting più ampio dei bianchi -->
-    <filter id="whiteToTransparentStrong" x="0%" y="0%" width="100%" height="100%">
-      <feColorMatrix type="matrix" 
-        values="1 0 0 0 0
-                0 1 0 0 0  
-                0 0 1 0 0
-                -1.5 -1.5 -1.5 3.8 0"/>
-    </filter>
-    
-    <!-- Filtro ultra: molto aggressivo -->
-    <filter id="whiteToTransparentUltra" x="0%" y="0%" width="100%" height="100%">
-      <feColorMatrix type="matrix" 
-        values="1 0 0 0 0
-                0 1 0 0 0  
-                0 0 1 0 0
-                -2 -2 -2 5 0"/>
-    </filter>
-    
-    <!-- Chroma key per bianco preciso -->
-    <filter id="chromaKeyWhite" x="0%" y="0%" width="100%" height="100%">
-      <feColorMatrix type="matrix" 
-        values="1 0 0 0 0
-                0 1 0 0 0  
-                0 0 1 0 0
-                -3 -3 -3 6.8 0"/>
-      <feComponentTransfer>
-        <feFuncA type="discrete" tableValues="0 0 0 0 0 1 1 1 1 1 1"/>
-      </feComponentTransfer>
-    </filter>
-  </defs>
-</svg>
-
+<body>
  <div id="sidebar" class="sidebar collapsed">
 <!-- Nav tabs -->
         <div class="sidebar-tabs">
@@ -396,7 +135,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
                             </ul>
             <ul role="tablist">
             <li> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="OSD" width="20" height="20"/></a></li>
-       <li> <a href="https://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perchÃ© certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non Ã¨ facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
+       <li> <a href="https://petrusino.opendatasicilia.it/index.html" target="_blank" title="Petrusino, ... perché certi siti, apps, mappe, servizi sono un po' come il prezzemolo e non è facile distinguerli ..." role="tab"><img src="legend/pitrusino.png" alt="OSD" width="24" height="24"/></a></li>
                 <li><a href="#settings" title="Configurazione" role="tab"><i class="fa fa-gear"></i></a></li>
             </ul>
         </div>
@@ -407,7 +146,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <h2 class="sidebar-header">Palermo Hub - Strumenti urbanistici<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br>
 <p class="legenda"> <strong>Misilmeri | Piano regolatore generale.</strong>
 <p class="lorem">Vengono pubblicati qui di seguito il regolamento edilizio, le norme tecniche di attuazione e le tavole (in scala 1:10.000 e 1:2.000) del vigente Piano Regolatore Generale del Comune di Misilmeri, approvato con decreto del Dirigente generale della Regione Siciliana - Assessorato Territorio e Ambiente - Dipartimento regionale urbanistica, n. 1216/D.R.U. del 18/06/2006, (GURS del 5 dicembre 2007, parte I, n. 1), con la seguente avvertenza: gli elaborati grafici (tavole) e testuali (regolamento edilizio e norme tecniche di attuazione) del PRG contengono alcuni errori materiali di graficizzazione e di adeguamento puntuale rispetto ad alcune prescrizioni del decreto di approvazione.</p>
-<p class="lorem"><strong>Per tali ragioni, precisando che la consultazione online di questi elaborati Ã¨ a scopo puramente informativo, si fornisce anche il link diretto al <a href="https://www.gurs.regione.sicilia.it/Gazzette/g07-01/g07-01-p21.html" target="_blank">Decreto ARTA di approvazione </a> e si rimanda caso per caso al rilascio del certificato di destinazione urbanistica da richiedere, ai sensi dell'art. 30 del D.P.R. 380/01, tramite il portale <a href="https://www.impresainungiorno.gov.it/web/guest/comune?codCatastale=F246" target="_blank">Impresa in un giorno</a>. </strong></p>
+<p class="lorem"><strong>Per tali ragioni, precisando che la consultazione online di questi elaborati è a scopo puramente informativo, si fornisce anche il link diretto al <a href="https://www.gurs.regione.sicilia.it/Gazzette/g07-01/g07-01-p21.html" target="_blank">Decreto ARTA di approvazione </a> e si rimanda caso per caso al rilascio del certificato di destinazione urbanistica da richiedere, ai sensi dell'art. 30 del D.P.R. 380/01, tramite il portale <a href="https://www.impresainungiorno.gov.it/web/guest/comune?codCatastale=F246" target="_blank">Impresa in un giorno</a>. </strong></p>
  <!-- Inizio Legenda Piani -->
 <h2>Legenda Piano Regolatore 1:1000</h2>
 <a href="legend/legenda_10k.jpg" title="Legenda Piano Regolatore 10k"target="_blank"><img src="legend/legenda_10k.jpg" class="clip_resize2" title="Legenda Piano Regolatore 10k" border="0" /> </a><br>
@@ -419,7 +158,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
   <em><strong>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</strong></em><br>
   <em><strong>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</strong></em><br>
   <em><strong>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</strong></em>  <br>
-  <p class="lorem"> <strong>Questa mappa Ã¨ una versione beta test 2.0 NON VERIFICATA! Realizzata per studiare l'applicativo <a href="https://qgis.org/it/site/forusers/download.html" title="Scarica QGIS per il tuo Sistema Operativo" target="_blank">Qgis</a> e modalitÃ  webgis offerta dai plugin <a href="https://leafletjs.com/" title="Leaflet an open-source JavaScript library" target="_blank">Leaflet</a> e <a href="https://github.com/nextgis/QTiles" title="QGIS plugin to generate multi-level tilesets from a project." target="_blank">QTiles</a></strong></p> 
+  <p class="lorem"> <strong>Questa mappa è una versione beta test 2.0 NON VERIFICATA! Realizzata per studiare l'applicativo <a href="https://qgis.org/it/site/forusers/download.html" title="Scarica QGIS per il tuo Sistema Operativo" target="_blank">Qgis</a> e modalità webgis offerta dai plugin <a href="https://leafletjs.com/" title="Leaflet an open-source JavaScript library" target="_blank">Leaflet</a> e <a href="https://github.com/nextgis/QTiles" title="QGIS plugin to generate multi-level tilesets from a project." target="_blank">QTiles</a></strong></p> 
 
 </div>        
 
@@ -447,13 +186,13 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
  
 	 
    <hr>
-<p class="lorem"> <strong>Questa mappa Ã¨ una versione beta test 2.0  (non verificata) degli strumenti urbanistici di attuazione vigenti al 2021. Piano regolatore generale di Misilmeri.<br>La mappa Ã¨ stata realizzata per studiare l'applicativo <a href="https://qgis.org/it/site/forusers/download.html" title="Scarica QGIS per il tuo Sistema Operativo" target="_blank">Qgis</a> e modalitÃ  webgis offerta dai plugin <a href="https://leafletjs.com/" title="Leaflet an open-source JavaScript library" target="_blank">Leaflet</a> e <a href="https://github.com/nextgis/QTiles" title="QGIS plugin to generate multi-level tilesets from a project." target="_blank">QTiles</a></strong></p> 
+<p class="lorem"> <strong>Questa mappa è una versione beta test 2.0  (non verificata) degli strumenti urbanistici di attuazione vigenti al 2021. Piano regolatore generale di Misilmeri.<br>La mappa è stata realizzata per studiare l'applicativo <a href="https://qgis.org/it/site/forusers/download.html" title="Scarica QGIS per il tuo Sistema Operativo" target="_blank">Qgis</a> e modalità webgis offerta dai plugin <a href="https://leafletjs.com/" title="Leaflet an open-source JavaScript library" target="_blank">Leaflet</a> e <a href="https://github.com/nextgis/QTiles" title="QGIS plugin to generate multi-level tilesets from a project." target="_blank">QTiles</a></strong></p> 
 <strong>Note:</strong><br>
    <em>Le informazioni visibili e condivise in queste pagine non comportano la visualizzazione di dati sensibili.</em><br>
    <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
    <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em><br><br>
 <strong>Si declina ogni responsabilit&agrave; sulla veridicit&agrave; dei dati.</strong></p> <hr><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-<p class="lorem">   <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato Ã¨ distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />
+<p class="lorem">   <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license"><img alt="Licenza Creative Commons" style="border-width:0" src="https://i0.wp.com/i.creativecommons.org/l/by/4.0/88x31.png?ssl=1"  title="Tutto il materiale da me rielaborato è distribuito con Licenza Creative Commons Attribuzione 4.0 Internazionale." data-recalc-dims="1"/></a><br />
 <a href="https://creativecommons.org/licenses/by/4.0/" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Internazionale</a> - <a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="Licenza Creative Commons" target="_blank" rel="license">Creative Commons Attribuzione 4.0 Italia</a> </p> 
 </div>
 
@@ -465,10 +204,10 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <!-- Tab about -->
 <div class="sidebar-pane" id="about">
 <h2 class="sidebar-header">#OpenDataSicilia<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
-<p class="lorem2"><strong>Che cosâ€™Ã¨</strong><br>
-<strong><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> eâ€™ una iniziativa civica che si propone di far conoscere e diffondere la cultura dellâ€™open government e le prassi dellâ€™open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
+<p class="lorem2"><strong>Che cos’è</strong><br>
+<strong><a href="https://opendatasicilia.it/" title="opendatasicilia.it" target="_blank">#opendatasicilia</a></strong> e’ una iniziativa civica che si propone di far conoscere e diffondere la cultura dell’open government e le prassi dell’open data nel nostro territorio e aprire una discussione pubblica partecipata.<br><br>
 <strong>Chi siamo</strong>  <br>
-Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontÃ  di contribuire a migliorare la qualitÃ  della vita della nostra comunitÃ . Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
+Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo accomunati dalla genuina volontà di contribuire a migliorare la qualità della vita della nostra comunità. Lo vogliamo fare con spirito di collaborazione e concretezza.  </p> <br><br><br>
 <table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
   <tbody>
     <tr>
@@ -518,90 +257,11 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
  <!-- Tab strumenti -->
  <div class="sidebar-pane" id="settings">
 <h2 class="sidebar-header">Strumenti<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
-
-<!-- Controllo filtro bianco -->
-<div class="white-transparency-control">
-    <h3><i class="fa fa-magic"></i> Filtro Trasparenza Bianco</h3>
-    <div class="filter-option">
-        <input type="radio" id="filter-normal" name="white-filter" value="normal" checked>
-        <label for="filter-normal">Normale</label>
-        <div class="filter-preview">Nessun filtro applicato</div>
-    </div>
-    <div class="filter-option">
-        <input type="radio" id="filter-white-light" name="white-filter" value="white-only-light">
-        <label for="filter-white-light">Solo bianco puro (leggero)</label>
-        <div class="filter-preview">Rende trasparente solo #ffffff e colori molto simili</div>
-    </div>
-    <div class="filter-option">
-        <input type="radio" id="filter-white-medium" name="white-filter" value="white-only-medium">
-        <label for="filter-white-medium">Solo bianchi e grigi chiari</label>
-        <div class="filter-preview">Include grigi molto chiari (#f0f0f0+)</div>
-    </div>
-    <div class="filter-option">
-        <input type="radio" id="filter-white-strong" name="white-filter" value="white-only-strong">
-        <label for="filter-white-strong">Targeting bianco esteso</label>
-        <div class="filter-preview">Include range più ampio di bianchi/grigi</div>
-    </div>
-    <div class="filter-option">
-        <input type="radio" id="filter-white-ultra" name="white-filter" value="white-only-ultra">
-        <label for="filter-white-ultra">Ultra precisione bianco</label>
-        <div class="filter-preview">Massima rimozione colori chiari</div>
-    </div>
-    <div class="filter-option">
-        <input type="radio" id="filter-chroma" name="white-filter" value="chroma-key">
-        <label for="filter-chroma">Chroma Key bianco</label>
-        <div class="filter-preview">Tecnologia chroma key per bianco perfetto</div>
-    </div>
-    <p style="font-size: 12px; color: #2c5aa0; margin-top: 8px;">
-        <i class="fa fa-info-circle"></i> Seleziona il filtro per rendere trasparenti le aree bianche dei layer
-    </p>
-</div>
-
-<!-- Controllo trasparenza generale -->
-<div class="transparency-control">
-    <h3><i class="fa fa-adjust"></i> Controllo Trasparenza Generale</h3>
-    <label for="transparency-slider">Trasparenza: <span id="transparency-value">0</span>%</label>
-    <input type="range" id="transparency-slider" min="0" max="100" value="0" class="slider">
-    <div class="slider-labels">
-        <span>Opaco</span>
-        <span>Trasparente</span>
-    </div>
-    <p style="font-size: 12px; color: #666; margin-top: 8px;">
-        <i class="fa fa-info-circle"></i> Regola la trasparenza generale di tutti i layer
-    </p>
-</div>
-
-<!-- Controllo visibilità layer -->
-<div class="layer-toggle-control">
-    <h3><i class="fa fa-eye"></i> Visibilità Layer</h3>
-    <div class="layer-checkbox">
-        <input type="checkbox" id="toggle-prg10k" checked>
-        <label for="toggle-prg10k">Piano regolatore 10k</label>
-    </div>
-    <div class="layer-checkbox">
-        <input type="checkbox" id="toggle-ca2k" checked>
-        <label for="toggle-ca2k">Città abitato 2k</label>
-    </div>
-    <div class="layer-checkbox">
-        <input type="checkbox" id="toggle-portella2k" checked>
-        <label for="toggle-portella2k">Portella di mare 2k</label>
-    </div>
-    <div class="layer-checkbox">
-        <input type="checkbox" id="toggle-gr2k" checked>
-        <label for="toggle-gr2k">Gibilrossa 2k</label>
-    </div>
-    <p style="font-size: 12px; color: #666; margin-top: 8px;">
-        <i class="fa fa-info-circle"></i> Attiva/disattiva la visibilità dei singoli layer
-    </p>
-</div>
-
-<hr>
-
 <p class="lorem"><strong>I principali strumenti usati per realizzare questa semplice mappa:</strong></p>
 <ul>
 <li><p class="lorem"><a href="https://blog.spaziogis.it/static/palermo_prg/#14/38.1114/13.3571" title="Piano Regolatore di Palermo" target="_blank">Piano Regolatore di Palermo</a>, rielaborazione opendata di:<br><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso">@aborruso</a> e <a href="https://www.facebook.com/pigreco314?fref=ts"target="_blank" title="Salvatore Fiandaca">@pigreco</a> (studio di riferimento)</li></p>
 <li><p class="lorem2"><a href="https://www.qgis.org/it/site/" title="Qgis" target="_blank">Qgis,</a> per creare, modificare, visualizzare, analizzare e pubblicare le informazioni geospaziali su Windows, Mac, Linux, BSD;</li></p>
-<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non Ã¨ richiesto alcun software lato server;</li></p>
+<li><p class="lorem2"><a href="https://github.com/tomchadwin/qgis2web" title="Qgis2web" target="_blank">Qgis2web ,</a>plugin per Qgis per esportare il progetto in un webmap OpenLayers o foglio elettronico. Non è richiesto alcun software lato server;</li></p>
 <li><p class="lorem2"><a href="https://plugins.qgis.org/plugins/qtiles/" title="Qtiles" target="_blank">QTiles,</a>plugin per Qgis per per generare tiles raster dal progetto QGIS per livelli di zoom selezionati e le convenzioni di denominazione di piastrelle (Slippy mappa o TMS);</li></p>
 <li><p class="lorem2"><a href="https://leafletjs.com/" title="Leaflet" target="_blank">Leaflet,</a> per creare l'interfaccia di web mapping;</li></p>
 <li><p class="lorem2"><a href="https://github.com/mlevans/leaflet-hash" title="Leaflet hash" target="_blank">Leaflet hash</a>, per generare URL che contengono livello di zoom e posizione corrente;</li></p>
@@ -646,9 +306,6 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 var map = L.map('map', { zoomControl:false}).setView( [38.0200765, 13.4321402], 12);		  
 map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
 var bounds_group = new L.featureGroup([]);
-
-// Variabili globali per i layer
-var prg10k, ca2k, portella_2k, gr2k;
 	  
 <!-- mappe di base -->	  
 var basemaps = [ 
@@ -656,7 +313,7 @@ L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution:
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 10,  maxZoom: 18, maxNativeZoom: 18,label: 'Map tiles by CartoDB'}),
 
-L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data Â©2015 Google',
+L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
 				minZoom: 10,  maxZoom: 18, maxNativeZoom: 18, label: 'Google Satellite'}),
 ];
  	
@@ -735,39 +392,39 @@ L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 
 <!-- Poligono fantasma  fine -->
 
 //mappa prg10k
-prg10k = L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/misilmeri/10k/{z}/{x}/{y}.png', {
-    minZoom: 10,
-    maxZoom: 16,
-    maxNativeZoom: 16,
-    tms: true,
-    attribution: 'Piano Regolatore Misilmeri 10k', 
-}).addTo(map);	
+		 var prg10k =L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/misilmeri/10k/{z}/{x}/{y}.png', {
+        minZoom: 10,
+        maxZoom: 16,
+        maxNativeZoom: 16,
+        tms: true,
+        attribution: 'Piano Regolatore Misilmeri 10k', 
+      }) .addTo(map);	
 
 	  	
 <!-- mappe tiles 2k -->
-ca2k = L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/misilmeri/2k_ca/{z}/{x}/{y}.png', {minZoom: 17,  maxZoom: 18, maxNativeZoom: 18, tms: true, attribution: '', }).addTo(map);
-portella_2k = L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/misilmeri/misilmeri_2K_portella/{z}/{x}/{y}.png', {minZoom: 17,  maxZoom: 18, maxNativeZoom: 18, tms: true, attribution: '', }).addTo(map);
-gr2k = L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/misilmeri/misilmeri_2k_gr/{z}/{x}/{y}.png', {minZoom: 17,  maxZoom: 18, maxNativeZoom: 18, tms: true, attribution: '', }).addTo(map);
+var ca2k =L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/misilmeri/2k_ca/{z}/{x}/{y}.png', {minZoom: 17,  maxZoom: 18, maxNativeZoom: 18, tms: true, attribution: '', }).addTo(map);
+var portella_2k =L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/misilmeri/misilmeri_2K_portella/{z}/{x}/{y}.png', {minZoom: 17,  maxZoom: 18, maxNativeZoom: 18, tms: true, attribution: '', }).addTo(map);
+var gr2k =L.tileLayer('https://siciliahub.github.io/mappe/palermo_hub/data/misilmeri/misilmeri_2k_gr/{z}/{x}/{y}.png', {minZoom: 17,  maxZoom: 18, maxNativeZoom: 18, tms: true, attribution: '', }).addTo(map);
 	  
 
 
 <!-- Legenda mappa -->
 L.control.layers({},{'<span class="legenda1">&nbsp;#OpenDataSicilia - Palermo Hub</span><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Strumenti Urbanistici di attuazione<hr><span class="legenda1">&nbsp;Piano regolatore generale</span>':layer_poligonoisola0,
 '<span class="legenda1">&nbsp;&nbsp;Piano regolatore generale 10k</span>':prg10k,	
-'<span class="legenda1">&nbsp;&nbsp;CittÃ  abitato 2k</span>':ca2k,
+'<span class="legenda1">&nbsp;&nbsp;Città abitato 2k</span>':ca2k,
 '<span class="legenda1">&nbsp;&nbsp;Portella di mare 2k</span><br />':portella_2k,
-'<span class="legenda1">&nbsp;&nbsp;Gibilrossa 2k</span><hr><span class="legenda3">Seleziona i layer di tuo interesse.<br>La visualizzazione del Piano al 2000 Ã¨ automatica dallo zoom 17</span><br><span class="legenda2">Le legenda si trovano nella sidebar a sinistra dello schermo</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia">':gr2k,
-// '<img src="legend_prg/AreeedimmobilisogettiatutelaambientaleCittaStorica5.png" /> <span class="legenda1">&nbsp;&nbsp;CittÃ  Storica</span>':cs,
-// '<img src="legend/sfonfo_tra.png" /> <span class="legenda1">&nbsp;&nbsp;Etichetta CittÃ  Storica</span>':layer_CentroStorico_2,
+'<span class="legenda1">&nbsp;&nbsp;Gibilrossa 2k</span><hr><span class="legenda3">Seleziona i layer di tuo interesse.<br>La visualizzazione del Piano al 2000 è automatica dallo zoom 17</span><br><span class="legenda2">Le legenda si trovano nella sidebar a sinistra dello schermo</span><br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="lib/images/ods.svg" width="130" title="opendatasicilia.it" alt="opendatasicilia">':gr2k,
+// '<img src="legend_prg/AreeedimmobilisogettiatutelaambientaleCittaStorica5.png" /> <span class="legenda1">&nbsp;&nbsp;Città Storica</span>':cs,
+// '<img src="legend/sfonfo_tra.png" /> <span class="legenda1">&nbsp;&nbsp;Etichetta Città Storica</span>':layer_CentroStorico_2,
 }).addTo(map);
 
-setBounds();
+	   setBounds();
 		
 		<!-- strumenti di leaflet -->
 		var zoomHome = L.Control.zoomHome();zoomHome.addTo(map);
 		var hash = new L.Hash(map);
 		
-		var sidebar = L.control.sidebar('sidebar').addTo(map);
+		  var sidebar = L.control.sidebar('sidebar').addTo(map);
 
 		 <!--.zoomControl.setPosition("topleft") -->;
 		 L.control.locate().addTo(map);
@@ -793,221 +450,7 @@ var credctrl = L.controlCredits({
     link: "https://opendatasicilia.it/",
     text: "Interactive mapping<br/>by opendatasicilia"
 }).addTo(map);
-
-// Controllo filtro bianco
-function initWhiteFilterControl() {
-    const filterRadios = document.querySelectorAll('input[name="white-filter"]');
-    
-    filterRadios.forEach(radio => {
-        radio.addEventListener('change', function(e) {
-            if (e.target.checked) {
-                applyWhiteFilter(e.target.value);
-            }
-        });
-    });
-}
-
-// Applica il filtro del bianco ai layer tiles
-function applyWhiteFilter(filterType) {
-    // Rimuovi tutte le classi di filtro esistenti
-    const filterClasses = [
-        'tiles-normal', 'tiles-white-only-light', 'tiles-white-only-medium', 
-        'tiles-white-only-strong', 'tiles-white-only-ultra', 'tiles-chroma-key'
-    ];
-    
-    // Seleziona tutti i tile img elementi
-    const tileImages = document.querySelectorAll('.leaflet-tile-pane img');
-    
-    tileImages.forEach(img => {
-        // Rimuovi classi esistenti
-        filterClasses.forEach(cls => img.classList.remove(cls));
-        
-        // Aggiungi la nuova classe (converti nome filtro)
-        const className = filterType === 'chroma-key' ? 'tiles-chroma-key' : 'tiles-' + filterType;
-        img.classList.add(className);
-    });
-    
-    // Per i layer che non sono ancora caricati, aggiungi un observer
-    const prgLayers = [prg10k, ca2k, portella_2k, gr2k];
-    prgLayers.forEach(layer => {
-        if (layer && layer._container) {
-            const layerImages = layer._container.querySelectorAll('img');
-            layerImages.forEach(img => {
-                filterClasses.forEach(cls => img.classList.remove(cls));
-                const className = filterType === 'chroma-key' ? 'tiles-chroma-key' : 'tiles-' + filterType;
-                img.classList.add(className);
-            });
-        }
-    });
-    
-    // Observer per nuovi tiles che vengono caricati
-    observeNewTiles(filterType);
-}
-
-// Osserva i nuovi tiles che vengono caricati dinamicamente
-function observeNewTiles(currentFilter) {
-    // Usa un Mutation Observer per rilevare nuove immagini tile
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.type === 'childList') {
-                mutation.addedNodes.forEach((node) => {
-                    if (node.nodeType === Node.ELEMENT_NODE) {
-                        const newImages = node.querySelectorAll ? 
-                            node.querySelectorAll('img') : 
-                            (node.tagName === 'IMG' ? [node] : []);
-                        
-                        newImages.forEach(img => {
-                            if (img.src && img.src.includes('siciliahub.github.io/mappe/palermo_hub/data/misilmeri/')) {
-                                // Rimuovi classi esistenti e applica il filtro corrente
-                                const filterClasses = [
-                                    'tiles-normal', 'tiles-white-only-light', 'tiles-white-only-medium', 
-                                    'tiles-white-only-strong', 'tiles-white-only-ultra', 'tiles-chroma-key'
-                                ];
-                                filterClasses.forEach(cls => img.classList.remove(cls));
-                                const className = currentFilter === 'chroma-key' ? 'tiles-chroma-key' : 'tiles-' + currentFilter;
-                                img.classList.add(className);
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    });
-    
-    // Osserva il contenitore della mappa
-    observer.observe(document.getElementById('map'), {
-        childList: true,
-        subtree: true
-    });
-    
-    // Salva l'observer per poterlo disconnettere se necessario
-    if (window.tileObserver) {
-        window.tileObserver.disconnect();
-    }
-    window.tileObserver = observer;
-}
-
-// Controllo trasparenza generale
-function initTransparencyControl() {
-    const slider = document.getElementById('transparency-slider');
-    const valueDisplay = document.getElementById('transparency-value');
-    
-    if (slider && valueDisplay) {
-        slider.addEventListener('input', function(e) {
-            const transparencyValue = parseInt(e.target.value);
-            const opacity = (100 - transparencyValue) / 100;
-            
-            // Aggiorna il valore mostrato
-            valueDisplay.textContent = transparencyValue;
-            
-            // Applica la trasparenza a tutti i layer del PRG
-            const prgLayers = [prg10k, ca2k, portella_2k, gr2k];
-            prgLayers.forEach(layer => {
-                if (layer && map.hasLayer(layer)) {
-                    layer.setOpacity(opacity);
-                }
-            });
-        });
-    }
-}
-
-// Controllo visibilità layer
-function initLayerToggleControls() {
-    const layerControls = {
-        'toggle-prg10k': prg10k,
-        'toggle-ca2k': ca2k,
-        'toggle-portella2k': portella_2k,
-        'toggle-gr2k': gr2k
-    };
-    
-    Object.keys(layerControls).forEach(controlId => {
-        const checkbox = document.getElementById(controlId);
-        const layer = layerControls[controlId];
-        
-        if (checkbox && layer) {
-            checkbox.addEventListener('change', function(e) {
-                if (e.target.checked) {
-                    if (!map.hasLayer(layer)) {
-                        map.addLayer(layer);
-                    }
-                } else {
-                    if (map.hasLayer(layer)) {
-                        map.removeLayer(layer);
-                    }
-                }
-            });
-        }
-    });
-}
-
-// Inizializza i controlli dopo che la mappa è caricata
-setTimeout(() => {
-    initTransparencyControl();
-    initLayerToggleControls();
-    initWhiteFilterControl();
-    
-    // Applica il filtro normale di default
-    applyWhiteFilter('normal');
-}, 1000);
-
-// Funzione di reset completo
-function resetAllControls() {
-    // Reset trasparenza generale
-    const slider = document.getElementById('transparency-slider');
-    const valueDisplay = document.getElementById('transparency-value');
-    
-    if (slider && valueDisplay) {
-        slider.value = 0;
-        valueDisplay.textContent = '0';
-        
-        const prgLayers = [prg10k, ca2k, portella_2k, gr2k];
-        prgLayers.forEach(layer => {
-            if (layer && map.hasLayer(layer)) {
-                layer.setOpacity(1.0);
-            }
-        });
-    }
-    
-    // Reset filtro bianco
-    const normalFilter = document.getElementById('filter-normal');
-    if (normalFilter) {
-        normalFilter.checked = true;
-        applyWhiteFilter('normal');
-    }
-}
-
-// Aggiungi listener per quando la sidebar viene aperta/chiusa
-map.on('sidebaropen', function(e) {
-    if (e.id === 'settings') {
-        // Reinizializza i controlli quando si apre il tab settings
-        setTimeout(() => {
-            initTransparencyControl();
-            initLayerToggleControls();
-            initWhiteFilterControl();
-        }, 100);
-    }
-});
-
-// Listener per eventi di zoom per riapplicare i filtri
-map.on('zoomend', function() {
-    setTimeout(() => {
-        const checkedFilter = document.querySelector('input[name="white-filter"]:checked');
-        if (checkedFilter) {
-            applyWhiteFilter(checkedFilter.value);
-        }
-    }, 500);
-});
-
-// Listener per eventi di layer add per riapplicare i filtri
-map.on('layeradd', function(e) {
-    setTimeout(() => {
-        const checkedFilter = document.querySelector('input[name="white-filter"]:checked');
-        if (checkedFilter) {
-            applyWhiteFilter(checkedFilter.value);
-        }
-    }, 200);
-});
-        
+		
         </script>
 
 </body>
