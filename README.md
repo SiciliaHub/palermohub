@@ -3,10 +3,10 @@
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <a href="https://palermohub.opendatasicilia.it/"><img width="1000" src="https://palermohub.opendatasicilia.it/legend/pa_hub.jpg" Title="Palermo Hub è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili.
-Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare, é un po’ come tradurre il “burocratese” in linguaggio normale e presentarlo in modo visivamente comprensibile" /></a><br>
+Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare, é un po’ come tradurre il “burocratese” in linguaggio normale e presentarlo in modo visivamente comprensibile." /></a><br>
 
 PalermoHub di [**opendatasicilia.it**](https://opendatasicilia.it/) è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili.
-Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare, é un po’ come tradurre il “burocratese” in linguaggio normale e presentarlo in modo visivamente comprensibile. <br> a cura di
+Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare, é un po’ come tradurre il “burocratese” in linguaggio normale e presentarlo in modo visivamente comprensibile. <br> A cura di
 [@aborruso](https://twitter.com/aborruso), [@cirospat](https://twitter.com/cirospat) e [@gbvitrano](https://twitter.com/gbvitrano) <br> <br> <br>
 [**Link 1 - palermohub.opendatasicilia.it**](https://siciliahub.github.io/palermohub/index.html)<br>
 
