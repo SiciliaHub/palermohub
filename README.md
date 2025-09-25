@@ -2,9 +2,10 @@
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-<a href="https://siciliahub.github.io/palermohub/index.html/"><img width="1000" src="https://coseerobe.gbvitrano.it/rec/wp-content/uploads/2016/11/palermo_hub01-1.jpg" Title="Palermo Hub è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali." /></a><br>
+<a href="https://siciliahub.github.io/palermohub/index.html/"><img width="1000" src="https://palermohub.opendatasicilia.it/legend/pa_hub.jpg" Title="Palermo Hub è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali." /></a><br>
 
-Palermo Hub di [**opendatasicilia.it**](https://opendatasicilia.it/) è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l’unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali. <br> a cura di
+PalermoHub di [**opendatasicilia.it**](https://opendatasicilia.it/) è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili.
+Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare, é un po’ come tradurre il “burocratese” in linguaggio normale e presentarlo in modo visivamente comprensibile. <br> a cura di
 [@aborruso](https://twitter.com/aborruso), [@cirospat](https://twitter.com/cirospat) e [@gbvitrano](https://twitter.com/gbvitrano) <br> <br> <br>
 [**Link 1 - palermohub.opendatasicilia.it**](https://siciliahub.github.io/palermohub/index.html)<br>
 
