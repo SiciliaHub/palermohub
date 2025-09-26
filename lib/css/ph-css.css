@@ -2463,3 +2463,656 @@ body::before {
 [data-theme="dark"] .ph-more-tags.clickable:focus {
     outline-color: #60a5fa;
 }
+
+/* ========================================
+   DARK MODE - HEADER MODALE & LINGUETTA
+   ======================================== */
+
+/* Header modale principale */
+[data-theme="dark"] .modal-header {
+    background: rgba(28, 28, 30, 0.98);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Linguetta di controllo header */
+[data-theme="dark"] .header-toggle-tab {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff7700 100%);
+    border: 1px solid rgba(255, 167, 38, 0.5);
+    box-shadow: 0 2px 12px rgba(255, 167, 38, 0.6);
+}
+
+[data-theme="dark"] .header-toggle-tab::before {
+    background: linear-gradient(45deg, var(--primary-color), #ff7700, var(--primary-color), #ff7700);
+}
+
+[data-theme="dark"] .header-toggle-tab:hover {
+    background: linear-gradient(135deg, #ff7700 0%, #ff5500 100%);
+    box-shadow: 0 2px 16px rgba(255, 153, 0, 0.8);
+}
+
+[data-theme="dark"] .header-toggle-tab.tab-active {
+    background: linear-gradient(135deg, var(--secondary-green) 0%, #16a34a 100%);
+    box-shadow: 0 2px 12px rgba(34, 197, 94, 0.6);
+}
+
+[data-theme="dark"] .header-toggle-tab.tab-active:hover {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+}
+
+/* Tab di chiusura header */
+[data-theme="dark"] .modal-header-close-tab {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff7700 100%);
+    border: 2px solid rgba(255, 167, 38, 0.5);
+    box-shadow: 0 2px 12px rgba(255, 167, 38, 0.6);
+}
+
+[data-theme="dark"] .modal-header-close-tab:hover {
+    box-shadow: 0 4px 16px rgba(255, 153, 0, 0.8);
+}
+
+/* Contenuto header */
+[data-theme="dark"] .modal-header-content {
+    background: rgba(28, 28, 30, 0.98);
+}
+
+[data-theme="dark"] .ph-header-container {
+    background: transparent;
+}
+
+/* Logo dark mode */
+[data-theme="dark"] .ph-logo img {
+    filter: brightness(1.1);
+}
+
+/* Navigazione header mobile dark mode */
+[data-theme="dark"] .ph-nav {
+    background: rgba(18, 18, 18, 0.98);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .ph-nav-link {
+    color: var(--text-secondary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .ph-nav-link:hover,
+[data-theme="dark"] .ph-nav-link:focus {
+    color: var(--primary-color);
+    background: rgba(255, 167, 38, 0.1);
+}
+
+[data-theme="dark"] .ph-nav-link.active {
+    color: var(--primary-color);
+    background: rgba(255, 167, 38, 0.2);
+    border-left: 4px solid var(--primary-color);
+}
+
+/* Mobile toggle hamburger dark mode */
+[data-theme="dark"] .ph-hamburger-line {
+    background: var(--text-secondary);
+}
+
+[data-theme="dark"] .ph-mobile-toggle:hover,
+[data-theme="dark"] .ph-mobile-toggle:focus {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* ========================================
+   DARK MODE - BREADCRUMBS HEADER
+   ======================================== */
+
+[data-theme="dark"] .ph-breadcrumbs {
+    background: rgba(28, 28, 30, 0.98);
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .ph-breadcrumb-link {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .ph-breadcrumb-link:hover,
+[data-theme="dark"] .ph-breadcrumb-link:focus {
+    background: rgba(255, 167, 38, 0.1);
+}
+
+[data-theme="dark"] .ph-breadcrumb-current {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .ph-breadcrumb-category,
+[data-theme="dark"] .ph-breadcrumb-territory {
+    background: rgba(113, 128, 150, 0.2);
+    color: var(--text-secondary);
+    border-color: rgba(113, 128, 150, 0.4);
+}
+
+[data-theme="dark"] .ph-breadcrumb-category {
+    background: rgba(255, 167, 38, 0.15);
+    color: var(--primary-color);
+    border-color: rgba(255, 167, 38, 0.4);
+}
+
+[data-theme="dark"] .ph-breadcrumb-territory {
+    background: rgba(100, 181, 246, 0.2);
+    color: #64b5f6;
+    border-color: rgba(100, 181, 246, 0.5);
+}
+
+/* Filtri attivi breadcrumbs dark mode */
+[data-theme="dark"] .ph-filter-tag {
+    background: #2d3748;
+    color: var(--text-secondary);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .ph-filter-tag:hover {
+    background: #2d1b69;
+    color: var(--secondary-red);
+    border-color: var(--secondary-red);
+}
+
+[data-theme="dark"] .ph-filters-indicator {
+    background: var(--primary-color);
+    color: #000;
+}
+
+/* ========================================
+   DARK MODE - FOOTER MODALE & LINGUETTA  
+   ======================================== */
+
+/* Footer modale principale */
+[data-theme="dark"] .modal-footer {
+    background: rgba(28, 28, 30, 0.98);
+    border-top: 1px solid var(--border-color);
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Linguetta di controllo footer */
+[data-theme="dark"] .footer-toggle-tab {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff7700 100%);
+    border: 1px solid rgba(255, 167, 38, 0.5);
+    box-shadow: 0 2px 12px rgba(255, 167, 38, 0.6);
+}
+
+[data-theme="dark"] .footer-toggle-tab::before {
+    background: linear-gradient(45deg, var(--primary-color), #ff7700, var(--primary-color), #ff7700);
+}
+
+[data-theme="dark"] .footer-toggle-tab:hover {
+    background: linear-gradient(135deg, #ff7700 0%, #ff5500 100%);
+    box-shadow: 0 2px 16px rgba(255, 153, 0, 0.8);
+}
+
+[data-theme="dark"] .footer-toggle-tab.tab-active {
+    background: linear-gradient(135deg, var(--secondary-green) 0%, #16a34a 100%);
+    box-shadow: 0 2px 12px rgba(34, 197, 94, 0.6);
+}
+
+[data-theme="dark"] .footer-toggle-tab.tab-active:hover {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+}
+
+/* Tab di chiusura footer */
+[data-theme="dark"] .modal-footer-close-tab {
+    background: linear-gradient(135deg, var(--primary-color) 0%, #ff7700 100%);
+    border: 2px solid rgba(255, 167, 38, 0.5);
+    box-shadow: 0 -2px 12px rgba(255, 167, 38, 0.6);
+}
+
+[data-theme="dark"] .modal-footer-close-tab:hover {
+    box-shadow: 0 -4px 16px rgba(255, 153, 0, 0.8);
+}
+
+/* Header footer modale */
+[data-theme="dark"] .modal-footer-header {
+    background: linear-gradient(135deg, rgba(28, 28, 30, 0.95) 0%, rgba(18, 18, 18, 0.98) 100%);
+    border-bottom: 2px solid var(--border-color);
+}
+
+[data-theme="dark"] .modal-footer-title {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .modal-footer-title i {
+    color: var(--primary-color);
+}
+
+/* Contenuto footer */
+[data-theme="dark"] .modal-footer-content {
+    background: rgba(28, 28, 30, 0.98);
+}
+
+[data-theme="dark"] .footer-section {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .footer-section:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(255, 167, 38, 0.3);
+}
+
+[data-theme="dark"] .footer-section h4 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .footer-section h4 i {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .footer-text {
+    color: var(--text-secondary);
+}
+
+/* ========================================
+   DARK MODE - SOCIAL MEDIA FOOTER
+   ======================================== */
+
+[data-theme="dark"] .social-btn {
+    background: var(--background-main);
+    color: var(--text-secondary);
+    border: 2px solid var(--border-color);
+}
+
+[data-theme="dark"] .social-btn::before {
+    background: var(--primary-color);
+}
+
+[data-theme="dark"] .social-btn:hover {
+    color: #000;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 15px rgba(255, 167, 38, 0.4);
+}
+
+/* ========================================
+   DARK MODE - RICERCA FOOTER
+   ======================================== */
+
+[data-theme="dark"] .footer-search-input-container {
+    background: rgba(30, 30, 30, 0.95);
+    border: 2px solid var(--border-color);
+}
+
+[data-theme="dark"] .footer-search-input-container.focused {
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 12px rgba(255, 167, 38, 0.4);
+    background: #2d2d2d;
+}
+
+[data-theme="dark"] .footer-search-icon {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .footer-search-input-container.focused .footer-search-icon {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .footer-search-input {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .footer-search-input::placeholder {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .footer-search-clear {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .footer-search-clear:hover {
+    color: var(--secondary-red);
+    background: rgba(239, 83, 80, 0.2);
+}
+
+/* ========================================
+   DARK MODE - CREDITS FOOTER
+   ======================================== */
+
+[data-theme="dark"] .footer-credits {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .footer-credits a {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .footer-credits a:hover {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .privacy-link {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .privacy-link:hover {
+    background: #4a5568;
+    color: var(--primary-color);
+}
+
+/* ========================================
+   DARK MODE - SISTEMA CONDIVISIONE
+   ======================================== */
+
+[data-theme="dark"] .share-popup {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .share-content {
+    background: var(--white);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .share-header {
+    border-bottom: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .share-header h3 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .share-header i {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .share-close {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .share-close:hover {
+    background: #4a5568;
+}
+
+[data-theme="dark"] .share-description > p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .share-filters-preview {
+    background: rgba(28, 28, 30, 0.95);
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .share-filters-preview .no-filters {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] .share-filter-tag {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.5);
+}
+
+[data-theme="dark"] .share-url-section > label {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .share-url-input {
+    background: rgba(30, 30, 30, 0.95);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .share-url-input:focus {
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .copy-btn {
+    background: var(--primary-color);
+    color: #000;
+}
+
+[data-theme="dark"] .copy-btn:hover {
+    background: #ff7700;
+}
+
+[data-theme="dark"] .share-social-section > p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .share-social-btn {
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .share-social-btn:hover {
+    box-shadow: 0 4px 12px rgba(255, 167, 38, 0.3);
+}
+
+/* ========================================
+   DARK MODE - PRIVACY POPUP
+   ======================================== */
+
+[data-theme="dark"] .privacy-popup {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+[data-theme="dark"] .privacy-content {
+    background: var(--white);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+[data-theme="dark"] .privacy-header h3 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .privacy-header i {
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .privacy-close {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .privacy-close:hover {
+    background: #4a5568;
+}
+
+[data-theme="dark"] .privacy-body > p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .privacy-option {
+    border: 1px solid var(--border-color);
+}
+
+[data-theme="dark"] .privacy-option:hover {
+    border-color: var(--primary-color);
+}
+
+[data-theme="dark"] .privacy-option strong {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .privacy-option p {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .privacy-slider {
+    background-color: #4a5568;
+}
+
+[data-theme="dark"] input:checked + .privacy-slider {
+    background-color: var(--primary-color);
+}
+
+[data-theme="dark"] .privacy-required {
+    background: rgba(34, 197, 94, 0.2);
+    color: var(--secondary-green);
+}
+
+[data-theme="dark"] .privacy-btn-secondary {
+    background: var(--border-color);
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] .privacy-btn-secondary:hover {
+    background: #4a5568;
+}
+
+[data-theme="dark"] .privacy-btn-primary {
+    background: var(--primary-color);
+    color: #000;
+}
+
+[data-theme="dark"] .privacy-btn-success {
+    background: var(--secondary-green);
+    color: #000;
+}
+
+/* ========================================
+   DARK MODE - OVERLAY & BACKDROP
+   ======================================== */
+
+/* Header e Footer overlay devono rimanere trasparenti anche in dark mode */
+[data-theme="dark"] .header-modal-overlay,
+[data-theme="dark"] .footer-modal-overlay {
+    background: transparent;
+    backdrop-filter: none;
+}
+
+/* Solo i popup veri e propri (share, privacy) hanno overlay scuro */
+[data-theme="dark"] .share-backdrop,
+[data-theme="dark"] .privacy-backdrop {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+}
+
+/* ========================================
+   DARK MODE - RESPONSIVE ADJUSTMENTS
+   ======================================== */
+
+@media (max-width: 768px) {
+    [data-theme="dark"] .ph-nav {
+        background: rgba(18, 18, 18, 0.98);
+    }
+    
+    [data-theme="dark"] .modal-footer {
+        background: rgba(28, 28, 30, 0.98);
+    }
+    
+    [data-theme="dark"] .footer-section {
+        background: var(--white);
+    }
+    
+    [data-theme="dark"] .header-toggle-tab,
+    [data-theme="dark"] .footer-toggle-tab {
+        box-shadow: 0 2px 8px rgba(255, 167, 38, 0.5);
+    }
+}
+
+@media (max-width: 480px) {
+    [data-theme="dark"] .share-content,
+    [data-theme="dark"] .privacy-content {
+        margin: 1rem;
+        max-width: calc(100% - 2rem);
+    }
+    
+    [data-theme="dark"] .modal-footer-content {
+        padding: 1rem;
+    }
+    
+    [data-theme="dark"] .footer-section {
+        padding: 0.75rem;
+    }
+}
+
+/* ========================================
+   DARK MODE - BODY PADDING ADJUSTMENTS
+   ======================================== */
+
+[data-theme="dark"] body.header-modal-open {
+    background: var(--background-main);
+}
+
+/* ========================================
+   DARK MODE - SCROLLBAR PERSONALIZZATE
+   ======================================== */
+
+[data-theme="dark"] .modal-footer::-webkit-scrollbar,
+[data-theme="dark"] .footer-suggestions-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+[data-theme="dark"] .modal-footer::-webkit-scrollbar-track,
+[data-theme="dark"] .footer-suggestions-list::-webkit-scrollbar-track {
+    background: var(--border-color);
+}
+
+[data-theme="dark"] .modal-footer::-webkit-scrollbar-thumb,
+[data-theme="dark"] .footer-suggestions-list::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 3px;
+}
+
+[data-theme="dark"] .modal-footer::-webkit-scrollbar-thumb:hover,
+[data-theme="dark"] .footer-suggestions-list::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}
+
+/* ========================================
+   DARK MODE - ANIMAZIONI & TRANSIZIONI
+   ======================================== */
+
+[data-theme="dark"] .header-toggle-tab,
+[data-theme="dark"] .footer-toggle-tab,
+[data-theme="dark"] .modal-header,
+[data-theme="dark"] .modal-footer {
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Performance optimization per dark mode */
+[data-theme="dark"] .modal-header *,
+[data-theme="dark"] .modal-footer * {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* ========================================
+   DARK MODE - THEME TOGGLE SPECIFICO
+   ======================================== */
+
+[data-theme="dark"] .theme-toggle {
+    background: rgba(255, 167, 38, 0.1);
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background: rgba(255, 167, 38, 0.2);
+}
+
+[data-theme="dark"] .theme-switch {
+    background: var(--primary-color);
+}
+
+[data-theme="dark"] .theme-slider {
+    background: #000;
+    color: var(--primary-color);
+}
+
+[data-theme="dark"] .theme-label {
+    color: var(--text-primary);
+}
+
+/* Mobile nav theme toggle dark mode */
+@media (max-width: 768px) {
+    [data-theme="dark"] .ph-nav .theme-toggle {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    [data-theme="dark"] .ph-nav .theme-label {
+        color: #e2e8f0;
+    }
+    
+    [data-theme="dark"] .ph-nav .theme-toggle:hover {
+        color: var(--primary-color);
+        background: rgba(255, 167, 38, 0.1);
+    }
+    
+    [data-theme="dark"] .ph-nav .theme-toggle:hover .theme-label {
+        color: var(--primary-color);
+    }
+}
