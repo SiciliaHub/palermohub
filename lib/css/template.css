@@ -271,8 +271,8 @@ body {
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
-    bottom: calc(1rem + 80px + 1rem);
-    right: 2rem;
+    bottom: calc(1rem + 40px + 1rem);
+    right: 1.4rem;
     width: 50px;
     height: 50px;
     background: var(--white);
