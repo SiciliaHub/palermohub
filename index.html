@@ -160,10 +160,25 @@
     <meta name="twitter:title" content="PalermoHub">
     <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
     <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/legend/social_card_ph.jpg">
+	<style>
+	/* Margini del paragrafo introduttivo in base allo stato dell'header */
+body > p:first-of-type {
+    margin: 20px 10px 20px 10px !important;
+    text-align: center;
+    font-weight: 500;
+    transition: margin 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Quando l'header è aperto */
+body.header-modal-open > p:first-of-type {
+    margin: -20px 10px 20px 10px !important;
+}
+	
+	</style>
 </head>
 <body>
     <!-- Intro -->
-    <p style="margin: -20px 10px 20px 10px; text-align: center; font-weight: 500;">PalermoHub è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili. <br>  Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare, é un po’ come tradurre il “burocratese” in linguaggio normale e presentarlo in modo visivamente comprensibile.
+    <p style="text-align: center; font-weight: 500;">PalermoHub è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili. <br>  Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare, é un po’ come tradurre il “burocratese” in linguaggio normale e presentarlo in modo visivamente comprensibile.
 	  </p><hr>
 				
     <!-- Popup overlay for active filters -->
