@@ -2758,14 +2758,14 @@ body.header-modal-open .intro-paragraph {
     body > p:first-of-type {
         margin: 10px 15px !important;
         padding: 12px;
-        font-size: 0.9rem;
+     /*   font-size: 0.9rem;*/
         line-height: 1.5;
     }
     
     /* Highlight text più piccolo su mobile */
     .intro-paragraph .highlight,
     body > p:first-of-type .highlight {
-        font-size: 0.85rem;
+        /*font-size: 0.85rem;*/
         padding: 2px 6px;
     }
 }
@@ -2775,13 +2775,13 @@ body.header-modal-open .intro-paragraph {
     body > p:first-of-type {
         margin: 8px 10px !important;
         padding: 10px;
-        font-size: 0.85rem;
+       /* font-size: 0.85rem;*/
         line-height: 1.5;
     }
     
     .intro-paragraph .highlight,
     body > p:first-of-type .highlight {
-        font-size: 0.8rem;
+       /* font-size: 0.8rem;*/
         padding: 1px 4px;
     }
 }
