@@ -2706,3 +2706,99 @@ body::before {
         }
     }
 }
+
+/* ========================================
+   FIX PARAGRAFI HOME PAGE - FORMATTAZIONE UNIFORME
+   ======================================== */
+
+/* Reset e unificazione stili per tutti i paragrafi intro */
+.intro-paragraph {
+    margin: 15px 20px !important;
+    padding: 10px 15px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-size: 0.81rem;
+}
+
+/* Rimuovi gli stili precedenti problematici */
+body > p:first-of-type {
+    margin: 15px 20px !important;
+    padding: 10px 15px;
+    text-align: center;
+    font-weight: 500;
+    line-height: 1.6;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    font-size: 1.75rem;
+}
+
+/* Quando l'header è aperto, adatta i margini */
+body.header-modal-open > p:first-of-type,
+body.header-modal-open .intro-paragraph {
+    margin: 5px 20px 15px 20px !important;
+}
+
+/* ========================================
+   RESPONSIVE MOBILE - PARAGRAFI
+   ======================================== */
+
+@media (max-width: 768px) {
+    .intro-paragraph,
+    body > p:first-of-type {
+        margin: 10px 15px !important;
+        padding: 12px;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    /* Highlight text più piccolo su mobile */
+    .intro-paragraph .highlight,
+    body > p:first-of-type .highlight {
+        font-size: 0.85rem;
+        padding: 2px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .intro-paragraph,
+    body > p:first-of-type {
+        margin: 8px 10px !important;
+        padding: 10px;
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    
+    .intro-paragraph .highlight,
+    body > p:first-of-type .highlight {
+        font-size: 0.8rem;
+        padding: 1px 4px;
+    }
+}
+
+/* ========================================
+   DARK MODE SUPPORT PER PARAGRAFI
+   ======================================== */
+
+[data-theme="dark"] .intro-paragraph,
+[data-theme="dark"] body > p:first-of-type {
+    background: rgba(28, 28, 30, 0.9);
+    color: var(--text-primary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .intro-paragraph .highlight,
+[data-theme="dark"] body > p:first-of-type .highlight {
+    background: linear-gradient(120deg, rgba(255, 167, 38, 0.4) 0%, rgba(255, 167, 38, 0.2) 100%);
+    color: var(--text-primary);
+}

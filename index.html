@@ -160,26 +160,18 @@
     <meta name="twitter:title" content="PalermoHub">
     <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
     <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/legend/social_card_ph.jpg">
-	<style>
-	/* Margini del paragrafo introduttivo in base allo stato dell'header */
-body > p:first-of-type {
-    margin: 20px 10px 20px 10px !important;
-    text-align: center;
-    font-weight: 500;
-    transition: margin 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
 
-/* Quando l'header è aperto */
-body.header-modal-open > p:first-of-type {
-    margin: -20px 10px 20px 10px !important;
-}
-	
-	</style>
 </head>
 <body>
     <!-- Intro -->
-    <p style="text-align: center; font-weight: 500;">PalermoHub è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili. <br>  Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare, é un po’ come tradurre il “burocratese” in linguaggio normale e presentarlo in modo visivamente comprensibile.
-	  </p><hr>
+ <p class="intro-paragraph">
+        PalermoHub è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. 
+        Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti 
+        della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili. 
+        <br>Rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali 
+        difficili da navigare, è un po' come tradurre il "burocratese" in linguaggio normale e presentarlo 
+        in modo visivamente comprensibile.
+    </p><hr>
 				
     <!-- Popup overlay for active filters -->
     <div id="popup-overlay" class="popup-overlay"></div>
@@ -314,39 +306,47 @@ body.header-modal-open > p:first-of-type {
                 </div>
             </div>
                                     <!-- Cerca -->
-    <p style="margin: 10px 20px; text-align: center; font-weight: 500;">PalermoHub è progettato attorno a un principio semplice: <span class="highlight">rendere facile trovare quello che cerchi, anche se non sai esattamente cosa stai cercando.</span> <br>  È come avere un bibliotecario digitale molto paziente che: – Capisce quello che dici anche se non lo dici perfettamente – Ricorda le tue preferenze – Ti suggerisce cose correlate che potrebbero interessarti.
-                </p>
-            <div class="search-controls">
-                <!-- RICERCA INTELLIGENTE MIGLIORATA -->
-                <div class="smart-search-container">
-                    <div class="search-input-container" id="search-input-container">
-                        <div class="search-icon"><i class="fas fa-search"></i></div>
-                        <input type="text" 
-                               id="smart-search-input" 
-                               class="search-input" 
-                               placeholder="Cerca mappe per titolo, descrizione, autore, territorio..."
-                               autocomplete="off"
-                               autocorrect="off"
-                               spellcheck="false">
-                        <button id="search-clear-btn" class="search-clear-btn" title="Cancella ricerca">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
+ <div class="search-controls">
+        <!-- RICERCA INTELLIGENTE MIGLIORATA -->
+        <div class="smart-search-container">
+            <!-- PARAGRAFO UNIFICATO ANCHE QUI -->
+            <p class="intro-paragraph">
+                PalermoHub è progettato attorno a un principio semplice: 
+                <span class="highlight">rendere facile trovare quello che cerchi, anche se non sai esattamente cosa stai cercando.</span> 
+                <br>È come avere un bibliotecario digitale molto paziente che: 
+                – Capisce quello che dici anche se non lo dici perfettamente 
+                – Ricorda le tue preferenze 
+                – Ti suggerisce cose correlate che potrebbero interessarti.
+            </p>
+            
+            <div class="search-input-container" id="search-input-container">
+                <div class="search-icon"><i class="fas fa-search"></i></div>
+                <input type="text" 
+                       id="smart-search-input" 
+                       class="search-input" 
+                       placeholder="Cerca mappe per titolo, descrizione, autore, territorio..."
+                       autocomplete="off"
+                       autocorrect="off"
+                       spellcheck="false">
+                <button id="search-clear-btn" class="search-clear-btn" title="Cancella ricerca">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
 
-                    <div id="search-status" class="search-status"></div>
-                    
-                    <!-- Suggerimenti intelligenti -->
-                    <div id="smart-suggestions" class="smart-suggestions">
-                        <div class="suggestions-header">
-                            <div class="suggestions-title"><i class="fas fa-bullseye"></i> Risultati di ricerca</div>
-                            <div class="suggestions-count" id="suggestions-count">0 risultati</div>
-                        </div>
-                        <div class="suggestions-list" id="suggestions-list">
-                            <!-- I suggerimenti verranno generati dinamicamente -->
-                        </div>
-                    </div>
+            <div id="search-status" class="search-status"></div>
+            
+            <!-- Suggerimenti intelligenti -->
+            <div id="smart-suggestions" class="smart-suggestions">
+                <div class="suggestions-header">
+                    <div class="suggestions-title"><i class="fas fa-bullseye"></i> Risultati di ricerca</div>
+                    <div class="suggestions-count" id="suggestions-count">0 risultati</div>
+                </div>
+                <div class="suggestions-list" id="suggestions-list">
+                    <!-- I suggerimenti verranno generati dinamicamente -->
                 </div>
             </div>
+        </div>
+    </div>
             <!-- Gruppo pulsanti per mobile - Solo Filtri -->
             <div class="button-group-mobile">
                 <button id="show-filters" class="view-toggle" title="Gestione dei filtri"><i class="fas fa-filter"></i> Filtri</button>
