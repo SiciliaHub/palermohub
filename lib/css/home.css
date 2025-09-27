@@ -2,6 +2,7 @@
  * PalermoHub - Core Styles
  * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
  * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
+ \1\	
  * 
  * Licensed under CC BY-SA 4.0
  * https://creativecommons.org/licenses/by-sa/4.0/
@@ -2724,7 +2725,7 @@ body::before {
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    font-size: 0.81rem;
+    font-size: 0.95rem;
 }
 
 /* Rimuovi gli stili precedenti problematici */
@@ -2740,7 +2741,7 @@ body > p:first-of-type {
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    font-size: 2rem;
+    font-size: 0.95rem;
 }
 
 /* Quando l'header è aperto, adatta i margini */
@@ -2758,14 +2759,14 @@ body.header-modal-open .intro-paragraph {
     body > p:first-of-type {
         margin: 10px 15px !important;
         padding: 12px;
-     /*   font-size: 0.9rem;*/
+      font-size: 0.9rem;
         line-height: 1.5;
     }
     
     /* Highlight text più piccolo su mobile */
     .intro-paragraph .highlight,
     body > p:first-of-type .highlight {
-        /*font-size: 0.85rem;*/
+        font-size: 0.95rem;
         padding: 2px 6px;
     }
 }
@@ -2775,13 +2776,13 @@ body.header-modal-open .intro-paragraph {
     body > p:first-of-type {
         margin: 8px 10px !important;
         padding: 10px;
-       /* font-size: 0.85rem;*/
+       font-size: 0.95rem;
         line-height: 1.5;
     }
     
     .intro-paragraph .highlight,
     body > p:first-of-type .highlight {
-       /* font-size: 0.8rem;*/
+       font-size: 1.5rem!important;
         padding: 1px 4px;
     }
 }
