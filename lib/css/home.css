@@ -2714,39 +2714,39 @@ body::before {
 /* Reset e unificazione stili per tutti i paragrafi intro */
 .intro-paragraph {
     margin: 15px 20px !important;
-    padding: 10px 15px;
+    padding: 5px 5px;
     text-align: center;
     font-weight: 500;
     line-height: 1.6;
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.8);
+    /*background: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);*/
     font-size: 0.95rem;
 }
 
 /* Rimuovi gli stili precedenti problematici */
 body > p:first-of-type {
     margin: 15px 20px !important;
-    padding: 10px 15px;
+    padding: 5px 5px;
     text-align: center;
     font-weight: 500;
     line-height: 1.6;
     color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.8);
+    /*background: rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);*/
     font-size: 0.95rem;
 }
 
 /* Quando l'header è aperto, adatta i margini */
 body.header-modal-open > p:first-of-type,
 body.header-modal-open .intro-paragraph {
-    margin: 5px 20px 15px 20px !important;
+    margin: 0 0 20px 0 !important;
 }
 
 /* ========================================
@@ -2775,13 +2775,13 @@ body.header-modal-open .intro-paragraph {
     body > p:first-of-type {
         margin: 8px 10px !important;
         padding: 10px;
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         line-height: 1.4;
     }
     
     .intro-paragraph .highlight,
     body > p:first-of-type .highlight {
-        font-size: 0.8rem;
+        font-size: 0.75rem;
         padding: 1px 4px;
     }
 }
