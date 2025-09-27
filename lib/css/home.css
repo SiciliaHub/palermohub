@@ -2511,3 +2511,198 @@ body::before {
     }
 }
 
+/* ========================================
+   MOBILE FIXES PER FOOTER E BACK-TO-TOP
+   Aggiungere alla fine di home.css
+   ======================================== */
+
+/* Fix per evitare sovrapposizioni con barre di navigazione mobile */
+@supports(padding: max(0px)) {
+    .back-to-top {
+        bottom: max(calc(1rem + 40px + 1rem), calc(env(safe-area-inset-bottom) + 80px));
+        right: max(20px, env(safe-area-inset-right));
+    }
+}
+
+/* Specifiche per dispositivi mobile in modalità verticale */
+@media (max-width: 768px) and (orientation: portrait) {
+    
+    /* Back-to-top spostato più in alto per evitare barre browser */
+    .back-to-top {
+        bottom: 120px; /* Aumentato da ~82px a 120px */
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
+        z-index: 1001; /* Sopra altri elementi */
+    }
+    
+    /* Footer button per condivisione spostato a destra */
+    .footer .social-btn.share-btn {
+        position: fixed !important;
+        bottom: 60px; /* Sopra il back-to-top */
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(255, 153, 0, 0.4);
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Nascondi il pulsante share originale nel footer su mobile */
+    .footer-social .social-btn.share-btn {
+        display: none !important;
+    }
+    
+    /* Aggiungi un pulsante share fisso mobile */
+    .mobile-share-btn {
+        position: fixed;
+        bottom: 60px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        background: #ff9900;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 1.2rem;
+        z-index: 1000;
+        box-shadow: 0 4px 20px rgba(255, 153, 0, 0.4);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .mobile-share-btn:hover,
+    .mobile-share-btn:active {
+        background: #e6870a;
+        transform: scale(1.05);
+        box-shadow: 0 6px 25px rgba(255, 153, 0, 0.6);
+    }
+    
+    /* Footer layout migliorato per mobile */
+    .footer-content {
+        padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+        margin-bottom: 0;
+    }
+    
+    /* Migliora la visibilità considerando le safe areas */
+    .footer-search-input-container {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Per dispositivi molto piccoli (iPhone SE, etc.) */
+@media (max-width: 480px) and (orientation: portrait) {
+    .back-to-top {
+        bottom: 100px;
+        right: 10px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+    
+    .mobile-share-btn {
+        bottom: 50px;
+        right: 10px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.1rem;
+    }
+}
+
+/* Landscape mode adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+    .back-to-top {
+        bottom: 80px;
+        right: 15px;
+    }
+    
+    .mobile-share-btn {
+        bottom: 30px;
+        right: 15px;
+    }
+}
+
+/* Dark mode per i nuovi elementi mobile */
+[data-theme="dark"] .mobile-share-btn {
+    background: #ffa726;
+    color: #000;
+}
+
+[data-theme="dark"] .mobile-share-btn:hover,
+[data-theme="dark"] .mobile-share-btn:active {
+    background: #ffb74d;
+}
+
+/* Animazioni specifiche per mobile */
+@media (max-width: 768px) {
+    .back-to-top.visible {
+        animation: bounceInMobile 0.6s ease;
+    }
+    
+    .mobile-share-btn {
+        animation: fadeInMobile 0.8s ease;
+    }
+}
+
+@keyframes bounceInMobile {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInMobile {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fix per popup di condivisione su mobile */
+@media (max-width: 768px) {
+    .share-popup .share-content {
+        width: 95%;
+        max-height: 85vh;
+        margin-bottom: calc(env(safe-area-inset-bottom) + 1rem);
+    }
+    
+    .share-popup {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Assicura che i pulsanti non siano mai coperti da notch o barre */
+@supports (padding: max(0px)) {
+    @media (max-width: 768px) {
+        .back-to-top {
+            bottom: max(120px, calc(env(safe-area-inset-bottom) + 100px));
+            right: max(15px, calc(env(safe-area-inset-right) + 15px));
+        }
+        
+        .mobile-share-btn {
+            bottom: max(60px, calc(env(safe-area-inset-bottom) + 40px));
+            right: max(15px, calc(env(safe-area-inset-right) + 15px));
+        }
+    }
+}
