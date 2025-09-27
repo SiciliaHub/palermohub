@@ -396,7 +396,7 @@ h4::first-letter, h5::first-letter, h6::first-letter,
         <div class="content-container">
     <div class="container">
         <div class="content">
-          
+		
 <!-- Chapter 1 -->
             <div class="chapter">
                 <h2 class="chapter-title brand-name">Che cos'è PalermoHub - guida utente</h2>
@@ -409,6 +409,61 @@ h4::first-letter, h5::first-letter, h6::first-letter,
             </div>
 
             <hr class="chapter-separator">
+
+	 <!-- Chapter 0 -->		
+	  <div class="chapter">
+                <h2 class="chapter-title">Più spazio alle mappe</h2>		
+			      <div class="section">
+                    <h3 class="section-title">Ottimizzazione della visualizzazione delle mappe</h3>
+                    <div class="content-text">
+                        Quando si lavora con le mappe digitali, lo spazio disponibile sullo schermo rappresenta sempre una limitazione critica. Per massimizzare la visibilità e migliorare l'esperienza utente, abbiamo implementato una soluzione innovativa: header e footer sono stati resi modali, permettendo agli utenti di mostrarli o nasconderli a seconda delle necessità. <br>
+Questa funzionalità consente alle mappe di sfruttare l'intera superficie del monitor, offrendo una visualizzazione più ampia e dettagliata dei contenuti cartografici.
+                    </div>
+                       <h3>Header modale: il centro di controllo</h3>
+        
+        <div class="section">
+             <p>Nell'angolo superiore destro è presente un piccolo tab arancione che costituisce il punto di accesso principale al sistema di navigazione. Per impostazione predefinita, questo pannello rimane sempre aperto e accessibile:</p>
+            <ul class="content-list numbered-list">
+                <li><strong>Design dinamico:</strong> Cambia colore da arancione (chiuso) a verde (aperto) con animazioni fluide</li>
+                <li><strong>Effetti visivi:</strong> Pulse luminoso per attirare l'attenzione, effetto "shine" al passaggio del mouse</li>
+                <li><strong>Feedback immediato:</strong> Tooltip esplicativo e cambio icona (☰ → ✕)</li>
+                <li><strong>Stato persistente:</strong> L'header si apre automaticamente all'avvio per garantire un accesso immediato alla navigazione</li>
+            </ul>
+       
+			<h3>Footer modale: hub di informazioni e strumenti</h3>
+			  <p>Tab di controllo del footer, situata nell'angolo inferiore destro, consente l'accesso a funzionalità avanzate ed è chiusa per impostazione predefinita:</p>
+            
+            <ul class="content-list numbered-list">
+                <li><strong>Icona info: (ℹ️)</strong> Immediatamente riconoscibile come centro informazioni</li>
+                <li><strong>Tooltip "Info & Strumenti":</strong> Indica chiaramente il contenuto disponibile</li>
+                <li><strong>Apertura dal basso:</strong> Si sovrappone al contenuto senza interferire con la navigazione</li>
+                <li><strong>Design coordinato:</strong> Stile coerente con l'header ma differenziato nel comportamento</li>
+            </ul>
+                </ul>
+	  <hr class="content-separator">	   	
+	<h2>Sistema di condivisione avanzato</h2>
+		<p>Il sistema di condivisione di PalermoHub è progettato per mantenere il contesto della ricerca:</p>
+		        <ul class="content-list numbered-list">
+                <li><strong>URL parametrizzati:</strong> Genera automaticamente link che preservano tutti i filtri applicati</li>
+                <li><strong>Anteprima filtri:</strong> Mostra una preview dei filtri attivi prima della condivisione</li>
+                <li><strong>Multi-piattaforma:</strong> Supporto per Telegram, WhatsApp, Facebook, X (Twitter), Bluesky, email</li>
+                <li><strong>Copia intelligente:</strong> Fallback per browser che non supportano l'API Clipboard moderna</li>
+            </ul>
+	  <hr class="content-separator">	
+		<div class="note">
+                        <div class="note-content">
+                             <strong>Nota tecnica:</strong> Il sistema utilizza JavaScript moderno con fallback per browser meno recenti. Alcune funzionalità avanzate potrebbero non essere disponibili su browser obsoleti, ma la navigazione base rimane sempre garantita.
+                        </div>
+                    </div>
+					
+		 <h3>Filosofia di design</h3>
+                        <div class="important">
+                             <p>Header e footer modale sono progettati secondo il principio del <strong>"progressive disclosure"</strong>: le funzionalità sono sempre disponibili ma non invadenti, permettendo all'utente di accedere a strumenti avanzati solo quando necessario, mantenendo pulita l'interfaccia principale di esplorazione delle mappe.</p>
+                        </div>
+                    		
+		
+ </div>
+            <hr class="content-separator">	
 
             <!-- Chapter 2 -->
             <div class="chapter">
@@ -604,61 +659,7 @@ h4::first-letter, h5::first-letter, h6::first-letter,
             </div>
 			
 	 <hr class="content-separator">		
-	 <!-- Chapter 5.1 -->		
-	  <div class="chapter">
-                <h2 class="chapter-title">Più spazio alle mappe</h2>		
-			      <div class="section">
-                    <h3 class="section-title">Ottimizzazione della visualizzazione delle mappe</h3>
-                    <div class="content-text">
-                        Quando si lavora con le mappe digitali, lo spazio disponibile sullo schermo rappresenta sempre una limitazione critica. Per massimizzare la visibilità e migliorare l'esperienza utente delle mappe su PalermoHub, abbiamo implementato una soluzione innovativa: header e footer sono stati resi modali, permettendo agli utenti di mostrarli o nasconderli a seconda delle necessità. <br>
-Questa funzionalità consente alle mappe di sfruttare l'intera superficie del monitor, offrendo una visualizzazione più ampia e dettagliata dei contenuti cartografici.
-                    </div>
-                       <h2>Header modale: il centro di controllo</h2>
-        
-        <div class="section">
-            <h3>La linguetta di controllo intelligente</h3>
-            <p>Nell'angolo superiore destro è presente un piccolo tab arancione che costituisce il punto di accesso principale al sistema di navigazione. Per impostazione predefinita, questo pannello rimane sempre aperto e accessibile:</p>
-            <ul class="content-list numbered-list">
-                <li><strong>Design dinamico:</strong> Cambia colore da arancione (chiuso) a verde (aperto) con animazioni fluide</li>
-                <li><strong>Effetti visivi:</strong> Pulse luminoso per attirare l'attenzione, effetto "shine" al passaggio del mouse</li>
-                <li><strong>Feedback immediato:</strong> Tooltip esplicativo e cambio icona (☰ → ✕)</li>
-                <li><strong>Stato persistente:</strong> L'header si apre automaticamente all'avvio per garantire un accesso immediato alla navigazione</li>
-            </ul>
-       
-			<h2>Footer modale: hub di informazioni e strumenti</h2>
-			 <h3>Accesso intelligente dal basso</h3>
-            <p>Tab di controllo del footer, situata nell'angolo inferiore destro, consente l'accesso a funzionalità avanzate ed è chiusa per impostazione predefinita:</p>
-            
-            <ul class="content-list numbered-list">
-                <li><strong>Icona info: (ℹ️)</strong> Immediatamente riconoscibile come centro informazioni</li>
-                <li><strong>Tooltip "Info & Strumenti":</strong> Indica chiaramente il contenuto disponibile</li>
-                <li><strong>Apertura dal basso:</strong> Si sovrappone al contenuto senza interferire con la navigazione</li>
-                <li><strong>Design coordinato:</strong> Stile coerente con l'header ma differenziato nel comportamento</li>
-            </ul>
-       	
-	<h2>Sistema di condivisione avanzato</h2>
-		<p>Il sistema di condivisione di PalermoHub è progettato per mantenere il contesto della ricerca:</p>
-		        <ul class="content-list numbered-list">
-                <li><strong>URL parametrizzati:</strong> Genera automaticamente link che preservano tutti i filtri applicati</li>
-                <li><strong>Anteprima filtri:</strong> Mostra una preview dei filtri attivi prima della condivisione</li>
-                <li><strong>Multi-piattaforma:</strong> Supporto per Telegram, WhatsApp, Facebook, X (Twitter), Bluesky, email</li>
-                <li><strong>Copia intelligente:</strong> Fallback per browser che non supportano l'API Clipboard moderna</li>
-            </ul>
-	  <hr class="content-separator">	
-		<div class="note">
-                        <div class="note-content">
-                             <strong>Nota tecnica:</strong> Il sistema utilizza JavaScript moderno con fallback per browser meno recenti. Alcune funzionalità avanzate potrebbero non essere disponibili su browser obsoleti, ma la navigazione base rimane sempre garantita.
-                        </div>
-                    </div>
-					
-		 <h3>Filosofia di design</h3>
-                        <div class="important">
-                             <p>Header e footer modale sono progettati secondo il principio del <strong>"progressive disclosure"</strong>: le funzionalità sono sempre disponibili ma non invadenti, permettendo all'utente di accedere a strumenti avanzati solo quando necessario, mantenendo pulita l'interfaccia principale di esplorazione delle mappe.</p>
-                        </div>
-                    		
-		
- </div>
-            <hr class="content-separator">
+
 
             <!-- Chapter 6 -->
             <div class="chapter">
