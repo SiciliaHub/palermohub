@@ -1,0 +1,843 @@
+
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>PalermoHub - Struttura della piattaforma</title>
+    <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <META HTTP-EQUIV="refresh" CONTENT="3600">  
+    <meta name="description" content="PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l'unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
+    <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+    <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+    <meta http-equiv="content-language" content="IT">
+    <meta name="robots" content="index,follow">
+    <meta name="creation_Date" content="20/08/2025>
+	
+    <link rel="shortcut icon" href="favicon.ico"/> 
+	<link rel="icon" href="favicon.png" type="image/png"/> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" />
+     <!--	  -->
+	 <link rel="stylesheet" href="lib/css/page.css"> 
+	 <link rel="stylesheet" href="lib/css/template.css">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>
+
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="PalermoHub">
+    <meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/phhome.jpg">
+	<!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/">
+    <meta name="twitter:title" content="PalermoHub">
+    <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:image" content="https://siciliahub.github.io/palermohub/legend/clip_index/phhome.jpg">
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+/* Title Capitalization Rules - Only first letter uppercase */
+h1, h2, h3, h4, h5, h6,
+.content-title, .chapter-title, .section-title, .subsection-title {
+    text-transform: lowercase;
+}
+
+h1::first-letter, h2::first-letter, h3::first-letter, 
+h4::first-letter, h5::first-letter, h6::first-letter,
+.content-title::first-letter, .chapter-title::first-letter, 
+.section-title::first-letter, .subsection-title::first-letter {
+    text-transform: uppercase;
+}
+
+/* Exception for PalermoHub brand name */
+.brand-name {
+    text-transform: none !important;
+}
+        @keyframes movePattern {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content {
+            padding: 0;
+        }
+
+        .section {
+            margin-bottom: 3rem;
+            animation: slideInLeft 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:nth-child(even) {
+            animation: slideInRight 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section h2 {
+                font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-left: 1rem;
+        }
+
+        .section h2::before {
+            content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--primary-color);
+    border-radius: 2px;
+        }
+		
+
+        .section h3 {
+            font-size: 1.5rem;
+            color: #ff9900;
+            margin: 1.5rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .section h4 {
+            font-size: 1.2rem;
+            color: #5a6c7d;
+            margin: 1rem 0 0.5rem 0;
+            font-weight: 500;
+        }
+
+        .section p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .section li {
+            margin: 0.75rem 0;
+            padding: 1rem;
+            background: rgba(102, 126, 234, 0.05);
+            border-left: 4px solid #ff9900;
+            border-radius: 0 10px 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .section li:hover {
+            background: rgba(102, 126, 234, 0.1);
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .section li strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .highlight-box::before {
+            content: '🗺️';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .highlight-box p {
+            font-size: 1.2rem;
+            font-weight: 500;
+            position: relative;
+            z-index: 1;
+            margin: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            border-color: #667eea;
+        }
+
+        .stat-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 0.25rem;
+        }
+
+ 
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .content {
+                padding: 2rem 1rem;
+            }
+            
+            .section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        .conclusion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .conclusion-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .conclusion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(79, 172, 254, 0.3);
+        }
+
+        .conclusion-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .conclusion-card h4 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .conclusion-card p {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+        }
+
+        .impact-highlight {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .impact-highlight::before {
+            content: '🏙️';
+            position: absolute;
+            font-size: 6rem;
+            opacity: 0.1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .impact-highlight h3 {
+            color: white;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .animation-delay-1 { animation-delay: 0.2s; }
+        .animation-delay-2 { animation-delay: 0.4s; }
+        .animation-delay-3 { animation-delay: 0.6s; }
+        .animation-delay-4 { animation-delay: 0.8s; }
+        .animation-delay-5 { animation-delay: 1.0s; }
+    </style>
+</head>
+<body>
+    <!-- Breadcrumbs Navigation -->
+    <nav class="breadcrumbs-nav">
+        <div class="breadcrumbs-container">
+            <div class="breadcrumb-item home">
+                <span class="breadcrumb-icon"><i class="fas fa-home"></i></span>
+                <span class="breadcrumb-text">Home</span>
+            </div>
+            <span class="breadcrumb-separator"><i class="fas fa-chevron-right"></i></span>
+            <div class="breadcrumb-item">
+                <span class="breadcrumb-text">Documenti</span>
+            </div>
+        </div>
+    </nav>
+
+
+</head>
+<body>
+    <main class="main-content">
+        <div class="content-container">
+    <div class="container">
+        <div class="content">
+		
+<!-- Chapter 1 -->
+            <div class="chapter">
+                <h2 class="chapter-title brand-name">Che cos'è PalermoHub - guida utente</h2>
+                <div class="content-text">
+                    PalermoHub è come una grande biblioteca digitale piena di mappe interattive di Palermo e della Sicilia. Invece di libri sugli scaffali, qui trovi centinaia di mappe che mostrano tutto quello che può interessarti della città: dal traffico ai monumenti, dalla geologia alle piste ciclabili.
+                </div>
+                <div class="content-text">
+                    Il bello è che tutte queste mappe sono create con <span class="highlight">"dati aperti"</span> - informazioni che il Comune, la Regione e altri enti pubblici mettono a disposizione di tutti gratuitamente. È come se la città aprisse i suoi archivi e dicesse: "Ecco tutto quello che sappiamo, usate pure questi dati per creare qualcosa di utile".
+                </div>
+            </div>
+
+            <hr class="chapter-separator">
+
+	 <!-- Chapter 0 -->		
+	  <div class="chapter">
+                <h2 class="chapter-title">Più spazio alle mappe</h2>		
+			      <div class="section">
+                    <h3 class="section-title">Ottimizzazione della visualizzazione delle mappe</h3>
+                    <div class="content-text">
+                        Quando si lavora con le mappe digitali, lo spazio disponibile sullo schermo rappresenta sempre una limitazione critica. Per massimizzare la visibilità e migliorare l'esperienza utente, abbiamo implementato una soluzione innovativa: header e footer sono stati resi modali, permettendo agli utenti di mostrarli o nasconderli a seconda delle necessità. <br>
+Questa funzionalità consente alle mappe di sfruttare l'intera superficie del monitor, offrendo una visualizzazione più ampia e dettagliata dei contenuti cartografici.
+                    </div>
+                       <h3>Header modale: il centro di controllo</h3>
+        
+        <div class="section">
+             <p>Nell'angolo superiore destro è presente un piccolo tab arancione che costituisce il punto di accesso principale al sistema di navigazione. Per impostazione predefinita, questo pannello rimane sempre aperto e accessibile:</p>
+            <ul class="content-list numbered-list">
+                <li><strong>Design dinamico:</strong> Cambia colore da arancione (chiuso) a verde (aperto) con animazioni fluide</li>
+                <li><strong>Effetti visivi:</strong> Pulse luminoso per attirare l'attenzione, effetto "shine" al passaggio del mouse</li>
+                <li><strong>Feedback immediato:</strong> Tooltip esplicativo e cambio icona (☰ → ✕)</li>
+                <li><strong>Stato persistente:</strong> L'header si apre automaticamente all'avvio per garantire un accesso immediato alla navigazione</li>
+            </ul>
+       
+			<h3>Footer modale: hub di informazioni e strumenti</h3>
+			  <p>Tab di controllo del footer, situata nell'angolo inferiore destro, consente l'accesso a funzionalità avanzate ed è chiusa per impostazione predefinita:</p>
+            
+            <ul class="content-list numbered-list">
+                <li><strong>Icona info: (ℹ️)</strong> Immediatamente riconoscibile come centro informazioni</li>
+                <li><strong>Tooltip "Info & Strumenti":</strong> Indica chiaramente il contenuto disponibile</li>
+                <li><strong>Apertura dal basso:</strong> Si sovrappone al contenuto senza interferire con la navigazione</li>
+                <li><strong>Design coordinato:</strong> Stile coerente con l'header ma differenziato nel comportamento</li>
+            </ul>
+                </ul>
+	  <hr class="content-separator">	   	
+	<h2>Sistema di condivisione avanzato</h2>
+		<p>Il sistema di condivisione di PalermoHub è progettato per mantenere il contesto della ricerca:</p>
+		        <ul class="content-list numbered-list">
+                <li><strong>URL parametrizzati:</strong> Genera automaticamente link che preservano tutti i filtri applicati</li>
+                <li><strong>Anteprima filtri:</strong> Mostra una preview dei filtri attivi prima della condivisione</li>
+                <li><strong>Multi-piattaforma:</strong> Supporto per Telegram, WhatsApp, Facebook, X (Twitter), Bluesky, email</li>
+                <li><strong>Copia intelligente:</strong> Fallback per browser che non supportano l'API Clipboard moderna</li>
+            </ul>
+	  <hr class="content-separator">	
+		<div class="note">
+                        <div class="note-content">
+                             <strong>Nota tecnica:</strong> Il sistema utilizza JavaScript moderno con fallback per browser meno recenti. Alcune funzionalità avanzate potrebbero non essere disponibili su browser obsoleti, ma la navigazione base rimane sempre garantita.
+                        </div>
+                    </div>
+					
+		 <h3>Filosofia di design</h3>
+                        <div class="important">
+                             <p>Header e footer modale sono progettati secondo il principio del <strong>"progressive disclosure"</strong>: le funzionalità sono sempre disponibili ma non invadenti, permettendo all'utente di accedere a strumenti avanzati solo quando necessario, mantenendo pulita l'interfaccia principale di esplorazione delle mappe.</p>
+                        </div>
+                    		
+		
+ </div>
+            <hr class="content-separator">	
+
+            <!-- Chapter 2 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Il Primo Incontro: Cosa Succede Quando Arrivi sul Sito</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Il Caricamento Intelligente</h3>
+                    <div class="content-text">
+                        Quando apri PalermoHub per la prima volta, succede qualcosa di interessante dietro le quinte. Il sito scarica un file che contiene tutte le informazioni sulle mappe disponibili - un po' come scaricare l'indice di una biblioteca.
+                    </div>
+                    
+                    <div class="note">
+                        <div class="note-content">
+                            <strong>Ma ecco la parte intelligente:</strong> una volta scaricato, questo "indice" viene conservato nella memoria del tuo browser per 30 minuti. È come se il bibliotecario ti desse una copia dell'elenco dei libri da tenere con te, così la prossima volta non deve rifarlo da capo. <strong>Risultato?</strong> Il sito si carica molto più velocemente nei tuoi prossimi accessi.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Lo Slider delle Mappe in Evidenza</h3>
+                    <div class="content-text">
+                        In cima alla pagina trovi uno slider che mostra a rotazione 5 mappe interessanti, di solito le più recenti. Funziona come una vetrina di un negozio: ti fa vedere subito cosa c'è di nuovo e interessante. Puoi cliccare sulle frecce per navigare manualmente, o lasciare che scorra da solo ogni 5 secondi.
+                    </div>
+                </div>
+            </div>
+<img src="legend/funzionalita/funz_01.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+ <ol class="content-list numbered-list"> <p>  
+                  <li>Statistiche; </li>
+						<li>Selettori filtri, per Categoria, Territorio, Fonte dati, anno, tag e autore/i delle mappe; </li>
+						<li>Ricerca intelligente (Smart search)trova le mappe specifiche attraverso parole chiave </li>
+						<li>Interfaccia che mostra il numero di risultati trovati con indicazioni chiave; </li>
+						<li>Strumenti per la visualizzazione e la navigazione nell'elenco delle mappe:</li>
+						<li>Indicazione dell'ultimo aggiornamento</li></p>
+                         </ol>
+            <hr class="chapter-separator">
+
+            <!-- Chapter 3 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Come Cercare Quello Che Ti Interessa</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">La Ricerca Intelligente</h3>
+                    <div class="content-text">
+                        La barra di ricerca di PalermoHub non è una ricerca normale. È più come avere un assistente che capisce quello che vuoi anche se non lo dici perfettamente.
+                    </div>
+                    
+                    <div class="subsection">
+                        <h4 class="subsection-title">Come funziona in pratica:</h4>
+                        <ul class="content-list numbered-list">
+                            <li><strong>Tollera gli errori</strong>Se scrivi "traffico" invece di "traffico", ti trova comunque quello che cerchi</li>
+                            <li><strong>Capisce i sinonimi</strong> Se cerchi "biciclette" ti trova anche le mappe delle "bici" e delle "piste ciclabili"</li>
+                            <li><strong>Suggerisce mentre scrivi</strong>Dopo che hai digitato almeno 2 lettere, inizia a mostrarti i risultati più probabili</li>
+                        </ul>
+                    </div>
+
+                    <div class="subsection">
+                        <h4 class="subsection-title">Il sistema di punteggio:</h4>
+                        <div class="content-text">Ogni mappa riceve un "voto" basato su quanto corrisponde alla tua ricerca:</div>
+                        <ul class="content-list numbered-list">
+                            <li>Se la parola è nel titolo → voto alto</li>
+                            <li>Se è nella descrizione → voto medio</li>
+                            <li>Se è nei tag o nelle informazioni aggiuntive → voto più basso</li>
+                        </ul>
+                        <div class="content-text">I risultati vengono ordinati dal voto più alto al più basso, così trovi subito quello che cerchi.</div>
+                    </div>
+                </div>
+<img src="legend/funzionalita/funz_02.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+                <div class="section">
+                    <h3 class="section-title">I Filtri: Come un Sistema di Classificazione</h3>
+                    <div class="content-text">
+                        Oltre alla ricerca, puoi usare i filtri per restringere i risultati. È come in una biblioteca dove puoi cercare per argomento, autore, anno di pubblicazione:
+                    </div>
+                    <ul class="content-list numbered-list">
+                        <li><strong>Categoria</strong> Trasporti, Ambiente, Cultura, ecc.</li>
+                        <li><strong>Territorio</strong> Palermo Centro, Periferie, Provincia, Sicilia</li>
+                        <li><strong>Anno</strong> Quando è stata creata la mappa</li>
+                        <li><strong>Autore</strong> Chi l'ha realizzata</li>
+                        <li><strong>Fonte dati</strong> Da dove vengono i dati (Comune, Regione, ecc.)</li>
+                        <li><strong>Tag</strong> Parole chiave associate</li>
+                    </ul>
+                    
+                    <div class="important">
+                        <strong>La magia dei filtri interconnessi:</strong> Quando selezioni un filtro, gli altri si aggiornano automaticamente. Se scegli "Trasporti" come categoria, il filtro "Territorio" ti mostrerà solo le zone per cui esistono mappe sui trasporti. È come se il sistema eliminasse automaticamente le combinazioni che non portano a nessun risultato.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Le Statistiche in Tempo Reale</h3>
+                    <div class="content-text">
+                        In alto vedi sempre quante mappe ci sono in totale, quante categorie, quanti autori e - soprattutto - quanti risultati corrispondono ai tuoi filtri attuali. È un modo per capire subito se stai restringendo troppo la ricerca o se hai ancora molte opzioni tra cui scegliere.
+                    </div>
+                </div>
+            </div>
+
+            <hr class="chapter-separator">
+
+            <!-- Chapter 4 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Come Navigare tra le Mappe</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Due Modi di Vedere i Risultati</h3>
+                    <div class="content-text">PalermoHub ti offre due modi per esplorare le mappe:</div>
+                    
+                    <div class="content-text">
+                        <strong>Vista a Griglia</strong> (predefinita): Le mappe sono mostrate come delle "carte" con immagine, titolo e informazioni principali. È più visuale e ti permette di vedere subito di cosa si tratta.
+                    </div>
+                    <img src="legend/funzionalita/funz_03.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+							           <ol class="content-list numbered-list"> <p>  
+                  <li>Visualizzazione scroll infinito; </li>
+						<li>Visualizzazione a pagine; </li>
+						<li>Reset filtri usati</li>
+						<li>Ordina per data; </li>
+						<li>Layout: Griglia/Lista;</li>
+						<li>Navigazione: numerazione pagine e pulsanti:</li></p>
+						<li>Selettore per il numero di mappe da caricare per pagina.</li></p>
+                         </ol> 
+                    <div class="content-text">
+                        <strong>Vista Lista</strong>: Informazioni più dettagliate disposte in righe, utile quando vuoi confrontare rapidamente molte mappe.
+                    </div>
+                </div>
+<img src="legend/funzionalita/funz_04.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+                <div class="section">
+                    <h3 class="section-title">Paginazione vs Scorrimento Infinito</h3>
+                    <div class="content-text">Puoi scegliere come navigare tra i risultati:</div>
+                    
+                    <div class="content-text">
+                        <strong>Paginazione</strong> (predefinita): I risultati sono divisi in pagine da 12, 24, 36 o 48 mappe ciascuna. È come sfogliare un catalogo: vedi chiaramente dove sei (pagina 3 di 15) e puoi saltare direttamente a una pagina specifica.
+                    </div>
+                    
+                    <div class="content-text">
+                        <strong>Scorrimento infinito</strong>: Tutte le mappe si caricano in una lunga lista che puoi scorrere all'infinito. Comodo per esplorare senza pensare alle pagine.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Come Aprire le Mappe</h3>
+                    <div class="content-text">Ogni mappa può essere aperta in diversi modi:</div>
+                    <ul class="content-list numbered-list">
+                        <li><strong>Click normale</strong> Si apre nella stessa finestra</li>
+                        <li><strong>Ctrl+Click</strong> (o Cmd+Click su Mac) Si apre in una nuova finestra</li>
+                        <li><strong>Click con rotella del mouse</strong> Si apre in una nuova scheda</li>
+                    </ul>
+                    <div class="content-text">È lo stesso comportamento che conosci dai link normali del web.</div>
+                </div>
+            </div>
+
+            <hr class="chapter-separator">
+
+            <!-- Chapter 5 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Le Funzionalità Intelligenti</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">I Breadcrumbs (Le Briciole di Pane)</h3>
+                    <div class="content-text">
+                        In cima alla pagina, quando hai dei filtri attivi, appaiono delle "etichette" che mostrano il percorso che hai seguito. È come le briciole di pane di Hansel e Gretel: ti permettono di vedere dove sei e di tornare indietro facilmente.
+                    </div>
+					
+					                   
+                    <div class="content-text">
+                        Per esempio, se hai filtrato per "Categoria: Trasporti" e "Anno: 2024", vedrai due etichette cliccabili. Puoi cliccare sulla X di una di esse per rimuovere solo quel filtro, mantenendo gli altri.
+						<img src="legend/funzionalita/funz_05.jpg" class="responsive-image" Title="Nuove funzionalità" alt=""/>
+					<div class="content-text">	
+					<h3 class="section-title">	Breadcrumbs e funzione cerca nelle pagine delle mappe</h3>
+						  <ul class="content-list numbered-list">
+						<li>Breadcrumbs, mostra il percorso gerarchico della pagina in cui si trova;</li>
+						<li>Sistema di navigazione e classificazione delle mappe con Breadcrumbs</li>
+						<li>Barra di ricerca intelligente sincronizzata con la home page. Permette di cercare per titolo, descrizione, autore e altri criteri. La ricerca restituisce risultati direttamente nella home page, mostrando le mappe che corrispondono ai criteri di ricerca selezionati.</li>
+						 </ul>
+					Ogni mappa nella piattaforma è classificata secondo criteri specifici (categoria, difficoltà, autore, tag, ecc.) che ne determinano la raggiungibilità attraverso diversi percorsi di navigazione.<br>
+
+					<b>Breadcrumbs intelligente:</b> Nella barra di navigazione (breadcrumbs) vengono visualizzati tutti i filtri applicati che hanno portato alla mappa corrente. Ogni elemento del percorso rappresenta un criterio di classificazione specifico.<br>
+
+					<b>Navigazione interattiva:</b> Cliccando su qualsiasi filtro nella sequenza dei breadcrumbs, l'utente accede immediatamente all'elenco completo delle mappe che corrispondono a quel particolare criterio di filtraggio. Questo permette di esplorare facilmente mappe correlate o alternative senza dover tornare indietro nel percorso di navigazione.	</div>
+						
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">La Sincronizzazione tra Componenti</h3>
+                    <div class="content-text">
+                        Se usi la ricerca nella barra principale e poi scorri in fondo alla pagina, troverai che anche la barra di ricerca nel footer si è aggiornata automaticamente con lo stesso termine. È un dettaglio piccolo, ma rende l'esperienza più fluida.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">L'Ordinamento Intelligente</h3>
+                    <div class="content-text">
+                        Le mappe sono ordinate per data, con le più recenti in cima. Ma puoi invertire l'ordine con un click sul pulsante "Data". È utile per vedere l'evoluzione storica dei dati o per trovare informazioni di un periodo specifico.
+                    </div>
+                </div>
+            </div>
+			
+	 <hr class="content-separator">		
+
+
+            <!-- Chapter 6 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Perché è Importante</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Trasparenza dei Dati Pubblici</h3>
+                    <div class="content-text">
+                        PalermoHub rende visibili e accessibili dati che spesso sono sepolti in documenti tecnici o siti istituzionali difficili da navigare. È un po' come tradurre il "burocratese" in linguaggio normale e presentarlo in modo visivamente comprensibile.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Citizen Science</h3>
+                    <div class="content-text">
+                        Molte delle mappe sono create da cittadini volontari che prendono i dati grezzi e li trasformano in qualcosa di utile per la comunità. È un esempio di come la tecnologia possa democratizzare l'accesso alle informazioni.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Riutilizzo Creativo</h3>
+                    <div class="content-text">
+                        Ogni mappa presente su PalermoHub può ispirare altri progetti. Un giornalista potrebbe usare una mappa del traffico per un articolo, uno studente per una tesi, un'associazione per una campagna di sensibilizzazione.
+                    </div>
+                </div>
+            </div>
+
+            <hr class="content-separator">
+			
+       <!-- Chapter 7 -->
+            <div class="chapter">
+                <h2 class="chapter-title">Come il sito si adatta a te</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Modalità scura/chiara</h3>
+                    <div class="content-text">
+                        PalermoHub rileva automaticamente se preferisci la modalità scura o chiara dal tuo sistema operativo. Ma puoi anche cambiarla manualmente con l'interruttore nel menu. La preferenza viene ricordata per le prossime visite.onali difficili da navigare. È un po' come tradurre il "burocratese" in linguaggio normale e presentarlo in modo visivamente comprensibile.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">Responsive design: dallo schermo grande al telefono</h3>
+                    <div class="content-text">
+                        Il sito si adatta automaticamente al dispositivo che stai usando:
+						<p><strong>Su computer</strong>: Layout a più colonne, tutti i controlli visibili, menu orizzontale</p>
+<p><strong>Su tablet</strong>: Layout ottimizzato per il touch, dimensioni più grandi per i pulsanti</p>
+<p><strong>Su smartphone</strong>: - Menu a hamburger (le tre lineette) - Ricerca e filtri ripiegabili - Layout a colonna singola - Controlli ottimizzati per il dito</p>		
+</div>	
+ <h3 class="section-title">Accessibilità</h3>
+                    <div class="content-text">
+                        PalermoHub è progettato per essere usabile da tutti:
+						<p><strong>Navigazione da tastiera</strong>: Puoi usare Tab, Enter, spazio e le frecce per navigare</p>
+<p><strong>Screen reader</strong>: Le informazioni sono organizzate per essere lette correttamente dai software per non vedenti</p>
+<p><strong>Contrasti</strong>:I colori rispettano gli standard di accessibilità per chi ha difficoltà visive</p>		
+</div>	
+			
+<hr class="content-separator">			
+			
+			
+       <!-- Chapter 8 -->
+            <div class="chapter">
+                <h2 class="chapter-title">La tecnica... Spiegata in modo semplice</h2>
+                
+                <div class="section">
+                    <h3 class="section-title">Come vengono gestiti i dati¶</h3>
+                    <div class="content-text">
+                        Tutte le informazioni sulle mappe sono contenute in un file CSV (come un foglio di calcolo) che viene aggiornato regolarmente. Quando apri il sito:
+						 <ul class="content-list numbered-list">
+						<li>Il browser controlla se ha già una copia recente dei dati</li>
+						<li>Se sì, li usa immediatamente (velocità massima)</li>
+						<li>Se no, scarica la versione aggiornata</li>
+						<li>I dati vengono "processati" per creare gli indici di ricerca</li>
+						 </ul>
+						 
+						   <h3 class="section-title">Il sistema di ricerca</h3>
+						 <div class="content-text">
+						 Quando digiti nella barra di ricerca, succede questo:
+						 	 <ul class="content-list numbered-list">
+							 <li>Il sistema aspetta 300 millisecondi dopo che hai smesso di scrivere (così non fa troppe ricerche mentre stai ancora digitando)</li>
+							<li>Divide la tua query in parole e le "pulisce" (rimuove articoli come "il", "la", ecc.)</li>
+							<li>Cerca queste parole in tutti i campi di tutte le mappe</li>
+							<li>Calcola un punteggio per ogni risultato</li>
+							<li>Ordina i risultati per punteggio e te li mostra</li>
+							 </ul>
+						 </div>
+						 
+						 
+					<h3 class="section-title">La gestione degli errori</h3>
+						 <div class="content-text">
+						 Il sito è progettato per funzionare anche quando qualcosa va storto:
+						 	 <ul class="content-list numbered-list">
+							<li><b>Connessione lenta:</b> Mostra indicatori di caricamento</li>
+							<li><b>Immagini mancanti:</b> Genera automaticamente un'immagine placeholder</li>
+							<li><b>Dati corrotti:</b> Salta gli elementi problematici e continua</li>
+							<li><b>Cache danneggiata:</b> Si ripulisce automaticamente e ricarica i dati
+							 </ul>
+</div>
+						 
+								<h3 class="section-title">Privacy e Cookie</h3>
+						 <div class="content-text">
+						 Il sito rispetta rigorosamente la privacy:
+						 	 <ul class="content-list numbered-list">
+							<li><b>Cookie necessari:</b> Solo quelli indispensabili per il funzionamento (preferenze tema, cache)</li>
+							<li><b>Cookie analitici:</b> Solo se dai il consenso, per capire come migliorare il sito</li>
+							<li><b>Controllo granulare:</b> Puoi scegliere esattamente quali cookie accettare</li>
+							<li><b>Modifiche:</b> Puoi cambiare idea in qualsiasi momento dal link nel footer</li>
+							 </ul>
+</div>			 
+			 
+                    </div>
+                </div>
+			
+<hr class="content-separator">			
+            <!-- Final Chapter -->
+            <div class="chapter">
+                <h2 class="chapter-title">L'Esperienza Utente in Sintesi</h2>
+                <div class="content-text">
+                    PalermoHub è progettato attorno a un principio semplice: <span class="highlight">rendere facile trovare quello che cerchi, anche se non sai esattamente cosa stai cercando</span>.
+                </div>
+                <div class="content-text">È come avere un bibliotecario digitale molto paziente che:</div>
+                <ul class="content-list numbered-list">
+                    <li>Capisce quello che dici anche se non lo dici perfettamente</li>
+                    <li>Ricorda le tue preferenze</li>
+                    <li>Ti suggerisce cose correlate che potrebbero interessarti</li>
+                    <li>Si adatta al dispositivo che stai usando</li>
+                    <li>Rispetta la tua privacy</li>
+                </ul>
+                <div class="content-text">
+                    Il risultato è una piattaforma che invita all'esplorazione e rende i dati pubblici veramente pubblici - cioè accessibili a tutti, non solo agli addetti ai lavori. <br> <br>
+					<p>Spero di essere stato chiaro e di aver coperto tutti gli aspetti essenziali... Buona esplorazione &#128512;</p>
+					<p><i>Grazie OpenDataSicilia</i>  ❤️</p>
+                </div>
+
+                </div> 
+            </div>
+        </div>
+   </div> 
+    </main>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" title="Torna in cima">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Script per il pulsante "torna in cima"
+        const backToTopBtn = document.getElementById('back-to-top');
+        const mainContent = document.querySelector('.main-content');
+
+        mainContent.addEventListener('scroll', function() {
+            if (mainContent.scrollTop > 300) {
+                backToTopBtn.classList.add('visible');
+            } else {
+                backToTopBtn.classList.remove('visible');
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function() {
+            mainContent.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+	
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+<script src="lib/js/client/ph-header.js"></script>
+<script src="lib/js/client/ph-footer.js"></script>
+<script>
+// Aggiungi questo nelle pagine mappa
+document.addEventListener('DOMContentLoaded', function() {
+    // Leggi parametri URL e crea breadcrumbs
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('mapTitle')) {
+        // Il codice creerà automaticamente i breadcrumbs
+        initMapPageBreadcrumbs();
+    }
+});	
+</body>
+</html>

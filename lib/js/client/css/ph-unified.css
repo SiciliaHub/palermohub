@@ -68,6 +68,21 @@
   --bg-secondary: #374151;
   --border-color: #4b5563;
 }
+html, body {
+    overflow-x: hidden !important;
+}
+
+.container, 
+.main-content, 
+.maps-section {
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+.filters-section {
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
 
 /* =============================================
    RESET E BASE GLOBALI
