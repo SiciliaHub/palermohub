@@ -2510,3 +2510,142 @@ body::before {
         padding: 0.4rem 0.75rem;
     }
 }
+
+/* CORREZIONI PER VISIBILITÀ FOOTER BUTTON SU MOBILE */
+
+/* Fix principale: aumentare z-index e migliorare posizionamento */
+.footer-toggle-tab {
+    position: fixed;
+    bottom: 0px;
+    right: 20px;
+    z-index: 99999; /* Aumentato da 9999 a 99999 */
+    background: linear-gradient(135deg, var(--primary-color, #ff9900) 0%, #ff7700 100%);
+    color: white;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    user-select: none;
+    width: 48px;
+    height: 32px;
+    overflow: visible; /* Cambiato da hidden a visible */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Aggiunta ombra più marcata per mobile */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+/* Media query per tablet */
+@media (max-width: 768px) {
+    .footer-toggle-tab {
+        bottom: 10px; /* Sollevato da 0px */
+        right: 15px;
+        width: 50px; /* Aumentato da 44px */
+        height: 34px; /* Aumentato da 30px */
+        z-index: 99999;
+        /* Aggiunta animazione di pulsazione per attirare l'attenzione */
+        animation: mobileAttention 3s ease-in-out infinite;
+    }
+}
+
+/* Media query per smartphone */
+@media (max-width: 480px) {
+    .footer-toggle-tab {
+        bottom: 15px; /* Sollevato significativamente da 0px */
+        right: 15px;
+        width: 52px; /* Aumentato da 42px */
+        height: 36px; /* Aumentato da 28px */
+        z-index: 99999;
+        /* Bordo più marcato per evidenziarlo */
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        /* Ombra più pronunciata */
+        box-shadow: 0 4px 20px rgba(255, 153, 0, 0.6);
+    }
+}
+
+/* Animazione di attenzione per mobile */
+@keyframes mobileAttention {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 25px rgba(255, 153, 0, 0.7);
+    }
+}
+
+/* Fix per dispositivi con safe-area (iPhone X e successivi) */
+@supports(padding: max(0px)) {
+    .footer-toggle-tab {
+        bottom: max(15px, env(safe-area-inset-bottom));
+        right: max(15px, env(safe-area-inset-right));
+    }
+}
+
+/* Fix per viewport molto stretti */
+@media (max-width: 360px) {
+    .footer-toggle-tab {
+        bottom: 20px;
+        right: 10px;
+        width: 50px;
+        height: 35px;
+        /* Font icon leggermente più grande */
+    }
+    
+    .footer-toggle-tab .tab-icon {
+        font-size: 1.2rem; /* Aumentato da 1.1rem */
+    }
+}
+
+/* Fix per assicurarsi che sia sempre in primo piano */
+.footer-toggle-tab {
+    /* Forza il layer compositing per migliori performance */
+    will-change: transform;
+    transform: translateZ(0);
+    /* Previene interferenze con altri elementi */
+    isolation: isolate;
+}
+
+/* Fix per dispositivi touch - area di touch più grande */
+.footer-toggle-tab::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    /* Area invisibile ma toccabile più grande */
+    z-index: -1;
+}
+
+/* Fix specifico per conflitti con altri elementi floating */
+.footer-toggle-tab {
+    /* Assicura che sia sopra al back-to-top button */
+    z-index: 99999 !important;
+}
+
+/* Migliora la visibilità in dark mode */
+[data-theme="dark"] .footer-toggle-tab {
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 20px rgba(255, 167, 38, 0.5);
+}
+
+/* Fix per landscape mode su mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .footer-toggle-tab {
+        bottom: 5px;
+        right: 10px;
+        width: 45px;
+        height: 30px;
+    }
+}
+
+/* Debug helper - rimuovere in produzione */
+.footer-toggle-tab.debug {
+    background: red !important;
+    border: 3px solid yellow !important;
+    z-index: 999999 !important;
+}
