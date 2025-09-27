@@ -2,7 +2,6 @@
  * PalermoHub - Core Styles
  * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
  * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
- \1\	
  * 
  * Licensed under CC BY-SA 4.0
  * https://creativecommons.org/licenses/by-sa/4.0/
@@ -15,7 +14,6 @@
  * Source: https://github.com/SiciliaHub/palermohub
  * Build: PH-2025-gbv-ods
  */
-
 
 /* CSS COMPLETO CON LE NUOVE FUNZIONALITÀ */
 :root {
@@ -52,10 +50,12 @@
     /* Font */
     --font-family: "Titillium Web", sans-serif;
 }
+
 @font-face {
     font-family: 'Titillium Web';
     src: url(https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap);
 }
+
 #show-filters {
     display: none !important;
 }
@@ -75,6 +75,7 @@ body {
     padding: 0;
     color: var(--text-primary);
 }
+
 hr {
     width: 100%;
     height: 2px;
@@ -371,7 +372,10 @@ hr {
     font-size: 0.9rem;
 }
 
-/* Filters Section con statistiche integrate */
+/* ========================================
+   FILTERS SECTION MIGLIORATA CON RICERCA INTELLIGENTE
+   ======================================== */
+
 .filters-section {
     background: var(--card-background);
     backdrop-filter: blur(10px);
@@ -381,7 +385,83 @@ hr {
     box-shadow: var(--shadow-medium);
     border: 1px solid var(--border-color);
     position: relative;
-    z-index: 2000;
+	overflow-y: auto;
+    
+    /* Gestione altezza dinamica migliorata */
+    height: 450px;
+    min-height: 450px;
+    max-height: 450px;
+    
+    /* Transizioni fluide per il ridimensionamento */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    overflow: hidden;
+    z-index: 99999;
+}
+
+/* Stato espanso - attivato quando la ricerca è attiva */
+.filters-section.search-active,
+.filters-section.expanded {
+    height: auto;
+    min-height: 900px;
+    max-height: 1500px;
+    overflow: visible;
+    
+    /* Ombra più pronunciata quando espanso */
+    box-shadow: var(--shadow-heavy);
+    z-index: 100000;
+}
+
+/* Contenitore interno per gestire meglio lo scroll */
+.filters-section-inner {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+    margin-right: -8px;
+}
+
+.filters-section.search-active .filters-section-inner,
+.filters-section.expanded .filters-section-inner {
+    overflow-y: visible;
+}
+
+/* Indicatore che la sezione è espandibile */
+.filters-section::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 4px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.filters-section.search-active::before {
+    opacity: 1;
+}
+
+/* Animazioni per l'espansione */
+@keyframes expandFilters {
+    from { max-height: 450px; }
+    to { max-height: 1000px; }
+}
+
+@keyframes collapseFilters {
+    from { max-height: 1000px; }
+    to { max-height: 450px; }
+}
+
+.filters-section.expanding {
+    animation: expandFilters 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.filters-section.collapsing {
+    animation: collapseFilters 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 .filters-title {
@@ -407,9 +487,7 @@ hr {
 }
 
 .compact-stat {
-   /* background: var(--primary-color);
-    color: var(--white);*/
-	color: var(--text-secondary);
+    color: var(--text-secondary);
     padding: 0.5rem 1rem;
     border-radius: 4px;
     font-size: 0.8rem;
@@ -418,18 +496,14 @@ hr {
     box-shadow: var(--shadow-light);
     transition: transform 0.3s ease;
     white-space: nowrap;
-	background: white;     border: 1px solid #ddd;
+    background: white;
+    border: 1px solid #ddd;
 }
-/*
-.compact-stat:nth-child(2) { background: var(--secondary-blue); 
-.compact-stat:nth-child(3) { background: var(--secondary-pink); }
-.compact-stat:nth-child(4) { background: var(--secondary-green); }
-.compact-stat:nth-child(5) { background: var(--secondary-purple); color: var(--text-primary); }*/
-
-
 
 .compact-stat:hover {
-    transform: translateY(-2px); background: #f0f0f0; color: #ff9900;
+    transform: translateY(-2px);
+    background: #f0f0f0;
+    color: #ff9900;
 }
 
 .stat-number {
@@ -461,7 +535,7 @@ hr {
 
 .filter-select {
     padding: 0.75rem;
-    border: 2px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     background: var(--white);
     color: var(--text-primary);
@@ -486,7 +560,10 @@ hr {
     position: relative;
 }
 
-/* RICERCA INTELLIGENTE MIGLIORATA */
+/* ========================================
+   RICERCA INTELLIGENTE MIGLIORATA
+   ======================================== */
+
 .smart-search-container {
     position: relative;
     width: 100%;
@@ -499,7 +576,7 @@ hr {
     display: flex;
     align-items: center;
     background: var(--white);
-    border: 3px solid var(--border-color);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -582,30 +659,39 @@ hr {
     animation: spin 1s linear infinite;
 }
 
-/* SUGGERIMENTI MIGLIORATI */
+/* ========================================
+   SUGGERIMENTI MIGLIORATI
+   ======================================== */
+
 .smart-suggestions {
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
     right: 0;
     background: var(--white);
-    border: 2px solid var(--primary-color);
+    border: 1px solid var(--primary-color);
     border-radius: 15px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-    max-height: 400px;
+    
+    /* Altezza dinamica che rispetta i limiti del contenitore padre */
+    max-height: calc(1500px - 350px - 20px);
+    min-height: 0;
+    
     overflow: hidden;
-    z-index: 9999;
+    z-index: 100001;
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px) scale(0.95);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Assicura che rimanga dentro il filters-section */
+    contain: layout style paint;
 }
 
 .smart-suggestions.visible {
     opacity: 1;
     visibility: visible;
     transform: translateY(0) scale(1);
-    z-index: 9999;
 }
 
 .suggestions-header {
@@ -636,8 +722,31 @@ hr {
 }
 
 .suggestions-list {
-    max-height: 320px;
+    max-height: calc(100% - 60px);
     overflow-y: auto;
+    overflow-x: hidden;
+    
+    /* Scroll personalizzato */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--border-color);
+}
+
+.suggestions-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.suggestions-list::-webkit-scrollbar-track {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.suggestions-list::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+.suggestions-list::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
 }
 
 .suggestion-item {
@@ -753,15 +862,6 @@ hr {
 
 .suggestion-relevance.low {
     background: var(--secondary-red);
-}
-
-/* Evidenziazione del testo di ricerca */
-.highlight {
-    background: linear-gradient(120deg, rgba(255, 153, 0, 0.3) 0%, rgba(255, 153, 0, 0.1) 100%);
-    font-weight: 600;
-    color: var(--text-primary);
-    border-radius: 3px;
-    padding: 0 2px;
 }
 
 .no-results-suggestion {
@@ -1326,6 +1426,27 @@ hr {
     box-shadow: 0 6px 20px rgba(255, 153, 0, 0.4);
 }
 
+/* ========================================
+   GESTIONE RESPONSIVE DELLA RICERCA
+   ======================================== */
+
+/* Calcolo dinamico dell'altezza massima per i suggerimenti */
+@media (max-height: 800px) {
+    .smart-suggestions {
+        max-height: calc(70vh - 200px);
+    }
+}
+
+@media (max-height: 600px) {
+    .smart-suggestions {
+        max-height: calc(60vh - 150px);
+    }
+    
+    .filters-section.search-active {
+        max-height: 80vh;
+    }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .main-content {
@@ -1367,6 +1488,20 @@ hr {
         font-size: 1.2rem;
     }
 
+    .filters-section {
+        padding: 1rem;
+        margin: 1rem 0;
+        height: 400px;
+        min-height: 400px;
+        max-height: 400px;
+    }
+    
+    .filters-section.search-active,
+    .filters-section.expanded {
+        max-height: 90vh;
+        height: auto;
+    }
+
     .filters-grid {
         grid-template-columns: 1fr;
     }
@@ -1377,6 +1512,15 @@ hr {
 
     .smart-search-container {
         width: 100%;
+    }
+
+    .smart-suggestions {
+        max-height: calc(90vh - 400px - 40px);
+        border-radius: 12px;
+    }
+
+    .suggestions-list {
+        max-height: calc(100% - 50px);
     }
 
     .integrated-stats {
@@ -1405,15 +1549,6 @@ hr {
         min-width: auto;
     }
 
-    .smart-suggestions {
-        max-height: 300px;
-        z-index: 9999;
-    }
-
-    .suggestions-list {
-        max-height: 220px;
-    }
-
     /* View controls responsive */
     .view-controls {
         flex-direction: column;
@@ -1439,12 +1574,6 @@ hr {
 
 /* MEDIA QUERY MIGLIORATA PER MOBILE */
 @media (max-width: 768px) {
-    /* Filtri section migliorata */
-    .filters-section {
-        padding: 1rem;
-        margin: 1rem 0;
-    }
-    
     /* Grid dei filtri con scroll orizzontale */
     .filters-grid {
         display: flex;
@@ -1475,10 +1604,6 @@ hr {
     .search-controls {
         flex-direction: column;
         gap: 0.75rem;
-    }
-    
-    .smart-search-container {
-        width: 100%;
     }
     
     /* Pulsanti in riga su mobile */
@@ -1537,11 +1662,26 @@ hr {
         font-size: 1.2rem;
         margin-bottom: 1rem;
     }
+
+    .filters-section {
+        height: 350px;
+        min-height: 350px;
+        max-height: 350px;
+    }
+    
+    .filters-section.search-active,
+    .filters-section.expanded {
+        max-height: 85vh;
+    }
+
+    .smart-suggestions {
+        max-height: calc(85vh - 350px - 30px);
+    }
     
     .integrated-stats {
         gap: 0.5rem;
         margin-bottom: 1rem;
-		flex-direction: row;
+        flex-direction: row;
     }
     
     .compact-stat {
@@ -1566,7 +1706,7 @@ hr {
 
 /* Previene lo zoom su iOS quando si seleziona un'opzione */
 select {
-    font-size: 16px !important; /* Previene lo zoom su iOS */
+    font-size: 16px !important;
 }
 
 /* Miglioramento per l'accessibilità */
@@ -1579,12 +1719,11 @@ select {
 
 /* ========================================
    PALERMOHUB DARK MODE CSS
-   Da aggiungere alla fine di home.css e ph-css.css
    ======================================== */
 
-/* Dark Mode Variables - Sovrascrive le variabili esistenti quando data-theme="dark" */
+/* Dark Mode Variables */
 [data-theme="dark"] {
-    --primary-color: #ffa726; /* Arancione più luminoso per contrasto */
+    --primary-color: #ffa726;
     --primary-hover: #ffb74d;
     --primary-light: #ffcc80;
     --primary-bg: rgba(255, 167, 38, 0.15);
@@ -1598,22 +1737,18 @@ select {
     --secondary-red: #ef5350;
     --secondary-red-dark: #d32f2f;
     
-    --text-primary: #e8eaed; /* Testo principale chiaro */
-    --text-secondary: #bdc1c6; /* Testo secondario */
-    --text-muted: #9aa0a6; /* Testo disabilitato */
-    --border-color: #3c4043; /* Bordi scuri */
-    --background-main: #121212; /* Background principale scuro */
-    --card-background: rgba(28, 28, 30, 0.95); /* Card scure */
-    --white: #1e1e1e; /* "Bianco" scuro per inversioni */
+    --text-primary: #e8eaed;
+    --text-secondary: #bdc1c6;
+    --text-muted: #9aa0a6;
+    --border-color: #3c4043;
+    --background-main: #121212;
+    --card-background: rgba(28, 28, 30, 0.95);
+    --white: #1e1e1e;
     
     --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.4);
     --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.5);
     --shadow-heavy: 0 12px 35px rgba(0, 0, 0, 0.6);
 }
-
-/* ========================================
-   DARK MODE BODY & FOUNDATION
-   ======================================== */
 
 [data-theme="dark"] body {
     background: var(--background-main);
@@ -1621,73 +1756,25 @@ select {
     color-scheme: dark;
 }
 
-/* ========================================
-   DARK MODE HEADER & NAVIGATION
-   ======================================== */
-
-[data-theme="dark"] .ph-header {
-    background: rgba(28, 28, 30, 0.95);
-    border-bottom: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .ph-nav-link {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .ph-nav-link:hover,
-[data-theme="dark"] .ph-nav-link:focus {
-    color: var(--primary-color);
-    background: rgba(255, 167, 38, 0.1);
-}
-
-[data-theme="dark"] .ph-hamburger-line {
-    background: var(--text-secondary);
-}
-
-[data-theme="dark"] .ph-mobile-toggle:hover,
-[data-theme="dark"] .ph-mobile-toggle:focus {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-/* Dark Mode Navigation Mobile */
-[data-theme="dark"] .ph-nav {
-    background: rgba(18, 18, 18, 0.98);
-    border-bottom: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .ph-nav.active .ph-nav-link {
-    color: var(--text-primary);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-/* ========================================
-   DARK MODE BREADCRUMBS
-   ======================================== */
-
-[data-theme="dark"] .ph-breadcrumbs,
-[data-theme="dark"] .breadcrumbs-nav {
-    background: rgba(28, 28, 30, 0.95);
+[data-theme="dark"] .filters-section,
+[data-theme="dark"] .maps-section,
+[data-theme="dark"] .hero-slider,
+[data-theme="dark"] .hero-slider-section .hero-slider {
+    background: var(--card-background);
     border: 1px solid var(--border-color);
 }
 
-[data-theme="dark"] .ph-breadcrumb-link,
-[data-theme="dark"] .breadcrumb-path a {
-    color: var(--primary-color);
-}
-
-[data-theme="dark"] .ph-breadcrumb-link:hover,
-[data-theme="dark"] .ph-breadcrumb-link:focus,
-[data-theme="dark"] .breadcrumb-path a:hover {
-    background: rgba(255, 167, 38, 0.1);
-}
-
-[data-theme="dark"] .ph-breadcrumb-current,
-[data-theme="dark"] .breadcrumb-current {
+[data-theme="dark"] .filters-title {
     color: var(--text-primary);
 }
 
-[data-theme="dark"] .breadcrumb-path {
-    color: var(--text-secondary);
+[data-theme="dark"] .filters-section::before {
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+}
+
+[data-theme="dark"] .breadcrumbs-nav {
+    background: rgba(28, 28, 30, 0.95);
+    border: 1px solid var(--border-color);
 }
 
 [data-theme="dark"] .breadcrumb-separator {
@@ -1712,48 +1799,6 @@ select {
     color: var(--text-primary);
     background: var(--secondary-green);
 }
-
-[data-theme="dark"] .ph-filter-tag,
-[data-theme="dark"] .breadcrumb-filter {
-    background: #2d3748;
-    color: var(--text-secondary);
-    border-color: var(--border-color);
-}
-
-[data-theme="dark"] .ph-filter-tag:hover,
-[data-theme="dark"] .ph-filter-tag:focus,
-[data-theme="dark"] .breadcrumb-filter:hover {
-    background: #2d1b69;
-    color: var(--secondary-red);
-    border-color: var(--secondary-red);
-}
-
-/* ========================================
-   DARK MODE MAIN SECTIONS
-   ======================================== */
-
-[data-theme="dark"] .filters-section,
-[data-theme="dark"] .maps-section,
-[data-theme="dark"] .hero-slider,
-[data-theme="dark"] .hero-slider-section .hero-slider {
-    background: var(--card-background);
-    border: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .filters-title {
-    color: var(--text-primary);
-}
-
-/* Watermark: PH-gbv-ods-2025 */
-body::before {
-    content: "";
-    display: none;
-    /* PalermoHub-Original-gbvitrano-opendatasicilia */
-}
-
-/* ========================================
-   DARK MODE HERO SLIDER
-   ======================================== */
 
 [data-theme="dark"] .slide-overlay {
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
@@ -1789,10 +1834,6 @@ body::before {
     background: var(--primary-color);
     border-color: var(--text-primary);
 }
-
-/* ========================================
-   DARK MODE FORM CONTROLS
-   ======================================== */
 
 [data-theme="dark"] .filter-select,
 [data-theme="dark"] .search-input,
@@ -1857,10 +1898,6 @@ body::before {
     border-top: 2px solid var(--primary-color);
 }
 
-/* ========================================
-   DARK MODE STATISTICS
-   ======================================== */
-
 [data-theme="dark"] .integrated-stats .compact-stat {
     background: var(--white);
     color: var(--text-secondary);
@@ -1871,10 +1908,6 @@ body::before {
     background: #3d3d3d;
     color: var(--primary-color);
 }
-
-/* ========================================
-   DARK MODE SUGGESTIONS
-   ======================================== */
 
 [data-theme="dark"] .smart-suggestions {
     background: var(--white);
@@ -1893,6 +1926,14 @@ body::before {
     background: var(--background-main);
     border: 1px solid var(--border-color);
     color: var(--text-secondary);
+}
+
+[data-theme="dark"] .suggestions-list::-webkit-scrollbar-track {
+    background: var(--border-color);
+}
+
+[data-theme="dark"] .suggestions-list::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
 }
 
 [data-theme="dark"] .suggestion-item {
@@ -1933,10 +1974,6 @@ body::before {
     background: var(--secondary-green);
     color: #000;
 }
-
-/* ========================================
-   DARK MODE BUTTONS
-   ======================================== */
 
 [data-theme="dark"] .clear-btn {
     border-color: var(--secondary-red);
@@ -1988,10 +2025,6 @@ body::before {
     color: #000;
 }
 
-/* ========================================
-   DARK MODE CARDS & CONTENT
-   ======================================== */
-
 [data-theme="dark"] .map-card {
     background: var(--white);
     border: 1px solid var(--border-color);
@@ -2036,10 +2069,6 @@ body::before {
     color: var(--text-primary);
 }
 
-/* ========================================
-   DARK MODE LIST VIEW
-   ======================================== */
-
 [data-theme="dark"] .maps-list .map-info-sidebar {
     background: rgba(255, 167, 38, 0.08);
 }
@@ -2051,10 +2080,6 @@ body::before {
 [data-theme="dark"] .maps-list .map-info-value {
     color: var(--text-secondary);
 }
-
-/* ========================================
-   DARK MODE CONTROLS
-   ======================================== */
 
 [data-theme="dark"] .view-controls,
 [data-theme="dark"] .pagination-controls {
@@ -2083,10 +2108,6 @@ body::before {
     border: 1px solid rgba(255, 167, 38, 0.3);
 }
 
-/* ========================================
-   DARK MODE BACK TO TOP
-   ======================================== */
-
 [data-theme="dark"] .back-to-top {
     background: var(--white);
     color: var(--text-primary);
@@ -2097,10 +2118,6 @@ body::before {
     background: var(--primary-color);
     color: #000;
 }
-
-/* ========================================
-   DARK MODE POPUP & MODALS
-   ======================================== */
 
 [data-theme="dark"] .active-filters-popup {
     background: var(--white);
@@ -2128,118 +2145,6 @@ body::before {
     color: var(--text-muted);
 }
 
-/* ========================================
-   DARK MODE FOOTER
-   ======================================== */
-
-[data-theme="dark"] .footer {
-    background: rgba(28, 28, 30, 0.95);
-    border-top: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .footer-text {
-    color: var(--text-primary);
-}
-
-[data-theme="dark"] .footer-credits {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .footer-credits a {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .footer-credits a:hover {
-    color: var(--primary-color);
-}
-
-[data-theme="dark"] .social-btn {
-    background: var(--background-main);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .social-btn::before {
-    background: var(--primary-color);
-}
-
-[data-theme="dark"] .social-btn:hover {
-    color: #000;
-    border-color: var(--primary-color);
-}
-
-[data-theme="dark"] .social-title {
-    color: var(--text-secondary);
-}
-
-/* ========================================
-   DARK MODE PRIVACY POPUP
-   ======================================== */
-
-[data-theme="dark"] .privacy-content {
-    background: var(--white);
-}
-
-[data-theme="dark"] .privacy-header h3 {
-    color: var(--text-primary);
-}
-
-[data-theme="dark"] .privacy-body > p {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .privacy-option {
-    border: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .privacy-option:hover {
-    border-color: var(--primary-color);
-}
-
-[data-theme="dark"] .privacy-option strong {
-    color: var(--text-primary);
-}
-
-[data-theme="dark"] .privacy-option p {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .privacy-btn-secondary {
-    background: var(--border-color);
-    color: var(--text-primary);
-}
-
-[data-theme="dark"] .privacy-btn-secondary:hover {
-    background: #4a5568;
-}
-
-[data-theme="dark"] .privacy-notification {
-    background: var(--secondary-green);
-    color: #000;
-}
-
-[data-theme="dark"] .cookie-banner {
-    background: rgba(28, 28, 30, 0.98);
-    border-top: 1px solid var(--border-color);
-}
-
-[data-theme="dark"] .cookie-text {
-    color: var(--text-secondary);
-}
-
-[data-theme="dark"] .cookie-btn-settings {
-    background: var(--border-color);
-    color: var(--text-primary);
-}
-
-[data-theme="dark"] .cookie-btn-settings:hover {
-    background: #4a5568;
-}
-
-/* ========================================
-   DARK MODE LOADING & STATES
-   ======================================== */
-
 [data-theme="dark"] .loading,
 [data-theme="dark"] .no-results {
     color: var(--text-muted);
@@ -2249,22 +2154,6 @@ body::before {
     border: 3px solid var(--border-color);
     border-top: 3px solid var(--primary-color);
 }
-/*!
- * PalermoHub - Core Styles
- * Copyright (c) 2025 Giovan Battista Vitrano (@gbvitrano)
- * Copyright (c) 2025 OpenDataSicilia (@opendatasicilia)
- * 
- * Licensed under CC BY-SA 4.0
- * https://creativecommons.org/licenses/by-sa/4.0/
- * 
- * Attribution required:
- * - Keep this header intact in any derivative work
- * - Credit original authors
- * - Link back to: https://palermohub.opendatasicilia.it
- * 
- * Source: https://github.com/SiciliaHub/palermohub
- * Build: PH-2025-gbv-ods
- */
 
 /* ========================================
    DARK MODE SCROLLBARS
@@ -2289,10 +2178,6 @@ body::before {
     background: var(--primary-color);
 }
 
-/* ========================================
-   DARK MODE HIGHLIGHT & SELECTION
-   ======================================== */
-
 [data-theme="dark"] .highlight {
     background: linear-gradient(120deg, rgba(255, 167, 38, 0.4) 0%, rgba(255, 167, 38, 0.2) 100%);
     color: var(--text-primary);
@@ -2312,7 +2197,6 @@ body::before {
    DARK MODE THEME TOGGLE STYLES
    ======================================== */
 
-/* Dark Mode Toggle */
 .theme-toggle {
     position: relative;
     display: inline-flex;
@@ -2378,7 +2262,42 @@ body::before {
     order: -1;
 }
 
-/* Mobile adjustments */
+/* ========================================
+   SMOOTH TRANSITIONS & PERFORMANCE
+   ======================================== */
+
+*, *::before, *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+[data-theme="dark"] {
+    color-scheme: dark;
+}
+
+[data-theme="light"] {
+    color-scheme: light;
+}
+
+[data-theme] * {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+@media (prefers-contrast: high) {
+    [data-theme="dark"] {
+        --text-primary: #ffffff;
+        --border-color: #666666;
+        --primary-color: #ffcc00;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
 @media (max-width: 768px) {
     .theme-label {
         display: none;
@@ -2403,121 +2322,17 @@ body::before {
     [data-theme="dark"] .theme-slider {
         transform: translateX(22px);
     }
-    
-    /* Mobile nav specific */
-    .ph-nav .theme-toggle {
-        width: 100%;
-        padding: 0.75rem 1rem;
-        justify-content: space-between;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .ph-nav .theme-label {
-        display: block;
-        color: #e2e8f0;
-        order: 0;
-    }
-    
-    .ph-nav .theme-toggle:hover {
-        color: #ff9900;
-        background: rgba(255, 153, 0, 0.1);
-    }
-    
-    .ph-nav .theme-toggle:hover .theme-label {
-        color: #ff9900;
-    }
 }
 
-/* Focus states per accessibility */
 .theme-toggle:focus-within {
     outline: 2px solid var(--primary-color);
     outline-offset: 2px;
 }
 
 /* ========================================
-   SMOOTH TRANSITIONS & PERFORMANCE
-   ======================================== */
-
-/* Transizioni fluide per il cambio tema */
-*, *::before, *::after {
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
-}
-
-/* Prevent flash of unstyled content */
-[data-theme="dark"] {
-    color-scheme: dark;
-}
-
-[data-theme="light"] {
-    color-scheme: light;
-}
-
-/* Improve performance durante le transizioni */
-[data-theme] * {
-    backface-visibility: hidden;
-    transform: translateZ(0);
-}
-
-/* ========================================
-   ACCESSIBILITY IMPROVEMENTS
-   ======================================== */
-
-/* High contrast per utenti con disabilità visive */
-@media (prefers-contrast: high) {
-    [data-theme="dark"] {
-        --text-primary: #ffffff;
-        --border-color: #666666;
-        --primary-color: #ffcc00;
-    }
-}
-
-/* Rispetta le preferenze per reduced motion */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        transition: none !important;
-        animation: none !important;
-    }
-}
-
-/* ========================================
-   RESPONSIVE DARK MODE ADJUSTMENTS
-   ======================================== */
-
-@media (max-width: 768px) {
-    [data-theme="dark"] .filters-section,
-    [data-theme="dark"] .maps-section {
-        padding: 1rem;
-        margin: 1rem 0;
-    }
-    
-    [data-theme="dark"] .breadcrumbs-nav {
-        margin: 1rem 0;
-        padding: 1rem;
-    }
-    
-    [data-theme="dark"] .slider-container {
-        height: 300px;
-    }
-}
-
-@media (max-width: 480px) {
-    [data-theme="dark"] .integrated-stats {
-        gap: 0.5rem;
-        margin-bottom: 1rem;
-    }
-    
-    [data-theme="dark"] .compact-stat {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.75rem;
-    }
-}
-
-/* ========================================
    MOBILE FIXES PER FOOTER E BACK-TO-TOP
-   Aggiungere alla fine di home.css
    ======================================== */
 
-/* Fix per evitare sovrapposizioni con barre di navigazione mobile */
 @supports(padding: max(0px)) {
     .back-to-top {
         bottom: max(calc(1rem + 40px + 1rem), calc(env(safe-area-inset-bottom) + 80px));
@@ -2525,40 +2340,16 @@ body::before {
     }
 }
 
-/* Specifiche per dispositivi mobile in modalità verticale */
 @media (max-width: 768px) and (orientation: portrait) {
-    
-    /* Back-to-top spostato più in alto per evitare barre browser */
     .back-to-top {
-        bottom: 120px; /* Aumentato da ~82px a 120px */
+        bottom: 120px;
         right: 15px;
         width: 45px;
         height: 45px;
         font-size: 1.3rem;
-        z-index: 1001; /* Sopra altri elementi */
+        z-index: 1001;
     }
     
-    /* Footer button per condivisione spostato a destra */
-    .footer .social-btn.share-btn {
-        position: fixed !important;
-        bottom: 60px; /* Sopra il back-to-top */
-        right: 15px;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        z-index: 1000;
-        box-shadow: 0 4px 20px rgba(255, 153, 0, 0.4);
-        display: flex !important;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    /* Nascondi il pulsante share originale nel footer su mobile */
-    .footer-social .social-btn.share-btn {
-        display: none !important;
-    }
-    
-    /* Aggiungi un pulsante share fisso mobile */
     .mobile-share-btn {
         position: fixed;
         bottom: 60px;
@@ -2585,20 +2376,8 @@ body::before {
         transform: scale(1.05);
         box-shadow: 0 6px 25px rgba(255, 153, 0, 0.6);
     }
-    
-    /* Footer layout migliorato per mobile */
-    .footer-content {
-        padding-bottom: calc(env(safe-area-inset-bottom) + 1rem);
-        margin-bottom: 0;
-    }
-    
-    /* Migliora la visibilità considerando le safe areas */
-    .footer-search-input-container {
-        margin-bottom: 1rem;
-    }
 }
 
-/* Per dispositivi molto piccoli (iPhone SE, etc.) */
 @media (max-width: 480px) and (orientation: portrait) {
     .back-to-top {
         bottom: 100px;
@@ -2617,7 +2396,6 @@ body::before {
     }
 }
 
-/* Landscape mode adjustments */
 @media (max-width: 768px) and (orientation: landscape) {
     .back-to-top {
         bottom: 80px;
@@ -2630,7 +2408,6 @@ body::before {
     }
 }
 
-/* Dark mode per i nuovi elementi mobile */
 [data-theme="dark"] .mobile-share-btn {
     background: #ffa726;
     color: #000;
@@ -2641,7 +2418,6 @@ body::before {
     background: #ffb74d;
 }
 
-/* Animazioni specifiche per mobile */
 @media (max-width: 768px) {
     .back-to-top.visible {
         animation: bounceInMobile 0.6s ease;
@@ -2680,20 +2456,6 @@ body::before {
     }
 }
 
-/* Fix per popup di condivisione su mobile */
-@media (max-width: 768px) {
-    .share-popup .share-content {
-        width: 95%;
-        max-height: 85vh;
-        margin-bottom: calc(env(safe-area-inset-bottom) + 1rem);
-    }
-    
-    .share-popup {
-        padding-bottom: env(safe-area-inset-bottom);
-    }
-}
-
-/* Assicura che i pulsanti non siano mai coperti da notch o barre */
 @supports (padding: max(0px)) {
     @media (max-width: 768px) {
         .back-to-top {
@@ -2707,11 +2469,11 @@ body::before {
         }
     }
 }
+
 /* ========================================
    FIX PARAGRAFI HOME PAGE - FORMATTAZIONE UNIFORME
    ======================================== */
 
-/* Reset e unificazione stili per tutti i paragrafi intro */
 .intro-paragraph {
     margin: 15px 20px !important;
     padding: 5px 5px;
@@ -2719,15 +2481,9 @@ body::before {
     font-weight: 500;
     line-height: 1.6;
     color: var(--text-primary);
-    /*background: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);*/
     font-size: 0.95rem;
 }
 
-/* Rimuovi gli stili precedenti problematici */
 body > p:first-of-type {
     margin: 15px 20px !important;
     padding: 5px 5px;
@@ -2735,23 +2491,13 @@ body > p:first-of-type {
     font-weight: 500;
     line-height: 1.6;
     color: var(--text-primary);
-    /*background: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);*/
     font-size: 0.95rem;
 }
 
-/* Quando l'header è aperto, adatta i margini */
 body.header-modal-open > p:first-of-type,
 body.header-modal-open .intro-paragraph {
     margin: 0 0 20px 0 !important;
 }
-
-/* ========================================
-   RESPONSIVE MOBILE - PARAGRAFI
-   ======================================== */
 
 @media (max-width: 768px) {
     .intro-paragraph,
@@ -2762,7 +2508,6 @@ body.header-modal-open .intro-paragraph {
         line-height: 1.5;
     }
     
-    /* Highlight text più piccolo su mobile */
     .intro-paragraph .highlight,
     body > p:first-of-type .highlight {
         font-size: 0.85rem;
@@ -2786,10 +2531,6 @@ body.header-modal-open .intro-paragraph {
     }
 }
 
-/* ========================================
-   DARK MODE SUPPORT PER PARAGRAFI
-   ======================================== */
-
 [data-theme="dark"] .intro-paragraph,
 [data-theme="dark"] body > p:first-of-type {
     background: rgba(28, 28, 30, 0.9);
@@ -2801,4 +2542,684 @@ body.header-modal-open .intro-paragraph {
 [data-theme="dark"] body > p:first-of-type .highlight {
     background: linear-gradient(120deg, rgba(255, 167, 38, 0.4) 0%, rgba(255, 167, 38, 0.2) 100%);
     color: var(--text-primary);
+}
+
+/* ========================================
+   UTILITY CLASSES PER IL CONTROLLO PROGRAMMATICO
+   ======================================== */
+
+.filters-section.force-expand {
+    height: auto !important;
+    max-height: 1000px !important;
+    overflow: visible !important;
+}
+
+.smart-suggestions.force-hidden {
+    display: none !important;
+}
+
+.filters-section.debug {
+    border: 3px dashed red !important;
+}
+
+.smart-suggestions.debug {
+    border: 3px dashed blue !important;
+}
+
+/* Watermark: PH-gbv-ods-2025 */
+body::before {
+    content: "";
+    display: none;
+    /* PalermoHub-Original-gbvitrano-opendatasicilia */
+}
+
+/* ========================================
+   CSS AGGIUNTIVO PER MIGLIORARE L'ESPANSIONE RICERCA
+   Aggiungi questo CSS al file home.css
+   ======================================== */
+
+/* Migliora la transizione di espansione della filters-section */
+.filters-section {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+}
+
+/* Indicatore visivo quando la sezione si espande per la ricerca 
+.filters-section.search-active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        var(--primary-color) 20%, 
+        var(--secondary-blue) 50%, 
+        var(--primary-color) 80%, 
+        transparent 100%);
+    border-radius: 2px 2px 0 0;
+    opacity: 1;
+    animation: searchActiveGlow 2s ease-in-out infinite;
+}*/
+
+@keyframes searchActiveGlow {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* Migliora l'animazione dei suggerimenti */
+.smart-suggestions {
+    transform-origin: top center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smart-suggestions.visible {
+    animation: expandSuggestions 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes expandSuggestions {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        max-height: 0;
+    }
+    50% {
+        opacity: 0.5;
+        transform: translateY(-10px) scale(0.98);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        max-height: calc(1000px - 450px - 20px);
+    }
+}
+
+/* Effetto di focus migliorato per il campo di ricerca quando la sezione è espansa */
+.filters-section.search-active .search-input-container.focused {
+    border-color: var(--primary-color);
+    box-shadow: 
+        0 8px 25px rgba(255, 153, 0, 0.25),
+        0 0 0 3px rgba(255, 153, 0, 0.1);
+    transform: translateY(-3px);
+}
+
+/* Indicatore visivo che la sezione contiene risultati di ricerca */
+.filters-section.search-active .filters-title::after {
+    content: ' - Risultati di Ricerca';
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--primary-color);
+    opacity: 0;
+    animation: fadeInTitle 0.6s ease 0.3s forwards;
+}
+
+@keyframes fadeInTitle {
+    to { opacity: 1; }
+}
+
+/* Migliora la visualizzazione mobile dell'espansione */
+@media (max-width: 768px) {
+    .filters-section.search-active {
+        margin: 1rem 0;
+        border-radius: 15px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .filters-section.search-active::before {
+        height: 3px;
+    }
+    
+    .smart-suggestions {
+        border-radius: 12px;
+        max-height: calc(90vh - 400px - 40px);
+    }
+    
+    /* Migliora lo scroll dei suggerimenti su mobile */
+    .suggestions-list {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+}
+
+/* Effetto di highlight per i risultati di ricerca nelle mappe */
+.map-card.search-result {
+    border: 2px solid var(--primary-color);
+    background: linear-gradient(135deg, rgba(255, 153, 0, 0.05), rgba(255, 153, 0, 0.1));
+    animation: highlightSearchResult 0.6s ease;
+}
+
+@keyframes highlightSearchResult {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 10px 35px rgba(255, 153, 0, 0.2);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    }
+}
+
+/* Indicatore di caricamento durante la ricerca */
+.filters-section.search-active.searching {
+    background: linear-gradient(135deg, 
+        var(--card-background) 0%, 
+        rgba(255, 153, 0, 0.05) 50%, 
+        var(--card-background) 100%);
+    background-size: 200% 200%;
+    animation: searchingGradient 2s ease-in-out infinite;
+}
+
+@keyframes searchingGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Migliora l'accessibilità */
+.filters-section.search-active {
+    outline: none;
+}
+
+.filters-section.search-active:focus-within {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Transizione fluida per il ritorno allo stato normale */
+.filters-section:not(.search-active) {
+    transition: all 0.3s ease;
+}
+
+.filters-section:not(.search-active) .smart-suggestions {
+    animation: collapseSuggestions 0.3s ease forwards;
+}
+
+@keyframes collapseSuggestions {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        max-height: calc(1000px - 450px - 20px);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+        max-height: 0;
+    }
+}
+
+/* Stato di hover migliorato per i suggerimenti */
+.suggestion-item:hover {
+    background: linear-gradient(135deg, 
+        rgba(255, 153, 0, 0.1) 0%, 
+        rgba(167, 199, 231, 0.1) 100%);
+    transform: translateX(6px);
+    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.15);
+}
+
+/* Pulsante per chiudere la ricerca espansa */
+.search-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.filters-section.search-active .search-close-btn {
+    display: flex;
+}
+
+.search-close-btn:hover {
+    background: var(--secondary-red);
+    color: white;
+    transform: scale(1.1);
+}
+
+/* ========================================
+   CSS AGGIUNTIVO PER FEEDBACK RESET E ANIMAZIONI
+   Aggiungi questo CSS al file home.css
+   ======================================== */
+
+/* Stili per il feedback di reset */
+.search-status.reset-feedback {
+    background: linear-gradient(135deg, #d4edda, #c3e6cb);
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(21, 87, 36, 0.15);
+    animation: slideInFeedback 0.3s ease-out;
+}
+
+@keyframes slideInFeedback {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Indicatore di stato base ripristinato */
+.filters-section.base-state {
+    position: relative;
+}
+
+.filters-section.base-state::after {
+    content: '✓ Visualizzazione completa attiva';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: #d4edda;
+    color: #155724;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    opacity: 0;
+    animation: fadeInBaseIndicator 0.5s ease 0.2s forwards;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+@keyframes fadeInBaseIndicator {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animazione di contrazione della sezione filtri */
+.filters-section.contracting {
+    animation: contractSection 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes contractSection {
+    0% {
+        max-height: 1000px;
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.98);
+    }
+    100% {
+        max-height: 450px;
+        transform: scale(1);
+    }
+}
+
+/* Stili per il pulsante di chiusura ricerca */
+.search-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filters-section.search-active .search-close-btn {
+    display: flex;
+    animation: bounceIn 0.4s ease;
+}
+
+.search-close-btn:hover {
+    background: var(--secondary-red);
+    color: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Feedback visivo durante il reset */
+.resetting .map-card {
+    animation: resetCardFade 0.6s ease;
+}
+
+@keyframes resetCardFade {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.3;
+        transform: scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Indicatore di caricamento durante il reset */
+.filters-section.resetting {
+    position: relative;
+    pointer-events: none;
+}
+
+.filters-section.resetting::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    animation: fadeInOverlay 0.3s ease;
+}
+
+.filters-section.resetting::after {
+    content: '⟳ Ripristino in corso...';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    z-index: 1001;
+    box-shadow: 0 8px 25px rgba(255, 153, 0, 0.3);
+    animation: pulseReset 1.5s ease-in-out infinite;
+}
+
+@keyframes fadeInOverlay {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes pulseReset {
+    0%, 100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.05);
+        opacity: 0.9;
+    }
+}
+
+/* Miglioramenti per il campo di ricerca durante il reset */
+.search-input-container.clearing {
+    animation: clearingInput 0.5s ease;
+}
+
+@keyframes clearingInput {
+    0% {
+        border-color: var(--primary-color);
+        box-shadow: 0 8px 25px rgba(255, 153, 0, 0.25);
+    }
+    50% {
+        border-color: var(--secondary-red);
+        box-shadow: 0 8px 25px rgba(255, 0, 0, 0.25);
+    }
+    100% {
+        border-color: var(--border-color);
+        box-shadow: var(--shadow-light);
+    }
+}
+
+/* Stato "tutto pulito" per la sezione filtri */
+.filters-section.clean-state {
+    background: linear-gradient(135deg, 
+        var(--card-background) 0%, 
+        rgba(212, 237, 218, 0.1) 50%, 
+        var(--card-background) 100%);
+    animation: cleanStateGlow 2s ease-in-out;
+}
+
+@keyframes cleanStateGlow {
+    0%, 100% {
+        background: var(--card-background);
+    }
+    50% {
+        background: linear-gradient(135deg, 
+            var(--card-background) 0%, 
+            rgba(212, 237, 218, 0.2) 50%, 
+            var(--card-background) 100%);
+    }
+}
+
+/* Notifica toast per il reset */
+.reset-toast {
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 8px 25px rgba(40, 167, 69, 0.3);
+    z-index: 10000;
+    transform: translateX(400px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reset-toast.show {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.reset-toast.hide {
+    transform: translateX(400px);
+    opacity: 0;
+}
+
+.reset-toast .icon {
+    font-size: 1.2rem;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Versione dark mode del feedback */
+[data-theme="dark"] .search-status.reset-feedback {
+    background: linear-gradient(135deg, #1e4d3b, #2a5f47);
+    color: #a3d9b1;
+    border-color: #2a5f47;
+}
+
+[data-theme="dark"] .filters-section.base-state::after {
+    background: #1e4d3b;
+    color: #a3d9b1;
+}
+
+[data-theme="dark"] .reset-toast {
+    background: linear-gradient(135deg, #1e4d3b, #2a5f47);
+    color: #a3d9b1;
+}
+
+[data-theme="dark"] .search-close-btn {
+    background: rgba(28, 28, 30, 0.95);
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] .search-close-btn:hover {
+    background: var(--secondary-red);
+    color: white;
+}
+
+/* Responsive per dispositivi mobili */
+@media (max-width: 768px) {
+    .search-close-btn {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+    
+    .filters-section.base-state::after {
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 0.7rem;
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .reset-toast {
+        top: 1rem;
+        right: 1rem;
+        left: 1rem;
+        width: auto;
+        font-size: 0.8rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .filters-section.resetting::after {
+        font-size: 0.8rem;
+        padding: 0.75rem 1.5rem;
+    }
+}
+
+/* Animazioni di transizione fluide */
+.filters-section,
+.search-input-container,
+.smart-suggestions {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Prevenzione del flicker durante le animazioni */
+.filters-section * {
+    backface-visibility: hidden;
+    transform: translateZ(0);
+}
+
+/* Stato di focus migliorato durante il reset */
+.search-input:focus,
+.filter-select:focus {
+    outline: 0px solid var(--primary-color);
+    outline-offset: 0px;
+    transition: outline 0.2s ease;
+}
+
+/* Indicatore di stato attivo per i filtri */
+.filter-select:not([value=""]) {
+    border-color: var(--primary-color);
+    background: #ff990017;
+}
+
+.filter-select:not([value=""]):focus {
+    box-shadow: 0 0 0 3px rgba(255, 153, 0, 0.1);
+}
+
+/* Stili per la selezione multipla (se implementata in futuro) */
+.filter-select[multiple] option:checked {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Accessibilità per screen reader */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Miglioramenti per il contrasto alto */
+@media (prefers-contrast: high) {
+    .search-status.reset-feedback {
+        border-width: 2px;
+        font-weight: 700;
+    }
+    
+    .search-close-btn {
+        border: 2px solid var(--text-primary);
+    }
+    
+    .reset-toast {
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+}
+
+/* Riduzione movimento per utenti sensibili */
+@media (prefers-reduced-motion: reduce) {
+    .filters-section,
+    .search-input-container,
+    .smart-suggestions,
+    .reset-toast,
+    .search-close-btn {
+        animation: none !important;
+        transition: opacity 0.2s ease, transform 0.2s ease !important;
+    }
+    
+    .filters-section.resetting::after {
+        animation: none !important;
+    }
+    
+    .reset-toast .icon {
+        animation: none !important;
+    }
 }

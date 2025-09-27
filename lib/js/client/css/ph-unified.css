@@ -19,6 +19,7 @@
   --z-modal: 9500;
   --z-header: 9600;
   --z-footer: 9700;
+  --z-suggestions: 10001;
   --z-toast: 9800;
   --z-debug: 9900;
   
@@ -77,11 +78,12 @@ html, body {
 .maps-section {
     max-width: 100% !important;
     overflow-x: hidden !important;
+	overflow-y: auto !important;
 }
 
 .filters-section {
     max-width: 100% !important;
-    overflow: hidden !important;
+    overflow-x: hidden !important;
 }
 
 /* =============================================
@@ -1239,6 +1241,8 @@ body[data-viewport="large"] { /* Large styles applied via JS */ }
 .dev-indicator {
     display: none !important;
 }
+
+
 
 /* =============================================
    FINE CSS UNIFICATO
