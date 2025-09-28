@@ -464,7 +464,7 @@ body {
     width: 24px; /* Più piccolo */
     height: 24px; /* Più piccolo */
     border: none;
-    background: #ff9900;
+    background: #ff9900;.00
     border-radius: 50%;
     color: white;
     font-size: 14px; /* Font più piccolo */
@@ -624,6 +624,7 @@ body {
 
 #sidepanel.active {
     bottom: 0;
+	height: 85vh;
     z-index: 10000; /* Z-index elevato quando aperto */
 }
 
