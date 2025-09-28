@@ -618,7 +618,7 @@ body {
     backdrop-filter: var(--blur);
     transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1000;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+   /* border-radius: var(--radius-lg) var(--radius-lg) 0 0;*/
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
 }
 
@@ -648,6 +648,17 @@ body {
     box-shadow: var(--shadow-lg);
     transition: all 0.3s ease;
 }
+#sidepanel-tabs {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background: rgba(255, 153, 0, 0.05);
+    border-bottom: 2px solid var(--border);
+    padding: 0;
+    position: sticky; /* Rende i tab fissi */
+    top: 0; /* Fissati in cima */
+    z-index: 100; /* Sopra il contenuto che scorre */
+    backdrop-filter: blur(10px); /* Effetto sfocatura per leggibilità */
+}
 
 #sidepanel-tab:hover {
     transform: translateX(-50%) translateY(0px);
@@ -672,7 +683,7 @@ body {
 /* ===== BACK TO TOP BUTTON - FIXED ===== */
 .back-to-top-btn {
     position: fixed;
-    bottom: 30px;
+    bottom: 50px;
     right: 30px;
     width: 60px;
     height: 60px;

@@ -930,6 +930,17 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Loader forzatamente rimosso');
         }
     }, 4000);
+	
+	const sidepanelContent = document.getElementById('sidepanel-content');
+if (sidepanelContent) {
+    sidepanelContent.addEventListener('scroll', () => {
+        if (sidepanelContent.scrollTop > 10) {
+            sidepanelContent.classList.add('scrolling');
+        } else {
+            sidepanelContent.classList.remove('scrolling');
+        }
+    });
+}
 });
 
 // =========================
