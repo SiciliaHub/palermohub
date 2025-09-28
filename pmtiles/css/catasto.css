@@ -384,6 +384,7 @@ body {
     max-width: 400px;
     text-align: center;
     box-shadow: var(--shadow-xl);
+    position: relative; /* Necessario per posizionare il pulsante di chiusura */
 }
 
 .search-popup h3 {
@@ -436,7 +437,7 @@ body {
 }
 
 .search-popup button {
-    width: 100%;
+    /*width: 100%;*/
     padding: 18px;
     background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
     color: white;
@@ -458,23 +459,26 @@ body {
 
 .search-close {
     position: absolute;
-    top: 85px;
-    right: 20px;
-    width: 45px;
-    height: 45px;
+    top: 12px;
+    right: 12px; /* Più vicino al bordo destro */
+    width: 24px; /* Più piccolo */
+    height: 24px; /* Più piccolo */
     border: none;
-    background: rgba(255, 255, 255, 0.2);
+    background: #ff9900;
     border-radius: 50%;
     color: white;
-    font-size: 18px;
+    font-size: 14px; /* Font più piccolo */
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .search-close:hover,
 .search-close:active {
-    background: rgba(255, 255, 255, 0.3);
-    transform: scale(1.05);
+    background: #ff9900;
+    transform: scale(1.1);
 }
 
 .search-popup #search-error {

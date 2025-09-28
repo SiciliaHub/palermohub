@@ -132,18 +132,18 @@
     </div> -->
 
     <!-- Full-Screen Mobile Search Modal -->
-    <div class="search-popup" id="search-popup">
-        <button class="search-close" onclick="toggleSearchPopup()">×</button>
-        <div class="search-container">
-            <h3>Ricerca Particella</h3>
+<div class="search-popup" id="search-popup">
+    <div class="search-container">
+        <button class="search-close" onclick="toggleSearchPopup()" Title="Chiudi ricerca">×</button>
+        <h3>Ricerca Particella</h3>
             <p>Inserisci foglio e particella per iniziare la ricerca nella mappa catastale di Palermo</p>
             <div class="search-inputs">
                 <input type="number" id="foglio" placeholder="Numero Foglio" min="1">
                 <input type="number" id="particella" placeholder="Numero Particella" min="1">
             </div>
-            <button onclick="searchParticella()">Avvia Ricerca</button>
+            <button onclick="searchParticella()"Title="Avvia ricerca della particella" >Avvia ricerca</button>
             <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
-                Dati catastali aggiornati a Agosto 2025 (S.I.T.R. Sicilia)
+                Dati catastali aggiornati a Agosto 2025 (S.I.T.R. Sicilia) e Agenzia delle Entrate
             </p>
             <div id="search-error"></div>
         </div>
