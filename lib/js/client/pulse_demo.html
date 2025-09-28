@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Effetto Pulse PalermoHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f0f0f0;
+            padding: 50px;
+        }
+        
+        .demo-section {
+            background: white;
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .demo-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ff9900;
+            padding-bottom: 10px;
+        }
+        
+        .tabs-container {
+            display: flex;
+            gap: 50px;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+        }
+        
+        /* TAB HEADER (superiore) */
+        .header-tab {
+            position: relative;
+            width: 48px;
+            height: 32px;
+            background: linear-gradient(135deg, #ff9900 0%, #ff7700 100%);
+            color: white;
+            border-radius: 0 0 8px 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .header-tab.pulse {
+            animation: headerPulse 2s infinite;
+        }
+        
+        @keyframes headerPulse {
+            0% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 20px rgba(255, 153, 0, 0);
+            }
+            100% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0);
+            }
+        }
+        
+        /* TAB FOOTER (inferiore) */
+        .footer-tab {
+            position: relative;
+            width: 48px;
+            height: 32px;
+            background: linear-gradient(135deg, #ff9900 0%, #ff7700 100%);
+            color: white;
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer-tab.pulse {
+            animation: footerPulse 2s infinite;
+        }
+        
+        @keyframes footerPulse {
+            0% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 20px rgba(255, 153, 0, 0);
+            }
+            100% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0);
+            }
+        }
+        
+        /* PULSANTE CONDIVISIONE ORIGINALE */
+        .share-button {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4);
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            color: white;
+            font-size: 18px;
+        }
+        
+        .share-button.pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4), 0 0 0 20px rgba(255, 153, 0, 0);
+            }
+            100% {
+                box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0);
+            }
+        }
+        
+        .control-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .control-btn {
+            padding: 10px 20px;
+            background: #ff9900;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .control-btn:hover {
+            background: #ff6600;
+            transform: translateY(-2px);
+        }
+        
+        .description {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            line-height: 1.5;
+        }
+        
+        .status {
+            text-align: center;
+            margin-top: 20px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f0f9ff;
+            color: #0066cc;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo-section">
+        <h1 class="demo-title">🔥 Effetto Pulse - Demo PalermoHub</h1>
+        
+        <div class="tabs-container">
+            <div>
+                <div class="header-tab" id="headerTab">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <p style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: #666;">Header Tab</p>
+            </div>
+            
+            <div>
+                <div class="share-button" id="shareButton">
+                    <i class="fas fa-share-alt"></i>
+                </div>
+                <p style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: #666;">Share Button<br>(originale CSPA)</p>
+            </div>
+            
+            <div>
+                <div class="footer-tab" id="footerTab">
+                    <i class="fas fa-info-circle"></i>
+                </div>
+                <p style="text-align: center; margin-top: 10px; font-size: 0.8rem; color: #666;">Footer Tab</p>
+            </div>
+        </div>
+        
+        <div class="control-buttons">
+            <button class="control-btn" onclick="toggleHeaderPulse()">Toggle Header Pulse</button>
+            <button class="control-btn" onclick="toggleSharePulse()">Toggle Share Pulse</button>
+            <button class="control-btn" onclick="toggleFooterPulse()">Toggle Footer Pulse</button>
+            <button class="control-btn" onclick="toggleAllPulse()">Toggle All</button>
+        </div>
+        
+        <div class="status" id="status">
+            Clicca i pulsanti sopra per attivare/disattivare l'effetto pulse
+        </div>
+        
+        <div class="description">
+            <strong>Cosa dovresti vedere:</strong><br>
+            Un anello di luce arancione che si espande dal centro del tab/pulsante verso l'esterno, 
+            ripetendosi ogni 2 secondi. L'anello parte da opaco al centro e diventa trasparente 
+            mentre si espande, creando un effetto "respirazione" che attira l'attenzione.
+        </div>
+    </div>
+
+    <script>
+        let headerPulseActive = false;
+        let sharePulseActive = false;
+        let footerPulseActive = false;
+
+        function toggleHeaderPulse() {
+            const tab = document.getElementById('headerTab');
+            headerPulseActive = !headerPulseActive;
+            
+            if (headerPulseActive) {
+                tab.classList.add('pulse');
+            } else {
+                tab.classList.remove('pulse');
+            }
+            updateStatus();
+        }
+
+        function toggleSharePulse() {
+            const button = document.getElementById('shareButton');
+            sharePulseActive = !sharePulseActive;
+            
+            if (sharePulseActive) {
+                button.classList.add('pulse');
+            } else {
+                button.classList.remove('pulse');
+            }
+            updateStatus();
+        }
+
+        function toggleFooterPulse() {
+            const tab = document.getElementById('footerTab');
+            footerPulseActive = !footerPulseActive;
+            
+            if (footerPulseActive) {
+                tab.classList.add('pulse');
+            } else {
+                tab.classList.remove('pulse');
+            }
+            updateStatus();
+        }
+
+        function toggleAllPulse() {
+            const allActive = headerPulseActive && sharePulseActive && footerPulseActive;
+            
+            if (allActive) {
+                // Disattiva tutti
+                document.getElementById('headerTab').classList.remove('pulse');
+                document.getElementById('shareButton').classList.remove('pulse');
+                document.getElementById('footerTab').classList.remove('pulse');
+                headerPulseActive = sharePulseActive = footerPulseActive = false;
+            } else {
+                // Attiva tutti
+                document.getElementById('headerTab').classList.add('pulse');
+                document.getElementById('shareButton').classList.add('pulse');
+                document.getElementById('footerTab').classList.add('pulse');
+                headerPulseActive = sharePulseActive = footerPulseActive = true;
+            }
+            updateStatus();
+        }
+
+        function updateStatus() {
+            const active = [];
+            if (headerPulseActive) active.push('Header');
+            if (sharePulseActive) active.push('Share');
+            if (footerPulseActive) active.push('Footer');
+            
+            const status = document.getElementById('status');
+            if (active.length === 0) {
+                status.textContent = 'Nessun effetto pulse attivo';
+                status.style.background = '#f0f0f0';
+                status.style.color = '#666';
+            } else {
+                status.textContent = `Effetto pulse attivo su: ${active.join(', ')}`;
+                status.style.background = '#d4edda';
+                status.style.color = '#155724';
+            }
+        }
+
+        // Attiva automaticamente tutti gli effetti dopo 2 secondi
+        setTimeout(() => {
+            toggleAllPulse();
+        }, 2000);
+    </script>
+</body>
+</html>
