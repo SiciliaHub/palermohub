@@ -74,7 +74,7 @@ body {
 /* ===== MOBILE-FIRST FLOATING HEADER COMPATTO ===== */
 .command-bar {
     position: fixed;
-    top: 60px;
+    top: 10px;
     left: 60px;
     right: 30px;
     display: grid;
@@ -476,7 +476,7 @@ body {
 
 .search-close {
     position: absolute;
-    top: 80px;
+    top: 20px;
     right: 20px;
     width: 45px;
     height: 45px;
@@ -505,7 +505,7 @@ body {
 /* ===== MOBILE-OPTIMIZED SATELLITE OVERLAY ===== */
 #satellite-overlay {
     position: fixed;
-    bottom: 120px;
+    bottom: 160px;
     left: 10px;
     right: 10px;
     height: 200px;
@@ -987,42 +987,7 @@ body {
             padding: 2px 24px 2px 0;
             position: relative;
         }
-
-
-/* Sostituire la regola esistente con: */
-@media (max-width: 768px) {
-    .maplibregl-ctrl-top-left {
-        left: 10px;
-        top: 58px;
-        visibility: visible;
-        display: block;
-        z-index: 999;
-    }
-    
-    .maplibregl-ctrl-top-left .maplibregl-ctrl {
-        margin: 3px 0;
-    }
-    
-    .maplibregl-ctrl-zoom-in,
-    .maplibregl-ctrl-zoom-out {
-        width: 32px;
-        height: 32px;
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-radius: 6px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-        border: 1px solid rgba(255, 153, 0, 0.2);
-    }
-    
-    .maplibregl-ctrl-zoom-in:hover,
-    .maplibregl-ctrl-zoom-out:hover {
-        background-color: var(--primary);
-        color: white;
-    }
-	
-	.layer-switcher { top: 120px; }
-}
-	
+		
 /* ===== DESKTOP RESPONSIVE ADJUSTMENTS ===== */
 @media (min-width: 769px) {
     .command-bar {
@@ -1048,7 +1013,7 @@ body {
         margin-right: 8px;
     }
     
-	    .layer-switcher {
+    .layer-switcher {
         top: 80px;
         right: 30px;
         left: auto;
@@ -2258,14 +2223,10 @@ try {
 
     window.map = map;
 
-map.addControl(new maplibregl.NavigationControl({ 
-    showCompass: !isMobile, 
-    showZoom: true 
-}), "top-left");
-
-if (!isMobile) {
-    map.addControl(new maplibregl.FullscreenControl(), "top-left");
-}
+    if (!isMobile) {
+        map.addControl(new maplibregl.NavigationControl({ showCompass: true, showZoom: true }), "top-left");
+        map.addControl(new maplibregl.FullscreenControl(), "top-left");
+    }
     map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
 
     map.on('load', () => {

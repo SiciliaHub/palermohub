@@ -1,0 +1,2974 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Variante Generale e Particelle catastali - By OpenDataSicilia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" href="favicon.ico">
+    <meta name="author" content="Giovan Battista Vitrano per Open Data Sicilia">
+    
+    <!-- Libraries -->
+    <script src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
+    <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
+    <script src="https://unpkg.com/pmtiles@2.4.0/dist/index.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    
+    <!-- SEO Meta Tags -->
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:description" content="Variante Generale e Particelle catastali e stampa scheda pdf - By OpenDataSicilia">
+    <meta property="og:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
+    <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:description" content="Variante Generale e Particelle catastali e stampa scheda pdf - By OpenDataSicilia">
+    <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KHR1GHDRQS"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KHR1GHDRQS');
+    </script>
+
+    <style>
+        /* ===== CSS RESET & VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff9900;
+            --primary-hover: #e68800;
+            --primary-light: #ffb84d;
+            --primary-dark: #cc7700;
+            --text: #313131;
+            --text-light: #666666;
+            --text-muted: #999999;
+            --bg: #ffffff;
+            --bg-soft: #fafafa;
+            --bg-card: #ffffff;
+            --border: #e1e5e9;
+            --border-soft: #f0f0f0;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+            --shadow-xl: 0 20px 60px rgba(0, 0, 0, 0.15);
+            --radius: 16px;
+            --radius-lg: 24px;
+            --blur: blur(20px);
+        }
+
+        /* ===== BODY & BACKGROUND ===== */
+        body {
+            font-family: 'Poppins', -apple-system, sans-serif;
+            background: linear-gradient(135deg, #fafafa 0%, #ffffff 50%, #f5f5f5 100%);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* Animated background pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(255, 153, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 153, 0, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(255, 153, 0, 0.02) 0%, transparent 50%);
+            animation: backgroundFloat 20s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes backgroundFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-10px, -15px) scale(1.02); }
+            66% { transform: translate(15px, -10px) scale(0.98); }
+        }
+
+        /* ===== MAP CONTAINER ===== */
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+        /* ===== FLOATING HEADER COMMAND BAR ===== */
+        .command-bar {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            padding: 8px;
+            z-index: 1000;
+            box-shadow: var(--shadow-lg);
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .command-btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .command-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--primary);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            border-radius: 25px;
+            z-index: -1;
+        }
+
+        .command-btn:hover::before {
+            transform: translateX(0);
+        }
+
+        .command-btn:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .command-btn.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .command-btn i {
+            font-size: 16px;
+        }
+
+        /* ===== FLOATING LAYER CARDS ===== */
+        .layer-switcher {
+            position: fixed;
+            top: 100px;
+            right: 30px;
+            width: 320px;
+            z-index: 1000;
+            transform: translateX(350px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .layer-switcher.active {
+            transform: translateX(0);
+        }
+
+        .layer-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--border-soft);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-lg);
+            transform: scale(0.95);
+            opacity: 0;
+            animation: cardSlide 0.6s ease forwards;
+        }
+
+        .layer-card:nth-child(1) { animation-delay: 0.1s; }
+        .layer-card:nth-child(2) { animation-delay: 0.2s; }
+        .layer-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes cardSlide {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .layer-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .layer-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .layer-grid {
+            display: grid;
+            gap: 12px;
+        }
+
+        .layer-switcher button {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-card);
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .layer-switcher button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 153, 0, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .layer-switcher button:hover::before {
+            left: 100%;
+        }
+
+        .layer-switcher button:hover {
+            border-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .layer-switcher button.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: var(--shadow);
+        }
+
+        .layer-toggle {
+            width: 50px;
+            height: 26px;
+            background: var(--border);
+            border-radius: 13px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .layer-toggle::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .layer-switcher button.active .layer-toggle {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .layer-switcher button.active .layer-toggle::after {
+            left: 27px;
+        }
+
+        /* ===== VINCOLI SUBMENU ===== */
+        .vincoli-container {
+            position: relative;
+        }
+
+        .vincoli-submenu {
+            display: none;
+            margin-top: 12px;
+            padding: 16px;
+            background: rgba(255, 153, 0, 0.05);
+            border: 1px solid rgba(255, 153, 0, 0.1);
+            border-radius: var(--radius);
+            animation: expandDown 0.3s ease;
+        }
+
+        .vincoli-container.active .vincoli-submenu {
+            display: block;
+        }
+
+        @keyframes expandDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #vincoli-main {
+            position: relative;
+        }
+
+        #vincoli-main::after {
+            content: '▼';
+            font-size: 12px;
+            transition: transform 0.3s ease;
+            margin-left: 8px;
+        }
+
+        .vincoli-container.active #vincoli-main::after {
+            transform: rotate(180deg);
+        }
+
+        .vincoli-submenu button {
+            margin: 6px 0;
+            background: white;
+            border-color: var(--border-soft);
+        }
+
+        .vincoli-submenu button::after {
+            content: none;
+        }
+
+        /* Aggiungere alla fine del file CSS */
+        .vincoli-submenu button {
+            pointer-events: all !important;
+        }
+
+        .vincoli-container.active .vincoli-submenu {
+            display: block;
+            pointer-events: all;
+        }
+
+        /* Miglioramento per evitare che i pulsanti si disattivino */
+        .layer-switcher button:not(#vincoli-main) {
+            pointer-events: auto !important;
+        }
+
+        /* ===== REVOLUTIONARY SEARCH INTERFACE ===== */
+        .search-tab {
+            position: fixed;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: var(--shadow-lg), 0 0 0 0 rgba(255, 153, 0, 0.4); }
+            50% { box-shadow: var(--shadow-lg), 0 0 0 10px rgba(255, 153, 0, 0); }
+        }
+
+        .search-tab:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: var(--shadow-xl);
+            animation: none;
+        }
+
+        .search-tab i {
+            font-size: 28px;
+            color: white;
+        }
+
+        .pdf-tab {
+            position: fixed;
+            left: 20px;
+            top: calc(50% + 100px);
+            transform: translateY(-50%);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary) 0%, #e67e22 100%);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .pdf-tab:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .pdf-tab i {
+            font-size: 28px;
+            color: white;
+        }
+
+        /* ===== IMMERSIVE SEARCH MODAL ===== */
+        .search-popup {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 153, 0, 0.95) 0%, rgba(230, 136, 0, 0.95) 100%);
+            backdrop-filter: var(--blur);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            animation: searchReveal 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes searchReveal {
+            from {
+                opacity: 0;
+                transform: scale(1.1);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .search-popup.active {
+            display: flex;
+        }
+
+        .search-container {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 60px 40px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            transform: translateY(-20px);
+            animation: searchSlideUp 0.5s ease forwards;
+        }
+
+        @keyframes searchSlideUp {
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .search-popup h3 {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .search-popup p {
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .search-inputs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            flex-wrap: wrap;
+        }
+
+        .search-popup input {
+            flex: 1;
+            padding: 20px 24px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 18px;
+            font-weight: 500;
+            background: var(--bg-soft);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .search-popup input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(255, 153, 0, 0.1);
+            background: white;
+        }
+
+        .search-popup input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-popup button {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-popup button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .search-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border: none;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .search-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .search-popup #search-error {
+            color: #dc3545;
+            margin-top: 16px;
+            font-weight: 500;
+        }
+
+        /* ===== PICTURE-IN-PICTURE SATELLITE ===== */
+        #satellite-overlay {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 350px;
+            height: 250px;
+            background: var(--bg-card);
+            border: 3px solid white;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            display: none;
+            box-shadow: var(--shadow-xl);
+            z-index: 1500;
+            cursor: move;
+            animation: satelliteIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes satelliteIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        #satellite-map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .satellite-controls {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .satellite-btn {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .satellite-btn:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: scale(1.1);
+        }
+
+        .overlay-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1002;
+        }
+
+        .overlay-button button {
+            width: 70px;
+            height: 70px;
+            border: none;
+            background: linear-gradient(135deg, var(--primary) 0%, #27ae60 100%);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay-button button::before {
+            content: '🛡';
+            font-size: 28px;
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .overlay-button button:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .overlay-button button:hover::before {
+            transform: scale(1.2);
+        }
+
+        /* ===== CROSSHAIRS ===== */
+        .crosshair-main, .crosshair-minimap {
+            pointer-events: none;
+        }
+
+        .crosshair-main {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .crosshair-main::before, .crosshair-main::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            box-shadow: 0 0 10px rgba(255, 153, 0, 0.5);
+        }
+
+        .crosshair-main::before {
+            width: 100%;
+            height: 3px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .crosshair-main::after {
+            width: 3px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .crosshair-minimap {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+        }
+
+        .crosshair-minimap::before, .crosshair-minimap::after {
+            content: '';
+            position: absolute;
+            background: linear-gradient(90deg, transparent, #e74c3c, transparent);
+            box-shadow: 0 0 8px rgba(231, 76, 60, 0.5);
+        }
+
+        .crosshair-minimap::before {
+            width: 100%;
+            height: 2px;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .crosshair-minimap::after {
+            width: 2px;
+            height: 100%;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* ===== REVOLUTIONARY BOTTOM DRAWER SIDEPANEL ===== */
+        #sidepanel {
+            position: fixed;
+            bottom: -90%;
+            left: 0;
+            right: 0;
+            height: 90%;
+            background: linear-gradient(to top, var(--bg-card) 0%, rgba(255, 255, 255, 0.98) 100%);
+            backdrop-filter: var(--blur);
+            transition: bottom 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        #sidepanel.active {
+            bottom: 0;
+        }
+
+        #sidepanel-tab {
+            position: absolute;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        #sidepanel-tab:hover {
+            transform: translateX(-50%) translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        #sidepanel-tab i {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        #sidepanel.active #sidepanel-tab i {
+            transform: rotate(180deg);
+        }
+
+        #sidepanel-content {
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* ===== BACK TO TOP BUTTON ===== */
+        .back-to-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1003;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.3s ease forwards;
+        }
+
+        .back-to-top-btn.show {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top-btn:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .back-to-top-btn i {
+            font-size: 18px;
+            margin-bottom: 2px;
+        }
+
+        .back-to-top-btn span {
+            font-size: 10px;
+            line-height: 1;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #sidepanel-tabs {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            background: rgba(255, 153, 0, 0.05);
+            border-bottom: 2px solid var(--border);
+            padding: 0;
+        }
+
+        #sidepanel-tabs button {
+            padding: 20px 8px;
+            border: none;
+            background: transparent;
+            color: var(--text-light);
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            text-align: center;
+        }
+
+        #sidepanel-tabs button::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--primary);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        #sidepanel-tabs button:hover {
+            color: var(--primary);
+            background: rgba(255, 153, 0, 0.05);
+        }
+
+        #sidepanel-tabs button.active {
+            color: var(--primary);
+            background: var(--bg-card);
+        }
+
+        #sidepanel-tabs button.active::before {
+            width: 80%;
+        }
+
+        .sidepanel-section {
+            display: none;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sidepanel-section.active {
+            display: block;
+            animation: sectionSlide 0.5s ease;
+        }
+
+        @keyframes sectionSlide {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sidepanel-section h2 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sidepanel-section h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 24px 0 16px 0;
+            color: var(--text);
+        }
+
+        .sidepanel-section p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .sidepanel-section a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .sidepanel-section a:hover {
+            color: var(--primary-hover);
+        }
+
+        .sidepanel-section hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            margin: 24px 0;
+        }
+
+        .sidepanel-section ul {
+            padding-left: 20px;
+            margin: 16px 0;
+        }
+
+        .sidepanel-section li {
+            margin: 12px 0;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .sidepanel-section img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* ===== FLOATING LOGO ===== */
+        .logo {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: var(--shadow-xl);
+        }
+
+        /* ===== EPIC LOADING SCREEN ===== */
+        .custom-loader {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #ffffff 0%, #fafafa 50%, #f0f0f0 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        .loading-animation {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin-bottom: 40px;
+        }
+
+        .spinner {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 4px solid transparent;
+        }
+
+        .spinner:nth-child(1) {
+            border-top: 4px solid var(--primary);
+            animation: spin 2s linear infinite;
+        }
+
+        .spinner:nth-child(2) {
+            border-right: 4px solid var(--primary-light);
+            animation: spin 1.5s linear infinite reverse;
+            transform: scale(0.8);
+        }
+
+        .spinner:nth-child(3) {
+            border-bottom: 4px solid var(--primary-hover);
+            animation: spin 1s linear infinite;
+            transform: scale(0.6);
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .custom-loader .loader-text {
+            text-align: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .custom-loader h2 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .loading-progress {
+            width: 400px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .loading-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 3px;
+            animation: loading 4s ease-in-out;
+        }
+
+        @keyframes loading {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+
+        /* ===== WAIT POPUP ===== */
+        .wait-popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: var(--blur);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2500;
+        }
+
+        .wait-content {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--shadow-xl);
+            animation: waitPop 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes waitPop {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .wait-content p {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+
+        .wait-content .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        /* ===== MOBILE OPTIMIZATION ===== */
+        @media (max-width: 768px) {
+            /* Reset base per mobile */
+            body {
+                overflow: auto;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            /* Mappa ottimizzata per mobile */
+            #map {
+                position: relative;
+                height: 60vh;
+                width: 100%;
+            }
+            
+            /* Command Bar mobile */
+            .command-bar {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                top: auto;
+                transform: none;
+                border-radius: 20px 20px 0 0;
+                padding: 12px 16px;
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: space-around;
+            }
+            
+            .command-btn {
+                flex: 1;
+                min-width: 60px;
+                padding: 10px 8px;
+                font-size: 11px;
+                flex-direction: column;
+                gap: 4px;
+                border-radius: 12px;
+            }
+            
+            .command-btn i {
+                font-size: 18px;
+            }
+            
+            /* Layer panel mobile */
+            .layer-switcher {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(10px);
+                transform: translateY(-100%);
+                border-radius: 0;
+                padding: 20px;
+                overflow-y: auto;
+            }
+            
+            .layer-switcher.active {
+                transform: translateY(0);
+            }
+            
+            .layer-card {
+                width: 100%;
+                margin-bottom: 15px;
+            }
+            
+            /* Search interface mobile */
+            .search-popup {
+                padding: 20px;
+            }
+            
+            .search-container {
+                width: 95%;
+                padding: 30px 20px;
+            }
+            
+            .search-inputs {
+                flex-direction: column;
+            }
+            
+            /* Sidepanel mobile */
+            #sidepanel {
+                height: 70%;
+                bottom: -70%;
+            }
+            
+            #sidepanel-tabs {
+                grid-template-columns: repeat(3, 1fr);
+                overflow-x: auto;
+            }
+            
+            #sidepanel-tabs button {
+                padding: 15px 8px;
+                font-size: 11px;
+                white-space: nowrap;
+            }
+            
+            .sidepanel-section {
+                padding: 20px 15px;
+            }
+            
+            /* Satellite overlay mobile */
+            #satellite-overlay {
+                width: 90%;
+                height: 200px;
+                bottom: 80px;
+                left: 5%;
+                right: 5%;
+            }
+            
+            /* Logo positioning */
+            .logo {
+                top: 10px;
+                right: 10px;
+                bottom: auto;
+            }
+            
+            .logo img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            /* Touch-friendly enlargements */
+            .command-btn, 
+            .layer-switcher button, 
+            #sidepanel-tabs button {
+                min-height: 44px; /* Minimum touch target size */
+            }
+            
+            /* Hide crosshairs on mobile */
+            .crosshair-main, 
+            .crosshair-minimap {
+                display: none !important;
+            }
+            
+            /* PDF tab positioning */
+            .pdf-tab {
+                left: 20px;
+                bottom: 100px;
+                top: auto;
+                transform: none;
+            }
+            
+            /* Search tab positioning */
+            .search-tab {
+                left: 20px;
+                bottom: 180px;
+                top: auto;
+                transform: none;
+            }
+            
+            /* Hide overlay button on mobile */
+            .overlay-button {
+                display: none;
+            }
+        }
+
+        /* Additional mobile-specific styles */
+        @media (max-width: 480px) {
+            .command-btn {
+                font-size: 10px;
+                padding: 8px 4px;
+            }
+            
+            .command-btn i {
+                font-size: 16px;
+            }
+            
+            #sidepanel-tabs {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .sidepanel-section h2 {
+                font-size: 22px;
+            }
+            
+            .sidepanel-section h3 {
+                font-size: 18px;
+            }
+        }
+
+        /* Prevent zoom on input focus */
+        @media (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px; /* Prevents zoom on focus */
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            /* Remove hover effects for touch devices */
+            .command-btn:hover::before {
+                transform: translateX(-100%);
+            }
+            
+            .command-btn:hover {
+                transform: none;
+                color: var(--text);
+            }
+            
+            .command-btn.active:hover {
+                color: white;
+            }
+            
+            /* Improve touch feedback */
+            .command-btn:active,
+            .layer-switcher button:active {
+                transform: scale(0.95);
+                transition: transform 0.1s ease;
+            }
+        }
+
+        /* Orientation-specific styles */
+        @media (max-width: 768px) and (orientation: portrait) {
+            #map {
+                height: 50vh;
+            }
+            
+            .command-bar {
+                padding: 10px 12px;
+            }
+        }
+
+        @media (max-width: 768px) and (orientation: landscape) {
+            #map {
+                height: 40vh;
+            }
+            
+            .command-bar {
+                padding: 8px 10px;
+            }
+            
+            #sidepanel {
+                height: 60%;
+                bottom: -60%;
+            }
+        }
+
+        /* ===== HIDDEN ELEMENTS FOR COMPATIBILITY ===== */
+        .search-popup::after {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            border-radius: inherit;
+            z-index: -1;
+        }
+
+        /* ===== SMOOTH SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-soft);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-light);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary);
+        }
+
+        .maplibregl-ctrl-attrib {
+          position: fixed;        /* Fissa l'elemento rispetto alla finestra del browser */
+          top: 0px;              /* Centra verticalmente rispetto al viewport */
+          right: 10px;              /* Posiziona al bordo destro */
+          transform: rotate(270deg) translateY(-50%);
+          transform-origin: top right; /* Punto di origine della trasformazione */
+          /* Aggiustamenti eventuali di spaziatura */
+          background-color: white; /* Opzionale: sfondo per leggibilità */
+          z-index: 1000;          /* Assicura che sia sopra altri elementi */
+          background-color: #00000080!important;
+          color: #ffffff !important;
+          width: 100%;
+            text-align: right;
+        }
+        .maplibregl-ctrl-attrib a {color: #ffffff !important; }
+
+        .maplibregl-ctrl-attrib.maplibregl-compact {
+            background-color: #fff;
+            border-radius: 12px;
+            box-sizing: content-box;
+            margin: 10px;
+            min-height: 20px;
+            padding: 2px 24px 2px 0;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="crosshair-main"></div>
+
+    <!-- Revolutionary Floating Command Bar -->
+    <div class="command-bar">
+        <button class="command-btn" onclick="toggleLayersMobile()" Title="Attiva/Disattiva i layers">
+            <i class="fas fa-layer-group"></i>
+            Layers
+        </button>
+        <button class="command-btn" onclick="toggleSearchPopup()" Title="Cerca una particella">
+            <i class="fas fa-search"></i>
+            Search
+        </button>
+        <button class="command-btn" id="pdf-cmd" onclick="generatePDFMobile()" style="display: none;" Title="Stampa la particella cercata">
+            <i class="fas fa-file-pdf"></i>
+            PDF
+        </button>
+        <button class="command-btn" onclick="toggleSatelliteOverlay()" Title="Attiva overlay maps">
+            <i class="fas fa-satellite"></i>
+            Satellite
+        </button>
+        <button class="command-btn" onclick="toggleSidepanelMobile()" Title="Apri pannello informativo">
+            <i class="fas fa-info-circle"></i>
+            Info
+        </button>
+    </div>
+
+    <!-- Floating Layer Cards -->
+    <div class="layer-switcher" id="layer-panel">
+        <div class="layer-card">
+            <h3><div class="layer-icon"><i class="fas fa-shield-alt"></i></div> Vincoli</h3>
+            <div class="layer-grid">
+                <div class="vincoli-container">
+                    <button id="vincoli-main" class="active">
+                        <span>Vincoli Urbanistici</span>
+                        <div class="layer-toggle"></div>
+                    </button>
+                    <div class="vincoli-submenu">
+                        <button id="vincoli_lin" class="active">
+                            <span>Vincoli Lineari</span>
+                            <div class="layer-toggle"></div>
+                        </button>
+                        <button id="vincoli_ar" class="active">
+                            <span>Vincoli Areali</span>
+                            <div class="layer-toggle"></div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="layer-card">
+            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);"><i class="fas fa-map"></i></div> Catasto</h3>
+            <div class="layer-grid">
+                <button id="particelle" class="active">
+                    <span>Particelle Catastali</span>
+                    <div class="layer-toggle"></div>
+                </button>
+            </div>
+        </div>
+
+        <div class="layer-card">
+            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);"><i class="fas fa-globe"></i></div> Cartografia</h3>
+            <div class="layer-grid">
+                <button id="carta_tecnica">
+                    <span>Carta Tecnica 2k</span>
+                    <div class="layer-toggle"></div>
+                </button>
+                <button id="satellite">
+                    <span>Google Satellite</span>
+                    <div class="layer-toggle"></div>
+                </button>
+            </div>
+        </div>
+    </div>	
+    
+    <!-- Floating Logo -->
+    <div class="logo">
+        <a href="https://opendatasicilia.it/" title="@opendatasicilia" target="_blank">
+            <img src="https://palermohub.opendatasicilia.it/lib/images/opendatasicilia_dredits.png" alt="OpenDataSicilia">
+        </a>
+    </div>
+
+    <!-- Revolutionary Search Interface -->
+    <div class="search-tab" onclick="toggleSearchPopup()">
+        <i class="fas fa-search"></i>
+    </div>
+
+    <div class="pdf-tab" id="pdf-tab" onclick="generatePDFMobile()">
+        <i class="fas fa-file-pdf"></i>
+    </div>
+
+    <!-- Immersive Search Modal -->
+    <div class="search-popup" id="search-popup">
+        <button class="search-close" onclick="toggleSearchPopup()">×</button>
+        <div class="search-container">
+            <h3>Ricerca Particella</h3>
+            <p>Inserisci foglio e particella per iniziare la ricerca nella mappa catastale di Palermo</p>
+            <div class="search-inputs">
+                <input type="number" id="foglio" placeholder="Numero Foglio" min="1">
+                <input type="number" id="particella" placeholder="Numero Particella" min="1">
+            </div>
+            <button onclick="searchParticella()">Avvia Ricerca</button>
+            <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
+                Dati catastali aggiornati a Agosto 2025 (S.I.T.R. Sicilia)
+            </p>
+            <div id="search-error"></div>
+        </div>
+    </div>
+
+    <!-- Picture-in-Picture Satellite  -->
+    <div id="satellite-overlay">
+        <div class="satellite-controls">
+            <button class="satellite-btn" onclick="toggleSatelliteOverlay()" title="Chiudi">×</button>
+        </div>
+        <div id="satellite-map"></div>
+        <div class="crosshair-minimap"></div>
+    </div>
+
+    <div class="overlay-button">
+        <button onclick="toggleSatelliteOverlay()" data-state="closed"></button>
+    </div>
+
+    <!-- Revolutionary Bottom Drawer -->
+    <div id="sidepanel">
+        <div id="sidepanel-tab" onclick="toggleSidepanelMobile()">
+            <i id="tab-icon" class="fas fa-chevron-up"></i>
+            <span>Informazioni</span>
+        </div>
+        <div id="sidepanel-content">
+            <!-- Back to Top Button -->
+            <button id="back-to-top" title="Torna in alto" class="back-to-top-btn" onclick="scrollToTop()">
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            <div id="sidepanel-tabs">
+                <button onclick="showSection('section1')" class="active">Info</button>
+                <button onclick="showSection('section2')">Strumenti</button>
+                <button onclick="showSection('section3')">Ricerca</button>
+                <button onclick="showSection('section4')">PDF</button>
+                <button onclick="showSection('section6')">Legenda</button>
+                <button onclick="showSection('section5')">Video</button>
+            </div>
+
+            <div id="section1" class="sidepanel-section active">
+                <h2>Variante Generale e dati catastali</h2>
+                <p><em><strong>Dal 1° gennaio 2025, l'accesso telematico alle banche dati </strong>ipotecarie e <strong>catastali diventa gratuito</strong>, segnando un'importante semplificazione per professionisti, pubbliche amministrazioni e cittadini. <br>La novità è contenuta nel <a href="https://www.agenziaentrate.gov.it/portale/web/guest/-/provvedimento-del-30-dicembre-20-3">provvedimento</a> dell'Agenzia delle Entrate del 30 dicembre 2024, che attua le disposizioni introdotte dall'articolo 7 del decreto legislativo n. 139/2024.</em></p>
+                <hr>
+                <p><strong>Variente Generle al P.R.G.</strong> - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br>
+                Rielaborazione a cura di @opendatasicilia su opendata del Comune di Palermo. <br><br>
+                <strong> Fonte dati Zonizzazione e vincoli -</strong> <br><a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=11" title="Opendata Palermo - Urbanistica" target="_blank">Urbanistica</a>   <br>
+                <a href="https://www.comune.palermo.it/opendata_dld.php?id=320t" title="Perimetrazione Zonizzazione P.R.G. vigente" target="_blank" > Perimetrazione Zonizzazione P.R.G. vigente;</a><br>
+                <a href="https://www.comune.palermo.it/opendata_dld.php?id=321" title="Vincoli vigenti della Variante al P.R.G." target="_blank" >Vincoli vigenti della Variante al P.R.G.</a> -  <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong>
+                  <p class="lorem"><strong>La variante Generale al P.R.G. è stata redatta dal Settore Urbanistica nel 2004 oggi Area Urbanistica della rigenerazione urbana, della mobilità e del centro storico</strong><br>
+                    <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=103" target="_blank">Qui gli elaborati della Variante Generale</a></p>
+                     <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br>
+                     <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p>
+                   <hr>
+                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Agosto 2025</strong>.<br><br>
+                    L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
+                    <hr>
+                    <p><strong>Disclaimer:</strong> I contenuti presenti in questa sezione, compresi testi ed elementi grafici, hanno carattere puramente informativo e divulgativo.  <br><br> Non sono presenti dati personali o sensibili. Si precisa che questi materiali non costituiscono documenti ufficiali né hanno alcun valore legale.  <br> <br>Per consultare la documentazione ufficiale e legalmente vincolante, si prega di fare riferimento agli atti definitivi allegati alle relative deliberazioni degli organi competenti.</p>
+            </div>
+
+            <div id="section2" class="sidepanel-section">
+                <h2>Nuova mappa con particelle catastali e strumenti urbanistici vigenti di Palermo</h2>
+                <p> La nuova versione è completamente riprogettata e ottimizzata, grazie all'aiuto di <a href="https://x.com/deepseek_ai" title="DeepSeek AI" target="_blank">@deepseek_ai</a>, per offrire una migliore esperienza utente.</p>
+                <h3>Principali miglioramenti</h3>
+                <p>La novità più significativa riguarda la gestione dei tooltip. Nella versione precedente, in presenza di elementi sovrapposti nei livelli PMTiles, i tooltip si sovrapponevano creando confusione. Ora, lo script genera automaticamente un tooltip unificato che integra in modo ordinato le informazioni di tutti gli elementi presenti in un punto specifico.<br> Inoltre, è stato integrato un pratico modulo di ricerca che permette di individuare rapidamente fogli e particelle specifiche. <br> Infine è stata implementata una finestra dinamica che visualizza una mappa satellitare, la quale si sincronizza automaticamente con la mappa principale.</p>
+                <h3>Aspetti tecnici</h3>
+                <p>Il codice è stato completamente ristrutturato per garantire:</p>
+                <ul>
+                  <li>Maggiore stabilità e riduzione dei bug</li>
+                  <li>Performance ottimizzate</li>
+                  <li>Migliore gestione della visualizzazione dei dati</li>
+                  <li>Modulo di ricerca per Foglio e particella catastale</li>
+                  <li>Finestra dinamica per visualizzare la mappa satellitare</li>
+                </ul>
+                <h3>Mappa Variante Generale versione base</h3>
+                <p>La prima versione della mappa della Variante Generale rimane disponibile per la consultazione al seguente <a href="https://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595" title="Palermo - Zonizzazione e vincoli sul territorio" target="_blank"><b>indirizzo</b></a>.</p>
+                <h3>Ringraziamenti</h3>
+                <p>Un sentito ringraziamento va a <a href="https://x.com/aborruso" title="Andrea Borruso" target="_blank"><em>@aborruso</em></a> e <a href="https://x.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a>, i cui insegnamenti e la costante condivisione di conoscenze hanno contribuito in modo determinante alla realizzazione di questo progetto. Il loro supporto mi permette di implementare e migliorarmi nel campo della cartografia digitale.</p>
+                <hr>
+                <h3>I principali strumenti usati per realizzare la mappa</h3>
+                <p>Coming soon...</p>
+                <img src="js/demo2.png" width="366" height="128" alt=""/>
+            </div>
+
+            <div id="section3" class="sidepanel-section">
+                <h2>Ricerca geografica delle particelle catastali</h2>
+                <p> Il layer <b>Particelle Catastali</b> viene esposto in formato PMTiles.</p>
+                <p> Il <b>PMTiles</b> è un formato di file progettato per archiviare e servire dati geospaziali, come mappe vettoriali o raster, in modo efficiente. È un formato basato su tessere (tiles), che permette di suddividere i dati in piccole porzioni (tiles) per un accesso rapido e selettivo. <br> La particolarità di PMTiles è che è un formato monolitico, cioè tutti i dati sono contenuti in un unico file, a differenza di altri formati che richiedono molteplici file separati. Questo lo rende più semplice da gestire e distribuire, ad esempio su un server web o su un CDN (Content Delivery Network).</p>
+                <h3>Cerca una Particella</h3>
+                <p> Viste le caratteristiche del PMTiles, Durante la ricerca con PMTiles, è necessario che la particella da visualizzare sia compresa nell'area mostrata sullo schermo del proprio dispositivo (PC desktop o mobile). In caso contrario, poichè il dato non sarà stato caricato, verrà mostrato un messaggio di errore.</p>
+                <h3>Ricerca con PMTiles</h3>
+                <p>Dato che il formato <strong>PMTiles</strong> è progettato per caricare solo le <strong>porzioni di dati</strong> (tiles) necessarie per visualizzare l'area attualmente visibile sullo schermo (monitor del PC o display del dispositivo), è fondamentale assicurarsi che la particella o l'oggetto geospaziale richiesto rientri nell'area visualizzata.</p>
+            </div>
+
+            <div id="section4" class="sidepanel-section">
+                <h2>Stampa PDF</h2>
+                <p>Una volta effettuata la ricerca della particella catastale tramite il pulsante 'Cerca', comparirà una nuova icona sottostante. <br><br>Cliccando su questa icona, il sistema genererà automaticamente un documento PDF che include una mappa dettagliata con la particella evidenziata. <br><br>Il documento contiene inoltre tutte le informazioni catastali della particella selezionata e i relativi dati urbanistici, compresi la zonizzazione dell'area e gli eventuali vincoli esistenti.</p>
+                <hr>
+                <p> <b>N.B. Non è possibile generare file pdf quando si usa un device mobile orientato in verticale (Portrait) </b><br><br>
+                Per generare PDF con le informazioni richieste, ruotare il dispositivo in orientamento orizzontale (modalità landscape).</p>
+            </div>
+
+            <div id="section6" class="sidepanel-section">
+                <h2>Legenda PRG</h2>
+                <img src="legenda.svg" style="width: 100%; height: auto;" alt="Legenda PRG" />
+            </div>
+
+            <div id="section5" class="sidepanel-section">
+                <h2>Video demo</h2>
+                <p>Video di presentazione delle nuove funzionalità introdotte sulla mappa</p>
+                <div style="max-width: 600px; width: 100%; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 20px;">
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--radius);" src="https://www.youtube.com/embed/N_gdK7NBvU4?si=7yUCGTg8wOD_cJ_2&amp;start=3" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Wait Popup -->
+    <div id="pdf-wait-popup" class="wait-popup">
+        <div class="wait-content">
+            <p>Generazione del PDF in corso...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Epic Loading Screen -->
+    <div class="custom-loader" id="custom-loader">
+        <div class="loading-animation">
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+            <div class="spinner"></div>
+        </div>
+        <div class="loader-text">Elaborazione dei dati cartografici in corso...</div>
+        <h2>Variante Generale al P.R.G. e Particelle catastali</h2>
+        <div class="loading-progress">
+            <div class="loading-bar"></div>
+        </div>
+    </div>
+
+    <!-- Hidden compatibility elements -->
+    <div id="pdf-capture" style="display: none; width: 300px; height: 300px;">
+        <div id="map-capture"></div>
+    </div>
+
+    <script>
+        // =========================
+        // SCRIPT UNIFICATO CATASTO PALERMO - VERSIONE MOBILE OPTIMIZED
+        // =========================
+
+        // VARIABILI GLOBALI
+        let isSatelliteOverlayOpen = false;
+        let satelliteMap = null;
+        let layerPanelOpen = false;
+        let currentPopup = null;
+
+        // STATO DEI LAYER
+        const layerStates = {
+            'vincoli_lin': true,
+            'vincoli_ar': true,
+            'particelle': true,
+            'carta_tecnica': false,
+            'satellite': false
+        };
+
+        // MAPPATURA TRA ID PULSANTI E ID LAYER SULLA MAPPA
+        const layerMapping = {
+            'vincoli_lin': 'vincoli_lin',
+            'vincoli_ar': 'vincoli_ar', 
+            'particelle': 'Particelle catastali',
+            'carta_tecnica': 'carta_tecnica',
+            'satellite': 'satellite-layer'
+        };
+
+        // ===== MOBILE-SPECIFIC FUNCTIONS =====
+
+        // Detect mobile device
+        function isMobileDevice() {
+            return window.innerWidth <= 768 || 
+                   navigator.userAgent.match(/Android/i) ||
+                   navigator.userAgent.match(/webOS/i) ||
+                   navigator.userAgent.match(/iPhone/i) ||
+                   navigator.userAgent.match(/iPad/i) ||
+                   navigator.userAgent.match(/iPod/i) ||
+                   navigator.userAgent.match(/BlackBerry/i) ||
+                   navigator.userAgent.match(/Windows Phone/i);
+        }
+
+        // Mobile-optimized layer panel toggle
+        function toggleLayersMobile() {
+            const panel = document.getElementById('layer-panel');
+            const body = document.body;
+            
+            if (isMobileDevice()) {
+                layerPanelOpen = !layerPanelOpen;
+                
+                if (layerPanelOpen) {
+                    panel.classList.add('active');
+                    body.style.overflow = 'hidden'; // Prevent background scrolling
+                } else {
+                    panel.classList.remove('active');
+                    body.style.overflow = 'auto';
+                }
+            } else {
+                // Use desktop behavior
+                const btn = document.querySelector('.command-btn');
+                layerPanelOpen = !layerPanelOpen;
+                
+                if (layerPanelOpen) {
+                    panel.classList.add('active');
+                    btn.classList.add('active');
+                } else {
+                    panel.classList.remove('active');
+                    btn.classList.remove('active');
+                }
+            }
+        }
+
+        // Mobile-optimized sidepanel
+        function toggleSidepanelMobile() {
+            const sidepanel = document.getElementById('sidepanel');
+            const body = document.body;
+            
+            if (isMobileDevice()) {
+                const isActive = sidepanel.classList.toggle('active');
+                
+                if (isActive) {
+                    body.style.overflow = 'hidden';
+                    const content = document.getElementById('sidepanel-content');
+                    content.addEventListener('scroll', handleSidepanelScroll);
+                } else {
+                    body.style.overflow = 'auto';
+                }
+            } else {
+                // Use desktop behavior
+                const isActive = sidepanel.classList.toggle('active');
+                
+                if (isActive) {
+                    const content = document.getElementById('sidepanel-content');
+                    content.addEventListener('scroll', handleSidepanelScroll);
+                }
+            }
+        }
+
+        // Close panels when tapping outside (mobile)
+        function setupMobileTapOutside() {
+            document.addEventListener('click', function(e) {
+                if (!isMobileDevice()) return;
+                
+                const layerPanel = document.getElementById('layer-panel');
+                const sidepanel = document.getElementById('sidepanel');
+                
+                // Close layer panel if tapping outside
+                if (layerPanelOpen && layerPanel && !layerPanel.contains(e.target)) {
+                    const commandBtns = document.querySelectorAll('.command-btn');
+                    let isCommandBtn = false;
+                    
+                    commandBtns.forEach(btn => {
+                        if (btn.contains(e.target)) isCommandBtn = true;
+                    });
+                    
+                    if (!isCommandBtn) {
+                        toggleLayersMobile();
+                    }
+                }
+                
+                // Close sidepanel if tapping on overlay
+                if (sidepanel.classList.contains('active') && 
+                    e.target === document.getElementById('sidepanel-content')) {
+                    toggleSidepanelMobile();
+                }
+            });
+        }
+
+        // Mobile-optimized PDF generation
+        function generatePDFMobile() {
+            if (isMobileDevice()) {
+                const orientation = window.innerHeight > window.innerWidth ? 'portrait' : 'landscape';
+                
+                if (orientation === 'portrait') {
+                    // Show user-friendly message
+                    const message = document.createElement('div');
+                    message.style.cssText = `
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: white;
+                        padding: 20px;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+                        z-index: 3000;
+                        text-align: center;
+                        max-width: 80%;
+                    `;
+                    message.innerHTML = `
+                        <h3>Orientamento Richiesto</h3>
+                        <p>Per generare il PDF, ruota il dispositivo in orizzontale (landscape).</p>
+                        <button onclick="this.parentElement.remove()" 
+                                style="margin-top: 15px; padding: 10px 20px; background: #ff9900; color: white; border: none; border-radius: 5px;">
+                            OK
+                        </button>
+                    `;
+                    document.body.appendChild(message);
+                    return;
+                }
+            }
+            
+            // Proceed with normal PDF generation
+            generatePDF();
+        }
+
+        // Initialize mobile-specific features
+        function initMobileFeatures() {
+            if (isMobileDevice()) {
+                // Add touch-specific event listeners
+                setupMobileTapOutside();
+                
+                // Adjust map interactions for touch
+                if (map) {
+                    map.dragPan.enable();
+                    map.touchZoomRotate.enable();
+                }
+                
+                // Show mobile-specific hints
+                console.log('Mobile mode activated');
+            }
+        }
+
+        // =========================
+        // FUNZIONI LAYER SWITCHER CORRETTE
+        // =========================
+
+        function toggleLayer(layerId) {
+            if (!layerMapping[layerId]) {
+                console.warn(`Nessun mapping trovato per il layer: ${layerId}`);
+                return;
+            }
+            
+            // Aggiorna lo stato
+            layerStates[layerId] = !layerStates[layerId];
+            
+            // Aggiorna l'interfaccia
+            const button = document.getElementById(layerId);
+            if (button) {
+                if (layerStates[layerId]) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            }
+            
+            // Aggiorna la mappa
+            if (map && map.getLayer(layerMapping[layerId])) {
+                map.setLayoutProperty(
+                    layerMapping[layerId], 
+                    'visibility', 
+                    layerStates[layerId] ? 'visible' : 'none'
+                );
+                
+                // Gestione speciale per le particelle (include le labels)
+                if (layerId === 'particelle') {
+                    map.setLayoutProperty(
+                        'particelle-labels', 
+                        'visibility', 
+                        layerStates[layerId] ? 'visible' : 'none'
+                    );
+                }
+            }
+            
+            console.log(`Layer ${layerId} ${layerStates[layerId] ? 'attivato' : 'disattivato'}`);
+        }
+
+        // FUNZIONE PER IL TOGGLE DEL SUBMENU VINCOLI
+        function toggleVincoliSubmenu() {
+            const container = document.querySelector('.vincoli-container');
+            container.classList.toggle('active');
+        }
+
+        // INIZIALIZZA GLI EVENT LISTENER PER I PULSANTI
+        function initLayerButtons() {
+            // Pulsante principale vincoli (solo per aprire/chiudere il submenu)
+            const vincoliMain = document.getElementById('vincoli-main');
+            if (vincoliMain) {
+                vincoliMain.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleVincoliSubmenu();
+                });
+            }
+            
+            // Pulsanti dei layer individuali
+            const layerButtons = ['vincoli_lin', 'vincoli_ar', 'particelle', 'carta_tecnica', 'satellite'];
+            layerButtons.forEach(layerId => {
+                const button = document.getElementById(layerId);
+                if (button) {
+                    button.addEventListener('click', function(e) {
+                        e.stopPropagation();
+                        toggleLayer(layerId);
+                    });
+                }
+            });
+            
+            // Chiudi il submenu vincoli quando si clicca altrove
+            document.addEventListener('click', function(e) {
+                const vincoliContainer = document.querySelector('.vincoli-container');
+                const vincoliBtn = document.getElementById('vincoli-main');
+                
+                if (vincoliContainer && vincoliContainer.classList.contains('active') && 
+                    !vincoliContainer.contains(e.target) && 
+                    e.target !== vincoliBtn) {
+                    vincoliContainer.classList.remove('active');
+                }
+            });
+            
+            console.log('✅ Pulsanti dei layer inizializzati correttamente');
+        }
+
+        // =========================
+        // OVERLAY SATELLITARE CORRETTO
+        // =========================
+
+        function toggleSatelliteOverlay() {
+            const satelliteOverlay = document.getElementById("satellite-overlay");
+            const overlayButton = document.querySelector(".overlay-button button");
+            const crosshairMain = document.querySelector(".crosshair-main");
+
+            if (isSatelliteOverlayOpen) {
+                satelliteOverlay.style.display = "none";
+                if (overlayButton) overlayButton.setAttribute("data-state", "closed");
+                if (crosshairMain) crosshairMain.style.display = "none";
+                
+                if (satelliteMap) {
+                    satelliteMap.remove();
+                    satelliteMap = null;
+                }
+            } else {
+                satelliteOverlay.style.display = "block";
+                if (overlayButton) overlayButton.setAttribute("data-state", "open");
+                if (crosshairMain) crosshairMain.style.display = "block";
+                
+                // Posizionamento iniziale
+                if (isMobileDevice()) {
+                    satelliteOverlay.style.width = "90%";
+                    satelliteOverlay.style.height = "200px";
+                    satelliteOverlay.style.bottom = "80px";
+                    satelliteOverlay.style.left = "5%";
+                } else {
+                    satelliteOverlay.style.width = "350px";
+                    satelliteOverlay.style.height = "350px";
+                    satelliteOverlay.style.bottom = "50px";
+                    satelliteOverlay.style.left = "10px";
+                }
+
+                // Inizializza mappa satellitare
+                if (map) {
+                    satelliteMap = new maplibregl.Map({
+                        container: "satellite-map",
+                        style: {
+                            version: 8,
+                            sources: {
+                                satellite: {
+                                    type: "raster",
+                                    tiles: ["https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"],
+                                    tileSize: 256,
+                                    attribution: "Immagini ©2025 Google - "
+                                }
+                            },
+                            layers: [{
+                                id: "satellite-layer",
+                                type: "raster",
+                                source: "satellite",
+                                minzoom: 0,
+                                maxzoom: 22
+                            }]
+                        },
+                        center: map.getCenter(),
+                        zoom: map.getZoom(),
+                        interactive: false
+                    });
+
+                    // Sincronizzazione con mappa principale
+                    map.on("move", () => {
+                        if (satelliteMap) {
+                            satelliteMap.setCenter(map.getCenter());
+                            satelliteMap.setZoom(map.getZoom());
+                        }
+                    });
+
+                    map.on("zoom", () => {
+                        if (satelliteMap) {
+                            satelliteMap.setZoom(map.getZoom());
+                        }
+                    });
+                }
+            }
+
+            isSatelliteOverlayOpen = !isSatelliteOverlayOpen;
+        }
+
+        // =========================
+        // FUNZIONI RICERCA
+        // =========================
+
+        function toggleSearchPopup() {
+            const searchPopup = document.getElementById("search-popup");
+            searchPopup.classList.toggle("active");
+            
+            if (searchPopup.classList.contains("active")) {
+                setTimeout(() => {
+                    const foglioInput = document.getElementById("foglio");
+                    if (foglioInput) {
+                        foglioInput.focus();
+                    }
+                }, 300);
+            }
+        }
+
+        function searchParticella() {
+            const foglio = document.getElementById("foglio").value;
+            const particella = document.getElementById("particella").value;
+            const errorDiv = document.getElementById("search-error");
+            const pdfTab = document.getElementById("pdf-tab");
+            const pdfCmd = document.getElementById("pdf-cmd");
+
+            if (!foglio || !particella) {
+                errorDiv.textContent = "Inserire sia il Foglio che la Particella";
+                if (pdfTab) pdfTab.style.display = "none";
+                if (pdfCmd) pdfCmd.style.display = "none";
+                return;
+            }
+
+            const features = map.querySourceFeatures("catasto", {
+                sourceLayer: "particelle",
+                filter: ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]
+            });
+
+            if (features.length > 0) {
+                errorDiv.textContent = "";
+                window.currentParticella = {
+                    foglio: foglio,
+                    particella: particella,
+                    bounds: features[0].geometry.coordinates[0],
+                    center: features[0].geometry.coordinates[0].reduce(
+                        (bounds, coord) => bounds.extend(coord),
+                        new maplibregl.LngLatBounds(features[0].geometry.coordinates[0][0], features[0].geometry.coordinates[0][0])
+                    ).getCenter()
+                };
+
+                // MOSTRA ENTRAMBI I PULSANTI PDF
+                if (pdfTab) pdfTab.style.display = "block";
+                if (pdfCmd) pdfCmd.style.display = "flex";
+
+                const coordinates = features[0].geometry.coordinates[0];
+                const bounds = coordinates.reduce(
+                    (bounds, coord) => bounds.extend(coord),
+                    new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
+                );
+
+                map.fitBounds(bounds, { padding: 50, maxZoom: 17.5 });
+
+                if (map.getLayer("highlighted-polygon")) {
+                    map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
+                }
+
+                new maplibregl.Popup()
+                    .setLngLat(bounds.getCenter())
+                    .setHTML(`<b>Particelle catastali</b><br><b>Foglio:</b> ${foglio}<br><b>Particella:</b> ${particella}`)
+                    .addTo(map);
+
+                toggleSearchPopup();
+            } else {
+                errorDiv.textContent = "Nessuna particella trovata con i parametri specificati o la particella richiesta non è visibile nell'area corrente";
+                if (pdfTab) pdfTab.style.display = "none";
+                if (pdfCmd) pdfCmd.style.display = "none";
+                
+                if (map.getLayer("highlighted-polygon")) {
+                    map.setFilter("highlighted-polygon", ["==", "id", ""]);
+                }
+            }
+        }
+
+        // =========================
+        // FUNZIONI SIDEPANEL
+        // =========================
+
+        function handleSidepanelScroll() {
+            const content = document.getElementById('sidepanel-content');
+            const backToTopBtn = document.getElementById('back-to-top');
+            
+            if (content.scrollTop > 200) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        }
+
+        function scrollToTop() {
+            const content = document.getElementById('sidepanel-content');
+            if (content) {
+                content.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.sidepanel-section');
+            const buttons = document.querySelectorAll('#sidepanel-tabs button');
+            
+            sections.forEach(section => {
+                section.classList.remove('active');
+                section.style.display = 'none';
+            });
+            
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.style.display = 'block';
+                setTimeout(() => {
+                    targetSection.classList.add('active');
+                }, 10);
+            }
+            
+            event.target.classList.add('active');
+            
+            const content = document.getElementById('sidepanel-content');
+            if (content) {
+                content.scrollTop = 0;
+            }
+        }
+
+        // =========================
+        // FUNZIONI PDF SEMPLIFICATE E CORRETTE
+        // =========================
+
+        function calculateAreasAndIntersections(features) {
+            const particellaFeature = features.find(f => f.layer.id === "Particelle catastali");
+            if (!particellaFeature) return null;
+
+            const particellaGeometry = particellaFeature.geometry;
+            const particellaPolygon = turf.polygon(particellaGeometry.coordinates);
+            const particellaArea = turf.area(particellaPolygon);
+
+            const intersections = features
+                .filter(f => f.layer.id !== "Particelle catastali")
+                .map(feature => {
+                    const featureGeometry = feature.geometry;
+                    const featurePolygon = turf.polygon(featureGeometry.coordinates);
+                    const intersection = turf.intersect(particellaPolygon, featurePolygon);
+                    
+                    if (intersection) {
+                        const intersectionArea = turf.area(intersection);
+                        const percentage = (intersectionArea / particellaArea) * 100;
+                        return {
+                            layer: feature.layer.id,
+                            area: intersectionArea.toFixed(2),
+                            percentage: percentage.toFixed(2)
+                        };
+                    }
+                    return null;
+                })
+                .filter(intersection => intersection !== null);
+
+            return {
+                particellaArea: particellaArea.toFixed(2),
+                intersections: intersections
+            };
+        }
+
+        // VERSIONE PDF SEMPLIFICATA BASATA SUL FILE FUNZIONANTE
+        async function generatePDF() {
+            const isMobile = window.innerWidth <= 768;
+            const isPortrait = window.innerHeight > window.innerWidth;
+            
+            if (isMobile && isPortrait) {
+                alert("Per generare il file PDF con le informazioni richieste, ruotare il dispositivo in orientamento orizzontale (modalità landscape).");
+                return;
+            }
+            
+            if (!window.currentParticella) {
+                alert("Nessuna particella selezionata.");
+                return;
+            }
+            
+            const waitPopup = document.getElementById("pdf-wait-popup");
+            waitPopup.style.display = "flex";
+            
+            // Disabilita temporaneamente gli eventi mouse
+            map.off("mouseenter", "Particelle catastali");
+            map.off("mousemove");
+            
+            // Rimuovi highlight temporaneamente
+            if (map.getLayer("highlighted-polygon")) {
+                map.setFilter("highlighted-polygon", ["==", "id", ""]);
+            }
+            
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const margin = 20;
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const pageHeight = doc.internal.pageSize.getHeight();
+            
+            doc.setFont("helvetica");
+            
+            // Aggiungi logo demo
+            const demoImageUrl = "https://palermohub.opendatasicilia.it/pmtiles/js/demo.png";
+            const demoImageWidth = 35.28;
+            const demoImageHeight = 18.7;
+            doc.addImage(demoImageUrl, "PNG", pageWidth - margin - demoImageWidth, margin, demoImageWidth, demoImageHeight);
+            
+            // Titolo e info particella
+            doc.setFontSize(16);
+            doc.text(`Demo ricerca particella catastale`, pageWidth / 2, margin + 15, { align: "center" });
+            doc.setFontSize(12);
+            doc.text(`Foglio: ${window.currentParticella.foglio}`, margin, margin + 30);
+            doc.text(`Particella: ${window.currentParticella.particella}`, margin, margin + 35);
+            
+            const bounds = window.currentParticella.bounds;
+            if (!bounds || bounds.length === 0) {
+                alert("Bounds della particella non validi.");
+                waitPopup.style.display = "none";
+                return;
+            }
+            
+            // Zoom sulla particella
+            map.fitBounds(bounds, { padding: 50, maxZoom: 17.5 });
+            
+            // Aggiungi layer temporanei per evidenziare la particella
+            map.addLayer({
+                id: "highlighted-polygon-pdf",
+                type: "fill",
+                source: "catasto",
+                "source-layer": "particelle",
+                paint: {
+                    "fill-color": "#ffff00",
+                    "fill-opacity": 0.3
+                },
+                filter: ["all", ["==", "Foglio", window.currentParticella.foglio], ["==", "Paricella", window.currentParticella.particella]]
+            });
+            
+            map.addLayer({
+                id: "highlighted-polygon-outline-pdf",
+                type: "line",
+                source: "catasto",
+                "source-layer": "particelle",
+                paint: {
+                    "fill-color": "#000000",
+                    "line-width": 4
+                },
+                filter: ["all", ["==", "Foglio", window.currentParticella.foglio], ["==", "Paricella", window.currentParticella.particella]]
+            });
+            
+            // Data di generazione
+            const now = new Date();
+            doc.setFontSize(8);
+            doc.text(`Documento generato il ${now.toLocaleDateString()} alle ${now.toLocaleTimeString()}`, margin, margin + 45);
+            
+            // Aspetta che la mappa si stabilizzi
+            map.once("idle", async () => {
+                try {
+                    // Cattura la mappa
+                    const mapCanvas = map.getCanvas();
+                    const mapImage = mapCanvas.toDataURL("image/png");
+                    
+                    if (!mapImage) {
+                        throw new Error("Errore durante la generazione dell'immagine della mappa.");
+                    }
+                    
+                    // Aggiungi immagine della mappa
+                    const imgWidth = pageWidth - 2 * margin;
+                    const imgHeight = (mapCanvas.height / mapCanvas.width) * imgWidth;
+                    doc.addImage(mapImage, "PNG", margin, margin + 48, imgWidth, imgHeight);
+                    
+                    // Disclaimer e fonte dati
+                    const disclaimerText = `Fonte dati catastali S.I.T.R. Sicilia - Ultimo aggiornamento Agosto 2025, rilasciati con licenza CC-BY 4.0.
+        Fonte dati ZTO e vincoli: opendata Comune di Palermo, rilasciati con licenza CC-BY 4.0.
+
+        L'Agenzia delle entrate è l'amministrazione titolare dei dati, rilasciati con licenza CC-BY 4.0.
+        L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio dimostrativo.
+
+        Disclaimer: I contenuti presenti in questo documento, compresi testi ed elementi grafici, hanno carattere puramente informativo e divulgativo. Non sono presenti dati personali o sensibili. Si precisa che questi materiali non costituiscono documenti ufficiali né hanno alcun valore legale. Per consultare la documentazione ufficiale e legalmente vincolante, si prega di fare riferimento agli atti definitivi allegati alle relative deliberazioni degli organi competenti.
+
+        by @opendatasicilia`;
+                    
+                    doc.setFontSize(8);
+                    let yPos = margin + 50 + imgHeight + 10;
+                    doc.text(disclaimerText, margin, yPos, { maxWidth: pageWidth - 2 * margin });
+                    yPos += doc.getTextDimensions(disclaimerText).h + 39;
+                    
+                    // Linea separatrice
+                    doc.setLineWidth(0.5);
+                    doc.setDrawColor(204, 204, 204);
+                    doc.line(margin, yPos, pageWidth - margin, yPos);
+                    yPos += 2;
+                    
+                    // Query per dati urbanistici
+                    const center = window.currentParticella.center;
+                    const point = map.project(center);
+                    const features = map.queryRenderedFeatures(point, {
+                        layers: ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"]
+                    });
+                    
+                    // Aggiungi sezione dati urbanistici
+                    doc.setFontSize(14);
+                    yPos += 8;
+                    doc.text("Dati urbanistici:", margin, yPos);
+                    yPos += 8;
+                    doc.setFontSize(11);
+                    
+                    // Calcola aree se disponibili
+                    const areaData = calculateAreasAndIntersections(features);
+                    if (areaData) {
+                        doc.text(`• Area totale della particella: ${areaData.particellaArea} m²`, margin, yPos);
+                        yPos += 5;
+                        areaData.intersections.forEach(intersection => {
+                            doc.text(`• Area intersecata con ${intersection.layer}: ${intersection.area} m² (${intersection.percentage}%)`, margin, yPos);
+                            yPos += 5;
+                        });
+                    }
+                    
+                    yPos += 5;
+                    doc.setLineWidth(0.5);
+                    doc.line(margin, yPos, pageWidth - margin, yPos);
+                    yPos += 10;
+                    
+                    // Dettagli urbanistici
+                    features.forEach(feature => {
+                        doc.setFontSize(11);
+                        switch(feature.layer.id) {
+                            case "cs":
+                                doc.text(`• Circoscrizione: ${feature.properties.Circoscriz}`, margin, yPos);
+                                yPos += 5;
+                                break;
+                            case "Info Vin. areali":
+                                doc.text(`• Vincolo Areale:`, margin, yPos);
+                                yPos += 5;
+                                doc.text(`  Tipo: ${feature.properties.tipo || "N/A"}`, margin, yPos);
+                                yPos += 5;
+                                doc.text(`  Descrizione: ${feature.properties.descrizone || "N/A"}`, margin, yPos);
+                                yPos += 5;
+                                break;
+                            case "Info Vin. lineari":
+                                doc.text(`• Vincolo Lineare:`, margin, yPos);
+                                yPos += 5;
+                                doc.text(`  Tipo: ${feature.properties.TIPO || "N/A"}`, margin, yPos);
+                                yPos += 5;
+                                doc.text(`  Descrizione: ${feature.properties.DESCRIZION || "N/A"}`, margin, yPos);
+                                yPos += 5;
+                                break;
+                            case "Info Netto storico":
+                                doc.text(`• Netto Storico:`, margin, yPos);
+                                yPos += 5;
+                                doc.text(`  ZTO: ${feature.properties.ZTO || "N/A"}`, margin, yPos);
+                                yPos += 5;
+                                doc.text(`  Descrizione: ${feature.properties.DESCRIZION || "N/A"}`, margin, yPos);
+                                yPos += 5;
+                                break;
+                            case "Info ZTO":
+                                doc.text(`• Zonizzazione:`, margin, yPos);
+                                yPos += 5
+                                doc.text(`  ZTO: ${feature.properties.ZTO || "N/A"}`, margin, yPos);
+                                yPos += 5;
+                                doc.text(`  Descrizione: ${feature.properties.DESCRIZION || "N/A"}`, margin, yPos);
+                                yPos += 5;
+                                break;
+                        }
+                        
+                        // Nuova pagina se necessario
+                        if (yPos > pageHeight - margin) {
+                            doc.addPage();
+                            yPos = margin;
+                        }
+                    });
+                    
+                    // Nascondi popup di attesa
+                    waitPopup.style.display = "none";
+                    
+                    // Rimuovi layer temporanei
+                    map.removeLayer("highlighted-polygon-pdf");
+                    map.removeLayer("highlighted-polygon-outline-pdf");
+                    
+                    // Ripristina eventi mouse
+                    map.on("mouseenter", "Particelle catastali", e => {
+                        if (e.features.length > 0) {
+                            map.getCanvas().style.cursor = "pointer";
+                            const foglio = e.features[0].properties.Foglio;
+                            const particella = e.features[0].properties.Paricella;
+                            map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
+                        }
+                    });
+                    
+                    map.on("mousemove", e => {
+                        const features = map.queryRenderedFeatures(e.point, { layers: ["Particelle catastali"] });
+                        if (features.length > 0) {
+                            const feature = features[0];
+                            const foglio = feature.properties.Foglio;
+                            const particella = feature.properties.Paricella;
+                            map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
+                        } else {
+                            map.setFilter("highlighted-polygon", ["==", "id", ""]);
+                        }
+                    });
+                    
+                    // Salva il PDF
+                    doc.save(`particella_${window.currentParticella.foglio}_${window.currentParticella.particella}.pdf`);
+                    
+                } catch (error) {
+                    console.error("Errore durante la generazione del PDF:", error);
+                    waitPopup.style.display = "none";
+                    alert("Si è verificato un errore durante la generazione del PDF. Riprova.");
+                }
+            });
+        }
+
+        // =========================
+        // INIZIALIZZAZIONE INTERACT.JS
+        // =========================
+
+        function setupInteract() {
+            const satelliteOverlay = document.getElementById("satellite-overlay");
+            
+            interact(satelliteOverlay).draggable({
+                inertia: true,
+                modifiers: [],
+                listeners: {
+                    move(event) {
+                        const target = event.target;
+                        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+                        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+                        
+                        target.style.transform = `translate(${x}px, ${y}px)`;
+                        target.setAttribute('data-x', x);
+                        target.setAttribute('data-y', y);
+                    }
+                }
+            });
+
+            interact(satelliteOverlay).resizable({
+                edges: { left: true, right: true, bottom: true, top: true },
+                listeners: {
+                    move(event) {
+                        const target = event.target;
+                        let { width, height } = event.rect;
+                        
+                        width = Math.max(width, 200);
+                        height = Math.max(height, 150);
+                        
+                        target.style.width = `${width}px`;
+                        target.style.height = `${height}px`;
+                        
+                        const x = (parseFloat(target.getAttribute('data-x')) || 0) + event.deltaRect.left;
+                        const y = (parseFloat(target.getAttribute('data-y')) || 0) + event.deltaRect.top;
+                        
+                        target.style.transform = `translate(${x}px, ${y}px)`;
+                        target.setAttribute('data-x', x);
+                        target.setAttribute('data-y', y);
+                    }
+                },
+                modifiers: [interact.modifiers.restrictEdges({ outer: 'parent' })]
+            });
+        }
+
+        // =========================
+        // INIZIALIZZAZIONE MAPPA PRINCIPALE
+        // =========================
+
+        const protocol = new pmtiles.Protocol();
+        maplibregl.addProtocol("pmtiles", protocol.tile);
+
+        const map = new maplibregl.Map({
+            container: "map",
+            style: {
+                version: 8,
+                glyphs: "https://api.mapbox.com/fonts/v1/mapbox/{fontstack}/{range}.pbf?access_token=eyJ1IjoiZ2J2aXRyYW5vIiwiYSI6ImNtNWpwMDloejBtN3ozM3F3NzJvZGh2ZG4ifQ.AXXkYYL7XY6RBVXpJ2IrBA",
+                sources: {
+                    "raster-tiles": {
+                        type: "raster",
+                        tiles: ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"],
+                        tileSize: 256,
+                        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, © <a href="https://carto.com/attributions">CARTO</a>'
+                    },
+                    satellite: {
+                        type: "raster",
+                        tiles: ["https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"],
+                        tileSize: 256,
+                        attribution: "Immagini ©2025 Google - "
+                    }
+                },
+                layers: [
+                    {
+                        id: "raster-tiles-layer",
+                        type: "raster",
+                        source: "raster-tiles",
+                        minzoom: 10,
+                        maxzoom: 22
+                    },
+                    {
+                        id: "satellite-layer",
+                        type: "raster",
+                        source: "satellite",
+                        minzoom: 10,
+                        maxzoom: 22,
+                        layout: { visibility: "none" }
+                    }
+                ]
+            },
+            center: [13.33225, 38.14074],
+            zoom: 12,
+            maxBounds: [[13.1, 37.9785], [13.55, 38.2919]],
+            hash: true,
+            pitch: 0,
+            dragRotate: false,
+            preserveDrawingBuffer: true
+        });
+
+        // Controlli mappa
+        map.addControl(new maplibregl.NavigationControl({ showCompass: true, showZoom: true }), "top-left");
+        map.addControl(new maplibregl.FullscreenControl(), "top-left");
+        map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
+
+        // =========================
+        // EVENT LISTENERS E INIZIALIZZAZIONE
+        // =========================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Revolutionary Catasto Interface Loaded - Mobile Optimized Version');
+            
+            setupInteract();
+            initMobileFeatures();
+            
+            // Event listeners per input ricerca
+            const foglioInput = document.getElementById("foglio");
+            const particellaInput = document.getElementById("particella");
+            
+            if (foglioInput) {
+                foglioInput.addEventListener("keypress", function(e) {
+                    if (e.key === "Enter") searchParticella();
+                });
+            }
+            
+            if (particellaInput) {
+                particellaInput.addEventListener("keypress", function(e) {
+                    if (e.key === "Enter") searchParticella();
+                });
+            }
+            
+            // Shortcut da tastiera
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'l' && !e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
+                    toggleLayersMobile();
+                }
+                if (e.key === 'Escape') {
+                    if (layerPanelOpen) toggleLayersMobile();
+                    const searchPopup = document.getElementById('search-popup');
+                    if (searchPopup && searchPopup.classList.contains('active')) {
+                        toggleSearchPopup();
+                    }
+                }
+            });
+            
+            // Chiudi pannelli quando si clicca fuori
+            document.addEventListener('click', (e) => {
+                const layerPanel = document.getElementById('layer-panel');
+                const commandBar = document.querySelector('.command-bar');
+                
+                if (layerPanelOpen && 
+                    layerPanel && !layerPanel.contains(e.target) && 
+                    commandBar && !commandBar.contains(e.target)) {
+                    toggleLayersMobile();
+                }
+            });
+            
+            // Handle orientation changes
+            window.addEventListener('orientationchange', function() {
+                setTimeout(function() {
+                    if (map) {
+                        map.resize();
+                    }
+                }, 300);
+            });
+
+            // Handle resize events for mobile
+            window.addEventListener('resize', function() {
+                if (map) {
+                    setTimeout(function() {
+                        map.resize();
+                    }, 100);
+                }
+            });
+            
+            // Inizializza loading screen
+            setTimeout(function() {
+                const loader = document.getElementById('custom-loader');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    loader.style.transition = 'opacity 0.5s ease';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                    }, 500);
+                }
+            }, 4000);
+            
+            console.log('Layer states initialized:', layerStates);
+        });
+
+        // Inizializzazione mappa al caricamento
+        map.on("load", () => {
+            // AGGIUNGI TUTTE LE SOURCES
+            map.addSource("prg", {
+                type: "vector",
+                url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/prg.pmtiles"
+            });
+
+            map.addSource("catasto", {
+                type: "vector", 
+                url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0825.pmtiles",
+                attribution: "Catasto - fonte dati <b>SITR Sicilia</b>"
+            });
+
+            map.addSource("zto", {
+                type: "raster",
+                tiles: ["https://palermohub.github.io/PRG2004/ZTO/{z}/{x}/{y}.png"],
+                tileSize: 256,
+                attribution: 'Comune di Palermo - Variante Generale al P.R.G. 2004 - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>',
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            map.addSource("ppe", {
+                type: "raster",
+                tiles: ["https://palermohub.github.io/PRG2004/ppe/{z}/{x}/{y}.png"],
+                tileSize: 256,
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            map.addSource("vincoli_lin", {
+                type: "raster",
+                tiles: ["https://palermohub.github.io/PRG2004/VL/{z}/{x}/{y}.png"],
+                tileSize: 256,
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            map.addSource("vincoli_ar", {
+                type: "raster",
+                tiles: ["https://palermohub.github.io/PRG2004/VA/{z}/{x}/{y}.png"],
+                tileSize: 256,
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            map.addSource("carta_tecnica", {
+                type: "raster",
+                tiles: ["https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png"],
+                tileSize: 256,
+                attribution: "© Carta Tecnica Layer",
+                minzoom: 12,
+                maxzoom: 19
+            });
+
+            // AGGIUNGI LAYER RASTER
+            const rasterLayers = [
+                { id: "carta_tecnica", source: "carta_tecnica", visibility: "none" },
+                { id: "zto", source: "zto" },
+                { id: "ppe", source: "ppe" },
+                { id: "vincoli_lin", source: "vincoli_lin" },
+                { id: "vincoli_ar", source: "vincoli_ar" }
+            ];
+
+            rasterLayers.forEach(layer => {
+                map.addLayer({
+                    id: layer.id,
+                    type: "raster",
+                    source: layer.source,
+                    minzoom: 0,
+                    maxzoom: 22,
+                    layout: { visibility: layer.visibility || "visible" }
+                });
+            });
+
+            // AGGIUNGI LAYER VECTOR
+            const layers = [
+                {
+                    id: "cs",
+                    source: "prg",
+                    sourceLayer: "cs",
+                    color: "#ffffff",
+                    tooltip: "<b>Circoscrizione:</b> {{Circoscriz}}"
+                },
+                {
+                    id: "Info Vin. areali",
+                    source: "prg",
+                    sourceLayer: "va",
+                    color: "#ffffff",
+                    tooltip: "<b>Tipo:</b> {{tipo}}<br><b>Descrizione:</b> {{descrizone}}<br><b>Note:</b> {{note}}"
+                },
+                {
+                    id: "Info Vin. lineari",
+                    source: "prg",
+                    sourceLayer: "vl",
+                    color: "#ffffff",
+                    tooltip: "<b>Tipo:</b> {{TIPO}}<br><b>Descrizione:</b> {{DESCRIZION}}<br><b>Note:</b> {{note}}"
+                },
+                {
+                    id: "Info Netto storico",
+                    source: "prg",
+                    sourceLayer: "ns",
+                    color: "#ffffff",
+                    tooltip: "<b>Netto storico</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}"
+                },
+                {
+                    id: "Info ZTO",
+                    source: "prg",
+                    sourceLayer: "zto",
+                    color: "#ffffff",
+                    tooltip: "<b>Zonizzazione</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}"
+                },
+                {
+                    id: "Particelle catastali",
+                    source: "catasto",
+                    sourceLayer: "particelle",
+                    color: "#ffffff",
+                    tooltip: "<b>Particelle catastali</b><br><b>Foglio:</b> {{Foglio}}<br><b>Particella:</b> {{Paricella}}"
+                }
+            ];
+
+            layers.forEach(layer => {
+                map.addLayer({
+                    id: layer.id,
+                    type: "fill",
+                    source: layer.source,
+                    "source-layer": layer.sourceLayer,
+                    paint: {
+                        "fill-color": layer.color,
+                        "fill-opacity": layer.id === "Particelle catastali" ? 0.6 : 0,
+                        "fill-outline-color": layer.id === "Particelle catastali" ? "#000" : "transparent"
+                    }
+                });
+            });
+
+            // AGGIUNGI LAYER LABELS PARTICELLE
+            map.addLayer({
+                id: "particelle-labels",
+                type: "symbol",
+                source: "catasto",
+                "source-layer": "particelle",
+                layout: {
+                    "text-field": ["concat", "F. ", ["get", "Foglio"], " - ", "P. ", ["get", "Paricella"]],
+                    "text-size": ["interpolate", ["linear"], ["zoom"], 15, 5, 19, 12],
+                    "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+                    "text-allow-overlap": false,
+                    "text-ignore-placement": false,
+                    "text-anchor": "center",
+                    "text-offset": [0, 0.5],
+                    visibility: "none"
+                },
+                paint: {
+                    "text-color": "#000000",
+                    "text-halo-color": "#ffffff",
+                    "text-halo-width": 1
+                },
+                minzoom: 15
+            });
+
+            // AGGIUNGI LAYER HIGHLIGHT PARTICELLE
+            map.addLayer({
+                id: "highlighted-polygon",
+                type: "fill",
+                source: "catasto",
+                "source-layer": "particelle",
+                paint: {
+                    "fill-color": "#ffff00",
+                    "fill-opacity": 0.5,
+                    "fill-outline-color": "#ff0000"
+                },
+                filter: ["==", "id", ""]
+            });
+
+            // INIZIALIZZA I PULSANTI DEI LAYER
+            initLayerButtons();
+            
+            // IMPOSTA STATO INIZIALE DEI LAYER
+            Object.keys(layerStates).forEach(layerId => {
+                const mapLayerId = layerMapping[layerId];
+                if (mapLayerId && map.getLayer(mapLayerId)) {
+                    map.setLayoutProperty(
+                        mapLayerId, 
+                        'visibility', 
+                        layerStates[layerId] ? 'visible' : 'none'
+                    );
+                    
+                    // Aggiorna l'interfaccia
+                    const button = document.getElementById(layerId);
+                    if (button) {
+                        if (layerStates[layerId]) {
+                            button.classList.add('active');
+                        } else {
+                            button.classList.remove('active');
+                        }
+                    }
+                    
+                    // Gestione speciale per le particelle
+                    if (layerId === 'particelle') {
+                        map.setLayoutProperty(
+                            'particelle-labels', 
+                            'visibility', 
+                            layerStates[layerId] ? 'visible' : 'none'
+                        );
+                    }
+                }
+            });
+
+            // EVENT LISTENERS PER MOUSE INTERACTION
+            map.on("mouseenter", "Particelle catastali", e => {
+                if (e.features.length > 0) {
+                    map.getCanvas().style.cursor = "pointer";
+                    const foglio = e.features[0].properties.Foglio;
+                    const particella = e.features[0].properties.Paricella;
+                    map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
+                }
+            });
+
+            map.on("mousemove", e => {
+                const features = map.queryRenderedFeatures(e.point, { layers: ["Particelle catastali"] });
+                if (features.length > 0) {
+                    const feature = features[0];
+                    const foglio = feature.properties.Foglio;
+                    const particella = feature.properties.Paricella;
+                    map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
+                } else {
+                    map.setFilter("highlighted-polygon", ["==", "id", ""]);
+                }
+            });
+
+            // CLICK EVENT PER POPUP UNIFICATO
+            map.on("click", e => {
+                const features = map.queryRenderedFeatures(e.point, {
+                    layers: ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"]
+                });
+
+                if (features.length > 0) {
+                    if (currentPopup) {
+                        currentPopup.remove();
+                        currentPopup = null;
+                    }
+
+                    const unifiedTooltipContent = features.map(feature => {
+                        let content = "";
+                        if (feature.layer.id === "cs") {
+                            content = `<b>Strumento Urbanistico:</b> PPE<br><b>Circoscrizione:</b> ${feature.properties.Circoscriz || "N/A"}`;
+                        } else if (feature.layer.id === "Info Vin. areali") {
+                            content = `<b>Vincolo areale</b><br><b>Tipo:</b> ${feature.properties.tipo || "N/A"}<br><b>Descrizione:</b> ${feature.properties.descrizone || "N/A"}`;
+                        } else if (feature.layer.id === "Info Vin. lineari") {
+                            content = `<b>Vincolo lineare</b><br><b>Tipo:</b> ${feature.properties.TIPO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
+                        } else if (feature.layer.id === "Info Netto storico") {
+                            content = `<b>Netto storico</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
+                        } else if (feature.layer.id === "Info ZTO") {
+                            content = `<b>Zonizzazione</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
+                        } else if (feature.layer.id === "Particelle catastali") {
+                            content = `<b>Particelle catastali</b><br><b>Foglio:</b> ${feature.properties.Foglio || "N/A"}<br><b>Particella:</b> ${feature.properties.Paricella || "N/A"}`;
+                        }
+                        return content;
+                    }).join("<hr>");
+
+                    currentPopup = new maplibregl.Popup({ closeOnClick: true })
+                        .setLngLat(e.lngLat)
+                        .setHTML(unifiedTooltipContent)
+                        .addTo(map);
+                }
+            });
+
+            // CURSOR EVENTS
+            map.on("mouseenter", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"], () => {
+                map.getCanvas().style.cursor = "pointer";
+            });
+
+            map.on("mouseleave", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"], () => {
+                map.getCanvas().style.cursor = "default";
+            });
+        });
+    </script>
+</body>
+</html>
