@@ -1014,6 +1014,7 @@ body {
 /* Assicura che il main content abbia spazio per i breadcrumbs */
 .main-content {
     margin-top: 20px;
+	overflow-x: hidden;
 }
 
 /* Per pagine che hanno già i breadcrumbs custom, usa questo per nasconderli */
