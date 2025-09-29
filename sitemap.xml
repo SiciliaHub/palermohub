@@ -941,14 +941,35 @@
 
 <url>
 <loc>https://palermohub.opendatasicilia.it/prg_catasto.html</loc>
-<lastmod>2024-01-02</lastmod>
+<lastmod>2025-01-02</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>https://palermohub.opendatasicilia.it/prg_part_catastali.html</loc>
-<lastmod>2024-01-05</lastmod>
+<lastmod>2025-09-02</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://palermohub.github.io/cspa/</loc>
+<lastmod>2025-08-18</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://palermohub.opendatasicilia.it/pa_digitale_2026.html</loc>
+<lastmod>2025-09-05</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>https://palermohub.github.io/Palestine/</loc>
+<lastmod>2025-09-22</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>
