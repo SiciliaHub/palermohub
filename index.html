@@ -139,74 +139,10 @@
             }
         }
 		
-		 /* TAB HEADER (superiore) */
-        .header-tab {
-            position: relative;
-            width: 48px;
-            height: 32px;
-            background: linear-gradient(135deg, #ff9900 0%, #ff7700 100%);
-            color: white;
-            border-radius: 0 0 8px 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-        }
         
-        .header-tab.pulse {
-            animation: headerPulse 2s infinite;
-        }
-        
-        @keyframes headerPulse {
-            0% {
-                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0.7);
-            }
-            70% {
-                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 20px rgba(255, 153, 0, 0);
-            }
-            100% {
-                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0);
-            }
-        }
-        
-        /* TAB FOOTER (inferiore) */
 
         
-        .footer-toggle-tab.pulse {
-            animation: footerPulse 2s infinite;
-        }
-        
-        @keyframes footerPulse {
-            0% {
-                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0.7);
-            }
-            70% {
-                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 20px rgba(255, 153, 0, 0);
-            }
-            100% {
-                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0);
-            }
-        }
-        
-        /* PULSANTE CONDIVISIONE ORIGINALE */
-        .share-button {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255, 153, 0, 0.4);
-            transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.9);
-            color: white;
-            font-size: 18px;
-        }
-		
+	
     </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -778,88 +714,6 @@
 
 <!-- Carica home.js dopo aver sovrascritto le funzioni necessarie -->
  <script src="lib/js/client/home.js"></script>
-     <script>
-        let headerPulseActive = false;
-        let sharePulseActive = false;
-        let footerPulseActive = false;
 
-        function toggleHeaderPulse() {
-            const tab = document.getElementById('headerTab');
-            headerPulseActive = !headerPulseActive;
-            
-            if (headerPulseActive) {
-                tab.classList.add('pulse');
-            } else {
-                tab.classList.remove('pulse');
-            }
-            updateStatus();
-        }
-
-        function toggleSharePulse() {
-            const button = document.getElementById('shareButton');
-            sharePulseActive = !sharePulseActive;
-            
-            if (sharePulseActive) {
-                button.classList.add('pulse');
-            } else {
-                button.classList.remove('pulse');
-            }
-            updateStatus();
-        }
-
-        function toggleFooterPulse() {
-            const tab = document.getElementById('footerTab');
-            footerPulseActive = !footerPulseActive;
-            
-            if (footerPulseActive) {
-                tab.classList.add('pulse');
-            } else {
-                tab.classList.remove('pulse');
-            }
-            updateStatus();
-        }
-
-        function toggleAllPulse() {
-            const allActive = headerPulseActive && sharePulseActive && footerPulseActive;
-            
-            if (allActive) {
-                // Disattiva tutti
-                document.getElementById('headerTab').classList.remove('pulse');
-                document.getElementById('shareButton').classList.remove('pulse');
-                document.getElementById('footerTab').classList.remove('pulse');
-                headerPulseActive = sharePulseActive = footerPulseActive = false;
-            } else {
-                // Attiva tutti
-                document.getElementById('headerTab').classList.add('pulse');
-                document.getElementById('shareButton').classList.add('pulse');
-                document.getElementById('footerTab').classList.add('pulse');
-                headerPulseActive = sharePulseActive = footerPulseActive = true;
-            }
-            updateStatus();
-        }
-
-        function updateStatus() {
-            const active = [];
-            if (headerPulseActive) active.push('Header');
-            if (sharePulseActive) active.push('Share');
-            if (footerPulseActive) active.push('Footer');
-            
-            const status = document.getElementById('status');
-            if (active.length === 0) {
-                status.textContent = 'Nessun effetto pulse attivo';
-                status.style.background = '#f0f0f0';
-                status.style.color = '#666';
-            } else {
-                status.textContent = `Effetto pulse attivo su: ${active.join(', ')}`;
-                status.style.background = '#d4edda';
-                status.style.color = '#155724';
-            }
-        }
-
-        // Attiva automaticamente tutti gli effetti dopo 2 secondi
-        setTimeout(() => {
-            toggleAllPulse();
-        }, 2000);
-    </script>
 </body>
 </html>

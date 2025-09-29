@@ -3314,4 +3314,40 @@ body::before {
     }
 }
 
+/* TAB HEADER (superiore) */
+        .modal-header-close-tab.pulse {
+            animation: headerClosePulse 2s infinite;
+			
+        }
+        
+        @keyframes headerClosePulse {
+            0% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0.7);
+				clip-path: inset(0px -50px -50px -50px); /* ✅ Taglia la parte superiore */
+            }
+            70% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 20px rgba(255, 153, 0, 0);
+				clip-path: inset(0px -50px -50px -50px); /* ✅ Taglia la parte superiore */
+            }
+            100% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0);
+				clip-path: inset(0px -50px -50px -50px); /* ✅ Taglia la parte superiore */
+            }
+        }
 
+        /* TAB FOOTER (inferiore) */     
+        .footer-toggle-tab.pulse {
+            animation: footerPulse 2s infinite;
+        }
+        
+        @keyframes footerPulse {
+            0% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 20px rgba(255, 153, 0, 0);
+            }
+            100% {
+                box-shadow: 0 2px 12px rgba(255, 153, 0, 0.4), 0 0 0 0 rgba(255, 153, 0, 0);
+            }
+        }
