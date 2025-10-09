@@ -113,6 +113,7 @@
     font-size: 24px;
     font-weight: 700;
     margin: 0;
+	    color: #ffffff!important;
 }
 
 .chart-builder-close {
@@ -879,3 +880,61 @@ input[type="range"]::-moz-range-thumb {
     }
 }
 
+
+.chart-type-btn[data-type="mixed"] {
+    background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%);
+}
+.chart-type-btn[data-type="mixed"] span { color: #ffffff; }
+.chart-type-btn[data-type="mixed"] i { color: #ffffff; }
+
+.chart-type-btn[data-type="mixed"]:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+    transform: translateY(-2px);
+}
+
+.chart-type-btn[data-type="mixed"].active {
+    background: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+#mixed-config-group {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+
+
+.config-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.config-col-half {
+    flex: 1;
+}
+
+.sub-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+    margin-bottom: 5px;
+}
+
+.info-box {
+    background: rgba(59, 130, 246, 0.1);
+    border-left: 3px solid #3b82f6;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #1e293b;
+}
+
+.info-box i {
+    color: #3b82f6;
+    margin-right: 5px;
+}
