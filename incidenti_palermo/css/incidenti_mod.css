@@ -36,6 +36,7 @@ body {
     background: #ffffffa;
 }
 
+
 /* Touch Optimization */
 * {
     -webkit-tap-highlight-color: rgba(59, 130, 246, 0.3);
@@ -876,6 +877,7 @@ background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
 .detail-header h2 {
     font-size: 20px;
     font-weight: 700;
+	color: #ffffff;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
