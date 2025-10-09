@@ -1,12 +1,13 @@
-name: Deploy to GitHub Pages
+name: Manual Pages Rebuild
 
 on:
-  push:
-    branches: ["PH-release-v2.0"]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  build-and-deploy:
+  trigger-rebuild:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -14,14 +15,9 @@ jobs:
         with:
           ref: PH-release-v2.0
       
-      - name: Build
+      - name: Trigger Pages rebuild
         run: |
-          # I tuoi comandi di build
-          # es: npm install && npm run build
-          
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist  # o la tua cartella di output
-          publish_branch: gh-pages
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git commit --allow-empty -m "Trigger Pages rebuild"
+          git push origin PH-release-v2.0
