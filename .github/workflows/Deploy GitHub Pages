@@ -2,7 +2,7 @@ name: Deploy GitHub Pages
 
 on:
   push:
-    branches: ["main"]
+    branches: ["PH-release-v2.0"]
   workflow_dispatch:  # Abilita il trigger manuale
 
 permissions:
