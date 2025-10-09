@@ -1,0 +1,2344 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Palermo incidenti stradali dal 2015 al 2023 - Dashboard interattiva by @opendatasicilia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <META HTTP-EQUIV="refresh" CONTENT="3600">  
+    <meta name="description" content="Dashboard interattiva degli incidenti stradali a Palermo">
+    <meta name="keywords" content="Open Data, Sicilia, Palermo, Incidenti Stradali">
+    <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+    
+    <link rel="shortcut icon" href="favicon.ico"/> 
+    <link rel="icon" href="favicon.png" type="image/png"/> 
+    <!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+       <link rel="stylesheet" href="css/incidenti_mod.css">
+	   <link rel="stylesheet" href="css/dataviz_mod.css">
+	  <link rel="stylesheet" href="css/footer-modal-mod.css">
+     <link rel="stylesheet" href="css/chart-builder.css">
+    <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+	
+	    <!-- Meta tags per social sharing pen Graph Protocol -->
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Palermo incidenti stradali dal 2015 al 2023 - Dashboard interattiv">
+    <meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:image" content="https://palermohub.github.io/palermo-incidenti/img/social_card.jpg">
+	<!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/">
+    <meta name="twitter:title" content="Palermo incidenti stradali dal 2015 al 2023 - Dashboard interattiv">
+    <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:image" content="https://palermohub.github.io/palermo-incidenti/img/social_card.jpg">
+	
+<!-- 
+
+    <style>
+        .demo-badge {
+            position: absolute;
+    top: 50px;
+    right: -25px;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transform: rotate(-30deg);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            animation: pulse-demo 2s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        .demo-badge i {
+            margin-right: 4px;
+            font-size: 12px;
+        }
+        
+        @keyframes pulse-demo {
+            0%, 100% {
+                transform: rotate(-30deg) scale(1);
+                box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+            }
+            50% {
+                transform: rotate(-30deg) scale(1.05);
+                box-shadow: 0 6px 16px rgba(239, 68, 68, 0.6);
+            }
+        }
+        
+        .header-content {
+            position: relative;
+        }
+    </style> -->
+	
+	
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-87653723-4');
+</script>	
+	
+</head>
+<body>
+    <!-- Mobile Toggle -->
+    <button class="mobile-toggle" id="mobile-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- Sidebar Overlay -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+    
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <div class="header">
+            <div class="header-content">
+                <h1>Incidenti Stradali</h1>
+                <p>Palermo 2015-2023 • Dashboard Interattiva</p>
+             <!--   <span class="demo-badge">
+                    <i class="fas fa-flask"></i> Demo Version
+                </span> -->
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-label-main">Statistiche</div>
+<div class="stat-grid">
+    <div class="stat-item mortale" data-tipo="M" title="Clicca per filtrare incidenti mortali">
+        <div class="stat-label">M - Mortali</div>
+        <div class="stat-value" id="stat-mortale">0</div>
+    </div>
+    <div class="stat-item riserva" data-tipo="R" title="Clicca per filtrare incidenti con prognosi riservata">
+        <div class="stat-label">R - Riserva</div>
+        <div class="stat-value" id="stat-riserva">0</div>
+    </div>
+    <div class="stat-item feriti" data-tipo="F" title="Clicca per filtrare incidenti con feriti">
+        <div class="stat-label">F - Feriti</div>
+        <div class="stat-value" id="stat-feriti">0</div>
+    </div>
+    <div class="stat-item cose" data-tipo="C" title="Clicca per filtrare incidenti con solo danni materiali">
+        <div class="stat-label">C - Cose</div>
+        <div class="stat-value" id="stat-cose">0</div>
+    </div>
+</div>
+            <div class="stat-total">
+                <div class="stat-label">Totale Incidenti</div>
+                <div class="stat-value" id="stat-total">0</div>
+                <div class="stat-info" id="total-info">
+                    <span><i class="fas fa-check"></i> Dati caricati</span>
+                    <span class="info-icon" id="info-icon-btn" title="Informazioni sui dati">i</span>
+                </div>
+            </div>
+            
+            <div class="year-stats">
+                <div class="year-stats-title"><i class="fas fa-chart-bar"></i> Distribuzione per Anno (clicca per filtrare)</div>
+                <div class="year-stats-grid" id="year-stats-grid"></div>
+            </div>
+        </div>
+
+        <div class="filters">
+            <button class="btn-heatmap" id="btn-toggle-heatmap">
+                <i class="fas fa-fire"></i> Mappa di Calore
+            </button>
+            <br>
+            <div class="filter-group hidden">
+                <label class="filter-label">Tipologia Incidente</label>
+                <select id="filter-tipologia">
+                    <option value="">Tutte le tipologie</option>
+                    <option value="M">M - Mortale</option>
+                    <option value="R">R - Riserva</option>
+                    <option value="F">F - Feriti</option>
+                    <option value="C">C - Cose</option>
+                </select>
+            </div>
+           <div class="filter-section">
+<!-- NUOVO: Sezione Calendario Personalizzato -->
+<div class="filter-section" >
+    <div class="filter-section-header" data-section="calendario">
+        <span><i class="fas fa-calendar-alt"></i> Calendario Interattivo</span>
+        <span class="toggle-icon collapsed"><i class="fas fa-chevron-down"></i></span>
+    </div>
+    <div class="filter-section-content collapsed" id="content-calendario">
+        <div class="custom-calendar" id="custom-calendar">
+            <!-- Controlli Anno -->
+            <div class="calendar-year-control">
+                <button class="calendar-nav-btn" id="cal-prev-year"><i class="fas fa-chevron-left"></i></button>
+                <div class="calendar-year-display" id="cal-year-display">2023</div>
+                <button class="calendar-nav-btn" id="cal-next-year"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <!-- Griglia Mesi -->
+            <div class="calendar-months-grid" id="cal-months-grid">
+                <!-- Sarà popolato via JS -->
+            </div>
+            
+            <!-- Griglia Giorni Settimana -->
+            <div class="calendar-weekdays-grid" id="cal-weekdays-grid">
+                <!-- Sarà popolato via JS -->
+            </div>
+            
+            <!-- Griglia Giorni del Mese (quando un mese è selezionato) -->
+            <div class="calendar-days-container" id="cal-days-container" style="display: none;">
+                <div class="calendar-month-header" id="cal-month-header"></div>
+                <div class="calendar-weekday-labels">
+                    <div>L</div><div>M</div><div>M</div><div>G</div><div>V</div><div>S</div><div>D</div>
+                </div>
+                <div class="calendar-days-grid" id="cal-days-grid">
+                    <!-- Sarà popolato via JS -->
+                </div>
+            </div>
+            
+            <!-- Riepilogo Selezione -->
+            <div class="calendar-selection-summary" id="cal-selection-summary">
+                Nessun filtro temporale attivo
+            </div>
+            
+            <!-- Pulsanti Azione -->
+            <div class="calendar-actions">
+                <button class="btn-calendar-reset" id="btn-calendar-reset"><i class="fas fa-sync-alt"></i> Reset</button>
+            </div>
+        </div>
+    </div>
+</div>
+                <div class="filter-section-header" data-section="localizzazione">
+                    <span><i class="fas fa-map-marker-alt"></i> Localizzazione</span>
+                    <span class="toggle-icon collapsed"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="filter-section-content collapsed" id="content-localizzazione">
+                    <div class="filter-group">
+                        <label class="filter-label">Circoscrizioni</label>
+                        <select id="filter-circoscrizione"></select>
+                        <div class="filter-cascade-info">Filtra Quartiere e UPL <i class="fas fa-arrow-down"></i></div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Quartieri</label>
+                        <select id="filter-quartiere"></select>
+                        <div class="filter-cascade-info">Filtra UPL <i class="fas fa-arrow-down"></i></div>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Unità di primo livello</label>
+                        <select id="filter-upl"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-section-header" data-section="temporale">
+                    <span><i class="fa-solid fa-calendar"></i> Analisi Temporale</span>
+                    <span class="toggle-icon collapsed"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="filter-section-content collapsed" id="content-temporale">
+                    <div class="filter-group hidden">
+                        <label class="filter-label">Anno</label>
+                        <select id="filter-anno"></select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Stagione</label>
+                        <select id="filter-stagione"></select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Mese</label>
+                        <select id="filter-mese"></select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Giorno Settimana</label>
+                        <select id="filter-giorno-settimana"></select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Feriale/Weekend</label>
+                        <select id="filter-feriale-weekend"></select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-section-header" data-section="condizioni">
+                    <span><i class="fas fa-cloud-sun"></i> Condizioni e Orari</span>
+                    <span class="toggle-icon collapsed"><i class="fas fa-chevron-down"></i></span>
+                </div>
+                <div class="filter-section-content collapsed" id="content-condizioni">
+                    <div class="filter-group">
+                        <label class="filter-label">Giorno/Notte</label>
+                        <select id="filter-giorno-notte"></select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Condizioni Luce</label>
+                        <select id="filter-condizioni-luce"></select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Fascia oraria (4 fasce)</label>
+                        <select id="filter-fascia-4"></select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Fascia oraria (6 fasce)</label>
+                        <select id="filter-fascia-6"></select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Ora di Punta</label>
+                        <select id="filter-ora-punta"></select>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-reset" id="btn-reset" title="Reset Filtri"><i class="fas fa-sync-alt"></i> Reset Filtri</button>
+            <button class="btn-data-table" id="btn-data-table" title="Visualizza e scarica i dati selezionati"><i class="fas fa-table"></i> Tabella Dati</button>
+            <a href="https://www.dati.gov.it/view-dataset?Cerca=incidenti+palermo" title="Agenzia per l'Italia Digitale" target="_blank" rel="noopener noreferrer" class="btn-fonte">
+                <i class="fa fa-database"></i> Fonte Dati: dati.gov.it
+            </a>
+        </div>
+    </div>
+	</div>
+	<!-- Fine #sidebar -->
+<!-- Sidebar Desktop Toggle -->
+<button class="sidebar-desktop-toggle" id="sidebar-desktop-toggle" title="Apri/Chiudi pannello filtri">
+    <i class="fas fa-chevron-left"></i>
+</button>
+    <!-- Map -->
+    <div id="map">
+    
+    <!-- Map Controls Container -->
+    <div class="map-controls-container">
+   </div>
+
+<!-- Analytics Side Panel -->
+<div id="analytics-side-panel">
+    <!-- Sezione 1: Controlli Mappa -->
+<div class="panel-section section-map-controls">
+    <div class="section-header">
+        <i class="fas fa-map"></i>
+        <span>Controlli Mappa</span>
+    </div>
+    <div class="section-content">
+        <select id="basemap-select" class="panel-select" title="Seleziona Mappa di Base">
+            <option value="carto-light" selected>Carto Light</option>
+            <option value="carto-dark">Carto Dark</option>
+            <option value="osm">OpenStreetMap</option>
+            <option value="satellite">Satellite</option>
+        </select>
+        
+        <!-- Prima riga: Clustering e Heatmap -->
+        <div class="panel-btn-row">
+            <button class="panel-btn btn-primary" id="btn-clustering-map" title="Visualizza clustering geografico">
+                <i class="fas fa-circle"></i>
+                <span>Clustering</span>
+            </button>
+                        <button class="panel-btn btn-info" id="btn-data-table-map" title="Tabella dati">
+                <i class="fas fa-table"></i>
+                <span>Tabella</span>
+            </button>
+        </div>
+        
+        <!-- Seconda riga: Tabella e Top Luoghi -->
+        <div class="panel-btn-row">
+		            <button class="panel-btn btn-success" id="btn-heatmap-map" title="Mappa di calore">
+                <i class="fas fa-fire"></i>
+                <span>Heatmap</span>
+            </button>
+		           
+            <button class="panel-btn btn-warning" id="btn-top-luoghi-map" title="Top 25 strade con più incidenti">
+                <i class="fas fa-trophy"></i>
+                <span>Top Strade</span>
+            </button>
+        </div>
+        
+        <!-- Terza riga: Reset Filtri e Analisi -->
+        <div class="panel-btn-row">
+            <button class="panel-btn btn-danger" id="btn-reset-map" title="Reset Filtri">
+                <i class="fas fa-sync-alt"></i>
+                <span>Reset Filtri</span>
+            </button>
+            
+            <button class="panel-btn btn-purple" id="btn-analytics-map" title="Vsualizzazione dei dati (DataViz)">
+                <i class="fas fa-chart-line"></i>
+                <span>DataViz</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <!-- Sezione 2: Tipologie Incidenti -->
+    <div class="panel-section section-types">
+        <div class="section-header">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span id="legend-chart-title">Tipologie Incidenti</span>
+        </div>
+        <div class="section-content">
+            <div class="chart-wrapper-panel">
+                <canvas id="legend-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sezione 3: Periodo Giorno/Notte -->
+    <div class="panel-section section-period">
+        <div class="section-header">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span>Periodo</span>
+        </div>
+        <div class="section-content">
+            <div class="period-switches">
+                <button id="switch-giorno" class="period-switch" data-period="Giorno" title="Filtra incidenti diurni">
+                    <i class="fas fa-sun"></i>
+                    <span>Giorno</span>
+                    <span id="count-giorno" class="period-count">0</span>
+                </button>
+                <button id="switch-notte" class="period-switch" data-period="Notte" title="Filtra incidenti notturni">
+                    <i class="fas fa-moon"></i>
+                    <span>Notte</span>
+                    <span id="count-notte" class="period-count">0</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sezione 4: Analisi Mensile -->
+    <div class="panel-section section-monthly">
+        <div class="section-header">
+            <i class="fas fa-chart-bar"></i>
+            <span>Incidenti per Mese</span>
+        </div>
+        <div class="section-content">
+            <div class="chart-wrapper-panel">
+                <canvas id="monthly-area-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sezione 5: Analisi Feriti/Morti -->
+    <div class="panel-section section-injuries">
+        <div class="section-header">
+            <i class="fas fa-ambulance"></i>
+            <span>Feriti/Morti per Mese</span>
+        </div>
+        <div class="section-content">
+            <div class="chart-wrapper-panel">
+                <canvas id="monthly-injuries-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</div>
+
+<!-- Heatmap Legend (separato, si mostra solo con heatmap attiva) -->
+<div class="heatmap-legend hidden" id="heatmap-legend">
+    <h3>Densità Incidenti</h3>
+    <div class="heatmap-gradient"></div>
+    <div class="heatmap-labels">
+        <span>Bassa</span>
+        <span>Alta</span>
+    </div>
+</div>
+
+
+   <!-- Heatmap Legend -->
+    <div class="heatmap-legend hidden" id="heatmap-legend">
+        <h3>Densità Incidenti</h3>
+        <div class="heatmap-gradient"></div>
+        <div class="heatmap-labels">
+            <span>Bassa</span>
+            <span>Alta</span>
+        </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading" id="loading">
+        <div>Caricamento dati CSV...</div>
+        <small>Attendere prego</small>
+    </div>
+
+    <!-- Detail Panel -->
+    <div class="detail-panel" id="detail-panel">
+        <div class="detail-header">
+            <button class="detail-close" id="detail-close">×</button>
+            <h2 id="detail-tipo-header">
+                <span id="detail-tipo-icon"><i class="fas fa-car"></i></span>
+                Dettagli Incidente
+            </h2>
+            <p id="detail-subtitle">Informazioni complete</p>
+        </div>
+        <div class="detail-content" id="detail-content"></div>
+    </div>
+
+    <!-- Info Modal -->
+    <div class="modal" id="info-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-info-circle"></i> Informazioni sui Dati</h3>
+                <button class="modal-close" id="info-modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Dataset completo:</strong> 28.239 incidenti registrati a Palermo dal 2015 al 2023.</p>
+                <p><strong>Incidenti mappati:</strong> 23.487 incidenti (83,2% del totale) con coordinate geografiche valide.</p>
+                <p><strong>Esclusioni:</strong></p>
+                <ul style="margin-left: 20px; margin-bottom: 16px;">
+                    <li style="margin-bottom: 8px;"><strong>1.560 incidenti (5,5%)</strong> - Coordinate esterne ai confini comunali. Si tratta di errori che potrebbero essere corretti tramite geocoding, qualora si disponesse di tempo sufficiente. Tuttavia, data la necessità di procedere speditamente in questa fase dell'analisi, si è scelto di escluderli dai vari dataset.</li>
+                    <li><strong>3.192 incidenti del 2019 (11,3%)</strong> - Privi di coordinate geografiche</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data Table Modal -->
+    <div class="modal" id="data-table-modal">
+        <div class="modal-content" style="max-width: 90vw;">
+            <div class="modal-header">
+                <h3><i class="fas fa-table"></i> Tabella Dati Incidenti Filtrati</h3>
+                <button class="modal-close" id="data-table-close">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="table-actions">
+                    <button class="btn-download" id="btn-download-csv"><i class="fas fa-download"></i> Scarica CSV</button>
+                    <button class="btn-download" id="btn-download-json"><i class="fas fa-download"></i> Scarica JSON</button>
+                </div>
+                <div style="color: #94a3b8; font-size: 12px; margin-bottom: 12px;">
+                    <strong id="table-count">0</strong> incidenti visualizzati
+                </div>
+                <div class="table-container">
+                    <table class="data-table" id="data-table">
+                        <thead id="table-header"></thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Analytics Panel -->
+    <div class="analytics-panel" id="analytics-panel">
+        <div class="analytics-header">
+            <div class="analytics-header-top">
+                <h2><i class="fas fa-chart-line"></i> Vsualizzazione dei dati (DataViz)</h2>
+                <button class="analytics-close" id="analytics-close">×</button>
+            </div>
+<div class="analytics-filters-info">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+        <strong>Dati Visualizzati:</strong>
+        <button class="btn-reset-analytics" id="btn-reset-analytics" title="Reset filtri visualizzazione">
+            <i class="fas fa-sync-alt"></i>
+        </button>
+    </div>
+    <span id="active-filters-text">Tutti gli incidenti (2015-2023)</span>
+</div>
+        </div>
+        
+<!-- Nella sezione .analytics-tabs, PRIMA di tutti gli altri tab -->
+<div class="analytics-tabs">
+    <button class="analytics-tab active" data-tab="serie-storica"><i class="fas fa-chart-area"></i> Serie Storica</button>
+    <button class="analytics-tab" data-tab="panoramica"><i class="fas fa-chart-bar"></i> Panoramica</button>
+    <button class="analytics-tab" data-tab="temporale"><i class="fas fa-calendar-alt"></i> Temporale</button>
+    <button class="analytics-tab" data-tab="oraria"><i class="fas fa-clock"></i> Oraria</button>
+  <!--  <button class="analytics-tab" data-tab="condizioni"><i class="fas fa-cloud-sun"></i> Condizioni</button> -->
+    <button class="analytics-tab" data-tab="insights"><i class="fas fa-lightbulb"></i> Insights</button>
+</div>
+
+        <div class="analytics-content">
+            <!-- Panoramica Tab -->
+           <div class="analytics-content">
+    <!-- NUOVO TAB SERIE STORICA -->
+<div class="analytics-tab-content active" id="tab-serie-storica">
+    <div class="charts-grid">
+        <div class="chart-container chart-full">
+            <h3>Incidenti stradali e feriti (1991-2024)</h3>
+            <div class="chart-wrapper">
+                <canvas id="chart-serie-storica-incidenti"></canvas>
+            </div>
+        </div>
+        <div class="chart-container chart-full">
+            <h3>Incidenti stradali con deceduti (1991-2024)</h3>
+            <div class="chart-wrapper">
+                <canvas id="chart-serie-storica-morti"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Panoramica Tab - rimuovi "active" dalla classe -->
+<div class="analytics-tab-content" id="tab-panoramica">
+    <div class="charts-grid charts-grid-two-col">
+        <div class="chart-container">
+            <h3>Incidenti per quartiere</h3>
+            <div class="chart-wrapper">
+                <canvas id="chart-quartieri-heatmap"></canvas>
+            </div>
+        </div>
+        <div class="chart-container">
+            <h3>Top 25 - Strade con più incidenti</h3>
+            <div class="chart-wrapper">
+                <canvas id="chart-top-strade"></canvas>
+            </div>
+        </div>
+    </div>
+</div>     
+
+<!-- Temporale Tab -->
+<div class="analytics-tab-content" id="tab-temporale">
+    
+    <!-- Griglia principale a 2 colonne -->
+    <div class="charts-grid">
+        
+        <!-- COLONNA SINISTRA -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+            
+            <!-- 1. Distribuzione per Giorno della Settimana -->
+            <div class="chart-container" style="min-height: 280px;">
+                <h3>Distribuzione per giorno della settimana</h3>
+                <div class="chart-wrapper">
+                    <canvas id="chart-giorno-settimana"></canvas>
+                </div>
+            </div>
+            
+            <!-- 2. Primavera -->
+            <div class="chart-container" style="min-height: 240px;">
+                <h3>Primavera - Distribuzione per fase giornaliera</h3>
+                <div class="chart-wrapper">
+                    <canvas id="chart-primavera-oraria"></canvas>
+                </div>
+            </div>
+            
+            <!-- 3. Autunno -->
+            <div class="chart-container" style="min-height: 240px;">
+                <h3>Autunno - Distribuzione per fase giornaliera</h3>
+                <div class="chart-wrapper">
+                    <canvas id="chart-autunno-oraria"></canvas>
+                </div>
+            </div>
+            
+        </div>
+        
+        <!-- COLONNA DESTRA -->
+        <div style="display: flex; flex-direction: column; gap: 24px;">
+            
+            <!-- 1. Incidenti per Giorno del Mese -->
+            <div class="chart-container" style="min-height: 280px;">
+                <h3>Incidenti per giorno del mese</h3>
+                <div class="chart-wrapper">
+                    <canvas id="chart-giorni-mese"></canvas>
+                </div>
+            </div>
+            
+            <!-- 2. Estate -->
+            <div class="chart-container" style="min-height: 240px;">
+                <h3>Estate - Distribuzione per fase giornaliera</h3>
+                <div class="chart-wrapper">
+                    <canvas id="chart-estate-oraria"></canvas>
+                </div>
+            </div>
+            
+            <!-- 3. Inverno -->
+            <div class="chart-container" style="min-height: 240px;">
+                <h3>Inverno - Distribuzione per fase giornaliera</h3>
+                <div class="chart-wrapper">
+                    <canvas id="chart-inverno-oraria"></canvas>
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+    
+    <!-- CALENDARIO HEATMAP A TUTTA LARGHEZZA IN BASSO -->
+    <div class="chart-container chart-full" style="min-height: 330px; margin-top: 24px;">
+        <h3>Calendario incidenti (Heatmap)</h3>
+        <div class="chart-wrapper">
+            <div id="chart-calendario-heatmap" class="calendar-heatmap"></div>
+        </div>
+    </div>
+    
+</div>
+
+<!-- oraria Tab -->
+<div class="analytics-tab-content" id="tab-oraria">
+    <div class="charts-grid charts-grid-two-col">
+        <!-- Prima riga: Fasce Orarie -->
+        <div class="chart-container">
+            <h3>Distribuzione per fase giornaliera</h3>
+            <div class="chart-wrapper">
+                <canvas id="chart-fascia-oraria"></canvas>
+            </div>
+        </div>
+        <div class="chart-container">
+            <h3>Distribuzione per fascia oraria</h3>
+            <div class="chart-wrapper">
+                <canvas id="chart-orari-dettaglio"></canvas>
+            </div>
+        </div>
+        
+        <!-- Seconda riga: Distribuzione Settimanale -->
+        <div class="chart-container">
+            <h3>Distribuzione settimanale</h3>
+            <div class="chart-wrapper">
+                <canvas id="chart-settimanale-area"></canvas>
+            </div>
+        </div>
+        <div class="chart-container">
+            <h3>Feriali vs Weekend</h3>
+            <div class="chart-wrapper">
+                <canvas id="chart-settimanale-barre"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Insights Tab - VERSIONE CON GRAFICA ORIGINALE -->
+<div class="analytics-tab-content" id="tab-insights">
+    <div class="insights-container">
+        
+        <!-- Statistiche in Tempo Reale -->
+        <div class="stats-realtime">
+            <h3><i class="fas fa-chart-bar"></i> Statistiche in Tempo Reale</h3>
+            <div class="stats-realtime-grid">
+                <!-- ESISTENTI -->
+                <div class="stat-realtime-item">
+                    <div class="stat-realtime-label">Totale Incidenti</div>
+                    <div class="stat-realtime-value" id="realtime-total">0</div>
+                </div>
+                
+                <div class="stat-realtime-item">
+                    <div class="stat-realtime-label">Totale Feriti</div>
+                    <div class="stat-realtime-value" id="realtime-feriti">0</div>
+                </div>
+                
+                <div class="stat-realtime-item">
+                    <div class="stat-realtime-label">% con Feriti</div>
+                    <div class="stat-realtime-value" id="realtime-percentuale">0%</div>
+                </div>
+                
+                <div class="stat-realtime-item">
+                    <div class="stat-realtime-label">Media Feriti</div>
+                    <div class="stat-realtime-value" id="realtime-media">0</div>
+                </div>
+                
+                <!-- ✅ NUOVI: DECEDUTI -->
+                <div class="stat-realtime-item">
+                    <div class="stat-realtime-label">Totale Deceduti</div>
+                    <div class="stat-realtime-value" id="realtime-morti">0</div>
+                </div>
+                
+                <div class="stat-realtime-item">
+                    <div class="stat-realtime-label">% con Deceduti</div>
+                    <div class="stat-realtime-value" id="realtime-percentuale-morti">0%</div>
+                </div>
+                
+                <div class="stat-realtime-item">
+                    <div class="stat-realtime-label">Media Deceduti</div>
+                    <div class="stat-realtime-value" id="realtime-media-morti">0</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Insights Automatici -->
+        <div class="insights-auto">
+            <h3><i class="fas fa-lightbulb"></i> Insights Automatici</h3>
+            
+            <!-- ESISTENTI -->
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-calendar-day"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">Giorno più pericoloso</div>
+                    <div class="insight-value" id="insight-giorno">-</div>
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-clock"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">Fascia oraria critica</div>
+                    <div class="insight-value" id="insight-fascia">-</div>
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-leaf"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">Stagione più rischiosa</div>
+                    <div class="insight-value" id="insight-stagione">-</div>
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-moon"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">Condizione più pericolosa</div>
+                    <div class="insight-value" id="insight-condizione">-</div>
+                </div>
+            </div>
+            
+            <!-- ✅ NUOVI INSIGHTS -->
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-calendar-alt"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">Mese con più incidenti</div>
+                    <div class="insight-value" id="insight-mese">-</div>
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-map-marked-alt"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">Circoscrizione più colpita</div>
+                    <div class="insight-value" id="insight-circoscrizione">-</div>
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-city"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">Quartiere più colpito</div>
+                    <div class="insight-value" id="insight-quartiere">-</div>
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-map-pin"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">UPL con più incidenti</div>
+                    <div class="insight-value" id="insight-upl">-</div>
+                </div>
+            </div>
+            
+            <div class="insight-item">
+                <div class="insight-icon"><i class="fas fa-road"></i></div>
+                <div class="insight-content">
+                    <div class="insight-label">Strada più pericolosa</div>
+                    <div class="insight-value" id="insight-strada">-</div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+	
+<!-- Top Luoghi Modal -->
+<div class="modal" id="top-luoghi-modal">
+    <div class="modal-content" style="max-width: 1000px;">
+        <div class="modal-header">
+            <h3><i class="fas fa-trophy"></i> Top 25 vie con più incidenti</h3>
+            <button class="modal-close" id="top-luoghi-close">×</button>
+        </div>
+        <div class="modal-body">
+            <div class="table-actions">
+                <button class="btn-download" id="btn-download-luoghi-csv">Scarica CSV</button>
+                <div style="color: #94a3b8; font-size: 12px;">
+                    <strong id="top-luoghi-count">0</strong> luoghi analizzati
+                </div>
+            </div>
+            <div class="table-container">
+                <table class="data-table" id="top-luoghi-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 60px;">#</th>
+                            <th>Indirizzo</th>
+                            <th style="width: 100px;">Totale</th>
+                            <th style="width: 80px;">Mortali</th>
+                            <th style="width: 80px;">Riserva</th>
+                            <th style="width: 80px;">Feriti</th>
+                            <th style="width: 80px;">Cose</th>
+                            <th style="width: 120px;">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="top-luoghi-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Button with Pulse -->
+<button class="footer-info-btn" id="footer-info-btn">
+    <span class="pulse-ring"></span>
+    <i class="fas fa-info-circle"></i>  <span>Informazioni</span>
+</button>
+
+<!-- Footer Modal Panel -->
+
+<div class="footer-modal" id="footer-modal">
+    <div class="footer-modal-header">
+        <h3><i class="fas fa-chart-bar"></i> Informazioni Dataset</h3>
+        <button class="footer-modal-close" id="footer-modal-close">×</button>
+    </div>
+    
+    <div class="footer-modal-tabs">
+        <button class="footer-tab active" data-tab="dataset">Dataset e Analisi</button>
+	    <button class="footer-tab" data-tab="tecnologie">Tecnologie</button>
+	    <button class="footer-tab" data-tab="chart-builder">Crea il tuo DataViz</button>
+		<button class="footer-tab" data-tab="condividi">Condividi & Seguici</button>
+        <button class="footer-tab" data-tab="crediti">Crediti</button>
+		<button class="footer-tab" data-tab="fonte">Fonte Dati</button>
+		<button class="footer-tab" data-tab="licenza">Licenza</button>
+    </div>
+    
+    <div class="footer-modal-content">
+	    <button class="back-to-top-btn" id="back-to-top-btn" title="Torna su">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+        <!-- Tab Dataset -->
+        <div class="footer-tab-content active" id="tab-dataset">
+            <div class="info-card">
+                <h4><i class="fas fa-chart-line"></i> Statistiche Dataset</h4>
+		   <p class="subtitle">Un'analisi approfondita dei dati 2015-2023 rivela 28.239 incidenti: il 2023 segna l'anno più recente di una serie storica che evidenzia zone rosse e orari critici</p>
+            <div class="info-card">
+                <h4><i class="fas fa-chart-line"></i> Statistiche Dataset</h4>
+                <div class="info-grid">
+                    <div class="info-item">
+                        <span class="info-label">Periodo coperto</span>
+                        <span class="info-value">2015 - 2023</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Totale incidenti</span>
+                        <span class="info-value">28.239</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Incidenti mappati</span>
+                        <span class="info-value">23.487 (83,2%)</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Ultimo aggiornamento</span>
+                        <span class="info-value">Dicembre 2023</span>
+                    </div>
+                </div>
+      <p>Tra il 2015 e il 2023, le strade di Palermo hanno registrato <strong>28.239 incidenti stradali</strong>. Un numero che, tradotto in media, significa <strong>oltre 8,6 incidenti al giorno</strong> per nove anni consecutivi. Di questi:</p>
+        
+        <ul>
+            <li><strong>23.487 incidenti (83,2%)</strong> hanno coordinate geografiche precise e sono mappabili</li>
+            <li><strong>3.192 incidenti del 2019 (11,3%)</strong> sono privi di geolocalizzazione, una lacuna significativa che rende quell'anno problematico per analisi territoriali</li>
+            <li><strong>1.560 incidenti (5,5%)</strong> presentano coordinate esterne ai confini comunali. Si tratta di errori che potrebbero essere corretti tramite geocoding, qualora si disponesse di tempo sufficiente. Tuttavia, data la necessità di procedere speditamente in questa fase dell'analisi, si è scelto di escluderli dai vari dataset.</li>
+        </ul>
+        
+        <p>Il 2023, ultimo anno disponibile nel dataset, viene impostato come anno di default nella dashboard - un segnale dell'importanza di analizzare i dati più recenti per orientare le politiche di sicurezza.</p>
+        
+        <h2>Focus 2023</h2>
+        
+        <p>Pur non avendo accesso ai numeri disaggregati anno per anno dal dataset fornito, la dashboard interattiva permette di filtrare il 2023 come anno predefinito, suggerendo che rappresenti un benchmark importante per valutare l'attuale stato della sicurezza stradale palermitana.</p>
+        
+        <p>Il 2023 si colloca in un contesto post-pandemico dove la circolazione è tornata ai livelli pre-Covid, rendendo il confronto con gli anni 2020-2021 poco significativo, ma molto rilevante il raffronto con il 2019 e gli anni precedenti.</p>
+        
+        <h2>Le quattro categorie di incidenti</h2>
+        
+        <p>Gli incidenti sono classificati in quattro tipologie di gravità:</p>
+        
+        <div class="category-list">
+            <ul>
+                <li><strong>M - Mortali</strong>: incidenti con esito fatale</li>
+                <li><strong>R - Riserva</strong>: incidenti con prognosi riservata, situazioni critiche</li>
+                <li><strong>F - Feriti</strong>: incidenti con feriti di varia gravità</li>
+                <li><strong>C - Cose</strong>: incidenti con soli danni materiali</li>
+            </ul>
+        </div>
+		<p>La dashboard utilizza un sistema di colori per evidenziare questa classificazione: rosso per i mortali, viola per le riserve, arancione per i feriti, verde per i danni alle cose. Una scala cromatica che rende immediatamente visibile la gravità della situazione.</p>
+        
+        <h2>L'anomalia 2019 e l'effetto pandemia: i numeri che raccontano</h2>
+        
+        <p>Il <strong>2019 presenta 3.192 incidenti "fantasma"</strong> - sinistri documentati ma senza coordinate geografiche. Questo significa che per quell'anno, qualsiasi analisi territoriale è parziale: non sappiamo in quali quartieri o strade siano avvenuti questi incidenti, né possiamo identificare pattern geografici completi.</p>
+        
+        <p>Gli anni della pandemia mostrano inevitabilmente numeri diversi:</p>
+        <ul>
+            <li><strong>2020</strong>: primo anno di lockdown e restrizioni severe</li>
+            <li><strong>2021</strong>: proseguimento delle limitazioni alla mobilità</li>
+        </ul>
+        
+        <p>Questi due anni registrano probabilmente un calo negli incidenti assoluti, ma il dato va contestualizzato: con meno veicoli circolanti, era inevitabile. Ciò che conta è il <strong>tasso di incidenti rispetto al traffico effettivo</strong> - un dato che richiederebbe l'incrocio con statistiche sul volume di circolazione.</p>
+        
+        <h2>La geografia del rischio: dove avvengono gli incidenti</h2>
+        
+        <p>La dashboard implementa una funzionalità "Top 25 luoghi" che identifica le vie con il maggior numero di incidenti quando attivata la modalità clustering. Questa funzione diventa operativa solo filtrando i dati e permette di visualizzare:</p>
+        
+        <ul>
+            <li><strong>Indirizzo esatto</strong> dell'area critica</li>
+            <li><strong>Totale incidenti</strong> in quella localizzazione</li>
+            <li><strong>Distribuzione per gravità</strong>: mortali, riserva, feriti, cose</li>
+            <li><strong>Coordinate geografiche</strong> per la localizzazione sulla mappa</li>
+        </ul>
+        
+        <p>Il sistema di clustering geografico evidenzia come gli incidenti tendano a concentrarsi in specifici punti critici: grandi incroci, rotonde complesse, arterie di scorrimento veloce. Ogni "cluster" sulla mappa rappresenta un'area dove multipli incidenti si sono verificati in prossimità.</p>
+        
+        <h2>L'analisi territoriale: circoscrizioni e quartieri</h2>
+        
+        <p>Il dataset include una stratificazione territoriale articolata:</p>
+        <ul>
+            <li><strong>Circoscrizioni</strong>: la prima suddivisione amministrativa</li>
+            <li><strong>Quartieri</strong>: livello intermedio di dettaglio</li>
+            <li><strong>UPL (Unità di Primo Livello)</strong>: la granularità più fine</li>
+        </ul>
+        
+        <p>Questa struttura permette analisi a cascata: filtrando una circoscrizione, si vedono solo i quartieri inclusi; filtrando un quartiere, solo le relative UPL. Un sistema che permette di "zoomare" progressivamente sulle zone più critiche.</p>
+        
+        <h2>Il fattore tempo: quando Palermo diventa pericolosa</h2>
+        
+        <h3>Stagionalità</h3>
+        <p>Il dataset classifica gli incidenti per <strong>stagione</strong>, permettendo di identificare se estate o inverno, primavera o autunno presentino rischi differenti - legati a condizioni meteo, flussi turistici, abitudini di mobilità.</p>
+        
+        <h3>Distribuzione settimanale</h3>
+        <p>La suddivisione per <strong>giorno della settimana</strong> rivela pattern comportamentali: i weekend potrebbero mostrare dinamiche diverse (velocità più elevate, guida in stato di ebbrezza) rispetto ai giorni feriali (traffico pendolare, ore di punta).</p>
+        
+        <p>Il filtro <strong>Feriale/Weekend</strong> sintetizza questa distinzione, evidenziando come il rischio cambi tra giorni lavorativi e di riposo.</p>
+        
+        <h3>Le fasce orarie critiche</h3>
+        <p>La dashboard offre due livelli di granularità temporale:</p>
+        
+        <p><strong>Fascia oraria (4 fasce)</strong>: una divisione grossolana della giornata</p>
+        
+        <p><strong>Fascia oraria dettagliata (6 fasce)</strong>:</p>
+        <ul>
+            <li>Alba</li>
+            <li>Mattina</li>
+            <li>Pranzo</li>
+            <li>Pomeriggio</li>
+            <li>Sera</li>
+            <li>Notte</li>
+        </ul>
+        
+        <p>A questo si aggiunge il filtro <strong>"Ora di punta (Picchi di traffico)"</strong> che identifica specificamente i momenti di maggiore congestione - tipicamente le ore 7-9 del mattino e 17-20 del pomeriggio, quando il traffico pendolare raggiunge l'apice.</p>
+        
+        <h3>Giorno vs Notte: il fattore visibilità</h3>
+        
+        <p>La dashboard include un'analisi comparativa <strong>Giorno/Notte</strong> con contatori in tempo reale che mostrano:</p>
+        <ul>
+            <li>Numero di incidenti diurni</li>
+            <li>Numero di incidenti notturni</li>
+            <li>Possibilità di filtrare l'uno o l'altro per analisi mirate</li>
+        </ul>
+        
+        <p>Un elemento grafico particolare: il pannello laterale mostra icone di sole e luna, rendendo immediatamente visibile questa distinzione fondamentale.</p>
+        
+        <h2>Condizioni di luce: oltre il giorno e la notte</h2>
+        
+        <p>Il parametro <strong>"Condizioni luce (Visibilità)"</strong> va oltre la semplice dicotomia temporale e considera:</p>
+        <ul>
+            <li>Luce naturale piena</li>
+            <li>Crepuscolo</li>
+            <li>Buio con illuminazione artificiale funzionante</li>
+            <li>Buio con illuminazione artificiale insufficiente/assente</li>
+            <li>Condizioni meteo che riducono la visibilità</li>
+        </ul>
+        
+        <p>Questa classificazione è cruciale per valutare l'adeguatezza dell'illuminazione pubblica e per programmare interventi di potenziamento nelle zone critiche.</p>
+        
+        <h2>Strumenti di visualizzazione: dalla mappa ai grafici</h2>
+        
+        <p>La dashboard offre multiple modalità di analisi:</p>
+        
+        <h3>Modalità mappa</h3>
+        <ul>
+            <li><strong>Visualizzazione a punti</strong>: ogni incidente come punto colorato per gravità</li>
+            <li><strong>Clustering geografico</strong>: aggregazione automatica delle zone ad alta densità</li>
+            <li><strong>Heatmap (mappa di calore)</strong>: visualizzazione della densità spaziale degli incidenti</li>
+        </ul>
+        
+        <h3>Grafici analitici</h3>
+        <ul>
+            <li><strong>Trend annuale</strong>: evoluzione degli incidenti 2015-2023</li>
+            <li><strong>Distribuzione mensile</strong>: grafico radar che mostra i mesi più rischiosi</li>
+            <li><strong>Analisi oraria</strong>: grafici polari per le fasce della giornata</li>
+            <li><strong>Confronti stagionali</strong>: bar chart per le quattro stagioni</li>
+        </ul>
+        
+        <h3>Calendario interattivo</h3>
+        <p>Una funzionalità innovativa permette di:</p>
+        <ul>
+            <li>Selezionare un anno specifico</li>
+            <li>Navigare per mesi</li>
+            <li>Visualizzare giorni specifici con evidenza di quelli con incidenti</li>
+            <li>Filtrare per giorno della settimana</li>
+        </ul>
+        
+        <h2>I numeri nel 2023: cosa ci dicono</h2>
+        
+        <p>Pur mancando i dati disaggregati completi nel documento fornito, la struttura della dashboard indica che il 2023 è l'anno di riferimento principale. Questo suggerisce che:</p>
+        
+        <ol>
+            <li><strong>È l'anno più recente</strong> e quindi il più rilevante per politiche attuali</li>
+            <li><strong>Ha dati completi e geolocalizzati</strong> a differenza dell'anomalo 2019</li>
+            <li><strong>Rappresenta la "nuova normalità" post-Covid</strong> senza le distorsioni pandemiche del 2020-2021</li>
+        </ol>
+        
+        <h2>Il contesto demografico e urbanistico</h2>
+        
+        <p>Palermo conta circa 650.000 abitanti nell'area comunale. Con quasi 30.000 incidenti in 9 anni su questa popolazione, significa che statisticamente:</p>
+        <ul>
+            <li><strong>Ogni 23 palermitani, uno è stato coinvolto in un incidente</strong> nel periodo considerato</li>
+            <li>Considerando che non tutti i palermitani guidano (escludendo minori, anziani non automuniti, etc.), la proporzione reale tra conducenti/passeggeri coinvolti è ancora più alta</li>
+        </ul>
+        
+        <h2>Limiti e criticità dei dati</h2>
+        
+        <p>È importante evidenziare alcune criticità:</p>
+        
+        <ol>
+            <li><strong>Il buco nero del 2019</strong>: 3.192 incidenti senza coordinate rendono parziale qualsiasi analisi di quell'anno</li>
+            <li><strong>Sottoregistrazione possibile</strong>: alcuni incidenti minori potrebbero non essere rilevati</li>
+            <li><strong>Mancanza di dati su vittime</strong>: il dataset classifica per gravità ma non specifica il numero esatto di morti e feriti per incidente</li>
+            <li><strong>Assenza di informazioni su cause</strong>: non sappiamo se gli incidenti siano dovuti a velocità, alcol, distrazione, condizioni stradali</li>
+        </ol>
+        
+        <h2>Dal dato all'azione: cosa fare</h2>
+        
+        <p>La disponibilità di questi dati georeferenziati permette interventi mirati:</p>
+        
+        <h3>Immediati</h3>
+        <ul>
+            <li><strong>Potenziamento controlli</strong> nelle top 25 vie più pericolose</li>
+            <li><strong>Miglioramento illuminazione</strong> dove gli incidenti notturni sono concentrati</li>
+            <li><strong>Revisione segnaletica</strong> negli incroci critici</li>
+        </ul>
+        
+        <h3>Medio termine</h3>
+        <ul>
+            <li><strong>Ridisegno viabilità</strong> nelle zone ad alta concentrazione</li>
+            <li><strong>Installazione autovelox</strong> nelle arterie dove la velocità è fattore critico</li>
+            <li><strong>Potenziamento trasporto pubblico</strong> per ridurre traffico veicolare privato</li>
+        </ul>
+        
+        <h3>Strategici</h3>
+        <ul>
+            <li><strong>Piano urbano mobilità sostenibile</strong> evidence-based</li>
+            <li><strong>Educazione stradale</strong> mirata su comportamenti più rischiosi</li>
+            <li><strong>Monitoraggio continuo</strong> con aggiornamento dati in tempo reale</li>
+        </ul>
+        
+        <h2>Trasparenza come prima forma di prevenzione</h2>
+        
+        <p>L'iniziativa di rendere questi dati pubblici e visualizzabili rappresenta un atto di trasparenza fondamentale. La pubblicazione su <strong>dati.gov.it</strong> con licenza <strong>Creative Commons CC BY 4.0</strong> significa che:</p>
+        
+        <ul>
+            <li>Chiunque può accedere ai dati gratuitamente</li>
+            <li>I dati possono essere riutilizzati anche commercialmente</li>
+            <li>L'unico vincolo è citare la fonte</li>
+        </ul>
+        
+        <p>OpenDataSicilia ha trasformato un dataset tecnico in una <strong>dashboard interattiva</strong> accessibile anche a non esperti, democratizzando l'accesso all'informazione sulla sicurezza stradale.</p>
+        
+        <h2>Conclusioni: i numeri chiedono risposte</h2>
+        
+        <div class="highlight-box">
+            <p><strong>28.239 incidenti non sono una statistica astratta</strong>: sono persone, famiglie, vite cambiate. Ogni punto sulla mappa rappresenta un dramma personale, un costo sociale, un fallimento nella progettazione urbana o nel controllo del territorio.</p>
+        </div>
+        
+        <p>Il 2023, come anno più recente, ci dice che il problema è attuale, non storico. I dati esistono, gli strumenti per analizzarli pure. Quello che manca è la <strong>volontà politica</strong> di trasformare le evidenze in azioni concrete.</p>
+        
+        <p>Palermo, come molte città italiane, deve scegliere: continuare a contare incidenti o iniziare a prevenirli. I dati sono lì, georeferenziati, analizzabili, pronti a guidare politiche basate su evidenze. Ignorarli sarebbe non solo un errore tecnico, ma una responsabilità morale verso chi ogni giorno affronta il rischio delle strade urbane.</p>
+  </div>
+  </div>
+        </div>
+        
+        <!-- Tab Fonte Dati -->
+        <div class="footer-tab-content" id="tab-fonte">
+            <div class="info-card">
+                <h4><i class="fa fa-database"></i> Fonte dei Dati</h4>
+                <p><strong>Ente:</strong> Comune di Palermo - Polizia Municipale</p>
+                <p><strong>Portale:</strong> <a href="https://www.dati.gov.it/view-dataset?Cerca=incidenti+palermo" target="_blank" rel="noopener">dati.gov.it</a></p>
+                <p><strong>Dataset:</strong> Incidenti stradali rilevati dalla Polizia Municipale di Palermo</p>
+                <div class="info-note">
+                    <strong><i class="fas fa-clipboard-list"></i> Contenuto del dataset:</strong>
+                    <p>Il dataset contiene informazioni dettagliate su ogni incidente stradale rilevato, inclusi: tipologia, data, ora, condizioni atmosferiche, visibilità, localizzazione geografica e amministrativa.</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Tab Licenza -->
+        <div class="footer-tab-content" id="tab-licenza">
+            <div class="info-card">
+                <h4><i class="fas fa-balance-scale"></i> Licenza d'Uso</h4>
+                <p><strong>Licenza:</strong> Creative Commons - Attribuzione 4.0 Internazionale (CC BY 4.0)</p>
+                <div class="license-box">
+                    <p><strong>Sei libero di:</strong></p>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Condividere – riprodurre, distribuire, comunicare al pubblico</li>
+                        <li><i class="fas fa-check"></i> Modificare – rielaborare e trasformare i dati</li>
+                        <li><i class="fas fa-check"></i> Utilizzare per fini commerciali</li>
+                    </ul>
+                    <p><strong>Alle seguenti condizioni:</strong></p>
+                    <ul>
+                        <li><i class="fas fa-pencil-alt"></i> Attribuzione – devi riconoscere la paternità dei dati e fornire un link alla licenza</li>
+                    </ul>
+                </div>
+                <p style="margin-top: 16px;"><a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">Leggi il testo completo della licenza <i class="fas fa-external-link-alt"></i></a></p>
+            </div>
+        </div>
+		
+        <!-- Tab tecnologie -->
+        <div class="footer-tab-content" id="tab-tecnologie">
+            <div class="info-card">
+                <h4><i class="fas fa-map"></i> Tecnologie utilizzate</h4>
+<p><strong>In sintesi:</strong></p>
+                    <ul>
+					<li>QGIS - software libero e open source per i Sistemi Informativi Geografici (GIS), che permette di visualizzare, organizzare, analizzare e rappresentare dati spaziali</li>
+                        <li>MapLibre GL JS - Visualizzazione mappa interattiva</li>
+                        <li>Chart.js - Grafici e visualizzazioni dati</li>
+                        <li>PapaParse - Elaborazione file CSV</li>
+                    </ul><br>
+					<hr><br>
+				<p><strong>Versione estesa:</strong></p>
+				<p>Questa web app utilizza uno stack tecnologico <strong>completamente client-side</strong> (nessun backend), basato su tecnologie web moderne:</p>
+
+<h4>Frontend Core</h4>
+<ul>
+  <li><strong>HTML5</strong> - Struttura semantica della pagina</li>
+  <li><strong>CSS3</strong> - Styling avanzato con gradients, flexbox, grid, animazioni</li>
+  <li><strong>JavaScript ES6+</strong> - Logica applicativa (vanilla JS, no framework)</li>
+</ul>
+
+<h4>Librerie JavaScript</h4>
+<ul>
+  <li><strong>MapLibre GL JS</strong> (v4.7.1) - Rendering mappe vettoriali WebGL
+    <ul>
+      <li>Alternative open-source a Mapbox</li>
+      <li>Supporto tile raster e stili personalizzati</li>
+    </ul>
+  </li>
+  <li><strong>PapaParse</strong> (v5.4.1) - Parsing CSV lato client
+    <ul>
+      <li>Gestione file grandi con streaming</li>
+    </ul>
+  </li>
+  <li><strong>Chart.js</strong> (v4.4.0) - Visualizzazioni dati interattive
+    <ul>
+      <li>Plugin: ChartDataLabels per etichette sui grafici</li>
+    </ul>
+  </li>
+</ul>
+
+<h4>Fonti Dati</h4>
+<ul>
+  <li><strong>Tile Maps</strong>: CartoDB, OpenStreetMap, Google Satellite</li>
+  <li><strong>CSV statico</strong>: <code>incidenti_2015_2023.csv</code> (23.487 record geocodificati)</li>
+  <li>Nessun database - tutto caricato in memoria browser</li>
+</ul>
+
+<h4>Pattern Architetturali</h4>
+<ul>
+  <li><strong>Single Page Application (SPA)</strong> - Nessun reload pagina</li>
+  <li><strong>Component-based</strong> - Pannelli modulari (sidebar, analytics, dettagli)</li>
+  <li><strong>Event-driven</strong> - Listener per filtri, click mappa, interazioni UI</li>
+  <li><strong>State management</strong> - Oggetti globali (<code>currentFilters</code>, <code>customCalendarState</code>)</li>
+</ul>
+
+<h4>Caratteristiche Tecniche</h4>
+<ul>
+  <li><strong>Responsive Design</strong> - Media queries per mobile/tablet/desktop</li>
+  <li><strong>Touch-optimized</strong> - Gesture handler per dispositivi touch</li>
+  <li><strong>Client-side filtering</strong> - Nessuna query server, filtraggio array in-memory</li>
+  <li><strong>Real-time updates</strong> - Sincronizzazione immediata tra filtri/mappa/grafici</li>
+</ul>
+
+<h4>Performance</h4>
+<ul>
+  <li><strong>Lazy rendering</strong> - Solo dati visibili renderizzati</li>
+  <li><strong>Clustering geografico</strong> - SuperCluster per aggregazione punti</li>
+  <li><strong>Debouncing</strong> - Eventi touch ottimizzati</li>
+  <li><strong>Canvas rendering</strong> - Chart.js usa canvas per performance</li>
+</ul>
+
+<h4>Deployment</h4>
+<ul>
+  <li><strong>Static hosting</strong> - Può girare su GitHub Pages, Netlify, CDN</li>
+  <li><strong>No build step</strong> - File serviti direttamente (no webpack/vite necessari)</li>
+</ul>
+
+<p>È essenzialmente una <strong>Progressive Web App</strong> che sfrutta le capacità moderne dei browser per elaborare e visualizzare grandi dataset senza server.</p>
+            </div>
+        </div>
+
+
+ <!-- Chart Builder Guide -->
+        <div class="footer-tab-content" id="tab-chart-builder">
+ <!-- Introduzione -->
+        <div class="info-card">
+            <h4><i class="fas fa-chart-pie"></i> Chart Builder: Crea i Tuoi Grafici Personalizzati</h4>
+            <p class="subtitle">Un potente strumento interattivo che trasforma i dati sugli incidenti stradali di Palermo in visualizzazioni personalizzate. Scegli dimensioni, metriche, stili e colori per creare il grafico perfetto per la tua analisi.</p>
+            
+            <p>Il <strong>Chart Builder</strong> è stato progettato per offrire la massima flessibilità nell'analisi dei dati. Con pochi clic puoi generare grafici professionali che riflettono esattamente le informazioni che stai cercando, applicando automaticamente tutti i filtri attivi nella dashboard.</p>
+        </div>
+
+        <!-- Come Accedere -->
+        <div class="info-card">
+            <h2>Come Accedere al Chart Builder</h2>
+            
+            <p>Per aprire il Chart Builder, cerca il pulsante <strong style="color: #ff9900;">"Crea il tuo DataViz"</strong> nella parte alta della schermata. Un badge viola lampeggiante ti guiderà verso questa funzionalità innovativa.</p>
+            
+            <div class="info-note">
+                <strong><i class="fas fa-lightbulb"></i> Suggerimento Rapido</strong>
+                <p>Il Chart Builder si integra perfettamente con i filtri della dashboard. Prima di aprirlo, applica i filtri che ti interessano (anno, mese, circoscrizione, ecc.) e questi verranno automaticamente considerati nel grafico.</p>
+            </div>
+        </div>
+
+        <!-- Anatomia del Chart Builder -->
+        <div class="info-card">
+            <h2>Anatomia del Chart Builder</h2>
+            
+            <p>L'interfaccia è divisa in <strong>due sezioni principali</strong>:</p>
+            
+            <h3><i class="fas fa-1"></i> Pannello di Configurazione (Sinistra)</h3>
+            <p>Qui si trovano tutti i controlli per personalizzare il grafico:</p>
+            
+            <ul>
+                <li><strong>Tipo di Grafico:</strong> 8 tipologie disponibili (barre, linea, torta, ciambella, radar, polare, scatter, bubble)</li>
+                <li><strong>Configurazione Dati:</strong> dimensione, metrica, titolo personalizzato, limiti</li>
+                <li><strong>Colori:</strong> modalità automatica, colore singolo o gradiente personalizzato</li>
+                <li><strong>Stile:</strong> spessore bordi, opacità, dimensioni testo, preset rapidi</li>
+                <li><strong>Varianti:</strong> orientamento, impilamento, animazioni, griglia</li>
+            </ul>
+            
+            <h3><i class="fas fa-2"></i> Anteprima Grafico (Destra)</h3>
+            <p>Mostra il risultato in tempo reale. Una volta generato, il grafico può essere scaricato come immagine PNG ad alta risoluzione (800×600px) con intestazione, filtri applicati e crediti.</p>
+        </div>
+
+        <!-- Guida Passo-Passo -->
+        <div class="info-card">
+            <h2>Guida Passo-Passo: Crea il Tuo Primo Grafico</h2>
+            
+            <div class="highlight-box">
+                <p><strong><i class="fas fa-bullseye"></i> Obiettivo:</strong> Creare un grafico a barre che mostri gli incidenti per giorno della settimana nel 2023</p>
+            </div>
+            
+            <h3>Step 1: Applica i Filtri nella Dashboard</h3>
+            <p>Prima di aprire il Chart Builder, imposta i filtri nella sidebar sinistra:</p>
+            <ul>
+                <li>Seleziona <strong>Anno: 2023</strong> dal filtro temporale</li>
+                <li>Eventuali altri filtri desiderati (circoscrizione, tipologia, ecc.)</li>
+            </ul>
+            
+            <h3>Step 2: Apri il Chart Builder</h3>
+            <p>Clicca sul pulsante <strong>"Crea il tuo DataViz"</strong> in basso a destra. Il modal si aprirà mostrando i filtri attivi nella sezione "Filtri Attivi".</p>
+            
+            <h3>Step 3: Scegli il Tipo di Grafico</h3>
+            <p>Nella sezione "Tipo di Grafico", clicca sull'icona <strong>Barre</strong> (già selezionata di default). Sono disponibili 8 tipologie:</p>
+            
+            <div class="category-list">
+                <ul>
+                    <li><strong>Barre:</strong> ideale per confronti tra categorie</li>
+                    <li><strong>Linea:</strong> perfetto per trend temporali</li>
+                    <li><strong>Torta:</strong> visualizza proporzioni percentuali</li>
+                    <li><strong>Ciambella:</strong> come la torta, ma più moderno</li>
+                    <li><strong>Radar:</strong> confronta multiple variabili</li>
+                    <li><strong>Polare:</strong> visualizzazione circolare elegante</li>
+                    <li><strong>Scatter:</strong> mostra correlazioni</li>
+                    <li><strong>Bubble:</strong> aggiunge una terza dimensione</li>
+                </ul>
+            </div>
+            
+            <h3>Step 4: Configura i Dati</h3>
+            <p>Nella sezione "Configurazione Dati":</p>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Dimensione Principale</span>
+                    <span class="info-value">Giorno Settimana</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Metrica</span>
+                    <span class="info-value">Conteggio Incidenti</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Limita Risultati</span>
+                    <span class="info-value">Tutti</span>
+                </div>
+            </div>
+            
+            <p><strong><i class="fas fa-lightbulb"></i> Titolo Personalizzato (Opzionale):</strong> Inserisci un titolo custom come <em>"Analisi Settimanale Incidenti 2023"</em>. Se lasci vuoto, verrà usata la dimensione selezionata. I filtri attivi verranno aggiunti automaticamente al titolo.</p>
+            
+            <h3>Step 5: Personalizza lo Stile</h3>
+            <p>Scegli tra 4 preset rapidi o personalizza manualmente:</p>
+            
+            <ul>
+                <li><strong>Minimal:</strong> design pulito e discreto</li>
+                <li><strong>Default:</strong> bilanciamento perfetto (consigliato)</li>
+                <li><strong>Bold:</strong> impatto visivo massimo</li>
+                <li><strong>Clean:</strong> eleganza senza bordi</li>
+            </ul>
+            
+            <h3>Step 6: Genera e Scarica</h3>
+            <p>Clicca <strong>"Genera Grafico"</strong> e il risultato apparirà nell'anteprima. Soddisfatto? Usa il pulsante <strong>"PNG"</strong> per scaricare l'immagine ad alta qualità.</p>
+        </div>
+
+        <!-- Dimensioni Disponibili -->
+        <div class="info-card">
+            <h2>Le 13 Dimensioni di Analisi</h2>
+            
+            <p>Ogni dimensione offre una prospettiva unica sui dati. Ecco la lista completa con esempi d'uso:</p>
+            
+            <h3><i class="fas fa-calendar-alt"></i> Dimensioni Temporali</h3>
+            <div class="category-list">
+                <ul>
+                    <li><strong>Anno:</strong> Evoluzione dal 2015 al 2023 - <em>Esempio: "Come sono variati gli incidenti negli anni?"</em></li>
+                    <li><strong>Mese:</strong> Stagionalità mensile - <em>Esempio: "Quali mesi sono più pericolosi?"</em></li>
+                    <li><strong>Giorno Settimana:</strong> Pattern settimanali - <em>Esempio: "Weekend vs giorni feriali"</em></li>
+                    <li><strong>Stagione:</strong> Confronto primavera/estate/autunno/inverno</li>
+                    <li><strong>Feriale/Weekend:</strong> Semplice dicotomia giorni lavorativi vs riposo</li>
+                </ul>
+            </div>
+            
+            <h3><i class="fas fa-clock"></i> Dimensioni Orarie</h3>
+            <div class="category-list">
+                <ul>
+                    <li><strong>Giorno/Notte:</strong> Visibilità e illuminazione naturale</li>
+                    <li><strong>Fascia Oraria (4 fasce):</strong> Divisione grossolana della giornata</li>
+                    <li><strong>Fascia Oraria (6 fasce):</strong> Alba, Mattina, Pranzo, Pomeriggio, Sera, Notte</li>
+                    <li><strong>Condizioni Luce:</strong> Visibilità dettagliata (luce naturale, crepuscolo, buio)</li>
+                    <li><strong>Ora di Punta:</strong> Picchi di traffico pendolare</li>
+                </ul>
+            </div>
+            
+            <h3><i class="fas fa-map-marker-alt"></i> Dimensioni Territoriali</h3>
+            <div class="category-list">
+                <ul>
+                    <li><strong>Circoscrizione:</strong> Prima suddivisione amministrativa di Palermo</li>
+                    <li><strong>Quartiere:</strong> Livello intermedio di dettaglio territoriale</li>
+                    <li><strong>UPL:</strong> Unità di Primo Livello - granularità massima</li>
+                </ul>
+            </div>
+            
+            <h3><i class="fas fa-exclamation-triangle"></i> Dimensione Tipologica</h3>
+            <p><strong>Tipologia Incidente:</strong> Mortale, Riserva, Feriti, Cose - l'indicatore di gravità più importante</p>
+        </div>
+
+        <!-- Metriche -->
+        <div class="info-card">
+            <h2>Le Due Metriche Principali</h2>
+            
+            <h3><i class="fas fa-calculator"></i> Conteggio Incidenti (Default)</h3>
+            <p>Conta semplicemente il numero totale di incidenti per ogni categoria della dimensione scelta. È la metrica più diretta e immediata.</p>
+            
+            <div class="info-note">
+                <strong><i class="fas fa-chart-bar"></i> Esempio Pratico</strong>
+                <p>Dimensione: <strong>Mese</strong> | Metrica: <strong>Conteggio</strong><br>
+                Risultato: Un grafico che mostra quanti incidenti sono avvenuti in Gennaio, Febbraio, Marzo, ecc.</p>
+            </div>
+            
+            <h3><i class="fas fa-layer-group"></i> Raggruppa per Tipologia</h3>
+            <p>Suddivide i dati in base alla gravità dell'incidente (M, R, F, C, TOTAL). Crea dataset multipli colorati per confrontare le diverse tipologie.</p>
+            
+            <div class="info-note">
+                <strong><i class="fas fa-layer-group"></i> Esempio Pratico</strong>
+                <p>Dimensione: <strong>Giorno Settimana</strong> | Metrica: <strong>Raggruppa per Tipologia</strong><br>
+                Risultato: Un grafico con 5 linee/barre separate che mostrano, per ogni giorno, quanti incidenti mortali (rosso), con riserva (viola), con feriti (arancio), con cose (verde) e totali (blu) sono avvenuti.</p>
+            </div>
+            
+            <p>Quando selezioni <strong>"Raggruppa per Tipologia"</strong>, appare una sezione con checkbox per scegliere quali tipologie visualizzare. Se non selezioni nulla, vengono mostrate tutte.</p>
+        </div>
+
+        <!-- Colori e Stili -->
+        <div class="info-card">
+            <h2>Sistema Colori Avanzato</h2>
+            
+            <p>Il Chart Builder offre <strong>tre modalità colore</strong> per adattarsi a ogni esigenza:</p>
+            
+            <h3><i class="fas fa-palette"></i> Modalità Automatica (Consigliata)</h3>
+            <p>Usa una palette intelligente che si adatta al tipo di grafico:</p>
+            <ul>
+                <li><strong>Grafici circolari</strong> (torta, ciambella, polare): palette multicolore vivace</li>
+                <li><strong>Grafici lineari/barre</strong>: gradiente blu-viola elegante</li>
+                <li><strong>Tipologie</strong>: colori semantici (rosso=mortali, arancio=feriti, verde=cose)</li>
+            </ul>
+            
+            <h3><i class="fas fa-square"></i> Colore Singolo</h3>
+            <p>Tutte le barre/punti dello stesso colore che scegli tu. Perfetto per grafici minimalisti o quando vuoi enfatizzare l'uniformità dei dati.</p>
+            
+            <h3><i class="fas fa-gradient"></i> Gradiente Personalizzato</h3>
+            <p>Scegli due colori (inizio e fine) e il sistema genera automaticamente una transizione fluida. Ideale per evidenziare progressioni (es: dal più basso al più alto).</p>
+            
+            <div class="highlight-box">
+                <p><strong><i class="fas fa-sparkles"></i> Novità: Colore Testo Personalizzato</strong><br>
+                Puoi ora cambiare il colore di <em>tutti</em> gli elementi testuali (titolo, assi, etichette, legenda) per adattare il grafico al tuo brand o documento. Default: grigio scuro (#1f2937).</p>
+            </div>
+        </div>
+
+        <!-- Titolo Personalizzato -->
+        <div class="info-card">
+            <h2>Titolo Personalizzato + Filtri Automatici</h2>
+            
+            <p>Una delle funzionalità più potenti del Chart Builder è il <strong>sistema di titolazione intelligente</strong>:</p>
+            
+            <h3>Come Funziona</h3>
+            <ol style="padding-left: 20px; color: #374151; line-height: 1.8;">
+                <li><strong>Senza titolo personalizzato:</strong> Usa il nome della dimensione come titolo base (es: "Mese")</li>
+                <li><strong>Con titolo personalizzato:</strong> Usa il tuo testo custom (es: "Analisi Mensile Traffico Urbano")</li>
+                <li><strong>Filtri automatici:</strong> Aggiunge automaticamente tutti i filtri attivi dopo il titolo, separati da " • "</li>
+            </ol>
+            
+            <div class="info-note">
+                <strong><i class="fas fa-magic"></i> Esempio Completo</strong>
+                <p><strong>Titolo inserito:</strong> "Analisi Incidenti Urbani"<br>
+                <strong>Filtri attivi:</strong> Anno 2023, Mese Gennaio, Circoscrizione 1<br>
+                <strong>Risultato finale:</strong> "Analisi Incidenti Urbani - 2023 • Gennaio • Circoscrizione 1"</p>
+            </div>
+            
+            <p>Questo sistema garantisce che ogni grafico sia <strong>auto-documentante</strong>: guardandolo, si capisce immediatamente quali dati rappresenta e con quali filtri è stato generato.</p>
+        </div>
+
+        <!-- Controlli Stile -->
+        <div class="info-card">
+            <h2>Controlli di Stile Professionali</h2>
+            
+            <p>Oltre ai 4 preset rapidi (Minimal, Default, Bold, Clean), puoi personalizzare ogni aspetto visivo:</p>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <span class="info-label">Spessore Bordi</span>
+                    <span class="info-value">0-10px</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Opacità</span>
+                    <span class="info-value">0-100%</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Dimensione Testo</span>
+                    <span class="info-value">8-20px</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Dimensione Titolo</span>
+                    <span class="info-value">12-32px</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Dimensione Legenda</span>
+                    <span class="info-value">8-18px</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Opacità Griglia</span>
+                    <span class="info-value">0-100%</span>
+                </div>
+            </div>
+            
+            <h3>Controlli Specifici per Tipo di Grafico</h3>
+            <p>Alcune opzioni appaiono solo con determinati tipi di grafico:</p>
+            
+            <ul>
+                <li><strong>Curvatura Linee:</strong> Solo per grafici line/radar - rende le linee più morbide</li>
+                <li><strong>Dimensione Punti:</strong> Solo per grafici line/scatter - controlla i marker</li>
+                <li><strong>Orientamento:</strong> Solo per grafici a barre - verticale vs orizzontale</li>
+                <li><strong>Impilamento:</strong> Solo per barre/linee - somma i valori verticalmente</li>
+                <li><strong>Riempi Area:</strong> Solo per grafici a linea - colora l'area sotto la curva</li>
+            </ul>
+        </div>
+
+        <!-- Varianti e Opzioni -->
+        <div class="info-card">
+            <h2>Varianti e Opzioni Avanzate</h2>
+            
+            <h3><i class="fas fa-check-square"></i> Checkbox Disponibili</h3>
+            
+            <div class="category-list">
+                <ul>
+                    <li><strong>Grafico Impilato (Stacked):</strong> Somma i valori verticalmente - utile per vedere totali compositi</li>
+                    <li><strong>Orientamento Orizzontale:</strong> Ruota il grafico a barre di 90° - meglio per etichette lunghe</li>
+                    <li><strong>Riempi Area sotto la Linea:</strong> Aggiunge colore sotto le curve - maggiore impatto visivo</li>
+                    <li><strong>Mostra Valori sul Grafico:</strong> Etichette numeriche su ogni barra/punto - massima precisione</li>
+                    <li><strong>Mostra Griglia:</strong> Linee di riferimento sugli assi - facilita la lettura</li>
+                    <li><strong>Mostra Legenda:</strong> Box esplicativo dei colori - essenziale con multiple serie</li>
+                    <li><strong>Abilita Animazioni:</strong> Transizioni fluide all'apertura - più elegante ma più lento</li>
+                </ul>
+            </div>
+            
+            <div class="info-note">
+                <strong><i class="fas fa-info-circle"></i> Nota sulle Etichette Valori</strong>
+                <p>Le etichette si posizionano intelligentemente: dentro le barre se c'è spazio, fuori se sono troppo piccole. Per grafici circolari, le etichette sono sempre esterne per massima leggibilità.</p>
+            </div>
+        </div>
+
+        <!-- Download e Export -->
+        <div class="info-card">
+            <h2>Download e Export Professionale</h2>
+            
+            <p>Il pulsante <strong>"PNG"</strong> non genera semplicemente uno screenshot, ma crea un'immagine professionale con:</p>
+            
+            <h3><i class="fas fa-file-image"></i> Struttura del File Esportato</h3>
+            
+            <ol style="padding-left: 20px; color: #374151; line-height: 1.8;">
+                <li><strong>Header (100px):</strong>
+                    <ul style="margin-top: 8px;">
+                        <li>Titolo principale con filtri in grassetto 22px</li>
+                        <li>Sottotitolo "Chart Builder - Grafico Personalizzato"</li>
+                        <li>Info sui filtri attivi</li>
+                        <li>Linea separatrice</li>
+                    </ul>
+                </li>
+                <li><strong>Area Grafico:</strong> Il tuo grafico renderizzato in alta qualità</li>
+                <li><strong>Footer (70px):</strong>
+                    <ul style="margin-top: 8px;">
+                        <li>Fonte dati: dati.gov.it</li>
+                        <li>Rielaborazione: opendatasicilia.it</li>
+                        <li>URL completo del progetto</li>
+                        <li>Logo OpenDataSicilia (se disponibile)</li>
+                    </ul>
+                </li>
+            </ol>
+            
+            <div class="highlight-box">
+                <p><strong><i class="fas fa-ruler-combined"></i> Risoluzione:</strong> 800×600px minimo (si adatta automaticamente all'aspect ratio del grafico)<br>
+                <strong><i class="fas fa-folder"></i> Formato:</strong> PNG con sfondo bianco<br>
+                <strong><i class="fas fa-file-signature"></i> Naming:</strong> Il filename usa il titolo personalizzato (o dimensione) + dimensioni</p>
+            </div>
+        </div>
+
+        <!-- Casi d'Uso -->
+        <div class="info-card">
+            <h2>5 Casi d'Uso Pratici</h2>
+            
+            <h3><i class="fas fa-file-alt"></i> Report Annuale per Ente Pubblico</h3>
+            <p><strong>Obiettivo:</strong> Creare grafici per un documento ufficiale</p>
+            <ul>
+                <li>Tipo: Barre verticali</li>
+                <li>Dimensione: Mese</li>
+                <li>Metrica: Raggruppa per Tipologia (solo Mortali e Feriti)</li>
+                <li>Stile: Bold con colori automatici</li>
+                <li>Titolo: "Incidenti Gravi - Report Annuale 2023"</li>
+            </ul>
+            
+            <h3><i class="fas fa-presentation"></i> Presentazione per Consiglio Comunale</h3>
+            <p><strong>Obiettivo:</strong> Evidenziare zone critiche della città</p>
+            <ul>
+                <li>Filtri: Anno 2023</li>
+                <li>Tipo: Barre orizzontali</li>
+                <li>Dimensione: Circoscrizione</li>
+                <li>Limita: Top 10</li>
+                <li>Stile: Clean con gradiente rosso-arancio</li>
+                <li>Titolo: "Circoscrizioni con Più Incidenti"</li>
+            </ul>
+            
+            <h3><i class="fas fa-graduation-cap"></i> Studio Accademico di Stagionalità</h3>
+            <p><strong>Obiettivo:</strong> Paper scientifico su pattern temporali</p>
+            <ul>
+                <li>Tipo: Linea con area riempita</li>
+                <li>Dimensione: Mese</li>
+                <li>Stile: Minimal, griglia visibile</li>
+                <li>Colori: Singolo blu accademico</li>
+                <li>Titolo: "Trend Mensile Incidentalità 2015-2023"</li>
+            </ul>
+            
+            <h3><i class="fas fa-share-alt"></i> Infografica per Social Media</h3>
+            <p><strong>Obiettivo:</strong> Post Instagram coinvolgente</p>
+            <ul>
+                <li>Tipo: Ciambella o Torta</li>
+                <li>Dimensione: Giorno Settimana</li>
+                <li>Stile: Bold, colori vivaci, etichette grandi</li>
+                <li>Colore testo: Bianco (per sfondo scuro)</li>
+                <li>Titolo: "Quando Palermo è Più Pericolosa?"</li>
+            </ul>
+            
+            <h3><i class="fas fa-shield-alt"></i> Dashboard Interna Polizia Municipale</h3>
+            <p><strong>Obiettivo:</strong> Monitoraggio operativo giornaliero</p>
+            <ul>
+                <li>Filtri: Ultime 24 ore (se disponibile) o giorno specifico</li>
+                <li>Tipo: Radar</li>
+                <li>Dimensione: Fascia Oraria (6 fasce)</li>
+                <li>Metrica: Raggruppa per Tipologia</li>
+                <li>Titolo: "Distribuzione Oraria Incidenti di Oggi"</li>
+            </ul>
+        </div>
+
+        <!-- Tips & Tricks -->
+        <div class="info-card">
+            <h2>Tips & Tricks per Grafici Efficaci</h2>
+            
+            <div class="category-list">
+                <ul>
+                    <li><strong><i class="fas fa-chart-bar"></i> Meno è Meglio:</strong> Limita i dati a Top 10-15 per grafici leggibili. Troppi elementi creano confusione.</li>
+                    <li><strong><i class="fas fa-palette"></i> Coerenza Cromatica:</strong> Se crei più grafici per lo stesso documento, usa la stessa palette colori.</li>
+                    <li><strong><i class="fas fa-heading"></i> Titoli Descrittivi:</strong> Un buon titolo risponde a "Cosa?" e "Quando?". Esempio: "Incidenti per Quartiere - Estate 2023"</li>
+                    <li><strong><i class="fas fa-sync-alt"></i> Sfrutta i Filtri:</strong> Invece di creare 12 grafici diversi manualmente, applica filtri diversi e rigenera lo stesso tipo di grafico.</li>
+                    <li><strong><i class="fas fa-arrows-alt-h"></i> Orientamento Intelligente:</strong> Usa barre orizzontali quando le etichette sono lunghe (es: nomi di vie o quartieri).</li>
+                    <li><strong><i class="fas fa-rainbow"></i> Evita Arcobaleni:</strong> Più di 5-6 colori diversi rendono il grafico caotico. Usa "Raggruppa per Tipologia" solo se necessario.</li>
+                    <li><strong><i class="fas fa-bolt"></i> Preset per Velocità:</strong> I 4 preset (Minimal/Default/Bold/Clean) coprono il 90% delle esigenze. Personalizza solo se strettamente necessario.</li>
+                    <li><strong><i class="fas fa-mobile-alt"></i> Mobile-First:</strong> Se il grafico sarà visto su smartphone, aumenta dimensioni testo e riduci elementi.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Limitazioni e Note Tecniche -->
+        <div class="info-card">
+            <h2>Limitazioni e Note Tecniche</h2>
+            
+            <div class="license-box">
+                <strong><i class="fas fa-exclamation-triangle"></i> Cosa Non Puoi Fare (Per Ora)</strong>
+                <ul style="margin: 12px 0;">
+                    <li><strong>Export multi-formato:</strong> Solo PNG disponibile (no SVG, PDF, Excel)</li>
+                    <li><strong>Grafici combinati:</strong> Non puoi sovrapporre più tipi (es: barre + linea)</li>
+                    <li><strong>Drill-down interattivo:</strong> Il grafico è statico, non cliccabile</li>
+                    <li><strong>Serie temporali continue:</strong> Non puoi visualizzare tutti i giorni dell'anno in sequenza</li>
+                    <li><strong>Mappe integrate:</strong> Non ci sono grafici geografici (usa la mappa principale per quello)</li>
+                </ul>
+            </div>
+            
+            <div class="info-note">
+                <strong><i class="fas fa-code"></i> Tecnologia Sottostante</strong>
+                <p>Il Chart Builder usa <strong>Chart.js 4.4.0</strong> con plugin DataLabels per le etichette. Tutti i calcoli avvengono client-side nel browser, nessun dato viene inviato a server esterni. I grafici sono renderizzati su Canvas HTML5.</p>
+            </div>
+        </div>
+
+        <!-- FAQ Rapide -->
+        <div class="info-card">
+            <h2>Domande Frequenti (FAQ)</h2>
+            
+            <h3><i class="fas fa-question-circle"></i> Il grafico non mostra nulla dopo "Genera Grafico"</h3>
+            <p><strong>Soluzione:</strong> Verifica di aver selezionato una <em>Dimensione Principale</em>. Se i filtri attivi escludono tutti i dati, il grafico sarà vuoto. Prova a rimuovere alcuni filtri.</p>
+            
+            <h3><i class="fas fa-question-circle"></i> I colori del grafico non corrispondono a quelli scelti</h3>
+            <p><strong>Causa:</strong> Hai probabilmente selezionato "Modalità Colore: Automatica". Cambia in "Colore Singolo" o "Gradiente" per usare i tuoi colori personalizzati.</p>
+            
+            <h3><i class="fas fa-question-circle"></i> Le etichette dei valori si sovrappongono</h3>
+            <p><strong>Soluzione:</strong> Riduci il numero di elementi con "Limita Risultati" (es: Top 10 invece di Tutti), oppure disabilita "Mostra Valori sul Grafico".</p>
+            
+            <h3><i class="fas fa-question-circle"></i> Il download PNG ha qualità bassa</h3>
+            <p><strong>Nota:</strong> L'immagine è 800×600px, ottimale per documenti digitali. Per stampe professionali, considera di aumentare la risoluzione usando strumenti esterni di upscaling.</p>
+            
+            <h3><i class="fas fa-question-circle"></i> Posso salvare le configurazioni del grafico?</h3>
+            <p><strong>Non ancora:</strong> Attualmente non c'è un sistema di salvataggio preset. Ogni volta devi riconfigurare. Suggerimento: segna le impostazioni su un file di testo se devi ricreare lo stesso grafico.</p>
+            
+            <h3><i class="fas fa-question-circle"></i> I filtri non vengono mostrati nel titolo</h3>
+            <p><strong>Verifica:</strong> I filtri devono essere <em>attivi nella dashboard</em> prima di aprire il Chart Builder. Se modifichi i filtri con il Chart Builder già aperto, chiudi e riapri il modal.</p>
+        </div>
+
+        <!-- Conclusione -->
+        <div class="highlight-box">
+            <p><strong class="doppia-sottolineatura">Il Chart Builder trasforma dati complessi in storie visive comprensibili.</strong><br><br>
+            Che tu sia un amministratore pubblico, un ricercatore, un giornalista o un cittadino curioso, questo strumento ti permette di esplorare 28.239 incidenti da infinite angolazioni, creando visualizzazioni professionali in pochi clic. Nessun software esterno, nessuna competenza di programmazione richiesta - solo dati, filtri e creatività.</p>
+        </div>
+    </div>
+
+
+<!-- Tab Condividi & Seguici -->
+<div class="footer-tab-content" id="tab-condividi">
+    <div class="info-card">
+        <h4><i class="fas fa-share-nodes"></i> Condividi questa Visualizzazione</h4>
+        <p>Condividi la vista attuale con tutti i filtri e la posizione della mappa:</p>
+        
+        <div class="share-url-section" style="margin-top: 1rem;">
+            <div class="share-url-container" style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                <input type="text" 
+                       id="footer-share-url-input" 
+                       class="share-url-input" 
+                       readonly 
+                       placeholder="Generando link..."
+                       style="flex: 1; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; font-family: monospace; font-size: 0.85rem;">
+<button id="footer-copy-share-url" 
+        class="copy-btn" 
+        title="Copia negli appunti" 
+        onclick="copyFooterShareUrl(); return false;"
+        style="padding: 0.75rem 1rem; background: #ff9900; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+    <i class="fas fa-copy"></i>
+</button>
+            </div>
+            <div id="footer-copy-feedback" class="copy-feedback" style="font-size: 0.85rem; margin-top: 0.5rem;"></div>
+        </div>
+        
+        <div class="share-social-section" style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e7eb;">
+            <p><strong>Condividi su:</strong></p>
+            <div class="share-social-buttons" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 1rem;">
+                
+                <button class="share-social-btn telegram" onclick="shareOnSocial('telegram')" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; background: white; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                    <i class="fab fa-telegram" style="font-size: 1.25rem; color: #0088cc;"></i>
+                    <span>Telegram</span>
+                </button>
+                
+                <button class="share-social-btn whatsapp" onclick="shareOnSocial('whatsapp')" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; background: white; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                    <i class="fab fa-whatsapp" style="font-size: 1.25rem; color: #25d366;"></i>
+                    <span>WhatsApp</span>
+                </button>
+                
+                <button class="share-social-btn facebook" onclick="shareOnSocial('facebook')" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; background: white; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                    <i class="fab fa-facebook-f" style="font-size: 1.25rem; color: #1877f2;"></i>
+                    <span>Facebook</span>
+                </button>
+                
+                <button class="share-social-btn twitter" onclick="shareOnSocial('twitter')" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; background: white; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                    <i class="fab fa-x-twitter" style="font-size: 1.25rem; color: #000000;"></i>
+                    <span>X (Twitter)</span>
+                </button>
+                
+                <button class="share-social-btn bluesky" onclick="shareOnSocial('bluesky')" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; background: white; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                    <svg width="20" height="20" viewBox="0 0 568 501" fill="#00d4ff" xmlns="http://www.w3.org/2000/svg" style="min-width: 20px;">
+                        <path d="M123.121 33.6637C188.241 82.5526 258.281 181.681 284 234.873C309.719 181.681 379.759 82.5526 444.879 33.6637C491.866 -1.61183 568 -28.9064 568 57.9464C568 75.2916 558.055 203.659 552.222 224.501C531.947 296.954 458.067 315.434 392.347 304.249C507.222 323.8 536.444 388.56 473.333 453.32C353.473 576.312 301.061 422.461 287.631 383.039C285.169 375.812 284.017 372.431 284 375.306C283.983 372.431 282.831 375.812 280.369 383.039C266.939 422.461 214.527 576.312 94.6667 453.32C31.5556 388.56 60.7778 323.8 175.653 304.249C109.933 315.434 36.0535 296.954 15.7778 224.501C9.94525 203.659 0 75.2916 0 57.9464C0 -28.9064 76.1345 -1.61183 123.121 33.6637Z" fill="currentColor"/>
+                    </svg>
+                    <span>Bluesky</span>
+                </button>
+                
+                <button class="share-social-btn email" onclick="shareOnSocial('email')" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem; border: 2px solid #e5e7eb; border-radius: 8px; background: white; cursor: pointer; font-weight: 600; transition: all 0.3s;">
+                    <i class="fas fa-envelope" style="font-size: 1.25rem; color: #ff9900;"></i>
+                    <span>Email</span>
+                </button>
+                
+            </div>
+        </div>
+    </div>
+    
+    <div class="info-card" style="margin-top: 1.5rem;">
+        <h4><i class="fas fa-users"></i> Seguici sui Social</h4>
+        <p>Resta aggiornato sulle novità di OpenDataSicilia:</p>
+        <div class="social-follow-buttons" style="display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem;">
+            
+            <a href="https://opendatasicilia.it" target="_blank" rel="noopener" class="social-follow-btn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #374151; font-weight: 600; transition: all 0.3s;">
+                <i class="fas fa-globe" style="color: #ff9900; font-size: 1.1rem;"></i>
+                <span>Sito Web</span>
+            </a>
+            
+            <a href="https://www.facebook.com/groups/opendatasicilia" target="_blank" rel="noopener" class="social-follow-btn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #374151; font-weight: 600; transition: all 0.3s;">
+                <i class="fab fa-facebook-f" style="color: #1877f2; font-size: 1.1rem;"></i>
+                <span>Facebook</span>
+            </a>
+            
+            <a href="https://x.com/opendatasicilia" target="_blank" rel="noopener" class="social-follow-btn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #374151; font-weight: 600; transition: all 0.3s;">
+                <i class="fab fa-x-twitter" style="color: #000000; font-size: 1.1rem;"></i>
+                <span>X (Twitter)</span>
+            </a>
+            
+            <a href="https://t.me/opendatasicilia" target="_blank" rel="noopener" class="social-follow-btn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #374151; font-weight: 600; transition: all 0.3s;">
+                <i class="fab fa-telegram" style="color: #0088cc; font-size: 1.1rem;"></i>
+                <span>Telegram</span>
+            </a>
+            
+            <a href="https://groups.google.com/g/opendatasicilia?pli=1" target="_blank" rel="noopener" class="social-follow-btn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #374151; font-weight: 600; transition: all 0.3s;">
+                <i class="fas fa-envelope" style="color: #ea4335; font-size: 1.1rem;"></i>
+                <span>Mailing List</span>
+            </a>
+            
+            <a href="https://github.com/SiciliaHub/palermohub" target="_blank" rel="noopener" class="social-follow-btn" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1rem; background: #f3f4f6; border-radius: 8px; text-decoration: none; color: #374151; font-weight: 600; transition: all 0.3s;">
+                <i class="fab fa-github" style="color: #000000; font-size: 1.1rem;"></i>
+                <span>GitHub</span>
+            </a>
+            
+        </div>
+    </div>
+</div>
+
+
+        <!-- Tab Crediti -->
+        <div class="footer-tab-content" id="tab-crediti">
+            <div class="info-card">
+                <h4><i class="fas fa-users"></i> Crediti e Realizzazione</h4>
+                <div class="credits-section">
+                    <p><strong><i class="fas fa-tools"></i> Sviluppo e Design:</strong></p>
+                    <p>Applicazione web a tecnologia ibrida, sviluppata attraverso una collaborazione human-<a href="https://claude.ai" target="_blank">Claude AI (Anthropic)</a>, che ha supportato lo sviluppo dell'architettura modulare, l'ottimizzazione del codice e l'implementazione di funzionalità avanzate di visualizzazione.<strong>Rielaborazione dati & Autore:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener">Giovan Battista Vitrano</a></p>
+                    
+                    <p><strong><i class="fas fa-landmark"></i> Comunità:</strong></p>
+                    <p><a href="http://opendatasicilia.it/" target="_blank" rel="noopener">OpenDataSicilia</a> - Comunità civica che promuove la cultura dei dati aperti in Sicilia</p>
+                    
+                  	<div class="info-note">
+                    <strong><i class="fas fa-hands-helping"></i> Ringraziamenti</strong>
+                    <p>Si ringrazia il <a href="https://www.comune.palermo.it/" title="Comune di Palermo" target="_blank">Comune di Palermo</a> e la <a href="https://www.comune.palermo.it/servizio/polizia-municipale/" title="Polizia Municipale" target="_blank">Polizia Municipale</a> per la pubblicazione dei dati in formato aperto, rendendo possibile questa analisi e sensibilizzazione.</p>
+					<p>Un grazie speciale a <a href="https://www.linkedin.com/in/andreaborruso/" title="Andrea Borruso" target="_blank">Andrea Borruso</a> e <a href="https://www.linkedin.com/in/salvatore-fiandaca-23a1a250/" title="Totò Fiandaca" target="_blank">Totò Fiandaca</a> per il prezioso supporto tecnico, per la loro disponibilità e per aver condiviso con generosità competenze ed esperienza.</p>
+				</div>
+
+<div class="license-box">
+    <strong><i class="fas fa-shield-alt"></i> Responsabilità</strong>
+    <p>I dati sono forniti <b>"as is".</b> <br> L'utente accetta i dati nella loro condizione attuale e si assume la responsabilità del loro utilizzo.
+                    <br>
+                <strong>Cosa significa "as is"?</strong>
+                I dati sono forniti nello stato in cui si trovano, senza garanzie di alcun tipo (esplicite o implicite) riguardo:
+                <ul>
+                    <li>Completezza delle informazioni</li>
+                    <li>Accuratezza o precisione dei dati</li>
+                    <li>Idoneità per uno scopo specifico</li>
+                    <li>Assenza di errori o omissioni</li>
+                </ul> </p>
+            <p class="doppia-sottolineatura">  <b> L'elaborazione è a scopo informativo e di sensibilizzazione. - Per informazioni ufficiali contattare la <a href="https://www.comune.palermo.it/servizio/polizia-municipale/" title="Polizia Municipale" target="_blank">Polizia Municipale di Palermo.</a></b></p>
+</div>
+                                      
+                    <p><strong><i class="fas fa-envelope"></i> Contatti:</strong></p>
+                    <p>Per segnalazioni, suggerimenti o collaborazioni: <a href="https://groups.google.com/g/opendatasicilia?pli=1" target="_blank" rel="noopener">contattaci</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Chart Builder Button -->
+<button class="chart-builder-trigger" id="chart-builder-trigger" title="Crea il tuo grafico personalizzato"> <span class="pulse-ring1"></span> <i class="fas fa-chart-pie"></i> <span>Crea il tuo DataViz</span> </button>
+<!-- ============================================ -->
+<!-- CHART BUILDER MODAL - VERSIONE COMPLETA -->
+<!-- Sostituisce il blocco esistente in index.html -->
+<!-- Posiziona PRIMA di </body> -->
+<!-- ============================================ -->
+
+<div class="chart-builder-modal" id="chart-builder-modal">
+    <div class="chart-builder-content">
+        <!-- Header -->
+        <div class="chart-builder-header">
+            <div class="chart-builder-title">
+                <i class="fas fa-chart-line"></i>
+                <h2>Crea il tuo grafico personalizzato</h2>
+            </div>
+            <button class="chart-builder-close" id="chart-builder-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <!-- Body -->
+        <div class="chart-builder-body">
+            
+            <!-- ====================================== -->
+            <!-- LEFT PANEL - Configurazione -->
+            <!-- ====================================== -->
+            <div class="chart-builder-config">
+                
+                <!-- SEZIONE 1: Tipo di Grafico -->
+                <div class="config-section">
+                    <h3><i class="fas fa-chart-bar"></i> Tipo di Grafico</h3>
+                    <div class="chart-type-grid">
+                        <button class="chart-type-btn active" data-type="bar">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Barre</span>
+                        </button>
+                        <button class="chart-type-btn" data-type="line">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Linea</span>
+                        </button>
+                        <button class="chart-type-btn" data-type="pie">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Torta</span>
+                        </button>
+                        <button class="chart-type-btn" data-type="doughnut">
+                            <i class="fas fa-circle-notch"></i>
+                            <span>Ciambella</span>
+                        </button>
+                        <button class="chart-type-btn" data-type="radar">
+                            <i class="fas fa-atom"></i>
+                            <span>Radar</span>
+                        </button>
+                        <button class="chart-type-btn" data-type="polarArea">
+                            <i class="fas fa-bullseye"></i>
+                            <span>Polare</span>
+                        </button>
+                        <button class="chart-type-btn" data-type="scatter">
+                            <i class="fas fa-braille"></i>
+                            <span>Scatter</span>
+                        </button>
+                        <button class="chart-type-btn" data-type="bubble">
+                            <i class="fas fa-circle"></i>
+                            <span>Bubble</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SEZIONE 2: Configurazione Dati -->
+                <div class="config-section">
+                    <h3><i class="fas fa-database"></i> Configurazione Dati</h3>
+                    
+                    <div class="config-group">
+                        <label class="config-label">
+                            <i class="fas fa-chart-bar"></i> Dimensione Principale
+                        </label>
+                        <select id="dimension-select" class="config-select">
+                            <option value="">Seleziona dimensione...</option>
+                            <option value="Tipologia">Tipologia Incidente</option>
+                            <option value="Anno">Anno</option>
+                            <option value="Mese">Mese</option>
+                            <option value="Giorno settimana">Giorno Settimana</option>
+                            <option value="Stagione">Stagione</option>
+                            <option value="Feriale/Weekend">Feriale/Weekend</option>
+                            <option value="Giorno/Notte">Giorno/Notte</option>
+                            <option value="Circoscrizione">Circoscrizione</option>
+                            <option value="Quartiere">Quartiere</option>
+                            <option value="Fascia oraria (4 fasce)">Fascia Oraria (4)</option>
+                            <option value="Fascia oraria dettagliata (6 fasce)">Fascia Oraria (6)</option>
+                            <option value="Condizioni luce (Visibilità)">Condizioni Luce</option>
+                            <option value="Ora di punta (Picchi di traffico)">Ora di Punta</option>
+                        </select>
+                    </div>
+    <div class="config-group">
+        <label class="config-label">
+            <i class="fas fa-heading"></i> Titolo Personalizzato (opzionale)
+        </label>
+        <input 
+            type="text" 
+            id="custom-title-input" 
+            class="config-select" 
+            placeholder="Lascia vuoto per usare la dimensione"
+            maxlength="100"
+            style="padding: 10px; border-radius: 6px; border: 1px solid #334155;"
+        >
+        <div class="info-box" style="margin-top: 8px; padding: 6px 8px; font-size: 10px;">
+            <i class="fas fa-info-circle"></i>
+            <span>Se lasci vuoto, verrà usata la dimensione selezionata. I filtri verranno aggiunti automaticamente.</span>
+        </div>
+    </div>
+
+
+
+                    <div class="config-group">
+                        <label class="config-label">
+                            <i class="fas fa-calculator"></i> Metrica
+                        </label>
+                        <select id="metric-select" class="config-select">
+                            <option value="count">Conteggio Incidenti</option>
+                            <option value="tipologia">Raggruppa per Tipologia</option>
+                        </select>
+                    </div>
+
+                    <!-- Tipologie Checkbox (visibile solo con metric=tipologia) -->
+                    <div class="config-group" id="tipologie-group" style="display: none;">
+                        <label class="config-label">
+                            <i class="fas fa-check-square"></i> Seleziona Tipologie
+                        </label>
+                        <div class="tipologie-checkboxes">
+                            <div class="tipologia-checkbox">
+                                <input type="checkbox" id="tipo-m" value="M">
+                                <label for="tipo-m">
+                                    <span class="tipologia-icon" style="color: #ef4444;">●</span>
+                                    Mortali
+                                </label>
+                            </div>
+                            <div class="tipologia-checkbox">
+                                <input type="checkbox" id="tipo-r" value="R">
+                                <label for="tipo-r">
+                                    <span class="tipologia-icon" style="color: #a855f7;">●</span>
+                                    Riserva
+                                </label>
+                            </div>
+                            <div class="tipologia-checkbox">
+                                <input type="checkbox" id="tipo-f" value="F">
+                                <label for="tipo-f">
+                                    <span class="tipologia-icon" style="color: #f59e0b;">●</span>
+                                    Feriti
+                                </label>
+                            </div>
+                            <div class="tipologia-checkbox">
+                                <input type="checkbox" id="tipo-c" value="C">
+                                <label for="tipo-c">
+                                    <span class="tipologia-icon" style="color: #10b981;">●</span>
+                                    Cose
+                                </label>
+                            </div>
+        <!-- NUOVA CHECKBOX TOTALE -->
+        <div class="tipologia-checkbox">
+            <input type="checkbox" id="tipo-total" value="TOTAL">
+            <label for="tipo-total">
+                <span class="tipologia-icon" style="color: #3b82f6;">●</span>
+                Totale
+            </label>
+        </div>
+    </div>
+    <div class="info-box" style="margin-top: 10px; padding: 8px 10px; font-size: 10px;">
+        <i class="fas fa-info-circle"></i>
+        <span>Se nessuna tipologia è selezionata, verranno mostrate tutte (incluso totale)</span>
+    </div>
+</div>
+
+                    <div class="config-group">
+                        <label class="config-label">
+                            <i class="fas fa-list-ol"></i> Limita Risultati
+                        </label>
+                        <select id="limit-select" class="config-select">
+                            <option value="0">Tutti</option>
+                            <option value="5">Top 5</option>
+                            <option value="10" selected>Top 10</option>
+                            <option value="15">Top 15</option>
+                            <option value="20">Top 20</option>
+                            <option value="25">Top 25</option>
+                        </select>
+                    </div>
+
+                    <div class="config-group" id="orientation-group" style="display: none;">
+                        <label class="config-label">
+                            <i class="fas fa-arrows-alt-h"></i> Orientamento
+                        </label>
+                        <select id="orientation-select" class="config-select">
+                            <option value="vertical">Verticale</option>
+                            <option value="horizontal">Orizzontale</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- SEZIONE 3: Colori Avanzati -->
+                <div class="config-section">
+                    <h3><i class="fas fa-palette"></i> Colori</h3>
+                    
+                    <div class="config-group color-mode-group">
+                        <label class="config-label">
+                            <i class="fas fa-swatchbook"></i> Modalità Colore
+                        </label>
+                        <select id="color-mode-select" class="config-select">
+                            <option value="auto">Automatico</option>
+                            <option value="single">Colore Singolo</option>
+                            <option value="gradient">Gradiente</option>
+                        </select>
+                    </div>
+
+                    <div id="single-color-group" style="display: none;">
+                        <div class="color-input-wrapper">
+                            <label>Colore Primario</label>
+                            <input type="color" id="primary-color" value="#3b82f6">
+                        </div>
+                    </div>
+
+                    <div id="gradient-color-group" style="display: none;">
+                        <div class="color-picker-grid">
+                            <div class="color-input-wrapper">
+                                <label>Inizio</label>
+                                <input type="color" id="primary-color-gradient" value="#3b82f6">
+                            </div>
+                            <div class="color-input-wrapper">
+                                <label>Fine</label>
+                                <input type="color" id="secondary-color" value="#8b5cf6">
+                            </div>
+                        </div>
+                    </div>
+
+ <!-- NUOVO: Colore Testo -->
+    <div class="divider"></div>
+    
+    <div class="config-group">
+        <label class="config-label">
+            <i class="fas fa-font"></i> Colore Testo e Assi
+        </label>
+        <div class="color-input-wrapper">
+            <label>Colore Etichette, Assi e Titoli</label>
+            <input type="color" id="text-color" value="#1f2937">
+        </div>
+        <div class="info-box" style="margin-top: 8px; padding: 6px 8px; font-size: 10px;">
+            <i class="fas fa-info-circle"></i>
+            <span>Cambia il colore di: titolo, assi, etichette, legenda</span>
+        </div>
+    </div>
+
+    <div class="info-box" style="margin-top: 12px;">
+        <i class="fas fa-info-circle"></i>
+        <span><strong>Automatico:</strong> usa i colori predefiniti come Analytics Panel</span>
+    </div>
+</div>
+
+                <!-- SEZIONE 4: Stile e Dimensioni -->
+                <div class="config-section">
+                    <h3><i class="fas fa-paint-brush"></i> Stile e Dimensioni</h3>
+                    
+                    <!-- Border Width -->
+                    <div class="range-group">
+                        <div class="range-label">
+                            <span class="range-label-text">Spessore Bordi</span>
+                            <span class="range-value" id="border-width-value">2</span>
+                        </div>
+                        <input type="range" id="border-width" min="0" max="10" step="0.5" value="2">
+                    </div>
+
+                    <!-- Opacity -->
+                    <div class="range-group">
+                        <div class="range-label">
+                            <span class="range-label-text">Opacità</span>
+                            <span class="range-value" id="opacity-value">0.8</span>
+                        </div>
+                        <input type="range" id="opacity" min="0" max="1" step="0.05" value="0.8">
+                    </div>
+
+                    <!-- Font Size -->
+                    <div class="range-group">
+                        <div class="range-label">
+                            <span class="range-label-text">Dimensione Testo</span>
+                            <span class="range-value" id="font-size-value">12px</span>
+                        </div>
+                        <input type="range" id="font-size" min="8" max="20" step="1" value="12">
+                    </div>
+
+                    <!-- Title Size -->
+                    <div class="range-group">
+                        <div class="range-label">
+                            <span class="range-label-text">Dimensione Titolo</span>
+                            <span class="range-value" id="title-size-value">16px</span>
+                        </div>
+                        <input type="range" id="title-size" min="12" max="32" step="1" value="16">
+                    </div>
+
+                    <!-- Legend Size -->
+                    <div class="range-group">
+                        <div class="range-label">
+                            <span class="range-label-text">Dimensione Legenda</span>
+                            <span class="range-value" id="legend-size-value">12px</span>
+                        </div>
+                        <input type="range" id="legend-size" min="8" max="18" step="1" value="12">
+                    </div>
+
+                    <!-- Grid Opacity -->
+                    <div class="range-group">
+                        <div class="range-label">
+                            <span class="range-label-text">Opacità Griglia</span>
+                            <span class="range-value" id="grid-opacity-value">0.1</span>
+                        </div>
+                        <input type="range" id="grid-opacity" min="0" max="1" step="0.05" value="0.1">
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Tension (Line Charts) -->
+                    <div class="range-group" id="tension-group" style="display: none;">
+                        <div class="range-label">
+                            <span class="range-label-text">Curvatura Linee</span>
+                            <span class="range-value" id="tension-value">0.4</span>
+                        </div>
+                        <input type="range" id="tension" min="0" max="1" step="0.1" value="0.4">
+                    </div>
+
+                    <!-- Point Radius -->
+                    <div class="range-group" id="point-group" style="display: none;">
+                        <div class="range-label">
+                            <span class="range-label-text">Dimensione Punti</span>
+                            <span class="range-value" id="point-radius-value">3px</span>
+                        </div>
+                        <input type="range" id="point-radius" min="0" max="10" step="1" value="3">
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Preset Buttons -->
+                    <label class="config-label">
+                        <i class="fas fa-magic"></i> Preset Rapidi
+                    </label>
+                    <div class="preset-buttons">
+                        <button class="preset-btn apply-preset" data-preset="minimal">
+                            <i class="fas fa-compress"></i> Minimal
+                        </button>
+                        <button class="preset-btn apply-preset" data-preset="default">
+                            <i class="fas fa-check"></i> Default
+                        </button>
+                        <button class="preset-btn apply-preset" data-preset="bold">
+                            <i class="fas fa-bold"></i> Bold
+                        </button>
+                        <button class="preset-btn apply-preset" data-preset="clean">
+                            <i class="fas fa-eraser"></i> Clean
+                        </button>
+                    </div>
+                </div>
+
+                <!-- SEZIONE 5: Varianti e Opzioni -->
+                <div class="config-section">
+                    <h3><i class="fas fa-sliders-h"></i> Varianti e Opzioni</h3>
+                    
+                    <div id="stacked-group" style="display: none;">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="stacked-variant">
+                            <label for="stacked-variant">Grafico Impilato (Stacked)</label>
+                        </div>
+                    </div>
+
+                    <div id="horizontal-group" style="display: none;">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="horizontal-variant">
+                            <label for="horizontal-variant">Orientamento Orizzontale</label>
+                        </div>
+                    </div>
+
+                    <div id="fill-group" style="display: none;">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="fill-area" checked>
+                            <label for="fill-area">Riempi Area sotto la Linea</label>
+                        </div>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="show-values" checked>
+                        <label for="show-values">Mostra Valori sul Grafico</label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="show-grid" checked>
+                        <label for="show-grid">Mostra Griglia</label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="show-legend" checked>
+                        <label for="show-legend">Mostra Legenda</label>
+                    </div>
+
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="animation" checked>
+                        <label for="animation">Abilita Animazioni</label>
+                    </div>
+                </div>
+
+                <!-- Filtri Attivi -->
+                <div class="config-section">
+                    <h3><i class="fas fa-filter"></i> Filtri Attivi</h3>
+                    <div class="active-filters-box" id="custom-chart-filters">
+                        <span class="no-filters">Nessun filtro applicato</span>
+                    </div>
+                </div>
+
+                <!-- Pulsanti Azione -->
+                <div class="config-actions">
+                    <button class="btn-generate" id="btn-generate-chart">
+                        <i class="fas fa-magic"></i>
+                        Genera Grafico
+                    </button>
+					
+                    <button class="btn-reset-builder" id="btn-reset-builder">
+                        <i class="fas fa-undo"></i>
+                        Reset
+                    </button>
+                </div>
+
+                <!-- Info Box -->
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Suggerimento:</strong> Seleziona una dimensione e clicca "Genera Grafico". 
+                        I filtri applicati nella dashboard saranno utilizzati automaticamente. 
+                        Le etichette si posizionano intelligentemente dentro/fuori in base allo spazio.
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ====================================== -->
+            <!-- RIGHT PANEL - Anteprima Grafico -->
+            <!-- ====================================== -->
+            <div class="chart-builder-preview">
+                <div class="preview-header">
+                    <h3>
+                        <i class="fas fa-eye"></i> Anteprima
+                    </h3>
+                    <button class="btn-download-chart" id="btn-download-custom-chart" title="Scarica grafico come PNG 800x600">
+                        <i class="fas fa-download"></i> PNG
+                    </button>
+                </div>
+                
+                <div class="preview-container" id="preview-container">
+                    <div class="preview-placeholder">
+                        <i class="fas fa-chart-area"></i>
+                        <p>Il tuo grafico apparirà qui</p>
+                        <small>Seleziona le opzioni e clicca "Genera Grafico"</small>
+                    </div>
+                    <div class="chart-wrapper-custom" id="chart-wrapper-custom">
+                        <canvas id="custom-chart-canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer con statistiche -->
+        <div class="chart-builder-footer">
+            <div class="footer-stat">
+                <i class="fas fa-database"></i>
+                <span id="custom-chart-total">0 incidenti</span>
+            </div>
+            <div class="footer-stat">
+                <i class="fas fa-calendar"></i>
+                <span id="custom-chart-period">2015-2023</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="footer-modal-overlay" id="footer-modal-overlay"></div>
+<script src="js/incidenti_smart-awesome.js"></script>
+<script src="js/incidenti_final.js"></script>
+<script src="js/footer-modal.js"></script>
+<script src="js/chart-builder.js"></script>
+</body>
+</html>
