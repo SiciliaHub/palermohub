@@ -405,6 +405,7 @@ cubic-bezier(0.4, 0, 0.2, 1);
     margin-top: 2px;
 }
 
+
 /* Filters */
 
 .filters {
@@ -832,15 +833,15 @@ background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
 .detail-panel {
     position: fixed;
     top: 0;
-    right: -450px;
-    width: 450px;
+    right: -320px;
+    width: 320px;
     height: 100vh;
     background: #ffffff;
     box-shadow: -4px 0 20px rgba(0,0,0,0.5);
     z-index: 2000;
     overflow-y: auto;
     transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    border-left: 1px solid rgba(148, 163, 184, 0.2);
+   /* border-left: 1px solid rgba(148, 163, 184, 0.2);*/
 }
 
 .detail-panel.open {
@@ -860,10 +861,12 @@ background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
     border-radius: 4px;
 }
 
-.detail-header {
+.detail-header {     background-image: url(../img/inc_02.png);
+    background-repeat: no-repeat;
+    background-size: cover;
     position: sticky;
     top: 0;
-    background: #ffffff;
+   /* background: linear-gradient(135deg, #ff9900 0%, #ff6600 100%);*/
     color: #1f2937;
     padding: 24px;
     z-index: 10;
@@ -877,17 +880,29 @@ background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
     display: flex;
     align-items: center;
     gap: 12px;
+	padding-left: 0px!important;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7), -1px -1px 2px rgba(255, 255, 255, 0.5);
 }
 
+.detail-header h2 i {
+   color: #ffffff;
+}
+
+
 .detail-header p {
-    font-size: 13px;
-    opacity: 0.9;
+    font-size: 14px;
+	
+	color:#ffffff;
+    opacity: 0.95;
+	    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7), -1px -1px 2px rgba(255, 255, 255, 0.5)
+	
 }
 
 .detail-close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 8px;
+    right: 8px;
     background: #ff9900;
     border: none;
     width: 36px;
@@ -908,7 +923,7 @@ background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
 }
 
 .detail-content {
-    padding: 24px;
+    padding: 6px;
 	box-shadow: 4px 0 12px rgba (255, 153, 0, 0.2);
 }
 
@@ -933,7 +948,7 @@ background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
     gap: 8px;
 }
 
-.detail-section h3 i, .detail-header h2  i {
+.detail-section h3 i {
     color: #ff9900;
     font-size: 16px;
 }
