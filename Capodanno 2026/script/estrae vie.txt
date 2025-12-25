@@ -1,0 +1,143 @@
+import requests
+import json
+import folium
+from folium import plugins
+import time
+
+# Lista delle strade da cercare
+strade_chiuse = [
+    "Piazza Castelnuovo, Palermo",
+    "Piazza Aldo Moro, Palermo",
+    "Via Valerio Villareale, Palermo",
+    "Via G. B. Guccia, Palermo",
+    "Piazza Sant'Oliva, Palermo",
+    "Via Principe di Villafranca, Palermo",
+    "Via P. Paternostro, Palermo",
+    "Via Giovanni Guarino Amella, Palermo",
+    "Via Folengo, Palermo",
+    "Via Niccolò Garzilli, Palermo",
+    "Via Dante, Palermo",
+    "Via Venti Settembre, Palermo",
+    "Via Turati, Palermo",
+    "Via P. V. Panascia, Palermo",
+    "Via della Libertà, Palermo",
+    "Via XII Gennaio, Palermo",
+    "Via Enrico Parisi, Palermo",
+    "Via Nicolò Gallo, Palermo",
+    "Via Torrearsa, Palermo",
+    "Via Quintino Sella, Palermo",
+    "Via Ricasoli, Palermo",
+    "Via Trapani, Palermo",
+    "Via Messina, Palermo",
+    "Via Gaetano Daita, Palermo",
+    "Via Isidoro La Lumia, Palermo",
+    "Piazza Luigi Sturzo, Palermo",
+    "Via G. Mazzini, Palermo",
+    "Via Domenico Scinà, Palermo",
+    "Piazza Ruggero Settimo, Palermo"
+]
+
+# Query Overpass per cercare le strade a Palermo
+def get_street_geometry(street_name):
+    """Ottiene la geometria di una strada da OSM"""
+    overpass_url = "http://overpass-api.de/api/interpreter"
+    
+    # Rimuovi ", Palermo" dal nome per la query
+    clean_name = street_name.replace(", Palermo", "")
+    
+    overpass_query = f"""
+    [out:json];
+    area["name"="Palermo"]["admin_level"="8"]->.searchArea;
+    (
+      way["name"="{clean_name}"](area.searchArea);
+      relation["name"="{clean_name}"](area.searchArea);
+    );
+    out geom;
+    """
+    
+    try:
+        response = requests.get(overpass_url, params={'data': overpass_query}, timeout=30)
+        data = response.json()
+        return data.get('elements', [])
+    except Exception as e:
+        print(f"Errore per {street_name}: {e}")
+        return []
+
+# Raccogli tutte le geometrie
+print("Recupero dati da OpenStreetMap...")
+all_features = []
+
+for i, strada in enumerate(strade_chiuse):
+    print(f"[{i+1}/{len(strade_chiuse)}] Cerco: {strada}")
+    elements = get_street_geometry(strada)
+    
+    for element in elements:
+        if element['type'] == 'way' and 'geometry' in element:
+            coords = [[node['lat'], node['lon']] for node in element['geometry']]
+            all_features.append({
+                'name': strada,
+                'coords': coords,
+                'type': 'way'
+            })
+    
+    # Pausa per non sovraccaricare l'API
+    time.sleep(1)
+
+print(f"\nTrovate {len(all_features)} geometrie")
+
+# Crea la mappa
+center_palermo = [38.1157, 13.3615]  # Coordinate approssimative di Palermo centro
+mappa = folium.Map(
+    location=center_palermo,
+    zoom_start=15,
+    tiles='OpenStreetMap'
+)
+
+# Aggiungi le strade chiuse in rosso
+for feature in all_features:
+    folium.PolyLine(
+        locations=feature['coords'],
+        color='red',
+        weight=6,
+        opacity=0.7,
+        popup=feature['name']
+    ).add_to(mappa)
+
+# Aggiungi un marker per Piazza Castelnuovo come riferimento
+folium.Marker(
+    location=[38.1207, 13.3562],
+    popup="Piazza Castelnuovo - Centro eventi Capodanno 2026",
+    icon=folium.Icon(color='red', icon='info-sign')
+).add_to(mappa)
+
+# Aggiungi legenda
+legend_html = '''
+<div style="position: fixed; 
+            bottom: 50px; right: 50px; width: 300px; height: auto; 
+            background-color: white; z-index:9999; font-size:14px;
+            border:2px solid grey; border-radius: 5px; padding: 10px">
+<h4 style="margin-top:0;">Chiusure Capodanno 2026</h4>
+<p><span style="color:red; font-weight:bold;">━━━</span> Strade chiuse</p>
+<p style="font-size:12px; margin-top:10px;">
+<strong>Periodo:</strong><br>
+31/12/2025 ore 7:00<br>
+→ 01/01/2026 ore 7:00
+</p>
+</div>
+'''
+mappa.get_root().html.add_child(folium.Element(legend_html))
+
+# Salva la mappa
+output_path = '/mnt/user-data/outputs/mappa_chiusure_capodanno_2026_palermo.html'
+mappa.save(output_path)
+
+print(f"\nMappa salvata in: {output_path}")
+print(f"Strade mappate: {len(all_features)}")
+
+# Stampa quali strade non sono state trovate
+strade_trovate = set([f['name'] for f in all_features])
+strade_non_trovate = set(strade_chiuse) - strade_trovate
+if strade_non_trovate:
+    print(f"\nStrade NON trovate su OSM ({len(strade_non_trovate)}):")
+    for s in sorted(strade_non_trovate):
+        print(f"  - {s}")
