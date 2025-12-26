@@ -205,6 +205,12 @@
                 const panel = document.getElementById('infoPanel');
                 panel.classList.add('collapsed');
             }
+
+            // Inizializza la sezione crediti come chiusa
+            const creditsSection = document.querySelector('.credits-section');
+            if (creditsSection) {
+                creditsSection.classList.add('collapsed');
+            }
         });
 
         // Gestisci il resize
@@ -214,6 +220,12 @@
                 panel.classList.remove('collapsed');
             }
         });
+
+        // Funzione per toggle crediti
+        function toggleCredits() {
+            const creditsSection = document.querySelector('.credits-section');
+            creditsSection.classList.toggle('collapsed');
+        }
 
         // Funzioni per il modale
         function openModal() {
