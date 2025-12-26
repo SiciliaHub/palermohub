@@ -35,6 +35,9 @@
             maxZoom: 20
         }).addTo(map);
 
+        // Aggiungi funzionalità hash per condividere posizione mappa via URL
+        const hash = new L.Hash(map);
+
         const streetLayers = {};
         const allStreetNames = new Set();
         const allCoords = [];
