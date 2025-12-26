@@ -14,11 +14,24 @@
 
         // Inizializza mappa
         const centerPalermo = [38.1250, 13.3550];
-        const map = L.map('map', { zoomControl: false, attributionControl: true }).setView(centerPalermo, 16);
+
+        // Definisci i bounds del comune di Palermo
+        const palermoBounds = [
+            [38.05, 13.25],  // Angolo sud-ovest
+            [38.20, 13.43]   // Angolo nord-est
+        ];
+
+        const map = L.map('map', {
+            zoomControl: false,
+            attributionControl: true,
+            maxBounds: palermoBounds,
+            maxBoundsViscosity: 1.0  // 1.0 = bounds rigidi, 0.0 = bounds morbidi
+        }).setView(centerPalermo, 16);
 
         L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
             attribution: '© OpenStreetMap © CARTO - Rielaborazione dati: @opendatasicilia - @gbvitrano',
             subdomains: 'abcd',
+			minZoom: 14,
             maxZoom: 20
         }).addTo(map);
 
@@ -189,7 +202,8 @@
         // Inizializza il pannello come chiuso su mobile al caricamento
         window.addEventListener('DOMContentLoaded', function() {
             if (window.innerWidth <= 768) {
-                document.getElementById('infoPanel').classList.add('collapsed');
+                const panel = document.getElementById('infoPanel');
+                panel.classList.add('collapsed');
             }
         });
 
