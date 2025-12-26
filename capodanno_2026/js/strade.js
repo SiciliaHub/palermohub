@@ -282,3 +282,13 @@
                 podcastAudio.pause();
             }
         }
+
+        // Funzione per scaricare l'infografica
+        function downloadInfographic() {
+            const link = document.createElement('a');
+            link.href = 'img/infografica.png';
+            link.download = 'infografica_capodanno_2026_palermo.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
