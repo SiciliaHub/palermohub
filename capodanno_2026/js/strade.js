@@ -255,3 +255,30 @@
                 closeModal();
             }
         });
+
+        // Variabile globale per l'audio
+        let podcastAudio = null;
+
+        // Funzione per gestire la riproduzione del podcast
+        function playPodcast() {
+            // Se l'audio non esiste ancora, crealo
+            if (!podcastAudio) {
+                podcastAudio = new Audio('audio/Silenzio_e_sicurezza_dietro_il_Capodanno.m4a');
+
+                // Gestisci eventuali errori di caricamento
+                podcastAudio.addEventListener('error', function(e) {
+                    alert('Errore nel caricamento del podcast. Verifica che il file audio esista.');
+                    console.error('Errore audio:', e);
+                });
+            }
+
+            // Se l'audio è in pausa, riproduci, altrimenti metti in pausa
+            if (podcastAudio.paused) {
+                podcastAudio.play().catch(function(error) {
+                    console.error('Errore nella riproduzione:', error);
+                    alert('Impossibile riprodurre il podcast. Riprova.');
+                });
+            } else {
+                podcastAudio.pause();
+            }
+        }
