@@ -157,6 +157,7 @@
                 if (types.includes('chiusura') && types.includes('divieto')) {
                     div.style.setProperty('--dot-color', 'linear-gradient(90deg, #E63946 50%, #ff9900 50%)');
                 } else if (types.includes('divieto')) {
+                    div.classList.add('divieto');
                     div.style.borderLeft = '4px solid #ff9900';
                 } else {
                     div.style.borderLeft = '4px solid #E63946';

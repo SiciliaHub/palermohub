@@ -71,6 +71,7 @@
         .street-item { padding: 12px 14px; border-radius: 10px; cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; }
         .street-item:hover { background: rgba(255,255,255,0.1); }
         .street-item::before { content: ''; width: 8px; height: 8px; background: var(--primary); border-radius: 50%; flex-shrink: 0; }
+        .street-item.divieto::before { background: rgb(255, 153, 0); }
         .street-item.not-found::before { background: rgba(255,255,255,0.3); }
         .street-item.not-found { color: rgba(255,255,255,0.4); }
         .leaflet-control-zoom { display: none !important; }
