@@ -275,6 +275,11 @@ body {
 /* ===== VINCOLI SUBMENU COMPATTO ===== */
 .vincoli-container {
     position: relative;
+    width: 100%;
+}
+
+#vincoli-main {
+    width: 100%;
 }
 
 .vincoli-submenu {
