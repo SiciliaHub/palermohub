@@ -63,6 +63,7 @@ function hideLoader() {
         loader.style.transition = 'opacity 0.5s ease';
         setTimeout(() => {
             loader.style.display = 'none';
+            setTimeout(() => initNewsPopup(), 3000);
         }, 500);
     }
 }
@@ -881,7 +882,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     try {
         detectMobile();
-        initNewsPopup();
 
         const foglioInput = document.getElementById("foglio");
         const particellaInput = document.getElementById("particella");
