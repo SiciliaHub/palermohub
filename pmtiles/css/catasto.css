@@ -1339,6 +1339,16 @@ body {
     opacity: 0.88;
 }
 
+/* ===== MAPLIBRE POPUP CLOSE BUTTON ===== */
+.maplibregl-popup-close-button {
+    font-size: 22px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    padding: 0;
+}
+
 /* ===== TOUCH-FRIENDLY IMPROVEMENTS ===== */
 .command-btn,
 .layer-switcher button,
