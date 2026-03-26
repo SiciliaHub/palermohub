@@ -40,7 +40,8 @@ const layerStates = {
     'particelle': true,
     'civici': false,
     'carta_tecnica': false,
-    'satellite': false
+    'satellite': false,
+    'zonizzazione': true
 };
 
 // MAPPATURA TRA ID PULSANTI E ID LAYER SULLA MAPPA
@@ -50,7 +51,8 @@ const layerMapping = {
     'particelle': 'Particelle catastali',
     'civici': 'Numeri Civici',
     'carta_tecnica': 'carta_tecnica',
-    'satellite': 'satellite-layer'
+    'satellite': 'satellite-layer',
+    'zonizzazione': 'zto'
 };
 
 // =========================
@@ -136,10 +138,20 @@ function toggleLayer(layerId) {
         
         if (layerId === 'particelle') {
             window.map.setLayoutProperty(
-                'particelle-labels', 
-                'visibility', 
+                'particelle-labels',
+                'visibility',
                 layerStates[layerId] ? 'visible' : 'none'
             );
+        }
+
+        if (layerId === 'zonizzazione') {
+            const vis = layerStates[layerId] ? 'visible' : 'none';
+            if (window.map.getLayer('ppe')) {
+                window.map.setLayoutProperty('ppe', 'visibility', vis);
+            }
+            if (window.map.getLayer('Info ZTO')) {
+                window.map.setLayoutProperty('Info ZTO', 'visibility', vis);
+            }
         }
     }
     
@@ -166,7 +178,7 @@ function initLayerButtons() {
         });
     }
     
-    const layerButtons = ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'carta_tecnica', 'satellite'];
+    const layerButtons = ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'carta_tecnica', 'satellite', 'zonizzazione'];
     layerButtons.forEach(layerId => {
         const button = document.getElementById(layerId);
         if (button) {
