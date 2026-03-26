@@ -137,6 +137,28 @@ body {
     margin-bottom: 1px;
 }
 
+.info-badge-wrapper {
+    position: relative;
+    display: inline-flex;
+}
+
+.info-badge {
+    position: absolute;
+    top: -4px;
+    right: -5px;
+    width: 9px;
+    height: 9px;
+    background: #e74c3c;
+    border-radius: 50%;
+    border: 1.5px solid white;
+    animation: badgePulse 1.5s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%       { transform: scale(1.4); opacity: 0.6; }
+}
+
 /* ===== LAYER CARDS COMPATTE PER MOBILE ===== */
 .layer-switcher {
     position: fixed;
@@ -647,23 +669,35 @@ body {
 
 #sidepanel-tab {
     position: absolute;
-    top: -30px;
+    top: -36px;
     left: 50%;
     transform: translateX(-50%);
-    width: 50px;
-    height: 30px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    cursor: pointer;
+    width: 120px;
+    height: 36px;
+    background: white;
+    border-radius: 18px 18px 0 0;
+    cursor: grab;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    color: white;
-    font-weight: 700;
-    font-size: 16px;
-    box-shadow: var(--shadow-lg);
+    gap: 4px;
+    box-shadow: 0 -3px 12px rgba(0,0,0,0.12);
     transition: all 0.3s ease;
+}
+
+#sidepanel-tab::before {
+    content: '';
+    width: 36px;
+    height: 4px;
+    background: #ccc;
+    border-radius: 2px;
+    transition: background 0.3s ease;
+}
+
+#sidepanel-tab:hover::before,
+#sidepanel.active #sidepanel-tab::before {
+    background: var(--primary);
 }
 #sidepanel-tabs {
     display: grid;
@@ -678,13 +712,19 @@ body {
 }
 
 #sidepanel-tab:hover {
-    transform: translateX(-50%) translateY(0px);
-    box-shadow: var(--shadow-xl);
+    transform: translateX(-50%);
+    box-shadow: 0 -4px 16px rgba(0,0,0,0.16);
 }
 
 #sidepanel-tab i {
-    font-size: 20px;
-    transition: transform 0.3s ease;
+    font-size: 11px;
+    color: #aaa;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#sidepanel-tab:hover i,
+#sidepanel.active #sidepanel-tab i {
+    color: var(--primary);
 }
 
 #sidepanel.active #sidepanel-tab i {

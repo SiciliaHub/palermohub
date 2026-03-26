@@ -60,8 +60,11 @@
             <i class="fas fa-satellite"></i>
             <span>Satellite</span>
         </button>
-        <button class="command-btn" onclick="toggleSidepanel()" title="Attiva pannello informativo">
-            <i class="fas fa-info-circle"></i>
+        <button class="command-btn" id="info-btn" onclick="toggleSidepanel()" title="Attiva pannello informativo">
+            <span class="info-badge-wrapper">
+                <i class="fas fa-info-circle"></i>
+                <span class="info-badge" id="info-badge"></span>
+            </span>
             <span>Info</span>
         </button>
     </div>
@@ -215,6 +218,9 @@
                    <hr>
                     <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> con aggiornamenti ssemestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Febbraio 2026</strong>.<br><br>
                     L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
+                    <hr>
+                    <p><strong>Autore:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" title="@gbvitrano su LinkedIn" target="_blank">@gbvitrano</a> &amp; <a href="https://claude.ai" title="Claude AI - Anthropic" target="_blank">Claude AI (Anthropic)</a></p>
+                    <p><strong>Sviluppo tecnico:</strong> Collaborazione human–<a href="https://claude.ai" title="Claude AI - Anthropic" target="_blank">Claude AI (Anthropic)</a>, che ha supportato lo sviluppo dell'architettura modulare, l'ottimizzazione del codice e l'implementazione di funzionalità avanzate di visualizzazione.</p>
                     <hr>
                     <p><strong>Disclaimer:</strong> I contenuti presenti in questa sezione, compresi testi ed elementi grafici, hanno carattere puramente informativo e divulgativo.  <br><br> Non sono presenti dati personali o sensibili. Si precisa che questi materiali non costituiscono documenti ufficiali né hanno alcun valore legale.  <br> <br>Per consultare la documentazione ufficiale e legalmente vincolante, si prega di fare riferimento agli atti definitivi allegati alle relative deliberazioni degli organi competenti.</p>
             </div>

@@ -459,6 +459,9 @@ function scrollToTop() {
 }
 
 function toggleSidepanel() {
+    const badge = document.getElementById('info-badge');
+    if (badge) badge.remove();
+
     const sidepanel = document.getElementById('sidepanel');
     const backToTopBtn = document.getElementById('back-to-top');
     const isActive = sidepanel.classList.toggle('active');
