@@ -163,21 +163,13 @@ body {
 .layer-switcher {
     position: fixed;
     top: 100px;
-	right: 30px;
-	width: 320px;
-    /*left: 5px;
-     bottom: 5px;*/
+    right: 30px;
+    width: 320px;
+    max-height: calc(100vh - 120px);
     z-index: 1500;
-    transform: translateX(100%);
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  /*  background: rgba(255, 255, 255, 0.10);
-    backdrop-filter: var(--blur);
-    border-radius: var(--radius);
-    border: 1px solid var(--border-soft);
-    box-shadow: var(--shadow-xl);*/
     overflow-y: auto;
     padding: 12px;
-	transform: translateX(350px);
+    transform: translateX(350px);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
