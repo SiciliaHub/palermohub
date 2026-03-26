@@ -144,6 +144,10 @@ function toggleLayer(layerId) {
             );
         }
 
+        if (layerId === 'vincoli_lin' || layerId === 'vincoli_ar') {
+            syncVincoliMain();
+        }
+
         if (layerId === 'zonizzazione') {
             const vis = layerStates[layerId] ? 'visible' : 'none';
             if (window.map.getLayer('ppe')) {
@@ -163,10 +167,38 @@ function toggleLayer(layerId) {
 function toggleVincoliSubmenu() {
     const container = document.querySelector('.vincoli-container');
     container.classList.toggle('active');
-    
+
     if (isMobile && navigator.vibrate) {
         navigator.vibrate(30);
     }
+}
+
+function toggleVincoliMain() {
+    // Lo stato principale è attivo se almeno uno dei due sub-layer è attivo
+    const anyActive = layerStates['vincoli_lin'] || layerStates['vincoli_ar'];
+    const newState = !anyActive;
+
+    ['vincoli_lin', 'vincoli_ar'].forEach(id => {
+        layerStates[id] = newState;
+        const btn = document.getElementById(id);
+        if (btn) btn.classList.toggle('active', newState);
+        if (window.map && window.map.getLayer(layerMapping[id])) {
+            window.map.setLayoutProperty(layerMapping[id], 'visibility', newState ? 'visible' : 'none');
+        }
+    });
+
+    const mainBtn = document.getElementById('vincoli-main');
+    if (mainBtn) mainBtn.classList.toggle('active', newState);
+
+    if (isMobile && navigator.vibrate) {
+        navigator.vibrate(50);
+    }
+}
+
+function syncVincoliMain() {
+    const anyActive = layerStates['vincoli_lin'] || layerStates['vincoli_ar'];
+    const mainBtn = document.getElementById('vincoli-main');
+    if (mainBtn) mainBtn.classList.toggle('active', anyActive);
 }
 
 function initLayerButtons() {
@@ -174,7 +206,12 @@ function initLayerButtons() {
     if (vincoliMain) {
         vincoliMain.addEventListener('click', function(e) {
             e.stopPropagation();
-            toggleVincoliSubmenu();
+            const toggle = e.target.closest('.layer-toggle');
+            if (toggle) {
+                toggleVincoliMain();
+            } else {
+                toggleVincoliSubmenu();
+            }
         });
     }
     

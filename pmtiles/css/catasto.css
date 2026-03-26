@@ -203,6 +203,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     padding: 12px 14px;
     border: 2px solid var(--border);
     border-radius: 10px;
@@ -215,6 +216,16 @@ body {
     position: relative;
     overflow: hidden;
     min-height: 45px;
+}
+
+.layer-switcher button span {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.layer-switcher button .layer-toggle {
+    flex-shrink: 0;
 }
 
 .layer-switcher button:hover,
