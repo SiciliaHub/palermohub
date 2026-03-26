@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -rl Geolocalizza 'd:/GitHub - Clone/SiciliaHub/palermohub' --include=*.js --include=*.html --include=*.json)",
+      "Bash(grep -rn Geocodifica 'd:/GitHub - Clone/SiciliaHub/palermohub' --include=*.html --include=*.js)"
+    ]
+  }
+}
