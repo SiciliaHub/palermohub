@@ -213,7 +213,7 @@
                      <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br>
                      <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p>
                    <hr>
-                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Febbraio 2026</strong>.<br><br>
+                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> con aggiornamenti ssemestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Febbraio 2026</strong>.<br><br>
                     L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
                     <hr>
                     <p><strong>Disclaimer:</strong> I contenuti presenti in questa sezione, compresi testi ed elementi grafici, hanno carattere puramente informativo e divulgativo.  <br><br> Non sono presenti dati personali o sensibili. Si precisa che questi materiali non costituiscono documenti ufficiali né hanno alcun valore legale.  <br> <br>Per consultare la documentazione ufficiale e legalmente vincolante, si prega di fare riferimento agli atti definitivi allegati alle relative deliberazioni degli organi competenti.</p>
@@ -239,8 +239,16 @@
                 <p>Un sentito ringraziamento va a <a href="https://x.com/aborruso" title="Andrea Borruso" target="_blank"><em>@aborruso</em></a> e <a href="https://x.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a>, i cui insegnamenti e la costante condivisione di conoscenze hanno contribuito in modo determinante alla realizzazione di questo progetto. Il loro supporto mi permette di implementare e migliorarmi nel campo della cartografia digitale.</p>
                 <hr>
                 <h3>I principali strumenti usati per realizzare la mappa</h3>
-                <p>Coming soon...</p>
-                <img src="js/demo2.png" width="366" height="128" alt=""/>
+                <ul>
+                    <li><strong><a href="https://qgis.org/" target="_blank">QGIS</a></strong> — elaborazione e gestione dei dati geografici</li>
+                    <li><strong><a href="https://plugins.qgis.org/plugins/CatastoIT_GML_Merger_Pro/" target="_blank">CatastoIT_GML_Merger_Pro</a></strong> — plugin QGIS per l'importazione e la fusione dei file GML catastali</li>
+                    <li><strong><a href="https://github.com/felt/tippecanoe" target="_blank">tippecanoe</a></strong> — conversione dei dati vettoriali in tile PMTiles ottimizzati</li>
+                    <li><strong><a href="https://maplibre.org/maplibre-gl-js/docs/" target="_blank">MapLibreGL JS 3.3</a></strong> — rendering della mappa interattiva</li>
+                    <li><strong><a href="https://github.com/protomaps/PMTiles" target="_blank">PMTiles 2.4</a></strong> — distribuzione serverless dei tile vettoriali e raster</li>
+                    <li><strong><a href="https://rawgit.com/MrRio/jsPDF/master/docs/" target="_blank">jsPDF 2.5</a></strong> — generazione delle schede PDF</li>
+                    <li><strong><a href="https://turfjs.org/" target="_blank">Turf.js 6</a></strong> — analisi geometrica e calcolo delle aree</li>
+                    <li><strong><a href="https://interactjs.io/" target="_blank">Interact.js</a></strong> — gestione del pannello informativo ridimensionabile</li>
+                </ul>
             </div>
 
             <div id="section3" class="sidepanel-section">
