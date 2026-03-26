@@ -4,6 +4,28 @@
 // Versione ottimizzata per dispositivi mobili
 // =========================
 
+// =========================
+// NEWS POPUP (scade 2026-04-10)
+// =========================
+function initNewsPopup() {
+    const overlay = document.getElementById('news-popup-overlay');
+    if (!overlay) return;
+    const expiry = new Date('2026-04-10');
+    if (new Date() > expiry) {
+        overlay.style.display = 'none';
+        return;
+    }
+    setTimeout(() => closeNewsPopup(), 10000);
+}
+
+function closeNewsPopup() {
+    const overlay = document.getElementById('news-popup-overlay');
+    if (overlay) {
+        overlay.style.animation = 'fadeOutOverlay 0.25s ease forwards';
+        setTimeout(() => { overlay.style.display = 'none'; }, 250);
+    }
+}
+
 // VARIABILI GLOBALI
 let isSatelliteOverlayOpen = false;
 let satelliteMap = null;
@@ -16,6 +38,7 @@ const layerStates = {
     'vincoli_lin': true,
     'vincoli_ar': true,
     'particelle': true,
+    'civici': false,
     'carta_tecnica': false,
     'satellite': false
 };
@@ -23,8 +46,9 @@ const layerStates = {
 // MAPPATURA TRA ID PULSANTI E ID LAYER SULLA MAPPA
 const layerMapping = {
     'vincoli_lin': 'vincoli_lin',
-    'vincoli_ar': 'vincoli_ar', 
+    'vincoli_ar': 'vincoli_ar',
     'particelle': 'Particelle catastali',
+    'civici': 'Numeri Civici',
     'carta_tecnica': 'carta_tecnica',
     'satellite': 'satellite-layer'
 };
@@ -141,7 +165,7 @@ function initLayerButtons() {
         });
     }
     
-    const layerButtons = ['vincoli_lin', 'vincoli_ar', 'particelle', 'carta_tecnica', 'satellite'];
+    const layerButtons = ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'carta_tecnica', 'satellite'];
     layerButtons.forEach(layerId => {
         const button = document.getElementById(layerId);
         if (button) {
@@ -857,7 +881,8 @@ document.addEventListener('DOMContentLoaded', () => {
     
     try {
         detectMobile();
-        
+        initNewsPopup();
+
         const foglioInput = document.getElementById("foglio");
         const particellaInput = document.getElementById("particella");
         
@@ -1039,9 +1064,15 @@ function initializeMapLayers() {
         });
 
         window.map.addSource("catasto", {
-            type: "vector", 
+            type: "vector",
             url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0226.pmtiles",
             attribution: "Catasto - fonte dati <b>SITR Sicilia - Agenzia delle Entrate</b>"
+        });
+
+        window.map.addSource("civici", {
+            type: "vector",
+            url: "pmtiles://https://palermohub.github.io/PRG2004/civici/civici_0226.pmtiles",
+            attribution: "Numeri Civici - fonte dati <b>SITR Sicilia</b>"
         });
 
         window.map.addSource("satellite", {
@@ -1212,6 +1243,35 @@ function initializeMapLayers() {
             filter: ["==", "id", ""]
         });
 
+        // AGGIUNGI LAYER NUMERI CIVICI (in cima allo stack per click detection)
+        window.map.addLayer({
+            id: "Numeri Civici",
+            type: "symbol",
+            source: "civici",
+            "source-layer": "civici_wgs84",
+            minzoom: 14,
+            layout: {
+                "text-field": ["get", "Civico"],
+                "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+                "text-size": [
+                    "interpolate", ["linear"], ["zoom"],
+                    14, isMobile ? 7 : 8,
+                    16, isMobile ? 9 : 11,
+                    18, isMobile ? 11 : 13,
+                    20, isMobile ? 13 : 15
+                ],
+                "text-allow-overlap": false,
+                "text-ignore-placement": false,
+                "text-anchor": "center",
+                "visibility": "none"
+            },
+            paint: {
+                "text-color": "#c0392b",
+                "text-halo-color": "#ffffff",
+                "text-halo-width": 1.5
+            }
+        });
+
         // INIZIALIZZA I PULSANTI DEI LAYER
         initLayerButtons();
         
@@ -1249,7 +1309,7 @@ function initializeMapLayers() {
         // CLICK EVENT PER POPUP UNIFICATO OTTIMIZZATO PER MOBILE
         window.map.on("click", e => {
             const features = window.map.queryRenderedFeatures(e.point, {
-                layers: ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"]
+                layers: ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali", "Numeri Civici"]
             });
 
             if (features.length > 0) {
@@ -1272,9 +1332,11 @@ function initializeMapLayers() {
                         content = `<b>Zonizzazione</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
                     } else if (feature.layer.id === "Particelle catastali") {
                         content = `<b>Particelle catastali</b><br><b>Foglio:</b> ${feature.properties.Foglio || "N/A"}<br><b>Particella:</b> ${feature.properties.Paricella || "N/A"}`;
+                    } else if (feature.layer.id === "Numeri Civici") {
+                        content = `<b>Numero Civico</b><br><b>Civico:</b> ${feature.properties.Civico || "N/A"}<br><b>Odonimo:</b> ${feature.properties.Odonimo || "N/A"}<br><b>Circoscrizione:</b> ${feature.properties.Circoscrizione || "N/A"}<br><b>Quartiere:</b> ${feature.properties.Quartiere || "N/A"}<br><b>UPL:</b> ${feature.properties.UPL || "N/A"}`;
                     }
                     return content;
-                }).join("<hr>");
+                }).filter(c => c !== "").join("<hr>");
 
                 // Popup ottimizzato per mobile
                 currentPopup = new maplibregl.Popup({ 
@@ -1295,11 +1357,11 @@ function initializeMapLayers() {
 
         // CURSOR EVENTS (solo desktop)
         if (!isMobile) {
-            window.map.on("mouseenter", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"], () => {
+            window.map.on("mouseenter", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali", "Numeri Civici"], () => {
                 window.map.getCanvas().style.cursor = "pointer";
             });
 
-            window.map.on("mouseleave", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"], () => {
+            window.map.on("mouseleave", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali", "Numeri Civici"], () => {
                 window.map.getCanvas().style.cursor = "default";
             });
 

@@ -101,6 +101,16 @@
         </div>
 
         <div class="layer-card">
+            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);"><i class="fas fa-location-dot"></i></div> Numeri Civici</h3>
+            <div class="layer-grid">
+                <button id="civici" Title="Numeri Civici - Aggiornamento Febbraio 2026">
+                    <span>Numeri Civici</span>
+                    <div class="layer-toggle"></div>
+                </button>
+            </div>
+        </div>
+
+        <div class="layer-card">
             <h3><div class="layer-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);"><i class="fas fa-globe"></i></div> Cartografia</h3>
             <div class="layer-grid">
                 <button id="carta_tecnica" Title="Carta Tecnica Comunale 2k 2007/09" >
@@ -252,6 +262,36 @@
                 <div style="max-width: 600px; width: 100%; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 20px;">
                     <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--radius);" src="https://www.youtube.com/embed/N_gdK7NBvU4?si=7yUCGTg8wOD_cJ_2&amp;start=3" frameborder="0" allowfullscreen></iframe>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- News Popup - Numeri Civici (scade 2026-04-10) -->
+    <div id="news-popup-overlay">
+        <div id="news-popup">
+            <div class="news-popup-header">
+                <div class="news-icon"><i class="fas fa-location-dot"></i></div>
+                <h3>Novità: Numeri Civici integrati in mappa</h3>
+                <span class="news-badge">Nuovo</span>
+            </div>
+            <div class="news-popup-body">
+                <p>
+                    Sono stati integrati i <strong>Numeri Civici del Comune di Palermo</strong>,
+                    resi disponibili dall'<strong>ANNCSU</strong> — Archivio Nazionale dei Numeri Civici
+                    e delle Strade Urbane — consultabile sul portale ufficiale
+                    <a href="https://www.anncsu.gov.it" target="_blank" rel="noopener">anncsu.gov.it</a>.
+                </p>
+                <p>
+                    Il dataset comprende <strong>165.000+ civici georeferenziati</strong> con informazioni
+                    su odonimo, quartiere, circoscrizione e unità di pianificazione locale (UPL).
+                </p>
+                <div class="news-hint">
+                    <i class="fas fa-layer-group" style="margin-right:5px;color:#e67e22;"></i>
+                    Per visualizzarli, attiva il layer <strong>Numeri Civici</strong> nel pannello <em>Layers</em>.
+                </div>
+            </div>
+            <div class="news-popup-footer">
+                <button class="news-popup-close-btn" onclick="closeNewsPopup()">Ho capito</button>
             </div>
         </div>
     </div>

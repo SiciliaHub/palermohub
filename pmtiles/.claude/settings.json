@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -r 0-511 \"https://palermohub.github.io/PRG2004/civici/civici_0226.pmtiles\" -o /tmp/pmtiles_header.bin)",
+      "Bash(xxd /tmp/pmtiles_header.bin)"
+    ]
+  }
+}
