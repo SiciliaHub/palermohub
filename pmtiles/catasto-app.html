@@ -157,20 +157,47 @@
     <!-- Full-Screen Mobile Search Modal -->
 <div class="search-popup" id="search-popup">
     <div class="search-container">
-        <button class="search-close" onclick="toggleSearchPopup()" Title="Chiudi ricerca">×</button>
+        <button class="search-close" onclick="toggleSearchPopup()" title="Chiudi ricerca">×</button>
         <h3>Ricerca Particella</h3>
-            <p>Inserisci foglio e particella per iniziare la ricerca nella mappa catastale di Palermo</p>
+
+        <div class="search-info">
+            <i class="fas fa-info-circle"></i>
+            <span id="search-info-text">La ricerca funziona sull'area visibile della mappa. Naviga prima nella zona di interesse, poi avvia la ricerca.</span>
+        </div>
+
+        <div class="search-mode-toggle" id="search-mode-toggle" onclick="switchSearchMode(this.classList.contains('civico-active') ? 'foglio' : 'civico')">
+            <span class="search-toggle-label active" id="label-foglio">Foglio / Particella</span>
+            <div class="search-toggle-track">
+                <div class="search-toggle-thumb"></div>
+            </div>
+            <span class="search-toggle-label" id="label-civico">Via / Civico</span>
+        </div>
+
+        <div id="search-mode-foglio" class="search-mode-panel">
             <div class="search-inputs">
                 <input type="number" id="foglio" placeholder="Numero Foglio" min="1">
                 <input type="number" id="particella" placeholder="Numero Particella" min="1">
             </div>
-            <button onclick="searchParticella()"Title="Avvia ricerca della particella" >Avvia ricerca</button>
-            <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
-                Dati catastali aggiornati a Febbraio 2026 (S.I.T.R. Sicilia) e Agenzia delle Entrate
-            </p>
-            <div id="search-error"></div>
+            <button onclick="searchParticella()" title="Avvia ricerca della particella">Avvia ricerca</button>
         </div>
+
+        <div id="search-mode-civico" class="search-mode-panel" style="display:none">
+            <div class="search-inputs">
+                <div class="odonimo-wrapper">
+                    <input type="text" id="odonimo" placeholder="Nome via (es. VIA ROMA)" autocomplete="off">
+                    <div id="odonimo-dropdown" class="odonimo-dropdown"></div>
+                </div>
+                <input type="text" id="civico-search" placeholder="Numero civico (es. 10)" autocomplete="off">
+            </div>
+            <button onclick="searchByCivico()" title="Avvia ricerca per via e civico">Avvia ricerca</button>
+        </div>
+
+        <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
+            Dati catastali aggiornati a Febbraio 2026 (S.I.T.R. Sicilia) e Agenzia delle Entrate
+        </p>
+        <div id="search-error"></div>
     </div>
+</div>
 
     <!-- Mobile-Optimized Satellite Overlay -->
     <div id="satellite-overlay">

@@ -314,6 +314,10 @@ function toggleSatelliteOverlay() {
 function toggleSearchPopup() {
     const searchPopup = document.getElementById("search-popup");
     searchPopup.classList.toggle("active");
+    if (searchPopup.classList.contains("active") && window._civicoMarker) {
+        window._civicoMarker.remove();
+        window._civicoMarker = null;
+    }
     
     if (isMobile) {
         if (searchPopup.classList.contains("active")) {
@@ -342,6 +346,176 @@ function toggleSearchPopup() {
     
     if (isMobile && navigator.vibrate) {
         navigator.vibrate(50);
+    }
+}
+
+function loadCiviciIndex(url) {
+    fetch(url)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(data => {
+            window._civiciIndex = data;
+            window._odonomiList = Object.keys(data).sort();
+        })
+        .catch(() => {
+            // fallback: estrazione dai tile caricati nel viewport
+            window._civiciIndex = null;
+        });
+}
+
+function extractOdonomi() {
+    if (window._civiciIndex) return; // indice già caricato, non serve riestrarre dai tile
+    if (!window.map) return;
+    window.map.once('idle', () => {
+        const features = window.map.querySourceFeatures("civici", { sourceLayer: "civici_wgs84" });
+        const set = new Set();
+        features.forEach(f => { if (f.properties.Odonimo) set.add(f.properties.Odonimo.toUpperCase()); });
+        window._odonomiList = Array.from(set).sort();
+    });
+}
+
+function renderOdonimoDropdown(matches) {
+    const dropdown = document.getElementById("odonimo-dropdown");
+    if (!dropdown) return;
+    if (matches.length === 0) { dropdown.style.display = 'none'; return; }
+    dropdown.innerHTML = matches.map(m =>
+        `<div class="odonimo-option" onmousedown="selectOdonimo('${m.replace(/'/g, "\\'")}')">${m}</div>`
+    ).join('');
+    dropdown.style.display = 'block';
+}
+
+function closeOdonimoDropdown() {
+    const dropdown = document.getElementById("odonimo-dropdown");
+    if (dropdown) dropdown.style.display = 'none';
+}
+
+function placeCivicoMarker(coords) {
+    if (window._civicoMarker) {
+        window._civicoMarker.remove();
+        window._civicoMarker = null;
+    }
+    const el = document.createElement('div');
+    el.className = 'civico-marker';
+    window._civicoMarker = new maplibregl.Marker({ element: el, anchor: 'top' })
+        .setLngLat(coords)
+        .addTo(window.map);
+}
+
+function selectOdonimo(name) {
+    document.getElementById('odonimo').value = name;
+    closeOdonimoDropdown();
+    const civicoInput = document.getElementById('civico-search');
+    if (civicoInput) civicoInput.focus();
+}
+
+function switchSearchMode(mode) {
+    document.getElementById('search-mode-foglio').style.display = mode === 'foglio' ? 'block' : 'none';
+    document.getElementById('search-mode-civico').style.display = mode === 'civico' ? 'block' : 'none';
+    document.getElementById('search-mode-toggle').classList.toggle('civico-active', mode === 'civico');
+    document.getElementById('label-foglio').classList.toggle('active', mode === 'foglio');
+    document.getElementById('label-civico').classList.toggle('active', mode === 'civico');
+    document.getElementById('search-error').textContent = '';
+    const infoText = document.getElementById('search-info-text');
+    if (infoText) infoText.textContent = mode === 'civico'
+        ? 'Inserisci il nome della via e il numero civico per trovare la zona sulla mappa.'
+        : 'La ricerca funziona sull\'area visibile della mappa. Naviga prima nella zona di interesse, poi avvia la ricerca.';
+    closeOdonimoDropdown();
+
+    if (window.map && window.map.getLayer("Numeri Civici")) {
+        if (mode === 'civico') {
+            window._civiciWasVisible = window.map.getLayoutProperty("Numeri Civici", "visibility") === "visible";
+            window.map.setLayoutProperty("Numeri Civici", "visibility", "visible");
+            const btn = document.getElementById("civici");
+            if (btn) btn.classList.add("active");
+            extractOdonomi();
+        } else if (!window._civiciWasVisible) {
+            window.map.setLayoutProperty("Numeri Civici", "visibility", "none");
+            const btn = document.getElementById("civici");
+            if (btn) btn.classList.remove("active");
+        }
+    }
+
+    setTimeout(() => {
+        const input = document.getElementById(mode === 'foglio' ? 'foglio' : 'odonimo');
+        if (input) input.focus();
+    }, 50);
+}
+
+function searchByCivico() {
+    const odonimo = document.getElementById("odonimo").value.trim().toUpperCase();
+    const civico = document.getElementById("civico-search").value.trim();
+    const errorDiv = document.getElementById("search-error");
+
+    if (!odonimo || !civico) {
+        errorDiv.textContent = "Inserire sia la via che il numero civico";
+        return;
+    }
+
+    errorDiv.textContent = "";
+    closeOdonimoDropdown();
+
+    // --- percorso veloce: indice JSON completo caricato ---
+    if (window._civiciIndex) {
+        const viaData = window._civiciIndex[odonimo];
+        if (!viaData) {
+            errorDiv.textContent = `Via "${odonimo}" non trovata`;
+            return;
+        }
+        const coords = viaData[civico];
+        if (!coords) {
+            const civiciDisp = Object.keys(viaData).sort((a, b) => parseInt(a) - parseInt(b)).slice(0, 10).join(', ');
+            errorDiv.textContent = `Civico "${civico}" non trovato in ${odonimo}. Civici disponibili: ${civiciDisp}`;
+            if (isMobile && navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            return;
+        }
+        toggleSearchPopup();
+        window.map.flyTo({ center: coords, zoom: 17, duration: 800 });
+        placeCivicoMarker(coords);
+        return;
+    }
+
+    // --- fallback: ricerca sui tile del viewport (richiede zoom ≥ 14) ---
+    if (window.map.getZoom() < 14) {
+        errorDiv.textContent = "Dati civici non ancora caricati. Aumenta lo zoom (almeno livello 14) e riprova.";
+        return;
+    }
+
+    errorDiv.textContent = "Ricerca in corso…";
+
+    const doSearch = () => {
+        const features = window.map.querySourceFeatures("civici", { sourceLayer: "civici_wgs84" });
+
+        if (features.length === 0) {
+            errorDiv.textContent = "Nessun civico nell'area visibile. Aumenta lo zoom e riprova.";
+            return;
+        }
+
+        const viaFeatures = features.filter(f => (f.properties.Odonimo || "").toUpperCase() === odonimo);
+
+        if (viaFeatures.length === 0) {
+            const sample = [...new Set(features.map(f => f.properties.Odonimo).filter(Boolean))].sort().slice(0, 3).join(', ');
+            errorDiv.textContent = `Via "${odonimo}" non trovata nell'area. Vie caricate: ${sample}`;
+            return;
+        }
+
+        const match = viaFeatures.find(f => String(f.properties.Civico || "").trim() === civico);
+
+        if (!match) {
+            const civiciDisp = [...new Set(viaFeatures.map(f => String(f.properties.Civico || "").trim()))].sort((a, b) => parseInt(a) - parseInt(b)).slice(0, 10).join(', ');
+            errorDiv.textContent = `Civico "${civico}" non trovato in ${odonimo}. Civici nell'area: ${civiciDisp}`;
+            if (isMobile && navigator.vibrate) navigator.vibrate([100, 50, 100]);
+            return;
+        }
+
+        errorDiv.textContent = "";
+        toggleSearchPopup();
+        window.map.flyTo({ center: match.geometry.coordinates, zoom: 17, duration: 800 });
+        placeCivicoMarker(match.geometry.coordinates);
+    };
+
+    if (window.map.loaded()) {
+        doSearch();
+    } else {
+        window.map.once('idle', doSearch);
     }
 }
 
@@ -955,6 +1129,56 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }
+
+        const odonimoInput = document.getElementById("odonimo");
+        const civicoSearchInput = document.getElementById("civico-search");
+
+        if (odonimoInput) {
+            odonimoInput.addEventListener("input", function() {
+                const val = this.value.trim().toUpperCase();
+                if (val.length < 3 || !window._odonomiList) {
+                    closeOdonimoDropdown();
+                    return;
+                }
+                const matches = window._odonomiList.filter(o => o.includes(val)).slice(0, 12);
+                renderOdonimoDropdown(matches);
+            });
+
+            odonimoInput.addEventListener("keydown", function(e) {
+                const dropdown = document.getElementById("odonimo-dropdown");
+                const items = dropdown.querySelectorAll(".odonimo-option");
+                const active = dropdown.querySelector(".odonimo-option.highlighted");
+                const idx = active ? Array.from(items).indexOf(active) : -1;
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    const next = items[idx + 1] || items[0];
+                    if (next) { if (active) active.classList.remove("highlighted"); next.classList.add("highlighted"); next.scrollIntoView({ block: "nearest" }); }
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    const prev = items[idx - 1] || items[items.length - 1];
+                    if (prev) { if (active) active.classList.remove("highlighted"); prev.classList.add("highlighted"); prev.scrollIntoView({ block: "nearest" }); }
+                } else if (e.key === "Enter") {
+                    e.preventDefault();
+                    if (active) { selectOdonimo(active.textContent); } else { searchByCivico(); }
+                } else if (e.key === "Escape") {
+                    closeOdonimoDropdown();
+                }
+            });
+        }
+
+        if (civicoSearchInput) {
+            civicoSearchInput.addEventListener("keypress", function(e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    searchByCivico();
+                }
+            });
+        }
+
+        document.addEventListener("click", function(e) {
+            if (!e.target.closest("#search-mode-civico")) closeOdonimoDropdown();
+        });
         
         // AGGIUNGI EVENT LISTENER PER LO SCROLL DEL SIDEPANEL
         const sidepanelContent = document.getElementById('sidepanel-content');
@@ -1088,6 +1312,7 @@ if (!isMobile) {
             hideLoader();
             console.log('Mappa caricata con successo');
             initializeMapLayers();
+            loadCiviciIndex('civici_index.json');
         } catch (error) {
             console.error('Errore durante il caricamento dei layer:', error);
             hideLoader();

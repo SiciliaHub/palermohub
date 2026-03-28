@@ -390,6 +390,146 @@ body {
     color: white;
 }
 
+/* ===== SEARCH MODE TABS ===== */
+.search-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(255, 153, 0, 0.1);
+    border: 1px solid rgba(255, 153, 0, 0.3);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: var(--text-light);
+    line-height: 1.5;
+}
+
+.search-info i {
+    color: var(--primary);
+    font-size: 15px;
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+
+.search-mode-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.search-toggle-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: color 0.25s ease;
+}
+
+.search-toggle-label.active {
+    color: var(--text);
+}
+
+.search-toggle-track {
+    width: 52px;
+    height: 28px;
+    background: var(--border);
+    border-radius: 14px;
+    position: relative;
+    flex-shrink: 0;
+    transition: background 0.25s ease;
+}
+
+.search-mode-toggle.civico-active .search-toggle-track {
+    background: var(--primary);
+}
+
+.search-toggle-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    transition: left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.search-mode-toggle.civico-active .search-toggle-thumb {
+    left: 27px;
+}
+
+.search-mode-panel {
+    animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.civico-marker {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #e74c3c;
+    border: 3px solid white;
+    box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.5);
+    animation: civicoPulse 1.6s ease-out infinite;
+    cursor: default;
+    margin-top: 4px;
+}
+
+@keyframes civicoPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.5); }
+    70%  { box-shadow: 0 0 0 14px rgba(231, 76, 60, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(231, 76, 60, 0); }
+}
+
+.odonimo-wrapper {
+    position: relative;
+}
+
+.odonimo-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: 0;
+    right: 0;
+    background: var(--bg-card);
+    border: 2px solid var(--primary);
+    border-radius: var(--radius);
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 9999;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+.odonimo-option {
+    padding: 11px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.1s;
+}
+
+.odonimo-option:last-child {
+    border-bottom: none;
+}
+
+.odonimo-option:hover,
+.odonimo-option.highlighted {
+    background: rgba(255, 153, 0, 0.12);
+    color: var(--primary);
+    font-weight: 600;
+}
+
 /* ===== FULL-SCREEN MOBILE SEARCH MODAL ===== */
 .search-popup {
     position: fixed;
