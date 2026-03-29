@@ -1528,7 +1528,16 @@ function initializeMapLayers() {
             "source-layer": "civici_wgs84",
             minzoom: 14,
             layout: {
-                "text-field": ["get", "Civico"],
+                "text-field": ["case",
+                    ["all",
+                        ["has", "Esponente"],
+                        ["!=", ["get", "Esponente"], null],
+                        ["!=", ["get", "Esponente"], "NULL"],
+                        ["!=", ["get", "Esponente"], ""]
+                    ],
+                    ["concat", ["get", "Civico"], "/", ["get", "Esponente"]],
+                    ["get", "Civico"]
+                ],
                 "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
                 "text-size": [
                     "interpolate", ["linear"], ["zoom"],
@@ -1610,7 +1619,9 @@ function initializeMapLayers() {
                     } else if (feature.layer.id === "Particelle catastali") {
                         content = `<b>Particelle catastali</b><br><b>Foglio:</b> ${feature.properties.Foglio || "N/A"}<br><b>Particella:</b> ${feature.properties.Paricella || "N/A"}`;
                     } else if (feature.layer.id === "Numeri Civici") {
-                        content = `<b>Numero Civico</b><br><b>Civico:</b> ${feature.properties.Civico || "N/A"}<br><b>Odonimo:</b> ${feature.properties.Odonimo || "N/A"}<br><b>Circoscrizione:</b> ${feature.properties.Circoscrizione || "N/A"}<br><b>Quartiere:</b> ${feature.properties.Quartiere || "N/A"}<br><b>UPL:</b> ${feature.properties.UPL || "N/A"}`;
+                        const _esp = feature.properties.Esponente;
+                        const _civicoLabel = (_esp && _esp !== 'NULL' && _esp !== '') ? `${feature.properties.Civico}/${_esp}` : (feature.properties.Civico || "N/A");
+                        content = `<b>Numero Civico</b><br><b>Civico:</b> ${_civicoLabel}<br><b>Odonimo:</b> ${feature.properties.Odonimo || "N/A"}<br><b>Circoscrizione:</b> ${feature.properties.Circoscrizione || "N/A"}<br><b>Quartiere:</b> ${feature.properties.Quartiere || "N/A"}<br><b>UPL:</b> ${feature.properties.UPL || "N/A"}`;
                     }
                     return content;
                 }).filter(c => c !== "").join("<hr>");
