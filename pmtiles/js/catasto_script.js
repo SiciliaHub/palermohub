@@ -1409,15 +1409,17 @@ function buildOMIPopup(omiFeatures) {
         </details>`;
     }).join('');
 
+    const fasciaDisplay = fasciaLabel !== fascia ? `${fascia}: ${fasciaLabel}` : fascia;
+
     return `
     <div class="info-card">
         <div class="info-card-hdr">
-            <i class="fas fa-euro-sign" style="color:#16a085;"></i>
+            <i class="fas fa-euro-sign"></i>
             <span>Quotazioni OMI</span>
             <span class="omi-zona-badge">Zona ${zona}</span>
         </div>
         <div class="info-card-body">
-            <div class="info-row"><span class="info-lbl">Fascia</span><span class="info-val">${fascia}: ${fasciaLabel}</span></div>
+            <div class="info-row"><span class="info-lbl">Fascia</span><span class="info-val">${fasciaDisplay}</span></div>
             <div class="info-row"><span class="info-lbl">Descrizione</span><span class="info-val">${descr}${microzona && microzona !== '0' ? ` – Microzona ${microzona}` : ''}</span></div>
         </div>
         <details class="omi-main-details">

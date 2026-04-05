@@ -1585,7 +1585,7 @@ body {
 
 /* ========== OMI POPUP STYLES ========== */
 .omi-zona-badge {
-    background: #1abc9c;
+    background: var(--primary);
     color: #fff;
     padding: 2px 9px;
     border-radius: 20px;
@@ -1617,7 +1617,7 @@ body {
 .omi-main-summary::before {
     content: '▶';
     font-size: 8px;
-    color: #16a085;
+    color: var(--primary);
     transition: transform 0.18s;
     flex-shrink: 0;
 }
@@ -1625,7 +1625,7 @@ body {
     transform: rotate(90deg);
 }
 .omi-main-summary i {
-    color: #16a085;
+    color: var(--primary);
     font-size: 11px;
 }
 .omi-tipi {
@@ -1654,7 +1654,7 @@ summary.omi-tipo-summary::-webkit-details-marker { display: none; }
 summary.omi-tipo-summary::before {
     content: '▶';
     font-size: 8px;
-    color: #16a085;
+    color: var(--primary);
     transition: transform 0.18s;
     flex-shrink: 0;
     margin-right: 2px;
