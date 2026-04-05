@@ -1650,6 +1650,8 @@ function initializeMapLayers() {
                     // fallback
                     "#323232"
                 ];
+                // Inserisce Zone OMI PRIMA del satellite (e di tutti i raster overlay)
+                // così ZTO, vincoli e particelle vengono renderizzati sopra le zone OMI
                 window.map.addLayer({
                     id: layer.id,
                     type: "fill",
@@ -1660,7 +1662,7 @@ function initializeMapLayers() {
                         "fill-color": omiColorMatch,
                         "fill-opacity": 0.5
                     }
-                });
+                }, 'satellite-layer');
                 window.map.addLayer({
                     id: "Zone OMI-line",
                     type: "line",
@@ -1671,7 +1673,7 @@ function initializeMapLayers() {
                         "line-color": "#232323",
                         "line-width": 1
                     }
-                });
+                }, 'satellite-layer');
             } else {
                 window.map.addLayer({
                     id: layer.id,
