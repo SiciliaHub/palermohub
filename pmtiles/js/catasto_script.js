@@ -1342,6 +1342,19 @@ if (!isMobile) {
 }
 
 // =========================
+// HELPER: CARD GENERICA PER TUTTI I LAYER NON-OMI
+// =========================
+function buildInfoCard(iconClass, title, rows) {
+    const rowsHTML = rows
+        .filter(r => r.val != null && r.val !== 'N/A' && r.val !== '' && r.val !== 'NULL')
+        .map(r => `<div class="info-row"><span class="info-lbl">${r.lbl}</span><span class="info-val">${r.val}</span></div>`)
+        .join('');
+    return `<div class="info-card">
+        <div class="info-card-hdr"><i class="${iconClass}"></i><span>${title}</span></div>
+        <div class="info-card-body">${rowsHTML}</div>
+    </div>`;
+}
+
 // HELPER: POPUP QUOTAZIONI OMI
 // Accetta un array di feature (una per tipologia immobiliare) della stessa zona
 // =========================
@@ -1356,37 +1369,44 @@ function buildOMIPopup(omiFeatures) {
         return isNaN(n) ? null : n;
     };
 
-    const zona  = p0.Zona_OMI || p0.Zona || '—';
-    const fascia = p0.Fascia || p0.Fasce || '—';
-    // Codici fascia da metadati OMI ufficiali
+    const zona     = p0.Zona_OMI || p0.Zona || '—';
+    const fascia   = p0.Fascia || p0.Fasce || '—';
     const fasciaMap = { 'B': 'Centrale', 'S': 'Semicentrale', 'P': 'Periferica', 'U': 'Suburbana', 'R': 'Extraurbana' };
     const fasciaLabel = fasciaMap[fascia] || fascia;
-    const descr = (p0.Zona_Descr || '').replace(/^'|'$/g, '').trim();
-    const microzona = p0.Microzona || '';
+    const descr    = (p0.Zona_Descr || '').replace(/^'|'$/g, '').trim();
+    const microzona = p0.Microzona;
     const semestre = p0.Anno_Semestre ? `OMI ${p0.Anno_Semestre.replace(' / ', ' S')}` : 'OMI 2025 S2';
-    const supMap = { 'L': 'lorda', 'N': 'netta' };
+    const tipoPrev = (p0.Descr_tip_prev || '').replace(/^'|'$/g, '').trim();
+    const supMap   = { 'L': 'sup.lorda', 'N': 'sup.netta' };
 
     const tipiHTML = omiFeatures.map(f => {
-        const p = f.properties;
-        const tipo  = p.Descr_Tipologia || '—';
+        const p    = f.properties;
+        const tipo  = (p.Descr_Tipologia || '—').replace(/^'|'$/g, '').trim();
         const stato = p.Stato || '';
         const cMin  = parseOMI(p.Compr_min), cMax = parseOMI(p.Compr_max);
         const lMin  = parseOMI(p.Loc_min),   lMax = parseOMI(p.Loc_max);
         const supC  = supMap[p.Sup_NL_compr] || '';
         const supL  = supMap[p.Sup_NL_loc]   || '';
         const compStr = (cMin != null && cMax != null)
-            ? `${cMin.toLocaleString('it-IT')} – ${cMax.toLocaleString('it-IT')} €/m²${supC ? `<small style="color:#999"> sup.${supC}</small>` : ''}` : '—';
+            ? `${cMin.toLocaleString('it-IT')} – ${cMax.toLocaleString('it-IT')} €/m²${supC ? ` <small class="omi-sup">(${supC})</small>` : ''}` : '—';
         const locStr = (lMin != null && lMax != null)
-            ? `${lMin.toLocaleString('it-IT')} – ${lMax.toLocaleString('it-IT')} €/m²/mese${supL ? `<small style="color:#999"> sup.${supL}</small>` : ''}` : '—';
-        const statoTag = stato ? ` <span style="font-weight:400;color:#888;font-size:11px;">(${stato})</span>` : '';
+            ? `${lMin.toLocaleString('it-IT')} – ${lMax.toLocaleString('it-IT')} €/m²/mese${supL ? ` <small class="omi-sup">(${supL})</small>` : ''}` : '—';
+        const previewStr = cMin != null && cMax != null
+            ? `${cMin.toLocaleString('it-IT')}–${cMax.toLocaleString('it-IT')} €/m²` : '';
         return `
-        <div class="omi-tipo">
-            <div class="omi-tipo-label">${tipo}${statoTag}</div>
-            <div class="omi-tipo-values">
-                <div><span class="omi-val-lbl">Compravendita</span><br><span class="omi-val">${compStr}</span></div>
-                <div><span class="omi-val-lbl">Locazione</span><br><span class="omi-val">${locStr}</span></div>
+        <details class="omi-tipo">
+            <summary class="omi-tipo-summary">
+                <span class="omi-tipo-name">${tipo}</span>
+                ${stato ? `<em class="omi-stato-tag">${stato}</em>` : ''}
+                ${previewStr ? `<span class="omi-tipo-preview">${previewStr}</span>` : ''}
+            </summary>
+            <div class="omi-tipo-body">
+                <div class="omi-tipo-values">
+                    <div><span class="omi-val-lbl">Compravendita</span><br><span class="omi-val">${compStr}</span></div>
+                    <div><span class="omi-val-lbl">Locazione</span><br><span class="omi-val">${locStr}</span></div>
+                </div>
             </div>
-        </div>`;
+        </details>`;
     }).join('');
 
     return `
@@ -1400,6 +1420,7 @@ function buildOMIPopup(omiFeatures) {
             <span class="omi-area">${descr}${microzona && microzona !== '0' ? ` <small style="color:#aaa">– Microzona ${microzona}</small>` : ''}</span>
             <span class="omi-fascia">Fascia ${fascia}: ${fasciaLabel}</span>
         </div>
+        ${tipoPrev ? `<div class="omi-tipprev"><i class="fas fa-home"></i> Tipo prevalente: <b>${tipoPrev}</b></div>` : ''}
         <div class="omi-tipi">${tipiHTML}</div>
         <div class="omi-footer">Fonte: Agenzia delle Entrate — ${semestre}</div>
     </div>`;
@@ -1793,31 +1814,55 @@ function initializeMapLayers() {
                     }
                 });
 
-                // Costruisci contenuto: prima OMI (una card per zona), poi altri layer
+                // Costruisci contenuto: prima altri layer, poi OMI alla fine
                 const omiParts = Object.values(omiByZona).map(grp => buildOMIPopup(grp));
                 const otherParts = nonOmiFeatures.map(feature => {
-                    let content = "";
+                    const p = feature.properties;
                     if (feature.layer.id === "cs") {
-                        content = `<b>Strumento Urbanistico:</b> PPE<br><b>Circoscrizione:</b> ${feature.properties.Circoscriz || "N/A"}`;
+                        return buildInfoCard('fas fa-city', 'Piano Urbanistico', [
+                            { lbl: 'Strumento', val: 'PPE' },
+                            { lbl: 'Circoscrizione', val: p.Circoscriz }
+                        ]);
                     } else if (feature.layer.id === "Info Vin. areali") {
-                        content = `<b>Vincolo areale</b><br><b>Tipo:</b> ${feature.properties.tipo || "N/A"}<br><b>Descrizione:</b> ${feature.properties.descrizone || "N/A"}`;
+                        return buildInfoCard('fas fa-shield-alt', 'Vincolo Areale', [
+                            { lbl: 'Tipo', val: p.tipo },
+                            { lbl: 'Descrizione', val: p.descrizone }
+                        ]);
                     } else if (feature.layer.id === "Info Vin. lineari") {
-                        content = `<b>Vincolo lineare</b><br><b>Tipo:</b> ${feature.properties.TIPO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
+                        return buildInfoCard('fas fa-draw-polygon', 'Vincolo Lineare', [
+                            { lbl: 'Tipo', val: p.TIPO },
+                            { lbl: 'Descrizione', val: p.DESCRIZION }
+                        ]);
                     } else if (feature.layer.id === "Info Netto storico") {
-                        content = `<b>Netto storico</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
+                        return buildInfoCard('fas fa-scroll', 'Netto Storico', [
+                            { lbl: 'ZTO', val: p.ZTO },
+                            { lbl: 'Descrizione', val: p.DESCRIZION }
+                        ]);
                     } else if (feature.layer.id === "Info ZTO") {
-                        content = `<b>Zonizzazione</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
+                        return buildInfoCard('fas fa-map', 'Zonizzazione', [
+                            { lbl: 'ZTO', val: p.ZTO },
+                            { lbl: 'Descrizione', val: p.DESCRIZION }
+                        ]);
                     } else if (feature.layer.id === "Particelle catastali") {
-                        content = `<b>Particelle catastali</b><br><b>Foglio:</b> ${feature.properties.Foglio || "N/A"}<br><b>Particella:</b> ${feature.properties.Paricella || "N/A"}`;
+                        return buildInfoCard('fas fa-table-cells', 'Particella Catastale', [
+                            { lbl: 'Foglio', val: p.Foglio },
+                            { lbl: 'Particella', val: p.Paricella }
+                        ]);
                     } else if (feature.layer.id === "Numeri Civici") {
-                        const _esp = feature.properties.Esponente;
-                        const _civicoLabel = (_esp && _esp !== 'NULL' && _esp !== '') ? `${feature.properties.Civico}/${_esp}` : (feature.properties.Civico || "N/A");
-                        content = `<b>Numero Civico</b><br><b>Civico:</b> ${_civicoLabel}<br><b>Odonimo:</b> ${feature.properties.Odonimo || "N/A"}<br><b>Circoscrizione:</b> ${feature.properties.Circoscrizione || "N/A"}<br><b>Quartiere:</b> ${feature.properties.Quartiere || "N/A"}<br><b>UPL:</b> ${feature.properties.UPL || "N/A"}`;
+                        const esp = p.Esponente;
+                        const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;
+                        return buildInfoCard('fas fa-map-marker-alt', 'Numero Civico', [
+                            { lbl: 'Civico', val: civico },
+                            { lbl: 'Odonimo', val: p.Odonimo },
+                            { lbl: 'Circoscrizione', val: p.Circoscrizione },
+                            { lbl: 'Quartiere', val: p.Quartiere },
+                            { lbl: 'UPL', val: p.UPL }
+                        ]);
                     }
-                    return content;
-                }).filter(c => c !== "");
+                    return '';
+                }).filter(c => c !== '');
 
-                const unifiedTooltipContent = [...omiParts, ...otherParts].join("<hr>");
+                const unifiedTooltipContent = [...otherParts, ...omiParts].join("<hr>");
 
                 // Popup ottimizzato per mobile
                 currentPopup = new maplibregl.Popup({
