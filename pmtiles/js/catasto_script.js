@@ -1410,19 +1410,24 @@ function buildOMIPopup(omiFeatures) {
     }).join('');
 
     return `
-    <div class="omi-popup">
-        <div class="omi-header">
-            <span class="omi-icon">€</span>
-            <span class="omi-title">Quotazioni OMI</span>
+    <div class="info-card">
+        <div class="info-card-hdr">
+            <i class="fas fa-euro-sign" style="color:#16a085;"></i>
+            <span>Quotazioni OMI</span>
             <span class="omi-zona-badge">Zona ${zona}</span>
         </div>
-        <div class="omi-descr">
-            <span class="omi-area">${descr}${microzona && microzona !== '0' ? ` <small style="color:#aaa">– Microzona ${microzona}</small>` : ''}</span>
-            <span class="omi-fascia">Fascia ${fascia}: ${fasciaLabel}</span>
+        <div class="info-card-body">
+            <div class="info-row"><span class="info-lbl">Fascia</span><span class="info-val">${fascia}: ${fasciaLabel}</span></div>
+            <div class="info-row"><span class="info-lbl">Descrizione</span><span class="info-val">${descr}${microzona && microzona !== '0' ? ` – Microzona ${microzona}` : ''}</span></div>
         </div>
-        ${tipoPrev ? `<div class="omi-tipprev"><i class="fas fa-home"></i> Tipo prevalente: <b>${tipoPrev}</b></div>` : ''}
-        <div class="omi-tipi">${tipiHTML}</div>
-        <div class="omi-footer">Fonte: Agenzia delle Entrate — ${semestre}</div>
+        <details class="omi-main-details">
+            <summary class="omi-main-summary">
+                <i class="fas fa-home"></i>
+                Tipo prevalente: <b>${tipoPrev || '—'}</b>
+            </summary>
+            <div class="omi-tipi">${tipiHTML}</div>
+            <div class="omi-footer">Fonte: Agenzia delle Entrate — ${semestre}</div>
+        </details>
     </div>`;
 }
 

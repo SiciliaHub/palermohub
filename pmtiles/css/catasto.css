@@ -1584,82 +1584,49 @@ body {
 }
 
 /* ========== OMI POPUP STYLES ========== */
-.omi-popup {
-    background: #fff;
-    color: #222;
-    font-family: 'Poppins', sans-serif;
-    min-width: 260px;
-    max-width: 330px;
-}
-.omi-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 6px;
-}
-.omi-icon {
-    background: #16a085;
-    color: #fff;
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 15px;
-    flex-shrink: 0;
-}
-.omi-title {
-    font-weight: 700;
-    font-size: 15px;
-    color: #111;
-    flex: 1;
-}
 .omi-zona-badge {
     background: #1abc9c;
     color: #fff;
     padding: 2px 9px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     white-space: nowrap;
+    margin-left: auto;
 }
-.omi-descr {
+/* Sezione collassabile principale (Tipo prevalente → prezzi) */
+.omi-main-details {
+    margin-top: 7px;
+}
+.omi-main-summary {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 12px;
-    color: #555;
-    margin-bottom: 6px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #eee;
-}
-.omi-area {
-    font-weight: 500;
-    color: #333;
-    flex: 1;
-    line-height: 1.4;
-}
-.omi-fascia {
-    white-space: nowrap;
-    color: #666;
-}
-.omi-tipprev {
-    font-size: 11px;
-    color: #444;
-    margin-bottom: 7px;
-    padding: 4px 7px;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    list-style: none;
+    padding: 5px 7px;
     background: #f0faf8;
     border-radius: 5px;
     border-left: 3px solid #16a085;
-    line-height: 1.5;
+    font-size: 12px;
+    color: #333;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
-.omi-tipprev i {
+.omi-main-summary::-webkit-details-marker { display: none; }
+.omi-main-summary::before {
+    content: '▶';
+    font-size: 8px;
     color: #16a085;
-    margin-right: 4px;
-    font-size: 10px;
+    transition: transform 0.18s;
+    flex-shrink: 0;
+}
+.omi-main-details[open] > .omi-main-summary::before {
+    transform: rotate(90deg);
+}
+.omi-main-summary i {
+    color: #16a085;
+    font-size: 11px;
 }
 .omi-tipi {
     display: flex;
