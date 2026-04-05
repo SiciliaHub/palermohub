@@ -1534,3 +1534,203 @@ body {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
 }
+
+/* ========== INFO CARD (tutti i layer non-OMI) ========== */
+.info-card {
+    font-family: 'Poppins', sans-serif;
+    color: #222;
+    min-width: 240px;
+}
+.info-card-hdr {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 13px;
+    color: #111;
+    margin-bottom: 7px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #f0f0f0;
+}
+.info-card-hdr i {
+    color: var(--primary);
+    width: 16px;
+    text-align: center;
+    font-size: 13px;
+}
+.info-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.4;
+}
+.info-lbl {
+    color: #888;
+    white-space: nowrap;
+    min-width: 80px;
+    flex-shrink: 0;
+}
+.info-val {
+    font-weight: 600;
+    color: #222;
+    text-align: right;
+}
+
+/* ========== OMI POPUP STYLES ========== */
+.omi-zona-badge {
+    background: var(--primary);
+    color: #fff;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: auto;
+}
+/* Sezione collassabile principale (Tipo prevalente → prezzi) */
+.omi-main-details {
+    margin-top: 7px;
+}
+.omi-main-summary {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    list-style: none;
+    padding: 5px 7px;
+    background: #f0faf8;
+    border-radius: 5px;
+    border-left: 3px solid #16a085;
+    font-size: 12px;
+    color: #333;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.omi-main-summary::-webkit-details-marker { display: none; }
+.omi-main-summary::before {
+    content: '▶';
+    font-size: 8px;
+    color: var(--primary);
+    transition: transform 0.18s;
+    flex-shrink: 0;
+}
+.omi-main-details[open] > .omi-main-summary::before {
+    transform: rotate(90deg);
+}
+.omi-main-summary i {
+    color: var(--primary);
+    font-size: 11px;
+}
+.omi-tipi {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+/* Collapsible per tipologia */
+details.omi-tipo {
+    border-bottom: 1px solid #f0f0f0;
+}
+details.omi-tipo:last-child {
+    border-bottom: none;
+}
+summary.omi-tipo-summary {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    list-style: none;
+    padding: 7px 2px;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+summary.omi-tipo-summary::-webkit-details-marker { display: none; }
+summary.omi-tipo-summary::before {
+    content: '▶';
+    font-size: 8px;
+    color: var(--primary);
+    transition: transform 0.18s;
+    flex-shrink: 0;
+    margin-right: 2px;
+}
+details[open] > summary.omi-tipo-summary::before {
+    transform: rotate(90deg);
+}
+.omi-tipo-name {
+    font-weight: 600;
+    font-size: 12px;
+    color: #222;
+    flex: 1;
+}
+.omi-stato-tag {
+    font-size: 10px;
+    color: #888;
+    font-style: normal;
+    white-space: nowrap;
+}
+.omi-tipo-preview {
+    font-size: 11px;
+    color: #16a085;
+    font-weight: 600;
+    white-space: nowrap;
+    margin-left: auto;
+}
+.omi-tipo-body {
+    padding: 5px 8px 8px 14px;
+    background: #f8fffe;
+    border-radius: 5px;
+    margin-bottom: 4px;
+}
+.omi-tipo-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+}
+.omi-val-lbl {
+    font-size: 11px;
+    color: #888;
+    display: block;
+    margin-bottom: 2px;
+}
+.omi-val {
+    font-size: 12px;
+    font-weight: 600;
+    color: #111;
+    line-height: 1.4;
+}
+.omi-sup {
+    color: #bbb;
+    font-size: 10px;
+    font-weight: 400;
+}
+.omi-footer {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #999;
+    border-top: 1px solid #eee;
+    padding-top: 6px;
+}
+
+/* ========== POPUP BASE STYLES ========== */
+.maplibregl-popup-content {
+    background: #fff !important;
+    color: #222 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18) !important;
+    padding: 0 !important;
+}
+.unified-popup {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.maplibregl-popup-tip {
+    border-top-color: #fff !important;
+    border-bottom-color: #fff !important;
+}

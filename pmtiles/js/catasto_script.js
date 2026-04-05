@@ -41,7 +41,8 @@ const layerStates = {
     'civici': false,
     'carta_tecnica': false,
     'satellite': false,
-    'zonizzazione': true
+    'zonizzazione': true,
+    'zone_omi': false
 };
 
 // MAPPATURA TRA ID PULSANTI E ID LAYER SULLA MAPPA
@@ -52,7 +53,8 @@ const layerMapping = {
     'civici': 'Numeri Civici',
     'carta_tecnica': 'carta_tecnica',
     'satellite': 'satellite-layer',
-    'zonizzazione': 'zto'
+    'zonizzazione': 'zto',
+    'zone_omi': 'Zone OMI'
 };
 
 // =========================
@@ -144,6 +146,16 @@ function toggleLayer(layerId) {
             );
         }
 
+        if (layerId === 'zone_omi') {
+            if (window.map.getLayer('Zone OMI-line')) {
+                window.map.setLayoutProperty(
+                    'Zone OMI-line',
+                    'visibility',
+                    layerStates[layerId] ? 'visible' : 'none'
+                );
+            }
+        }
+
         if (layerId === 'vincoli_lin' || layerId === 'vincoli_ar') {
             syncVincoliMain();
         }
@@ -215,7 +227,7 @@ function initLayerButtons() {
         });
     }
     
-    const layerButtons = ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'carta_tecnica', 'satellite', 'zonizzazione'];
+    const layerButtons = ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'carta_tecnica', 'satellite', 'zonizzazione', 'zone_omi'];
     layerButtons.forEach(layerId => {
         const button = document.getElementById(layerId);
         if (button) {
@@ -1330,6 +1342,98 @@ if (!isMobile) {
 }
 
 // =========================
+// HELPER: CARD GENERICA PER TUTTI I LAYER NON-OMI
+// =========================
+function buildInfoCard(iconClass, title, rows) {
+    const rowsHTML = rows
+        .filter(r => r.val != null && r.val !== 'N/A' && r.val !== '' && r.val !== 'NULL')
+        .map(r => `<div class="info-row"><span class="info-lbl">${r.lbl}</span><span class="info-val">${r.val}</span></div>`)
+        .join('');
+    return `<div class="info-card">
+        <div class="info-card-hdr"><i class="${iconClass}"></i><span>${title}</span></div>
+        <div class="info-card-body">${rowsHTML}</div>
+    </div>`;
+}
+
+// HELPER: POPUP QUOTAZIONI OMI
+// Accetta un array di feature (una per tipologia immobiliare) della stessa zona
+// =========================
+function buildOMIPopup(omiFeatures) {
+    if (!omiFeatures || omiFeatures.length === 0) return '';
+    const p0 = omiFeatures[0].properties;
+
+    // Converte valori numerici anche se salvati come stringa con virgola decimale (es. "1,4")
+    const parseOMI = v => {
+        if (v == null) return null;
+        const n = typeof v === 'string' ? parseFloat(v.replace(',', '.')) : Number(v);
+        return isNaN(n) ? null : n;
+    };
+
+    const zona     = p0.Zona_OMI || p0.Zona || '—';
+    const fascia   = p0.Fascia || p0.Fasce || '—';
+    const fasciaMap = { 'B': 'Centrale', 'S': 'Semicentrale', 'P': 'Periferica', 'U': 'Suburbana', 'R': 'Extraurbana' };
+    const fasciaLabel = fasciaMap[fascia] || fascia;
+    const descr    = (p0.Zona_Descr || '').replace(/^'|'$/g, '').trim();
+    const microzona = p0.Microzona;
+    const semestre = p0.Anno_Semestre ? `OMI ${p0.Anno_Semestre.replace(' / ', ' S')}` : 'OMI 2025 S2';
+    const tipoPrev = (p0.Descr_tip_prev || '').replace(/^'|'$/g, '').trim();
+    const supMap   = { 'L': 'sup.lorda', 'N': 'sup.netta' };
+
+    const tipiHTML = omiFeatures.map(f => {
+        const p    = f.properties;
+        const tipo  = (p.Descr_Tipologia || '—').replace(/^'|'$/g, '').trim();
+        const stato = p.Stato || '';
+        const cMin  = parseOMI(p.Compr_min), cMax = parseOMI(p.Compr_max);
+        const lMin  = parseOMI(p.Loc_min),   lMax = parseOMI(p.Loc_max);
+        const supC  = supMap[p.Sup_NL_compr] || '';
+        const supL  = supMap[p.Sup_NL_loc]   || '';
+        const compStr = (cMin != null && cMax != null)
+            ? `${cMin.toLocaleString('it-IT')} – ${cMax.toLocaleString('it-IT')} €/m²${supC ? ` <small class="omi-sup">(${supC})</small>` : ''}` : '—';
+        const locStr = (lMin != null && lMax != null)
+            ? `${lMin.toLocaleString('it-IT')} – ${lMax.toLocaleString('it-IT')} €/m²/mese${supL ? ` <small class="omi-sup">(${supL})</small>` : ''}` : '—';
+        const previewStr = cMin != null && cMax != null
+            ? `${cMin.toLocaleString('it-IT')}–${cMax.toLocaleString('it-IT')} €/m²` : '';
+        return `
+        <details class="omi-tipo">
+            <summary class="omi-tipo-summary">
+                <span class="omi-tipo-name">${tipo}</span>
+                ${stato ? `<em class="omi-stato-tag">${stato}</em>` : ''}
+                ${previewStr ? `<span class="omi-tipo-preview">${previewStr}</span>` : ''}
+            </summary>
+            <div class="omi-tipo-body">
+                <div class="omi-tipo-values">
+                    <div><span class="omi-val-lbl">Compravendita</span><br><span class="omi-val">${compStr}</span></div>
+                    <div><span class="omi-val-lbl">Locazione</span><br><span class="omi-val">${locStr}</span></div>
+                </div>
+            </div>
+        </details>`;
+    }).join('');
+
+    const fasciaDisplay = fasciaLabel !== fascia ? `${fascia}: ${fasciaLabel}` : fascia;
+
+    return `
+    <div class="info-card">
+        <div class="info-card-hdr">
+            <i class="fas fa-euro-sign"></i>
+            <span>Quotazioni OMI</span>
+            <span class="omi-zona-badge">Zona ${zona}</span>
+        </div>
+        <div class="info-card-body">
+            <div class="info-row"><span class="info-lbl">Fascia</span><span class="info-val">${fasciaDisplay}</span></div>
+            <div class="info-row"><span class="info-lbl">Descrizione</span><span class="info-val">${descr}${microzona && microzona !== '0' ? ` – Microzona ${microzona}` : ''}</span></div>
+        </div>
+        <details class="omi-main-details">
+            <summary class="omi-main-summary">
+                <i class="fas fa-home"></i>
+                Tipo prevalente: <b>${tipoPrev || '—'}</b>
+            </summary>
+            <div class="omi-tipi">${tipiHTML}</div>
+            <div class="omi-footer">Fonte: Agenzia delle Entrate — ${semestre}</div>
+        </details>
+    </div>`;
+}
+
+// =========================
 // INIZIALIZZAZIONE LAYER MAPPA COMPLETA
 // =========================
 function initializeMapLayers() {
@@ -1344,6 +1448,12 @@ function initializeMapLayers() {
             type: "vector",
             url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0226.pmtiles",
             attribution: "Catasto - fonte dati <b>SITR Sicilia - Agenzia delle Entrate</b>"
+        });
+
+        window.map.addSource("zone_omi", {
+            type: "vector",
+            url: "pmtiles://https://palermohub.github.io/PRG2004/civici/Zone_OMI_2025_II.pmtiles",
+            attribution: "Zone OMI 2025 S2 - <b>Agenzia delle Entrate</b>"
         });
 
         window.map.addSource("civici", {
@@ -1424,6 +1534,14 @@ function initializeMapLayers() {
 
         // AGGIUNGI LAYER VECTOR (Sopra i layer raster)
         const vectorLayers = [
+            // Zone OMI prima di tutto: rimane sotto tutti gli altri layer vettoriali
+            {
+                id: "Zone OMI",
+                source: "zone_omi",
+                sourceLayer: "Zone_OMI_2025_II",
+                color: "rgba(22,160,133,0.15)",
+                tooltip: "omi"
+            },
             {
                 id: "cs",
                 source: "prg",
@@ -1469,17 +1587,106 @@ function initializeMapLayers() {
         ];
 
         vectorLayers.forEach(layer => {
-            window.map.addLayer({
-                id: layer.id,
-                type: "fill",
-                source: layer.source,
-                "source-layer": layer.sourceLayer,
-                paint: {
-                    "fill-color": layer.color,
-                    "fill-opacity": layer.id === "Particelle catastali" ? 0.6 : 0,
-                    "fill-outline-color": layer.id === "Particelle catastali" ? "#000" : "transparent"
-                }
-            });
+            if (layer.id === "Zone OMI") {
+                // Colori esatti da zone_omi.sld (campo Zona_OMI)
+                const omiColorMatch = [
+                    "match", ["get", "Zona_OMI"],
+                    // B zones – rosso/rosa
+                    "B2",  "#66333b",
+                    "B3",  "#b3243b",
+                    "B4",  "#994d59",
+                    "B7",  "#e64561",
+                    "B12", "#662933",
+                    "B13", "#b34759",
+                    "B14", "#ff8094",
+                    "B15", "#cc5266",
+                    "B16", "#e6173b",
+                    "B17", "#ff4d6b",
+                    "B18", "#660a1a",
+                    "B19", "#cc6678",
+                    "B20", "#99001a",
+                    "B21", "#803340",
+                    "B22", "#ff6680",
+                    "B23", "#e65c73",
+                    // C zones – giallo
+                    "C1",  "#ffff00",
+                    "C3",  "#d9d942",
+                    "C4",  "#f2f23d",
+                    "C5",  "#d9d90a",
+                    "C7",  "#e6e624",
+                    "C10", "#f2f21a",
+                    "C11", "#f2f224",
+                    "C12", "#99992e",
+                    // D zones – blu
+                    "D1",  "#002bff",
+                    "D3",  "#1f00b3",
+                    "D4",  "#0029f2",
+                    "D8",  "#000099",
+                    "D9",  "#0d0d80",
+                    "D10", "#401aff",
+                    "D11", "#5433ff",
+                    "D12", "#6b4dff",
+                    "D13", "#0029f2",
+                    "D14", "#1a3df2",
+                    // E zones – versioni chiare per visibilità semi-trasparente
+                    "E1",  "#a89ab8",
+                    "E2",  "#f5ffff",
+                    "E3",  "#c8bebe",
+                    "E4",  "#d8d8e0",
+                    "E5",  "#8a9898",
+                    "E6",  "#9a8a9a",
+                    "E9",  "#ebe0e0",
+                    "E11", "#7a6a7a",
+                    "E14", "#787878",
+                    "E15", "#78788a",
+                    "E19", "#7a6a6a",
+                    "E20", "#8a7878",
+                    "E21", "#8a788a",
+                    "E22", "#8a7898",
+                    "E23", "#8a8a78",
+                    // R zones – verde
+                    "R1",  "#00ff00",
+                    "R2",  "#2e992e",
+                    // fallback
+                    "#323232"
+                ];
+                // Inserisce Zone OMI PRIMA del satellite (e di tutti i raster overlay)
+                // così ZTO, vincoli e particelle vengono renderizzati sopra le zone OMI
+                window.map.addLayer({
+                    id: layer.id,
+                    type: "fill",
+                    source: layer.source,
+                    "source-layer": layer.sourceLayer,
+                    layout: { visibility: "none" },
+                    paint: {
+                        "fill-color": omiColorMatch,
+                        "fill-opacity": 0.5
+                    }
+                }, 'carta_tecnica');
+                window.map.addLayer({
+                    id: "Zone OMI-line",
+                    type: "line",
+                    source: layer.source,
+                    "source-layer": layer.sourceLayer,
+                    layout: { visibility: "none" },
+                    paint: {
+                        "line-color": "#232323",
+                        "line-width": 1
+                    }
+                }, 'carta_tecnica');
+            } else {
+                window.map.addLayer({
+                    id: layer.id,
+                    type: "fill",
+                    source: layer.source,
+                    "source-layer": layer.sourceLayer,
+                    paint: {
+                        "fill-color": layer.color,
+                        "fill-opacity": layer.id === "Particelle catastali" ? 0.6 : 0,
+                        "fill-outline-color": layer.id === "Particelle catastali" ? "#000" : "transparent"
+                    }
+                });
+            }
         });
 
         // AGGIUNGI LAYER LABELS PARTICELLE (ottimizzato per mobile)
@@ -1595,7 +1802,7 @@ function initializeMapLayers() {
         // CLICK EVENT PER POPUP UNIFICATO OTTIMIZZATO PER MOBILE
         window.map.on("click", e => {
             const features = window.map.queryRenderedFeatures(e.point, {
-                layers: ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali", "Numeri Civici"]
+                layers: ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Zone OMI", "Particelle catastali", "Numeri Civici"]
             });
 
             if (features.length > 0) {
@@ -1604,36 +1811,77 @@ function initializeMapLayers() {
                     currentPopup = null;
                 }
 
-                const unifiedTooltipContent = features.map(feature => {
-                    let content = "";
-                    if (feature.layer.id === "cs") {
-                        content = `<b>Strumento Urbanistico:</b> PPE<br><b>Circoscrizione:</b> ${feature.properties.Circoscriz || "N/A"}`;
-                    } else if (feature.layer.id === "Info Vin. areali") {
-                        content = `<b>Vincolo areale</b><br><b>Tipo:</b> ${feature.properties.tipo || "N/A"}<br><b>Descrizione:</b> ${feature.properties.descrizone || "N/A"}`;
-                    } else if (feature.layer.id === "Info Vin. lineari") {
-                        content = `<b>Vincolo lineare</b><br><b>Tipo:</b> ${feature.properties.TIPO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
-                    } else if (feature.layer.id === "Info Netto storico") {
-                        content = `<b>Netto storico</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
-                    } else if (feature.layer.id === "Info ZTO") {
-                        content = `<b>Zonizzazione</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
-                    } else if (feature.layer.id === "Particelle catastali") {
-                        content = `<b>Particelle catastali</b><br><b>Foglio:</b> ${feature.properties.Foglio || "N/A"}<br><b>Particella:</b> ${feature.properties.Paricella || "N/A"}`;
-                    } else if (feature.layer.id === "Numeri Civici") {
-                        const _esp = feature.properties.Esponente;
-                        const _civicoLabel = (_esp && _esp !== 'NULL' && _esp !== '') ? `${feature.properties.Civico}/${_esp}` : (feature.properties.Civico || "N/A");
-                        content = `<b>Numero Civico</b><br><b>Civico:</b> ${_civicoLabel}<br><b>Odonimo:</b> ${feature.properties.Odonimo || "N/A"}<br><b>Circoscrizione:</b> ${feature.properties.Circoscrizione || "N/A"}<br><b>Quartiere:</b> ${feature.properties.Quartiere || "N/A"}<br><b>UPL:</b> ${feature.properties.UPL || "N/A"}`;
+                // Raggruppa le feature OMI per Zona_OMI (più tipologie per zona)
+                const omiByZona = {};
+                const nonOmiFeatures = [];
+                features.forEach(feature => {
+                    if (feature.layer.id === "Zone OMI") {
+                        const z = feature.properties.Zona_OMI || 'unknown';
+                        if (!omiByZona[z]) omiByZona[z] = [];
+                        omiByZona[z].push(feature);
+                    } else {
+                        nonOmiFeatures.push(feature);
                     }
-                    return content;
-                }).filter(c => c !== "").join("<hr>");
+                });
+
+                // Costruisci contenuto: prima altri layer, poi OMI alla fine
+                const omiParts = Object.values(omiByZona).map(grp => buildOMIPopup(grp));
+                const otherParts = nonOmiFeatures.map(feature => {
+                    const p = feature.properties;
+                    if (feature.layer.id === "cs") {
+                        return buildInfoCard('fas fa-city', 'Piano Urbanistico', [
+                            { lbl: 'Strumento', val: 'PPE' },
+                            { lbl: 'Circoscrizione', val: p.Circoscriz }
+                        ]);
+                    } else if (feature.layer.id === "Info Vin. areali") {
+                        return buildInfoCard('fas fa-shield-alt', 'Vincolo Areale', [
+                            { lbl: 'Tipo', val: p.tipo },
+                            { lbl: 'Descrizione', val: p.descrizone }
+                        ]);
+                    } else if (feature.layer.id === "Info Vin. lineari") {
+                        return buildInfoCard('fas fa-draw-polygon', 'Vincolo Lineare', [
+                            { lbl: 'Tipo', val: p.TIPO },
+                            { lbl: 'Descrizione', val: p.DESCRIZION }
+                        ]);
+                    } else if (feature.layer.id === "Info Netto storico") {
+                        return buildInfoCard('fas fa-scroll', 'Netto Storico', [
+                            { lbl: 'ZTO', val: p.ZTO },
+                            { lbl: 'Descrizione', val: p.DESCRIZION }
+                        ]);
+                    } else if (feature.layer.id === "Info ZTO") {
+                        return buildInfoCard('fas fa-map', 'Zonizzazione', [
+                            { lbl: 'ZTO', val: p.ZTO },
+                            { lbl: 'Descrizione', val: p.DESCRIZION }
+                        ]);
+                    } else if (feature.layer.id === "Particelle catastali") {
+                        return buildInfoCard('fas fa-table-cells', 'Particella Catastale', [
+                            { lbl: 'Foglio', val: p.Foglio },
+                            { lbl: 'Particella', val: p.Paricella }
+                        ]);
+                    } else if (feature.layer.id === "Numeri Civici") {
+                        const esp = p.Esponente;
+                        const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;
+                        return buildInfoCard('fas fa-map-marker-alt', 'Numero Civico', [
+                            { lbl: 'Civico', val: civico },
+                            { lbl: 'Odonimo', val: p.Odonimo },
+                            { lbl: 'Circoscrizione', val: p.Circoscrizione },
+                            { lbl: 'Quartiere', val: p.Quartiere },
+                            { lbl: 'UPL', val: p.UPL }
+                        ]);
+                    }
+                    return '';
+                }).filter(c => c !== '');
+
+                const unifiedTooltipContent = [...otherParts, ...omiParts].join("<hr>");
 
                 // Popup ottimizzato per mobile
-                currentPopup = new maplibregl.Popup({ 
+                currentPopup = new maplibregl.Popup({
                     closeOnClick: true,
-                    maxWidth: isMobile ? '280px' : '300px',
+                    maxWidth: isMobile ? '320px' : '360px',
                     offset: isMobile ? [0, -10] : [0, 0]
                 })
                     .setLngLat(e.lngLat)
-                    .setHTML(`<div style="padding: ${isMobile ? '8px' : '10px'}; font-size: ${isMobile ? '13px' : '14px'};">${unifiedTooltipContent}</div>`)
+                    .setHTML(`<div class="unified-popup" style="padding: ${isMobile ? '8px' : '10px'}; font-size: ${isMobile ? '13px' : '14px'};">${unifiedTooltipContent}</div>`)
                     .addTo(window.map);
                     
                 // Feedback vibrazione su mobile
@@ -1645,11 +1893,11 @@ function initializeMapLayers() {
 
         // CURSOR EVENTS (solo desktop)
         if (!isMobile) {
-            window.map.on("mouseenter", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali", "Numeri Civici"], () => {
+            window.map.on("mouseenter", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Zone OMI", "Particelle catastali", "Numeri Civici"], () => {
                 window.map.getCanvas().style.cursor = "pointer";
             });
 
-            window.map.on("mouseleave", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali", "Numeri Civici"], () => {
+            window.map.on("mouseleave", ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Zone OMI", "Particelle catastali", "Numeri Civici"], () => {
                 window.map.getCanvas().style.cursor = "default";
             });
 
