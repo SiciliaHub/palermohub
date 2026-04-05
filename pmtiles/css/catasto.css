@@ -1534,3 +1534,124 @@ body {
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
 }
+
+/* ========== OMI POPUP STYLES ========== */
+.omi-popup {
+    background: #fff;
+    color: #222;
+    font-family: 'Poppins', sans-serif;
+    min-width: 260px;
+    max-width: 320px;
+}
+.omi-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+.omi-icon {
+    background: #16a085;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+.omi-title {
+    font-weight: 700;
+    font-size: 15px;
+    color: #111;
+    flex: 1;
+}
+.omi-zona-badge {
+    background: #1abc9c;
+    color: #fff;
+    padding: 2px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+.omi-descr {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+}
+.omi-area {
+    font-weight: 500;
+    color: #333;
+    flex: 1;
+}
+.omi-fascia {
+    white-space: nowrap;
+    color: #666;
+}
+.omi-tipi {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+.omi-tipo {
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+.omi-tipo:last-child {
+    border-bottom: none;
+}
+.omi-tipo-label {
+    font-weight: 600;
+    font-size: 13px;
+    color: #222;
+    margin-bottom: 4px;
+}
+.omi-tipo-values {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+}
+.omi-val-lbl {
+    font-size: 11px;
+    color: #888;
+    display: block;
+}
+.omi-val {
+    font-size: 12px;
+    font-weight: 600;
+    color: #111;
+}
+.omi-footer {
+    margin-top: 8px;
+    font-size: 11px;
+    color: #999;
+    border-top: 1px solid #eee;
+    padding-top: 6px;
+}
+
+/* ========== POPUP BASE STYLES ========== */
+.maplibregl-popup-content {
+    background: #fff !important;
+    color: #222 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.18) !important;
+    padding: 0 !important;
+}
+.unified-popup {
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.maplibregl-popup-tip {
+    border-top-color: #fff !important;
+    border-bottom-color: #fff !important;
+}
