@@ -1553,6 +1553,68 @@ function initializeMapLayers() {
 
         vectorLayers.forEach(layer => {
             if (layer.id === "Zone OMI") {
+                // Colori QGIS (Zona_OMI → hex): B=rosa/rosso, C=giallo, D=blu, E=verde, R=arancio
+                const omiColorMatch = [
+                    "match", ["get", "Zona_OMI"],
+                    // B zones – tonalità rosa/rosso
+                    "B2",  "#e85077",
+                    "B3",  "#b3243b",
+                    "B4",  "#994d59",
+                    "B7",  "#e64561",
+                    "B12", "#662933",
+                    "B13", "#b34759",
+                    "B14", "#ff8094",
+                    "B15", "#cc3355",
+                    "B16", "#dd4466",
+                    "B17", "#ee5577",
+                    "B18", "#b35870",
+                    "B19", "#cc6680",
+                    "B20", "#9e3a4f",
+                    "B21", "#803340",
+                    "B22", "#ff6680",
+                    "B23", "#e65c73",
+                    // C zones – giallo
+                    "C1",  "#ffff00",
+                    "C3",  "#d9d942",
+                    "C4",  "#f2f23d",
+                    "C5",  "#d9d90a",
+                    "C7",  "#e6e624",
+                    "C10", "#f2f21a",
+                    "C11", "#f2f224",
+                    "C12", "#99992e",
+                    // D zones – blu
+                    "D1",  "#002bff",
+                    "D3",  "#1133ff",
+                    "D4",  "#0d40ff",
+                    "D8",  "#264de6",
+                    "D9",  "#0a22d9",
+                    "D10", "#401aff",
+                    "D11", "#5033ff",
+                    "D12", "#2244d9",
+                    "D13", "#0d1aff",
+                    "D14", "#3344ff",
+                    // E zones – verde
+                    "E1",  "#2ca02c",
+                    "E2",  "#44bb55",
+                    "E3",  "#33aa44",
+                    "E4",  "#55cc66",
+                    "E5",  "#66dd77",
+                    "E6",  "#44bb55",
+                    "E9",  "#1a882a",
+                    "E11", "#38b038",
+                    "E14", "#268026",
+                    "E15", "#4db34d",
+                    "E19", "#5ec65e",
+                    "E20", "#3dcc44",
+                    "E21", "#4dbb55",
+                    "E22", "#6dcc77",
+                    "E23", "#5dc066",
+                    // R zones – arancio/marrone
+                    "R1",  "#d4873f",
+                    "R2",  "#b36b1a",
+                    // fallback
+                    "#aaaaaa"
+                ];
                 window.map.addLayer({
                     id: layer.id,
                     type: "fill",
@@ -1560,9 +1622,9 @@ function initializeMapLayers() {
                     "source-layer": layer.sourceLayer,
                     layout: { visibility: "none" },
                     paint: {
-                        "fill-color": "#1abc9c",
-                        "fill-opacity": 0.15,
-                        "fill-outline-color": "#16a085"
+                        "fill-color": omiColorMatch,
+                        "fill-opacity": 0.55,
+                        "fill-outline-color": "#232323"
                     }
                 });
                 window.map.addLayer({
@@ -1572,8 +1634,8 @@ function initializeMapLayers() {
                     "source-layer": layer.sourceLayer,
                     layout: { visibility: "none" },
                     paint: {
-                        "line-color": "#16a085",
-                        "line-width": 1.5
+                        "line-color": "#232323",
+                        "line-width": 1
                     }
                 });
             } else {
