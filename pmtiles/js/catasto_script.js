@@ -1349,24 +1349,35 @@ function buildOMIPopup(omiFeatures) {
     if (!omiFeatures || omiFeatures.length === 0) return '';
     const p0 = omiFeatures[0].properties;
 
+    // Converte valori numerici anche se salvati come stringa con virgola decimale (es. "1,4")
+    const parseOMI = v => {
+        if (v == null) return null;
+        const n = typeof v === 'string' ? parseFloat(v.replace(',', '.')) : Number(v);
+        return isNaN(n) ? null : n;
+    };
+
     const zona  = p0.Zona_OMI || p0.Zona || '—';
     const fascia = p0.Fascia || p0.Fasce || '—';
-    const fasciaMap = { 'C': 'Centrale', 'S': 'Semicentrale', 'P': 'Periferica', 'R': 'Suburbana', 'E': 'Rurale', 'T': 'Transitoria' };
+    // Codici fascia da metadati OMI ufficiali
+    const fasciaMap = { 'B': 'Centrale', 'S': 'Semicentrale', 'P': 'Periferica', 'U': 'Suburbana', 'R': 'Extraurbana' };
     const fasciaLabel = fasciaMap[fascia] || fascia;
     const descr = (p0.Zona_Descr || '').replace(/^'|'$/g, '').trim();
     const microzona = p0.Microzona || '';
     const semestre = p0.Anno_Semestre ? `OMI ${p0.Anno_Semestre.replace(' / ', ' S')}` : 'OMI 2025 S2';
+    const supMap = { 'L': 'lorda', 'N': 'netta' };
 
     const tipiHTML = omiFeatures.map(f => {
         const p = f.properties;
         const tipo  = p.Descr_Tipologia || '—';
         const stato = p.Stato || '';
-        const cMin  = p.Compr_min, cMax = p.Compr_max;
-        const lMin  = p.Loc_min,   lMax = p.Loc_max;
+        const cMin  = parseOMI(p.Compr_min), cMax = parseOMI(p.Compr_max);
+        const lMin  = parseOMI(p.Loc_min),   lMax = parseOMI(p.Loc_max);
+        const supC  = supMap[p.Sup_NL_compr] || '';
+        const supL  = supMap[p.Sup_NL_loc]   || '';
         const compStr = (cMin != null && cMax != null)
-            ? `${Number(cMin).toLocaleString('it-IT')} - ${Number(cMax).toLocaleString('it-IT')} €/m²` : '—';
+            ? `${cMin.toLocaleString('it-IT')} – ${cMax.toLocaleString('it-IT')} €/m²${supC ? `<small style="color:#999"> sup.${supC}</small>` : ''}` : '—';
         const locStr = (lMin != null && lMax != null)
-            ? `${Number(lMin).toLocaleString('it-IT')} - ${Number(lMax).toLocaleString('it-IT')} €/m²` : '—';
+            ? `${lMin.toLocaleString('it-IT')} – ${lMax.toLocaleString('it-IT')} €/m²/mese${supL ? `<small style="color:#999"> sup.${supL}</small>` : ''}` : '—';
         const statoTag = stato ? ` <span style="font-weight:400;color:#888;font-size:11px;">(${stato})</span>` : '';
         return `
         <div class="omi-tipo">
@@ -1386,8 +1397,8 @@ function buildOMIPopup(omiFeatures) {
             <span class="omi-zona-badge">Zona ${zona}</span>
         </div>
         <div class="omi-descr">
-            <span class="omi-area">${descr}${microzona ? ` <small style="color:#aaa">– Microzona ${microzona}</small>` : ''}</span>
-            <span class="omi-fascia">Fascia: ${fasciaLabel}</span>
+            <span class="omi-area">${descr}${microzona && microzona !== '0' ? ` <small style="color:#aaa">– Microzona ${microzona}</small>` : ''}</span>
+            <span class="omi-fascia">Fascia ${fascia}: ${fasciaLabel}</span>
         </div>
         <div class="omi-tipi">${tipiHTML}</div>
         <div class="omi-footer">Fonte: Agenzia delle Entrate — ${semestre}</div>
