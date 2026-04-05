@@ -1343,48 +1343,40 @@ if (!isMobile) {
 
 // =========================
 // HELPER: POPUP QUOTAZIONI OMI
+// Accetta un array di feature (una per tipologia immobiliare) della stessa zona
 // =========================
-function buildOMIPopup(props) {
-    const zona = props.Cod_Zona || props.zona_omi || props.ZONA_OMI || props.Zona || props.COD_ZONA || '—';
-    const fascia = props.Fascia || props.FASCIA || '—';
-    const fasciaMap = { 'C': 'Centrale', 'S': 'Semicentrale', 'P': 'Periferica', 'R': 'Suburbana', 'E': 'Rurale' };
+function buildOMIPopup(omiFeatures) {
+    if (!omiFeatures || omiFeatures.length === 0) return '';
+    const p0 = omiFeatures[0].properties;
+
+    const zona  = p0.Zona_OMI || p0.Zona || '—';
+    const fascia = p0.Fascia || p0.Fasce || '—';
+    const fasciaMap = { 'C': 'Centrale', 'S': 'Semicentrale', 'P': 'Periferica', 'R': 'Suburbana', 'E': 'Rurale', 'T': 'Transitoria' };
     const fasciaLabel = fasciaMap[fascia] || fascia;
-    const descr = props.Descr_Zona || props.DESCR_ZONA || props.Denominaz || props.denominazi || props.DENOMINAZ || props.Microzona || props.MICROZONA || '';
+    const descr = (p0.Zona_Descr || '').replace(/^'|'$/g, '').trim();
+    const microzona = p0.Microzona || '';
+    const semestre = p0.Anno_Semestre ? `OMI ${p0.Anno_Semestre.replace(' / ', ' S')}` : 'OMI 2025 S2';
 
-    // Destinazioni d'uso con i campi standard OMI open data
-    const tipi = [
-        { label: 'Abitazioni civili',         stato: props.Stato_AB_C || props.stato_ab_c, compMin: props.Comp_min_AB_C || props.comp_min_ab_c, compMax: props.Comp_max_AB_C || props.comp_max_ab_c, locMin: props.Loc_min_AB_C || props.loc_min_ab_c, locMax: props.Loc_max_AB_C || props.loc_max_ab_c },
-        { label: 'Abitazioni di tipo economico', stato: props.Stato_AB_E || props.stato_ab_e, compMin: props.Comp_min_AB_E || props.comp_min_ab_e, compMax: props.Comp_max_AB_E || props.comp_max_ab_e, locMin: props.Loc_min_AB_E || props.loc_min_ab_e, locMax: props.Loc_max_AB_E || props.loc_max_ab_e },
-        { label: 'Box',                        stato: props.Stato_BOX || props.stato_box,   compMin: props.Comp_min_BOX || props.comp_min_box,   compMax: props.Comp_max_BOX || props.comp_max_box,   locMin: props.Loc_min_BOX || props.loc_min_box,   locMax: props.Loc_max_BOX || props.loc_max_box },
-        { label: 'Negozi',                     stato: props.Stato_NEG || props.stato_neg,   compMin: props.Comp_min_NEG || props.comp_min_neg,   compMax: props.Comp_max_NEG || props.comp_max_neg,   locMin: props.Loc_min_NEG || props.loc_min_neg,   locMax: props.Loc_max_NEG || props.loc_max_neg },
-        { label: 'Uffici',                     stato: props.Stato_UFF || props.stato_uff,   compMin: props.Comp_min_UFF || props.comp_min_uff,   compMax: props.Comp_max_UFF || props.comp_max_uff,   locMin: props.Loc_min_UFF || props.loc_min_uff,   locMax: props.Loc_max_UFF || props.loc_max_uff },
-        { label: 'Laboratori',                 stato: props.Stato_LAB || props.stato_lab,   compMin: props.Comp_min_LAB || props.comp_min_lab,   compMax: props.Comp_max_LAB || props.comp_max_lab,   locMin: props.Loc_min_LAB || props.loc_min_lab,   locMax: props.Loc_max_LAB || props.loc_max_lab },
-        { label: 'Magazzini',                  stato: props.Stato_MAG || props.stato_mag,   compMin: props.Comp_min_MAG || props.comp_min_mag,   compMax: props.Comp_max_MAG || props.comp_max_mag,   locMin: props.Loc_min_MAG || props.loc_min_mag,   locMax: props.Loc_max_MAG || props.loc_max_mag },
-    ].filter(t => t.compMin != null || t.compMax != null || t.locMin != null || t.locMax != null);
-
-    let tipiHTML = '';
-    if (tipi.length > 0) {
-        tipiHTML = tipi.map(t => {
-            const statoLabel = t.stato ? ` <span style="font-weight:400;color:#888;font-size:11px;">(${t.stato})</span>` : '';
-            const compStr = (t.compMin != null && t.compMax != null) ? `${Number(t.compMin).toLocaleString('it-IT')} - ${Number(t.compMax).toLocaleString('it-IT')} €/m²` : '—';
-            const locStr  = (t.locMin  != null && t.locMax  != null) ? `${Number(t.locMin).toLocaleString('it-IT')} - ${Number(t.locMax).toLocaleString('it-IT')} €/m²`  : '—';
-            return `
-            <div class="omi-tipo">
-                <div class="omi-tipo-label">${t.label}${statoLabel}</div>
-                <div class="omi-tipo-values">
-                    <div><span class="omi-val-lbl">Compravendita</span><br><span class="omi-val">${compStr}</span></div>
-                    <div><span class="omi-val-lbl">Locazione</span><br><span class="omi-val">${locStr}</span></div>
-                </div>
-            </div>`;
-        }).join('');
-    } else {
-        // Fallback: show all properties as key-value pairs
-        const skip = new Set(['geometry', 'layer', 'source', 'sourceLayer', 'state']);
-        tipiHTML = Object.entries(props)
-            .filter(([k]) => !skip.has(k))
-            .map(([k, v]) => `<div style="margin:2px 0;"><b>${k}:</b> ${v}</div>`)
-            .join('');
-    }
+    const tipiHTML = omiFeatures.map(f => {
+        const p = f.properties;
+        const tipo  = p.Descr_Tipologia || '—';
+        const stato = p.Stato || '';
+        const cMin  = p.Compr_min, cMax = p.Compr_max;
+        const lMin  = p.Loc_min,   lMax = p.Loc_max;
+        const compStr = (cMin != null && cMax != null)
+            ? `${Number(cMin).toLocaleString('it-IT')} - ${Number(cMax).toLocaleString('it-IT')} €/m²` : '—';
+        const locStr = (lMin != null && lMax != null)
+            ? `${Number(lMin).toLocaleString('it-IT')} - ${Number(lMax).toLocaleString('it-IT')} €/m²` : '—';
+        const statoTag = stato ? ` <span style="font-weight:400;color:#888;font-size:11px;">(${stato})</span>` : '';
+        return `
+        <div class="omi-tipo">
+            <div class="omi-tipo-label">${tipo}${statoTag}</div>
+            <div class="omi-tipo-values">
+                <div><span class="omi-val-lbl">Compravendita</span><br><span class="omi-val">${compStr}</span></div>
+                <div><span class="omi-val-lbl">Locazione</span><br><span class="omi-val">${locStr}</span></div>
+            </div>
+        </div>`;
+    }).join('');
 
     return `
     <div class="omi-popup">
@@ -1393,9 +1385,12 @@ function buildOMIPopup(props) {
             <span class="omi-title">Quotazioni OMI</span>
             <span class="omi-zona-badge">Zona ${zona}</span>
         </div>
-        ${descr ? `<div class="omi-descr"><span class="omi-area">${descr}</span><span class="omi-fascia">Fascia: ${fasciaLabel}</span></div>` : ''}
+        <div class="omi-descr">
+            <span class="omi-area">${descr}${microzona ? ` <small style="color:#aaa">– Microzona ${microzona}</small>` : ''}</span>
+            <span class="omi-fascia">Fascia: ${fasciaLabel}</span>
+        </div>
         <div class="omi-tipi">${tipiHTML}</div>
-        <div class="omi-footer">Fonte: Agenzia delle Entrate — OMI 2025 S2</div>
+        <div class="omi-footer">Fonte: Agenzia delle Entrate — ${semestre}</div>
     </div>`;
 }
 
@@ -1774,7 +1769,22 @@ function initializeMapLayers() {
                     currentPopup = null;
                 }
 
-                const unifiedTooltipContent = features.map(feature => {
+                // Raggruppa le feature OMI per Zona_OMI (più tipologie per zona)
+                const omiByZona = {};
+                const nonOmiFeatures = [];
+                features.forEach(feature => {
+                    if (feature.layer.id === "Zone OMI") {
+                        const z = feature.properties.Zona_OMI || 'unknown';
+                        if (!omiByZona[z]) omiByZona[z] = [];
+                        omiByZona[z].push(feature);
+                    } else {
+                        nonOmiFeatures.push(feature);
+                    }
+                });
+
+                // Costruisci contenuto: prima OMI (una card per zona), poi altri layer
+                const omiParts = Object.values(omiByZona).map(grp => buildOMIPopup(grp));
+                const otherParts = nonOmiFeatures.map(feature => {
                     let content = "";
                     if (feature.layer.id === "cs") {
                         content = `<b>Strumento Urbanistico:</b> PPE<br><b>Circoscrizione:</b> ${feature.properties.Circoscriz || "N/A"}`;
@@ -1786,8 +1796,6 @@ function initializeMapLayers() {
                         content = `<b>Netto storico</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
                     } else if (feature.layer.id === "Info ZTO") {
                         content = `<b>Zonizzazione</b><br><b>ZTO:</b> ${feature.properties.ZTO || "N/A"}<br><b>Descrizione:</b> ${feature.properties.DESCRIZION || "N/A"}`;
-                    } else if (feature.layer.id === "Zone OMI") {
-                        content = buildOMIPopup(feature.properties);
                     } else if (feature.layer.id === "Particelle catastali") {
                         content = `<b>Particelle catastali</b><br><b>Foglio:</b> ${feature.properties.Foglio || "N/A"}<br><b>Particella:</b> ${feature.properties.Paricella || "N/A"}`;
                     } else if (feature.layer.id === "Numeri Civici") {
@@ -1796,7 +1804,9 @@ function initializeMapLayers() {
                         content = `<b>Numero Civico</b><br><b>Civico:</b> ${_civicoLabel}<br><b>Odonimo:</b> ${feature.properties.Odonimo || "N/A"}<br><b>Circoscrizione:</b> ${feature.properties.Circoscrizione || "N/A"}<br><b>Quartiere:</b> ${feature.properties.Quartiere || "N/A"}<br><b>UPL:</b> ${feature.properties.UPL || "N/A"}`;
                     }
                     return content;
-                }).filter(c => c !== "").join("<hr>");
+                }).filter(c => c !== "");
+
+                const unifiedTooltipContent = [...omiParts, ...otherParts].join("<hr>");
 
                 // Popup ottimizzato per mobile
                 currentPopup = new maplibregl.Popup({
