@@ -1553,73 +1553,67 @@ function initializeMapLayers() {
 
         vectorLayers.forEach(layer => {
             if (layer.id === "Zone OMI") {
-                // Colori esatti da zone_omi.sld (campo Zona_OMI) con alpha 0.5 diretta
-                function hex2rgba(hex, a) {
-                    const r = parseInt(hex.slice(1,3),16);
-                    const g = parseInt(hex.slice(3,5),16);
-                    const b = parseInt(hex.slice(5,7),16);
-                    return `rgba(${r},${g},${b},${a})`;
-                }
+                // Colori esatti da zone_omi.sld (campo Zona_OMI)
                 const omiColorMatch = [
                     "match", ["get", "Zona_OMI"],
                     // B zones – rosso/rosa
-                    "B2",  "rgba(102,51,59,0.5)",
-                    "B3",  "rgba(179,36,59,0.5)",
-                    "B4",  "rgba(153,77,89,0.5)",
-                    "B7",  "rgba(230,69,97,0.5)",
-                    "B12", "rgba(102,41,51,0.5)",
-                    "B13", "rgba(179,71,89,0.5)",
-                    "B14", "rgba(255,128,148,0.5)",
-                    "B15", "rgba(204,82,102,0.5)",
-                    "B16", "rgba(230,23,59,0.5)",
-                    "B17", "rgba(255,77,107,0.5)",
-                    "B18", "rgba(102,10,26,0.5)",
-                    "B19", "rgba(204,102,120,0.5)",
-                    "B20", "rgba(153,0,26,0.5)",
-                    "B21", "rgba(128,51,64,0.5)",
-                    "B22", "rgba(255,102,128,0.5)",
-                    "B23", "rgba(230,92,115,0.5)",
+                    "B2",  "#66333b",
+                    "B3",  "#b3243b",
+                    "B4",  "#994d59",
+                    "B7",  "#e64561",
+                    "B12", "#662933",
+                    "B13", "#b34759",
+                    "B14", "#ff8094",
+                    "B15", "#cc5266",
+                    "B16", "#e6173b",
+                    "B17", "#ff4d6b",
+                    "B18", "#660a1a",
+                    "B19", "#cc6678",
+                    "B20", "#99001a",
+                    "B21", "#803340",
+                    "B22", "#ff6680",
+                    "B23", "#e65c73",
                     // C zones – giallo
-                    "C1",  "rgba(255,255,0,0.5)",
-                    "C3",  "rgba(217,217,66,0.5)",
-                    "C4",  "rgba(242,242,61,0.5)",
-                    "C5",  "rgba(217,217,10,0.5)",
-                    "C7",  "rgba(230,230,36,0.5)",
-                    "C10", "rgba(242,242,26,0.5)",
-                    "C11", "rgba(242,242,36,0.5)",
-                    "C12", "rgba(153,153,46,0.5)",
+                    "C1",  "#ffff00",
+                    "C3",  "#d9d942",
+                    "C4",  "#f2f23d",
+                    "C5",  "#d9d90a",
+                    "C7",  "#e6e624",
+                    "C10", "#f2f21a",
+                    "C11", "#f2f224",
+                    "C12", "#99992e",
                     // D zones – blu
-                    "D1",  "rgba(0,43,255,0.5)",
-                    "D3",  "rgba(31,0,179,0.5)",
-                    "D4",  "rgba(0,41,242,0.5)",
-                    "D8",  "rgba(0,0,153,0.5)",
-                    "D9",  "rgba(13,13,128,0.5)",
-                    "D10", "rgba(64,26,255,0.5)",
-                    "D11", "rgba(84,51,255,0.5)",
-                    "D12", "rgba(107,77,255,0.5)",
-                    "D13", "rgba(0,41,242,0.5)",
-                    "D14", "rgba(26,61,242,0.5)",
-                    // E zones – grigio scuro/nero
-                    "E1",  "rgba(51,41,61,0.5)",
-                    "E2",  "rgba(245,255,255,0.5)",
-                    "E3",  "rgba(133,122,122,0.5)",
-                    "E4",  "rgba(184,184,194,0.5)",
-                    "E5",  "rgba(61,71,71,0.5)",
-                    "E6",  "rgba(41,31,41,0.5)",
-                    "E9",  "rgba(235,224,224,0.5)",
-                    "E11", "rgba(20,10,20,0.5)",
-                    "E14", "rgba(20,20,20,0.5)",
-                    "E15", "rgba(20,20,31,0.5)",
-                    "E19", "rgba(20,10,10,0.5)",
-                    "E20", "rgba(31,20,20,0.5)",
-                    "E21", "rgba(31,20,31,0.5)",
-                    "E22", "rgba(31,20,41,0.5)",
-                    "E23", "rgba(31,31,20,0.5)",
+                    "D1",  "#002bff",
+                    "D3",  "#1f00b3",
+                    "D4",  "#0029f2",
+                    "D8",  "#000099",
+                    "D9",  "#0d0d80",
+                    "D10", "#401aff",
+                    "D11", "#5433ff",
+                    "D12", "#6b4dff",
+                    "D13", "#0029f2",
+                    "D14", "#1a3df2",
+                    // E zones – versioni chiare per visibilità semi-trasparente
+                    "E1",  "#a89ab8",
+                    "E2",  "#f5ffff",
+                    "E3",  "#c8bebe",
+                    "E4",  "#d8d8e0",
+                    "E5",  "#8a9898",
+                    "E6",  "#9a8a9a",
+                    "E9",  "#ebe0e0",
+                    "E11", "#7a6a7a",
+                    "E14", "#787878",
+                    "E15", "#78788a",
+                    "E19", "#7a6a6a",
+                    "E20", "#8a7878",
+                    "E21", "#8a788a",
+                    "E22", "#8a7898",
+                    "E23", "#8a8a78",
                     // R zones – verde
-                    "R1",  "rgba(0,255,0,0.5)",
-                    "R2",  "rgba(46,153,46,0.5)",
+                    "R1",  "#00ff00",
+                    "R2",  "#2e992e",
                     // fallback
-                    "rgba(50,50,50,0.5)"
+                    "#323232"
                 ];
                 window.map.addLayer({
                     id: layer.id,
@@ -1629,7 +1623,7 @@ function initializeMapLayers() {
                     layout: { visibility: "none" },
                     paint: {
                         "fill-color": omiColorMatch,
-                        "fill-opacity": 1
+                        "fill-opacity": 0.5
                     }
                 });
                 window.map.addLayer({
