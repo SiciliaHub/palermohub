@@ -1623,7 +1623,7 @@ function initializeMapLayers() {
                     layout: { visibility: "none" },
                     paint: {
                         "fill-color": omiColorMatch,
-                        "fill-opacity": 0.55,
+                        "fill-opacity": 0.5,
                         "fill-outline-color": "#232323"
                     }
                 });
