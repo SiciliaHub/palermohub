@@ -1662,7 +1662,7 @@ function initializeMapLayers() {
                         "fill-color": omiColorMatch,
                         "fill-opacity": 0.5
                     }
-                }, 'satellite-layer');
+                }, 'zto');
                 window.map.addLayer({
                     id: "Zone OMI-line",
                     type: "line",
@@ -1673,7 +1673,7 @@ function initializeMapLayers() {
                         "line-color": "#232323",
                         "line-width": 1
                     }
-                }, 'satellite-layer');
+                }, 'zto');
             } else {
                 window.map.addLayer({
                     id: layer.id,
