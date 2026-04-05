@@ -1553,23 +1553,23 @@ function initializeMapLayers() {
 
         vectorLayers.forEach(layer => {
             if (layer.id === "Zone OMI") {
-                // Colori da stile QGIS Zone_OMI_2025_II.qml (campo Zona_OMI → hex)
+                // Colori esatti da zone_omi.sld (campo Zona_OMI)
                 const omiColorMatch = [
                     "match", ["get", "Zona_OMI"],
-                    // B zones – tonalità rosa/rosso
-                    "B2",  "#e85077",
+                    // B zones – rosso/rosa
+                    "B2",  "#66333b",
                     "B3",  "#b3243b",
                     "B4",  "#994d59",
                     "B7",  "#e64561",
                     "B12", "#662933",
                     "B13", "#b34759",
                     "B14", "#ff8094",
-                    "B15", "#cc3355",
-                    "B16", "#dd4466",
-                    "B17", "#ee5577",
-                    "B18", "#b35870",
-                    "B19", "#cc6680",
-                    "B20", "#9e3a4f",
+                    "B15", "#cc5266",
+                    "B16", "#e6173b",
+                    "B17", "#ff4d6b",
+                    "B18", "#660a1a",
+                    "B19", "#cc6678",
+                    "B20", "#99001a",
                     "B21", "#803340",
                     "B22", "#ff6680",
                     "B23", "#e65c73",
@@ -1584,36 +1584,36 @@ function initializeMapLayers() {
                     "C12", "#99992e",
                     // D zones – blu
                     "D1",  "#002bff",
-                    "D3",  "#1133ff",
-                    "D4",  "#0d40ff",
-                    "D8",  "#264de6",
-                    "D9",  "#0a22d9",
+                    "D3",  "#1f00b3",
+                    "D4",  "#0029f2",
+                    "D8",  "#000099",
+                    "D9",  "#0d0d80",
                     "D10", "#401aff",
-                    "D11", "#5033ff",
-                    "D12", "#2244d9",
-                    "D13", "#0d1aff",
-                    "D14", "#3344ff",
-                    // E zones – verde
-                    "E1",  "#2ca02c",
-                    "E2",  "#44bb55",
-                    "E3",  "#33aa44",
-                    "E4",  "#55cc66",
-                    "E5",  "#66dd77",
-                    "E6",  "#44bb55",
-                    "E9",  "#1a882a",
-                    "E11", "#38b038",
-                    "E14", "#268026",
-                    "E15", "#4db34d",
-                    "E19", "#5ec65e",
-                    "E20", "#3dcc44",
-                    "E21", "#4dbb55",
-                    "E22", "#6dcc77",
-                    "E23", "#5dc066",
-                    // R zones – arancio/marrone
-                    "R1",  "#d4873f",
-                    "R2",  "#b36b1a",
+                    "D11", "#5433ff",
+                    "D12", "#6b4dff",
+                    "D13", "#0029f2",
+                    "D14", "#1a3df2",
+                    // E zones – grigio scuro/nero (periferica/suburbana)
+                    "E1",  "#33293d",
+                    "E2",  "#f5ffff",
+                    "E3",  "#857a7a",
+                    "E4",  "#b8b8c2",
+                    "E5",  "#3d4747",
+                    "E6",  "#291f29",
+                    "E9",  "#ebe0e0",
+                    "E11", "#140a14",
+                    "E14", "#141414",
+                    "E15", "#14141f",
+                    "E19", "#140a0a",
+                    "E20", "#1f1414",
+                    "E21", "#1f141f",
+                    "E22", "#1f1429",
+                    "E23", "#1f1f14",
+                    // R zones – verde
+                    "R1",  "#00ff00",
+                    "R2",  "#2e992e",
                     // fallback
-                    "#aaaaaa"
+                    "#323232"
                 ];
                 window.map.addLayer({
                     id: layer.id,
