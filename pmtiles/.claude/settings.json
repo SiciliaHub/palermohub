@@ -2,7 +2,23 @@
   "permissions": {
     "allow": [
       "Bash(curl -s -r 0-511 \"https://palermohub.github.io/PRG2004/civici/civici_0226.pmtiles\" -o /tmp/pmtiles_header.bin)",
-      "Bash(xxd /tmp/pmtiles_header.bin)"
+      "Bash(xxd /tmp/pmtiles_header.bin)",
+      "Read(//d/GitHub - Clone/SiciliaHub/palermohub/.claude/worktrees/agent-a39a05e5/pmtiles/js/**)",
+      "Read(//d/GitHub - Clone/SiciliaHub/palermohub/.claude/worktrees/agent-a39a05e5/pmtiles/css/**)",
+      "Bash(start \"\" \"D:\\\\GitHub - Clone\\\\SiciliaHub\\\\palermohub\\\\.claude\\\\worktrees\\\\agent-a39a05e5\\\\pmtiles\\\\catasto-app.html\")",
+      "Bash(node --check \"d:\\\\GitHub - Clone\\\\SiciliaHub\\\\palermohub\\\\.claude\\\\worktrees\\\\agent-a39a05e5\\\\pmtiles\\\\js\\\\catasto_script.js\")",
+      "Read(//d/GitHub - Clone/SiciliaHub/palermohub/.claude/worktrees/agent-a39a05e5/pmtiles/**)",
+      "Bash(node --check js/catasto_script.js)",
+      "Bash(curl -s \"http://localhost:8765/js/catasto_script.js\")",
+      "Bash(node -e ':*)",
+      "Read(//d/GitHub - Clone/SiciliaHub/palermohub/.claude/worktrees/agent-a39a05e5/**)",
+      "Bash(node --check pmtiles/js/catasto_script.js)",
+      "Read(//d/GitHub - Clone/SiciliaHub/palermohub/**)"
+    ],
+    "additionalDirectories": [
+      "d:\\GitHub - Clone\\SiciliaHub\\palermohub\\.claude\\worktrees\\agent-a39a05e5\\pmtiles\\js",
+      "d:\\GitHub - Clone\\SiciliaHub\\palermohub\\.claude\\worktrees\\agent-a39a05e5\\pmtiles\\css",
+      "d:\\GitHub - Clone\\SiciliaHub\\palermohub\\.claude\\worktrees\\agent-a39a05e5\\pmtiles"
     ]
   }
 }

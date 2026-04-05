@@ -154,6 +154,13 @@ function toggleLayer(layerId) {
                     layerStates[layerId] ? 'visible' : 'none'
                 );
             }
+            if (window.map.getLayer('Zone OMI-labels')) {
+                window.map.setLayoutProperty(
+                    'Zone OMI-labels',
+                    'visibility',
+                    layerStates[layerId] ? 'visible' : 'none'
+                );
+            }
         }
 
         if (layerId === 'vincoli_lin' || layerId === 'vincoli_ar') {
@@ -1660,8 +1667,7 @@ function initializeMapLayers() {
                     layout: { visibility: "none" },
                     paint: {
                         "fill-color": omiColorMatch,
-                        "fill-opacity": 0.5
-                    }
+                        "fill-opacity": 0.1                    }
                 }, 'carta_tecnica');
                 window.map.addLayer({
                     id: "Zone OMI-line",
@@ -1671,8 +1677,29 @@ function initializeMapLayers() {
                     layout: { visibility: "none" },
                     paint: {
                         "line-color": "#232323",
-                        "line-width": 1
+                        "line-width": 0.5
                     }
+                }, 'carta_tecnica');
+                window.map.addLayer({
+                    id: "Zone OMI-labels",
+                    type: "symbol",
+                    source: layer.source,
+                    "source-layer": layer.sourceLayer,
+                    layout: {
+                        "text-field": ["get", "Zona_OMI"],
+                        "text-size": ["interpolate", ["linear"], ["zoom"], 10, 9, 14, 13],
+                        "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+                        "text-allow-overlap": false,
+                        "text-ignore-placement": false,
+                        "text-anchor": "center",
+                        visibility: "none"
+                    },
+                    paint: {
+                        "text-color": "#111111",
+                        "text-halo-color": "#ffffff",
+                        "text-halo-width": 1.5
+                    },
+                    minzoom: 9
                 }, 'carta_tecnica');
             } else {
                 window.map.addLayer({
