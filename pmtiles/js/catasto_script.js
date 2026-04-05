@@ -1534,6 +1534,14 @@ function initializeMapLayers() {
 
         // AGGIUNGI LAYER VECTOR (Sopra i layer raster)
         const vectorLayers = [
+            // Zone OMI prima di tutto: rimane sotto tutti gli altri layer vettoriali
+            {
+                id: "Zone OMI",
+                source: "zone_omi",
+                sourceLayer: "Zone_OMI_2025_II",
+                color: "rgba(22,160,133,0.15)",
+                tooltip: "omi"
+            },
             {
                 id: "cs",
                 source: "prg",
@@ -1568,13 +1576,6 @@ function initializeMapLayers() {
                 sourceLayer: "zto",
                 color: "#ffffff",
                 tooltip: "<b>Zonizzazione</b><br><b>ZTO:</b> {{ZTO}}<br><b>Descrizione:</b> {{DESCRIZION}}"
-            },
-            {
-                id: "Zone OMI",
-                source: "zone_omi",
-                sourceLayer: "Zone_OMI_2025_II",
-                color: "rgba(22,160,133,0.15)",
-                tooltip: "omi"
             },
             {
                 id: "Particelle catastali",
