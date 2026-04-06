@@ -1667,7 +1667,8 @@ function initializeMapLayers() {
                     layout: { visibility: "none" },
                     paint: {
                         "fill-color": omiColorMatch,
-                        "fill-opacity": 0.1                    }
+                        "fill-opacity": 0.15
+                    }
                 }, 'carta_tecnica');
                 window.map.addLayer({
                     id: "Zone OMI-line",
