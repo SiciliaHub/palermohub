@@ -35,6 +35,7 @@ let isMobile = window.innerWidth <= 768;
 
 // STATO DEI LAYER
 const layerStates = {
+    'basemap': true,
     'vincoli_lin': true,
     'vincoli_ar': true,
     'particelle': true,
@@ -47,6 +48,7 @@ const layerStates = {
 
 // MAPPATURA TRA ID PULSANTI E ID LAYER SULLA MAPPA
 const layerMapping = {
+    'basemap': 'raster-tiles-layer',
     'vincoli_lin': 'vincoli_lin',
     'vincoli_ar': 'vincoli_ar',
     'particelle': 'Particelle catastali',
@@ -234,7 +236,7 @@ function initLayerButtons() {
         });
     }
     
-    const layerButtons = ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'carta_tecnica', 'satellite', 'zonizzazione', 'zone_omi'];
+    const layerButtons = ['basemap', 'vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'carta_tecnica', 'satellite', 'zonizzazione', 'zone_omi'];
     layerButtons.forEach(layerId => {
         const button = document.getElementById(layerId);
         if (button) {
