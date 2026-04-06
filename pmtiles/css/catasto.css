@@ -1541,6 +1541,9 @@ body {
     color: #222;
     min-width: 240px;
 }
+hr + .info-card {
+    margin-top: 10px;
+}
 .info-card-hdr {
     display: flex;
     align-items: center;
