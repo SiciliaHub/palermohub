@@ -17,7 +17,8 @@
       "Bash(git -C \"d:\\\\GitHub - Clone\\\\SiciliaHub\\\\palermohub\" diff --stat)",
       "Bash(git -C \"d:\\\\GitHub - Clone\\\\SiciliaHub\\\\palermohub\" add pmtiles/js/catasto_script.js)",
       "Bash(git -C 'd:\\\\GitHub - Clone\\\\SiciliaHub\\\\palermohub' commit -m ':*)",
-      "Bash(git -C \"d:\\\\GitHub - Clone\\\\SiciliaHub\\\\palermohub\" push origin PH-release-v2.0)"
+      "Bash(git -C \"d:\\\\GitHub - Clone\\\\SiciliaHub\\\\palermohub\" push origin PH-release-v2.0)",
+      "Bash(git -C \"d:\\\\GitHub - Clone\\\\SiciliaHub\\\\palermohub\" ls-files --error-unmatch .claude/worktrees/agent-a39a05e5)"
     ],
     "additionalDirectories": [
       "d:\\GitHub - Clone\\SiciliaHub\\palermohub\\.claude\\worktrees\\agent-a39a05e5\\pmtiles\\js",
