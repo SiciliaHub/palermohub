@@ -1381,8 +1381,6 @@ function buildOMIPopup(omiFeatures) {
     const zona     = p0.Zona_OMI || p0.Zona || '—';
     const fascia      = p0.Fascia || p0.Fasce || '—';
     const fasciaDescr = (p0.Fascia_Descr || '').replace(/^'|'$/g, '').trim();
-    const fasciaMap = { 'B': 'Centrale', 'S': 'Semicentrale', 'P': 'Periferica', 'U': 'Suburbana', 'R': 'Extraurbana' };
-    const fasciaLabel = fasciaMap[fascia] || fascia;
     const descr    = (p0.Zona_Descr || '').replace(/^'|'$/g, '').trim();
     const microzona = p0.Microzona;
     const semestre = p0.Anno_Semestre ? `OMI ${p0.Anno_Semestre.replace(' / ', ' S')}` : 'OMI 2025 S2';
@@ -1420,10 +1418,7 @@ function buildOMIPopup(omiFeatures) {
         </details>`;
     }).join('');
 
-    const fasciaDisplay = [
-        fasciaLabel !== fascia ? `${fascia}: ${fasciaLabel}` : fascia,
-        fasciaDescr
-    ].filter(Boolean).join(' – ');
+    const fasciaDisplay = fasciaDescr ? `${fascia} – ${fasciaDescr}` : fascia;
 
     return `
     <div class="info-card">
