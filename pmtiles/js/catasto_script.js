@@ -1377,13 +1377,15 @@ function buildOMIPopup(omiFeatures) {
     };
 
     const zona     = p0.Zona_OMI || p0.Zona || '—';
-    const fascia   = p0.Fascia || p0.Fasce || '—';
+    const fascia      = p0.Fascia || p0.Fasce || '—';
+    const fasciaDescr = (p0.Fascia_Descr || '').replace(/^'|'$/g, '').trim();
     const fasciaMap = { 'B': 'Centrale', 'S': 'Semicentrale', 'P': 'Periferica', 'U': 'Suburbana', 'R': 'Extraurbana' };
     const fasciaLabel = fasciaMap[fascia] || fascia;
     const descr    = (p0.Zona_Descr || '').replace(/^'|'$/g, '').trim();
     const microzona = p0.Microzona;
     const semestre = p0.Anno_Semestre ? `OMI ${p0.Anno_Semestre.replace(' / ', ' S')}` : 'OMI 2025 S2';
-    const tipoPrev = (p0.Descr_tip_prev || '').replace(/^'|'$/g, '').trim();
+    const tipoPrev  = (p0.Descr_tip_prev || '').replace(/^'|'$/g, '').trim();
+    const codTipPrev = p0.Cod_tip_prev || '';
     const supMap   = { 'L': 'sup.lorda', 'N': 'sup.netta' };
 
     const tipiHTML = omiFeatures.map(f => {
@@ -1416,7 +1418,10 @@ function buildOMIPopup(omiFeatures) {
         </details>`;
     }).join('');
 
-    const fasciaDisplay = fasciaLabel !== fascia ? `${fascia}: ${fasciaLabel}` : fascia;
+    const fasciaDisplay = [
+        fasciaLabel !== fascia ? `${fascia}: ${fasciaLabel}` : fascia,
+        fasciaDescr
+    ].filter(Boolean).join(' – ');
 
     return `
     <div class="info-card">
@@ -1427,12 +1432,13 @@ function buildOMIPopup(omiFeatures) {
         </div>
         <div class="info-card-body">
             <div class="info-row"><span class="info-lbl">Fascia</span><span class="info-val">${fasciaDisplay}</span></div>
-            <div class="info-row"><span class="info-lbl">Descrizione</span><span class="info-val">${descr}${microzona && microzona !== '0' ? ` – Microzona ${microzona}` : ''}</span></div>
+            <div class="info-row"><span class="info-lbl">Descrizione</span><span class="info-val">${descr}</span></div>
+            ${microzona != null && microzona !== '' ? `<div class="info-row"><span class="info-lbl">Microzona</span><span class="info-val">${microzona}</span></div>` : ''}
         </div>
         <details class="omi-main-details">
             <summary class="omi-main-summary">
                 <i class="fas fa-home"></i>
-                Tipo prevalente: <b>${tipoPrev || '—'}</b>
+                Tipo prevalente: <b>${codTipPrev ? `[${codTipPrev}] ` : ''}${tipoPrev || '—'}</b>
             </summary>
             <div class="omi-tipi">${tipiHTML}</div>
             <div class="omi-footer">Fonte: Agenzia delle Entrate — ${semestre}</div>
@@ -1905,7 +1911,7 @@ function initializeMapLayers() {
                 // Popup ottimizzato per mobile
                 currentPopup = new maplibregl.Popup({
                     closeOnClick: true,
-                    maxWidth: isMobile ? '320px' : '360px',
+                    maxWidth: isMobile ? '320px' : '390px',
                     offset: isMobile ? [0, -10] : [0, 0]
                 })
                     .setLngLat(e.lngLat)

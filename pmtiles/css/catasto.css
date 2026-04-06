@@ -1580,7 +1580,7 @@ body {
 .info-val {
     font-weight: 600;
     color: #222;
-    text-align: right;
+    text-align: justify;
 }
 
 /* ========== OMI POPUP STYLES ========== */
@@ -1676,7 +1676,7 @@ details[open] > summary.omi-tipo-summary::before {
 }
 .omi-tipo-preview {
     font-size: 11px;
-    color: #16a085;
+    color: #ff9900;
     font-weight: 600;
     white-space: nowrap;
     margin-left: auto;
