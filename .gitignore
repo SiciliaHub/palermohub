@@ -1,2 +1,8 @@
 legend/clip_index/cheat-sheet_gb01-1.pdf
 .claude/worktrees/
+/analytics
+dati-palermo-hub/analytics/ga4_data.json
+.github/workflows/update-ga4-analytics.yml
+scripts/grant_ga4_access.py
+scripts/requirements-analytics.txt
+scripts/update_ga4_analytics.py
