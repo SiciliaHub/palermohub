@@ -74,7 +74,7 @@
 
   <!-- SIDEBAR FILTRI -->
   <aside class="sidebar">
-    <h2><i class="fa-solid fa-sliders"></i> Filtri</h2>
+    <h2 style="display:flex;align-items:center;justify-content:space-between"><span><i class="fa-solid fa-sliders"></i> Filtri</span><button class="tab-info-btn" onclick="openInfoModal()" title="Licenza e informazioni"><i class="fa-solid fa-circle-info"></i></button></h2>
 
     <div class="filter-group">
       <label>Circoscrizione <span class="select-count" id="cnt-f-circ"></span></label>
@@ -144,7 +144,6 @@
       <button class="tab-btn" onclick="showTab('tabella', this)"><i class="fa-solid fa-table-list"></i> Tabella</button>
       <button class="tab-btn" onclick="showTab('analisi', this)"><i class="fa-solid fa-chart-bar"></i> Analisi</button>
       <button class="tab-btn" onclick="showTab('note', this)"><i class="fa-solid fa-book-open"></i> Note tecniche</button>
-      <button class="tab-info-btn" onclick="openInfoModal()" title="Licenza e informazioni"><i class="fa-solid fa-circle-info"></i></button>
     </div>
 
     <!-- MODAL INFO -->
@@ -251,8 +250,8 @@
             <button class="mtb-btn"            id="mtb-poly"   title="Visualizza particelle catastali"><i class="fa-solid fa-draw-polygon"></i><span>Particelle</span></button>
             <div class="mtb-sep"></div>
             <button class="mtb-btn" id="mtb-search" title="Cerca immobile"><i class="fa-solid fa-magnifying-glass"></i><span>Cerca</span></button>
-            <div class="mtb-sep"></div>
-            <button class="mtb-btn" id="mtb-draw" title="Filtra per area disegnata" onclick="toggleDrawMode()"><i class="fa-solid fa-vector-square"></i><span>Selezione</span></button>
+            <div class="mtb-sep" style="display:none"></div>
+            <button class="mtb-btn" id="mtb-draw" title="Funzione non disponibile" disabled style="display:none">
           </div>
 
           <!-- ── POPUP RICERCA ── -->
