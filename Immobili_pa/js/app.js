@@ -133,6 +133,81 @@ function countBy(arr, key) {
 
 function fmt(n) { return n.toLocaleString("it-IT"); }
 
+function escapeHtml(s) {
+  return String(s == null ? "" : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+}
+
+// Renderer per la classifica stile "Top N" (sostituisce i grafici a barre sidebar).
+// items: [{ label, value, color?, active?, dim?, onClick?, title? }]
+// opts:  { color, header?: { title, icon } }
+function renderRankList(container, items, opts) {
+  if (!container) return;
+  opts = opts || {};
+  container.innerHTML = "";
+  if (!items.length) {
+    const e = document.createElement("div");
+    e.className = "rank-list-empty";
+    e.innerHTML = '<i class="fa-solid fa-chart-simple"></i><span>Nessun dato per la selezione</span>';
+    container.appendChild(e);
+    return;
+  }
+  const max = Math.max.apply(null, items.map(i => i.value).concat([1]));
+  const baseColor = opts.color || "var(--primary-dark)";
+  container.style.setProperty("--rank-color", baseColor);
+
+  if (opts.header) {
+    const h = document.createElement("div");
+    h.className = "rank-list-header";
+    h.innerHTML =
+      '<span class="rl-title"><i class="' + (opts.header.icon || "fa-solid fa-trophy") + '"></i> ' +
+      escapeHtml(opts.header.title) + '</span>' +
+      '<span class="rl-count">' + items.length + '</span>';
+    container.appendChild(h);
+  }
+
+  items.forEach((item, i) => {
+    const row = document.createElement("div");
+    row.className = "rank-item";
+    if (item.active) row.classList.add("is-active");
+    if (item.dim) row.classList.add("is-dim");
+    if (item.color) row.style.setProperty("--rank-color", item.color);
+
+    // Barra: segmenti stacked oppure barra semplice
+    let barHtml;
+    if (item.segments && item.segments.length) {
+      const totalPct = Math.max(2, (item.value / max) * 100);
+      const segsHtml = item.segments.filter(s => s.value > 0).map(s => {
+        const segPct = (s.value / item.value) * 100;
+        return '<span class="rank-seg" style="width:' + segPct + '%;background:' + s.color + '" title="' + escapeHtml(s.label) + ': ' + fmt(s.value) + '"></span>';
+      }).join("");
+      barHtml = '<div class="rank-bar rank-bar-stacked" style="width:' + totalPct + '%">' + segsHtml + '</div>';
+    } else {
+      const pct = Math.max(2, (item.value / max) * 100);
+      barHtml = '<div class="rank-bar"><div class="rank-bar-fill" style="width:' + pct + '%"></div></div>';
+    }
+
+    row.innerHTML =
+      '<div class="rank-num">' + (i + 1) + '</div>' +
+      '<div class="rank-body">' +
+        '<div class="rank-name">' + escapeHtml(item.label) + '</div>' +
+        barHtml +
+      '</div>' +
+      '<div class="rank-val">' + fmt(item.value) + '</div>';
+    row.title = item.title || (item.label + ": " + fmt(item.value) + " immobili");
+    if (item.onClick) row.addEventListener("click", item.onClick);
+    container.appendChild(row);
+  });
+
+  if (opts.legend && opts.legend.length) {
+    const lg = document.createElement("div");
+    lg.className = "rank-list-legend";
+    lg.innerHTML = opts.legend.map(l =>
+      '<span class="rank-leg-item"><span class="rank-leg-dot" style="background:' + l.color + '"></span>' + escapeHtml(l.label) + '</span>'
+    ).join("");
+    container.appendChild(lg);
+  }
+}
+
 // ─── CASCADING FILTERS ────────────────────────────────────────────────────────
 function onFilterChange() {
   const circ = document.getElementById("f-circ").value;
@@ -184,6 +259,12 @@ function applyFilters() {
   const upl = document.getElementById("f-upl").value;
   const cat = document.getElementById("f-cat").value;
   const tipo = document.getElementById("f-tipo").value;
+
+  // Aggiorna stato "filtro attivo" sui filter-group per evidenziarli graficamente
+  ["f-circ","f-quart","f-upl","f-cat","f-tipo"].forEach(id => {
+    const sel = document.getElementById(id);
+    if (sel) sel.closest(".filter-group")?.classList.toggle("is-active", !!sel.value);
+  });
 
   filtered = RAW_DATA.filter(d =>
     (!circ  || d.circoscrizione === circ) &&
@@ -298,11 +379,27 @@ function clearSearchFilter() {
 // ─── DASHBOARD ────────────────────────────────────────────────────────────────
 function updateDashboard() {
   const n = filtered.length;
+  const ua  = filtered.filter(d => d.categoria === "Unità abitativa").length;
+  const ed  = filtered.filter(d => d.categoria === "Edificio").length;
+  const una = filtered.filter(d => d.categoria === "Unità non abitativa").length;
+  const te  = filtered.filter(d => d.categoria === "Terreno" || d.categoria === "Area").length;
+
   document.getElementById("kpi-tot").textContent = fmt(n);
-  document.getElementById("kpi-ua").textContent  = fmt(filtered.filter(d=>d.categoria==="Unità abitativa").length);
-  document.getElementById("kpi-ed").textContent  = fmt(filtered.filter(d=>d.categoria==="Edificio").length);
-  document.getElementById("kpi-una").textContent = fmt(filtered.filter(d=>d.categoria==="Unità non abitativa").length);
-  document.getElementById("kpi-te").textContent  = fmt(filtered.filter(d=>d.categoria==="Terreno"||d.categoria==="Area").length);
+  document.getElementById("kpi-ua").textContent  = fmt(ua);
+  document.getElementById("kpi-ed").textContent  = fmt(ed);
+  document.getElementById("kpi-una").textContent = fmt(una);
+  document.getElementById("kpi-te").textContent  = fmt(te);
+
+  // Mini-bar: % rispetto al totale corrente
+  const pct = (v) => n > 0 ? (v / n * 100) + "%" : "0%";
+  const setBar = (id, v) => {
+    const el = document.getElementById(id);
+    if (el) el.style.width = pct(v);
+  };
+  setBar("kpi-ua-bar",  ua);
+  setBar("kpi-ed-bar",  ed);
+  setBar("kpi-una-bar", una);
+  setBar("kpi-te-bar",  te);
 
   renderChartCat();
   renderChartTipo();
@@ -323,12 +420,53 @@ function renderChartCat(targetCanvas) {
   );
   if (!targetCanvas && chartCat) chartCat.destroy();
   const total = values.reduce((a,b)=>a+b,0);
+  const isSidebar = !targetCanvas;
+
+  // Aggiorna il valore centrale e la legenda HTML (solo sidebar)
+  if (isSidebar) {
+    const centerEl = document.getElementById("chart-cat-center");
+    if (centerEl) {
+      centerEl.querySelector(".dc-num").textContent = fmt(total);
+      centerEl.querySelector(".dc-lbl").textContent = total === 1 ? "immobile" : "immobili";
+    }
+    const legendEl = document.getElementById("chart-cat-legend");
+    if (legendEl) {
+      // Ordino dalla categoria con più immobili a quella con meno
+      const order = labels.map((l, i) => ({ label: l, value: values[i], color: baseColors[i] }))
+                         .sort((a, b) => b.value - a.value);
+      legendEl.innerHTML = order.map(o => {
+        const pct = total ? (o.value / total * 100).toFixed(1) : "0";
+        const cls = !activeCat ? "" : (activeCat === o.label ? " is-active" : " is-dim");
+        return '<div class="dl-item' + cls + '" data-cat="' + escapeHtml(o.label) + '" title="' + escapeHtml(o.label) + ': ' + fmt(o.value) + ' (' + pct + '%)">' +
+                 '<span class="dl-dot" style="background:' + o.color + '"></span>' +
+                 '<div class="dl-body">' +
+                   '<span class="dl-label">' + escapeHtml(o.label) + '</span>' +
+                   '<span class="dl-meta"><b>' + fmt(o.value) + '</b> · ' + pct + '%</span>' +
+                 '</div>' +
+               '</div>';
+      }).join("");
+      legendEl.querySelectorAll(".dl-item").forEach(item => {
+        item.addEventListener("click", () => setFilter("f-cat", item.dataset.cat));
+      });
+    }
+  }
+
   const instance = new Chart(el, {
     type: "doughnut",
     plugins: [ChartDataLabels],
-    data: { labels, datasets: [{ data: values, backgroundColor: colors, borderWidth: 2, borderColor: "#fff" }] },
+    data: { labels, datasets: [{
+      data: values,
+      backgroundColor: colors,
+      borderWidth: isSidebar ? 3 : 4,
+      borderColor: "#fff",
+      hoverOffset: isSidebar ? 6 : 10,
+      hoverBorderColor: "#fff",
+      spacing: 1
+    }] },
     options: {
       ...(targetCanvas && { responsive: true, maintainAspectRatio: false }),
+      ...(isSidebar  && { responsive: true, maintainAspectRatio: false }),
+      animation: { animateRotate: true, duration: 600, easing: "easeOutQuart" },
       onClick: (evt, elements) => {
         if (!elements.length) return;
         setFilter("f-cat", labels[elements[0].index]);
@@ -339,13 +477,19 @@ function renderChartCat(targetCanvas) {
       },
       plugins: {
         legend: {
+          display: !isSidebar,
           position: "right",
-          labels: { font: { size: 11 }, padding: 14 },
+          labels: { font: { size: 11 }, padding: 14, usePointStyle: true, pointStyle: "rectRounded" },
           onClick: (evt, item) => { setFilter("f-cat", item.text); if (targetCanvas) closeChartModal(); }
         },
-        tooltip: { callbacks: { label: ctx => ` ${ctx.label}: ${fmt(ctx.raw)} (${(ctx.raw/total*100).toFixed(1)}%)` } },
+        tooltip: {
+          backgroundColor: "rgba(33,33,33,0.92)",
+          padding: 10, cornerRadius: 6, displayColors: true, boxPadding: 4,
+          titleFont: { size: 12, weight: "600" }, bodyFont: { size: 12 },
+          callbacks: { label: ctx => ` ${ctx.label}: ${fmt(ctx.raw)} (${(ctx.raw/total*100).toFixed(1)}%)` }
+        },
         datalabels: {
-          display: ctx => (ctx.dataset.data[ctx.dataIndex] / total * 100) >= (targetCanvas ? 2 : 5),
+          display: isSidebar ? false : ctx => (ctx.dataset.data[ctx.dataIndex] / total * 100) >= 2,
           color: "#2c2c2c",
           font: { size: targetCanvas ? 13 : 9, weight: "bold" },
           textShadow: "0 1px 2px rgba(255,255,255,.6)",
@@ -355,7 +499,7 @@ function renderChartCat(targetCanvas) {
           }
         }
       },
-      cutout: "55%"
+      cutout: isSidebar ? "72%" : "60%"
     }
   });
   if (!targetCanvas) chartCat = instance;
@@ -364,10 +508,6 @@ function renderChartCat(targetCanvas) {
 
 function renderChartTipo(targetCanvas) {
   const el = targetCanvas || document.getElementById("chart-tipo");
-  if (!targetCanvas) setChartEmptyState('chart-tipo', filtered.length === 0);
-  if (filtered.length === 0 && !targetCanvas) return;
-  if (!targetCanvas) setChartEmptyState('chart-tipo', filtered.length === 0);
-  if (filtered.length === 0 && !targetCanvas) return;
   const counts = countBy(filtered, "tipo");
   const _tot = filtered.length;
   const _min = _tot > 500 ? Math.ceil(_tot * 0.004) : 1;
@@ -375,6 +515,24 @@ function renderChartTipo(targetCanvas) {
   const labels = sorted.map(e=>e[0]);
   const values = sorted.map(e=>e[1]);
   const activeTipo = document.getElementById("f-tipo").value;
+
+  // --- SIDEBAR: rank list ---
+  if (!targetCanvas) {
+    const items = labels.map((l, i) => ({
+      label: l,
+      value: values[i],
+      active: activeTipo === l,
+      dim: activeTipo && activeTipo !== l,
+      onClick: () => setFilter("f-tipo", l)
+    }));
+    renderRankList(el, items, {
+      color: "var(--primary-dark)",
+      header: { title: "Top Tipi (" + items.length + ")", icon: "fa-solid fa-trophy" }
+    });
+    return null;
+  }
+
+  // --- MODAL: Chart.js ---
   const colors = labels.map((l, i) => {
     const base = CHART_COLORS[i % CHART_COLORS.length];
     return (!activeTipo || l === activeTipo) ? base : hexToRgba(base, 0.2);
@@ -428,8 +586,38 @@ function renderChartCirc(targetCanvas) {
   const values = sorted.map(e => e[1]);
   const activeCirc = document.getElementById("f-circ").value;
   const BASE_CIRC = "#9ebac4";
+
+  // --- SIDEBAR: rank list ---
+  if (!targetCanvas) {
+    // Ordino per valore decrescente nella classifica
+    const ranked = keys.map((k, i) => ({ key: k, label: labels[i], value: values[i] }))
+                       .sort((a, b) => b.value - a.value);
+    const NA_KEY = "(n.d.)";
+    const NA_COLOR = "#b8b1a3"; // grigio caldo per dati non mappati
+    const items = ranked.map(r => ({
+      label: r.label,
+      value: r.value,
+      color: r.key === NA_KEY ? NA_COLOR : undefined,
+      active: activeCirc === r.key,
+      dim: activeCirc && activeCirc !== r.key,
+      onClick: () => setFilter("f-circ", r.key),
+      title: r.key === NA_KEY
+        ? "Non mappato: " + fmt(r.value) + " immobili senza riferimento territoriale"
+        : r.label + ": " + fmt(r.value) + " immobili"
+    }));
+    renderRankList(el, items, {
+      color: "#5b8294",
+      header: { title: "Circoscrizioni", icon: "fa-solid fa-map-location-dot" }
+    });
+    return null;
+  }
+
+  // --- MODAL: Chart.js ---
+  const NA_KEY_M = "(n.d.)";
+  const NA_COLOR_M = "#b8b1a3";
   const colors = keys.map((k) => {
-    return (!activeCirc || k === activeCirc) ? BASE_CIRC : hexToRgba(BASE_CIRC, 0.2);
+    const base = k === NA_KEY_M ? NA_COLOR_M : BASE_CIRC;
+    return (!activeCirc || k === activeCirc) ? base : hexToRgba(base, 0.2);
   });
   if (!targetCanvas && chartCirc) chartCirc.destroy();
   const instance = new Chart(el, {
@@ -478,6 +666,25 @@ function renderChartQuart(targetCanvas) {
   const values = sorted.map(e=>e[1]);
   const activeQuart = document.getElementById("f-quart").value;
   const BASE_QUART = "#d66b58";
+
+  // --- SIDEBAR: rank list ---
+  if (!targetCanvas) {
+    const top = labels.slice(0, 15);
+    const items = top.map((l, i) => ({
+      label: l,
+      value: values[i],
+      active: activeQuart === l,
+      dim: activeQuart && activeQuart !== l,
+      onClick: () => setFilter("f-quart", l)
+    }));
+    renderRankList(el, items, {
+      color: BASE_QUART,
+      header: { title: "Top " + items.length + " Quartieri", icon: "fa-solid fa-trophy" }
+    });
+    return null;
+  }
+
+  // --- MODAL: Chart.js ---
   const colors = labels.map((l) => {
     return (!activeQuart || l === activeQuart) ? BASE_QUART : hexToRgba(BASE_QUART, 0.2);
   });
@@ -529,6 +736,42 @@ function renderChartCatCirc(targetCanvas) {
     return order.indexOf(a) - order.indexOf(b);
   });
   const cats = Object.keys(CAT_COLORS);
+
+  // --- SIDEBAR: rank list stacked ---
+  if (!targetCanvas) {
+    const activeCirc = document.getElementById("f-circ").value;
+    const rows = circs.map(circ => {
+      const segments = cats.map(cat => ({
+        label: cat,
+        color: CAT_COLORS[cat],
+        value: filtered.filter(d => d.circoscrizione === circ && d.categoria === cat).length
+      }));
+      const total = segments.reduce((a, s) => a + s.value, 0);
+      return { circ, total, segments };
+    }).sort((a, b) => b.total - a.total);
+
+    const items = rows.map(r => ({
+      label: r.circ === "n.d." ? "Circoscrizione n.d. (non mappato)" : "Circoscrizione " + r.circ,
+      value: r.total,
+      segments: r.segments,
+      color: r.circ === "n.d." ? "#b8b1a3" : undefined,
+      active: activeCirc === r.circ,
+      dim: activeCirc && activeCirc !== r.circ,
+      onClick: () => setFilter("f-circ", r.circ),
+      title: r.circ === "n.d."
+        ? "Non mappato: " + fmt(r.total) + " immobili senza riferimento territoriale"
+        : "Circ. " + r.circ + ": " + fmt(r.total) + " immobili"
+    }));
+
+    renderRankList(el, items, {
+      color: "#7c6a5e",
+      header: { title: "Circoscrizioni per categoria", icon: "fa-solid fa-layer-group" },
+      legend: cats.map(c => ({ label: c, color: CAT_COLORS[c] }))
+    });
+    return null;
+  }
+
+  // --- MODAL: Chart.js stacked ---
   const datasets = cats.map(cat => ({
     label: cat,
     data: circs.map(circ => filtered.filter(d => d.circoscrizione === circ && d.categoria === cat).length),

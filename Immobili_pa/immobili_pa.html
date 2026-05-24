@@ -17,7 +17,7 @@
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
-	<link rel="stylesheet" href="css/style.css?v=20260523d"/>
+	<link rel="stylesheet" href="css/style.css?v=20260525h"/>
 	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 	<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
@@ -74,45 +74,55 @@
 
   <!-- SIDEBAR FILTRI -->
   <aside class="sidebar">
-    <h2 style="display:flex;align-items:center;justify-content:space-between"><span><i class="fa-solid fa-sliders"></i> Filtri</span><button class="tab-info-btn" onclick="openInfoModal()" title="Licenza e informazioni"><i class="fa-solid fa-circle-info"></i></button></h2>
+    <h2 class="sidebar-title">
+      <span><i class="fa-solid fa-sliders"></i> Filtri</span>
+      <button class="tab-info-btn sidebar-info-btn" onclick="openInfoModal()" title="Licenza e informazioni"><i class="fa-solid fa-circle-info"></i></button>
+    </h2>
 
-    <div class="filter-group">
-      <label>Circoscrizione <span class="select-count" id="cnt-f-circ"></span></label>
-      <select id="f-circ">
-        <option value="">Tutte le circoscrizioni</option>
-      </select>
-    </div>
-    <div class="filter-cascade-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-    <div class="filter-group">
-      <label>Quartiere <span class="select-count" id="cnt-f-quart"></span></label>
-      <select id="f-quart">
-        <option value="">Tutti i quartieri</option>
-      </select>
-    </div>
-    <div class="filter-cascade-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-    <div class="filter-group">
-      <label>UPL – Unità di Primo Livello <span class="select-count" id="cnt-f-upl"></span></label>
-      <select id="f-upl">
-        <option value="">Tutte le UPL</option>
-      </select>
-    </div>
-    <div class="filter-cascade-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-    <div class="filter-group">
-      <label>Categoria <span class="select-count" id="cnt-f-cat"></span></label>
-      <select id="f-cat">
-        <option value="">Tutte le categorie</option>
-      </select>
-    </div>
-    <div class="filter-cascade-arrow"><i class="fa-solid fa-chevron-down"></i></div>
-    <div class="filter-group">
-      <label>Tipologia <span class="select-count" id="cnt-f-tipo"></span></label>
-      <select id="f-tipo">
-        <option value="">Tutti le tipologie</option>
-      </select>
+    <div class="filter-section">
+      <div class="filter-section-head"><i class="fa-solid fa-map-location-dot"></i> Territorio</div>
+      <div class="filter-group">
+        <label><span class="lbl-text"><i class="fa-solid fa-landmark"></i> Circoscrizione</span> <span class="select-count" id="cnt-f-circ"></span></label>
+        <select id="f-circ">
+          <option value="">Tutte le circoscrizioni</option>
+        </select>
+      </div>
+      <div class="filter-cascade-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+      <div class="filter-group">
+        <label><span class="lbl-text"><i class="fa-solid fa-vector-square"></i> Quartiere</span> <span class="select-count" id="cnt-f-quart"></span></label>
+        <select id="f-quart">
+          <option value="">Tutti i quartieri</option>
+        </select>
+      </div>
+      <div class="filter-cascade-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+      <div class="filter-group">
+        <label><span class="lbl-text"><i class="fa-solid fa-location-dot"></i> UPL</span> <span class="select-count" id="cnt-f-upl"></span></label>
+        <select id="f-upl">
+          <option value="">Tutte le UPL</option>
+        </select>
+      </div>
     </div>
 
-    <button class="btn-reset" onclick="resetFilters()"><i class="fa-solid fa-xmark"></i> Azzera filtri</button>
-    <button class="btn-share" onclick="copyShareUrl()"><i class="fa-solid fa-share-nodes"></i> Condividi filtri</button>
+    <div class="filter-section">
+      <div class="filter-section-head"><i class="fa-solid fa-building"></i> Tipologia immobile</div>
+      <div class="filter-group">
+        <label><span class="lbl-text"><i class="fa-solid fa-layer-group"></i> Categoria</span> <span class="select-count" id="cnt-f-cat"></span></label>
+        <select id="f-cat">
+          <option value="">Tutte le categorie</option>
+        </select>
+      </div>
+      <div class="filter-cascade-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+      <div class="filter-group">
+        <label><span class="lbl-text"><i class="fa-solid fa-tags"></i> Tipologia</span> <span class="select-count" id="cnt-f-tipo"></span></label>
+        <select id="f-tipo">
+          <option value="">Tutti le tipologie</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="filter-actions">
+      <button class="btn-reset" onclick="resetFilters()"><i class="fa-solid fa-xmark"></i> Azzera filtri</button>
+    </div>
 
     <h2 style="margin-top:8px"><i class="fa-solid fa-chart-pie"></i> Selezione attiva</h2>
     <div id="active-filters-panel"></div>
@@ -125,7 +135,7 @@
     </div>
 
     <div class="ai-data-alert" id="ai-alert">
-      <div class="ai-alert-header">
+   <div class="ai-alert-header">
         <span class="alert-icon"><i class="fa-solid fa-triangle-exclamation"></i></span>
         <span class="ai-alert-label" Title="I contenuti di questa webapp, mappa, testi e grafici hanno carattere puramente informativo e divulgativo. I dati, sono stati elaborati tramite mappatura automatica con PyQGIS e Claude AI. I risultati richiedono verifica da parte di operatori qualificati per garantire l'accuratezza delle informazioni e correggere eventuali errori.">Disclaimer</span>
       </div>
@@ -252,8 +262,6 @@
             <button class="mtb-btn"            id="mtb-poly"   title="Visualizza particelle catastali"><i class="fa-solid fa-draw-polygon"></i><span>Particelle</span></button>
             <div class="mtb-sep"></div>
             <button class="mtb-btn" id="mtb-search" title="Cerca immobile"><i class="fa-solid fa-magnifying-glass"></i><span>Cerca</span></button>
-            <div class="mtb-sep" style="display:none"></div>
-            <button class="mtb-btn" id="mtb-draw" title="Funzione non disponibile" disabled style="display:none">
           </div>
 
           <!-- ── POPUP RICERCA ── -->
@@ -316,32 +324,65 @@
           <div class="sidebar-section">
             <h3><i class="fa-solid fa-square-poll-vertical"></i> Statistiche</h3>
             <div class="sidebar-kpi-grid">
-              <div class="kpi-card c1 kpi-btn" onclick="clearCatFilter()" title="Mostra tutti"><div class="kpi-val" id="kpi-tot">–</div><div class="kpi-label">Totale</div></div>
-              <div class="kpi-card c2 kpi-btn" onclick="setFilter('f-cat','Unità abitativa')" title="Filtra: Unità abitative"><div class="kpi-val" id="kpi-ua">–</div><div class="kpi-label">Unità Abitative</div></div>
-              <div class="kpi-card c3 kpi-btn" onclick="setFilter('f-cat','Edificio')" title="Filtra: Edifici"><div class="kpi-val" id="kpi-ed">–</div><div class="kpi-label">Edifici</div></div>
-              <div class="kpi-card c4 kpi-btn" onclick="setFilter('f-cat','Unità non abitativa')" title="Filtra: Unità non abitative"><div class="kpi-val" id="kpi-una">–</div><div class="kpi-label">Unità Non abitative</div></div>
-              <div class="kpi-card c5 kpi-btn" onclick="setFilterTeAree()" title="Cicla: Terreno → Area → Tutti"><div class="kpi-val" id="kpi-te">–</div><div class="kpi-label" id="kpi-te-label">Terreni + Aree</div></div>
+              <div class="kpi-card kpi-total kpi-btn" onclick="clearCatFilter()" title="Mostra tutti">
+                <div class="kpi-ico"><i class="fa-solid fa-building"></i></div>
+                <div class="kpi-text">
+                  <div class="kpi-val" id="kpi-tot">–</div>
+                  <div class="kpi-label">Totale immobili</div>
+                </div>
+              </div>
+              <div class="kpi-card kpi-cat kpi-ua-card kpi-btn" onclick="setFilter('f-cat','Unità abitativa')" title="Filtra: Unità abitative">
+                <div class="kpi-ico"><i class="fa-solid fa-house"></i></div>
+                <div class="kpi-val" id="kpi-ua">–</div>
+                <div class="kpi-label">Unità Abitative</div>
+                <div class="kpi-bar"><div class="kpi-bar-fill" id="kpi-ua-bar"></div></div>
+              </div>
+              <div class="kpi-card kpi-cat kpi-ed-card kpi-btn" onclick="setFilter('f-cat','Edificio')" title="Filtra: Edifici">
+                <div class="kpi-ico"><i class="fa-solid fa-city"></i></div>
+                <div class="kpi-val" id="kpi-ed">–</div>
+                <div class="kpi-label">Edifici</div>
+                <div class="kpi-bar"><div class="kpi-bar-fill" id="kpi-ed-bar"></div></div>
+              </div>
+              <div class="kpi-card kpi-cat kpi-una-card kpi-btn" onclick="setFilter('f-cat','Unità non abitativa')" title="Filtra: Unità non abitative">
+                <div class="kpi-ico"><i class="fa-solid fa-store"></i></div>
+                <div class="kpi-val" id="kpi-una">–</div>
+                <div class="kpi-label">Unità Non abitative</div>
+                <div class="kpi-bar"><div class="kpi-bar-fill" id="kpi-una-bar"></div></div>
+              </div>
+              <div class="kpi-card kpi-cat kpi-te-card kpi-btn" onclick="setFilterTeAree()" title="Cicla: Terreno → Area → Tutti">
+                <div class="kpi-ico"><i class="fa-solid fa-mountain-sun"></i></div>
+                <div class="kpi-val" id="kpi-te">–</div>
+                <div class="kpi-label" id="kpi-te-label">Terreni + Aree</div>
+                <div class="kpi-bar"><div class="kpi-bar-fill" id="kpi-te-bar"></div></div>
+              </div>
             </div>
           </div>
           <div class="sidebar-section">
             <h3><i class="fa-solid fa-chart-pie"></i> Per Categoria <button class="chart-expand-btn" onclick="openChartModal('cat')" title="Ingrandisci" data-tooltip="Clicca per ingrandire il grafico"><i class="fa-solid fa-expand"></i></button></h3>
-            <canvas id="chart-cat"></canvas>
+            <div class="doughnut-wrap">
+              <canvas id="chart-cat"></canvas>
+              <div class="doughnut-center" id="chart-cat-center">
+                <div class="dc-num">–</div>
+                <div class="dc-lbl">immobili</div>
+              </div>
+            </div>
+            <div class="doughnut-legend" id="chart-cat-legend"></div>
           </div>
           <div class="sidebar-section">
             <h3><i class="fa-solid fa-bars-staggered"></i> Top Tipi <button class="chart-expand-btn" onclick="openChartModal('tipo')" title="Ingrandisci" data-tooltip="Clicca per ingrandire il grafico"><i class="fa-solid fa-expand"></i></button></h3>
-            <canvas id="chart-tipo"></canvas>
+            <div id="chart-tipo" class="rank-list"></div>
           </div>
           <div class="sidebar-section">
             <h3><i class="fa-solid fa-chart-column"></i> Per Circoscrizione <button class="chart-expand-btn" onclick="openChartModal('circ')" title="Ingrandisci" data-tooltip="Clicca per ingrandire il grafico"><i class="fa-solid fa-expand"></i></button></h3>
-            <canvas id="chart-circ"></canvas>
+            <div id="chart-circ" class="rank-list"></div>
           </div>
           <div class="sidebar-section">
             <h3><i class="fa-solid fa-chart-bar"></i> Per Quartiere <button class="chart-expand-btn" onclick="openChartModal('quart')" title="Ingrandisci" data-tooltip="Clicca per ingrandire il grafico"><i class="fa-solid fa-expand"></i></button></h3>
-            <canvas id="chart-quart"></canvas>
+            <div id="chart-quart" class="rank-list"></div>
           </div>
           <div class="sidebar-section">
             <h3><i class="fa-solid fa-layer-group"></i> Categoria × Circoscrizione <button class="chart-expand-btn" onclick="openChartModal('catcirc')" title="Ingrandisci" data-tooltip="Clicca per ingrandire il grafico"><i class="fa-solid fa-expand"></i></button></h3>
-            <canvas id="chart-catcirc"></canvas>
+            <div id="chart-catcirc" class="rank-list"></div>
           </div>
         </aside>
 
@@ -750,9 +791,9 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
         <hr>
 
         <!-- SEZIONE 1 - CATEGORIE + GRAFICO -->
+        <h2><i class="fa-solid fa-layer-group"></i> 1. Categorie principali</h2>
         <div class="analisi-section-2col">
           <div class="analisi-col-left">
-            <h2><i class="fa-solid fa-layer-group"></i> 1. Categorie principali</h2>
             <div class="table-wrap">
               <table class="analisi-table">
                 <thead><tr><th>Categoria</th><th>N.</th><th>%</th></tr></thead>
@@ -775,9 +816,9 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
         <hr>
 
         <!-- SEZIONE 2 - TIPOLOGIE + GRAFICO -->
+        <h2><i class="fa-solid fa-tags"></i> 2. Tipologie (TIPO)</h2>
         <div class="analisi-section-2col">
           <div class="analisi-col-left">
-            <h2><i class="fa-solid fa-tags"></i> 2. Tipologie (TIPO)</h2>
             <div class="table-wrap">
               <table class="analisi-table">
                 <thead><tr><th>Tipo</th><th>N.</th><th>%</th></tr></thead>
