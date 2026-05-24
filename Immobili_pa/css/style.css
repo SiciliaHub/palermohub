@@ -164,7 +164,7 @@ header p { font-size: 0.85rem; opacity: 0.85; margin-top: 3px; }
 .modal-overlay.open { display: flex; }
 .modal-box {
   background: var(--card); border-radius: var(--radius);
-  padding: 28px 30px; max-width: 480px; width: 90%;
+  padding: 28px 30px; max-width: 550px; width: 90%;
   box-shadow: 0 8px 32px rgba(0,0,0,0.25);
   position: relative; animation: modalIn .2s ease;
 }
