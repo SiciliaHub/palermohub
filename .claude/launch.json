@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "palermohub",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8766", "-d", "D:\\GitHub - Clone\\SiciliaHub\\palermohub"],
+      "port": 8766
+    }
+  ]
+}
