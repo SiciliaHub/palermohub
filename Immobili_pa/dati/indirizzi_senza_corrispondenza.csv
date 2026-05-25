@@ -1,0 +1,512 @@
+﻿INDIRIZZO,NUMERO_CIVICO,CATEGORIA,TIPO,SUBTIPO,FOGLIO,PLLA,motivo
+CORSO CALATAFIMI,88,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+CORTILE CLEMENTE,6,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+CORTILE GRIFOTTA,22,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+LARGO MACELLO,20,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+PIAZZA BECCADELLI ANTONIO,60,Edificio,ARREDO URBANO,CHIOSCO,,,civico_non_trovato_in_anncsu
+PIAZZA CASCINO ANTONINO GEN.,33,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+PIAZZA CASCINO ANTONINO GEN.,177,Edificio,INFRASTRUTTURA INTERESSE GENERALE,PADIGLIONE,,,civico_non_trovato_in_anncsu
+PIAZZA CASTELFORTE,77,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+PIAZZA CASTELNUOVO,79,Edificio,ARREDO URBANO,CHIOSCO,,,civico_non_trovato_in_anncsu
+PIAZZA MAGIONE,37/D,Unità non abitativa,EDILIZIA RESIDENZIALE,MAGAZZINO (E.R.),,,civico_non_trovato_in_anncsu
+PIAZZA PORTA MONTALTO,203,Edificio,ARREDO URBANO,CHIOSCO,,,civico_non_trovato_in_anncsu
+PIAZZA TREDICI VITTIME,8,Terreno,VERDE,AGRICOLO,,,civico_non_trovato_in_anncsu
+PIAZZETTA CHIESA DEI COCCHIERI,2,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+PIAZZETTA CINA',97,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+PIAZZETTA DELLA PIETA',2,Unità abitativa,EDILIZIA RESIDENZIALE,ALLOGGIO (E.R.),131,,civico_non_trovato_in_anncsu
+PIAZZETTA DELLE VERGINI,66,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+PIAZZETTA SEIDITA,13,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+PIAZZETTA SETTE FATE,1,Terreno,AREA,AREA LIBERA,,,civico_non_trovato_in_anncsu
+PIAZZETTA SETTE FATE,1,Terreno,AREA,AREA LIBERA,,,civico_non_trovato_in_anncsu
+PIAZZETTA SPECIALE PIETRO,1,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA ALBERGHERIA,187,Unità non abitativa,LOCALE,MAGAZZINO,139,,civico_non_trovato_in_anncsu
+VIA ARCHIMEDE,16,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA BELLOLAMPO,4,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,civico_non_trovato_in_anncsu
+VIA BONOMO GABRIELE,33,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA BRAMANTE DONATO,17,Edificio,SCUOLA,ASILO NIDO,48,,civico_non_trovato_in_anncsu
+VIA CASALINI,37,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA CASCINO ANTONINO GEN.,177,Terreno,INFRASTRUTTURA INTERESSE GENERALE,AREA ESPOSITIVA,,,civico_non_trovato_in_anncsu
+VIA CIMABUE GIOVANNI,22,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA DE GOBBIS FRANCESCO,39,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,15,,civico_non_trovato_in_anncsu
+VIA DE GOBBIS FRANCESCO,39,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,15,,civico_non_trovato_in_anncsu
+VIA DEL CASTORO,118,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,,,civico_non_trovato_in_anncsu
+VIA DEL PAPPAGALLO,1,Unità non abitativa,LOCALE,MAGAZZINO,133,,civico_non_trovato_in_anncsu
+VIA DELLO SPASIMO,4,Unità non abitativa,LOCALE,MAGAZZINO,135,,civico_non_trovato_in_anncsu
+VIA GAETANI OTTAVIO,20,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA GIARDINA,95,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA GIUSINO,24,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA GUGLIELMINI,20,Terreno,LOCALE,CAPANNONE,,,civico_non_trovato_in_anncsu
+VIA LO FASO DOMENICO,23,Terreno,EDILIZIA RESIDENZIALE,NON CLASSIFICATO,,,civico_non_trovato_in_anncsu
+VIA MATTARELLA PIERSANTI,15,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,civico_non_trovato_in_anncsu
+VIA MESSINA MARINE,106,Terreno,AREA,PARZIALMENTE EDIFICATA,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,ABITAZIONE DI SERVIZIO,PORTINERIA,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,ABITAZIONE DI SERVIZIO,PORTINERIA,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,COMMERCIALE,BAR,34,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,MAGAZZINO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,NON CLASSIFICATO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,NON CLASSIFICATO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,LOCALE,NON CLASSIFICATO,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,civico_non_trovato_in_anncsu
+VIA MONTEPELLEGRINO,1,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,civico_non_trovato_in_anncsu
+VIA MURA DI SAN VITO,810,Unità non abitativa,LOCALE,MAGAZZINO,127,,civico_non_trovato_in_anncsu
+VIA PANZERA FRANCESCO,1,Edificio,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,88,,civico_non_trovato_in_anncsu
+VIA PANZERA FRANCESCO,1,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,88,,civico_non_trovato_in_anncsu
+VIA PANZERA FRANCESCO,1,Unità non abitativa,LOCALE TECNICO,AUTOCLAVE/CALDAIA,88,,civico_non_trovato_in_anncsu
+VIA PANZERA FRANCESCO,1,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,88,,civico_non_trovato_in_anncsu
+VIA PARROCCHIA DEI TARTARI,93,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA PARTANNA MONDELLO,194,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA PIEDILEGNO,25/27,Unità non abitativa,LOCALE,MAGAZZINO,31,,civico_non_trovato_in_anncsu
+VIA PORTA CARINI,4,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA PORTA DI CASTRO,184/186,Terreno,AREA,AREA DI RISULTA,,,civico_non_trovato_in_anncsu
+VIA PREZZOLINI GIUSEPPE,108,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA ROCCAZZO,2,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA ROSSI,1,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA SALINE,29,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA SAVONA,40,Unità non abitativa,COMMERCIALE,NEGOZI E BOTTEGHE,,,civico_non_trovato_in_anncsu
+VIA SAVONA,38,Unità non abitativa,COMMERCIALE,NEGOZI E BOTTEGHE,,,civico_non_trovato_in_anncsu
+VIA SCIACCA,22,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA SICCHERIA AL PORTELLO,7,Unità non abitativa,LOCALE,MAGAZZINO,55,,civico_non_trovato_in_anncsu
+VIA TIMEO,21,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA TORRE DI MONDELLO,49,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA TURR STEFANO,154B,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VIA VILLA SPERLINGA,158,Terreno,VERDE,VERDE PUBBLICO,,,civico_non_trovato_in_anncsu
+VIALE DEL FANTE,15,Edificio,IMPIANTO SPORTIVO,CAMPO CALCIO,,,civico_non_trovato_in_anncsu
+VIALE DEL FANTE,13,Edificio,IMPIANTO SPORTIVO,CAMPO OSTACOLI,,,civico_non_trovato_in_anncsu
+VICOLO NUOVO,30,Edificio,ARREDO URBANO,FONTANA,,,civico_non_trovato_in_anncsu
+VICOLO ROCCA,56,Terreno,AREA,TERRENO,,,civico_non_trovato_in_anncsu
+CLE ECCE HOMO (V S.AGOSTINO),,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+CLE ECCE HOMO (V S.AGOSTINO),,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+CLE ECCE HOMO (V S.AGOSTINO),,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+CLE ECCE HOMO (V S.AGOSTINO),,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+CLE ECCE HOMO (V S.AGOSTINO),,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+CLE ECCE HOMO (V S.AGOSTINO),,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+CLE ECCE HOMO (V S.AGOSTINO),,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+CORSO CALATAFIMI,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+CORSO DEI MILLE,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+CORTILE CATARO,,Unità non abitativa,SCUOLA,ASILO NIDO,,,numero_civico_assente_snc
+FONDO CHIANAZZO,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+FONDO CHIANAZZO,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+FONDO MOTISI,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+LARGO DI VITTORIO GIUSEPPE,,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,89,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LARGO SABATO ANTONINO,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,,Area,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+LUNGOMARE COLOMBO CRISTOFORO,SNC,Terreno,STRADA,REGIA TRAZZERA,,,numero_civico_assente_snc
+PASSAGGIO LINCOLN,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PASSAGGIO LINCOLN,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PASSAGGIO LINCOLN,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PASSAGGIO LINCOLN,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PASSAGGIO LINCOLN,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PASSAGGIO LINCOLN,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PIAZZA CARACCIOLO,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PIAZZA CUPANI FRANCESCO,,Edificio,INFRASTRUTTURA INTERESSE GENERALE,GABINETTO PUBBLICO,,,numero_civico_assente_snc
+PIAZZA DEGLI ARAGONESI,SNC,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+PIAZZA GENTILI ALBERICO,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PIAZZA GIULIO CESARE,,Edificio,ARREDO URBANO,CHIOSCO,,,numero_civico_assente_snc
+PIAZZA GIULIO CESARE,,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,numero_civico_assente_snc
+PIAZZA GIULIO CESARE,,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,numero_civico_assente_snc
+PIAZZA GIULIO CESARE,,Terreno,VERDE,VERDE PUBBLICO,,,numero_civico_assente_snc
+PIAZZA INDIPENDENZA,,Edificio,ARREDO URBANO,CHIOSCO,136,,numero_civico_assente_snc
+PIAZZA MONDELLO,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PIAZZA MONTE DI PIETA',,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PIAZZA PRETORIA,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PIAZZA TORRELUNGA,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+PIAZZA TREDICI VITTIME,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PIAZZA TREDICI VITTIME,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+PIAZZA TREDICI VITTIME,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+PIAZZA TREDICI VITTIME,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+PIAZZA TREDICI VITTIME,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+PIAZZA TREDICI VITTIME,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+PIAZZA VITTORIA,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PIAZZETTA DI GIOVANNI VINCENZO19,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+PZZA ORLANDO VITTORIO EMANUELE,SNC,Edificio,PARCHEGGIO,PARCHEGGIO SOTTERRANEO MULTILIVELLO,126,,numero_civico_assente_snc
+SALITA DEL BANDITORE,,Unità non abitativa,LOCALE,CANTINA,,,numero_civico_assente_snc
+SALITA DEL BANDITORE,,Unità non abitativa,LOCALE,CANTINA,,,numero_civico_assente_snc
+SALITA DEL BANDITORE,,Unità non abitativa,LOCALE,CANTINA,,,numero_civico_assente_snc
+SALITA DEL BANDITORE,,Unità non abitativa,LOCALE,CANTINA,,,numero_civico_assente_snc
+SALITA DEL BANDITORE,,Unità non abitativa,LOCALE,CANTINA,,,numero_civico_assente_snc
+SALITA DEL BANDITORE,,Unità non abitativa,LOCALE TECNICO,LOCALE CONTATORI,139,,numero_civico_assente_snc
+SALITA DEL BANDITORE,,Unità non abitativa,LOCALE TECNICO,LOCALE SALA MACCHINE ASCENSORE,139,,numero_civico_assente_snc
+SCALA CARINI,SNC,Terreno,AREA,PARZIALMENTE EDIFICATA,,,numero_civico_assente_snc
+STRADELLA RISERVA REALE,,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,numero_civico_assente_snc
+STRADELLA RISERVA REALE,,Unità non abitativa,LOCALE,MAGAZZINO,,,numero_civico_assente_snc
+STRADELLA RISERVA REALE,,Unità non abitativa,LOCALE,MAGAZZINO,,,numero_civico_assente_snc
+STRADELLA RISERVA REALE,,Unità non abitativa,LOCALE,MAGAZZINO,,,numero_civico_assente_snc
+STRADELLA RISERVA REALE,,Unità non abitativa,LOCALE,MAGAZZINO,,,numero_civico_assente_snc
+STRADELLA RISERVA REALE,,Unità non abitativa,LOCALE,MAGAZZINO,,,numero_civico_assente_snc
+STRADELLA RISERVA REALE,,Edificio,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+STRADELLA RISERVA REALE,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA ADDAURA,,Edificio,CULTURALE,MONUMENTO,,,numero_civico_assente_snc
+VIA ALDISIO SALVATORE,,Terreno,IMPIANTO SPORTIVO,CAMPO TENNIS,,,numero_civico_assente_snc
+VIA ALTARELLO,,Terreno,AREA,AREA LIBERA,,,numero_civico_assente_snc
+VIA BALSAMO PAOLO,,Edificio,ARREDO URBANO,CHIOSCO,,,numero_civico_assente_snc
+VIA BARCARELLO,SNC,Area,RETE FOGNARIA SFERRACAVALLO,,,,numero_civico_assente_snc
+VIA BELVEDERE,,Terreno,AREA,AREA LIBERA,,,numero_civico_assente_snc
+VIA BRANCACCIO,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA BRASCA,,Edificio,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA BRASCA,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA BRASCA,,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA BRONTE,,Terreno,IMPIANTO TECNICO,SERBATOIO,,,numero_civico_assente_snc
+VIA BRUNETTO FILIPPO,N.C.,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,numero_civico_assente_snc
+VIA CARUSO,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA CASCINO ANTONINO GEN.,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA CASCINO ANTONINO GEN.,,Terreno,IMPIANTO TECNICO,SERBATOIO,,,numero_civico_assente_snc
+VIA CASSARO,,Edificio,IMPIANTO TECNICO,IMPIANTO FOGNARIO,,,numero_civico_assente_snc
+VIA CHIARAMONTE GIOVANNI,SNC,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA CIACULLI,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA CIACULLI,,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA CIACULLI,,Terreno,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA COLONNA ROTTA,,Terreno,AREA,AREA DI RISULTA,,,numero_civico_assente_snc
+VIA CONTE FEDERICO,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VIA CROCETTA,,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA DEGLI EMIRI,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA DEI PESCATORI,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA DEL CASTORO,,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,numero_civico_assente_snc
+VIA DELL'ARENELLA,,Terreno,AREA,SOTTOVIA,,,numero_civico_assente_snc
+VIA DELLA LIBERTA',,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA DELLA LIBERTA',,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA DELLA LIBERTA',,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA DELLA LIBERTA',,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA DELLA LIBERTA',,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA DELLO SCANZANO,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA DOGALI,,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,11,,numero_civico_assente_snc
+VIA DOGALI,,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,11,,numero_civico_assente_snc
+VIA FALSOMIELE,,Terreno,AREA,PARZIALMENTE EDIFICATA,,,numero_civico_assente_snc
+VIA FICHIDINDIA,,Terreno,IMPIANTO TECNICO,POZZO,,,numero_civico_assente_snc
+VIA GARRAFFELLO,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA GRAMSCI ANTONIO,SNC,Terreno,AREA,AREA LIBERA,86,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GROTTE PARTANNA,,Terreno,VERDE,AGRICOLO,,,numero_civico_assente_snc
+VIA GUASTELLA SERAFINO AMABILE6,,Terreno,EDILIZIA RESIDENZIALE,NON CLASSIFICATO,,,numero_civico_assente_snc
+VIA GUGLIELMINI,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VIA LA LOGGIA GAETANO,,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA LA LOGGIA GAETANO,,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA LA MALFA UGO,,Terreno,PARCHEGGIO,PARCHEGGIO COMUNALE,,,numero_civico_assente_snc
+VIA LA ROCCA NICK,,Terreno,AREA,AREA LIBERA,,,numero_civico_assente_snc
+VIA LANCIA DI BROLO DOMENICO,SNC,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA LAZZARO CARMELO,,Terreno,PARCHEGGIO,PARCHEGGIO COMUNALE,,,numero_civico_assente_snc
+VIA LUNGARO PIETRO ERMELINDO96,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA LUOGHICELLI,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VIA MARCHESE NICOLO' PENSABENE,,Terreno,AREA,AREA LIBERA,,,numero_civico_assente_snc
+VIA MARCIANO ROCKY,,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA MATER DEI,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA MERENDA PIETRO,,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,51,,numero_civico_assente_snc
+VIA MERENDA PIETRO,,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,51,,numero_civico_assente_snc
+VIA MESSINA MARINE,,Terreno,AREA,AREA LIBERA,,,numero_civico_assente_snc
+VIA MESSINA MONTAGNE,,Edificio,IMPIANTO TECNICO,IMPIANTO FOGNARIO,,,numero_civico_assente_snc
+VIA MESSINA MONTAGNE,,Edificio,IMPIANTO TECNICO,VASCA IDRICA (IMPIANTO),,,numero_civico_assente_snc
+VIA MOSTO ANTONIO,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VIA NOVELLI PIETRO,NC,Edificio,ARREDO URBANO,CHIOSCO,,,numero_civico_assente_snc
+VIA ORETO,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA PARUTA FILIPPO,,Edificio,IMPIANTO TECNICO,IMPIANTO FOGNARIO,,,numero_civico_assente_snc
+VIA PATERNOSTRO ALESSANDRO,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIA PAULSEN FEDERICO,,Edificio,IMPIANTO SPORTIVO,PALESTRA,65,,numero_civico_assente_snc
+VIA PAULSEN FEDERICO,,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,,,numero_civico_assente_snc
+VIA PAULSEN FEDERICO,,Edificio,LOCALE TECNICO,ENEL,65,,numero_civico_assente_snc
+VIA PAULSEN FEDERICO,,Unità non abitativa,LOCALE TECNICO,ENEL,,,numero_civico_assente_snc
+VIA PAULSEN FEDERICO,,Edificio,SCUOLA,ELEMENTARE,65,,numero_civico_assente_snc
+VIA PIEDILEGNO,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA PONTE CORLEONE AGNETTA,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA PONTE DI MARE,,Edificio,ARREDO URBANO,CHIOSCO,,,numero_civico_assente_snc
+VIA PONTE DI MARE,,Edificio,ARREDO URBANO,CHIOSCO,,,numero_civico_assente_snc
+VIA PORTA DI CASTRO,SNC,Unità non abitativa,COMMERCIALE,NEGOZI E BOTTEGHE,136,,numero_civico_assente_snc
+VIA PORTA DI CASTRO,SNC,Unità non abitativa,COMMERCIALE,NEGOZI E BOTTEGHE,136,,numero_civico_assente_snc
+VIA PORTA DI CASTRO,,Terreno,AREA,AREA DI RISULTA,,,numero_civico_assente_snc
+VIA PORTA DI CASTRO,SNC,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),136,,numero_civico_assente_snc
+VIA PORTA DI CASTRO,SNC,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),136,,numero_civico_assente_snc
+VIA PORTA DI CASTRO,SNC,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),136,,numero_civico_assente_snc
+VIA QUATTROCIOCCHI DOMENICO11,,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VIA RE MANFREDI,,Terreno,AREA,PARZIALMENTE EDIFICATA,,,numero_civico_assente_snc
+VIA ROCCELLA GUSTAVO,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VIA SALEMI GIOVANNI,,Edificio,IMPIANTO TECNICO,IMPIANTO IDRICO,28,,numero_civico_assente_snc
+VIA SALINAS ANTONINO,,Terreno,VERDE,PARCO GIOCHI,,,numero_civico_assente_snc
+VIA SAN BERNARDO DA CORLEONE19,,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VIA SANTICELLI,,Terreno,AREA,PARZIALMENTE EDIFICATA,,,numero_civico_assente_snc
+VIA SARDEGNA,,Terreno,INFRASTRUTTURA INTERESSE GENERALE,MERCATO,,,numero_civico_assente_snc
+VIA SARDEGNA,,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,,,numero_civico_assente_snc
+VIA SICCHERIA QUATTRO CAMERE,SNC,Unità non abitativa,LOCALE,MAGAZZINO,55,,numero_civico_assente_snc
+VIA SICCHERIA QUATTRO CAMERE,SNC,Unità non abitativa,LOCALE,MAGAZZINO,,,numero_civico_assente_snc
+VIA TASCA LANZA,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA TASCA LANZA,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA TASCA LANZA,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA TIRO A SEGNO,,Unità non abitativa,LOCALE,MAGAZZINO,64,,numero_civico_assente_snc
+VIA TOLOMEA,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VIA TOMMASO NATALE,,Terreno,AREA,PARZIALMENTE EDIFICATA,,,numero_civico_assente_snc
+VIA TOMMASO NATALE,,Terreno,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA TOMMASO NATALE,,Terreno,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA TOMMASO NATALE,,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA TRABUCCO,,Area,AREA,PARZIALMENTE EDIFICATA,,,numero_civico_assente_snc
+VIA UGDULENA GREGORIO,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA UGHETTI GIOVANBATTISTA,,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,61,,numero_civico_assente_snc
+VIA VALDAURA,SNC,Edificio,EDILIZIA RESIDENZIALE,NON CLASSIFICATO,,,numero_civico_assente_snc
+VIA VENEZIA,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA VERGINE MARIA,,Unità non abitativa,CULTO,CHIESA,25,,numero_civico_assente_snc
+VIA VERGINE MARIA,,Edificio,INFRASTRUTTURA INTERESSE GENERALE,CIMITERO,,,numero_civico_assente_snc
+VIA VERGINE MARIA,,Edificio,INFRASTRUTTURA INTERESSE GENERALE,CIMITERO,,,numero_civico_assente_snc
+VIA VERGINE MARIA,,Unità non abitativa,LOCALE,MAGAZZINO,25,,numero_civico_assente_snc
+VIA VERGINE MARIA,,Unità non abitativa,LOCALE,MAGAZZINO,25,,numero_civico_assente_snc
+VIA VERGINE MARIA,,Unità non abitativa,LOCALE,MAGAZZINO,25,,numero_civico_assente_snc
+VIA VERGINE MARIA,,Unità non abitativa,LOCALE,MAGAZZINO,,,numero_civico_assente_snc
+VIA VILLAGRAZIA,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA VILLANI GIOVANNI,SNC,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,numero_civico_assente_snc
+VIA VILLANI GIOVANNI,SNC,Edificio,SCUOLA,ELEMENTARE,67,,numero_civico_assente_snc
+VIA VITTORIO EMANUELE,,Unità non abitativa,LOCALE,MAGAZZINO,,,numero_civico_assente_snc
+VIA VOLTURNO,,Terreno,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,numero_civico_assente_snc
+VIA VOLTURNO,,Terreno,IMPIANTO TECNICO,POZZO,,,numero_civico_assente_snc
+VIA VOLTURNO,SNC,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,numero_civico_assente_snc
+VIA VOLTURNO,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA VOLTURNO,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA VOLTURNO,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA VOLTURNO,,Terreno,IMPIANTO TECNICO,ACQUEDOTTO,,,numero_civico_assente_snc
+VIA VOLTURNO,,Terreno,IMPIANTO TECNICO,IMPIANTO DI DEPURAZIONE,,,numero_civico_assente_snc
+VIA VOLTURNO,,Edificio,IMPIANTO TECNICO,IMPIANTO DI DEPURAZIONE,,,numero_civico_assente_snc
+VIALE CAVARRETTA,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIALE DEL FANTE,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIALE DEL FANTE,,Edificio,ARREDO URBANO,FONTANA,,,numero_civico_assente_snc
+VIALE DEL FANTE,,Terreno,IMPIANTO SPORTIVO,CAMPO TENNIS,,,numero_civico_assente_snc
+VIALE DIANA,,Unità non abitativa,LOCALE,MAGAZZINO,23,,numero_civico_assente_snc
+VIALE DUCA DEGLI ABRUZZI,SNC,Unità non abitativa,LOCALE,MAGAZZINO,23,,numero_civico_assente_snc
+VIALE LEONARDO DA VINCI,,Terreno,AREA,PARZIALMENTE EDIFICATA,,,numero_civico_assente_snc
+VIALE REGINA ELENA,,Edificio,INFRASTRUTTURA INTERESSE GENERALE,GABINETTO PUBBLICO,,,numero_civico_assente_snc
+VICOLO COLLUZIO A CROCEVERDE,SNC,Terreno,AREA,TERRENO,,,numero_civico_assente_snc
+VICOLO DEGLI ORFANI,,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+VICOLO DEGLI ORFANI,,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+VICOLO DEGLI ORFANI,,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,numero_civico_assente_snc
+VICOLO GRIFOTTA,,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,133,,numero_civico_assente_snc
+ARCO DEI BISCOTTARI,15,Edificio,SOCIALE,CENTRO SOCIALE,,,strada_non_in_anncsu
+BAGLIO VITALE (V B.CHIAVELLI),3,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+CORTILE CARBONE (1),1,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+CORTILE GNAZZIDDI,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+CORTILE GROTTA DANISINNI (2),1,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+CORTILE LE CHIAVI (2),38,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+CORTILE S.CROCE,19,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+DISCESA DELL'ETERNITA',,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+DISCESA DELL'ETERNITA',,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+DISCESA DELL'ETERNITA',7,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+FONDO PASTORE,10,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+FORO UMBERTO I,SNC,Edificio,IMPIANTO TECNICO,IMPIANTO DI SOLLEVAMENTO,,,strada_non_in_anncsu
+FORO UMBERTO I,,Terreno,VERDE,VERDE PUBBLICO,,,strada_non_in_anncsu
+GRADIN. MURA DELLE CATTIVE,17,Unità non abitativa,INFRASTRUTTURA INTERESSE GENERALE,GABINETTO PUBBLICO,,,strada_non_in_anncsu
+LARGO S.FILARETE,3,Unità non abitativa,LOCALE,MAGAZZINO,20,,strada_non_in_anncsu
+PIAZZA BARONIO MANFREDI F.,16,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA S.ANDREA,3A/3B,Unità non abitativa,LOCALE,MAGAZZINO,129,,strada_non_in_anncsu
+PIAZZA S.ANNA AL CAPO,13,Unità non abitativa,LOCALE,MAGAZZINO,131,,strada_non_in_anncsu
+PIAZZA S.ANTONINO,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA S.CHIARA,3,Area,CULTURALE,MONUMENTO,137,,strada_non_in_anncsu
+PIAZZA S.CHIARA,3,Unità non abitativa,LOCALE,MAGAZZINO,137,,strada_non_in_anncsu
+PIAZZA S.DOMENICO,14,Edificio,ARREDO URBANO,STATUA,,,strada_non_in_anncsu
+PIAZZA S.FRANCESCO DI PAOLA,48,Edificio,INFRASTRUTTURA INTERESSE GENERALE,GABINETTO PUBBLICO,,,strada_non_in_anncsu
+PIAZZA S.GIOVANNI ALLA GUILLA,4,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA S.GREGORIO,13,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA S.ONOFRIO,18,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA S.ORSOLA,7,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA S.ORSOLA,7,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA S.PAOLO,4,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,38,,strada_non_in_anncsu
+PIAZZA S.PAOLO,4,Edificio,SCUOLA,ELEMENTARE,38,,strada_non_in_anncsu
+PIAZZA SS.COSMA E DAMIANO,15,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA TONNARAZZA,1,Unità non abitativa,IMPIANTO TECNICO,GASOMETRO,64,,strada_non_in_anncsu
+PIAZZA UNITA' D'ITALIA,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA VILLENA,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA VILLENA,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA VILLENA,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PIAZZA VILLENA,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PORTA FELICE,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+PORTA GRECI,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,135,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,LOCALE,MAGAZZINO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,LOCALE,MAGAZZINO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,,Terreno,IMPIANTO TECNICO,AREA DEPOSITO,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Edificio,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+PZA POTTINO FILIPPO MONS.,1,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA DAMIANI ALMEJDA,25,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,strada_non_in_anncsu
+VIA DELL'AIRONE,,Terreno,IMPIANTO SPORTIVO,CAMPO TENNIS,,,strada_non_in_anncsu
+VIA DELL'ERMELLINO,,Edificio,IMPIANTO TECNICO,IMPIANTO FOGNARIO,,,strada_non_in_anncsu
+VIA DELL'USIGNOLO,1,Edificio,SCUOLA,MEDIA,,,strada_non_in_anncsu
+VIA EUGENIO L'EMIRO,30,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,29,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,,Terreno,VERDE,VILLA/GIARDINO,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,26,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,26,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,26,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,26,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,26,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,26,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,26,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA MONTE S.CALOGERO,26,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VIA PARROCCHIA (DIETRO),2,Edificio,IMPIANTO TECNICO,SERBATOIO,,,strada_non_in_anncsu
+VIA PARROCCHIA (DIETRO),,Terreno,IMPIANTO TECNICO,SERBATOIO,,,strada_non_in_anncsu
+VIA PECORI GIRALDI GUGLIELMO M1,,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,strada_non_in_anncsu
+VIA RITIRO SUOR VINCENZA,20,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA ROSSO DI S.SECONDO,1,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,53,,strada_non_in_anncsu
+VIA ROSSO DI S.SECONDO,1,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,53,,strada_non_in_anncsu
+VIA ROSSO DI S.SECONDO,1,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,53,,strada_non_in_anncsu
+VIA ROSSO DI S.SECONDO,1,Edificio,SCUOLA,ELEMENTARE,53,,strada_non_in_anncsu
+VIA ROSSO DI S.SECONDO,1,Edificio,SCUOLA,ELEMENTARE,53,,strada_non_in_anncsu
+VIA S.AGOSTINO,184,Unità non abitativa,COMMERCIALE,NEGOZI E BOTTEGHE,,,strada_non_in_anncsu
+VIA S.AGOSTINO,180,Unità non abitativa,COMMERCIALE,NEGOZI E BOTTEGHE,,,strada_non_in_anncsu
+VIA S.ALESSANDRO,7,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+VIA S.ALESSANDRO,9,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+VIA S.ALESSANDRO,27,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+VIA S.ALESSANDRO,27,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+VIA S.ALESSANDRO,27,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+VIA S.ALESSANDRO,27,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+VIA S.ALESSANDRO,27,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),,,strada_non_in_anncsu
+VIA S.CIRO,48,Edificio,IMPIANTO SPORTIVO,PALESTRA,,,strada_non_in_anncsu
+VIA S.CIRO,48,Unità non abitativa,IMPIANTO SPORTIVO,PALESTRA,,,strada_non_in_anncsu
+VIA S.CIRO,48,Edificio,SCUOLA,ELEMENTARE,,,strada_non_in_anncsu
+VIA S.FILIPPO,11,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,72,,strada_non_in_anncsu
+VIA S.LORENZO,48/A,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA S.LORENZO,155,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA S.LORENZO,251,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA S.MARIA DI GESU',36,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,strada_non_in_anncsu
+VIA S.MARIA DI GESU',258,Terreno,AREA,TERRENO,,,strada_non_in_anncsu
+VIA S.MARIA DI GESU',258,Terreno,AREA,TERRENO,,,strada_non_in_anncsu
+VIA S.MARIA DI GESU',9,Unità abitativa,EDILIZIA RESIDENZIALE,ALLOGGIO (E.R.),,,strada_non_in_anncsu
+VIA S.MARIA DI GESU',258,Unità non abitativa,EDILIZIA RESIDENZIALE,NON CLASSIFICATO,,,strada_non_in_anncsu
+VIA S.MARIA DI GESU',258,Unità non abitativa,EDILIZIA RESIDENZIALE,NON CLASSIFICATO,,,strada_non_in_anncsu
+VIA S.MARTINO,81,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA S.MARTINO,114,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA S.NICOLO' ALL'ALBERGHERIA,,Edificio,EDILIZIA RESIDENZIALE PUBBLICA,NON CLASSIFICATO,,,strada_non_in_anncsu
+VIA SANTOSTEFANO FULCO,SNC,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA SANTOSTEFANO FULCO,14,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA SANTOSTEFANO FULCO,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,strada_non_in_anncsu
+VIA SERGIO PAPA I,21,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,strada_non_in_anncsu
+VIA SERGIO PAPA I,94,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+VIA SERGIO PAPA I,94,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+VIA SERGIO PAPA I,94,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+VIA SERGIO PAPA I,94,Edificio,IMPIANTO TECNICO,CAPANNONE (IMPIANTO TECNICO),,,strada_non_in_anncsu
+VIA SS.SALVATORE,30,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIA V.53,15,Unità abitativa,EDILIZIA RESIDENZIALE,ALLOGGIO (E.R.),,,strada_non_in_anncsu
+VIA V.53,15,Unità abitativa,EDILIZIA RESIDENZIALE,ALLOGGIO (E.R.),,,strada_non_in_anncsu
+VIALE AMEDEO D'AOSTA,52,Unità abitativa,ABITAZIONE DI SERVIZIO,ALLOGGIO CUSTODE,,,strada_non_in_anncsu
+VIALE AMEDEO D'AOSTA,52,Edificio,SCUOLA,MEDIA,77,,strada_non_in_anncsu
+VIALE ERCOLE,,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VIALE REGIONE SICILIANA N.O.,4739/47470029,Unità non abitativa,LOCALE,MAGAZZINO,,1695,strada_non_in_anncsu
+VIALE REGIONE SICILIANA N.O.,4739/47470029,Unità non abitativa,LOCALE,MAGAZZINO,,1695,strada_non_in_anncsu
+VIALE REGIONE SICILIANA N.O.,4739/47470029,Unità non abitativa,LOCALE,MAGAZZINO,,1695,strada_non_in_anncsu
+VIALE REGIONE SICILIANA N.O.,4739/47470029,Unità non abitativa,LOCALE,MAGAZZINO,,1695,strada_non_in_anncsu
+VIALE REGIONE SICILIANA N.O.,4739/47470029,Unità non abitativa,LOCALE,MAGAZZINO,,1695,strada_non_in_anncsu
+VIALE REGIONE SICILIANA N.O.,95,Unità non abitativa,UFFICIO,UFFICIO COMUNALE,,,strada_non_in_anncsu
+VICOLO BAGLICELLO (2),9,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VICOLO CHIARANDA,9,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VICOLO DEI CROCIFERI (2),11,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VICOLO DELLE VERGINI,12,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VICOLO FORNO A S.AGATUZZA,SNC,Unità non abitativa,COMMERCIALE,NEGOZI E BOTTEGHE,136,,strada_non_in_anncsu
+VICOLO FORNO A S.AGATUZZA,SNC,Unità non abitativa,COMMERCIALE,NEGOZI E BOTTEGHE,136,,strada_non_in_anncsu
+VICOLO FORNO A S.AGATUZZA,SNC,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),136,,strada_non_in_anncsu
+VICOLO S.ALESSANDRO,47,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VICOLO S.GILIBERTO,11,Unità abitativa,EDILIZIA RESIDENZIALE,ALLOGGIO (E.R.),137,,strada_non_in_anncsu
+VICOLO S.MICHELE ARCANGELO,,Terreno,AREA,PARZIALMENTE EDIFICATA,,,strada_non_in_anncsu
+VICOLO S.MICHELE ARCANGELO,,Edificio,EDILIZIA RESIDENZIALE PUBBLICA,NON CLASSIFICATO,,,strada_non_in_anncsu
+VICOLO S.MICHELE ARCANGELO,11,Unità non abitativa,LOCALE,MAGAZZINO,137,,strada_non_in_anncsu
+VICOLO S.ROSALIA,,Edificio,LOCALE TECNICO,CABINA ELETTRICA,,,strada_non_in_anncsu
+VICOLO S.UFFIZIO,50,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VICOLO SPAGNA (2),SNC,Unità abitativa,EDILIZIA RESIDENZIALE PUBBLICA,ALLOGGIO (E.R.P.),136,,strada_non_in_anncsu
+VLO GESU' E MARIA A PAL. REALE,17,Edificio,ARREDO URBANO,FONTANA,,,strada_non_in_anncsu
+VLO RITIRO SUOR VINCENZA (1),1,Terreno,AREA,AREA ARCHEOLOGICA,,,strada_non_in_anncsu
