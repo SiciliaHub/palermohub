@@ -1205,7 +1205,7 @@ function initMap() {
   const odsCtrl = L.control({ position: 'bottomright' });
   odsCtrl.onAdd = () => {
     const c = L.DomUtil.create('div', 'leaflet-control-ods');
-    c.innerHTML = `<a href="https://opendatasicilia.it/" target="_blank" rel="noopener" title="Open Data Sicilia"><img src="immobili_pa/img/opendatasicilia.png" alt="Open Data Sicilia" title="Open Data Sicilia"></a>`;
+    c.innerHTML = `<a href="https://opendatasicilia.it/" target="_blank" rel="noopener" title="Open Data Sicilia"><img src="https://raw.githubusercontent.com/SiciliaHub/palermohub/refs/heads/PH-release-v2.0/Immobili_pa/img/opendatasicilia.png" alt="Open Data Sicilia" title="Open Data Sicilia"></a>`;
     L.DomEvent.disableClickPropagation(c);
     return c;
   };
