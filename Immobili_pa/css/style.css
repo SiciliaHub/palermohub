@@ -510,6 +510,7 @@ tbody td.td-cat span {
 .mtb-btn:hover { background: rgba(0,0,0,0.07); color: var(--primary-dark); }
 .mtb-btn.mtb-active { background: var(--primary-dark); color: #fff; }
 .mtb-btn.mtb-active:hover { background: #7a2218; }
+.mtb-btn:disabled { opacity: 0.38; cursor: not-allowed; pointer-events: none; }
 .mtb-btn i { font-size: 0.82rem; }
 .mtb-sep { width: 1px; height: 20px; background: var(--border); margin: 0 3px; flex-shrink: 0; }
 
