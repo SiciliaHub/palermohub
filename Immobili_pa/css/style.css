@@ -751,7 +751,7 @@ tbody td.td-cat span {
 
 /* TAB DOCUMENTO */
 .doc-scroll-top-btn {
-  position: fixed; bottom: 28px; right: 28px; z-index: 2000;
+  position: fixed; bottom: 40px; right: 28px; z-index: 2000;
   width: 36px; height: 36px; border-radius: 50%;
   background: var(--primary); color: #fff;
   border: none; cursor: pointer;
