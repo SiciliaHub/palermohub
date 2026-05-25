@@ -1368,6 +1368,7 @@ function buildMarkerCard(d) {
     { lbl: 'Indirizzo',      val: addr },
     { lbl: 'Foglio',         val: d.foglio },
     { lbl: 'Particella',     val: d.plla },
+    { lbl: 'Sub',            val: d.sub },
     { lbl: 'UPL',            val: d.upl },
     { lbl: 'Quartiere',      val: d.quartiere },
     { lbl: 'Circoscrizione', val: d.circoscrizione },

@@ -1144,6 +1144,44 @@ tbody td.td-cat span {
 .analisi-intro p { margin-bottom: 8px; }
 .analisi-intro p:last-child { margin-bottom: 0; }
 
+/* Cause list — note tecniche */
+.cause-list {
+  margin: 12px 0 16px 1.2rem;
+  padding: 0;
+  counter-reset: cause-counter;
+  list-style: none;
+}
+.cause-list > li {
+  counter-increment: cause-counter;
+  position: relative;
+  padding: 10px 12px 10px 42px;
+  margin-bottom: 8px;
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+.cause-list > li::before {
+  content: counter(cause-counter);
+  position: absolute;
+  left: 12px;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cause-list > li strong { color: var(--primary-dark); }
+.cause-list > li em { color: var(--accent); font-style: normal; font-size: 0.8rem; }
+
 /* ===== TOOLTIP EXPAND BUTTON ===== */
 .chart-expand-btn {
   position: relative;

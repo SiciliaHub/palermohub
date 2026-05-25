@@ -196,7 +196,7 @@
           <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener">@gbvitrano</a>
           in collaborazione con <strong><a href="https://claude.ai" target="_blank" rel="noopener">Claude AI</a> (Anthropic)</strong>, che ha affiancato le scelte architetturali,
           l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale. <br><br>
-		  In fondo, la mappa è solo il pretesto, un gioco: l'obiettivo era verificare se i dati ANNCSU e le chiavi catastali fossero sufficienti per georeferenziare un CSV privo di geometrie. <br>Il 97% di copertura dice di sì. Si può fareeee! 😊<br>
+		  In fondo, la mappa è solo il pretesto, un gioco: l'obiettivo era verificare se i dati ANNCSU e le chiavi catastali fossero sufficienti per georeferenziare un CSV privo di geometrie. <br>Il 75,9% di copertura dice di sì. Si può fareeee! 😊<br>
 		Il resto, come sempre, richiede occhi umani. 
         </p>
       </div>
@@ -208,7 +208,7 @@
       <div class="modal-box" onclick="event.stopPropagation()">
         <button class="modal-close" onclick="closeDisclaimerModal()" title="Chiudi"><i class="fa-solid fa-xmark"></i></button>
         <h3 style="color:#c0392b"><i class="fa-solid fa-triangle-exclamation"></i> Mappa dimostrativa, verifica richiesta</h3>
-        <p>Questa mappa è il risultato di una georeferenziazione automatica e ha carattere puramente dimostrativo. Gli errori possono avere due origini: il documento sorgente del Comune presenta imprecisioni negli indirizzi e nei riferimenti catastali; il processo automatico (PyQGIS + AI) può amplificarle o introdurne di nuove. I dati non costituiscono atto ufficiale e non hanno valore legale.</p>
+        <p>Questa mappa è il risultato di una georeferenziazione automatica e ha carattere puramente dimostrativo. Gli errori possono avere due origini: il documento sorgente del Comune potrebbe presentare imprecisioni negli indirizzi e nei riferimenti catastali; il processo automatico (PyQGIS + AI) può amplificarle o introdurne di nuove. I dati non costituiscono atto ufficiale e non hanno valore legale.</p>
         <p style="margin-top:12px"><a href="#" onclick="closeDisclaimerModal();document.querySelectorAll('.tab-btn')[3].click();return false;"><i class="fa-solid fa-book-open"></i> Note tecniche sul metodo →</a></p>
         <div style="text-align:right;margin-top:20px">
           <button onclick="closeDisclaimerModal()" style="background:#922b21;color:#fff;border:none;padding:9px 22px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:0.9rem;font-weight:600"><i class="fa-solid fa-check"></i> Ho capito</button>
@@ -489,10 +489,10 @@ NUMERO_CIVICO  = 3</code></pre>
           │         │ match: 7.562
           │         │ no match ↓
           ├─ [2] JOIN INDIRIZZO ──────────────► Civici ANNCSU → Particelle
-          │         │ polygon: 3.000
-          │         │ nearest: 513
+          │         │ polygon: 894
+          │         │ nearest: 213
           │         │ no match ↓
-          ├─ [3] NO MATCH (343)
+          ├─ [3] NO MATCH (2.749)
           │
           └─ [4] SPATIAL JOIN UPL ────────────► UPL + Quartiere + Circoscrizione</code></pre>
 
@@ -590,9 +590,9 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
           <table>
             <thead><tr><th>Sotto-metodo</th><th>Record</th></tr></thead>
             <tbody>
-              <tr><td>Civico → poligono contenente</td><td>3.000</td></tr>
-              <tr><td>Civico → particella più vicina</td><td>513</td></tr>
-              <tr><td><strong>Totale fase 2</strong></td><td><strong>3.513</strong></td></tr>
+              <tr><td>Civico → poligono contenente</td><td>894</td></tr>
+              <tr><td>Civico → particella più vicina</td><td>213</td></tr>
+              <tr><td><strong>Totale fase 2</strong></td><td><strong>1.107</strong></td></tr>
             </tbody>
           </table>
         </div>
@@ -600,33 +600,112 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
         <hr>
 
         <h2><i class="fa-solid fa-circle-xmark"></i> 7. Fase 3 — Record non georeferenziati (no match)</h2>
-        <p><span class="result-highlight" style="background:#fdebd0;color:#784212;border-left-color:var(--accent)"><i class="fa-solid fa-triangle-exclamation"></i> Totale: 343 record (3,0%)</span></p>
+        <p><span class="result-highlight" style="background:#fdebd0;color:#784212;border-left-color:var(--accent)"><i class="fa-solid fa-triangle-exclamation"></i> Totale: 2.749 record (24,1%)</span></p>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Causa</th><th>Record</th></tr></thead>
             <tbody>
-              <tr><td>Foglio/plla nel CSV ma particella non trovata in catasto</td><td>181</td></tr>
-              <tr><td>Senza foglio né indirizzo nel CSV</td><td>83</td></tr>
-              <tr><td>Indirizzo presente ma strada non in Civici ANNCSU</td><td>40</td></tr>
-              <tr><td>Foglio+indirizzo entrambi presenti ma nessuno risolto</td><td>39</td></tr>
+              <tr><td>Foglio/plla nel CSV ma particella non trovata in catasto</td><td>—</td></tr>
+              <tr><td>Senza foglio né indirizzo nel CSV</td><td>—</td></tr>
+              <tr><td>Indirizzo presente ma strada non in Civici ANNCSU</td><td>—</td></tr>
+              <tr><td>Foglio+indirizzo entrambi presenti ma nessuno risolto</td><td>—</td></tr>
             </tbody>
           </table>
         </div>
-        <p>I 181 record con chiave catastale non trovata sono probabilmente riferiti a particelle soppresse, accorpate o con numerazione non aggiornata nel layer catastale disponibile.</p>
-        <p>I 40 record con indirizzo non trovato in Civici si riferiscono prevalentemente a strade periferiche, vicinali private o accessi non censiti nel dataset ANNCSU.</p>
+        <p class="analisi-note"><i class="fa-solid fa-circle-info"></i> Il dettaglio per causa richiede re-analisi del log di georeferenziazione; i 2.749 no_match includono probabilmente particelle soppresse o non censite in ANNCSU.</p>
         <h3>Distribuzione per categoria</h3>
         <div class="table-wrap">
           <table>
             <thead><tr><th>Categoria</th><th>No match</th></tr></thead>
             <tbody>
-              <tr><td>Edificio</td><td>126</td></tr>
-              <tr><td>Terreno</td><td>95</td></tr>
-              <tr><td>Area</td><td>50</td></tr>
-              <tr><td>Unità non abitativa</td><td>42</td></tr>
-              <tr><td>Unità abitativa</td><td>30</td></tr>
+              <tr><td>Unità abitativa</td><td>1.479</td></tr>
+              <tr><td>Unità non abitativa</td><td>430</td></tr>
+              <tr><td>Edificio</td><td>392</td></tr>
+              <tr><td>Terreno</td><td>329</td></tr>
+              <tr><td>Area</td><td>119</td></tr>
             </tbody>
           </table>
         </div>
+
+        <h3>7.1 Particelle non trovate nel Catasto <span style="font-weight:normal;font-size:.85em">(Catasto aggiornato Febbraio 2026)</span></h3>
+        <p>
+          Di 2.749 record senza georeferenziazione, <strong>2.401</strong> possedevano chiave catastale (foglio + particella) nell'elenco comunale, ma la particella corrispondente
+          non è più presente nel layer catastale aggiornato a <strong>Febbraio 2026</strong>.
+          Queste voci sono state estratte nel file <a href="Immobili_pa/dati/particelle_inesistenti_in_catasto.csv" download><i class="fa-solid fa-file-csv"></i> <code>particelle_inesistenti_in_catasto.csv</code></a>
+          (<strong>956 particelle uniche</strong>, 2.401 record immobili).
+        </p>
+
+        <div class="analisi-section-2col" style="gap:1.5rem">
+          <div>
+            <h4 style="margin:0 0 .5rem">Per categoria</h4>
+            <div class="table-wrap">
+              <table class="analisi-table">
+                <thead><tr><th>Categoria</th><th>Particelle</th><th>Record</th></tr></thead>
+                <tbody>
+                  <tr><td>Unità abitativa</td><td>407</td><td>1.499</td></tr>
+                  <tr><td>Terreno</td><td>229</td><td>241</td></tr>
+                  <tr><td>Edificio</td><td>140</td><td>167</td></tr>
+                  <tr><td>Area</td><td>114</td><td>127</td></tr>
+                  <tr><td>Unità non abitativa</td><td>66</td><td>367</td></tr>
+                  <tr class="total-row"><td><strong>Totale</strong></td><td><strong>956</strong></td><td><strong>2.401</strong></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <h4 style="margin:0 0 .5rem">Per tipo</h4>
+            <div class="table-wrap">
+              <table class="analisi-table">
+                <thead><tr><th>Tipo</th><th>Particelle</th><th>Record</th></tr></thead>
+                <tbody>
+                  <tr><td>Edilizia Residenziale Pubblica</td><td>319</td><td>1.273</td></tr>
+                  <tr><td>Verde</td><td>143</td><td>151</td></tr>
+                  <tr><td>Scuola</td><td>97</td><td>116</td></tr>
+                  <tr><td>Edilizia Residenziale</td><td>92</td><td>203</td></tr>
+                  <tr><td>Area</td><td>91</td><td>302</td></tr>
+                  <tr><td>Impianto Tecnico</td><td>43</td><td>45</td></tr>
+                  <tr><td>Locale</td><td>42</td><td>83</td></tr>
+                  <tr><td>Impianto Sportivo</td><td>34</td><td>41</td></tr>
+                  <tr><td>Parcheggio</td><td>29</td><td>30</td></tr>
+                  <tr><td>Inf. Interesse Generale</td><td>21</td><td>21</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <h4>Possibili cause dell'assenza dal Catasto</h4>
+        <ol class="cause-list">
+          <li>
+            <strong>Frazionamento</strong> <em>(la più comune)</em><br>
+            Una particella viene suddivisa in due o più particelle figlie. La particella "madre" viene soppressa e sostituita dalle nuove.
+            È la causa più frequente, tipica in caso di vendita parziale di un terreno o edificio.
+          </li>
+          <li>
+            <strong>Fusione / Accorpamento</strong><br>
+            Più particelle adiacenti vengono unite in una sola. Le particelle originali vengono soppresse e ne nasce una nuova con numero diverso.
+          </li>
+          <li>
+            <strong>Variazione di coltura o destinazione d'uso</strong><br>
+            In alcuni casi storici, variazioni significative nella destinazione d'uso (es. da terreno agricolo ad area edificata) hanno comportato la soppressione della particella terreno
+            e la creazione di una nuova particella fabbricato con iscrizione nel Catasto Urbano.
+          </li>
+          <li>
+            <strong>Strade, corsi d'acqua, espropri per pubblica utilità</strong><br>
+            Se un'area viene espropriata per realizzare una strada, una ferrovia, o viene demanializzata (es. alveo di un torrente), la particella può essere soppressa perché il bene
+            entra nel demanio pubblico e non è più soggetto a iscrizione catastale ordinaria.
+          </li>
+          <li>
+            <strong>Errori di duplicazione storica</strong><br>
+            In fase di riordino degli archivi catastali — specialmente durante le digitalizzazioni degli anni '80–2000 — particelle duplicate o erroneamente istituite sono state
+            soppresse d'ufficio dall'Agenzia delle Entrate.
+          </li>
+          <li>
+            <strong>Ricomposizione fondiaria</strong><br>
+            Nei procedimenti di ricomposizione fondiaria (es. consorzi di bonifica, piani di lottizzazione), le particelle originali vengono soppresse e sostituite da un nuovo impianto catastale.
+          </li>
+        </ol>
+        <p class="analisi-note"><i class="fa-solid fa-circle-info"></i> Per verificare lo stato attuale di una particella è possibile consultare il servizio <strong>Visura Catastale</strong> dell'Agenzia delle Entrate oppure richiedere un certificato di destinazione urbanistica al Comune.</p>
 
         <hr>
 
@@ -638,7 +717,7 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
           <li><code>circoscrizione</code> — circoscrizione comunale (I–VIII)</li>
         </ul>
         <p>Metodo: centroide della particella → poligono UPL che lo contiene. Il layer UPL (EPSG:4326) è stato trasformato in EPSG:6706 prima del confronto.</p>
-        <p><span class="result-highlight"><i class="fa-solid fa-check"></i> 11.074 feature arricchite</span> (le 343 no_match rimangono prive di dato territoriale).</p>
+        <p><span class="result-highlight"><i class="fa-solid fa-check"></i> 8.669 feature arricchite</span> (le 2.749 no_match rimangono prive di dato territoriale).</p>
 
         <hr>
 
@@ -650,10 +729,10 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
             <thead><tr><th>Metodo</th><th>Record</th><th>% sul totale</th></tr></thead>
             <tbody>
               <tr><td>Join catastale (foglio+plla)</td><td>7.562</td><td>66,2%</td></tr>
-              <tr><td>Join indirizzo → poligono</td><td>3.000</td><td>26,3%</td></tr>
-              <tr><td>Join indirizzo → nearest</td><td>513</td><td>4,5%</td></tr>
-              <tr><td><strong>Con geometria</strong></td><td><strong>11.075</strong></td><td><strong>97,0%</strong></td></tr>
-              <tr><td>No match</td><td>343</td><td>3,0%</td></tr>
+              <tr><td>Join indirizzo → poligono</td><td>894</td><td>7,8%</td></tr>
+              <tr><td>Join indirizzo → nearest</td><td>213</td><td>1,9%</td></tr>
+              <tr><td><strong>Con geometria</strong></td><td><strong>8.669</strong></td><td><strong>75,9%</strong></td></tr>
+              <tr><td>No match</td><td>2.749</td><td>24,1%</td></tr>
               <tr><td><strong>Totale</strong></td><td><strong>11.418</strong></td><td><strong>100%</strong></td></tr>
             </tbody>
           </table>
@@ -697,14 +776,14 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
           <table>
             <thead><tr><th>Circoscrizione</th><th>Record con geom</th></tr></thead>
             <tbody>
-              <tr><td>I</td><td>1.605</td></tr>
-              <tr><td>II</td><td>1.735</td></tr>
-              <tr><td>III</td><td>1.323</td></tr>
-              <tr><td>IV</td><td>1.217</td></tr>
-              <tr><td>V</td><td>1.776</td></tr>
-              <tr><td>VI</td><td>1.307</td></tr>
-              <tr><td>VII</td><td>1.179</td></tr>
-              <tr><td>VIII</td><td>932</td></tr>
+              <tr><td>I</td><td>1.477</td></tr>
+              <tr><td>II</td><td>1.261</td></tr>
+              <tr><td>III</td><td>1.129</td></tr>
+              <tr><td>IV</td><td>844</td></tr>
+              <tr><td>V</td><td>1.535</td></tr>
+              <tr><td>VI</td><td>650</td></tr>
+              <tr><td>VII</td><td>969</td></tr>
+              <tr><td>VIII</td><td>804</td></tr>
             </tbody>
           </table>
         </div>
@@ -714,16 +793,16 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
           <table>
             <thead><tr><th>UPL</th><th>Record</th></tr></thead>
             <tbody>
-              <tr><td>Borgo Nuovo</td><td>985</td></tr>
-              <tr><td>San Giovanni Apostolo</td><td>706</td></tr>
-              <tr><td>Ciaculli Croce Verde</td><td>535</td></tr>
-              <tr><td>Tribunali o Kalsa</td><td>501</td></tr>
-              <tr><td>Palazzo Reale o Albergaria</td><td>495</td></tr>
-              <tr><td>Settecannoli</td><td>470</td></tr>
-              <tr><td>Tommaso Natale - Sant'Ambrogio - Cardillo</td><td>445</td></tr>
-              <tr><td>Bonagia</td><td>412</td></tr>
-              <tr><td>S. Rosalia</td><td>401</td></tr>
-              <tr><td>Monte di Pietà o Seralcadi</td><td>399</td></tr>
+              <tr><td>Borgo Nuovo</td><td>895</td></tr>
+              <tr><td>Ciaculli Croce Verde</td><td>476</td></tr>
+              <tr><td>Tribunali o Kalsa</td><td>463</td></tr>
+              <tr><td>Palazzo Reale o Albergaria</td><td>458</td></tr>
+              <tr><td>Bonagia</td><td>405</td></tr>
+              <tr><td>Monte di Pietà o Seralcadi</td><td>363</td></tr>
+              <tr><td>Tommaso Natale - Sant'Ambrogio - Cardillo</td><td>351</td></tr>
+              <tr><td>Montepellegrino</td><td>306</td></tr>
+              <tr><td>Partanna Mondello</td><td>290</td></tr>
+              <tr><td>Chiavelli - S. Maria di Gesù</td><td>290</td></tr>
             </tbody>
           </table>
         </div>
@@ -797,7 +876,7 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
           <div class="analisi-kpi"><div class="analisi-kpi-val">11.418</div><div class="analisi-kpi-lbl">Totale immobili</div></div>
           <div class="analisi-kpi"><div class="analisi-kpi-val">5.775</div><div class="analisi-kpi-lbl">Unità abitative</div></div>
           <div class="analisi-kpi"><div class="analisi-kpi-val">5.584</div><div class="analisi-kpi-lbl">Alloggi ERP + ER</div></div>
-          <div class="analisi-kpi"><div class="analisi-kpi-val">97%</div><div class="analisi-kpi-lbl">Georeferenziati</div></div>
+          <div class="analisi-kpi"><div class="analisi-kpi-val">75,9%</div><div class="analisi-kpi-lbl">Georeferenziati</div></div>
           <div class="analisi-kpi"><div class="analisi-kpi-val">25</div><div class="analisi-kpi-lbl">Quartieri</div></div>
           <div class="analisi-kpi"><div class="analisi-kpi-val">8</div><div class="analisi-kpi-lbl">Circoscrizioni</div></div>
         </div>
@@ -1038,20 +1117,20 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
                   <tr><th>Circ.</th><th>Totale</th><th>%</th><th>Unit. abit.</th><th>Unit. non ab.</th><th>Terreno</th><th>Edificio</th><th>Area</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td><strong>I</strong></td><td>1.605</td><td>14,1%</td><td>777</td><td>489</td><td>43</td><td>242</td><td>54</td></tr>
-                  <tr><td><strong>II</strong></td><td>1.735</td><td>15,2%</td><td>924</td><td>241</td><td>229</td><td>244</td><td>97</td></tr>
-                  <tr><td><strong>III</strong></td><td>1.323</td><td>11,6%</td><td>736</td><td>165</td><td>220</td><td>134</td><td>68</td></tr>
-                  <tr><td><strong>IV</strong></td><td>1.217</td><td>10,7%</td><td>547</td><td>148</td><td>325</td><td>154</td><td>43</td></tr>
-                  <tr><td><strong>V</strong></td><td>1.776</td><td>15,6%</td><td>1.059</td><td>344</td><td>142</td><td>208</td><td>23</td></tr>
-                  <tr><td><strong>VI</strong></td><td>1.307</td><td>11,4%</td><td>768</td><td>195</td><td>199</td><td>124</td><td>21</td></tr>
-                  <tr><td><strong>VII</strong></td><td>1.179</td><td>10,3%</td><td>436</td><td>122</td><td>359</td><td>174</td><td>88</td></tr>
-                  <tr><td><strong>VIII</strong></td><td>932</td><td>8,2%</td><td>498</td><td>223</td><td>85</td><td>121</td><td>5</td></tr>
-                  <tr><td><em>N/D</em></td><td>344</td><td>3,0%</td><td>30</td><td>42</td><td>95</td><td>127</td><td>50</td></tr>
+                  <tr><td><strong>I</strong></td><td>1.477</td><td>12,9%</td><td>719</td><td>463</td><td>35</td><td>219</td><td>41</td></tr>
+                  <tr><td><strong>II</strong></td><td>1.261</td><td>11,0%</td><td>611</td><td>135</td><td>219</td><td>206</td><td>90</td></tr>
+                  <tr><td><strong>III</strong></td><td>1.129</td><td>9,9%</td><td>681</td><td>111</td><td>186</td><td>109</td><td>42</td></tr>
+                  <tr><td><strong>IV</strong></td><td>844</td><td>7,4%</td><td>307</td><td>123</td><td>247</td><td>128</td><td>39</td></tr>
+                  <tr><td><strong>V</strong></td><td>1.535</td><td>13,4%</td><td>917</td><td>309</td><td>130</td><td>164</td><td>15</td></tr>
+                  <tr><td><strong>VI</strong></td><td>650</td><td>5,7%</td><td>246</td><td>127</td><td>167</td><td>90</td><td>20</td></tr>
+                  <tr><td><strong>VII</strong></td><td>969</td><td>8,5%</td><td>365</td><td>87</td><td>322</td><td>117</td><td>78</td></tr>
+                  <tr><td><strong>VIII</strong></td><td>804</td><td>7,0%</td><td>450</td><td>184</td><td>62</td><td>103</td><td>5</td></tr>
+                  <tr><td><em>N/D</em></td><td>2.749</td><td>24,1%</td><td>1.479</td><td>430</td><td>329</td><td>392</td><td>119</td></tr>
                   <tr class="total-row"><td><strong>Tot.</strong></td><td><strong>11.418</strong></td><td><strong>100%</strong></td><td><strong>5.775</strong></td><td><strong>1.969</strong></td><td><strong>1.697</strong></td><td><strong>1.528</strong></td><td><strong>449</strong></td></tr>
                 </tbody>
               </table>
             </div>
-            <p class="analisi-note"><i class="fa-solid fa-circle-info"></i> Circoscrizione V è la più dotata (1.776). Circoscrizioni IV e VII concentrano la maggior quota di terreni.</p>
+            <p class="analisi-note"><i class="fa-solid fa-circle-info"></i> Circoscrizione V è la più dotata (1.535). Circoscrizioni IV e VII concentrano la maggior quota di terreni.</p>
           </div>
           <div class="analisi-col-right analisi-chart-wrap">
             <canvas id="analisi-chart-circ"></canvas>
@@ -1068,32 +1147,32 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
               <table class="analisi-table">
                 <thead><tr><th>Quartiere</th><th>N.</th><th>Circoscrizione</th></tr></thead>
                 <tbody>
-                  <tr><td>Villagrazia – Falsomiele</td><td>1.133</td><td>V</td></tr>
-                  <tr><td>Borgo Nuovo</td><td>985</td><td>II</td></tr>
-                  <tr><td>Cruillas – S. Giovanni Apostolo</td><td>944</td><td>II</td></tr>
-                  <tr><td>Palazzo Reale – Monte di Pietà</td><td>894</td><td>I</td></tr>
-                  <tr><td>Settecannoli</td><td>832</td><td>VI</td></tr>
-                  <tr><td>Brancaccio – Ciaculli</td><td>788</td><td>VI</td></tr>
-                  <tr><td>Tribunali-Castellammare</td><td>711</td><td>I</td></tr>
-                  <tr><td>Montegrappa – S. Rosalia</td><td>571</td><td>V</td></tr>
-                  <tr><td>Tommaso Natale – Sferracavallo</td><td>504</td><td>VIII</td></tr>
-                  <tr><td>Montepellegrino</td><td>420</td><td>VIII</td></tr>
-                  <tr><td>Resuttana – San Lorenzo</td><td>363</td><td>III</td></tr>
-                  <tr><td>Politeama</td><td>341</td><td>I</td></tr>
-                  <tr><td>Mezzomonreale – Villa Tasca</td><td>331</td><td>VII</td></tr>
-                  <tr><td>Zisa</td><td>326</td><td>IV</td></tr>
-                  <tr><td>Uditore – Passo di Rigano</td><td>324</td><td>III</td></tr>
-                  <tr><td>Partanna Mondello</td><td>309</td><td>VII</td></tr>
-                  <tr><td>Oreto – Stazione</td><td>305</td><td>V</td></tr>
-                  <tr><td>Pallavicino</td><td>203</td><td>III</td></tr>
-                  <tr><td>Cuba – Calatafimi</td><td>169</td><td>IV</td></tr>
-                  <tr><td>Arenella – Vergine Maria</td><td>163</td><td>VIII</td></tr>
-                  <tr><td>Noce</td><td>141</td><td>IV</td></tr>
-                  <tr><td>Libertà</td><td>131</td><td>II</td></tr>
-                  <tr><td>Altarello</td><td>96</td><td>VII</td></tr>
-                  <tr><td>Boccadifalco</td><td>50</td><td>VII</td></tr>
-                  <tr><td>Malaspina – Palagonia</td><td>40</td><td>II</td></tr>
-                  <tr><td><em>N/D</em></td><td>344</td><td>—</td></tr>
+                  <tr><td>Villagrazia – Falsomiele</td><td>1.024</td><td>III</td></tr>
+                  <tr><td>Borgo Nuovo</td><td>895</td><td>V</td></tr>
+                  <tr><td>Palazzo Reale – Monte di Pietà</td><td>821</td><td>I</td></tr>
+                  <tr><td>Brancaccio – Ciaculli</td><td>697</td><td>II</td></tr>
+                  <tr><td>Tribunali-Castellammare</td><td>656</td><td>I</td></tr>
+                  <tr><td>Settecannoli</td><td>498</td><td>II</td></tr>
+                  <tr><td>Tommaso Natale – Sferracavallo</td><td>405</td><td>VII</td></tr>
+                  <tr><td>Montepellegrino</td><td>370</td><td>VIII</td></tr>
+                  <tr><td>Cruillas – S. Giovanni Apostolo</td><td>360</td><td>VI</td></tr>
+                  <tr><td>Zisa</td><td>309</td><td>V</td></tr>
+                  <tr><td>Politeama</td><td>301</td><td>VIII</td></tr>
+                  <tr><td>Mezzomonreale – Villa Tasca</td><td>291</td><td>IV</td></tr>
+                  <tr><td>Partanna Mondello</td><td>290</td><td>VII</td></tr>
+                  <tr><td>Resuttana – San Lorenzo</td><td>290</td><td>VI</td></tr>
+                  <tr><td>Montegrappa – S. Rosalia</td><td>277</td><td>IV</td></tr>
+                  <tr><td>Uditore – Passo di Rigano</td><td>240</td><td>V</td></tr>
+                  <tr><td>Oreto – Stazione</td><td>171</td><td>III</td></tr>
+                  <tr><td>Pallavicino</td><td>169</td><td>VII</td></tr>
+                  <tr><td>Cuba – Calatafimi</td><td>138</td><td>IV</td></tr>
+                  <tr><td>Arenella – Vergine Maria</td><td>105</td><td>VII</td></tr>
+                  <tr><td>Libertà</td><td>99</td><td>VIII</td></tr>
+                  <tr><td>Altarello</td><td>93</td><td>IV</td></tr>
+                  <tr><td>Noce</td><td>91</td><td>V</td></tr>
+                  <tr><td>Boccadifalco</td><td>45</td><td>IV</td></tr>
+                  <tr><td>Malaspina – Palagonia</td><td>34</td><td>VIII</td></tr>
+                  <tr><td><em>N/D</em></td><td>2.749</td><td>—</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1114,14 +1193,14 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
                 <thead><tr><th>Metodo</th><th>N.</th><th>%</th></tr></thead>
                 <tbody>
                   <tr><td><code>foglio_plla</code> – chiave catastale</td><td>7.562</td><td>66,2%</td></tr>
-                  <tr><td><code>civici_polygon</code> – civico poligono</td><td>3.000</td><td>26,3%</td></tr>
-                  <tr><td><code>civici_nearest</code> – civico prossimo</td><td>513</td><td>4,5%</td></tr>
-                  <tr><td><code>no_match</code> – non georef.</td><td>343</td><td>3,0%</td></tr>
+                  <tr><td><code>civici_polygon</code> – civico poligono</td><td>894</td><td>7,8%</td></tr>
+                  <tr><td><code>civici_nearest</code> – civico prossimo</td><td>213</td><td>1,9%</td></tr>
+                  <tr><td><code>no_match</code> – non georef.</td><td>2.749</td><td>24,1%</td></tr>
                   <tr class="total-row"><td><strong>Totale</strong></td><td><strong>11.418</strong></td><td><strong>100%</strong></td></tr>
                 </tbody>
               </table>
             </div>
-            <p class="analisi-note"><i class="fa-solid fa-circle-info"></i> Il 97% degli immobili è georeferenziato. 343 record (3%) rimangono senza localizzazione spaziale e richiedono verifica manuale.</p>
+            <p class="analisi-note"><i class="fa-solid fa-circle-info"></i> Il 75,9% degli immobili è georeferenziato. 2.749 record (24,1%) rimangono senza localizzazione spaziale e richiedono verifica manuale.</p>
           </div>
           <div class="analisi-col-right analisi-chart-wrap">
             <canvas id="analisi-chart-match"></canvas>
@@ -1172,7 +1251,7 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
             <div class="insight-icon"><i class="fa-solid fa-map-location-dot"></i></div>
             <div class="insight-body">
               <strong>Concentrazione territoriale</strong>
-              <p>Circ. V più dotata (1.776). Centro storico (Circ. I) con alta densità di usi non residenziali.</p>
+              <p>Circ. V più dotata (1.535). Centro storico (Circ. I) con alta densità di usi non residenziali.</p>
             </div>
           </div>
         </div>
@@ -1302,8 +1381,8 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
       circCanvas.parentElement.style.height = '300px';
     }
     hbarChart('analisi-chart-circ',
-      ['V','II','I','VI','III','IV','VII','VIII'],
-      [1776, 1735, 1605, 1307, 1323, 1217, 1179, 932],
+      ['V','I','II','III','VII','IV','VIII','VI'],
+      [1535, 1477, 1261, 1129, 969, 844, 804, 650],
       '#9ebac4'
     );
 
@@ -1314,17 +1393,17 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
       quartCanvas.parentElement.style.height = '440px';
     }
     hbarChart('analisi-chart-quart',
-      ['Villagrazia – Falsomiele','Borgo Nuovo','Cruillas – S.G.A.','Palazzo Reale – M.P.','Settecannoli',
-       'Brancaccio – Ciaculli','Tribunali-Castellammare','Montegrappa – S.R.','T. Natale – Sferracavallo','Montepellegrino',
-       'Resuttana – S. Lorenzo','Politeama','Mezzomonreale','Zisa','Uditore – P. Rigano'],
-      [1133, 985, 944, 894, 832, 788, 711, 571, 504, 420, 363, 341, 331, 326, 324],
+      ['Villagrazia – Falsomiele','Borgo Nuovo','Palazzo Reale – M.P.','Brancaccio – Ciaculli','Tribunali-Castellammare',
+       'Settecannoli','T. Natale – Sferracavallo','Montepellegrino','Cruillas – S.G.A.','Zisa',
+       'Politeama','Mezzomonreale','Partanna Mondello','Resuttana – S. Lorenzo','Montegrappa – S.R.'],
+      [1024, 895, 821, 697, 656, 498, 405, 370, 360, 309, 301, 291, 290, 290, 277],
       '#d66b58'
     );
 
     /* 6 — Georeferenziazione */
     pieChart('analisi-chart-match',
       ['foglio_plla','civici_polygon','civici_nearest','no_match'],
-      [7562, 3000, 513, 343],
+      [7562, 894, 213, 2749],
       ['#9ebac4','#6b8f71','#c9aa58','#922b21']
     );
   }
