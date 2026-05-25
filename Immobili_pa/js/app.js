@@ -527,7 +527,7 @@ function renderChartTipo(targetCanvas) {
     }));
     renderRankList(el, items, {
       color: "var(--primary-dark)",
-      header: { title: "Top Tipi (" + items.length + ")", icon: "fa-solid fa-trophy" }
+      header: { title: "Top Tipi (" + items.length + ")", icon: "fa-solid fa-arrow-trend-up" }
     });
     return null;
   }
@@ -679,7 +679,7 @@ function renderChartQuart(targetCanvas) {
     }));
     renderRankList(el, items, {
       color: BASE_QUART,
-      header: { title: "Top " + items.length + " Quartieri", icon: "fa-solid fa-trophy" }
+      header: { title: "Top " + items.length + " Quartieri", icon: "fa-solid fa-arrow-trend-up" }
     });
     return null;
   }
