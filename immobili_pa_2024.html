@@ -203,6 +203,19 @@
     </div>
 
 
+    <!-- MODAL DISCLAIMER APERTURA -->
+    <div id="disclaimer-modal-overlay" class="modal-overlay" onclick="closeDisclaimerModal()">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeDisclaimerModal()" title="Chiudi"><i class="fa-solid fa-xmark"></i></button>
+        <h3 style="color:#c0392b"><i class="fa-solid fa-triangle-exclamation"></i> Mappa dimostrativa, verifica richiesta</h3>
+        <p>Questa mappa è il risultato di una georeferenziazione automatica e ha carattere puramente dimostrativo. Gli errori possono avere due origini: il documento sorgente del Comune presenta imprecisioni negli indirizzi e nei riferimenti catastali; il processo automatico (PyQGIS + AI) può amplificarle o introdurne di nuove. I dati non costituiscono atto ufficiale e non hanno valore legale.</p>
+        <p style="margin-top:12px"><a href="#" onclick="closeDisclaimerModal();document.querySelectorAll('.tab-btn')[3].click();return false;"><i class="fa-solid fa-book-open"></i> Note tecniche sul metodo →</a></p>
+        <div style="text-align:right;margin-top:20px">
+          <button onclick="closeDisclaimerModal()" style="background:#922b21;color:#fff;border:none;padding:9px 22px;border-radius:7px;cursor:pointer;font-family:inherit;font-size:0.9rem;font-weight:600"><i class="fa-solid fa-check"></i> Ho capito</button>
+        </div>
+      </div>
+    </div>
+
     <!-- TAB TABELLA -->
     <div id="tab-tabella" class="tab-content">
       <div class="table-toolbar">
@@ -1324,6 +1337,16 @@ chiave_catasto = (Foglio.lstrip('0'), particella.lstrip('0'))</code></pre>
     }
   });
 })();
+
+/* ===== DISCLAIMER APERTURA ===== */
+function closeDisclaimerModal() {
+  const el = document.getElementById('disclaimer-modal-overlay');
+  if (el) el.style.display = 'none';
+}
+window.addEventListener('load', function() {
+  const el = document.getElementById('disclaimer-modal-overlay');
+  if (el) el.style.display = 'flex';
+});
 
 /* ===== AI DATA ALERT HOVER ===== */
 (function initAiAlert() {
