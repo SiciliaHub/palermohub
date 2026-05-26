@@ -45,8 +45,21 @@ header p { font-size: 0.85rem; opacity: 0.85; margin-top: 3px; }
   gap: 8px;
 }
 .sidebar h2.sidebar-title i { margin-right: 6px; }
+.sidebar-toggle-chevron {
+  display: none;
+  margin-left: 6px;
+  font-size: 0.72rem;
+  transition: transform .25s ease;
+  vertical-align: middle;
+}
+
+/* Corpo collassabile della sidebar filtri */
+.sidebar-body {
+  display: flex; flex-direction: column; gap: 14px;
+}
+
 .sidebar-info-btn {
-  margin: 0 !important;
+  margin: 0 50px 0 0 !important;
   padding: 0 4px !important;
   font-size: 1.15rem !important;
   color: var(--primary-dark) !important;
@@ -1236,9 +1249,23 @@ tbody td.td-cat span {
 
 /* RESPONSIVE */
 @media (max-width: 900px) {
-  .layout { grid-template-columns: 1fr; }
+  .layout { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
   .kpi-row { grid-template-columns: repeat(2, 1fr); }
   .charts-row, .charts-row-3 { grid-template-columns: 1fr; }
+
+  /* Toggle pannello filtri su mobile */
+  .sidebar-toggle-chevron { display: inline-block; }
+  #sidebar-title-toggle { cursor: pointer; user-select: none; }
+  .sidebar-body {
+    overflow: hidden;
+    transition: max-height .35s ease-out, opacity .3s ease;
+    max-height: 2000px;
+    opacity: 1;
+  }
+  .sidebar-body.collapsed {
+    max-height: 0;
+    opacity: 0;
+  }
 }
 
 @media (max-width: 768px) {
@@ -1261,7 +1288,7 @@ tbody td.td-cat span {
     right: 220px;
     top: 50%;
     transform: translateY(-50%);
-    height: 56px; width: 26px !important;
+    height: 50px; width: 15px !important;
     z-index: 700;
     background: rgba(255,255,255,0.95) !important;
     border-radius: 8px 0 0 8px;
@@ -1367,6 +1394,24 @@ tbody td.td-cat span {
   .rank-list-header { padding: 6px 8px; font-size: 0.7rem; }
   .rank-list-legend { padding: 6px 8px; gap: 4px 8px; font-size: 0.62rem; }
   .rank-list-legend .rank-leg-dot { width: 8px; height: 8px; }
+
+  /* Icona pannello destra: riempie tutta la linguetta, sempre visibile e centrata */
+  .map-resize-handle .sidebar-toggle-btn {
+    width: 5px;
+    height: 5px;
+    border-radius: 8px 0 0 8px;
+    background: transparent;
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 56px;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* Tooltip della linguetta: nascosto su mobile */
+  .handle-tooltip { display: none !important; }
 }
 
 

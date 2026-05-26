@@ -1021,7 +1021,10 @@ function initMapToolbar() {
     L.DomEvent.disableScrollPropagation(searchPopup);
   }
 
-  document.getElementById('mtb-home').addEventListener('click', () => map.setView([38.115, 13.362], 12));
+  document.getElementById('mtb-home').addEventListener('click', () => {
+    map.invalidateSize();
+    map.setView([38.115, 13.362], 12);
+  });
 
   const btnBase   = document.getElementById('mtb-base');
   const btnSat    = document.getElementById('mtb-sat');
@@ -1699,3 +1702,166 @@ function setChartEmptyState(canvasId, isEmpty) {
     if (empty) empty.style.display = 'none';
   }
 }
+
+/* ===== GRAFICI TAB ANALISI ===== */
+(function initAnalisiCharts() {
+  const ACCENT = '#922b21';
+  const COLORS_CAT = ['#f4eabf','#d66b58','#b7f75e','#9ebac4','#9b9990'];
+  const COLORS_MULTI = [
+    '#922b21','#f39c12','#d66b58','#9ebac4','#9b9990',
+    '#c47e44','#6b8f71','#5d8a8a','#7c6a5e','#b5825a','#c9aa58','#a06060'
+  ];
+
+  const darkGrid = { color: 'rgba(0,0,0,0.08)' };
+  const darkTick = { color: '#7f8c8d', font: { size: 11 } };
+
+  function pieChart(id, labels, data, colors) {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+    new Chart(ctx, {
+      type: 'doughnut',
+      plugins: [ChartDataLabels],
+      data: {
+        labels,
+        datasets: [{ data, backgroundColor: colors, borderWidth: 2, borderColor: '#ffffff' }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true,
+        cutout: '55%',
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#2c2c2c', font: { size: 11 }, boxWidth: 12, padding: 10 } },
+          datalabels: {
+            color: '#2c2c2c', font: { weight: 'bold', size: 11 },
+            formatter: (val, ctx) => {
+              const tot = ctx.dataset.data.reduce((a, b) => a + b, 0);
+              const pct = (val / tot * 100);
+              return pct >= 4 ? pct.toFixed(1) + '%' : '';
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function hbarChart(id, labels, data, color) {
+    const ctx = document.getElementById(id);
+    if (!ctx) return;
+    new Chart(ctx, {
+      type: 'bar',
+      plugins: [ChartDataLabels],
+      data: {
+        labels,
+        datasets: [{ data, backgroundColor: color || ACCENT, borderRadius: 0, borderSkipped: false }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          datalabels: {
+            anchor: 'end', align: 'right',
+            color: '#2c2c2c', font: { size: 10 },
+            formatter: v => v.toLocaleString('it-IT')
+          }
+        },
+        scales: {
+          x: { grid: darkGrid, ticks: darkTick, border: { color: 'transparent' } },
+          y: { grid: { display: false }, ticks: darkTick, border: { color: 'transparent' } }
+        }
+      }
+    });
+  }
+
+  /* Attiva i grafici quando il tab analisi diventa visibile */
+  let chartsBuilt = false;
+  function buildCharts() {
+    if (chartsBuilt) return;
+    chartsBuilt = true;
+
+    /* 1 — Categorie */
+    pieChart('analisi-chart-cat',
+      ['Unità abitativa','Unità non abitativa','Terreno','Edificio','Area'],
+      [5775, 1969, 1697, 1528, 449],
+      COLORS_CAT
+    );
+
+    /* 2 — Tipologie (top 10) */
+    const tipoCanvas = document.getElementById('analisi-chart-tipo');
+    if (tipoCanvas) {
+      tipoCanvas.style.height = '340px';
+      tipoCanvas.parentElement.style.height = '360px';
+    }
+    hbarChart('analisi-chart-tipo',
+      ['ERP','Ed. Residenziale','Locale','Verde','Area','Scuola','Arredo Urbano','Parcheggio','Imp. Tecnico','Ufficio'],
+      [4584, 1398, 1103, 755, 710, 656, 328, 310, 278, 271],
+      COLORS_MULTI
+    );
+
+    /* 4 — Circoscrizioni */
+    const circCanvas = document.getElementById('analisi-chart-circ');
+    if (circCanvas) {
+      circCanvas.style.height = '280px';
+      circCanvas.parentElement.style.height = '300px';
+    }
+    hbarChart('analisi-chart-circ',
+      ['V','I','II','III','VII','IV','VIII','VI'],
+      [1526, 1414, 1232, 1120, 904, 787, 786, 640],
+      '#9ebac4'
+    );
+
+    /* 5 — Quartieri (top 15) */
+    const quartCanvas = document.getElementById('analisi-chart-quart');
+    if (quartCanvas) {
+      quartCanvas.style.height = '420px';
+      quartCanvas.parentElement.style.height = '440px';
+    }
+    hbarChart('analisi-chart-quart',
+      ['Villagrazia – Falsomiele','Borgo Nuovo','Palazzo Reale – M.P.','Brancaccio – Ciaculli','Tribunali-Castellammare',
+       'Settecannoli','T. Natale – Sferracavallo','Montepellegrino','Cruillas – S.G.A.','Zisa',
+       'Politeama','Resuttana – S. Lorenzo','Mezzomonreale','Partanna Mondello','Montegrappa – S.R.'],
+      [1015, 892, 783, 681, 631, 490, 398, 368, 362, 307, 291, 278, 273, 259, 245],
+      '#d66b58'
+    );
+
+    /* 6 — Georeferenziazione */
+    pieChart('analisi-chart-match',
+      ['foglio_plla','civici_polygon','civici_nearest','no_match'],
+      [7562, 654, 156, 3046],
+      ['#9ebac4','#6b8f71','#c9aa58','#922b21']
+    );
+  }
+
+  /* Intercetta il click sul tab analisi */
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.tab-btn');
+    if (btn && btn.textContent.includes('Analisi')) {
+      setTimeout(buildCharts, 80);
+    }
+  });
+})();
+
+/* ===== DISCLAIMER APERTURA ===== */
+function closeDisclaimerModal() {
+  const el = document.getElementById('disclaimer-modal-overlay');
+  if (el) el.style.display = 'none';
+}
+window.addEventListener('load', function() {
+  const el = document.getElementById('disclaimer-modal-overlay');
+  if (el) el.style.display = 'flex';
+});
+
+/* ===== AI DATA ALERT HOVER ===== */
+(function initAiAlert() {
+  const aiAlert = document.getElementById('ai-alert');
+  if (!aiAlert) return;
+
+  const header = aiAlert.querySelector('.ai-alert-header');
+
+  header.addEventListener('mouseover', function() {
+    aiAlert.classList.add('open');
+  });
+
+  aiAlert.addEventListener('mouseleave', function() {
+    aiAlert.classList.remove('open');
+  });
+})();
