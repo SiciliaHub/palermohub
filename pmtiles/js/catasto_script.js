@@ -1346,14 +1346,16 @@ try {
 // =========================
 // HELPER: CARD GENERICA PER TUTTI I LAYER NON-OMI
 // =========================
-function buildInfoCard(iconClass, title, rows) {
+function buildInfoCard(iconClass, title, rows, footer = '') {
     const rowsHTML = rows
         .filter(r => r.val != null && r.val !== 'N/A' && r.val !== '' && r.val !== 'NULL')
         .map(r => `<div class="info-row"><span class="info-lbl">${r.lbl}</span><span class="info-val">${r.val}</span></div>`)
         .join('');
+    const footerHTML = footer ? `<div class="info-card-footer">${footer}</div>` : '';
     return `<div class="info-card">
         <div class="info-card-hdr"><i class="${iconClass}"></i><span>${title}</span></div>
         <div class="info-card-body">${rowsHTML}</div>
+        ${footerHTML}
     </div>`;
 }
 
@@ -1878,10 +1880,11 @@ function initializeMapLayers() {
                             { lbl: 'Descrizione', val: p.DESCRIZION }
                         ]);
                     } else if (feature.layer.id === "Particelle catastali") {
+                        const sisterFooter = `<a href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" class="sister-btn" title="Accedi a SISTER con SPID — inserisci Foglio ${p.Foglio} e Particella ${p.Paricella}"><i class="fas fa-external-link-alt"></i> Visura su SISTER <span class="sister-coords">Fg.${p.Foglio} · P.${p.Paricella}</span></a>`;
                         return buildInfoCard('fas fa-table-cells', 'Particella Catastale', [
                             { lbl: 'Foglio', val: p.Foglio },
                             { lbl: 'Particella', val: p.Paricella }
-                        ]);
+                        ], sisterFooter);
                     } else if (feature.layer.id === "Numeri Civici") {
                         const esp = p.Esponente;
                         const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;

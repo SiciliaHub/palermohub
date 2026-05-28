@@ -1754,6 +1754,44 @@ hr + .info-card {
     text-align: justify;
 }
 
+/* ========== SISTER BUTTON ========== */
+.info-card-footer {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #f0f0f0;
+}
+.sister-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #0066cc;
+    color: #fff !important;
+    text-decoration: none;
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 11.5px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    transition: background 0.18s;
+    justify-content: center;
+}
+.sister-btn:hover {
+    background: #0052a3;
+}
+.sister-btn i {
+    font-size: 10px;
+    flex-shrink: 0;
+}
+.sister-coords {
+    margin-left: auto;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
 /* ========== OMI POPUP STYLES ========== */
 .omi-zona-badge {
     background: var(--primary);
