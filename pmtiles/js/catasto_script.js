@@ -1318,14 +1318,6 @@ try {
 
     window.map = map;
 
-map.addControl(new maplibregl.NavigationControl({ 
-    showCompass: !isMobile, 
-    showZoom: true 
-}), "top-left");
-
-if (!isMobile) {
-    map.addControl(new maplibregl.FullscreenControl(), "top-left");
-}
     map.addControl(new maplibregl.ScaleControl({ unit: "metric" }), "bottom-left");
 
     map.on('load', () => {
@@ -1334,6 +1326,7 @@ if (!isMobile) {
             console.log('Mappa caricata con successo');
             initializeMapLayers();
             loadCiviciIndex('civici_index.json');
+            initZoomSlider();
         } catch (error) {
             console.error('Errore durante il caricamento dei layer:', error);
             hideLoader();
@@ -1984,6 +1977,82 @@ function initializeMapLayers() {
         
     } catch (error) {
         console.error('Errore durante l\'inizializzazione dei layer:', error);
+    }
+}
+
+// =========================
+// FULLSCREEN TOGGLE
+// =========================
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+document.addEventListener('fullscreenchange', () => {
+    const btn = document.getElementById('fullscreen-btn');
+    const icon = document.getElementById('fullscreen-icon');
+    if (!btn) return;
+    const isFs = !!document.fullscreenElement;
+    if (icon) icon.className = isFs ? 'fas fa-compress' : 'fas fa-expand';
+    btn.classList.toggle('active', isFs);
+});
+
+// =========================
+// ZOOM SLIDER
+// =========================
+function initZoomSlider() {
+    const slider = document.getElementById('zoom-slider');
+    if (!slider || !window.map) return;
+
+    const z0 = Math.round(window.map.getZoom());
+    slider.value = Math.min(Math.max(z0, 12), 18);
+    _syncZoomUI(Math.round(slider.value));
+
+    slider.addEventListener('input', () => {
+        const z = parseInt(slider.value);
+        window.map.easeTo({ zoom: z, duration: 300 });
+        _syncZoomUI(z);
+    });
+
+    window.map.on('zoom', () => {
+        const z = window.map.getZoom();
+        const clamped = Math.min(Math.max(z, 12), 18);
+        slider.value = clamped;
+        _syncZoomUI(Math.round(clamped));
+    });
+
+    window.map.on('rotate', () => {
+        const bearing = window.map.getBearing();
+        const icon = document.getElementById('bearing-icon');
+        if (icon) icon.style.transform = `rotate(${-bearing}deg)`;
+        const btn = document.getElementById('bearing-btn');
+        if (btn) btn.classList.toggle('active', Math.abs(bearing) > 0.5);
+    });
+}
+
+function resetMapHome() {
+    if (!window.map) return;
+    window.map.flyTo({ center: [13.33225, 38.14074], zoom: isMobile ? 11 : 12, bearing: 0, duration: 800 });
+}
+
+function resetBearing() {
+    if (!window.map) return;
+    window.map.easeTo({ bearing: 0, duration: 400 });
+}
+
+function _syncZoomUI(zoom) {
+    document.querySelectorAll('.zoom-tick').forEach(t => {
+        t.classList.toggle('active', parseInt(t.dataset.zoom) === zoom);
+    });
+    const badge = document.getElementById('zoom-level-display');
+    if (badge) badge.textContent = zoom;
+    const slider = document.getElementById('zoom-slider');
+    if (slider) {
+        const pct = ((zoom - 12) / 6) * 100;
+        slider.style.background = `linear-gradient(to right, #ff9900 ${pct}%, #e1e5e9 ${pct}%)`;
     }
 }
 

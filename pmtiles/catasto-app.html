@@ -69,6 +69,35 @@
         </button>
     </div>
 
+    <!-- Zoom Slider Bar -->
+    <div class="zoom-bar" id="zoom-bar">
+        <div class="zoom-bar-actions">
+            <button class="zoom-bar-btn" onclick="resetMapHome()" title="Vista iniziale">
+                <i class="fas fa-home"></i>
+            </button>
+          <!--  <button class="zoom-bar-btn" id="bearing-btn" onclick="resetBearing()" title="Reimposta orientamento Nord">
+                <i class="fas fa-compass" id="bearing-icon"></i>
+            </button>  -->
+            <button class="zoom-bar-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Schermo intero">
+                <i class="fas fa-expand" id="fullscreen-icon"></i>
+            </button>
+        </div>
+        <div class="zoom-bar-divider"></div>
+        <div class="zoom-slider-track">
+            <input type="range" id="zoom-slider" min="12" max="18" step="1" value="12">
+            <div class="zoom-ticks">
+                <span class="zoom-tick" data-zoom="12" onclick="window.map&&window.map.easeTo({zoom:12,duration:300})">12</span>
+                <span class="zoom-tick" data-zoom="13" onclick="window.map&&window.map.easeTo({zoom:13,duration:300})">13</span>
+                <span class="zoom-tick" data-zoom="14" onclick="window.map&&window.map.easeTo({zoom:14,duration:300})">14</span>
+                <span class="zoom-tick" data-zoom="15" onclick="window.map&&window.map.easeTo({zoom:15,duration:300})">15</span>
+                <span class="zoom-tick" data-zoom="16" onclick="window.map&&window.map.easeTo({zoom:16,duration:300})">16</span>
+                <span class="zoom-tick" data-zoom="17" onclick="window.map&&window.map.easeTo({zoom:17,duration:300})">17</span>
+                <span class="zoom-tick" data-zoom="18" onclick="window.map&&window.map.easeTo({zoom:18,duration:300})">18</span>
+            </div>
+        </div>
+        <span class="zoom-level-badge" id="zoom-level-display">12</span>
+    </div>
+
     <!-- Mobile-Optimized Layer Cards -->
     <div class="layer-switcher" id="layer-panel">
         <div class="layer-card">

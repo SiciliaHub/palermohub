@@ -1207,6 +1207,168 @@ body {
     margin: 0 auto;
 }
 
+/* ===== ZOOM SLIDER BAR ===== */
+.zoom-bar {
+    position: fixed;
+    top: 122px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: var(--blur);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 6px 14px 8px;
+    z-index: 999;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 320px;
+    animation: slideDown 0.8s ease;
+}
+
+.zoom-bar-actions {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.zoom-bar-btn {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    cursor: pointer;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    transition: background 0.2s ease, color 0.2s ease;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.zoom-bar-btn:hover {
+    background: rgba(255, 153, 0, 0.12);
+    color: var(--primary);
+}
+
+.zoom-bar-btn.active {
+    color: #27ae60;
+    background: rgba(39, 174, 96, 0.12);
+}
+
+.zoom-bar-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--border);
+    flex-shrink: 0;
+    margin: 0 6px;
+}
+
+.zoom-slider-track {
+    flex: 1;
+    position: relative;
+}
+
+#zoom-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    background: #e1e5e9;
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+    display: block;
+    margin-bottom: 0;
+}
+
+#zoom-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff9900;
+    cursor: pointer;
+    box-shadow: 0 1px 5px rgba(39, 174, 96, 0.5);
+    border: 2px solid #fff;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+#zoom-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.6);
+}
+
+#zoom-slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #ff9900;
+    cursor: pointer;
+    border: 2px solid #fff;
+    box-shadow: 0 1px 5px rgba(39, 174, 96, 0.5);
+}
+
+#zoom-slider::-moz-range-track {
+    height: 3px;
+    background: #e1e5e9;
+    border-radius: 2px;
+}
+
+.zoom-ticks {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding: 0 1px;
+}
+
+.zoom-tick {
+    font-size: 9px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.15s ease;
+    line-height: 1;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.zoom-tick.active {
+    color: #ff9900;
+    font-weight: 700;
+}
+
+.zoom-tick:hover {
+    color: var(--primary);
+}
+
+.zoom-level-badge {
+    background: #ff9900;
+    color: #fff;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Nascondi zoom buttons MapLibre (gestiti dallo slider) */
+.maplibregl-ctrl-zoom-in,
+.maplibregl-ctrl-zoom-out {
+    display: none !important;
+}
+
 /* ===== MAPLIBRE ATTRIBUTION ===== */
 .maplibregl-ctrl-attrib {
     position: fixed !important;
@@ -1285,7 +1447,8 @@ body {
         padding: 5px 10px !important;
     }
 	
-	.layer-switcher { top: 120px; }
+	.layer-switcher { top: 175px; }
+    .zoom-bar { top: 122px; min-width: 300px; }
 }
 	
 /* ===== DESKTOP RESPONSIVE ADJUSTMENTS ===== */
@@ -1320,6 +1483,11 @@ body {
         bottom: auto;
         width: 320px;
         max-height: calc(100vh - 120px);
+    }
+
+    .zoom-bar {
+        top: 74px;
+        min-width: 340px;
     }
     
     .search-tab {
