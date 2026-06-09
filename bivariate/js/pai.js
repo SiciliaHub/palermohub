@@ -20,7 +20,7 @@ const TABS = [
   // ── 0: RISCHIO_Idraul × carico_insediativo────────────
   {
     title:    'Rischio Idraulico PAI × Carico Insediativo',
-    // subtitle: 'RISCHIO_Idraul (R1–R4) × Carico Insediativo',
+    subtitle: 'Mappa bivariata',
     yField:   'RISCHIO_Idraul',
     yLabel:   '← Rischio Idraulico PAI →',
     yClasses: [
@@ -47,7 +47,7 @@ const TABS = [
   // ── 1: RISCHIO_geomorf × carico_insediativo───────────
   {
     title:    'Rischio Geomorfologico PAI × Carico Insediativo',
-  //  subtitle: 'RISCHIO_geomorf (1,3,4) × carico_insediativo',
+    subtitle: 'Mappa bivariata',
     yField:   'RISCHIO_geomorf',
     yLabel:   '← Rischio Geomorfologico PAI →',
     yClasses: [
@@ -74,7 +74,7 @@ const TABS = [
   // ── 2: PERICOLO_Idraul × carico_insediativo(4 × 3) ──
   {
     title:    'Pericolosità Idraulica PAI × Carico Insediativo',
- //   subtitle: 'PERICOLO_Idraul (P1–P4) × Carico Insediativo',
+    subtitle: 'Mappa bivariata',
     yField:   'PERICOLO_Idraul',
     yLabel:   '← Pericolosità Idraulica PAI →',
     yClasses: [
@@ -103,7 +103,7 @@ const TABS = [
   // ── 3: PERICOLO_geomorf × carico_insediativo(4 × 3) ─
   {
     title:    'Pericolosità Geomorfologica PAI × Carico Insediativo',
-   // subtitle: 'PERICOLO_geomorf (0,1,3,4) × Carico Insediativo',
+    subtitle: 'Mappa bivariata',
     yField:   'PERICOLO_geomorf',
     yLabel:   '← Pericolosità Geomorfologica PAI →',
     yClasses: [
@@ -132,7 +132,7 @@ const TABS = [
   // ── 4: RISCHIO_Idraul × RISCHIO_geomorf (3 × 3) ──────
   {
     title:    'Rischio Idraulico × Rischio Geomorfologico PAI',
-  //  subtitle: 'RISCHIO_Idraul (R1–R4) × RISCHIO_geomorf (1,3,4)',
+    subtitle: 'Mappa bivariata',
     yField:   'RISCHIO_Idraul',
     yLabel:   '← Rischio Idraulico PAI →',
     yClasses: [
@@ -161,7 +161,7 @@ const TABS = [
   // ── 5: Carico insediativo (coropletica) ──────────────
   {
     title:    'Carico Insediativo 2022',
-  // subtitle: 'Carico insediativo – abitanti per ha',
+    subtitle: 'Mappa tematica',
     type:     'choropleth',
     field:    'carico_insediativo',
     breaks:   [0.5, 1.5, 3.5, 7],
@@ -172,7 +172,7 @@ const TABS = [
   // ── 6: Rischio Idraulico PAI (colori ufficiali) ───────
   {
     title:      'Rischio Idraulico PAI',
-  //  subtitle:   'RISCHIO_Idraul (R1–R4) — colori ufficiali PAI',
+    subtitle:   'Mappa tematica',
     type:       'pai-cat',
     field:      'RISCHIO_Idraul',
     fieldLabel: 'Rischio Idraulico',
@@ -188,7 +188,7 @@ const TABS = [
   // ── 7: Rischio Geomorfologico PAI (colori ufficiali) ──
   {
     title:      'Rischio Geomorfologico PAI',
-  //  subtitle:   'RISCHIO_geomorf (1, 3, 4) — colori ufficiali PAI',
+    subtitle:   'Mappa tematica',
     type:       'pai-cat',
     field:      'RISCHIO_geomorf',
     fieldLabel: 'Rischio Geomorfologico',
@@ -203,7 +203,7 @@ const TABS = [
   // ── 8: Pericolosità Idraulica PAI (colori ufficiali) ──
   {
     title:      'Pericolosità Idraulica PAI',
-   // subtitle:   'PERICOLO_Idraul (P1–P4) — colori ufficiali PAI',
+    subtitle:   'Mappa tematica',
     type:       'pai-cat',
     field:      'PERICOLO_Idraul',
     fieldLabel: 'Pericolosità Idraulica',
@@ -219,7 +219,7 @@ const TABS = [
   // ── 9: Pericolosità Geomorfologica PAI (colori ufficiali)
   {
     title:      'Pericolosità Geomorfologica PAI',
-   // subtitle:   'PERICOLO_geomorf (0, 1, 3, 4) — colori ufficiali PAI',
+    subtitle:   'Mappa tematica',
     type:       'pai-cat',
     field:      'PERICOLO_geomorf',
     fieldLabel: 'Pericolosità Geomorfologica',
