@@ -897,10 +897,28 @@ function buildRanking() {
   if (!wrap) return;
   if (_donutFeats.length === 0) { wrap.innerHTML = ''; return; }
 
+  const tab     = TABS[currentTab];
+  const isChoro = tab.type === 'choropleth';
+
+  // Per carico_insediativo (coropletica globale) usa tutte le sezioni;
+  // altrimenti conta solo la popolazione soggetta a rischio/pericolo.
+  let rankFeats;
+  if (isChoro && tab.field === 'carico_insediativo') {
+    rankFeats = _donutFeats;
+  } else if (tab.type === 'pai-cat') {
+    const valid = new Set(tab.categories.map(c => String(c.value)));
+    rankFeats = _donutFeats.filter(f => valid.has(String(f.properties[tab.field] ?? '')));
+  } else {
+    rankFeats = _donutFeats.filter(f => {
+      const v = f.properties[tab.yField];
+      return v != null && v !== '';
+    });
+  }
+
   const mf = window.paiMF;
   const circPop = new Map(), uplPop = new Map(), qrtrPop = new Map();
 
-  _donutFeats.forEach(f => {
+  rankFeats.forEach(f => {
     const p   = f.properties;
     const pop = Number(p.pop_ripartita || 0);
     const c   = p.circoscrizione != null ? String(p.circoscrizione) : null;
