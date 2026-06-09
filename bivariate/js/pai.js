@@ -1798,24 +1798,38 @@ document.getElementById('btn-theme').addEventListener('click', switchTheme);
 // ═══════════════════════════════════════════════════════
 (function initInfoModal() {
   const overlay = document.getElementById('info-overlay');
+  const wrap    = document.getElementById('info-modal-wrap');
   const modal   = document.getElementById('info-modal');
   const btn     = document.getElementById('btn-info');
+  const tabBtn  = document.getElementById('info-modal-tab');
 
   function open() {
     overlay.classList.add('open');
-    modal.classList.add('open');
+    wrap.classList.add('open');
     btn.classList.add('active');
   }
   function close() {
     overlay.classList.remove('open');
-    modal.classList.remove('open');
+    wrap.classList.remove('open');
     btn.classList.remove('active');
   }
+  function toggle() { wrap.classList.contains('open') ? close() : open(); }
 
-  btn.addEventListener('click', () => modal.classList.contains('open') ? close() : open());
+  btn.addEventListener('click', toggle);
+  tabBtn.addEventListener('click', toggle);
   overlay.addEventListener('click', close);
   document.getElementById('info-close').addEventListener('click', close);
   document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+
+  // Tab switching del contenuto
+  modal.querySelectorAll('.info-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      modal.querySelectorAll('.info-tab').forEach(t => t.classList.remove('active'));
+      modal.querySelectorAll('.info-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('itab-' + tab.dataset.itab).classList.add('active');
+    });
+  });
 })();
 
 // ═══════════════════════════════════════════════════════

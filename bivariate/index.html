@@ -3,14 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mappe Bivariate PAI – Palermo 2022</title>
+  <title>Palermo Hub - Capire il rischio sul territorio: le mappe bivariate del PAI per Palermo</title>
   <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
   <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
   <script src="https://unpkg.com/pmtiles@3.2.0/dist/pmtiles.js"></script>
-     <link rel="shortcut icon" href="img/favicon.ico"/> 
-    <link rel="icon" href="img/favicon.png" type="image/png"/> 
-   <link href="css/pai.css" rel="stylesheet">
   
+      <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+    <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+    <meta http-equiv="content-language" content="IT">
+    <meta name="robots" content="index,follow">
+    <meta name="creation_Date" content="20/08/2025>
+  
+  
+  <link rel="shortcut icon" href="img/favicon.ico"/> 
+  <link rel="icon" href="img/favicon.png" type="image/png"/> 
+  <link href="css/pai.css" rel="stylesheet">
+ 
+    <!-- Meta tags per social sharing pen Graph Protocol -->
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/bivariate/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Capire il rischio sul territorio: le mappe bivariate del PAI per Palermo">
+    <meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:image" content=https://palermohub.opendatasicilia.it/bivariate/img/social_card.jpg">
+	<!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/bivariate/">
+    <meta name="twitter:title" content="Capire il rischio sul territorio: le mappe bivariate del PAI per Palermo">
+    <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/bivariate/img/social_card.jpg"> 
   
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
@@ -142,7 +163,13 @@
 
 <!-- ── Info Modal ── -->
 <div id="info-overlay"></div>
-<div id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+<div id="info-modal-wrap">
+  <button id="info-modal-tab" aria-label="Apri/chiudi informazioni" title="Informazioni">
+    <svg id="info-tab-icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    <span id="info-tab-label">Informazioni</span>
+    <svg id="info-tab-arrow" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M7 14l5-5 5 5z"/></svg>
+  </button>
+  <div id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
   <div class="pfm-header">
     <h3 id="info-modal-title">
       <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
@@ -150,26 +177,93 @@
     </h3>
     <button id="info-close" aria-label="Chiudi">&#x2715;</button>
   </div>
-  <div class="info-section">
-    <h4 class="info-section-title">Fonte dati</h4>
-    <div class="info-row">
-      <strong>Popolazione residente 2022</strong>: Comune di Palermo<br>
-      <a href="https://opendata.comune.palermo.it/opendata-archivio-dataset.php?tag=POPOLAZIONE%20RESIDENTE" target="_blank" rel="noopener">opendata.comune.palermo.it</a>
+  <div class="info-tabbar">
+    <button class="info-tab active" data-itab="descrizione">Descrizione</button>
+    <button class="info-tab" data-itab="fonte">Dati</button>
+    <button class="info-tab" data-itab="sviluppo">Sviluppo e tecnologia
+    <button class="info-tab" data-itab="licenza">Licenza</button>
+</button>
+  </div>
+
+  <div class="info-panel active" id="itab-descrizione">
+    <div class="info-section">
+  <h1>Capire il rischio sul territorio: le mappe bivariate del PAI per Palermo</h1>
+ 
+   <p class="info-text">C'è una domanda che chi si occupa di urbanistica o protezione civile si fa spesso: <strong>dove vivono le persone più esposte al rischio idrogeologico?</strong></p>
+ 
+ <p class="info-text">Non basta sapere dove c'è rischio. Non basta sapere dove c'è gente. Serve vederli insieme, nello stesso posto, sulla stessa mappa.</p>
+ 
+  <p class="info-text">È esattamente quello che fa <a href="https://palermohub.opendatasicilia.it/bivariate/"><strong>Mappe Bivariate PAI – Palermo 2022</strong></a>.</p>
+ 
+  <h2>Cos'è una mappa bivariata</h2>
+ 
+  <p class="info-text">Una mappa bivariata mostra <strong>due variabili contemporaneamente</strong>, usando una griglia di colori che combina le due dimensioni. In questo caso le variabili sono:</p>
+ 
+  <ul>
+    <li>il <strong>rischio o pericolo idrogeologico</strong> (dal PAI, il Piano per l'Assetto Idrogeologico)</li>
+    <li>il <strong>carico insediativo</strong>, cioè la densità di popolazione per ettaro</li>
+  </ul>
+ 
+   <p class="info-text">Il risultato è una legenda a matrice 3×3: più ci si sposta verso un angolo, più alta è la combinazione di entrambi i fattori. Un colore scuro in quel quadrante significa: zona ad alto rischio <em>e</em> molto popolata. Il posto più critico possibile.</p>
+ 
+  <h2>Cosa si può fare con questa webapp</h2>
+ 
+   <p class="info-text">L'applicazione non è solo una mappa statica. Offre strumenti concreti.</p>
+ 
+   <p class="info-text"><strong>Cinque combinazioni bivariate</strong> sono disponibili nel menu principale:</p>
+ 
+  <ul>
+    <li>Rischio Idraulico × Carico Insediativo</li>
+    <li>Rischio Geomorfologico × Carico Insediativo</li>
+    <li>Pericolo Idraulico × Carico Insediativo</li>
+    <li>Pericolo Geomorfologico × Carico Insediativo</li>
+    <li>Rischio Idraulico × Rischio Geomorfologico</li>
+  </ul>
+ 
+  <p class="info-text">A queste si affiancano <strong>cinque mappe tematiche</strong> singole, per chi vuole analizzare un solo strato alla volta.</p>
+ 
+  <p class="info-text">I <strong>filtri avanzati</strong> permettono di selezionare classi specifiche — per esempio solo le zone R4 (rischio molto elevato) con carico insediativo superiore a una soglia — e vedere subito dove si trovano sul territorio. Cliccando su un aggregato strutturale si ottengono le <strong>proprietà del poligono</strong>: classe di rischio, pericolo, densità abitativa.</p>
+ 
+  <h2>A chi serve</h2>
+ 
+   <p class="info-text">Questa webapp è utile in scenari molto diversi.</p>
+ 
+   <p class="info-text">Un <strong>tecnico comunale</strong> può usarla per orientarsi rapidamente nelle priorità di intervento, senza dover aprire QGIS o interrogare un database. Un <strong>pianificatore</strong> può usarla per capire dove i nuovi strumenti urbanistici devono porre maggiore attenzione. Un <strong>giornalista o un cittadino curioso</strong> può navigarla senza bisogno di competenze GIS, grazie all'interfaccia semplice e alla legenda leggibile.</p>
+ 
+  <p class="info-text">Per chi lavora nella <strong>Protezione Civile o nella pianificazione di emergenza</strong>, la combinazione rischio/popolazione è esattamente il tipo di dato che serve per costruire scenari e priorità operative.</p>
     </div>
-    <div class="info-row">
-      <strong>Aggregati strutturali ITC-Isole</strong>: DPC-Aggregati-Strutturali-ITG-Isole<br>
-      <a href="https://github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITG-Isole" target="_blank" rel="noopener">github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITG-Isole</a>
+  </div>
+
+  <div class="info-panel" id="itab-fonte">
+    <div class="info-section">
+      <div class="info-row">
+	 <strong> I dati provengono da fonti pubbliche e verificabili: </strong> <br><br>
+        <strong>Popolazione residente 2022</strong>: Comune di Palermo<br>
+        <a href="https://opendata.comune.palermo.it/opendata-archivio-dataset.php?tag=POPOLAZIONE%20RESIDENTE" target="_blank" rel="noopener">opendata.comune.palermo.it</a>
+      </div>
+      <div class="info-row">
+        <strong>Aggregati strutturali ITC-Isole</strong>: DPC-Aggregati-Strutturali-ITG-Isole<br>
+        <a href="https://github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITG-Isole" target="_blank" rel="noopener">github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITG-Isole</a>
+      </div>
     </div>
   </div>
-  <div class="info-section">
-    <h4 class="info-section-title">Licenza</h4>
-    <p class="info-text">I contenuti di questa applicazione sono rilasciati sotto licenza <strong>CC BY 4.0 – Attribuzione 4.0 Internazionale</strong>. Sei libero di condividere e adattare il materiale per qualsiasi scopo, anche commerciale, a condizione di citare adeguatamente la fonte.</p>
+
+  <div class="info-panel" id="itab-licenza">
+    <div class="info-section">
+      <p class="info-text">I contenuti di questa applicazione sono rilasciati sotto licenza    <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener"> <strong>CC BY 4.0 – Attribuzione 4.0 Internazionale</strong></a>. Sei libero di condividere e adattare il materiale per qualsiasi scopo, anche commerciale, a condizione di citare adeguatamente la fonte.</p>
+    </div>
   </div>
-  <div class="info-section">
-    <h4 class="info-section-title">Sviluppo tecnico</h4>
-    <p class="info-text">Web app progettata e sviluppata da <strong>@gbvitrano</strong> in collaborazione con <strong>Claude AI (Anthropic)</strong>, che ha affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p>
+
+  <div class="info-panel" id="itab-sviluppo">
+    <div class="info-section">
+      <p class="info-text">>Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener" class="mi-link"><b>@gbvitrano</b></a> in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener" class="mi-link"><b>Claude AI (Anthropic)</b></a> che ha affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p>
+	  <br>
+	  <p class="info-text">La mappa usa <b>PMTiles</b>, un formato vettoriale moderno che permette di caricare solo i tile visibili, senza un server backend. Questo la rende veloce, leggera e ospitabile su GitHub Pages — zero costi di infrastruttura. </p>
+	  
+    </div>
   </div>
-</div>
+  </div><!-- /info-modal -->
+</div><!-- /info-modal-wrap -->
 
 <a id="ods-logo" href="https://opendatasicilia.it/" target="_blank" rel="noopener"
    title="OpenDataSicilia – Promuovere la cultura dell'open data in Sicilia">

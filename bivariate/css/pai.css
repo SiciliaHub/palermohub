@@ -48,6 +48,38 @@
     body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow: hidden; }
     #map { position: absolute; inset: 0; }
 
+    h1 {
+      font-size: 1.7rem;
+      line-height: 1.3;
+      margin-bottom: 1.2rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin-top: 2.2rem;
+      margin-bottom: 0.6rem;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 0.3rem;
+    }
+    p {
+      margin: 0.9rem 0;
+    }
+    ul {
+      margin: 0.8rem 0 0.8rem 1.5rem;
+      padding: 0;
+    }
+    li {
+      margin: 0.3rem 0;
+    }
+    a {
+      color: #1a5276;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #e0e0e0;
+      margin: 2rem 0;
+    }
+
+
     /* ── Loading ── */
     #loading {
       position: absolute; inset: 0; z-index: 200;
@@ -142,7 +174,7 @@
     }
     .lcell-warn { font-size: 16px; line-height: 1; pointer-events: none; }
     .ylbl { font-size: 12px; font-weight: 600; color: var(--text2); text-align: center; margin-bottom: 4px; }
-    .xlbl { font-size: 12px; font-weight: 600; color: var(--text2); text-align: center; margin-top: 6px; }
+    .xlbl { font-size: 12px; font-weight: 600; color: var(--text2); text-align: center; margin-top: 6px; margin-bottom: 6px;}
 
     /* ── Tooltip ── */
     #tt {
@@ -477,31 +509,84 @@
     #btn-info.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
     /* ══ Info Modal ══════════════════════════════════════════════════════ */
-    #info-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.55); z-index:150; }
+    #info-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:150; }
     #info-overlay.open { display:block; }
-    #info-modal {
-      display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-      background:var(--bg2); border:1px solid var(--border); border-radius:12px;
-      box-shadow:var(--shadow); z-index:160; width:360px; max-width:94vw;
-      max-height:88vh; overflow-y:auto; font-family:inherit;
+
+    /* Wrap: gestisce posizione e animazione slide-up */
+    #info-modal-wrap {
+      position:fixed; bottom:0; left:50%;
+      transform:translateX(-50%) translateY(100%);
+      width:80vw; z-index:160;
+      transition:transform .38s cubic-bezier(.4,0,.2,1);
+      pointer-events:none;
     }
-    #info-modal.open { display:block; }
+    #info-modal-wrap.open {
+      transform:translateX(-50%) translateY(0);
+      pointer-events:auto;
+    }
+
+    /* Linguetta */
+    #info-modal-tab {
+      position:absolute; top:-30px; left:50%;
+      transform:translateX(-50%);
+      width:140px; height:30px;
+      background:var(--bg2); border:1px solid var(--border); border-bottom:none;
+      border-radius:8px 8px 0 0;
+      cursor:pointer; color:var(--text2);
+      display:flex; align-items:center; justify-content:center; gap:5px;
+      font-size:.72rem; font-weight:600; font-family:inherit;
+      box-shadow:-2px -4px 12px rgba(0,0,0,.35);
+      transition:background .15s, color .15s;
+      pointer-events:auto;
+    }
+    #info-modal-tab:hover { background:var(--bg3); color:var(--text); }
+    #info-tab-arrow { transition:transform .35s cubic-bezier(.4,0,.2,1); }
+    #info-modal-wrap.open #info-tab-arrow { transform:rotate(180deg); }
+
+    /* Modal: dimensioni e stile visivo */
+    #info-modal {
+      width:100%; height:75vh;
+      background:var(--bg2); border:1px solid var(--border);
+      border-radius:12px 12px 0 0;
+      box-shadow:var(--shadow);
+      overflow:hidden; font-family:inherit;
+      display:flex; flex-direction:column;
+    }
     #info-close { background:none; border:none; cursor:pointer; color:var(--text2); font-size:.9rem; padding:4px; }
     #info-close:hover { color:var(--text); }
-    .info-section { padding:12px 16px; border-bottom:1px solid var(--border); }
-    .info-section:last-child { border-bottom:none; }
+
+    /* Tab bar contenuto */
+    .info-tabbar {
+      display:flex; border-bottom:1px solid var(--border);
+      background:var(--bg2); flex-shrink:0;
+    }
+    .info-tab {
+      flex:1; padding:9px 4px; font-size:.72rem; font-weight:600;
+      background:none; border:none; cursor:pointer;
+      color:var(--text2); border-bottom:2px solid transparent;
+      transition:color .2s, border-color .2s;
+      white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .info-tab:hover { color:var(--text); }
+    .info-tab.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+    /* Tab panels contenuto */
+    .info-panel { display:none; overflow-y:auto; flex:1; }
+    .info-panel.active { display:block; }
+
+    .info-section { padding:14px 16px; }
     .info-section-title {
       font-size:.72rem; font-weight:700; text-transform:uppercase;
       letter-spacing:.06em; color:var(--accent); margin-bottom:8px;
     }
     .info-row {
       font-size:.84rem; color:var(--text); line-height:1.6;
-      margin-bottom:8px;
+      margin-bottom:10px;
     }
     .info-row:last-child { margin-bottom:0; }
     .info-row a { color:var(--accent); text-decoration:none; word-break:break-all; font-size:.78rem; }
     .info-row a:hover { text-decoration:underline; }
-    .info-text { font-size:.84rem; color:var(--text); line-height:1.6; }
+    .info-text { font-size:.84rem; color:var(--text); line-height:1.6; margin:0; }
     .info-text strong { color:var(--strong-color); }
 
     /* ══ MapLibre bottom-right controls follow panel ══════════════════════ */
@@ -566,4 +651,8 @@
       body:not(.panel-closed) .maplibregl-ctrl-bottom-right {
         right: 0 !important;
       }
+
+      /* Info modal: su mobile riduce a larghezza piena */
+      #info-modal-wrap { width: 96vw; }
+      .info-tab { font-size: .68rem; padding: 10px 2px; }
     }
