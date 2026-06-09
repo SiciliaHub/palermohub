@@ -395,6 +395,10 @@ function applyFilters() {
 
   map.setFilter('biv-fill', f);
   map.setFilter('biv-line', f);
+  if (compareModeActive && mapRight && mapRight.getLayer('biv-fill')) {
+    mapRight.setFilter('biv-fill', f);
+    mapRight.setFilter('biv-line', f);
+  }
   fitFilteredFeatures(f);
   buildRanking();
   pushAppState();
@@ -1080,6 +1084,10 @@ function encodeAppState() {
   const c = map.getCenter();
   const p = new URLSearchParams();
   p.set('tab', String(currentTab));
+  if (compareModeActive) {
+    p.set('compare', '1');
+    p.set('tabRight', String(currentRightTab));
+  }
   p.set('z',   map.getZoom().toFixed(2));
   p.set('lat', c.lat.toFixed(5));
   p.set('lng', c.lng.toFixed(5));
@@ -1133,6 +1141,16 @@ function restoreAppState() {
       map.setPaintProperty('biv-fill', 'fill-color', buildExpr(tab));
   }
   switchGroup(groupForTab(tabIdx));
+
+  if (s.tabRight !== undefined) {
+    currentRightTab = Math.max(0, Math.min(TABS.length - 1, parseInt(s.tabRight, 10)));
+  } else {
+    currentRightTab = BIV_TO_THEME[tabIdx] !== undefined ? BIV_TO_THEME[tabIdx] : 6;
+  }
+
+  if (s.compare === '1') {
+    toggleCompareMode(true);
+  }
 
   const mf = window.paiMF;
   if (s.ri)   mf.ri        = s.ri;
@@ -1190,28 +1208,67 @@ document.querySelectorAll('.tab').forEach(btn => {
 
   btn.addEventListener('click', () => {
     const idx = +btn.dataset.tab;
-    if (idx === currentTab) return;
 
-    document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+    if (compareModeActive) {
+      if (idx < 5) {
+        if (idx === currentTab) return;
+        currentTab = idx;
+        activeCells.clear();
+        updateFilterChips();
 
-    currentTab = idx;
-    activeCells.clear();
-    updateFilterChips();
+        const tab = TABS[currentTab];
+        document.getElementById('panel-title').textContent = tab.title;
+        document.getElementById('panel-sub').textContent   = tab.subtitle;
+        document.getElementById('maptitle').textContent    = tab.title;
 
-    const tab = TABS[currentTab];
-    document.getElementById('panel-title').textContent = tab.title;
-    document.getElementById('panel-sub').textContent   = tab.subtitle;
-    document.getElementById('maptitle').textContent    = tab.title;
+        if (map.getLayer('biv-fill')) {
+          map.setPaintProperty('biv-fill', 'fill-color', buildExpr(tab));
+          map.setFilter('biv-fill', null);
+          map.setFilter('biv-line', null);
+        }
+        buildLegend();
+      } else {
+        if (idx === currentRightTab) return;
+        currentRightTab = idx;
+        
+        if (mapRight && mapRight.getLayer('biv-fill')) {
+          const rightTab = TABS[currentRightTab];
+          mapRight.setPaintProperty('biv-fill', 'fill-color', buildExpr(rightTab));
+        }
+        buildRightLegend();
+      }
 
-    if (map.getLayer('biv-fill')) {
-      map.setPaintProperty('biv-fill', 'fill-color', buildExpr(tab));
-      map.setFilter('biv-fill', null);
-      map.setFilter('biv-line', null);
+      document.querySelectorAll('.tab').forEach(b => {
+        const tIdx = +b.dataset.tab;
+        b.classList.toggle('active', tIdx === currentTab || tIdx === currentRightTab);
+      });
+
+      pushAppState();
+    } else {
+      if (idx === currentTab) return;
+
+      currentTab = idx;
+      activeCells.clear();
+      updateFilterChips();
+
+      const tab = TABS[currentTab];
+      document.getElementById('panel-title').textContent = tab.title;
+      document.getElementById('panel-sub').textContent   = tab.subtitle;
+      document.getElementById('maptitle').textContent    = tab.title;
+
+      if (map.getLayer('biv-fill')) {
+        map.setPaintProperty('biv-fill', 'fill-color', buildExpr(tab));
+        map.setFilter('biv-fill', null);
+        map.setFilter('biv-line', null);
+      }
+
+      document.querySelectorAll('.tab').forEach(b => {
+        b.classList.toggle('active', +b.dataset.tab === currentTab);
+      });
+
+      buildLegend();
+      pushAppState();
     }
-
-    buildLegend();
-    pushAppState();
   });
 });
 
@@ -1228,12 +1285,30 @@ document.getElementById('clear-btn').addEventListener('click', () => {
 // ═══════════════════════════════════════════════════════
 //  FEATURE CLICK
 // ═══════════════════════════════════════════════════════
-map.on('click', 'biv-fill', e => showInfo(e.features[0].properties));
+const featurePopup = new maplibregl.Popup({
+  closeButton: true, closeOnClick: false, offset: 12, className: 'biv-popup'
+});
+
+map.on('click', 'biv-fill', e => {
+  const p = e.features[0].properties;
+  showInfo(p);
+
+  const idQ = p.id_quartieri ?? null;
+  const lbl = p.Label ?? null;
+  if (idQ == null && lbl == null) { featurePopup.remove(); return; }
+
+  let html = '';
+  if (idQ != null) html += `<div class="bpop-row"><span class="bpop-k">ID Quartiere</span><span class="bpop-v">${idQ}</span></div>`;
+  if (lbl != null) html += `<div class="bpop-row"><span class="bpop-k">Etichetta</span><span class="bpop-v">${lbl}</span></div>`;
+  featurePopup.setLngLat(e.lngLat).setHTML(html).addTo(map);
+});
 
 map.on('click', e => {
   if (!map.getLayer('biv-fill')) return;
-  if (!map.queryRenderedFeatures(e.point, { layers: ['biv-fill'] }).length)
+  if (!map.queryRenderedFeatures(e.point, { layers: ['biv-fill'] }).length) {
     document.getElementById('finfo').style.display = 'none';
+    featurePopup.remove();
+  }
 });
 
 map.on('mouseenter', 'biv-fill', () => { map.getCanvas().style.cursor = 'pointer'; });
@@ -1295,14 +1370,14 @@ const INFO_FIELDS = [
   { k: 'sez2011',          l: 'Sez. ISTAT 2011',      tech: true, code: true },
   { k: 'sez',              l: 'Sezione',               tech: true, code: true },
   { k: 'cod_asc',          l: 'Cod. ASC',              tech: true, code: true },
-  { k: 'id_quartieri',     l: 'ID Quartiere',          tech: true, code: true },
-  { k: 'Label',            l: 'Etichetta',             tech: true, code: true },
   { k: 'IDAG',             l: 'IDAG',                  tech: true, code: true },
   { k: 'fid',              l: 'FID',                   tech: true, code: true },
 ];
 
+const INFO_HIDDEN = new Set(['id_quartieri', 'Label']);
+
 function showInfo(props) {
-  const shown = new Set();
+  const shown = new Set(INFO_HIDDEN);
   let html = '';
   INFO_FIELDS.forEach(({ k, l, code, tech }) => {
     if (props[k] == null) return;
@@ -1820,6 +1895,17 @@ function switchTheme() {
     }
     applyFilters();
   });
+
+  if (compareModeActive && mapRight) {
+    if (mapRight.getLayer('biv-line')) mapRight.removeLayer('biv-line');
+    if (mapRight.getLayer('biv-fill')) mapRight.removeLayer('biv-fill');
+    if (mapRight.getSource('pai'))    mapRight.removeSource('pai');
+
+    mapRight.setStyle(isDark ? STYLE_DARK : STYLE_LIGHT);
+    mapRight.once('idle', () => {
+      setupRightMapLayers();
+    });
+  }
 }
 
 document.getElementById('btn-theme').addEventListener('click', switchTheme);
@@ -1883,6 +1969,296 @@ document.getElementById('btn-theme').addEventListener('click', switchTheme);
     document.body.classList.toggle('panel-closed');
     toggle.textContent = willClose ? '‹' : '›';
     toggle.title = willClose ? 'Apri pannello' : 'Chiudi pannello';
+    // Se compare mode è attiva, facciamo resize delle mappe per allinearle al pannello
+    setTimeout(() => {
+      map.resize();
+      if (mapRight) mapRight.resize();
+    }, 360);
   });
 })();
+
+// ═══════════════════════════════════════════════════════
+//  COMPARE / PARALLEL MODE IMPLEMENTATION
+// ═══════════════════════════════════════════════════════
+const BIV_TO_THEME = {
+  0: 6, // Rischio Idraulico x Carico -> Rischio Idraulico
+  1: 7, // Rischio Geomorfologico x Carico -> Rischio Geomorfologico
+  2: 8, // Pericolosità Idraulica x Carico -> Pericolosità Idraulica
+  3: 9, // Pericolosità Geomorfologica x Carico -> Pericolosità Geomorfologica
+  4: 6  // Rischio Idraulico x Rischio Geomorfologico -> Rischio Idraulico (default)
+};
+
+const THEME_TO_BIV = {
+  5: 0, // Carico Insediativo -> Rischio Idraulico x Carico
+  6: 0, // Rischio Idraulico -> Rischio Idraulico x Carico
+  7: 1, // Rischio Geomorfologico -> Rischio Geomorfologico x Carico
+  8: 2, // Pericolosità Idraulica -> Pericolosità Idraulica x Carico
+  9: 3  // Pericolosità Geomorfologica -> Pericolosità Geomorfologica x Carico
+};
+
+let mapRight = null;
+let compareModeActive = false;
+let isSyncing = false;
+let mapSyncObj = null;
+let currentRightTab = 6;
+
+function syncMaps(mapA, mapB) {
+  const onMove = (source, target) => {
+    if (isSyncing) return;
+    isSyncing = true;
+    target.setCenter(source.getCenter());
+    target.setZoom(source.getZoom());
+    target.setBearing(source.getBearing());
+    target.setPitch(source.getPitch());
+    isSyncing = false;
+  };
+
+  const handlerA = () => onMove(mapA, mapB);
+  const handlerB = () => onMove(mapB, mapA);
+
+  mapA.on('move', handlerA);
+  mapB.on('move', handlerB);
+
+  return {
+    destroy: () => {
+      mapA.off('move', handlerA);
+      mapB.off('move', handlerB);
+    }
+  };
+}
+
+function getRightTabIdx() {
+  return currentRightTab;
+}
+
+function setupRightMapLayers() {
+  if (!mapRight.getSource('pai')) {
+    mapRight.addSource('pai', { type: 'vector', url: `pmtiles://${PMTILES_URL}` });
+  }
+  const rightTab = TABS[getRightTabIdx()];
+  if (!mapRight.getLayer('biv-fill')) {
+    mapRight.addLayer({
+      id: 'biv-fill', type: 'fill', source: 'pai', 'source-layer': LAYER,
+      paint: { 'fill-color': buildExpr(rightTab), 'fill-opacity': 0.82 }
+    });
+  }
+  if (!mapRight.getLayer('biv-line')) {
+    mapRight.addLayer({
+      id: 'biv-line', type: 'line', source: 'pai', 'source-layer': LAYER,
+      paint: {
+        'line-color': document.body.classList.contains('dark') ? 'rgba(255,255,255,0.07)' : 'rgba(0,0,0,0.1)',
+        'line-width': 0.6
+      }
+    });
+  }
+  applyRightFilters();
+  buildRightLegend();
+}
+
+function applyRightFilters() {
+  if (!mapRight || !mapRight.getLayer('biv-fill')) return;
+  const leftFilter = map.getFilter('biv-fill') || null;
+  mapRight.setFilter('biv-fill', leftFilter);
+  mapRight.setFilter('biv-line', leftFilter);
+}
+
+function updateRightMapLayer() {
+  if (!mapRight || !mapRight.getLayer('biv-fill')) return;
+  const rightTab = TABS[getRightTabIdx()];
+  mapRight.setPaintProperty('biv-fill', 'fill-color', buildExpr(rightTab));
+  applyRightFilters();
+  buildRightLegend();
+}
+
+function buildRightLegend() {
+  const wrap = document.getElementById('right-legend-card');
+  if (!wrap) return;
+  wrap.innerHTML = '';
+  if (!compareModeActive) {
+    wrap.classList.add('hidden');
+    return;
+  }
+  wrap.classList.remove('hidden');
+
+  const tab = TABS[getRightTabIdx()];
+  
+  const title = document.createElement('div');
+  title.className = 'right-legend-title';
+  title.textContent = tab.yFieldLabel || tab.fieldLabel || tab.title;
+  wrap.appendChild(title);
+
+  if (tab.type === 'choropleth') {
+    const bar = document.createElement('div');
+    bar.className = 'choro-bar';
+    tab.colors.forEach((c) => {
+      const s = document.createElement('div');
+      s.className = 'choro-seg';
+      s.style.background = c;
+      bar.appendChild(s);
+    });
+    wrap.appendChild(bar);
+
+    const lbls = document.createElement('div');
+    lbls.className = 'choro-lbls';
+    tab.labels.forEach((l) => {
+      const s = document.createElement('span');
+      s.className = 'choro-lbl';
+      s.textContent = l;
+      lbls.appendChild(s);
+    });
+    wrap.appendChild(lbls);
+  } else if (tab.type === 'pai-cat') {
+    const ul = document.createElement('div');
+    ul.className = 'pai-cat-legend';
+    tab.categories.forEach((cat) => {
+      const row = document.createElement('div');
+      row.className = 'pai-cat-row';
+      row.style.cursor = 'default';
+      row.innerHTML = `<span class="pai-cat-swatch" style="background:${cat.color}"></span>`
+                    + `<span class="pai-cat-lbl">${cat.label}</span>`;
+      ul.appendChild(row);
+    });
+    wrap.appendChild(ul);
+  }
+}
+
+const featurePopupRight = new maplibregl.Popup({
+  closeButton: true, closeOnClick: false, offset: 12, className: 'biv-popup'
+});
+
+function setupRightMapEvents() {
+  mapRight.on('click', 'biv-fill', e => {
+    const p = e.features[0].properties;
+    showInfo(p);
+
+    const idQ = p.id_quartieri ?? null;
+    const lbl = p.Label ?? null;
+    if (idQ == null && lbl == null) { featurePopupRight.remove(); return; }
+
+    let html = '';
+    if (idQ != null) html += `<div class="bpop-row"><span class="bpop-k">ID Quartiere</span><span class="bpop-v">${idQ}</span></div>`;
+    if (lbl != null) html += `<div class="bpop-row"><span class="bpop-k">Etichetta</span><span class="bpop-v">${lbl}</span></div>`;
+    featurePopupRight.setLngLat(e.lngLat).setHTML(html).addTo(mapRight);
+  });
+
+  mapRight.on('click', e => {
+    if (!mapRight.getLayer('biv-fill')) return;
+    if (!mapRight.queryRenderedFeatures(e.point, { layers: ['biv-fill'] }).length) {
+      document.getElementById('finfo').style.display = 'none';
+      featurePopupRight.remove();
+    }
+  });
+
+  mapRight.on('mouseenter', 'biv-fill', () => { mapRight.getCanvas().style.cursor = 'pointer'; });
+  mapRight.on('mouseleave', 'biv-fill', () => { mapRight.getCanvas().style.cursor = ''; hideTT(); });
+
+  mapRight.on('mousemove', 'biv-fill', e => {
+    const p   = e.features[0].properties;
+    const tab = TABS[getRightTabIdx()];
+    const dens = (+(p['carico_insediativo'] ?? 0)).toLocaleString('it-IT', {minimumFractionDigits:1, maximumFractionDigits:1});
+    const qrt  = p.Quartiere ? `<br><strong>Quartiere:</strong> ${p.Quartiere}` : '';
+    const circ = p.circoscrizione ? ` &nbsp;(Circ. ${p.circoscrizione})` : '';
+
+    let body = '';
+    if (tab.type === 'choropleth') {
+      body = `<strong>Carico ins.:</strong> ${dens} ab/ha${qrt}${circ}`;
+    } else if (tab.type === 'pai-cat') {
+      const val = p[tab.field] ?? '—';
+      const cat = tab.categories.find(c => String(c.value) === String(val));
+      body = `<strong>${tab.fieldLabel}:</strong> ${cat ? cat.label : val}<br>`
+           + `<strong>Carico ins.:</strong> ${dens} ab/ha`
+           + qrt + circ;
+    } else {
+      const yFieldLbl = tab.yFieldLabel || tab.yField;
+      const xFieldLbl = tab.xFieldLabel || tab.xField;
+      const yVal = p[tab.yField] ?? '—';
+      const xVal = tab.xType === 'step'
+        ? `${dens} ab/ha`
+        : (p[tab.xField] ?? '—');
+      body = `<strong>${yFieldLbl}:</strong> ${yVal}<br>`
+           + `<strong>${tab.xType === 'step' ? 'Carico ins.' : xFieldLbl}:</strong> ${xVal}`
+           + qrt + circ;
+    }
+    showTT(e.originalEvent, body);
+  });
+}
+
+function toggleCompareMode(forceState) {
+  compareModeActive = forceState !== undefined ? forceState : !compareModeActive;
+  const btn = document.getElementById('btn-compare');
+  if (btn) btn.classList.toggle('active', compareModeActive);
+  document.body.classList.toggle('compare-active', compareModeActive);
+
+  const mapRightEl = document.getElementById('map-right');
+  if (compareModeActive) {
+    if (currentTab >= 5) {
+      currentRightTab = currentTab;
+      currentTab = THEME_TO_BIV[currentRightTab] !== undefined ? THEME_TO_BIV[currentRightTab] : 0;
+      
+      const tab = TABS[currentTab];
+      document.getElementById('panel-title').textContent = tab.title;
+      document.getElementById('panel-sub').textContent   = tab.subtitle;
+      document.getElementById('maptitle').textContent    = tab.title;
+
+      if (map.getLayer('biv-fill')) {
+        map.setPaintProperty('biv-fill', 'fill-color', buildExpr(tab));
+        map.setFilter('biv-fill', null);
+        map.setFilter('biv-line', null);
+      }
+      buildLegend();
+    }
+
+    mapRightEl.style.display = 'block';
+    if (!mapRight) {
+      mapRight = new maplibregl.Map({
+        container: 'map-right',
+        style: document.body.classList.contains('dark') ? STYLE_DARK : STYLE_LIGHT,
+        center: map.getCenter(),
+        zoom: map.getZoom(),
+        minZoom: 11,
+        maxZoom: 17,
+        maxBounds: PALERMO_BOUNDS,
+        dragRotate: false,
+        attributionControl: { compact: true }
+      });
+      mapRight.touchZoomRotate.disableRotation();
+
+      mapRight.on('load', () => {
+        setupRightMapLayers();
+        setupRightMapEvents();
+        mapSyncObj = syncMaps(map, mapRight);
+      });
+    } else {
+      updateRightMapLayer();
+      if (!mapSyncObj) {
+        mapSyncObj = syncMaps(map, mapRight);
+      }
+      mapRight.resize();
+    }
+  } else {
+    mapRightEl.style.display = 'none';
+    if (mapSyncObj) {
+      mapSyncObj.destroy();
+      mapSyncObj = null;
+    }
+    buildRightLegend();
+  }
+
+  // Sincronizza evidenziatore dei tab attivi nel menu laterale
+  const leftIdx = currentTab;
+  const rightIdx = getRightTabIdx();
+  document.querySelectorAll('.tab').forEach(b => {
+    const tIdx = +b.dataset.tab;
+    b.classList.toggle('active', tIdx === leftIdx || (compareModeActive && tIdx === rightIdx));
+  });
+
+  setTimeout(() => {
+    map.resize();
+    if (mapRight) mapRight.resize();
+  }, 360);
+
+  pushAppState();
+}
+
+document.getElementById('btn-compare').addEventListener('click', () => toggleCompareMode());
 

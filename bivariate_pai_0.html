@@ -12,15 +12,16 @@
     <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
     <meta http-equiv="content-language" content="IT">
     <meta name="robots" content="index,follow">
-    <meta name="creation_Date" content="20/08/2025>
+    <meta name="creation_Date" content="09/06/2026>
   
+	<link rel="stylesheet" href="lib/css/home.css">
   
-  <link rel="shortcut icon" href="img/favicon.ico"/> 
-  <link rel="icon" href="img/favicon.png" type="image/png"/> 
-  <link href="css/pai.css" rel="stylesheet">
+  <link rel="shortcut icon" href="bivariate/img/favicon.ico"/> 
+  <link rel="icon" href="bivariate/img/favicon.png" type="image/png"/> 
+  <link href="bivariate/css/pai.css" rel="stylesheet">
  
     <!-- Meta tags per social sharing pen Graph Protocol -->
-    <meta property="og:url" content="https://palermohub.opendatasicilia.it/bivariate/">
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/bivariate_pai.html">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Capire il rischio sul territorio: le mappe bivariate del PAI per Palermo">
     <meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
@@ -28,7 +29,7 @@
 	<!-- twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
-    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/bivariate/">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/bivariate_pai.html">
     <meta name="twitter:title" content="Capire il rischio sul territorio: le mappe bivariate del PAI per Palermo">
     <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
     <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/bivariate/img/social_card.jpg"> 
@@ -46,11 +47,7 @@
 <body>
 
 <div id="loading"><div class="spinner"></div><p>Caricamento dati PMTiles…</p></div>
-<div id="map-container">
-  <div id="map"></div>
-  <div id="map-right" style="display: none;"></div>
-  <div id="right-legend-card" class="hidden"></div>
-</div>
+<div id="map"></div>
 <div id="maptitle">Rischio Idraulico PAI × Carico Insediativo</div>
 
 <!-- ── Panel ── -->
@@ -109,11 +106,6 @@
   </button>
   <button id="btn-theme" title="Tema scuro">
     <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
-  </button>
-  <button id="btn-compare" title="Navigazione in parallelo (Bivariata sx / Tematica dx)">
-    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
-      <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-8 14H5V5h6v12zm8 0h-6V5h6v12z"/>
-    </svg>
   </button>
   <button id="btn-info" title="Informazioni">
     <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
@@ -281,7 +273,7 @@
 
   <div class="info-panel" id="itab-sviluppo">
     <div class="info-section">
-      <p class="info-text">Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener" class="mi-link">@gbvitrano</a> in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener" class="mi-link">Claude AI (Anthropic)</a> e <a href="https://gemini.google.com" target="_blank" rel="noopener" class="mi-link">Gemini</a> che hanno affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p>
+      <p class="info-text">>Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener" class="mi-link"><b>@gbvitrano</b></a> in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener" class="mi-link"><b>Claude AI (Anthropic)</b></a> che ha affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p>
 	  <br>
 	  <p class="info-text">La mappa usa <b>PMTiles</b>, un formato vettoriale moderno che permette di caricare solo i tile visibili, senza un server backend. Questo la rende veloce, leggera e ospitabile su GitHub Pages — zero costi di infrastruttura. </p>
 	  
@@ -295,7 +287,44 @@
   <img src="img/opendatasicilia.png" alt="OpenDataSicilia" height="80">
 </a>
 
-<script src="js/pai.js"></script>
+<script src="bivariate/js/pai.js"></script>
+
+    <!-- Inclusione header e footer PalermoHub -->
+    <link rel="stylesheet" href="lib/css/ph-css.css">
+    <script src="lib/js/client/ph-header.js"></script>
+    <script src="lib/js/client/ph-footer.js"></script>
+
+<script>
+function toggleSidebarFilters() {
+  if (window.innerWidth > 900) return;
+  var body = document.getElementById('sidebar-body');
+  var chevron = document.getElementById('sidebar-toggle-chevron');
+  var title = document.getElementById('sidebar-title-toggle');
+  if (!body) return;
+  var isCollapsed = body.classList.toggle('collapsed');
+  if (chevron) chevron.style.transform = isCollapsed ? 'rotate(180deg)' : '';
+  if (title) title.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+  // Dopo la transizione CSS (350ms) notifica Leaflet del nuovo contenitore
+  setTimeout(function() { if (typeof map !== 'undefined' && map) map.invalidateSize(); }, 380);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth <= 900) {
+    var body = document.getElementById('sidebar-body');
+    var chevron = document.getElementById('sidebar-toggle-chevron');
+    var title = document.getElementById('sidebar-title-toggle');
+    if (body) {
+      // Collapse istantaneo al caricamento (nessuna animazione) così Leaflet
+      // misura subito l'altezza corretta del contenitore mappa
+      body.style.transition = 'none';
+      body.classList.add('collapsed');
+      body.offsetHeight; // forza reflow
+      body.style.transition = '';
+    }
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
+    if (title) title.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
 
 </body>
 </html>
