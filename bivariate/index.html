@@ -53,18 +53,38 @@
 <div id="panel">
   <button id="panel-toggle" title="Chiudi pannello">›</button>
   <div id="tabbar">
-    <div class="tab-group-label">Mappe Bivariate</div>
-    <button class="tab active" data-tab="0">R. Idraul<br>× C. Ins.</button>
-    <button class="tab"        data-tab="1">R. Geomorf<br>× C. Ins.</button>
-    <button class="tab"        data-tab="2">P. Idraul<br>× C. Ins.</button>
-    <button class="tab"        data-tab="3">P. Geomorf<br>× C. Ins.</button>
-    <button class="tab"        data-tab="4">Idraul<br>× Geomorf</button>
-    <div class="tab-group-label">Mappe Tematiche</div>
-    <button class="tab"        data-tab="5">Carico<br>Ins.</button>
-    <button class="tab"        data-tab="6">Rischio<br>Idraul.</button>
-    <button class="tab"        data-tab="7">Rischio<br>Geomorf.</button>
-    <button class="tab"        data-tab="8">Pericol.<br>Idraul.</button>
-    <button class="tab"        data-tab="9">Pericol.<br>Geomorf.</button>
+    <div class="tab-section has-active" id="section-bivariate">
+      <button class="tab-section-hdr open" data-section="bivariate">
+        <span>Mappe Bivariate</span>
+        <svg class="sec-arrow" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+      <div class="tab-section-body open">
+        <button class="tab active" data-tab="0">R. Idraul<br>× C. Ins.</button>
+        <button class="tab"        data-tab="1">R. Geomorf<br>× C. Ins.</button>
+        <button class="tab"        data-tab="2">P. Idraul<br>× C. Ins.</button>
+        <button class="tab"        data-tab="3">P. Geomorf<br>× C. Ins.</button>
+        <button class="tab"        data-tab="4">Idraul<br>× Geomorf</button>
+      </div>
+    </div>
+    <div class="tab-section" id="section-tematiche">
+      <button class="tab-section-hdr" data-section="tematiche">
+        <span>Mappe Tematiche</span>
+        <svg class="sec-arrow" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M7 10l5 5 5-5z"/></svg>
+      </button>
+      <div class="tab-section-body">
+        <button class="tab" data-tab="5">Carico<br>Ins.</button>
+        <button class="tab" data-tab="6">Rischio<br>Idraul.</button>
+        <button class="tab" data-tab="7">Rischio<br>Geomorf.</button>
+        <button class="tab" data-tab="8">Pericol.<br>Idraul.</button>
+        <button class="tab" data-tab="9">Pericol.<br>Geomorf.</button>
+      </div>
+    </div>
+    <div id="tabbar-pin">
+      <label>
+        <input type="checkbox" id="tab-pin-chk">
+        <span>Tieni entrambe aperte</span>
+      </label>
+    </div>
   </div>
   <div id="panel-hdr">
     <h3 id="panel-title">Mappa Bivariata PAI</h3>

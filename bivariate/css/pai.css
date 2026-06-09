@@ -122,20 +122,43 @@
 
     /* ── Tab bar ── */
     #tabbar {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 4px; padding: 10px 10px 8px;
+      display: flex; flex-direction: column;
       background: var(--bg3);
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
     }
-    .tab-group-label {
-      grid-column: 1 / -1;
-      font-size: 10px; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .08em; color: var(--accent);
-      padding: 6px 2px 2px;
-      border-top: 1px solid var(--border);
+
+    .tab-section { border-bottom: 1px solid var(--border); }
+
+    .tab-section-hdr {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 12px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--text2);
+      background: transparent; border: none; cursor: pointer;
+      transition: color .15s, background .15s;
     }
-    .tab-group-label:first-child { border-top: none; padding-top: 0; }
+    .tab-section-hdr:hover { background: var(--bg2); color: var(--text); }
+    .tab-section-hdr.open  { color: var(--accent); }
+    .tab-section.has-active > .tab-section-hdr:not(.open) { color: var(--accent); opacity: .55; }
+
+    .sec-arrow { flex-shrink: 0; transition: transform .2s; }
+    .tab-section-hdr.open     .sec-arrow { transform: rotate(0deg); }
+    .tab-section-hdr:not(.open) .sec-arrow { transform: rotate(-90deg); }
+
+    .tab-section-body {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 4px; overflow: hidden;
+      max-height: 0; padding: 0 10px;
+      transition: max-height .25s ease, padding .25s ease;
+    }
+    .tab-section-body.open { max-height: 400px; padding: 6px 10px 10px; }
+
+    #tabbar-pin {
+      padding: 6px 12px;
+      font-size: 11px; color: var(--text2);
+    }
+    #tabbar-pin label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    #tabbar-pin input[type=checkbox] { cursor: pointer; accent-color: var(--accent); }
 
     .tab {
       padding: 7px 3px; font-size: 12px; font-weight: 600; letter-spacing: .2px;
