@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mappe Bivariate PAI – Palermo 2022</title>
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+  <script src="https://unpkg.com/pmtiles@3.2.0/dist/pmtiles.js"></script>
+     <link rel="shortcut icon" href="img/favicon.ico"/> 
+    <link rel="icon" href="img/favicon.png" type="image/png"/> 
+   <link href="css/pai.css" rel="stylesheet">
+  
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-87653723-4');
+    </script>	  
+  
+</head>
+<body>
+
+<div id="loading"><div class="spinner"></div><p>Caricamento dati PMTiles…</p></div>
+<div id="map"></div>
+<div id="maptitle">Rischio Idraulico PAI × Carico Insediativo</div>
+
+<!-- ── Panel ── -->
+<div id="panel">
+  <button id="panel-toggle" title="Chiudi pannello">›</button>
+  <div id="tabbar">
+    <div class="tab-group-label">Mappe Bivariate</div>
+    <button class="tab active" data-tab="0">R. Idraul<br>× C. Ins.</button>
+    <button class="tab"        data-tab="1">R. Geomorf<br>× C. Ins.</button>
+    <button class="tab"        data-tab="2">P. Idraul<br>× C. Ins.</button>
+    <button class="tab"        data-tab="3">P. Geomorf<br>× C. Ins.</button>
+    <button class="tab"        data-tab="4">Idraul<br>× Geomorf</button>
+    <div class="tab-group-label">Mappe Tematiche</div>
+    <button class="tab"        data-tab="5">Carico<br>Ins.</button>
+    <button class="tab"        data-tab="6">Rischio<br>Idraul.</button>
+    <button class="tab"        data-tab="7">Rischio<br>Geomorf.</button>
+    <button class="tab"        data-tab="8">Pericol.<br>Idraul.</button>
+    <button class="tab"        data-tab="9">Pericol.<br>Geomorf.</button>
+  </div>
+  <div id="panel-hdr">
+    <h3 id="panel-title">Mappa Bivariata PAI</h3>
+    <p  id="panel-sub">Rischio Idraulico × Carico Insediativo</p>
+  </div>
+  <div id="panel-body">
+    <div id="legend-wrap"></div>
+    <div id="donut-wrap"></div>
+    <div id="ranking-wrap"></div>
+    <button id="clear-btn">Rimuovi filtri selezione</button>
+  </div>
+</div>
+
+<!-- ── Feature info ── -->
+<div id="finfo">
+  <h4>Proprietà aggregato</h4>
+  <div id="fprops"></div>
+</div>
+
+<div id="map-toolbar">
+  <button id="btn-home" title="Vista iniziale">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+  </button>
+  <button id="btn-fs" title="Schermo intero">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+  </button>
+  <button id="btn-theme" title="Tema scuro">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>
+  </button>
+  <button id="btn-info" title="Informazioni">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+  </button>
+  <div class="zoom-wrap">
+    <input type="range" id="zoom-slider" min="11" max="17" step="0.1" value="12">
+    <div class="zoom-ticks">
+      <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span>
+    </div>
+  </div>
+  <div id="zoom-badge">12</div>
+</div>
+
+<div id="dbg"></div>
+<div id="tt"></div>
+
+<!-- ── Search area (chips + bar) ── -->
+<div id="pai-search-area">
+  <div id="pai-chips"></div>
+  <div id="pai-searchbar">
+    <span class="pai-si"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg></span>
+    <input type="text" id="pai-search-input" placeholder="Cerca quartiere, circoscrizione, rischio…" autocomplete="off">
+    <button id="pai-search-clear" style="display:none">&#x2715;</button>
+    <div class="pai-sep"></div>
+    <button id="pai-filter-btn" title="Filtri avanzati">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg>
+      <span id="pai-filter-badge" style="display:none"></span>
+    </button>
+    <div id="pai-search-dd"></div>
+  </div>
+</div>
+
+<!-- ── Filter Modal ── -->
+<div id="pai-filter-overlay"></div>
+<div id="pai-filter-modal">
+  <div class="pfm-header">
+    <h3><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/></svg> Filtri Avanzati</h3>
+    <button id="pfm-close">&#x2715;</button>
+  </div>
+  <div class="pfm-group">
+    <label>Rischio Idraulico</label>
+    <select id="pfm-ri"><option value="">Tutti</option><option value="R1">R1 — Basso</option><option value="R2">R2 — Moderato</option><option value="R3">R3 — Elevato</option><option value="R4">R4 — Molto elevato</option></select>
+  </div>
+  <div class="pfm-group">
+    <label>Rischio Geomorfologico</label>
+    <select id="pfm-rg"><option value="">Tutti</option><option value="1">1 — Basso</option><option value="3">3 — Elevato</option><option value="4">4 — Molto elevato</option></select>
+  </div>
+  <div class="pfm-group">
+    <label>Pericolo Idraulico</label>
+    <select id="pfm-pi"><option value="">Tutti</option><option value="P1">P1 — Basso</option><option value="P2">P2 — Moderato</option><option value="P3">P3 — Elevato</option><option value="P4">P4 — Molto elevato</option></select>
+  </div>
+  <div class="pfm-group">
+    <label>Pericolo Geomorfologico</label>
+    <select id="pfm-pg"><option value="">Tutti</option><option value="0">0 — Nessuno</option><option value="1">1 — Basso</option><option value="3">3 — Elevato</option><option value="4">4 — Molto elevato</option></select>
+  </div>
+  <div class="pfm-group">
+    <div class="pfm-label-row">
+      <label style="margin:0">Carico ins. min. (ab/ha)</label>
+      <span class="pfm-badge" id="pfm-dens-val">0</span>
+    </div>
+    <input type="range" id="pfm-dens" min="0" max="500" value="0" step="1" style="margin-top:8px">
+  </div>
+  <div class="pfm-footer">
+    <button id="pfm-reset">Ripristina</button>
+    <button id="pfm-apply">Applica</button>
+  </div>
+</div>
+
+<!-- ── Info Modal ── -->
+<div id="info-overlay"></div>
+<div id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+  <div class="pfm-header">
+    <h3 id="info-modal-title">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      Informazioni
+    </h3>
+    <button id="info-close" aria-label="Chiudi">&#x2715;</button>
+  </div>
+  <div class="info-section">
+    <h4 class="info-section-title">Fonte dati</h4>
+    <div class="info-row">
+      <strong>Popolazione residente 2022</strong>: Comune di Palermo<br>
+      <a href="https://opendata.comune.palermo.it/opendata-archivio-dataset.php?tag=POPOLAZIONE%20RESIDENTE" target="_blank" rel="noopener">opendata.comune.palermo.it</a>
+    </div>
+    <div class="info-row">
+      <strong>Aggregati strutturali ITC-Isole</strong>: DPC-Aggregati-Strutturali-ITG-Isole<br>
+      <a href="https://github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITG-Isole" target="_blank" rel="noopener">github.com/pcm-dpc/DPC-Aggregati-Strutturali-ITG-Isole</a>
+    </div>
+  </div>
+  <div class="info-section">
+    <h4 class="info-section-title">Licenza</h4>
+    <p class="info-text">I contenuti di questa applicazione sono rilasciati sotto licenza <strong>CC BY 4.0 – Attribuzione 4.0 Internazionale</strong>. Sei libero di condividere e adattare il materiale per qualsiasi scopo, anche commerciale, a condizione di citare adeguatamente la fonte.</p>
+  </div>
+  <div class="info-section">
+    <h4 class="info-section-title">Sviluppo tecnico</h4>
+    <p class="info-text">Web app progettata e sviluppata da <strong>@gbvitrano</strong> in collaborazione con <strong>Claude AI (Anthropic)</strong>, che ha affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p>
+  </div>
+</div>
+
+<a id="ods-logo" href="https://opendatasicilia.it/" target="_blank" rel="noopener"
+   title="OpenDataSicilia – Promuovere la cultura dell'open data in Sicilia">
+  <img src="img/opendatasicilia.png" alt="OpenDataSicilia" height="80">
+</a>
+
+<script src="js/pai.js"></script>
+
+</body>
+</html>
