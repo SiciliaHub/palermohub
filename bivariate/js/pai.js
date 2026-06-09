@@ -1132,9 +1132,7 @@ function restoreAppState() {
     if (map.getLayer('biv-fill'))
       map.setPaintProperty('biv-fill', 'fill-color', buildExpr(tab));
   }
-  // Sync accordion to restored tab (always, even if tabIdx === 0)
-  updateSectionActive(tabIdx);
-  openSection(sectionForTab(tabIdx));
+  switchGroup(groupForTab(tabIdx));
 
   const mf = window.paiMF;
   if (s.ri)   mf.ri        = s.ri;
@@ -1166,46 +1164,17 @@ function restoreAppState() {
 }
 
 // ═══════════════════════════════════════════════════════
-//  TAB SECTION ACCORDION
+//  TAB GROUP SWITCHING
 // ═══════════════════════════════════════════════════════
-function _sectionEl(sec) {
-  return document.querySelector(`.tab-section-hdr[data-section="${sec}"]`);
-}
-function openSection(sec) {
-  const hdr = _sectionEl(sec);
-  if (!hdr) return;
-  hdr.classList.add('open');
-  hdr.nextElementSibling.classList.add('open');
-}
-function closeSection(sec) {
-  const hdr = _sectionEl(sec);
-  if (!hdr) return;
-  hdr.classList.remove('open');
-  hdr.nextElementSibling.classList.remove('open');
-}
-function sectionForTab(idx) { return idx < 5 ? 'bivariate' : 'tematiche'; }
-function updateSectionActive(idx) {
-  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('has-active'));
-  const sec = sectionForTab(idx);
-  const hdr = _sectionEl(sec);
-  if (hdr) hdr.closest('.tab-section').classList.add('has-active');
+function groupForTab(idx) { return idx < 5 ? 'bivariate' : 'tematiche'; }
+
+function switchGroup(group) {
+  document.querySelectorAll('.tab-hdr').forEach(h => h.classList.toggle('active', h.dataset.group === group));
+  document.querySelectorAll('.tab-group').forEach(g => g.classList.toggle('open', g.id === 'group-' + group));
 }
 
-document.querySelectorAll('.tab-section-hdr').forEach(hdr => {
-  hdr.addEventListener('click', () => {
-    const sec    = hdr.dataset.section;
-    const isOpen = hdr.classList.contains('open');
-    const pinned = document.getElementById('tab-pin-chk').checked;
-    const allHdrs = [...document.querySelectorAll('.tab-section-hdr')];
-    const otherOpen = allHdrs.some(h => h !== hdr && h.classList.contains('open'));
-
-    if (isOpen) {
-      if (pinned || otherOpen) closeSection(sec);
-    } else {
-      openSection(sec);
-      if (!pinned) allHdrs.forEach(h => { if (h !== hdr) closeSection(h.dataset.section); });
-    }
-  });
+document.querySelectorAll('.tab-hdr').forEach(hdr => {
+  hdr.addEventListener('click', () => switchGroup(hdr.dataset.group));
 });
 
 // ═══════════════════════════════════════════════════════
@@ -1223,30 +1192,18 @@ document.querySelectorAll('.tab').forEach(btn => {
     const idx = +btn.dataset.tab;
     if (idx === currentTab) return;
 
-    // Update tab UI
     document.querySelectorAll('.tab').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
     currentTab = idx;
     activeCells.clear();
     updateFilterChips();
-    updateSectionActive(idx);
 
     const tab = TABS[currentTab];
     document.getElementById('panel-title').textContent = tab.title;
     document.getElementById('panel-sub').textContent   = tab.subtitle;
     document.getElementById('maptitle').textContent    = tab.title;
 
-    // Ensure the correct section is open
-    const sec = sectionForTab(idx);
-    openSection(sec);
-    if (!document.getElementById('tab-pin-chk').checked) {
-      document.querySelectorAll('.tab-section-hdr').forEach(h => {
-        if (h.dataset.section !== sec) closeSection(h.dataset.section);
-      });
-    }
-
-    // Update map
     if (map.getLayer('biv-fill')) {
       map.setPaintProperty('biv-fill', 'fill-color', buildExpr(tab));
       map.setFilter('biv-fill', null);
