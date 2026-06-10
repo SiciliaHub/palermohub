@@ -6,7 +6,7 @@
       --bg3:         #eaeaf0;
       --text:        #1c1c2e;
       --text2:       #7070a0;
-      --accent:      #4040e0;
+      --accent:      #ff9900;
       --border:      #d6d6e8;
       --r:           8px;
       --shadow:      0 4px 24px rgba(0,0,0,.12);
@@ -124,8 +124,8 @@
 
     /* ── Panel ── */
     #panel {
-      position: absolute; top: 0; right: 0;
-      width: var(--panel-w); height: 100%;
+      position: absolute; top: 0; right: 0; bottom: 0;
+      width: var(--panel-w);
       background: var(--bg2); border-left: 1px solid var(--border);
       box-shadow: var(--shadow); z-index: 10;
       display: flex; flex-direction: column;
@@ -397,8 +397,8 @@
       display:flex; align-items:center; justify-content:center;
       cursor:pointer; color:#fff; transition:background .15s;
     }
-    #pai-filter-btn:hover { background:#3a3ad5; }
-    #pai-filter-btn.active { background:#f5a623; }
+    #pai-filter-btn:hover  { background: var(--bg3); color: var(--text); border-color: var(--text2); }
+    #pai-filter-btn.active { background:#ff9900; }
     #pai-filter-badge {
       position:absolute; top:-2px; right:-2px;
       background:#f5a623; color:#12121f; border-radius:50%;
