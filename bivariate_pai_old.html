@@ -12,12 +12,13 @@
     <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
     <meta http-equiv="content-language" content="IT">
     <meta name="robots" content="index,follow">
-    <meta name="creation_Date" content="20/08/2025>
+    <meta name="creation_Date" content="09/06/2026>
   
+	<link rel="stylesheet" href="lib/css/home.css">
   
-  <link rel="shortcut icon" href="img/favicon.ico"/> 
-  <link rel="icon" href="img/favicon.png" type="image/png"/> 
-  <link href="css/pai_wsl.css" rel="stylesheet">
+  <link rel="shortcut icon" href="bivariate/img/favicon.ico"/> 
+  <link rel="icon" href="bivariate/img/favicon.png" type="image/png"/> 
+  <link href="bivariate/css/pai.css" rel="stylesheet">
  
     <!-- Meta tags per social sharing pen Graph Protocol -->
     <meta property="og:url" content="https://palermohub.opendatasicilia.it/bivariate/">
@@ -295,7 +296,46 @@
   <img src="img/opendatasicilia.png" alt="OpenDataSicilia" height="80">
 </a>
 
-<script src="js/pai.js"></script>
+<script src="bivariate/js/pai.js"></script>
+
+    <!-- Inclusione header e footer PalermoHub -->
+    <link rel="stylesheet" href="lib/css/ph-css.css">
+    <script src="lib/js/client/ph-header.js"></script>
+    <script src="lib/js/client/ph-footer.js"></script>
+
+<script>
+function toggleSidebarFilters() {
+  if (window.innerWidth > 900) return;
+  var body = document.getElementById('sidebar-body');
+  var chevron = document.getElementById('sidebar-toggle-chevron');
+  var title = document.getElementById('sidebar-title-toggle');
+  if (!body) return;
+  var isCollapsed = body.classList.toggle('collapsed');
+  if (chevron) chevron.style.transform = isCollapsed ? 'rotate(180deg)' : '';
+  if (title) title.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+  // Dopo la transizione CSS (350ms) notifica Leaflet del nuovo contenitore
+  setTimeout(function() { if (typeof map !== 'undefined' && map) map.invalidateSize(); }, 380);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth <= 900) {
+    var body = document.getElementById('sidebar-body');
+    var chevron = document.getElementById('sidebar-toggle-chevron');
+    var title = document.getElementById('sidebar-title-toggle');
+    if (body) {
+      // Collapse istantaneo al caricamento (nessuna animazione) così Leaflet
+      // misura subito l'altezza corretta del contenitore mappa
+      body.style.transition = 'none';
+      body.classList.add('collapsed');
+      body.offsetHeight; // forza reflow
+      body.style.transition = '';
+    }
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
+    if (title) title.setAttribute('aria-expanded', 'false');
+  }
+});
+</script>
+
+
 
 </body>
 </html>
