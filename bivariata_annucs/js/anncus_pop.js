@@ -319,7 +319,7 @@ map.on('load', () => {
 });
 
 // --- Fetch props leggeri per statistiche e zoom ---
-fetch('dati/sezioni_stats.json')
+fetch('bivariata_annucs/dati/sezioni_stats.json')
   .then(r => r.json())
   .then(d => { PROPS = d.props; BBOXES = d.bboxes; updateStats(); });
 
