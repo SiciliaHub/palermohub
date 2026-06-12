@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palermo Hub — Densità pop. (ab/km²) × Offerta TPL (corse/ab) · Palermo</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+      integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous"/>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+        integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"
+        integrity="sha384-QfbOCebHNw8pQiPAOd2IFee2v2A5VYZxBk0+JGZ5H+3mfzVIp6zsQNkTsfGJot93" crossorigin="anonymous"></script>
+
+    <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+    <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+    <meta http-equiv="content-language" content="IT">
+    <meta name="robots" content="index,follow">
+    <meta name="creation_Date" content="10/06/2026">
+    <link rel="shortcut icon" href="img/favicon.ico"/>
+    <link rel="icon" href="img/favicon.png" type="image/png"/>
+    <link rel="stylesheet" href="css/tpl.css"/>
+	
+ 
+    <!-- Meta tags per social sharing pen Graph Protocol -->
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/bivariate_tpl.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Densità pop. (ab/km²) × Offerta TPL (corse/ab) · Palermo">
+    <meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:image" content="https://palermohub.opendatasicilia.it/bivariata_annucs/img/social_card.jpg">
+	<!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/bivariate_tpl.html">
+    <meta name="twitter:title" content="Densità pop. (ab/km²) × Offerta TPL (corse/ab) · Palermo">
+    <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/bivariata_annucs/img/social_card.jpg"> 
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-87653723-4');
+    </script>
+	
+</head>
+<body class="dark">
+
+<div id="panel">
+  <button id="panel-toggle" title="Chiudi pannello">›</button>
+
+  <div id="tabbar">
+    <div id="tab-hdrs">
+      <button class="tab-hdr active" data-group="sezioni" title="Sezioni censuarie">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+        Sezioni
+      </button>
+      <button class="tab-hdr" data-group="aggregati" title="Aggregati territoriali">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        Aggregati
+      </button>
+    </div>
+    <div class="tab-group open" id="group-sezioni">
+      <div class="layer-btn active" id="lbtn-biv" onclick="toggleLayer('biv')">
+        <div class="layer-swatch" style="background:linear-gradient(135deg,#c89050,#7ab8c8)"></div>
+        Bivariata (3×3)
+      </div>
+      <div class="layer-btn" id="lbtn-dens" onclick="toggleLayer('dens')">
+        <div class="layer-swatch" style="background:linear-gradient(135deg,#ffcc44,#d73027)"></div>
+        Densità pop.
+      </div>
+      <div class="layer-btn" id="lbtn-anom" onclick="toggleLayer('anom')">
+        <div class="layer-swatch" style="background:linear-gradient(135deg,#c89050,#4090a8)"></div>
+        Anomalie biv.
+      </div>
+    </div>
+    <div class="tab-group" id="group-aggregati">
+      <div class="layer-btn" id="lbtn-circ" onclick="toggleLayer('circ')">
+        <div class="layer-swatch" style="background:#c89050"></div>
+        Circoscrizioni
+      </div>
+      <div class="layer-btn" id="lbtn-quart" onclick="toggleLayer('quart')">
+        <div class="layer-swatch" style="background:#7ab8c8"></div>
+        Quartieri
+      </div>
+      <div class="layer-btn" id="lbtn-upl" onclick="toggleLayer('upl')">
+        <div class="layer-swatch" style="background:#fdb434"></div>
+        UPL
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-header">
+    <h1>Mappa Bivariata · Palermo</h1>
+    <p>Densità pop. (ab/km²) × Offerta TPL (corse/ab) · Sezioni Censuarie 2011</p>
+  </div>
+  <div id="panel-body">
+
+    <div id="fsec-biv-grid" class="fsec">
+      <h3>Classe Bivariata</h3>
+      <p class="biv-hint">Click cella → filtra per classe</p>
+      <div class="biv-wrap">
+        <div class="ax-y-wrap">
+          <span class="ax-y-lbl">Offerta TPL (corse/ab) ↑</span>
+          <div class="ax-y-arrow"></div>
+        </div>
+        <div class="biv-inner">
+          <div class="biv-col-hdrs"><span></span><span>Bassa</span><span>Media</span><span>Alta</span></div>
+          <div class="biv-grid" id="biv-grid"></div>
+          <div class="ax-x"><span style="white-space:nowrap">Densità pop. (ab/km²) →</span><div class="ax-x-arrow"></div></div>
+        </div>
+      </div>
+      <div class="nd-row"><div class="nd-swatch"></div><span>Nessun dato</span></div>
+    </div>
+
+    <hr class="sep">
+
+    <div class="fsec">
+      <h3 id="donut-sec-title">Distribuzione classi</h3>
+      <div id="donut-wrap"></div>
+      <div class="stats-inline">
+        <span><strong id="st-sez">—</strong> sez.</span>
+        <span><strong id="st-civ">—</strong> Densità pop.</span>
+        <span><strong id="st-pop">—</strong> Offerta TPL </span>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <div class="fsec">
+      <h3>Top quartieri</h3>
+      <div id="ranking-wrap"></div>
+    </div>
+
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div id="map-toolbar">
+  <button id="btn-home" title="Vista iniziale">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  </button>
+  <button id="btn-theme" title="Tema chiaro">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+    </svg>
+  </button>
+  <button id="btn-fs" title="Schermo intero">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+    </svg>
+  </button>
+  <div class="zoom-wrap">
+    <input type="range" id="zoom-slider" min="11" max="17" step="0.1" value="11">
+    <div class="zoom-ticks">
+      <span>11</span><span>13</span><span>15</span><span>17</span>
+    </div>
+  </div>
+  <div id="zoom-badge">12</div>
+</div>
+
+<!-- ── Search area ── -->
+<div id="anncus-search-area">
+  <div id="anncus-chips"></div>
+  <div id="anncus-searchbar">
+    <span class="anncus-si">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </svg>
+    </span>
+    <input type="text" id="anncus-search-input"
+           placeholder="Cerca circoscrizione, quartiere, UPL…"
+           autocomplete="off">
+    <button id="anncus-search-clear" style="display:none">&#x2715;</button>
+    <div class="anncus-sep"></div>
+    <button id="anncus-filter-btn" title="Filtri">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+        <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+      </svg>
+      <span id="anncus-filter-badge" style="display:none"></span>
+    </button>
+    <div id="anncus-search-dd"></div>
+  </div>
+</div>
+
+<!-- ── Filter Modal ── -->
+<div id="anncus-filter-overlay"></div>
+<div id="anncus-filter-modal">
+  <div class="pfm-header">
+    <h3>Filtri geografici</h3>
+    <button id="anncus-pfm-close">&#x2715;</button>
+  </div>
+  <div class="pfm-group">
+    <label>Circoscrizione</label>
+    <select id="f-circ"><option value="">— Tutte —</option></select>
+  </div>
+  <div class="pfm-group">
+    <label>Quartiere</label>
+    <select id="f-quart" disabled><option value="">— Tutti —</option></select>
+  </div>
+  <div class="pfm-group">
+    <label>UPL · Unità di Primo Livello</label>
+    <select id="f-upl" disabled><option value="">— Tutte —</option></select>
+  </div>
+  <div class="pfm-footer">
+    <button id="btn-zoom" disabled>↗ Zoom selezione</button>
+    <button id="anncus-pfm-reset">Ripristina</button>
+    <button id="anncus-pfm-apply">Applica</button>
+  </div>
+</div>
+
+<div id="legend-dens">
+  <div class="leg-title">Densità Popolazione</div>
+  <div class="leg-unit">ab/km²</div>
+  <div class="leg-scale">
+    <div class="leg-bar">
+      <div style="background:#800026"></div>
+      <div style="background:#bd0026"></div>
+      <div style="background:#e31a1c"></div>
+      <div style="background:#fc4e2a"></div>
+      <div style="background:#fd8d3c"></div>
+      <div style="background:#feb24c"></div>
+      <div style="background:#fed976"></div>
+      <div style="background:#ffeda0"></div>
+      <div style="background:#ffffcc"></div>
+    </div>
+    <div class="leg-labels">
+      <span>38.5k+</span>
+      <span>19.5k</span>
+      <span>11.1k</span>
+      <span>2.8k</span>
+      <span>396</span>
+    </div>
+  </div>
+</div>
+
+<div id="info"><h3 id="i-title">—</h3><table id="i-table"></table></div>
+
+<a id="ods-logo" href="https://opendatasicilia.it/" target="_blank" rel="noopener"
+   title="OpenDataSicilia">
+  <img src="img/opendatasicilia.png" alt="OpenDataSicilia" height="60">
+</a>
+
+<!-- ── Info modal (slide dal basso) ── -->
+<div id="info-overlay"></div>
+<div id="info-modal-wrap">
+  <button id="info-modal-tab" aria-label="Apri/chiudi informazioni" title="Informazioni">
+    <svg id="info-tab-icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    <span id="info-tab-label">Informazioni</span>
+    <svg id="info-tab-arrow" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M7 14l5-5 5 5z"/></svg>
+  </button>
+  <div id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+    <div class="pfm-header">
+      <h3 id="info-modal-title">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        Informazioni
+      </h3>
+      <button id="info-close" aria-label="Chiudi">&#x2715;</button>
+    </div>
+    <div class="info-tabbar">
+      <button class="info-tab active" data-itab="analisi">Analisi</button>
+      <button class="info-tab" data-itab="faq">Guida</button>	  
+      <button class="info-tab" data-itab="fonte">Dati</button>
+      <button class="info-tab" data-itab="sviluppo">Sviluppo e tecnologia</button>
+      <button class="info-tab" data-itab="licenza">Licenza</button>
+
+    </div>
+
+    <div class="info-panel active" id="itab-analisi">
+      <div class="info-section">
+        <p class="analisi-title">Quanto è servita Palermo dai mezzi pubblici?</p>
+        <p class="info-text">Palermo ha 66 linee di trasporto pubblico, 1.643 fermate e quasi 12.000 corse giornaliere. Ma questi numeri, presi da soli, non bastano per capire se la città è davvero ben servita. Il problema non è quante corse ci sono in totale. È dove vanno.</p>
+
+        <h3 class="analisi-h3">Come funziona la mappa</h3>
+        <p class="info-text">La mappa bivariata incrocia due informazioni per ogni sezione di censimento:</p>
+        <ul class="analisi-list">
+          <li><strong>Densità di popolazione</strong> — quante persone vivono in ogni chilometro quadrato</li>
+          <li><strong>Offerta di trasporto</strong> — quante corse passano ogni giorno per ogni abitante di quella zona</li>
+        </ul>
+        <p class="info-text">Il risultato è una griglia di 9 classi. Le zone in <strong>viola scuro</strong> sono le più critiche: tanta gente, pochi mezzi. Le zone in <strong>blu profondo</strong> sono le più fortunate: molte persone, buona copertura. Le zone in <strong>grigio chiaro</strong> hanno poca gente e pochi mezzi — spesso periferie o aree industriali, dove la bassa offerta è meno urgente.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">I numeri</h3>
+        <p class="info-text">La mappa analizza <strong>2.874 sezioni di censimento</strong> per circa <strong>642.000 abitanti</strong> distribuiti su tutto il territorio comunale. I dati del trasporto vengono dall'orario ufficiale AMAT (formato GTFS, aggiornato a giugno 2026): 66 linee attive, 1.643 fermate, quasi 12.000 corse nel dataset. Il numero sembra alto. Ma la distribuzione non è uniforme.</p>
+
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead>
+              <tr><th>Classe</th><th>Descrizione</th><th>Sezioni</th><th>Abitanti</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>3-1</td><td>Alta densità / Bassa offerta</td><td>99</td><td>1.253</td></tr>
+              <tr><td>3-2</td><td>Alta densità / Media offerta</td><td>298</td><td>19.475</td></tr>
+              <tr><td>3-3</td><td>Alta densità / Alta offerta</td><td>560</td><td>94.873</td></tr>
+              <tr><td>2-1</td><td>Media densità / Bassa offerta</td><td>177</td><td>22.212</td></tr>
+              <tr><td>2-2</td><td>Media densità / Media offerta</td><td>448</td><td>130.254</td></tr>
+              <tr><td>2-3</td><td>Media densità / Alta offerta</td><td>333</td><td>114.521</td></tr>
+              <tr><td>1-1</td><td>Bassa densità / Bassa offerta</td><td>683</td><td>137.610</td></tr>
+              <tr><td>1-2</td><td>Bassa densità / Media offerta</td><td>212</td><td>89.415</td></tr>
+              <tr><td>1-3</td><td>Bassa densità / Alta offerta</td><td>64</td><td>32.394</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">Le zone in difficoltà</h3>
+        <p class="info-text">Le zone dove la densità è alta ma l'offerta è bassa si trovano soprattutto nella <strong>quinta circoscrizione</strong>: Zisa e Noce. Sono due quartieri con oltre <strong>60.000 abitanti</strong> — quasi il 10% della popolazione cittadina — ma con uno dei valori di offerta più bassi in tutta Palermo.</p>
+        <ul class="analisi-list">
+          <li><strong>Zisa</strong>: circa 33.000 abitanti, densità di 20.000 persone per km², con appena 0,32 corse al giorno per abitante</li>
+          <li><strong>Noce</strong>: circa 27.000 abitanti, densità ancora più alta (quasi 26.000 ab/km²), con soli 0,25 passaggi giornalieri per persona</li>
+        </ul>
+        <p class="info-text">L'intera quinta circoscrizione conta quasi 110.000 abitanti. È la zona dove lo squilibrio tra chi abita e quanti mezzi passano è più marcato di tutta la città. Anche nella <strong>quarta circoscrizione</strong> (Montegrappa, S. Rosalia, Pallavicino) la situazione è critica: quasi 99.000 abitanti con un'offerta ferma a 0,34 corse per persona al giorno.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">Le zone ben servite</h3>
+        <p class="info-text">Il <strong>centro storico</strong> — primo municipio, quartieri Palazzo Reale-Monte di Pietà e Tribunali-Castellammare — è di gran lunga il più coperto. Quasi 1,4 corse al giorno per abitante nel quartiere Palazzo Reale. Ha senso: è il nodo dove convergono le principali linee della rete.</p>
+        <p class="info-text">L'<strong>ottava circoscrizione</strong> (Brancaccio, Settecannoli, Villagrazia) è la più popolosa della città con oltre 117.000 abitanti. Qui l'offerta è relativamente buona (indice 0,39), soprattutto considerando l'estensione del territorio. Anche quartieri come Cuba-Calatafimi, Politeama e Malaspina-Palagonia mostrano una buona copertura, con valori tra 0,60 e 0,66 corse per abitante al giorno.</p>
+
+        <h4 class="analisi-h4">Circoscrizioni a confronto</h4>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead>
+              <tr><th>Circoscrizione</th><th>Abitanti</th><th>Densità ab/km²</th><th>Corse/ab/g</th><th>Classe</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>I — Centro storico</td><td>26.287</td><td>10.437</td><td>0,92</td><td>Alta dens / Alta offerta</td></tr>
+              <tr><td>VIII</td><td>117.384</td><td>7.742</td><td>0,39</td><td>Alta dens / Alta offerta</td></tr>
+              <tr><td>V — Zisa, Noce</td><td>109.984</td><td>6.286</td><td>0,25</td><td>⚠ Alta dens / Bassa offerta</td></tr>
+              <tr><td>IV</td><td>98.960</td><td>3.783</td><td>0,34</td><td>Media dens / Bassa offerta</td></tr>
+              <tr><td>III</td><td>72.653</td><td>3.636</td><td>0,36</td><td>Media dens / Media offerta</td></tr>
+              <tr><td>II</td><td>70.374</td><td>3.286</td><td>0,38</td><td>Bassa dens / Alta offerta</td></tr>
+              <tr><td>VI</td><td>70.573</td><td>2.930</td><td>0,38</td><td>Bassa dens / Media offerta</td></tr>
+              <tr><td>VII</td><td>75.792</td><td>2.298</td><td>0,36</td><td>Bassa dens / Bassa offerta</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">Cosa ci dice la mappa</h3>
+        <p class="info-text">La mappa non dice se il servizio è "buono" in senso assoluto. Dice dove c'è uno squilibrio tra chi abita e quanto servizio riceve. Una zona con poca gente e pochi mezzi (grigio, classe 1-1) può essere del tutto normale. Una zona con tanta gente e pochi mezzi (viola, classe 3-1 o 3-2) è invece un problema concreto per chi ci vive.</p>
+        <p class="info-text">Palermo ha sacche significative di sottoservizio in aree densamente abitate. Affrontare questo squilibrio richiederebbe di riorientare alcune risorse verso le zone più scoperte. Non è una questione di fare di più in assoluto, ma di farlo dove serve di più.</p>
+
+        <p class="analisi-footer">Dati: Comune di Palermo (popolazione residente 2022), AMAT Palermo SPA (GTFS giugno 2026).</p>
+      </div>
+    </div>
+
+
+    <div class="info-panel" id="itab-faq">
+      <div class="info-section">
+        <p class="analisi-title">Come leggere la mappa</p>
+        <p class="info-text">La mappa mostra due informazioni insieme: quante persone abitano in ogni zona di Palermo e quanto servizio di trasporto pubblico ricevono. L'obiettivo è capire, a colpo d'occhio, dove c'è equilibrio e dove invece ci sono squilibri.</p>
+
+        <h3 class="analisi-h3">La griglia dei colori</h3>
+        <p class="info-text">Il cuore della mappa è una griglia 3×3. Ogni cella corrisponde a una combinazione di <strong>densità di popolazione</strong> (asse orizzontale) e <strong>offerta di trasporto</strong> (asse verticale). La regola è semplice: più si tende al <strong>blu scuro</strong>, meglio è. L'<strong>arancione scuro</strong> segnala una criticità.</p>
+
+        <!-- griglia 3x3 visuale -->
+        <div style="display:flex;gap:10px;align-items:flex-end;margin:12px 0 16px;flex-wrap:wrap;">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px;font-size:.68rem;color:var(--text2);">
+            <span style="writing-mode:vertical-rl;transform:rotate(180deg);letter-spacing:.05em;font-weight:700;color:var(--accent);font-size:.65rem;text-transform:uppercase;margin-bottom:4px;">Offerta TPL ↑</span>
+          </div>
+          <div>
+            <div style="display:grid;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:2px;">
+              <!-- riga 3: alta offerta -->
+              <div style="background:#7ab8c8;border-radius:3px;" title="Bassa densità / Alta offerta"></div>
+              <div style="background:#5898a8;border-radius:3px;" title="Media densità / Alta offerta"></div>
+              <div style="background:#306878;border-radius:3px;" title="Alta densità / Alta offerta — virtuosa"></div>
+              <!-- riga 2: media offerta -->
+              <div style="background:#c8d8d4;border-radius:3px;" title="Bassa densità / Media offerta"></div>
+              <div style="background:#a8b8b0;border-radius:3px;" title="Media densità / Media offerta"></div>
+              <div style="background:#809098;border-radius:3px;" title="Alta densità / Media offerta"></div>
+              <!-- riga 1: bassa offerta -->
+              <div style="background:#f0ece4;border-radius:3px;" title="Bassa densità / Bassa offerta"></div>
+              <div style="background:#e8d0a4;border-radius:3px;" title="Media densità / Bassa offerta"></div>
+              <div style="background:#c89050;border-radius:3px;" title="Alta densità / Bassa offerta — critica"></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;margin-top:4px;font-size:.65rem;color:var(--text2);width:134px;">
+              <span>Bassa</span><span>Media</span><span>Alta</span>
+            </div>
+            <div style="text-align:center;font-size:.65rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-top:2px;">Densità →</div>
+          </div>
+          <div style="display:flex;flex-direction:column;justify-content:space-between;height:134px;font-size:.65rem;color:var(--text2);padding-bottom:20px;">
+            <span>Alta</span><span>Media</span><span>Bassa</span>
+          </div>
+        </div>
+
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead>
+              <tr><th>Colore</th><th>Classe</th><th>Cosa significa</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#c89050;border-radius:2px;vertical-align:middle;"></span></td><td>Alta dens / Bassa offerta</td><td>Zona critica: tanta gente, pochi mezzi</td></tr>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#e8d0a4;border-radius:2px;vertical-align:middle;"></span></td><td>Media dens / Bassa offerta</td><td>Zona mediamente abitata, trasporti scarsi</td></tr>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#f0ece4;border-radius:2px;vertical-align:middle;"></span></td><td>Bassa dens / Bassa offerta</td><td>Poca gente, pochi mezzi — spesso normale</td></tr>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#809098;border-radius:2px;vertical-align:middle;"></span></td><td>Alta dens / Media offerta</td><td>Densa, copertura discreta ma migliorabile</td></tr>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#a8b8b0;border-radius:2px;vertical-align:middle;"></span></td><td>Media dens / Media offerta</td><td>Situazione equilibrata nella media</td></tr>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#c8d8d4;border-radius:2px;vertical-align:middle;"></span></td><td>Bassa dens / Media offerta</td><td>Poco abitata, copertura discreta</td></tr>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#306878;border-radius:2px;vertical-align:middle;"></span></td><td>Alta dens / Alta offerta</td><td>Zona virtuosa: tanta gente, buoni trasporti</td></tr>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#5898a8;border-radius:2px;vertical-align:middle;"></span></td><td>Media dens / Alta offerta</td><td>Buon equilibrio tra domanda e offerta</td></tr>
+              <tr><td><span style="display:inline-block;width:14px;height:14px;background:#7ab8c8;border-radius:2px;vertical-align:middle;"></span></td><td>Bassa dens / Alta offerta</td><td>Poco abitata con ottima copertura</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">I layer disponibili</h3>
+        <p class="info-text">In cima al pannello laterale trovi quattro pulsanti che cambiano il modo in cui la mappa colora le sezioni.</p>
+
+        <h4 class="analisi-h4">Bivariata (predefinito)</h4>
+        <p class="info-text">È la vista principale. Ogni sezione è colorata secondo la griglia 3×3. Usa questa vista per vedere il quadro completo.</p>
+
+        <h4 class="analisi-h4">Offerta TPL</h4>
+        <p class="info-text">Mostra solo la copertura del trasporto: da blu chiaro (poca offerta) a blu scuro (tanta offerta), indipendentemente dalla densità. Utile per confrontare zone diverse solo sul versante trasporti.</p>
+
+        <h4 class="analisi-h4">Anomalia bivariata</h4>
+        <p class="info-text">Evidenzia le sezioni dove c'è uno squilibrio netto tra densità e offerta. <span style="display:inline-block;width:10px;height:10px;background:#c89050;border-radius:2px;vertical-align:middle;"></span> <strong>Arancione</strong> = zone <em>sottoservite</em> (la densità supera l'offerta). <span style="display:inline-block;width:10px;height:10px;background:#4090a8;border-radius:2px;vertical-align:middle;"></span> <strong>Azzurro</strong> = zone <em>sovraservite</em> (l'offerta è sproporzionata rispetto agli abitanti).</p>
+
+        <h4 class="analisi-h4">Quartieri / Circoscrizioni / UPL</h4>
+        <p class="info-text">Mostra i dati aggregati a livello di quartiere, circoscrizione o Unità di Paesaggio. I valori sono la media delle sezioni che compongono quell'area.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">I filtri</h3>
+        <p class="info-text">Sopra la mappa c'è una barra di ricerca. Scrivi il nome di una circoscrizione, un quartiere o un'UPL: la mappa zoommerà automaticamente su quell'area e aggiornerà tutte le statistiche. Ogni selezione appare come un chip colorato nella barra — clicca la <strong>×</strong> per rimuoverla.</p>
+        <p class="info-text">Puoi anche usare i menu a tendina nel pannello: prima la circoscrizione, poi il quartiere, poi l'Unità di Paesaggio. Ogni livello sblocca quello successivo.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">Il pannello statistiche</h3>
+        <ul class="analisi-list">
+          <li><strong>Distribuzione classi</strong> — Un grafico a ciambella mostra quante sezioni appartengono a ciascuna classe nell'area selezionata. Cliccando su una fetta puoi filtrare la mappa per mostrare solo quella classe.</li>
+          <li><strong>Densità media / Offerta media</strong> — La densità di popolazione media (ab/km²) e il numero medio di corse giornaliere per abitante nelle sezioni visibili.</li>
+          <li><strong>Ranking</strong> — Le sezioni con maggiore densità e quelle con maggiore offerta nell'area selezionata. Cliccando su una riga la mappa si centra su quella sezione.</li>
+        </ul>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">Il tooltip</h3>
+        <p class="info-text">Passando il mouse su una sezione compare un riquadro con: Circoscrizione, Quartiere, UPL, densità di popolazione (ab/km²), offerta TPL (corse/ab/giorno) e classe bivariata. Per le aree aggregate il tooltip mostra i valori dell'intera zona.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">Cosa non dice la mappa</h3>
+        <p class="info-text">La mappa usa le corse come misura dell'offerta: quante volte al giorno passa un mezzo pubblico in quella zona, diviso per il numero di abitanti. Non considera la velocità, la frequenza nelle ore di punta, la distanza dalle fermate né la qualità del servizio. È una misura indiretta ma oggettiva, che permette di confrontare tutte le zone della città con gli stessi criteri.</p>
+
+        <p class="analisi-footer">Dati: Comune di Palermo (popolazione residente 2022), AMAT Palermo SPA (GTFS giugno 2026).</p>
+      </div>
+    </div><!-- /itab-faq -->
+
+
+  <div class="info-panel" id="itab-fonte">
+    <div class="info-section">
+      <div class="info-row">
+	 <strong> I dati provengono da fonti pubbliche e verificabili: </strong> <br><br>
+        <strong>Popolazione residente 2022</strong>: Comune di Palermo<br>
+        <a href="https://opendata.comune.palermo.it/opendata-archivio-dataset.php?tag=POPOLAZIONE%20RESIDENTE" title=">Popolazione residente 2022 - Comune di Palermo " target="_blank" rel="noopener">opendata.comune.palermo.it</a>
+      </div>
+	       <div class="info-row">
+        <strong>DATI DEL TRASPORTO PUBBLICO LOCALE - Periodo 08/06/2026 </strong>: Amat Palermo SPA<br>
+        <a href="https://opendata.comune.palermo.it/opendata-dataset.php?dataset=1805" title="Dati del Trasporto Pubblico Locale - AMAT Palermo" target="_blank" rel="noopener">Comune di Palermo</a>
+      </div>
+      </div>
+    </div>
+
+    <div class="info-panel" id="itab-sviluppo">
+      <div class="info-section">
+        <p class="info-text">Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener" class="mi-link">@gbvitrano</a> in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener" class="mi-link">Claude AI (Anthropic)</a> e <a href="https://gemini.google.com" target="_blank" rel="noopener" class="mi-link">Gemini</a> che hanno affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p>
+        <br>
+        <p class="info-text">La mappa usa <b>PMTiles</b>, un formato vettoriale moderno che permette di caricare solo i tile visibili, senza un server backend. Questo la rende veloce, leggera e ospitabile su GitHub Pages — zero costi di infrastruttura.</p>
+      </div>
+    </div>
+
+    <div class="info-panel" id="itab-licenza">
+      <div class="info-section">
+        <p class="info-text">I contenuti di questa applicazione sono rilasciati sotto licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener"><strong>CC BY 4.0 – Attribuzione 4.0 Internazionale</strong></a>. Sei libero di condividere e adattare il materiale per qualsiasi scopo, anche commerciale, a condizione di citare adeguatamente la fonte.</p>
+      </div>
+    </div>
+	
+
+  </div><!-- /info-modal -->
+  <button id="info-totop" aria-label="Torna in cima">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M7 14l5-5 5 5z"/></svg>
+  </button>
+</div><!-- /info-modal-wrap -->
+
+<script src="js/tpl.js"></script>
+</body>
+</html>
