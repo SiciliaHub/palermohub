@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Palermo Hub -  Mappa Bivariata — Densità Civici × Densità Popolazione · Palermo</title>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+      integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V" crossorigin="anonymous"/>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+        integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/pmtiles@3.2.1/dist/pmtiles.js"
+        integrity="sha384-QfbOCebHNw8pQiPAOd2IFee2v2A5VYZxBk0+JGZ5H+3mfzVIp6zsQNkTsfGJot93" crossorigin="anonymous"></script>
+
+    <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
+    <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
+    <meta http-equiv="content-language" content="IT">
+    <meta name="robots" content="index,follow">
+    <meta name="creation_Date" content="10/06/2026">
+    <link rel="shortcut icon" href="bivariata_annucs/img/favicon.ico"/>
+    <link rel="icon" href="bivariata_annucs/img/favicon.png" type="image/png"/>
+    <link rel="stylesheet" href="bivariata_annucs/css/anncus_pop.css"/>
+	
+		<link rel="stylesheet" href="lib/css/home.css">
+ 
+    <!-- Meta tags per social sharing pen Graph Protocol -->
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/bivariate_anncus.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Mappa Bivariata — Densità Civici × Densità Popolazione · Palermo">
+    <meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta property="og:image" content="https://palermohub.opendatasicilia.it/bivariata_annucs/img/social_card.jpg">
+	<!-- twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/bivariate_anncus.html">
+    <meta name="twitter:title" content="Mappa Bivariata — Densità Civici × Densità Popolazione · Palermo">
+    <meta name="twitter:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+    <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/bivariata_annucs/img/social_card.jpg"> 
+  
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-87653723-4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-87653723-4');
+    </script>
+	
+</head>
+<body class="dark">
+
+<div id="panel">
+  <button id="panel-toggle" title="Chiudi pannello">›</button>
+
+  <div id="tabbar">
+    <div id="tab-hdrs">
+      <button class="tab-hdr active" data-group="sezioni" title="Sezioni censuarie">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z"/></svg>
+        Sezioni
+      </button>
+      <button class="tab-hdr" data-group="aggregati" title="Aggregati territoriali">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+        Aggregati
+      </button>
+    </div>
+    <div class="tab-group open" id="group-sezioni">
+      <div class="layer-btn active" id="lbtn-biv" onclick="toggleLayer('biv')">
+        <div class="layer-swatch" style="background:linear-gradient(135deg,#be64ac,#5ac8c8)"></div>
+        Bivariata (3×3)
+      </div>
+      <div class="layer-btn" id="lbtn-dens" onclick="toggleLayer('dens')">
+        <div class="layer-swatch" style="background:linear-gradient(135deg,#ffcc44,#d73027)"></div>
+        Densità pop.
+      </div>
+      <div class="layer-btn" id="lbtn-anom" onclick="toggleLayer('anom')">
+        <div class="layer-swatch" style="background:#ff6b35"></div>
+        Anomalie biv.
+      </div>
+    </div>
+    <div class="tab-group" id="group-aggregati">
+      <div class="layer-btn" id="lbtn-circ" onclick="toggleLayer('circ')">
+        <div class="layer-swatch" style="background:#be64ac"></div>
+        Circoscrizioni
+      </div>
+      <div class="layer-btn" id="lbtn-quart" onclick="toggleLayer('quart')">
+        <div class="layer-swatch" style="background:#5ac8c8"></div>
+        Quartieri
+      </div>
+      <div class="layer-btn" id="lbtn-upl" onclick="toggleLayer('upl')">
+        <div class="layer-swatch" style="background:#fdb434"></div>
+        UPL
+      </div>
+    </div>
+  </div>
+
+  <div id="panel-header">
+    <h1>Mappa Bivariata · Palermo</h1>
+    <p>Densità Civici ANNCSU × Densità Popolazione ISTAT · Sezioni Censuarie 2011</p>
+  </div>
+  <div id="panel-body">
+
+    <div id="fsec-biv-grid" class="fsec">
+      <h3>Classe Bivariata</h3>
+      <p class="biv-hint">Click cella → filtra per classe</p>
+      <div class="biv-wrap">
+        <div class="ax-y-wrap">
+          <span class="ax-y-lbl">Densità Popolazione ↑</span>
+          <div class="ax-y-arrow"></div>
+        </div>
+        <div class="biv-inner">
+          <div class="biv-col-hdrs"><span></span><span>Bassa</span><span>Media</span><span>Alta</span></div>
+          <div class="biv-grid" id="biv-grid"></div>
+          <div class="ax-x"><span style="white-space:nowrap">Civici →</span><div class="ax-x-arrow"></div></div>
+        </div>
+      </div>
+      <div class="nd-row"><div class="nd-swatch"></div><span>Nessun dato</span></div>
+    </div>
+
+    <hr class="sep">
+
+    <div class="fsec">
+      <h3 id="donut-sec-title">Distribuzione classi</h3>
+      <div id="donut-wrap"></div>
+      <div class="stats-inline">
+        <span><strong id="st-sez">—</strong> sez.</span>
+        <span><strong id="st-civ">—</strong> civici</span>
+        <span><strong id="st-pop">—</strong> ab.</span>
+      </div>
+    </div>
+
+    <hr class="sep">
+
+    <div class="fsec">
+      <h3>Top quartieri</h3>
+      <div id="ranking-wrap"></div>
+    </div>
+
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div id="map-toolbar">
+  <button id="btn-home" title="Vista iniziale">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+    </svg>
+  </button>
+  <button id="btn-theme" title="Tema chiaro">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-2.98 0-5.4-2.42-5.4-5.4 0-1.81.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/>
+    </svg>
+  </button>
+  <button id="btn-fs" title="Schermo intero">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+      <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+    </svg>
+  </button>
+  <div class="zoom-wrap">
+    <input type="range" id="zoom-slider" min="11" max="17" step="0.1" value="11">
+    <div class="zoom-ticks">
+      <span>11</span><span>13</span><span>15</span><span>17</span>
+    </div>
+  </div>
+  <div id="zoom-badge">12</div>
+</div>
+
+<!-- ── Search area ── -->
+<div id="anncus-search-area">
+  <div id="anncus-chips"></div>
+  <div id="anncus-searchbar">
+    <span class="anncus-si">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16">
+        <path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+      </svg>
+    </span>
+    <input type="text" id="anncus-search-input"
+           placeholder="Cerca circoscrizione, quartiere, UPL…"
+           autocomplete="off">
+    <button id="anncus-search-clear" style="display:none">&#x2715;</button>
+    <div class="anncus-sep"></div>
+    <button id="anncus-filter-btn" title="Filtri">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15">
+        <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+      </svg>
+      <span id="anncus-filter-badge" style="display:none"></span>
+    </button>
+    <div id="anncus-search-dd"></div>
+  </div>
+</div>
+
+<!-- ── Filter Modal ── -->
+<div id="anncus-filter-overlay"></div>
+<div id="anncus-filter-modal">
+  <div class="pfm-header">
+    <h3>Filtri geografici</h3>
+    <button id="anncus-pfm-close">&#x2715;</button>
+  </div>
+  <div class="pfm-group">
+    <label>Circoscrizione</label>
+    <select id="f-circ"><option value="">— Tutte —</option></select>
+  </div>
+  <div class="pfm-group">
+    <label>Quartiere</label>
+    <select id="f-quart" disabled><option value="">— Tutti —</option></select>
+  </div>
+  <div class="pfm-group">
+    <label>UPL · Unità di Primo Livello</label>
+    <select id="f-upl" disabled><option value="">— Tutte —</option></select>
+  </div>
+  <div class="pfm-footer">
+    <button id="btn-zoom" disabled>↗ Zoom selezione</button>
+    <button id="anncus-pfm-reset">Ripristina</button>
+    <button id="anncus-pfm-apply">Applica</button>
+  </div>
+</div>
+
+<div id="legend-dens">
+  <div class="leg-title">Densità Popolazione</div>
+  <div class="leg-unit">ab/km²</div>
+  <div class="leg-scale">
+    <div class="leg-bar">
+      <div style="background:#800026"></div>
+      <div style="background:#bd0026"></div>
+      <div style="background:#e31a1c"></div>
+      <div style="background:#fc4e2a"></div>
+      <div style="background:#fd8d3c"></div>
+      <div style="background:#feb24c"></div>
+      <div style="background:#fed976"></div>
+      <div style="background:#ffeda0"></div>
+      <div style="background:#ffffcc"></div>
+    </div>
+    <div class="leg-labels">
+      <span>38.5k+</span>
+      <span>19.5k</span>
+      <span>11.1k</span>
+      <span>2.8k</span>
+      <span>396</span>
+    </div>
+  </div>
+</div>
+
+<div id="info"><h3 id="i-title">—</h3><table id="i-table"></table></div>
+
+<a id="ods-logo" href="https://opendatasicilia.it/" target="_blank" rel="noopener"
+   title="OpenDataSicilia">
+  <img src="img/opendatasicilia.png" alt="OpenDataSicilia" height="60">
+</a>
+
+<!-- ── Info modal (slide dal basso) ── -->
+<div id="info-overlay"></div>
+<div id="info-modal-wrap">
+  <button id="info-modal-tab" aria-label="Apri/chiudi informazioni" title="Informazioni">
+    <svg id="info-tab-icon" viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+    <span id="info-tab-label">Informazioni</span>
+    <svg id="info-tab-arrow" viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M7 14l5-5 5 5z"/></svg>
+  </button>
+  <div id="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-modal-title">
+    <div class="pfm-header">
+      <h3 id="info-modal-title">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+        Informazioni
+      </h3>
+      <button id="info-close" aria-label="Chiudi">&#x2715;</button>
+    </div>
+    <div class="info-tabbar">
+      <button class="info-tab active" data-itab="analisi">Analisi</button>
+      <button class="info-tab" data-itab="faq">Guida</button>	  
+      <button class="info-tab" data-itab="fonte">Dati</button>
+      <button class="info-tab" data-itab="sviluppo">Sviluppo e tecnologia</button>
+      <button class="info-tab" data-itab="licenza">Licenza</button>
+
+    </div>
+
+    <div class="info-panel active" id="itab-analisi">
+      <div class="info-section">
+        <h2 class="analisi-title">Analisi Bivariata — Densità Civici × Densità Popolazione · Palermo</h2>
+        <p class="info-text"><strong>Fonte:</strong> ANNCSU (civici georeferenziati) × ISTAT Sezioni Censuarie 2011<br>
+        <strong>Universo:</strong> 2.874 sezioni censuarie · 164.944 civici · 642.007 abitanti</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">1. Lettura generale</h3>
+
+        <h4 class="analisi-h4">Metrica chiave: rapporto civici/popolazione</h4>
+        <p class="info-text">Il rapporto medio cittadino è <strong>0,26 civici per abitante</strong> (≈ 1 civico ogni 3,9 persone). Questo valore di riferimento è essenziale per distinguere le anomalie: sopra questa soglia le sezioni tendono verso la classe "alta densità civici", sotto verso quella "bassa".</p>
+
+        <h4 class="analisi-h4">Distribuzione delle 9 classi bivariate</h4>
+        <p class="info-text">La mappa bivariata (3×3, asse X = densità civici, asse Y = densità popolazione) mostra questa distribuzione sul totale delle sezioni:</p>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>Classe</th><th>Significato</th><th>Sezioni</th><th>%</th><th>Civici</th><th>Abitanti</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1-1</strong></td><td>Bassa/Bassa</td><td>683</td><td>23,8%</td><td>44.118</td><td>137.610</td></tr>
+              <tr><td><strong>1-2</strong></td><td>Bassa civ / Media pop</td><td>212</td><td>7,4%</td><td>9.280</td><td>89.415</td></tr>
+              <tr><td><strong>1-3</strong></td><td>Bassa civ / <strong>Alta pop</strong></td><td>64</td><td>2,2%</td><td>1.673</td><td>32.394</td></tr>
+              <tr><td><strong>2-1</strong></td><td>Media civ / Bassa pop</td><td>177</td><td>6,2%</td><td>13.186</td><td>22.212</td></tr>
+              <tr><td><strong>2-2</strong></td><td>Media/Media</td><td>448</td><td>15,6%</td><td>32.654</td><td>130.254</td></tr>
+              <tr><td><strong>2-3</strong></td><td>Media civ / Alta pop</td><td>333</td><td>11,6%</td><td>18.235</td><td>114.521</td></tr>
+              <tr><td><strong>3-1</strong></td><td><strong>Alta civ</strong> / Bassa pop</td><td>99</td><td>3,4%</td><td>3.096</td><td>1.253</td></tr>
+              <tr><td><strong>3-2</strong></td><td>Alta civ / Media pop</td><td>298</td><td>10,4%</td><td>13.221</td><td>19.475</td></tr>
+              <tr><td><strong>3-3</strong></td><td>Alta/Alta</td><td>560</td><td>19,5%</td><td>29.481</td><td>94.873</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 class="analisi-h4">Tre cluster dominanti</h4>
+        <p class="info-text">La città si organizza attorno a tre pattern principali che insieme coprono oltre il 58% delle sezioni:</p>
+        <ol class="analisi-list">
+          <li><strong>1-1 (23,8%)</strong> — Tessuto a bassa intensità: periferie costiere, aree rurali residue (Mondello, Sferracavallo, margini est e sud).</li>
+          <li><strong>3-3 (19,5%)</strong> — Città compatta e popolata: centro espanso storico, quartieri residenziali maturi (Noce, Oreto, Zisa interna).</li>
+          <li><strong>2-2 (15,6%)</strong> — Tessuto urbano equilibrato: i quartieri novecenteschi strutturati (Libertà, Settecannoli, zone VIII circoscrizione).</li>
+        </ol>
+
+        <h4 class="analisi-h4">Le anomalie off-diagonale</h4>
+        <p class="info-text">Le classi agli angoli opposti della matrice rivelano le disfunzioni urbane più significative:</p>
+
+        <p class="info-text"><strong>Classe 3-1 — Alta densità civici, bassa densità popolazione (99 sezioni)</strong><br>
+        Sono le sezioni con molti civici ma pochissimi residenti. Segnale quasi esclusivo del <strong>centro storico spopolato</strong>: strade fitte, numerazione civica densa, ma abitazioni vuote o destinate ad attività non residenziali. Concentrazione massima: Circoscrizione I (Tribunali-Kalsa, Palazzo Reale, Castellammare), con rapporti locali che sfiorano 34-36 civici per abitante. Il fenomeno riguarda anche zone di Politeama (Croci - Ruggero Settimo).</p>
+
+        <p class="info-text"><strong>Classe 1-3 — Bassa densità civici, alta densità popolazione (64 sezioni)</strong><br>
+        Sezioni con molta gente ma pochi indirizzi. Segnale caratteristico dell'<strong>edilizia residenziale pubblica compatta</strong> degli anni '60-'70: grandi blocchi serviti da pochi accessi stradali. Concentrazione: San Filippo Neri (Pallavicino), San Giovanni Apostolo (Cruillas), Resuttana, Bonagia (Villagrazia), Roccella Acqua dei Corsari.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">2. Analisi per Circoscrizione</h3>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>Circ.</th><th>Sezioni</th><th>Civici</th><th>Abitanti</th><th>Civ/Pop</th><th>Classe dom.</th><th>Carattere</th></tr></thead>
+            <tbody>
+              <tr><td><strong>I</strong></td><td>551</td><td>18.315</td><td>26.287</td><td><strong>0,697</strong></td><td>3-3 / 3-1</td><td>Centro storico spopolato</td></tr>
+              <tr><td><strong>II</strong></td><td>274</td><td>16.811</td><td>70.374</td><td>0,239</td><td>1-1</td><td>Periferia est residenziale</td></tr>
+              <tr><td><strong>III</strong></td><td>249</td><td>16.006</td><td>72.653</td><td>0,220</td><td>1-1</td><td>Sud: Oreto, Villagrazia</td></tr>
+              <tr><td><strong>IV</strong></td><td>289</td><td>22.030</td><td>98.960</td><td>0,223</td><td>1-1</td><td>Ovest: Mezzomonreale, Cuba</td></tr>
+              <tr><td><strong>V</strong></td><td>366</td><td>22.176</td><td>109.984</td><td>0,202</td><td>3-3</td><td>Zisa, Noce, Uditore — densa</td></tr>
+              <tr><td><strong>VI</strong></td><td>168</td><td>13.736</td><td>70.573</td><td>0,195</td><td>1-1</td><td>Nord: Resuttana, Cruillas</td></tr>
+              <tr><td><strong>VII</strong></td><td>255</td><td>25.587</td><td>75.792</td><td><strong>0,338</strong></td><td>1-1</td><td>Costa nord-ovest + Mondello</td></tr>
+              <tr><td><strong>VIII</strong></td><td>721</td><td>30.283</td><td>117.384</td><td>0,258</td><td>2-2</td><td>Libertà, Politeama — città nuova</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="info-text"><strong>Circoscrizione I — Centro storico</strong><br>
+        Il valore di <strong>0,697 civici/abitante</strong> è quasi tre volte la media cittadina. Le sezioni di classe 3-1 sono concentrate qui: strade medievali con numerazione continua, residenti ridottissimi. I quartieri Tribunali-Kalsa e Castellammare mostrano i picchi massimi (Castellammare: ratio aggregato 0,837). Il fenomeno non è recente ma è peggiorato dal dopoguerra: il centro storico di Palermo ha perso circa i 2/3 della popolazione dal 1951.</p>
+
+        <p class="info-text"><strong>Circoscrizione VIII — Città borghese</strong><br>
+        La più estesa per numero di sezioni (721) e la prima per popolazione (117.384 ab.). La classe dominante 2-2 indica un tessuto equilibrato. Al suo interno convivono zone ad alta densità di entrambi gli indicatori (Borgo Vecchio, S.Francesco di Paola) e aree semicentrali più diradate (Montepellegrino, Acquasanta).</p>
+
+        <p class="info-text"><strong>Circoscrizione V — Quartieri operai densi</strong><br>
+        Seconda per popolazione (109.984), con classe dominante 3-3: la densità abitativa è alta, la numerazione civica segue. Zisa, Noce e Uditore sono quartieri storicamente a forte insediamento popolare. Il rapporto 0,202 è il più basso tra le circoscrizioni centrali.</p>
+
+        <p class="info-text"><strong>Circoscrizione VII — Costa e villeggiatura</strong><br>
+        Il rapporto 0,338 (secondo più alto dopo la I) è trainato da <strong>Partanna Mondello</strong> (0,579) e <strong>Sferracavallo</strong> (0,456): zone balneari con ville, case vacanza, numerazione estesa su viabilità costiera ma residenti fissi ridotti. San Filippo Neri inverte il pattern (0,086): grande quartiere di edilizia pubblica con pochissimi civici su strada.</p>
+
+        <p class="info-text"><strong>Circoscrizioni II, III, IV, VI — Periferie residenziali</strong><br>
+        Tutte con ratio tra 0,195 e 0,239, classe dominante 1-1: il tessuto è meno denso rispetto al centro-città, con un equilibrio accettabile tra indirizzi e residenti. La classe 1-1 qui non segnala anomalia ma semplicemente bassa intensità urbana.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">3. Analisi per Quartiere</h3>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>Quartiere</th><th>Circ.</th><th>Sez.</th><th>Civici</th><th>Abitanti</th><th>Civ/Pop</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>Settecannoli</td><td>II</td><td>210</td><td>10.279</td><td>47.921</td><td>0,214</td><td>Quartiere più popoloso</td></tr>
+              <tr><td>Libertà</td><td>VIII</td><td>205</td><td>8.944</td><td>40.688</td><td>0,220</td><td></td></tr>
+              <tr><td>Resuttana - San Lorenzo</td><td>VI</td><td>112</td><td>8.733</td><td>40.238</td><td>0,217</td><td></td></tr>
+              <tr><td>Villagrazia - Falsomiele</td><td>III</td><td>85</td><td>8.753</td><td>39.719</td><td>0,220</td><td></td></tr>
+              <tr><td>Oreto - Stazione</td><td>III</td><td>197</td><td>8.969</td><td>39.041</td><td>0,230</td><td></td></tr>
+              <tr><td>Mezzomonreale - Villa Tasca</td><td>IV</td><td>74</td><td>7.763</td><td>35.665</td><td>0,218</td><td></td></tr>
+              <tr><td>Zisa</td><td>V</td><td>145</td><td>7.112</td><td>33.243</td><td>0,214</td><td></td></tr>
+              <tr><td><strong>Politeama</strong></td><td>VIII</td><td>341</td><td>11.985</td><td>31.396</td><td><strong>0,382</strong></td><td>Centro terziario</td></tr>
+              <tr><td>Cruillas - S.Giovanni Apostolo</td><td>VI</td><td>56</td><td>5.003</td><td>30.335</td><td>0,165</td><td>Edilizia pubblica</td></tr>
+              <tr><td>Uditore - Passo di Rigano</td><td>V</td><td>66</td><td>6.058</td><td>30.245</td><td>0,200</td><td></td></tr>
+              <tr><td>Noce</td><td>V</td><td>113</td><td>6.301</td><td>27.073</td><td>0,233</td><td></td></tr>
+              <tr><td>Montepellegrino</td><td>VIII</td><td>82</td><td>5.585</td><td>26.454</td><td>0,211</td><td></td></tr>
+              <tr><td>Pallavicino</td><td>VII</td><td>57</td><td>4.653</td><td>25.911</td><td>0,180</td><td>Edilizia pubblica</td></tr>
+              <tr><td>Tommaso Natale - Sferracavallo</td><td>VII</td><td>57</td><td>7.310</td><td>22.087</td><td><strong>0,331</strong></td><td>Costa/periurbano</td></tr>
+              <tr><td>Montegrappa - S.Rosalia</td><td>IV</td><td>102</td><td>3.676</td><td>21.058</td><td>0,175</td><td>Edilizia pubblica</td></tr>
+              <tr><td>Cuba - Calatafimi</td><td>IV</td><td>70</td><td>3.885</td><td>19.507</td><td>0,199</td><td></td></tr>
+              <tr><td><strong>Borgo Nuovo</strong></td><td>V</td><td>42</td><td>2.705</td><td>19.423</td><td><strong>0,139</strong></td><td>Edilizia pubblica — min. ratio</td></tr>
+              <tr><td><strong>Partanna Mondello</strong></td><td>VII</td><td>127</td><td>11.241</td><td>19.402</td><td><strong>0,579</strong></td><td>Costiero/stagionale — max ratio</td></tr>
+              <tr><td>Malaspina - Palagonia</td><td>VIII</td><td>93</td><td>3.769</td><td>18.846</td><td>0,200</td><td></td></tr>
+              <tr><td>Brancaccio - Ciaculli</td><td>II</td><td>31</td><td>4.816</td><td>16.346</td><td>0,295</td><td></td></tr>
+              <tr><td>Altarello</td><td>IV</td><td>24</td><td>3.417</td><td>14.931</td><td>0,229</td><td></td></tr>
+              <tr><td><strong>Palazzo Reale - Monte di Pietà</strong></td><td>I</td><td>304</td><td>9.156</td><td>14.020</td><td><strong>0,653</strong></td><td>Centro storico svuotato</td></tr>
+              <tr><td><strong>Tribunali-Castellammare</strong></td><td>I</td><td>247</td><td>9.159</td><td>12.267</td><td><strong>0,747</strong></td><td>Centro storico — max spopolamento</td></tr>
+              <tr><td>Arenella - Vergine Maria</td><td>VII</td><td>14</td><td>2.383</td><td>8.392</td><td>0,284</td><td></td></tr>
+              <tr><td>Boccadifalco</td><td>IV</td><td>19</td><td>3.289</td><td>7.799</td><td><strong>0,422</strong></td><td>Territorio esteso/rurale</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="info-text"><strong>Tribunali-Castellammare (0,747)</strong> e <strong>Palazzo Reale - Monte di Pietà (0,653)</strong>: i due quartieri del centro storico mostrano il divario più marcato tra civici e residenti dell'intera città. Con appena 12.267 e 14.020 abitanti rispettivamente ma oltre 9.000 civici ciascuno, indicano una presenza fisica di strade e indirizzi sproporzionata rispetto all'uso residenziale reale.</p>
+        <p class="info-text"><strong>Partanna Mondello (0,579)</strong>: picco opposto. Vasta area costiera con villette, seconde case e strutture turistiche. La numerazione civica è molto estesa (11.241 civici, il terzo valore assoluto tra tutti i quartieri) a fronte di soli 19.402 residenti stabili.</p>
+        <p class="info-text"><strong>Borgo Nuovo (0,139)</strong>: il rapporto più basso tra i quartieri significativi. Grande quartiere di edilizia residenziale pubblica (Iacp) degli anni '70 — grandi edifici con pochi ingressi su strada, altissima densità abitativa per superficie.</p>
+        <p class="info-text"><strong>Politeama (0,382)</strong>: densità civica elevata su territorio molto esteso (341 sezioni). Quartiere a vocazione terziaria e commerciale, con numerose attività e indirizzi ma uso residenziale contenuto.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">4. Analisi per UPL (Unità di Primo Livello)</h3>
+        <p class="info-text">Gli UPL sono la granularità più fine e rivelano i contrasti interni ai quartieri. I casi più significativi:</p>
+
+        <h4 class="analisi-h4">UPL con massimo spopolamento (classe 3-1 dominante)</h4>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>UPL</th><th>Quartiere</th><th>Circ.</th><th>Civici</th><th>Abitanti</th><th>Civ/Pop</th></tr></thead>
+            <tbody>
+              <tr><td>Castellammare o Loggia</td><td>Tribunali-Castellammare</td><td>I</td><td>4.037</td><td>4.822</td><td><strong>0,837</strong></td></tr>
+              <tr><td>Monte di Pietà o Seralcadi</td><td>Palazzo Reale - Monte di Pietà</td><td>I</td><td>4.582</td><td>6.220</td><td><strong>0,737</strong></td></tr>
+              <tr><td>Tribunali o Kalsa</td><td>Tribunali-Castellammare</td><td>I</td><td>5.122</td><td>7.445</td><td><strong>0,688</strong></td></tr>
+              <tr><td>Palazzo Reale o Albergaria</td><td>Palazzo Reale - Monte di Pietà</td><td>I</td><td>4.574</td><td>7.800</td><td><strong>0,586</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="info-text">Questi quattro UPL condensano il fenomeno del centro storico: strade medievali fittissime, eredità di una struttura urbana densa che nei secoli ospitava decine di migliaia di persone, oggi con poche centinaia di residenti per sezione.</p>
+
+        <h4 class="analisi-h4">UPL con edilizia pubblica compatta (classe 1-3 dominante)</h4>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>UPL</th><th>Quartiere</th><th>Circ.</th><th>Civici</th><th>Abitanti</th><th>Civ/Pop</th></tr></thead>
+            <tbody>
+              <tr><td>Bonagia</td><td>Villagrazia - Falsomiele</td><td>III</td><td>483</td><td>7.493</td><td><strong>0,064</strong></td></tr>
+              <tr><td>San Filippo Neri</td><td>Pallavicino</td><td>VII</td><td>1.204</td><td>13.930</td><td><strong>0,086</strong></td></tr>
+              <tr><td>San Giovanni Apostolo</td><td>Cruillas - S.G.Apostolo</td><td>VI</td><td>1.100</td><td>12.688</td><td><strong>0,087</strong></td></tr>
+              <tr><td>Borgo Nuovo</td><td>Borgo Nuovo</td><td>V</td><td>2.705</td><td>19.423</td><td><strong>0,139</strong></td></tr>
+              <tr><td>Montepellegrino</td><td>Montepellegrino</td><td>VIII</td><td>2.327</td><td>15.458</td><td><strong>0,151</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="info-text"><strong>Bonagia</strong> è il caso estremo (0,064): UPL di Villagrazia con grandi comparti residenziali degli anni '70-'80, accessibili da pochissime strade principali. <strong>San Filippo Neri</strong> e <strong>San Giovanni Apostolo</strong> rappresentano i grandi insediamenti IACP di Palermo Nord-Ovest con lo stesso modello urbanistico.</p>
+
+        <h4 class="analisi-h4">UPL costieri e periurbani</h4>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>UPL</th><th>Quartiere</th><th>Circ.</th><th>Civici</th><th>Abitanti</th><th>Civ/Pop</th></tr></thead>
+            <tbody>
+              <tr><td>Partanna Mondello</td><td>Partanna Mondello</td><td>VII</td><td>11.241</td><td>19.402</td><td><strong>0,579</strong></td></tr>
+              <tr><td>Sferracavallo</td><td>Tommaso Natale…</td><td>VII</td><td>2.614</td><td>5.732</td><td><strong>0,456</strong></td></tr>
+              <tr><td>Boccadifalco - Baida</td><td>Boccadifalco</td><td>IV</td><td>3.289</td><td>7.799</td><td><strong>0,422</strong></td></tr>
+              <tr><td>Borgo Vecchio - Principe Scordia</td><td>Politeama</td><td>VIII</td><td>4.747</td><td>13.078</td><td><strong>0,363</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="info-text"><strong>Partanna Mondello</strong> è il più grande UPL per numero di civici in assoluto (11.241), trainato dalla viabilità costiera fitta e dalla cultura dell'indirizzo per case vacanza.</p>
+
+        <h4 class="analisi-h4">UPL con distribuzione equilibrata (classe 2-2 o 3-3)</h4>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>UPL</th><th>Quartiere</th><th>Circ.</th><th>Civici</th><th>Abitanti</th><th>Civ/Pop</th></tr></thead>
+            <tbody>
+              <tr><td>Roccella Acqua dei Corsari</td><td>Settecannoli</td><td>II</td><td>6.352</td><td>28.930</td><td>0,220</td></tr>
+              <tr><td>Mezzomonreale</td><td>Mezzomonreale…</td><td>IV</td><td>6.220</td><td>26.762</td><td>0,232</td></tr>
+              <tr><td>Oreto Perez</td><td>Oreto - Stazione</td><td>III</td><td>5.174</td><td>21.390</td><td>0,242</td></tr>
+              <tr><td>Noce</td><td>Noce</td><td>V</td><td>4.076</td><td>17.464</td><td>0,233</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="info-text">Questi UPL rappresentano il modello di urbanizzazione "normale" palermitana degli anni '50-'70: lottizzazioni regolari, strade a maglia, rapporto civici/residenti intorno alla media.</p>
+
+        <hr class="analisi-sep">
+
+        <h3 class="analisi-h3">5. Sintesi interpretativa</h3>
+        <p class="info-text">La mappa bivariata restituisce tre grandi narrazioni urbane sovrapposte:</p>
+        <p class="info-text"><strong>1. Lo spopolamento del centro storico</strong> (Circ. I, classi 3-1 e 3-2)<br>
+        Un sistema stradale medievale sopravvive fisicamente con migliaia di civici, ma la popolazione è fuggita verso la periferia nel dopoguerra. Castellammare, Kalsa, Palazzo Reale hanno più indirizzi che abitanti. È la cicatrice più visibile della storia urbanistica palermitana del '900.</p>
+        <p class="info-text"><strong>2. La periferia ad alta densità senza strada</strong> (classi 1-3, 1-2)<br>
+        I grandi quartieri IACP degli anni '60-'80 (San Filippo Neri, Bonagia, San Giovanni Apostolo, Borgo Nuovo) presentano il paradosso inverso: altissima concentrazione di persone per ettaro, ma pochissimi accessi stradali numerati. Sono "isole" residenziali progettate senza viabilità capillare.</p>
+        <p class="info-text"><strong>3. La dispersione costiera</strong> (classi 1-1 e 3-1 in aree costiere)<br>
+        Mondello, Sferracavallo, la costa nord-ovest sono zone con viabilità estesa e numerazione civica abbondante — ville, lidi, strutture stagionali — ma con bassa residenzialità stabile. Il territorio è "occupato" fisicamente ma non demograficamente.</p>
+        <p class="info-text">Il <strong>tessuto urbano ordinario</strong> (classi 2-2 e 3-3 nelle circoscrizioni II–VI, VIII) appare invece come la parte più coerente della città, dove l'equilibrio tra strade numerate e residenti riflette un'urbanizzazione progressiva e pianificata.</p>
+
+        <hr class="analisi-sep">
+        <p class="info-text analisi-footer"><em>Dati ISTAT Censimento 2011 · ANNCSU Archivio Nazionale Numeri Civici e Strade Urbane<br>
+        Elaborazione: mappa bivariata 3×3, classificazione con metodo Jenks su sezioni censuarie</em></p>
+      </div>
+    </div>
+	
+		
+    <div class="info-panel" id="itab-faq">
+
+      <div class="info-section">
+        <p class="info-section-title">Che cosa rappresenta la mappa</p>
+        <p class="info-text">La mappa visualizza simultaneamente <strong>due fenomeni spaziali</strong> per ciascuna delle 2.874 sezioni censuarie di Palermo:</p>
+        <p class="info-text"><strong>Densità dei civici</strong> — quanti indirizzi ANNCSU (civici georeferenziati) ci sono per km² in quella sezione.<br>
+        <strong>Densità della popolazione</strong> — quanti abitanti ISTAT 2011 ci sono per km² nella stessa sezione.</p>
+        <p class="info-text">L'idea di fondo è che queste due grandezze non sempre si muovono insieme. Un'alta densità di civici segnala un tessuto edilizio fitto o un centro commerciale/terziario; un'alta densità di popolazione segnala dove vive effettivamente la gente. Dove le due densità divergono si nascondono le dinamiche urbane più interessanti.</p>
+      </div>
+
+      <div class="info-section">
+        <p class="info-section-title">Le fonti dei dati</p>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>Dato</th><th>Fonte</th><th>Copertura</th></tr></thead>
+            <tbody>
+              <tr><td>Indirizzi georeferenziati</td><td>ANNCSU (Agenzia delle Entrate + ISTAT)</td><td>164.933 civici · Palermo</td></tr>
+              <tr><td>Sezioni censuarie + popolazione</td><td>ISTAT — Censimento 2011</td><td>2.874 sezioni · 642.007 abitanti</td></tr>
+              <tr><td>Confini quartieri e circoscrizioni</td><td>Comune di Palermo</td><td>25 quartieri · 8 circoscrizioni</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="info-text"><em>Nota: i dati ISTAT si riferiscono al Censimento 2011. La popolazione reale attuale può differire.</em></p>
+      </div>
+
+      <div class="info-section">
+        <p class="info-section-title">Come funziona la classificazione bivariata</p>
+        <p class="info-text">Ogni misura viene divisa in <strong>tre classi (terzili)</strong> calcolate sull'intera distribuzione delle 2.874 sezioni: Classe 1 (bassa), Classe 2 (media), Classe 3 (alta). Combinando le due classi si ottengono <strong>9 combinazioni</strong>.</p>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>Classe</th><th>Colore</th><th>Lettura</th></tr></thead>
+            <tbody>
+              <tr><td><strong>1-1</strong></td><td>grigio chiaro</td><td>Pochi civici, poca gente — periferia rada o aree verdi</td></tr>
+              <tr><td><strong>2-1</strong></td><td>rosa chiaro</td><td>Civici medi, poca gente — zona mista poco abitata</td></tr>
+              <tr><td><strong>3-1</strong></td><td>fucsia/magenta</td><td>Molti civici, poca gente — centro commerciale, uffici, zona terziaria</td></tr>
+              <tr><td><strong>1-2</strong></td><td>azzurro chiaro</td><td>Pochi civici, gente media — quartiere residenziale compatto</td></tr>
+              <tr><td><strong>2-2</strong></td><td>lilla</td><td>Valori medi su entrambi — tessuto urbano ordinario</td></tr>
+              <tr><td><strong>3-2</strong></td><td>viola medio</td><td>Molti civici, gente media — zona mista densa</td></tr>
+              <tr><td><strong>1-3</strong></td><td>ciano</td><td>Pochi civici, molta gente — edilizia popolare, palazzi ad alta densità</td></tr>
+              <tr><td><strong>2-3</strong></td><td>blu acciaio</td><td>Civici medi, molta gente — quartieri residenziali densi</td></tr>
+              <tr><td><strong>3-3</strong></td><td>blu scuro</td><td>Molti civici, molta gente — centro storico fitto, alta complessità urbana</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="info-text">Le sezioni senza dato (178 su 2.874) sono visualizzate in grigio scuro neutro.</p>
+      </div>
+
+      <div class="info-section">
+        <p class="info-section-title">Come leggere il pannello laterale</p>
+        <p class="info-text"><strong>Filtri geografici</strong> — I tre menu a cascata permettono di restringere la visualizzazione a Circoscrizione → Quartiere → UPL. La selezione è gerarchica. Il pulsante <em>↗ Zoom alla selezione</em> centra la mappa sull'area filtrata; <em>✕ Reset</em> rimuove tutti i filtri.</p>
+        <p class="info-text"><strong>Filtro per classe bivariata</strong> — La griglia 3×3 nel pannello è interattiva: cliccando su una cella si filtrano solo le sezioni di quella classe.</p>
+        <p class="info-text"><strong>Statistiche selezione</strong> — In tempo reale il pannello mostra: numero di sezioni selezionate, totale civici e totale abitanti nelle sezioni visibili.</p>
+        <p class="info-text">I filtri geografici e il filtro per classe bivariata si <strong>combinano</strong>: è possibile ad esempio visualizzare solo le sezioni di una specifica UPL con classe 3-1.</p>
+      </div>
+
+      <div class="info-section">
+        <p class="info-section-title">Gli strati informativi</p>
+        <p class="info-text"><strong>Bivariata (3×3)</strong> — Strato principale. Colora ogni sezione secondo la classe bivariata. Attivo di default.</p>
+        <p class="info-text"><strong>Densità popolazione</strong> — Choropleth continuo sulla sola densità di popolazione. Scala a quantili (10 classi), dal giallo chiaro (bassa) al rosso scuro (alta).</p>
+        <p class="info-text"><strong>Anomalie bivariata</strong> — Evidenzia 1.150 sezioni (40%) dove le due classi divergono. <em>Arancio</em>: civici &gt; popolazione (zone commerciali). <em>Teal</em>: popolazione &gt; civici (edilizia popolare con pochi ingressi).</p>
+        <p class="info-text"><strong>Quartieri</strong> — Dissolve dei 25 quartieri, bordo ciano. Ogni poligono mostra la classe bivariata modale.</p>
+        <p class="info-text"><strong>Circoscrizioni</strong> — Dissolve delle 8 circoscrizioni, bordo viola. Confronto rapido tra le grandi aree della città.</p>
+        <p class="info-text"><strong>UPL · Unità di Primo Livello</strong> — Dissolve delle 55 UPL, bordo giallo-arancio. Permette letture a scala di sub-quartiere.</p>
+      </div>
+
+      <div class="info-section">
+        <p class="info-section-title">Come interagire con la mappa</p>
+        <div class="analisi-table-wrap">
+          <table class="analisi-table">
+            <thead><tr><th>Azione</th><th>Effetto</th></tr></thead>
+            <tbody>
+              <tr><td>Hover su sezione (bivariata/densità/anomalie)</td><td>Popup con dati: sezione, quartiere, circoscrizione, UPL, civici, popolazione, area, densità, classe</td></tr>
+              <tr><td>Hover su quartiere / circoscrizione / UPL</td><td>Popup con dati aggregati del poligono</td></tr>
+              <tr><td>Click su cella griglia 3×3</td><td>Filtra solo le sezioni di quella classe</td></tr>
+              <tr><td>Click su pulsante strato</td><td>Attiva / disattiva lo strato</td></tr>
+              <tr><td>Click su ↗ Zoom</td><td>Centra la mappa sull'area filtrata</td></tr>
+              <tr><td>Scroll / drag</td><td>Zoom e pan standard</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <p class="info-section-title">Domande frequenti</p>
+        <p class="info-text"><strong>Dove si concentra la massima densità abitativa?</strong><br>
+        Cercare le sezioni blu scuro (3-3) e blu acciaio (2-3). Si trovano prevalentemente nei quartieri densi del dopoguerra: Noce, Libertà, Politeama, Borgo Nuovo.</p>
+        <p class="info-text"><strong>Dove ci sono molti indirizzi ma pochi abitanti?</strong><br>
+        Classe 3-1 (fucsia). Zona tipicamente terziaria o commerciale. Attivare lo strato <em>Anomalie bivariata</em> → arancio per localizzarle rapidamente.</p>
+        <p class="info-text"><strong>Quali zone hanno subito uno spopolamento mantenendo il tessuto edilizio?</strong><br>
+        Classe 1-3 o 2-3 con bassa densità di civici. Oppure incrociare <em>Anomalie</em> (teal = pop &gt; civici) con il filtro quartieri del centro storico.</p>
+        <p class="info-text"><strong>Come si distribuisce il tessuto urbano "normale"?</strong><br>
+        La classe 2-2 (lilla, 422 sezioni) rappresenta il tessuto medio di Palermo. È distribuita diffusamente in tutta la città con una leggera prevalenza nelle zone di espansione novecentesca.</p>
+      </div>
+
+    </div><!-- /itab-faq -->
+
+
+  <div class="info-panel" id="itab-fonte">
+    <div class="info-section">
+      <div class="info-row">
+	 <strong> I dati provengono da fonti pubbliche e verificabili: </strong> <br><br>
+        <strong>Popolazione residente 2022</strong>: Comune di Palermo<br>
+        <a href="https://opendata.comune.palermo.it/opendata-archivio-dataset.php?tag=POPOLAZIONE%20RESIDENTE" title=">Popolazione residente 2022 - Comune di Palermo " target="_blank" rel="noopener">opendata.comune.palermo.it</a>
+      </div>
+	       <div class="info-row">
+        <strong>Archivio Nazionale dei Numeri Civici delle Strade Urbane</strong>: SERVIZI E DATASET<br>
+        <a href="https://www.anncsu.gov.it/it/consultazione-dellarchivio/open-data/" title="Archivio Nazionale dei Numeri Civici delle Strade Urbane - SERVIZI E DATASET" target="_blank" rel="noopener">ANNCU - Opendata</a>
+      </div>
+      </div>
+    </div>
+
+    <div class="info-panel" id="itab-sviluppo">
+      <div class="info-section">
+        <p class="info-text">Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener" class="mi-link">@gbvitrano</a> in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener" class="mi-link">Claude AI (Anthropic)</a> e <a href="https://gemini.google.com" target="_blank" rel="noopener" class="mi-link">Gemini</a> che hanno affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p>
+        <br>
+        <p class="info-text">La mappa usa <b>PMTiles</b>, un formato vettoriale moderno che permette di caricare solo i tile visibili, senza un server backend. Questo la rende veloce, leggera e ospitabile su GitHub Pages — zero costi di infrastruttura.</p>
+      </div>
+    </div>
+
+    <div class="info-panel" id="itab-licenza">
+      <div class="info-section">
+        <p class="info-text">I contenuti di questa applicazione sono rilasciati sotto licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener"><strong>CC BY 4.0 – Attribuzione 4.0 Internazionale</strong></a>. Sei libero di condividere e adattare il materiale per qualsiasi scopo, anche commerciale, a condizione di citare adeguatamente la fonte.</p>
+      </div>
+    </div>
+	
+
+  </div><!-- /info-modal -->
+  <button id="info-totop" aria-label="Torna in cima">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M7 14l5-5 5 5z"/></svg>
+  </button>
+</div><!-- /info-modal-wrap -->
+
+<script src="bivariata_annucs/js/anncus_pop.js"></script>
+    <!-- Inclusione header e footer PalermoHub -->
+    <link rel="stylesheet" href="lib/css/ph-css.css">
+    <script src="lib/js/client/ph-header.js"></script>
+    <script src="lib/js/client/ph-footer.js"></script>
+
+<script>
+function toggleSidebarFilters() {
+  if (window.innerWidth > 900) return;
+  var body = document.getElementById('sidebar-body');
+  var chevron = document.getElementById('sidebar-toggle-chevron');
+  var title = document.getElementById('sidebar-title-toggle');
+  if (!body) return;
+  var isCollapsed = body.classList.toggle('collapsed');
+  if (chevron) chevron.style.transform = isCollapsed ? 'rotate(180deg)' : '';
+  if (title) title.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+  // Dopo la transizione CSS (350ms) notifica Leaflet del nuovo contenitore
+  setTimeout(function() { if (typeof map !== 'undefined' && map) map.invalidateSize(); }, 380);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth <= 900) {
+    var body = document.getElementById('sidebar-body');
+    var chevron = document.getElementById('sidebar-toggle-chevron');
+    var title = document.getElementById('sidebar-title-toggle');
+    if (body) {
+      // Collapse istantaneo al caricamento (nessuna animazione) così Leaflet
+      // misura subito l'altezza corretta del contenitore mappa
+      body.style.transition = 'none';
+      body.classList.add('collapsed');
+      body.offsetHeight; // forza reflow
+      body.style.transition = '';
+    }
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
+    if (title) title.setAttribute('aria-expanded', 'false');
+  }
+});
+
+// Gli elementi della mappa sono position:absolute con inset:0 — il padding-top
+// sul body non li sposta. Shiftiamo direttamente il top di ciascun elemento
+// in base all'altezza reale dell'header modale (breadcrumb inclusi).
+(function syncMapWithModalHeader() {
+    var header = document.getElementById('modal-header');
+    if (!header) {
+        setTimeout(syncMapWithModalHeader, 100);
+        return;
+    }
+
+    var els = {
+        mapContainer: document.getElementById('map-container'),
+        loading:      document.getElementById('loading'),
+        panel:        document.getElementById('panel'),
+        toolbar:      document.getElementById('map-toolbar')
+    };
+
+    function apply() {
+        var h = document.body.classList.contains('header-modal-open')
+            ? header.offsetHeight : 0;
+
+        if (h > 0) {
+            if (els.mapContainer) els.mapContainer.style.setProperty('top', h + 'px', 'important');
+            if (els.loading)      els.loading.style.setProperty('top', h + 'px', 'important');
+            if (els.panel)        els.panel.style.setProperty('top', h + 'px', 'important');
+            if (els.toolbar)      els.toolbar.style.setProperty('top', (h + 12) + 'px', 'important');
+        } else {
+            if (els.mapContainer) els.mapContainer.style.removeProperty('top');
+            if (els.loading)      els.loading.style.removeProperty('top');
+            if (els.panel)        els.panel.style.removeProperty('top');
+            if (els.toolbar)      els.toolbar.style.removeProperty('top');
+        }
+    }
+
+    apply();
+    new ResizeObserver(apply).observe(header);
+    new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+            if (m.attributeName === 'class') apply();
+        });
+    }).observe(document.body, { attributes: true });
+})();
+</script>
+
+
+</body>
+</html>
