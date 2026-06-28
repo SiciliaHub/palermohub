@@ -187,6 +187,79 @@ document.addEventListener('DOMContentLoaded', function() {
     // document.getElementById('main-iframe').src = 'https://example.com';
 });	
 </script>
+<script>
+function toggleSidebarFilters() {
+  if (window.innerWidth > 900) return;
+  var body = document.getElementById('sidebar-body');
+  var chevron = document.getElementById('sidebar-toggle-chevron');
+  var title = document.getElementById('sidebar-title-toggle');
+  if (!body) return;
+  var isCollapsed = body.classList.toggle('collapsed');
+  if (chevron) chevron.style.transform = isCollapsed ? 'rotate(180deg)' : '';
+  if (title) title.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+  // Dopo la transizione CSS (350ms) notifica Leaflet del nuovo contenitore
+  setTimeout(function() { if (typeof map !== 'undefined' && map) map.invalidateSize(); }, 380);
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.innerWidth <= 900) {
+    var body = document.getElementById('sidebar-body');
+    var chevron = document.getElementById('sidebar-toggle-chevron');
+    var title = document.getElementById('sidebar-title-toggle');
+    if (body) {
+      // Collapse istantaneo al caricamento (nessuna animazione) così Leaflet
+      // misura subito l'altezza corretta del contenitore mappa
+      body.style.transition = 'none';
+      body.classList.add('collapsed');
+      body.offsetHeight; // forza reflow
+      body.style.transition = '';
+    }
+    if (chevron) chevron.style.transform = 'rotate(180deg)';
+    if (title) title.setAttribute('aria-expanded', 'false');
+  }
+});
 
+// Gli elementi della mappa sono position:absolute con inset:0 — il padding-top
+// sul body non li sposta. Shiftiamo direttamente il top di ciascun elemento
+// in base all'altezza reale dell'header modale (breadcrumb inclusi).
+(function syncMapWithModalHeader() {
+    var header = document.getElementById('modal-header');
+    if (!header) {
+        setTimeout(syncMapWithModalHeader, 100);
+        return;
+    }
+
+    var els = {
+        mapContainer: document.getElementById('map-container'),
+        loading:      document.getElementById('loading'),
+        panel:        document.getElementById('panel'),
+        toolbar:      document.getElementById('map-toolbar')
+    };
+
+    function apply() {
+        var h = document.body.classList.contains('header-modal-open')
+            ? header.offsetHeight : 0;
+
+        if (h > 0) {
+            if (els.mapContainer) els.mapContainer.style.setProperty('top', h + 'px', 'important');
+            if (els.loading)      els.loading.style.setProperty('top', h + 'px', 'important');
+            if (els.panel)        els.panel.style.setProperty('top', h + 'px', 'important');
+            if (els.toolbar)      els.toolbar.style.setProperty('top', (h + 12) + 'px', 'important');
+        } else {
+            if (els.mapContainer) els.mapContainer.style.removeProperty('top');
+            if (els.loading)      els.loading.style.removeProperty('top');
+            if (els.panel)        els.panel.style.removeProperty('top');
+            if (els.toolbar)      els.toolbar.style.removeProperty('top');
+        }
+    }
+
+    apply();
+    new ResizeObserver(apply).observe(header);
+    new MutationObserver(function(mutations) {
+        mutations.forEach(function(m) {
+            if (m.attributeName === 'class') apply();
+        });
+    }).observe(document.body, { attributes: true });
+})();
+</script>
 </body>
 </html>
