@@ -2738,7 +2738,7 @@
     "descrizione": "Mappa interattiva dei flussi di pendolarismo per lavoro in Italia (dati ISTAT 2021): entrate, uscite e collegamenti tra comuni, filtrabili per regione, provincia e comune."
   },
   "sicily_climate_change.html": {
-    "titolo": "Mappa Bivariata temperatura e precipitazioni e deficit idrico  Sicilia 1950-2025",
+    "titolo": "Sicily climate change 1950 - 2025",
     "categoria": "Clima",
     "territorio": "Sicilia",
     "autore": "@gbvitrano",
