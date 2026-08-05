@@ -1,0 +1,55 @@
+name: Aggiorna Analytics GA4 PalermoHub
+
+on:
+  schedule:
+    - cron: '0 2 1,16 * *'  # Ogni 15 giorni (giorno 1 e 16 del mese) alle 02:00 UTC (04:00 ora italiana CEST)
+  workflow_dispatch:       # Avvio manuale da GitHub Actions
+
+permissions:
+  contents: write
+
+jobs:
+  update-analytics:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/PH-release-v2.0'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Fetch dati GA4 da Apps Script
+        run: |
+          echo "📊 Fetch dati da Google Apps Script..."
+          RESPONSE=$(curl -sL "${{ secrets.GA4_WEBAPP_URL }}")
+
+          # Verifica che la risposta non contenga errori
+          if echo "$RESPONSE" | jq -e '.error' > /dev/null 2>&1; then
+            echo "❌ Errore Apps Script: $(echo "$RESPONSE" | jq -r '.error')"
+            exit 1
+          fi
+
+          LAST_UPDATE=$(echo "$RESPONSE" | jq -r '.lastUpdate')
+          CURRENT_YEAR=$(echo "$RESPONSE" | jq '.currentYear')
+          echo "✅ Dati ricevuti — anno: $CURRENT_YEAR, aggiornato: $LAST_UPDATE"
+
+          # Backup del file corrente
+          mkdir -p backups/analytics
+          cp dati-palermo-hub/analytics/ga4_data.json \
+             "backups/analytics/ga4_data_$(date +%Y-%m-%d).json"
+
+          # Merge: aggiorna solo gli anni restituiti dallo script
+          # Gli anni statici (2023, 2024, 2025) restano invariati
+          jq --argjson new "$RESPONSE" \
+            '.lastUpdate = $new.lastUpdate | .currentYear = $new.currentYear | .years = (.years + $new.years)' \
+            dati-palermo-hub/analytics/ga4_data.json > /tmp/ga4_merged.json
+
+          mv /tmp/ga4_merged.json dati-palermo-hub/analytics/ga4_data.json
+          echo "✅ ga4_data.json aggiornato"
+
+      - name: Commit e push se ci sono modifiche
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add dati-palermo-hub/analytics/ backups/analytics/
+          git diff --staged --quiet || git commit -m "📊 Aggiornamento analytics GA4 $(date -u '+%Y-%m-%d')"
+          git push

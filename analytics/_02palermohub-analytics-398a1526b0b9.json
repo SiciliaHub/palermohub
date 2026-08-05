@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "palermohub-analytics",
+  "private_key_id": "398a1526b0b903dffd6214a3213739e40780dc21",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDQRU6xZ5JDkY+H\neny/EGlOoLV3WuZLSEPICvWutMETaOIvfFgyQ0IBRqMB7WqBHoFyf3RvdldMPtD0\ncRruyqdxBVV9CPtFvbr9QyL/kBpta6C2F+3V3R+aZjM6kTpnBLMw/88o7shn+KxH\nOhXtebnYFxw9+WnN97XSUt1s364lGv6kxop6uDhBdOGR7uzs5rwpzfyQAJvOGE3e\n/4cAkJmqyMURh3ebtHbY3Gu6lNi0Fy0EM3pBogvb74eHacJmqnPX+Wgd/iZLbCFo\nvX8RP/de1PZAy3DP5amwI7JeeRyWF6dr7Q8SwiFoRf5Q5H5/RSxZgRMRN0mWcimo\ntkKwhJdrAgMBAAECggEAFYb0aVXhQmarRT+d4Una+KuX1ixpHWLszqKDXnmEc3Ml\n3e6mVxuomOUqOCrIFWyHyMPvzw2WXGUpx/pg5EnCIOaCPZhOEJlZ2I+18GB+usyj\nIe87QB3JBHaH2Qfl13we4XOvf/WedVC4zevtFEy+rt1EqAs9qnJuMr0p8fT01RTT\nW4EHBH+R7rfXRURFHxQ7un8lF7TMrHSi9wX6JLW3NcxW4KaWaZl5BfEWKdN0fAQx\nOqiP0dTSJBYRWQ2yrfyCcQLDX74Neywp1gEBrex7tzIA36d2dZhJeQbZHqJX49hN\nWFTaa97evnIhPPy/NhxZgHvkPt0+NtshXuQ43HYvAQKBgQD4vTJdulNxvL4/K7iV\nibc3oJnewm0du3sq9Kci4jimiWkfQT7NApZkcVpOnH5VtNcU+qIdNHVMqvEzZbfK\nucWzX3oWcb173zv/3ZJLl949UXYbK27YVTptsZqNyUWOpjLRU9rEh121ao/29x4G\nV59bDfcdeydoDtobFrIFoaCKQQKBgQDWWbHb+JrzyCRhqIQaCd7qZPdc9VZBe7NN\n3AZDhCjJ9LiVX+l3kovLh40lGEhPKsK64wdBTC/Yx59q6lQtzgeUWSkQbO+Ez76R\nLG5oC3pODl0dYf2B/bOoyMiz6HBNry//HJlUayUis4fvWT8rBxaG0G/bBydYuHIH\nsQVhsKy+qwKBgGBuAJujg3wBfwPAcGPQqu3u3hgk6eZv61UA2dbFOs8dUFqkkbMq\nwKEZ7LezJasWW5evfq+xyZO6ZZ3WXkVCdemPJyaSW7ItHfaYsIGL08WT0iTAVs2Z\nZPhntRIoqEWgGu1aA+LS07pkIIHO1Z4B1C6ZoGaWevV1ZIrB5qwWN8XBAoGAR8c9\ncgXsDZqF5FYD9pw7k44/71cQjVkZEAeP6WgGKKrUbODzU2E1gvBfaX6aKDiPgPmp\nYkpa82LVlX3mtnf5vcmloKR6CKVwkTipuBmv2ReiQsafl7oXQXwLCYPap4j0r58q\nEUTX6Kjp6lKefpAfEQIXkubwXBtXxA+ZV79L+YUCgYEAmsP7NQ9qhms5wRssj8Jx\n18s0TlSOKhgjtocsak9kaXzKHipKtsJ28BW3CCAmkRhSDAttUnJEjxcGI30QUlF9\nTrz0yKPpixxV/sYi25psr0eLqo3MImnngBK7LILl99ZvP9f7blbxWnGwccLmQZWh\nC3BB67y7ewHHaJDsZfAOvME=\n-----END PRIVATE KEY-----\n",
+  "client_email": "gbvitrano-gmail-com@palermohub-analytics.iam.gserviceaccount.com",
+  "client_id": "105000135010011799787",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gbvitrano-gmail-com%40palermohub-analytics.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

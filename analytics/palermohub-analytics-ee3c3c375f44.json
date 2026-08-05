@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "palermohub-analytics",
+  "private_key_id": "ee3c3c375f4495edbb70e804b0a30ffac0acb9d4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDQhqNzJjp4YmVF\nRcWO4gsF0X/H2dC/8kmtvvHYSh/Pjrl4e91QrdS9wI54OzelXds/U55kEClbnIrn\nvRE8w1qV4gsfe0ncjbrim8L/3vcbQfCrYzlWL2w6xsNjyDSCN72u1ZK24Rzsggyi\nue3YzR+WmpyAk5LuIVz5t9D+Y1oUlS83KC4ZJgpWxv7/Gg4Az5VQWw977nbIQb80\n1iMQeXcWVSnGUD/CXQ3WPA+WJXhIrR0u041tU8O0l4wOvJd7Mk/asdhTUtTK/Wvo\nrnfX1kCf6TNR2TG25LI59dviZkJvsQY8pzLQlLRfh3EUD+/g+bN/Tuw+9cTloj2e\nw/Mno/pVAgMBAAECggEAFe47DXa1SojqpqzuWJccWqnMWwvk4PMN3aiJzdoJ223i\nwrGgNoZ5q9UvBqUPtqQW1WOpclOizeA6WaHwSKgxBDdoPRDd1UTQpVmFWhysd2Dp\ne1TtqEtHgiz6Sqm5IALVv6f1jKdDP/pzcr/ELHtyOYgcMoeSudmnahnzcHWpeSWA\nu/x8YJgDPjO8OqTZ1f7Pm5j7V9rSUadO29+qvHS4PB3aSCcX+cWQXa9MDwL4zMrh\nNc69YyLHQbZtxc6qEBusGkWxgPBnn9XuGot+I0KZ8eqrMKTxaUJ0R2ZH5BhySpVT\nbz6tLFgb1fupXm1jlydWsoQ/r5LVecI73ivgz0rVkQKBgQD5A2rQMFLlZ0+XR3co\nRbAPhB5GOZk8QEothnXHBpZ7tnVdJnreVIAE990wewzcn/AeCdodCADhLRzlR6vT\nIvfNh8HMxunzT//hTm66z50vBEQTrIRlLEZnt+6MapFhyQrQz5no8I9IhdyCxy6/\ngwFDoXjcGdgS+Eaz//KlVLCRvQKBgQDWYGnEAmaouaYTjvaKoLW4aCyOsUm6DvkN\n5S2epd2ImALFqPmbj6R2aMFFDHYLmEJasSsEIcs1tWqpl3O3tNB63EuzbLGoZzEY\ntUQdRpf+40mQqCFpRb5q06U+xwYhvaw+WyB5scTmNejVTPHA5yNJHUuEPQQaPI4C\nNG8tDwD4eQKBgH0GezXGXYiy42JYTnqY6roPosetmcOHn/bVoQLpytqYlLrNXDmP\nAav860CxN5b6cqwSVEHpR8/HP8/auWnMD9FRDTwMz2AL1bTBFZWUMh5uLOQX5W2K\n2lqvHgXAZ/hJ4bVP1r3/MmG+XCYJbe5YD2VuiGkyTKvRnmY35xOdvv2dAoGAEq5e\nKR2IcqWS6ltn8pakn0g8scaTRSpu254gBpYvouqUO0NJVRwEWekxBmJamxIOnjaY\nKAkF201O2S6Af/66uCogUqdjJ+iuJ5gMMnznW+fUjk2Ic9MHD+oXmUvgpeoQa3Kn\ndtNd9C24d3X4DzZVJdbusLxccijauyh0k7md/QkCgYEA9Tnxz6BnQXwcT7mhTApH\n3AlB5QYTzjoVahDf1gvbJMJF62ld/yMF2SaHZ5/RV9D3+8H1C24XCZ13PMEXMXyF\nEJZuwWBhAF9q9Ji8a4zn/IFmlDoZxcJ+aDsUTb57WMcOvVRvM7jJKPWRoMHS38x8\npJyxWS8gfItwTwWOH/kQaBM=\n-----END PRIVATE KEY-----\n",
+  "client_email": "palermohub-ga4-reader@palermohub-analytics.iam.gserviceaccount.com",
+  "client_id": "100508538829740782361",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/palermohub-ga4-reader%40palermohub-analytics.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

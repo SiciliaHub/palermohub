@@ -1,0 +1,814 @@
+{
+  "lastUpdate": "2026-02-26",
+  "currentYear": 2026,
+  "years": {
+    "2023": {
+      "note": "Nota: il picco di accessi nell'estate 2023 è dovuto alle pagine sugli incendi in Sicilia, che hanno attirato grande interesse a livello nazionale.",
+      "kpis": {
+        "users": 22000,
+        "newUsers": 21000,
+        "pageviews": 100685,
+        "duration": "n.d."
+      },
+      "pages": [
+        [
+          "/index_prg.html",
+          11603,
+          4534
+        ],
+        [
+          "/database.html",
+          9898,
+          3372
+        ],
+        [
+          "/index_atlante.html",
+          9647,
+          3971
+        ],
+        [
+          "/index_incendi_sicilia.html",
+          6230,
+          3661
+        ],
+        [
+          "/etna_nord.html",
+          6218,
+          4661
+        ],
+        [
+          "/",
+          6133,
+          2261
+        ],
+        [
+          "/incendi_sicilia/qgis2threejs/clip_etna_nord_3d.html",
+          5993,
+          4549
+        ],
+        [
+          "/index.html",
+          4426,
+          1856
+        ],
+        [
+          "/cartografia.html",
+          3539,
+          2140
+        ],
+        [
+          "/wiki.html",
+          1938,
+          1196
+        ],
+        [
+          "/wiki_base.html",
+          1929,
+          1188
+        ],
+        [
+          "/strumenti.html",
+          1389,
+          913
+        ],
+        [
+          "/strumenti_base.html",
+          1384,
+          909
+        ],
+        [
+          "/geolocalizza.html",
+          1350,
+          801
+        ],
+        [
+          "/monreale.html",
+          1349,
+          783
+        ],
+        [
+          "/geo_base.html",
+          1347,
+          799
+        ],
+        [
+          "/incendi_sicilia/qgis2threejs/clip_monreale_3d.html",
+          1333,
+          772
+        ],
+        [
+          "/index_pai.html",
+          1274,
+          697
+        ],
+        [
+          "/san_vito_lo_capo.html",
+          1144,
+          544
+        ],
+        [
+          "/incendi_sicilia/qgis2threejs/clip_sanvito_3d.html",
+          1133,
+          538
+        ],
+        [
+          "/prg_1962/prg_pa_62.html",
+          1016,
+          638
+        ],
+        [
+          "/messina.html",
+          939,
+          478
+        ],
+        [
+          "/incendi_sicilia/qgis2threejs/clip_messina_3d.html",
+          920,
+          472
+        ],
+        [
+          "/qu_prg_62.html",
+          910,
+          597
+        ],
+        [
+          "/teca_digitale.html",
+          908,
+          545
+        ]
+      ],
+      "sources": {
+        "labels": [
+          "Google Organic",
+          "Diretto",
+          "Bing",
+          "Balarm",
+          "Facebook",
+          "Yahoo",
+          "Altri"
+        ],
+        "data": [
+          10000,
+          9700,
+          474,
+          182,
+          145,
+          125,
+          1374
+        ]
+      },
+      "cities": {
+        "labels": [
+          "Palermo",
+          "Milano",
+          "Roma",
+          "Catania",
+          "Torino",
+          "Cagliari",
+          "Ostia"
+        ],
+        "data": [
+          6600,
+          3300,
+          2800,
+          998,
+          812,
+          467,
+          422
+        ]
+      },
+      "monthly": null,
+      "devices": null,
+      "countries": null
+    },
+    "2024": {
+      "note": null,
+      "kpis": {
+        "users": 20000,
+        "newUsers": 19000,
+        "pageviews": 113009,
+        "duration": "n.d."
+      },
+      "pages": [
+        [
+          "/index_prg.html",
+          19382,
+          7156
+        ],
+        [
+          "/database.html",
+          17116,
+          3961
+        ],
+        [
+          "/index_atlante.html",
+          13671,
+          5483
+        ],
+        [
+          "/",
+          11400,
+          2782
+        ],
+        [
+          "/index.html",
+          6022,
+          1840
+        ],
+        [
+          "/cartografia.html",
+          4805,
+          3053
+        ],
+        [
+          "/wiki.html",
+          2913,
+          1709
+        ],
+        [
+          "/wiki_base.html",
+          2876,
+          1693
+        ],
+        [
+          "/index_pai.html",
+          2331,
+          1324
+        ],
+        [
+          "/strumenti.html",
+          2033,
+          1358
+        ],
+        [
+          "/strumenti_base.html",
+          2007,
+          1343
+        ],
+        [
+          "/geolocalizza.html",
+          1892,
+          1127
+        ],
+        [
+          "/geo_base.html",
+          1880,
+          1124
+        ],
+        [
+          "/prg_1962/prg_pa_62.html",
+          1479,
+          848
+        ],
+        [
+          "/qu_prg_62.html",
+          1327,
+          800
+        ],
+        [
+          "/rischio_idrogeologico.html",
+          1298,
+          747
+        ],
+        [
+          "/teca_digitale.html",
+          1272,
+          777
+        ],
+        [
+          "/prg_qgis_cloud.html",
+          1053,
+          655
+        ],
+        [
+          "/etna_nord.html",
+          1048,
+          768
+        ],
+        [
+          "/idraulica.html",
+          1027,
+          613
+        ],
+        [
+          "/incendi_sicilia/qgis2threejs/clip_etna_nord_3d.html",
+          1008,
+          745
+        ],
+        [
+          "/pericolosita_idrogeologica.html",
+          908,
+          539
+        ],
+        [
+          "/distretti_amap_pa.html",
+          878,
+          566
+        ],
+        [
+          "/cambia-menti2.html",
+          785,
+          371
+        ],
+        [
+          "/ortofoto14cm.html",
+          684,
+          432
+        ]
+      ],
+      "sources": {
+        "labels": [
+          "Google Organic",
+          "Diretto",
+          "Bing",
+          "Yahoo",
+          "Coseerobe",
+          "Balarm",
+          "Altri"
+        ],
+        "data": [
+          12000,
+          6500,
+          825,
+          187,
+          176,
+          147,
+          165
+        ]
+      },
+      "cities": {
+        "labels": [
+          "Palermo",
+          "Milano",
+          "Roma",
+          "Catania",
+          "Torino",
+          "Napoli",
+          "Cagliari"
+        ],
+        "data": [
+          7800,
+          2900,
+          2200,
+          593,
+          469,
+          343,
+          256
+        ]
+      },
+      "monthly": null,
+      "devices": null,
+      "countries": null
+    },
+    "2025": {
+      "note": null,
+      "kpis": {
+        "users": 25098,
+        "newUsers": 23651,
+        "pageviews": 194529,
+        "duration": "4 min"
+      },
+      "pages": [
+        [
+          "/index_prg.html",
+          26940,
+          8171
+        ],
+        [
+          "/database.html",
+          17605,
+          3395
+        ],
+        [
+          "/index_atlante.html",
+          16223,
+          5149
+        ],
+        [
+          "/",
+          13663,
+          3155
+        ],
+        [
+          "/index.html",
+          13327,
+          3658
+        ],
+        [
+          "/prg_part_catastali.html",
+          12298,
+          3607
+        ],
+        [
+          "/index_prg_iframe.html",
+          9910,
+          2363
+        ],
+        [
+          "/pmtiles/catasto-app.html",
+          6444,
+          1475
+        ],
+        [
+          "/pmtiles/prg_part_catastali_pdf.html",
+          5921,
+          2369
+        ],
+        [
+          "/index_atlante_iframe.html",
+          5856,
+          1192
+        ],
+        [
+          "/cartografia.html",
+          4277,
+          2474
+        ],
+        [
+          "/prg_catasto.html",
+          3095,
+          1261
+        ],
+        [
+          "/strumenti.html",
+          2896,
+          1730
+        ],
+        [
+          "/wiki.html",
+          2842,
+          1563
+        ],
+        [
+          "/wiki_base.html",
+          2750,
+          1528
+        ],
+        [
+          "/etna_nord.html",
+          2567,
+          1934
+        ],
+        [
+          "/incendi_sicilia/qgis2threejs/clip_etna_nord_3d.html",
+          2451,
+          1877
+        ],
+        [
+          "/geolocalizza.html",
+          2446,
+          1463
+        ],
+        [
+          "/index_pai.html",
+          2249,
+          1022
+        ],
+        [
+          "/idraulica.html",
+          2184,
+          619
+        ],
+        [
+          "/strumenti_base.html",
+          1935,
+          1226
+        ],
+        [
+          "/geo_base.html",
+          1914,
+          1148
+        ],
+        [
+          "/index_prg_misilmeri.html",
+          1404,
+          501
+        ],
+        [
+          "/idraulica_iframe.html",
+          1395,
+          117
+        ],
+        [
+          "/rischio_idrogeologico.html",
+          1329,
+          619
+        ]
+      ],
+      "sources": {
+        "labels": [
+          "Google Organic",
+          "Diretto",
+          "Bing",
+          "PalermoHub",
+          "Coseerobe",
+          "Yahoo",
+          "LinkedIn",
+          "Altri"
+        ],
+        "data": [
+          14000,
+          7800,
+          794,
+          352,
+          225,
+          219,
+          153,
+          1555
+        ]
+      },
+      "cities": {
+        "labels": [
+          "Palermo",
+          "Milano",
+          "Roma",
+          "Catania",
+          "Venezia",
+          "Torino",
+          "Napoli"
+        ],
+        "data": [
+          10000,
+          3200,
+          1700,
+          702,
+          549,
+          357,
+          319
+        ]
+      },
+      "monthly": {
+        "labels": [
+          "Gen",
+          "Feb",
+          "Mar",
+          "Apr",
+          "Mag",
+          "Giu",
+          "Lug",
+          "Ago",
+          "Set",
+          "Ott",
+          "Nov",
+          "Dic"
+        ],
+        "users": [
+          1700,
+          1500,
+          1700,
+          2400,
+          2600,
+          2300,
+          3500,
+          2200,
+          2700,
+          2700,
+          2500,
+          1900
+        ],
+        "note": "* Luglio 2025: picco per le pagine sugli incendi in Sicilia &nbsp;&middot;&nbsp; Ottobre 2025: alta durata media (5 min) per nuove funzionalità interattive"
+      },
+      "devices": {
+        "labels": [
+          "Desktop",
+          "Mobile",
+          "Tablet"
+        ],
+        "data": [
+          17000,
+          8300,
+          179
+        ]
+      },
+      "countries": [
+        {
+          "name": "Italia",
+          "users": 23296,
+          "pct": 92.82
+        },
+        {
+          "name": "USA",
+          "users": 325,
+          "pct": 1.29
+        },
+        {
+          "name": "Svizzera",
+          "users": 162,
+          "pct": 0.65
+        },
+        {
+          "name": "Spagna",
+          "users": 161,
+          "pct": 0.64
+        },
+        {
+          "name": "Germania",
+          "users": 160,
+          "pct": 0.64
+        },
+        {
+          "name": "Paesi Bassi",
+          "users": 136,
+          "pct": 0.54
+        },
+        {
+          "name": "Francia",
+          "users": 120,
+          "pct": 0.48
+        },
+        {
+          "name": "Cina",
+          "users": 116,
+          "pct": 0.46
+        },
+        {
+          "name": "Regno Unito",
+          "users": 84,
+          "pct": 0.33
+        },
+        {
+          "name": "Irlanda",
+          "users": 57,
+          "pct": 0.23
+        }
+      ]
+    },
+    "2026": {
+      "note": "Dati parziali: 1 gennaio – 26 febbraio 2026 (anno in corso).",
+      "kpis": {
+        "users": 4900,
+        "newUsers": 4100,
+        "pageviews": null,
+        "duration": "n.d."
+      },
+      "pages": [
+        [
+          "/index_prg.html",
+          5887,
+          1532
+        ],
+        [
+          "/index_prg_iframe.html",
+          5714,
+          1482
+        ],
+        [
+          "/index.html",
+          3855,
+          1435
+        ],
+        [
+          "/prg_part_catastali.html",
+          3628,
+          897
+        ],
+        [
+          "/pmtiles/catasto-app.html",
+          3607,
+          892
+        ],
+        [
+          "/index_atlante.html",
+          2999,
+          719
+        ],
+        [
+          "/index_atlante_iframe.html",
+          2982,
+          702
+        ],
+        [
+          "/",
+          1323,
+          653
+        ],
+        [
+          "/prg_catasto.html",
+          857,
+          257
+        ],
+        [
+          "/cartografia.html",
+          656,
+          281
+        ],
+        [
+          "/cartografia_iframe.html",
+          656,
+          280
+        ],
+        [
+          "/rischio_idrogeologico.html",
+          577,
+          343
+        ],
+        [
+          "/rischio_idrogeologico_iframe.html",
+          568,
+          335
+        ],
+        [
+          "/funzion.html",
+          526,
+          328
+        ],
+        [
+          "/index_pai.html",
+          492,
+          280
+        ],
+        [
+          "/rischio_geomorf_iframe.html",
+          490,
+          277
+        ],
+        [
+          "/strumenti.html",
+          436,
+          279
+        ],
+        [
+          "/palermo_incidenti.html",
+          343,
+          227
+        ],
+        [
+          "/prg_catasto",
+          340,
+          168
+        ],
+        [
+          "/incidenti_palermo/index.html",
+          334,
+          222
+        ],
+        [
+          "/geolocalizza.html",
+          320,
+          215
+        ],
+        [
+          "/idraulica_iframe.html",
+          300,
+          186
+        ],
+        [
+          "/idraulica.html",
+          296,
+          187
+        ],
+        [
+          "/pmtiles_pa.html",
+          235,
+          122
+        ],
+        [
+          "/index_prg_misilmeri.html",
+          188,
+          77
+        ]
+      ],
+      "sources": {
+        "labels": [
+          "Google Organic",
+          "Diretto",
+          "Bing",
+          "PalermoHub",
+          "Yahoo",
+          "Altri"
+        ],
+        "data": [
+          2500,
+          1800,
+          225,
+          81,
+          60,
+          234
+        ]
+      },
+      "cities": {
+        "labels": [
+          "Palermo",
+          "Milano",
+          "Roma",
+          "Lanzhou*",
+          "Venezia",
+          "Catania",
+          "Singapore"
+        ],
+        "data": [
+          2200,
+          449,
+          427,
+          234,
+          154,
+          65,
+          56
+        ]
+      },
+      "monthly": null,
+      "devices": null,
+      "countries": null
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "qgis-1497466564714",
+  "private_key_id": "9ba6e3dd1e0f0a7de84a7d4ccd402b2d6aa015a8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCvlajpYwIYWg2P\nC09NG7qWVbVIXQY+2lRU9HgYLN01W0DHAIJBgh9+uPZIJbUmi2AQmCp4gdiXqN2g\n+eut2xm5YWwsW95kgtKBocU2VW32b47xAGXhVnuH9qclbQ7M69BjdYa5Qmd0MQxD\nMwUq/QqTJxxdUEUTJ7vdBJyIyqD70u6gbvrcEFirL4yT10JlI/8ujqTzMGggbkCO\nw9czhDrxxg1S/JugLuHGxwqG/WzEXYevdmVf5lRUzMDD1/5Vcev6P4iS0gSHU7oa\n4IrtDnuzNcDPkU0ffth2xCFb1oH5bChWF3hUSLLcbpc5NT8tKxUp1xc/7tcq91qW\nj4mMMeDNAgMBAAECggEARocagJis7EQr4xPbaDElqyJFPYpkKlX/ftpt7OQEfNyp\nMeYx7AdNCFVaU9OVpqRgU3oTwTEC47RIRdNth/mUpSKNVWoXdA8aaEinEzKQh2b7\nJzIOOkvHNe9s5zsdsVFddL3t/jc+n+zdrJZvUnuuxjn1CkRmYpHYw6gJCmc977h5\nnxf7zdoZPC81GDsYCpVSpnAPB9deavkXkzC5HNVwD7iY1mLfQ1pJF7IQBfGPNnhE\nr3l4EaPJI7+c6qHgq9Ba0PDKbGyKN/4mUt4hKHsfJF+PMJ+Yr+wWfLfmXkpFKOew\nqQRljbzsSxmTX2lus6uWCqtYndzUZD2T9dnSgD5e7wKBgQDVP1qhFxGmpRMVXxhj\nBbw007YWhNAX8lJ7Xxqn1yCm1VzpSz5XWxIHNw0DVFvoc4VO9SLtu0dDZl+CbWPF\ngiiphoxhx8VfFMrEbMNjLAKc0L6KIMolal7p5h2Tc1nro4Xy0Gq+URDXw0DX/NyD\naygUIanWsmXi4D5lUsJkB4kvWwKBgQDSyU8FcVLmxLFyUyX2WcG0GOA3Bpqj0dM3\n0vJgKMdxf7p1c33kXKunKUoH0fJD2tRocKtG30maH5VCZnkDajvlfqiZ+esYKlvk\nWHVeV9ONoRf/ZoKkGNXJQz4QyYqDfLoWTHpVBPgIJLByxlaaQ8RFs3Sf2U0f/BGa\nM+OMjTaQ9wKBgQCMa3pvRzSNSngFg6gYVId5NcvaijxI+H1N1fNEgEl08lyLFswH\nU+XMMHj2L0+SArfOpWcJql+jxz6vMP8Y6LuD3iCEprqWAKgArin/HNTflClT5YGX\nH7M+TBQ/qx6UJwqmOI2Bovn3ShBh6ZT/SMmMcBpZUQH8YnNT3yo4GipArwKBgQCY\nMEzjqxymDaHo32vrYIbg140bbaM9YIPWLHJfR1Io+oXPw2FD/jzZZpBS8RywLVFr\nTt37P8BOjTshRAdfldZFLpvhAHbjbcIHLm8ffN37xjIjbwooHN5OgERRrpJZuTZK\nX1F8DShgCM11MQraOs99W8J6n1R2IXM8GPbURij9pQKBgElcVcaa952SNuBaCY76\ncloP04c1cEr917YUHTcF0r60aRQrWZbUsREIzEmG6+aHbNfChS1d+IUYRh4nDFW2\nTWiL0ON8PpJw7cUIbdy/aCWLDOoAsRWmDlc1d++Ta1FTNcHnKjXexOTLD8qyQwOM\n5kjsSZoRzKcz3a9sjo4L/uak\n-----END PRIVATE KEY-----\n",
+  "client_email": "palermohub-ga4-reader@qgis-1497466564714.iam.gserviceaccount.com",
+  "client_id": "107143755709853750223",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/palermohub-ga4-reader%40qgis-1497466564714.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

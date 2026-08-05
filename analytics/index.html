@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statistiche PalermoHub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha384-blOohCVdhjmtROpu8+CfTnUWham9nkX7P7OZQMst+RUnhtoY/9qemFAkIKOYxDI3"
+        crossorigin="anonymous">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+    body {
+      font-family: 'Titillium Web', sans-serif;
+      background: #F0F4F8;
+      color: #4A5568;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    .site-header {
+      background: #fff;
+      border-bottom: 3px solid #ff9900;
+      padding: 18px 40px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .site-header img { height: 46px; width: auto; }
+    .header-text h1 {
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #2D3748;
+    }
+    .header-text p {
+      font-size: 0.82rem;
+      color: #718096;
+      margin-top: 2px;
+    }
+
+    /* YEAR TABS */
+    .year-nav {
+      background: #fff;
+      padding: 0 40px;
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid #E2E8F0;
+      overflow-x: auto;
+    }
+    .year-tab {
+      padding: 13px 26px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #718096;
+      border: none;
+      border-bottom: 3px solid transparent;
+      background: none;
+      font-family: 'Titillium Web', sans-serif;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+    .year-tab:hover { color: #ff9900; }
+    .year-tab.active { color: #ff9900; border-bottom-color: #ff9900; }
+    .year-tab .sub { display: block; font-size: 0.68rem; font-weight: 400; color: #718096; }
+
+    /* CONTAINER */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 28px 20px;
+    }
+
+    /* BANNER */
+    .info-banner {
+      background: #FFF5E6;
+      border: 1px solid #FED7AA;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 22px;
+      font-size: 0.88rem;
+      color: #C05621;
+      display: none;
+      align-items: center;
+      gap: 10px;
+    }
+    .info-banner.show { display: flex; }
+
+    /* KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px 18px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+      border-left: 4px solid #ff9900;
+    }
+    .kpi-icon { font-size: 1.3rem; color: #ff9900; margin-bottom: 8px; }
+    .kpi-label {
+      font-size: 0.73rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #718096;
+      margin-bottom: 5px;
+    }
+    .kpi-value { font-size: 1.9rem; font-weight: 700; color: #2D3748; }
+
+    /* SECTION CARD */
+    .section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .section h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #2D3748;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .section h2 i { color: #ff9900; }
+
+    /* TWO COLUMNS */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-bottom: 22px;
+    }
+    .two-col .section { margin-bottom: 0; }
+
+    /* CHART WRAPPERS */
+    .chart-wrap { position: relative; height: 270px; }
+    .chart-wrap-tall { position: relative; height: 320px; }
+
+    /* PAGES TABLE */
+    .tbl-wrap { overflow-x: auto; }
+    .pages-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+    }
+    .pages-table th {
+      text-align: left;
+      padding: 9px 12px;
+      background: #F7FAFC;
+      color: #718096;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid #E2E8F0;
+    }
+    .pages-table th.r { text-align: right; }
+    .pages-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #F7FAFC;
+      color: #4A5568;
+      vertical-align: middle;
+    }
+    .pages-table td.r { text-align: right; font-weight: 600; color: #2D3748; }
+    .pages-table tr:hover td { background: #FAFBFC; }
+    .rank-num { color: #CBD5E0; font-size: 0.78rem; width: 28px; }
+    .page-url {
+      font-family: 'Courier New', monospace;
+      font-size: 0.80rem;
+      color: #3182CE;
+      word-break: break-all;
+    }
+    .mini-bar-bg { height: 3px; background: #EBF8FF; border-radius: 2px; margin-top: 4px; }
+    .mini-bar-fill { height: 3px; background: #ff9900; border-radius: 2px; }
+
+    /* COUNTRIES LIST */
+    .country-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 11px;
+    }
+    .c-name { width: 110px; font-size: 0.86rem; color: #4A5568; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .c-bar-bg { flex: 1; height: 8px; background: #EBF4FF; border-radius: 4px; }
+    .c-bar { height: 100%; background: #3182CE; border-radius: 4px; }
+    .c-pct { width: 46px; text-align: right; font-size: 0.78rem; color: #718096; }
+    .c-val { width: 54px; text-align: right; font-size: 0.82rem; font-weight: 600; color: #2D3748; }
+
+    /* NO DATA */
+    .no-data {
+      text-align: center;
+      padding: 36px 20px;
+      color: #718096;
+      font-size: 0.88rem;
+    }
+    .no-data i { font-size: 2rem; display: block; margin-bottom: 10px; }
+
+    /* NOTE */
+    .note-label {
+      font-size: 0.75rem;
+      color: #718096;
+      margin-top: 12px;
+      font-style: italic;
+    }
+
+    /* FOOTER */
+    /* NOTE SECTION */
+    .notes-section {
+      background: #fff;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 22px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07);
+    }
+    .notes-section h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #2D3748;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+    .notes-section h2 i { color: #ff9900; }
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .note-card {
+      background: #F7FAFC;
+      border-radius: 8px;
+      padding: 14px 16px;
+      border-left: 3px solid #ff9900;
+    }
+    .note-card.blue  { border-left-color: #3182CE; }
+    .note-card.green { border-left-color: #38A169; }
+    .note-card.red   { border-left-color: #E53E3E; }
+    .note-card .note-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #2D3748;
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .note-card .note-title i { font-size: 0.85rem; }
+    .note-card p {
+      font-size: 0.83rem;
+      color: #718096;
+      line-height: 1.5;
+    }
+    @media (max-width: 768px) {
+      .notes-grid { grid-template-columns: 1fr; }
+    }
+
+    .site-footer {
+      text-align: center;
+      padding: 22px;
+      color: #718096;
+      font-size: 0.78rem;
+      border-top: 1px solid #E2E8F0;
+      background: #fff;
+      margin-top: 10px;
+    }
+    .site-footer a { color: #ff9900; text-decoration: none; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .site-header { padding: 14px 16px; gap: 12px; }
+      .header-text h1 { font-size: 1.15rem; }
+      .year-nav { padding: 0 8px; }
+      .container { padding: 18px 12px; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .two-col { grid-template-columns: 1fr; }
+      .kpi-value { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <img src="https://palermohub.opendatasicilia.it/favicon.ico" onerror="this.style.display='none'" alt="PalermoHub">
+  <div class="header-text">
+    <h1><i class="fa-solid fa-chart-line" style="color:#ff9900;margin-right:8px;"></i>Statistiche PalermoHub</h1>
+    <p>Dati di accesso al sito &middot; Fonte: Google Analytics 4 &middot; Aggiornato al 26 febbraio 2026</p>
+  </div>
+</header>
+
+<!-- YEAR TABS -->
+<nav class="year-nav" role="tablist" aria-label="Seleziona anno">
+  <button class="year-tab" id="tab-2023" role="tab" aria-selected="false" onclick="setYear('2023')">2023</button>
+  <button class="year-tab" id="tab-2024" role="tab" aria-selected="false" onclick="setYear('2024')">2024</button>
+  <button class="year-tab active" id="tab-2025" role="tab" aria-selected="true" onclick="setYear('2025')">2025</button>
+  <button class="year-tab" id="tab-2026" role="tab" aria-selected="false" onclick="setYear('2026')">
+    2026 <span class="sub">gen&ndash;feb</span>
+  </button>
+</nav>
+
+<!-- CONTENT -->
+<div class="container">
+
+  <div class="info-banner" id="yearBanner">
+    <i class="fa-solid fa-circle-info"></i>
+    <span id="yearBannerText"></span>
+  </div>
+
+  <!-- KPI CARDS -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-icon"><i class="fa-solid fa-users"></i></div>
+      <div class="kpi-label">Utenti attivi</div>
+      <div class="kpi-value" id="kpi-users">&#8212;</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon"><i class="fa-solid fa-user-plus"></i></div>
+      <div class="kpi-label">Nuovi utenti</div>
+      <div class="kpi-value" id="kpi-new">&#8212;</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon"><i class="fa-solid fa-file-lines"></i></div>
+      <div class="kpi-label">Visualizzazioni pagina</div>
+      <div class="kpi-value" id="kpi-pv">&#8212;</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-icon"><i class="fa-solid fa-clock"></i></div>
+      <div class="kpi-label">Durata media sessione</div>
+      <div class="kpi-value" id="kpi-dur">&#8212;</div>
+    </div>
+  </div>
+
+  <!-- ANDAMENTO MENSILE -->
+  <div class="section" id="monthlySection" style="display:none;">
+    <h2><i class="fa-solid fa-chart-line"></i> Andamento mensile &mdash; utenti per mese</h2>
+    <div class="chart-wrap">
+      <canvas id="monthlyChart" role="img" aria-label="Grafico a linee: andamento utenti mensili"></canvas>
+    </div>
+    <p class="note-label" id="monthlyNote"></p>
+  </div>
+
+  <!-- TOP 25 PAGES -->
+  <div class="section">
+    <h2><i class="fa-solid fa-ranking-star"></i> Pagine pi&ugrave; visitate &mdash; top 25</h2>
+    <div class="tbl-wrap">
+      <table class="pages-table">
+        <caption class="sr-only">Classifica delle 25 pagine più visitate, con numero di visualizzazioni e utenti</caption>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Pagina</th>
+            <th class="r">Visualizzazioni</th>
+            <th class="r">Utenti</th>
+          </tr>
+        </thead>
+        <tbody id="pagesTbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- SORGENTI + CITTA -->
+  <div class="two-col">
+    <div class="section">
+      <h2><i class="fa-solid fa-network-wired"></i> Sorgenti di traffico</h2>
+      <div class="chart-wrap">
+        <canvas id="sourcesChart" role="img" aria-label="Grafico a torta: sorgenti di traffico"></canvas>
+      </div>
+    </div>
+    <div class="section">
+      <h2><i class="fa-solid fa-city"></i> Principali citt&agrave;</h2>
+      <div class="chart-wrap-tall">
+        <canvas id="citiesChart" role="img" aria-label="Grafico a barre: principali città per numero di utenti"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- DISPOSITIVI + PAESI -->
+  <div class="two-col">
+    <div class="section">
+      <h2><i class="fa-solid fa-laptop"></i> Dispositivi utilizzati</h2>
+      <div id="devicesContent"></div>
+    </div>
+    <div class="section">
+      <h2><i class="fa-solid fa-globe"></i> Paesi di provenienza</h2>
+      <div id="countriesContent"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- NOTE E CONSIDERAZIONI (fuori dal container, sezione fissa) -->
+<div style="max-width:1200px;margin:0 auto;padding:0 20px 28px;">
+  <div class="notes-section">
+    <h2><i class="fa-solid fa-lightbulb"></i> Note e considerazioni</h2>
+    <div class="notes-grid">
+
+      <div class="note-card">
+        <div class="note-title"><i class="fa-solid fa-magnifying-glass" style="color:#ff9900;"></i> Traffico prevalentemente organico</div>
+        <p>La maggior parte degli accessi proviene da Google (ricerca organica), che nel 2025 ha rappresentato oltre il 55% degli utenti. Il traffico diretto si mantiene elevato (~31%), segnale di un pubblico fidelizzato che conosce il sito. Bing contribuisce con circa il 3%.</p>
+      </div>
+
+      <div class="note-card blue">
+        <div class="note-title"><i class="fa-solid fa-fire" style="color:#E53E3E;"></i> Picchi stagionali da eventi straordinari</div>
+        <p>Sia nel 2023 che nel 2025 si registrano picchi estivi (luglio) legati alle pagine sugli <strong>incendi in Sicilia</strong>. In luglio 2025 gli utenti mensili hanno raggiunto 3.500 (+52% rispetto alla media annua), confermando l'interesse per i dati territoriali in situazioni di emergenza.</p>
+      </div>
+
+      <div class="note-card green">
+        <div class="note-title"><i class="fa-solid fa-map-location-dot" style="color:#38A169;"></i> Utenza quasi esclusivamente italiana</div>
+        <p>Nel 2025 il <strong>92,8%</strong> degli utenti proviene dall'Italia, con Palermo come prima città (40%), seguita da Milano e Roma. Questo conferma la vocazione locale e regionale del portale. La presenza internazionale (USA, Svizzera, Spagna, Germania) è minima ma costante.</p>
+      </div>
+
+      <div class="note-card">
+        <div class="note-title"><i class="fa-solid fa-chart-bar" style="color:#ff9900;"></i> Crescita significativa nel 2025</div>
+        <p>Il 2025 registra la crescita più marcata: <strong>25.098 utenti</strong> (+25% rispetto al 2024) e <strong>194.529 visualizzazioni</strong> (+72%), con una durata media di sessione di 4 minuti. Le nuove pagine PRG, catasto e PAI (Piano di Assetto Idrogeologico) hanno attratto nuovi utenti specializzati.</p>
+      </div>
+
+      <div class="note-card red">
+        <div class="note-title"><i class="fa-solid fa-desktop" style="color:#3182CE;"></i> Prevalenza desktop, mobile in crescita</div>
+        <p>Nel 2025 il <strong>67% degli accessi</strong> avviene da desktop, coerente con la natura tecnica dei contenuti (mappe interattive, PRG, catasto). La quota mobile è del 33%: un dato da monitorare per garantire la piena usabilità delle applicazioni cartografiche su smartphone.</p>
+      </div>
+
+      <div class="note-card blue">
+        <div class="note-title"><i class="fa-solid fa-triangle-exclamation" style="color:#ECC94B;"></i> Anomalie e limitazioni dei dati</div>
+        <p>I dati GA4 sono disponibili solo <strong>dal 2023</strong> (nessun storico precedente). Nel 2026 la città di Lanzhou (Cina) compare tra le principali sorgenti geografiche: si tratta probabilmente di traffico automatizzato (bot). Il dato di ottobre 2025 (82K eventi, 5 min di durata) potrebbe riflettere test tecnici o crawling.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <a href="https://palermohub.opendatasicilia.it" target="_blank">PalermoHub</a> &middot;
+  Dati raccolti tramite Google Analytics 4 (propriet&agrave; a87653723p364835028) &middot;
+  GA4 attivo dal 2023
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"
+        integrity="sha384-9nhczxUqK87bcKHh20fSQcTGD4qq5GhayNYSYWqwBkINBhOfQLg/P5HG5lF1urn4"
+        crossorigin="anonymous"></script>
+<script>
+// ============================
+//  D A T A
+// ============================
+
+var YEARS = {
+
+  '2023': {
+    note: "Nota: il picco di accessi nell'estate 2023 è dovuto alle pagine sugli incendi in Sicilia, che hanno attirato grande interesse a livello nazionale.",
+    kpis: { users: 22000, newUsers: 21000, pageviews: 100685, duration: 'n.d.' },
+    pages: [
+      ['/index_prg.html', 11603, 4534],
+      ['/database.html', 9898, 3372],
+      ['/index_atlante.html', 9647, 3971],
+      ['/index_incendi_sicilia.html', 6230, 3661],
+      ['/etna_nord.html', 6218, 4661],
+      ['/', 6133, 2261],
+      ['/incendi_sicilia/qgis2threejs/clip_etna_nord_3d.html', 5993, 4549],
+      ['/index.html', 4426, 1856],
+      ['/cartografia.html', 3539, 2140],
+      ['/wiki.html', 1938, 1196],
+      ['/wiki_base.html', 1929, 1188],
+      ['/strumenti.html', 1389, 913],
+      ['/strumenti_base.html', 1384, 909],
+      ['/geolocalizza.html', 1350, 801],
+      ['/monreale.html', 1349, 783],
+      ['/geo_base.html', 1347, 799],
+      ['/incendi_sicilia/qgis2threejs/clip_monreale_3d.html', 1333, 772],
+      ['/index_pai.html', 1274, 697],
+      ['/san_vito_lo_capo.html', 1144, 544],
+      ['/incendi_sicilia/qgis2threejs/clip_sanvito_3d.html', 1133, 538],
+      ['/prg_1962/prg_pa_62.html', 1016, 638],
+      ['/messina.html', 939, 478],
+      ['/incendi_sicilia/qgis2threejs/clip_messina_3d.html', 920, 472],
+      ['/qu_prg_62.html', 910, 597],
+      ['/teca_digitale.html', 908, 545]
+    ],
+    sources: {
+      labels: ['Google Organic','Diretto','Bing','Balarm','Facebook','Yahoo','Altri'],
+      data:   [10000, 9700, 474, 182, 145, 125, 1374]
+    },
+    cities: {
+      labels: ['Palermo','Milano','Roma','Catania','Torino','Cagliari','Ostia'],
+      data:   [6600, 3300, 2800, 998, 812, 467, 422]
+    },
+    monthly: null, devices: null, countries: null
+  },
+
+  '2024': {
+    note: null,
+    kpis: { users: 20000, newUsers: 19000, pageviews: 113009, duration: 'n.d.' },
+    pages: [
+      ['/index_prg.html', 19382, 7156],
+      ['/database.html', 17116, 3961],
+      ['/index_atlante.html', 13671, 5483],
+      ['/', 11400, 2782],
+      ['/index.html', 6022, 1840],
+      ['/cartografia.html', 4805, 3053],
+      ['/wiki.html', 2913, 1709],
+      ['/wiki_base.html', 2876, 1693],
+      ['/index_pai.html', 2331, 1324],
+      ['/strumenti.html', 2033, 1358],
+      ['/strumenti_base.html', 2007, 1343],
+      ['/geolocalizza.html', 1892, 1127],
+      ['/geo_base.html', 1880, 1124],
+      ['/prg_1962/prg_pa_62.html', 1479, 848],
+      ['/qu_prg_62.html', 1327, 800],
+      ['/rischio_idrogeologico.html', 1298, 747],
+      ['/teca_digitale.html', 1272, 777],
+      ['/prg_qgis_cloud.html', 1053, 655],
+      ['/etna_nord.html', 1048, 768],
+      ['/idraulica.html', 1027, 613],
+      ['/incendi_sicilia/qgis2threejs/clip_etna_nord_3d.html', 1008, 745],
+      ['/pericolosita_idrogeologica.html', 908, 539],
+      ['/distretti_amap_pa.html', 878, 566],
+      ['/cambia-menti2.html', 785, 371],
+      ['/ortofoto14cm.html', 684, 432]
+    ],
+    sources: {
+      labels: ['Google Organic','Diretto','Bing','Yahoo','Coseerobe','Balarm','Altri'],
+      data:   [12000, 6500, 825, 187, 176, 147, 165]
+    },
+    cities: {
+      labels: ['Palermo','Milano','Roma','Catania','Torino','Napoli','Cagliari'],
+      data:   [7800, 2900, 2200, 593, 469, 343, 256]
+    },
+    monthly: null, devices: null, countries: null
+  },
+
+  '2025': {
+    note: null,
+    kpis: { users: 25098, newUsers: 23651, pageviews: 194529, duration: '4 min' },
+    pages: [
+      ['/index_prg.html', 26940, 8171],
+      ['/database.html', 17605, 3395],
+      ['/index_atlante.html', 16223, 5149],
+      ['/', 13663, 3155],
+      ['/index.html', 13327, 3658],
+      ['/prg_part_catastali.html', 12298, 3607],
+      ['/index_prg_iframe.html', 9910, 2363],
+      ['/pmtiles/catasto-app.html', 6444, 1475],
+      ['/pmtiles/prg_part_catastali_pdf.html', 5921, 2369],
+      ['/index_atlante_iframe.html', 5856, 1192],
+      ['/cartografia.html', 4277, 2474],
+      ['/prg_catasto.html', 3095, 1261],
+      ['/strumenti.html', 2896, 1730],
+      ['/wiki.html', 2842, 1563],
+      ['/wiki_base.html', 2750, 1528],
+      ['/etna_nord.html', 2567, 1934],
+      ['/incendi_sicilia/qgis2threejs/clip_etna_nord_3d.html', 2451, 1877],
+      ['/geolocalizza.html', 2446, 1463],
+      ['/index_pai.html', 2249, 1022],
+      ['/idraulica.html', 2184, 619],
+      ['/strumenti_base.html', 1935, 1226],
+      ['/geo_base.html', 1914, 1148],
+      ['/index_prg_misilmeri.html', 1404, 501],
+      ['/idraulica_iframe.html', 1395, 117],
+      ['/rischio_idrogeologico.html', 1329, 619]
+    ],
+    sources: {
+      labels: ['Google Organic','Diretto','Bing','PalermoHub','Coseerobe','Yahoo','LinkedIn','Altri'],
+      data:   [14000, 7800, 794, 352, 225, 219, 153, 1555]
+    },
+    cities: {
+      labels: ['Palermo','Milano','Roma','Catania','Venezia','Torino','Napoli'],
+      data:   [10000, 3200, 1700, 702, 549, 357, 319]
+    },
+    monthly: {
+      labels: ['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic'],
+      users:  [1700, 1500, 1700, 2400, 2600, 2300, 3500, 2200, 2700, 2700, 2500, 1900],
+      note: '* Luglio 2025: picco per le pagine sugli incendi in Sicilia &nbsp;&middot;&nbsp; Ottobre 2025: alta durata media (5 min) per nuove funzionalit&agrave; interattive'
+    },
+    devices: {
+      labels: ['Desktop','Mobile','Tablet'],
+      data:   [17000, 8300, 179]
+    },
+    countries: [
+      { name: 'Italia',      users: 23296, pct: 92.82 },
+      { name: 'USA',         users: 325,   pct: 1.29  },
+      { name: 'Svizzera',    users: 162,   pct: 0.65  },
+      { name: 'Spagna',      users: 161,   pct: 0.64  },
+      { name: 'Germania',    users: 160,   pct: 0.64  },
+      { name: 'Paesi Bassi', users: 136,   pct: 0.54  },
+      { name: 'Francia',     users: 120,   pct: 0.48  },
+      { name: 'Cina',        users: 116,   pct: 0.46  },
+      { name: 'Regno Unito', users: 84,    pct: 0.33  },
+      { name: 'Irlanda',     users: 57,    pct: 0.23  }
+    ]
+  },
+
+  '2026': {
+    note: 'Dati parziali: 1 gennaio \u2013 26 febbraio 2026 (anno in corso).',
+    kpis: { users: 4900, newUsers: 4100, pageviews: null, duration: 'n.d.' },
+    pages: [
+      ['/index_prg.html', 5887, 1532],
+      ['/index_prg_iframe.html', 5714, 1482],
+      ['/index.html', 3855, 1435],
+      ['/prg_part_catastali.html', 3628, 897],
+      ['/pmtiles/catasto-app.html', 3607, 892],
+      ['/index_atlante.html', 2999, 719],
+      ['/index_atlante_iframe.html', 2982, 702],
+      ['/', 1323, 653],
+      ['/prg_catasto.html', 857, 257],
+      ['/cartografia.html', 656, 281],
+      ['/cartografia_iframe.html', 656, 280],
+      ['/rischio_idrogeologico.html', 577, 343],
+      ['/rischio_idrogeologico_iframe.html', 568, 335],
+      ['/funzion.html', 526, 328],
+      ['/index_pai.html', 492, 280],
+      ['/rischio_geomorf_iframe.html', 490, 277],
+      ['/strumenti.html', 436, 279],
+      ['/palermo_incidenti.html', 343, 227],
+      ['/prg_catasto', 340, 168],
+      ['/incidenti_palermo/index.html', 334, 222],
+      ['/geolocalizza.html', 320, 215],
+      ['/idraulica_iframe.html', 300, 186],
+      ['/idraulica.html', 296, 187],
+      ['/pmtiles_pa.html', 235, 122],
+      ['/index_prg_misilmeri.html', 188, 77]
+    ],
+    sources: {
+      labels: ['Google Organic','Diretto','Bing','PalermoHub','Yahoo','Altri'],
+      data:   [2500, 1800, 225, 81, 60, 234]
+    },
+    cities: {
+      labels: ['Palermo','Milano','Roma','Lanzhou*','Venezia','Catania','Singapore'],
+      data:   [2200, 449, 427, 234, 154, 65, 56]
+    },
+    monthly: null, devices: null, countries: null
+  }
+
+};
+
+// ============================
+//  C H A R T S
+// ============================
+
+var CI = {};
+
+function killChart(id) {
+  if (CI[id]) { CI[id].destroy(); delete CI[id]; }
+}
+
+var PAL = ['#ff9900','#3182CE','#38A169','#E53E3E','#805AD5','#319795','#D53F8C','#ECC94B','#718096'];
+var FONT = { family: 'Titillium Web' };
+
+function fmt(n) {
+  if (n == null) return 'n.d.';
+  if (typeof n === 'string') return n;
+  if (n >= 1000000) return (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return (n/1000).toFixed(1).replace(/\.0$/,'') + 'K';
+  return n.toLocaleString('it-IT');
+}
+
+// ============================
+//  R E N D E R
+// ============================
+
+function renderKPIs(d) {
+  document.getElementById('kpi-users').textContent = fmt(d.kpis.users);
+  document.getElementById('kpi-new').textContent   = fmt(d.kpis.newUsers);
+  document.getElementById('kpi-pv').textContent    = d.kpis.pageviews ? fmt(d.kpis.pageviews) : 'n.d.';
+  document.getElementById('kpi-dur').textContent   = d.kpis.duration;
+}
+
+function renderPages(pages) {
+  var max = pages[0][1];
+  document.getElementById('pagesTbody').innerHTML = pages.map(function(p, i) {
+    var w = Math.round(p[1] / max * 100);
+    return '<tr>' +
+      '<td class="rank-num">' + (i+1) + '</td>' +
+      '<td>' +
+        '<div class="page-url">' + p[0] + '</div>' +
+        '<div class="mini-bar-bg"><div class="mini-bar-fill" style="width:' + w + '%"></div></div>' +
+      '</td>' +
+      '<td class="r">' + p[1].toLocaleString('it-IT') + '</td>' +
+      '<td class="r">' + p[2].toLocaleString('it-IT') + '</td>' +
+    '</tr>';
+  }).join('');
+}
+
+function renderSources(src) {
+  killChart('sourcesChart');
+  CI['sourcesChart'] = new Chart(document.getElementById('sourcesChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: src.labels,
+      datasets: [{ data: src.data, backgroundColor: PAL, borderWidth: 2, borderColor: '#fff' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'right', labels: { font: FONT, color: '#4A5568', padding: 9, boxWidth: 14 } },
+        tooltip: { callbacks: { label: function(ctx) {
+          var tot = ctx.dataset.data.reduce(function(a,b){return a+b;}, 0);
+          return ctx.label + ': ' + ctx.raw.toLocaleString('it-IT') + ' (' + ((ctx.raw/tot)*100).toFixed(1) + '%)';
+        }}}
+      }
+    }
+  });
+}
+
+function renderCities(cities) {
+  killChart('citiesChart');
+  CI['citiesChart'] = new Chart(document.getElementById('citiesChart').getContext('2d'), {
+    type: 'bar',
+    data: {
+      labels: cities.labels,
+      datasets: [{ label: 'Utenti', data: cities.data, backgroundColor: '#ff9900', borderRadius: 4 }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.raw.toLocaleString('it-IT') + ' utenti'; } } }
+      },
+      scales: {
+        x: { grid: { color: '#F7FAFC' }, ticks: { font: FONT, color: '#718096' } },
+        y: { grid: { display: false }, ticks: { font: { family: 'Titillium Web', size: 13 }, color: '#4A5568' } }
+      }
+    }
+  });
+}
+
+function renderMonthly(monthly, year) {
+  var sec = document.getElementById('monthlySection');
+  if (!monthly) { sec.style.display = 'none'; return; }
+  sec.style.display = 'block';
+  var noteEl = document.getElementById('monthlyNote');
+  if (noteEl) {
+    noteEl.innerHTML = monthly.note || '';
+    noteEl.style.display = monthly.note ? '' : 'none';
+  }
+  killChart('monthlyChart');
+  CI['monthlyChart'] = new Chart(document.getElementById('monthlyChart').getContext('2d'), {
+    type: 'line',
+    data: {
+      labels: monthly.labels,
+      datasets: [{
+        label: 'Utenti attivi',
+        data: monthly.users,
+        borderColor: '#ff9900',
+        backgroundColor: 'rgba(255,153,0,0.10)',
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.35,
+        pointBackgroundColor: '#ff9900',
+        pointRadius: 5,
+        pointHoverRadius: 7
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: function(ctx) { return ctx.raw.toLocaleString('it-IT') + ' utenti'; } } }
+      },
+      scales: {
+        y: { beginAtZero: false, grid: { color: '#F7FAFC' }, ticks: { font: FONT, color: '#718096' } },
+        x: { grid: { display: false }, ticks: { font: FONT, color: '#4A5568' } }
+      }
+    }
+  });
+}
+
+function renderDevices(devices) {
+  killChart('devicesChart');
+  var el = document.getElementById('devicesContent');
+  if (!devices) {
+    el.innerHTML = '<div class="no-data"><i class="fa-solid fa-circle-info"></i>Dati disponibili solo per il 2025</div>';
+    return;
+  }
+  var tot = devices.data.reduce(function(a,b){return a+b;}, 0);
+  el.innerHTML =
+    '<div style="position:relative;height:230px;"><canvas id="devicesChart" role="img" aria-label="Grafico a torta: dispositivi utilizzati"></canvas></div>' +
+    '<p class="note-label" style="text-align:center;">' +
+      'Desktop: ' + Math.round(devices.data[0]/tot*100) + '%' +
+      ' &nbsp;&middot;&nbsp; Mobile: ' + Math.round(devices.data[1]/tot*100) + '%' +
+      ' &nbsp;&middot;&nbsp; Tablet: ' + Math.round(devices.data[2]/tot*100) + '%' +
+    '</p>';
+  CI['devicesChart'] = new Chart(document.getElementById('devicesChart').getContext('2d'), {
+    type: 'doughnut',
+    data: {
+      labels: devices.labels,
+      datasets: [{ data: devices.data, backgroundColor: ['#3182CE','#ff9900','#38A169'], borderWidth: 2, borderColor: '#fff' }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom', labels: { font: FONT, color: '#4A5568', padding: 12, boxWidth: 14 } },
+        tooltip: { callbacks: { label: function(ctx) {
+          return ctx.label + ': ' + ctx.raw.toLocaleString('it-IT') + ' (' + ((ctx.raw/tot)*100).toFixed(1) + '%)';
+        }}}
+      }
+    }
+  });
+}
+
+function renderCountries(countries) {
+  var el = document.getElementById('countriesContent');
+  if (!countries) {
+    el.innerHTML = '<div class="no-data"><i class="fa-solid fa-circle-info"></i>Dati disponibili solo per il 2025</div>';
+    return;
+  }
+  var maxPct = countries[0].pct;
+  el.innerHTML = countries.map(function(c) {
+    return '<div class="country-row">' +
+      '<div class="c-name">' + c.name + '</div>' +
+      '<div class="c-bar-bg"><div class="c-bar" style="width:' + (c.pct/maxPct*100).toFixed(1) + '%"></div></div>' +
+      '<div class="c-pct">' + c.pct.toFixed(1) + '%</div>' +
+      '<div class="c-val">' + c.users.toLocaleString('it-IT') + '</div>' +
+    '</div>';
+  }).join('');
+}
+
+// ============================
+//  Y E A R   S W I T C H
+// ============================
+
+function buildYearTabs(activeYear) {
+  var nav = document.querySelector('.year-nav');
+  if (!nav) return;
+  var years = Object.keys(YEARS).sort();
+  nav.innerHTML = years.map(function(y) {
+    var active = (y === activeYear) ? ' active' : '';
+    var selected = (y === activeYear) ? 'true' : 'false';
+    return '<button class="year-tab' + active + '" id="tab-' + y + '" role="tab" aria-selected="' + selected + '" onclick="setYear(\'' + y + '\')">' + y + '</button>';
+  }).join('');
+}
+
+function setYear(year) {
+  document.querySelectorAll('.year-tab').forEach(function(t) { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+  var tab = document.getElementById('tab-' + year);
+  if (tab) { tab.classList.add('active'); tab.setAttribute('aria-selected', 'true'); }
+
+  var d = YEARS[year];
+  if (!d) return;
+
+  var banner = document.getElementById('yearBanner');
+  if (d.note) {
+    banner.classList.add('show');
+    document.getElementById('yearBannerText').textContent = d.note;
+  } else {
+    banner.classList.remove('show');
+  }
+
+  renderKPIs(d);
+  renderPages(d.pages);
+  renderSources(d.sources);
+  renderCities(d.cities);
+  renderMonthly(d.monthly, year);
+  renderDevices(d.devices);
+  renderCountries(d.countries);
+}
+
+// ============================
+//  I N I T
+// ============================
+
+// Render immediato con dati statici (fallback offline)
+buildYearTabs('2025');
+setYear('2025');
+
+// Aggiornamento asincrono dal JSON generato dal workflow GA4
+fetch('../dati-palermo-hub/analytics/ga4_data.json')
+  .then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  })
+  .then(function(json) {
+    // Aggiorna YEARS con i dati freschi (sovrascrive solo gli anni presenti nel JSON)
+    if (json.years) {
+      Object.keys(json.years).forEach(function(y) {
+        if (json.years[y]) YEARS[y] = json.years[y];
+      });
+    }
+    // Aggiorna data "aggiornato al" nell'header
+    if (json.lastUpdate) {
+      var d = new Date(json.lastUpdate + 'T00:00:00');
+      var dateStr = d.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+      var sub = document.querySelector('.header-text p');
+      if (sub) {
+        sub.innerHTML = 'Dati di accesso al sito &middot; Fonte: Google Analytics 4 &middot; Aggiornato al ' + dateStr;
+      }
+    }
+    var activeYear = json.currentYear
+      ? String(json.currentYear)
+      : String(Math.max.apply(null, Object.keys(YEARS).map(Number)));
+    buildYearTabs(activeYear);
+    setYear(activeYear);
+  })
+  .catch(function() {
+    // JSON non disponibile — la pagina rimane con i dati hardcoded già renderizzati
+  });
+</script>
+</body>
+</html>
