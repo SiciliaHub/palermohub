@@ -7,24 +7,26 @@
     <title>PalermoHub</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <META HTTP-EQUIV="refresh" CONTENT="3600">  
-	  <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+	  <meta name="viewport" content="initial-scale=1,width=device-width">
     <meta name="description" content="PalermoHub di opendatasicilia.it è un contenitore di mappe realizzate/rielaborate da liberi cittadini o da civic hackers prevalentemente sul territorio comunale di Palermo, non ha alcun intento commerciale, l'unica finalità è mostrare le possibilità di rielaborazione e comunicazione offerte dagli open data o dati pubblici comunali, regionali e nazionali.">
     <meta name="keywords" content="Open Data, Sicilia, PAI, Geologia, CTR, PRG, Variente Generale, Palermo">
     <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
     <meta http-equiv="content-language" content="IT">
     <meta name="robots" content="index,follow">
-    <meta name="creation_Date" content="20/08/2025>
+    <meta name="creation_Date" content="20/08/2025">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="shortcut icon" href="favicon.ico"/> 
-    <link rel="icon" href="favicon.png" type="image/png"/> 
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="icon" href="favicon.png" type="image/png"/>
+
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://www.googletagmanager.com">
+
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">	
 
 	<link rel="stylesheet" href="lib/css/home.css">
 
-	
+
     <!-- Copyright & Watermark -->
     <!--
         PalermoHub - Interactive Maps Platform
@@ -36,115 +38,6 @@
 <meta name="generator" content="PalermoHub-gbvitrano-opendatasicilia-2025">
 <meta name="ph-build" content="original-gh-pages">
 <div style="display:none" data-ph-origin="gbv-ods-2025"></div>
-	
-    <style>
-        /* Stili aggiuntivi per l'allineamento dei pulsanti */
-        .view-controls {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .view-options {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-        
-        .view-options > span {
-            font-weight: 600;
-            color: #333;
-            white-space: nowrap;
-        }
-        
-        .view-option-btn, .clear-btn, .sort-btn, .view-toggle {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background: white;
-            color: #333;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-        
-        .view-option-btn:hover, .clear-btn:hover, .sort-btn:hover, .view-toggle:hover {
-            background: #f0f0f0;
-            border-color: #ccc;
-        }
-        
-      /*  .view-option-btn.active {
-            background: #2c3e50;
-            color: white;
-            border-color: #2c3e50;
-        }*
-        
-        .button-group-mobile {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-            justify-content: center;
-        }
-        
-        @media (max-width: 768px) {
-            .view-controls {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-            }
-            
-            .view-options {
-                width: 100%;
-                justify-content: space-between;
-            }
-            
-            .button-group-mobile {
-                width: 100%;
-            }
-        }
-        
-        /* Stili per il pulsante di aggiornamento */
-        .refresh-btn {
-            padding: 0.5rem 1rem;
-            /*background: var(--secondary-blue);*/
-			background: white;
-            color: #333;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            margin-left: 1rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-        
-        .refresh-btn:hover {
-            background:var(--primary-color);
-            color: white;
-            transform: translateY(-1px);
-        }
-        
-        @media (max-width: 768px) {
-            .refresh-btn {
-                margin-left: 0;
-                margin-top: 0.5rem;
-                width: 100%;
-                justify-content: center;
-            }
-        }
-		
-        
-
-        
-	
-    </style>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-KHR1GHDRQS"></script>
@@ -248,7 +141,7 @@
         
         <!-- Filters Section con statistiche integrate -->
         <section class="filters-section">
-            <h2 class="filters-title"><i class="fas fa- "></i> Esplora le mappe</h2>
+            <h2 class="filters-title"><i class="fas fa-compass"></i> Esplora le mappe</h2>
             
             <!-- Statistiche compatte integrate -->
             <div class="integrated-stats" id="integrated-stats">
@@ -439,152 +332,17 @@
     <script src="lib/js/client/ph-header.js"></script>
     <script src="lib/js/client/ph-footer.js"></script>
 
-
-
-    <!-- Sostituzione della funzione loadMapsData con versione ottimizzata -->
+    <!-- NOTA: home.js definisce la vera loadMapsData/setupAutoUpdate usando variabili
+         lessicali interne (let allMaps, ecc). Un override esterno non puo' scriverci dentro
+         via window.allMaps: sono due contenitori diversi in JS non-module. Per questo qui
+         non si prova piu' a sovrascrivere loadMapsData — solo il pulsante "Aggiorna dati"
+         (non presente in home.js) e il fix di visualizzazione iniziale paginazione. -->
     <script>
-    // ========= SISTEMA DI CACHING PER DATI CSV =========
-    const CACHE_KEY = 'palermoHubCSVData';
-    const CACHE_DURATION = 30 * 60 * 1000; // 30 minuti
-
-    // Memorizza la funzione originale
-    const originalLoadMapsData = window.loadMapsData;
-
-    // Sostituisci la funzione loadMapsData
-    window.loadMapsData = async function(showMessage = false) {
-        try {
-            if (showMessage) {
-                document.getElementById('maps-container').innerHTML = 
-                    '<div class="loading">Aggiornamento dati in corso...</div>';
-            }
-
-            // Controlla se abbiamo dati in cache validi
-            const cachedData = getCachedData();
-            if (cachedData) {
-                console.log('[DEBUG] Using cached CSV data');
-                processCachedData(cachedData);
-                return;
-            }
-
-            // Se non c'è cache valida, carica da CSV
-            await loadFromCSV();
-        } catch (error) {
-            console.error('Errore nel caricamento dati:', error);
-            document.getElementById('maps-container').innerHTML = 
-                '<div class="no-results">⚠ Errore nel caricamento dei dati: ' + error.message + '</div>';
-        }
-    };
-
-    function getCachedData() {
-        try {
-            const cached = localStorage.getItem(CACHE_KEY);
-            if (!cached) return null;
-            
-            const { data, timestamp } = JSON.parse(cached);
-            
-            // Verifica se la cache è ancora valida
-            if (Date.now() - timestamp < CACHE_DURATION) {
-                return data;
-            }
-            
-            // Cache scaduta, rimuovila
-            localStorage.removeItem(CACHE_KEY);
-            return null;
-        } catch (e) {
-            console.warn('Errore nell\'accesso alla cache, procedo con caricamento normale', e);
-            return null;
-        }
-    }
-
-    function processCachedData(cachedData) {
-        window.allMaps = cachedData;
-        window.filteredMaps = [...cachedData];
-        window.populateFilters();
-        window.applyFilters();
-        window.updateStatistics();
-        window.updateLastUpdateTime();
-        window.initializeSmartSearch();
-        window.initializeSlider();
-        window.updateBreadcrumbs();
-    }
-
-    async function loadFromCSV() {
-        const csvFilePath = 'dati-palermo-hub/palermo-hub.csv';
-        
-        const response = await fetch(csvFilePath);
-        if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        
-        const csvText = await response.text();
-        
-        Papa.parse(csvText, {
-            header: true,
-            skipEmptyLines: true,
-            delimiter: ',',
-            quotes: true,
-            quoteChar: '"',
-            escapeChar: '"',
-            transformHeader: function(header) {
-                return header.trim().toLowerCase();
-            },
-            transform: function(value, header) {
-                return value ? value.trim() : '';
-            },
-            complete: function(results) {
-                window.allMaps = results.data.filter(row => row.titolo && row.titolo.trim() !== '');
-                
-                // Salva i dati in cache
-                try {
-                    const cacheData = {
-                        data: window.allMaps,
-                        timestamp: Date.now()
-                    };
-                    localStorage.setItem(CACHE_KEY, JSON.stringify(cacheData));
-                } catch (e) {
-                    console.warn('Impossibile salvare nella cache, spazio esaurito?', e);
-                }
-                
-                window.filteredMaps = [...window.allMaps];
-                window.populateFilters();
-                window.applyFilters();
-                window.updateStatistics();
-                window.updateLastUpdateTime();
-                window.initializeSmartSearch();
-                window.initializeSlider();
-                window.updateBreadcrumbs();
-            },
-            error: function(error) {
-                document.getElementById('maps-container').innerHTML = 
-                    '<div class="no-results">⚠ Errore nel parsing del CSV</div>';
-            }
-        });
-    }
-
-    // Modifica setupAutoUpdate per rispettare la cache
-    const originalSetupAutoUpdate = window.setupAutoUpdate;
-    window.setupAutoUpdate = function() {
-        window.autoUpdateInterval = setInterval(() => {
-            // Controlla se la cache è scaduta
-            const cachedData = getCachedData();
-            if (!cachedData) {
-                window.loadMapsData(true);
-            } else {
-                // Aggiorna solo l'indicatore temporale
-                window.updateLastUpdateTime();
-            }
-        }, 30 * 60 * 1000); // Controlla ogni 30 minuti
-    };
-
-    // Funzione per forzare l'aggiornamento dei dati
     function forceRefreshData() {
-        // Rimuovi la cache
-        localStorage.removeItem(CACHE_KEY);
-        
-        // Ricarica i dati
-        window.loadMapsData(true);
-        
-        // Feedback visivo
+        if (window.loadMapsData) {
+            window.loadMapsData(true);
+        }
+
         const refreshBtn = document.getElementById('refresh-data');
         if (refreshBtn) {
             refreshBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Aggiornamento...';
@@ -594,127 +352,23 @@
         }
     }
 
-    // Inizializzazione
+    // NOTA: home.js registra gia' un proprio DOMContentLoaded che copre filtri, ricerca,
+    // popup, paginazione, back-to-top, slider e beforeunload — non ripeterlo qui (causava
+    // doppi listener sugli stessi bottoni). Qui restano solo le parti NON coperte da home.js.
     document.addEventListener('DOMContentLoaded', function() {
-        // Aggiungi listener per il pulsante di aggiornamento
         const refreshBtn = document.getElementById('refresh-data');
         if (refreshBtn) {
             refreshBtn.addEventListener('click', forceRefreshData);
         }
-        
-        // Il resto dell'inizializzazione rimane invariato
-        if (window.initBackToTop) window.initBackToTop();
-        if (window.loadMapsData) window.loadMapsData();
-        if (window.setupAutoUpdate) window.setupAutoUpdate();
-        if (window.pauseSliderOnHover) window.pauseSliderOnHover();
 
-        // Filtri tradizionali
-        if (document.querySelectorAll('.filter-select')) {
-            document.querySelectorAll('.filter-select').forEach(select => {
-                select.addEventListener('change', window.applyFilters);
-            });
-        }
-
-        // Ricerca intelligente
-        const searchInput = document.getElementById('smart-search-input');
-        const searchContainer = document.getElementById('search-input-container');
-        const clearBtn = document.getElementById('search-clear-btn');
-
-        if (searchInput && window.handleSmartSearchInput) {
-            searchInput.addEventListener('input', window.handleSmartSearchInput);
-        }
-        if (searchInput && window.handleSmartSearchKeyboard) {
-            searchInput.addEventListener('keydown', window.handleSmartSearchKeyboard);
-        }
-        
-        if (searchInput) {
-            searchInput.addEventListener('focus', function() {
-                searchContainer.classList.add('focused');
-            });
-            
-            searchInput.addEventListener('blur', function() {
-                searchContainer.classList.remove('focused');
-                setTimeout(window.hideSuggestions, 200);
-            });
-        }
-
-        if (clearBtn && window.clearSmartSearch) {
-            clearBtn.addEventListener('click', window.clearSmartSearch);
-        }
-
-        // Altri controlli
-        if (document.getElementById('clear-filters') && window.clearFilters) {
-            document.getElementById('clear-filters').addEventListener('click', window.clearFilters);
-        }
-        if (document.getElementById('view-toggle') && window.toggleView) {
-            document.getElementById('view-toggle').addEventListener('click', window.toggleView);
-        }
-        if (document.getElementById('sort-btn') && window.toggleSort) {
-            document.getElementById('sort-btn').addEventListener('click', window.toggleSort);
-        }
-        if (document.getElementById('show-filters') && window.showActiveFiltersPopup) {
-            document.getElementById('show-filters').addEventListener('click', window.showActiveFiltersPopup);
-        }
-        
-        if (document.getElementById('popup-close') && window.hideActiveFiltersPopup) {
-            document.getElementById('popup-close').addEventListener('click', window.hideActiveFiltersPopup);
-        }
-        if (document.getElementById('popup-overlay') && window.hideActiveFiltersPopup) {
-            document.getElementById('popup-overlay').addEventListener('click', window.hideActiveFiltersPopup);
-        }
-        if (document.getElementById('popup-reset') && window.resetAllFilters) {
-            document.getElementById('popup-reset').addEventListener('click', function() {
-                window.resetAllFilters();
-                window.hideActiveFiltersPopup();
-            });
-        }
-        if (document.getElementById('popup-apply') && window.hideActiveFiltersPopup) {
-            document.getElementById('popup-apply').addEventListener('click', window.hideActiveFiltersPopup);
-        }
-
-        // Chiudi suggerimenti quando si clicca fuori
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.smart-search-container') && window.hideSuggestions) {
-                window.hideSuggestions();
-            }
-        });
-
-        // Aggiungi i nuovi event listener per la paginazione
-        if (document.getElementById('infinite-scroll-btn') && window.setViewMode) {
-            document.getElementById('infinite-scroll-btn').addEventListener('click', () => window.setViewMode('infinite'));
-        }
-        if (document.getElementById('pagination-btn') && window.setViewMode) {
-            document.getElementById('pagination-btn').addEventListener('click', () => window.setViewMode('pagination'));
-        }
-        if (document.getElementById('prev-page') && window.changePage) {
-            document.getElementById('prev-page').addEventListener('click', () => window.changePage(-1));
-        }
-        if (document.getElementById('next-page') && window.changePage) {
-            document.getElementById('next-page').addEventListener('click', () => window.changePage(1));
-        }
-        if (document.getElementById('items-per-page-select') && window.setItemsPerPage) {
-            document.getElementById('items-per-page-select').addEventListener('change', (e) => window.setItemsPerPage(e.target.value));
-        }
-        
         // Nascondi inizialmente i controlli di paginazione
         if (document.getElementById('pagination-controls')) {
             document.getElementById('pagination-controls').style.display = 'none';
         }
-
-        // Pulizia al chiudere la finestra
-        window.addEventListener('beforeunload', function() {
-            if (window.autoUpdateInterval) {
-                clearInterval(window.autoUpdateInterval);
-            }
-            if (window.sliderInterval) {
-                clearInterval(window.sliderInterval);
-            }
-        });
     });
     </script>
 
-<!-- Carica home.js dopo aver sovrascritto le funzioni necessarie -->
- <script src="lib/js/client/home.js"></script>
+    <script src="lib/js/client/home.js"></script>
 
 </body>
 </html>

@@ -3329,3 +3329,105 @@ body::before {
 }
 
 /* Watermark: PH-modal-fix-gbv-ods-2025 */
+
+/* ========================================
+   INDEX.HTML: controlli vista/paginazione (era inline in <head>)
+   ======================================== */
+.view-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.view-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.view-options > span {
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+.view-option-btn, .clear-btn, .sort-btn, .view-toggle {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--card-background);
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.view-option-btn:hover, .clear-btn:hover, .sort-btn:hover, .view-toggle:hover {
+    background: var(--background-main);
+    border-color: var(--secondary-blue-dark);
+}
+
+.view-option-btn.active {
+    background: var(--secondary-blue-dark);
+    color: var(--white);
+    border-color: var(--secondary-blue-dark);
+}
+
+.button-group-mobile {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .view-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .view-options {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .button-group-mobile {
+        width: 100%;
+    }
+}
+
+.refresh-btn {
+    padding: 0.5rem 1rem;
+    background: var(--card-background);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    margin-left: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.refresh-btn:hover {
+    background: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+    .refresh-btn {
+        margin-left: 0;
+        margin-top: 0.5rem;
+        width: 100%;
+        justify-content: center;
+    }
+}
