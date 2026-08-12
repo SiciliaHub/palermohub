@@ -29,9 +29,10 @@ L.Control.Basemaps = L.Control.extend({
 
         if (this.options.overlays) {
             var modeRow = L.DomUtil.create("div", "basemaps-mode", container);
+            var modeIndicator = L.DomUtil.create("span", "basemaps-mode-indicator", modeRow);
             var baseBtn = L.DomUtil.create("a", "basemaps-mode-btn active", modeRow);
             baseBtn.href = "#";
-            baseBtn.textContent = "Base";
+            baseBtn.textContent = "Base cartografica";
             var overlayBtn = L.DomUtil.create("a", "basemaps-mode-btn", modeRow);
             overlayBtn.href = "#";
             overlayBtn.textContent = "Storica sovrapposta";
@@ -41,6 +42,7 @@ L.Control.Basemaps = L.Control.extend({
                 this._mode = "base";
                 L.DomUtil.addClass(baseBtn, "active");
                 L.DomUtil.removeClass(overlayBtn, "active");
+                L.DomUtil.removeClass(modeRow, "mode-overlay");
                 L.DomUtil.removeClass(container, "closed");
             }, this);
             L.DomEvent.on(overlayBtn, "click", function(e) {
@@ -48,6 +50,7 @@ L.Control.Basemaps = L.Control.extend({
                 this._mode = "overlay";
                 L.DomUtil.addClass(overlayBtn, "active");
                 L.DomUtil.removeClass(baseBtn, "active");
+                L.DomUtil.addClass(modeRow, "mode-overlay");
                 L.DomUtil.removeClass(container, "closed");
             }, this);
 

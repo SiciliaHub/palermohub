@@ -23,6 +23,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    gap: 10px;
     width: 100%;
 }
 .basemaps.closed .basemap.alt img {
@@ -39,6 +40,10 @@
 .basemaps.closed .basemaps-group {
     display: none;
 }
+.basemaps.closed .basemaps-title,
+.basemaps.closed .basemaps-mode {
+    display: none;
+}
 .basemaps-title {
     flex-basis: 100%;
     margin: 4px 0 0 10px;
@@ -47,15 +52,35 @@
     color: #333;
 }
 .basemaps-mode {
+    position: relative;
     flex-basis: 100%;
     display: flex;
     min-width: 170px;
     margin: 4px 10px 6px 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
+    background: #f5f5f5;
     overflow: hidden;
 }
+.basemaps-mode-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #FF9900;
+    border-radius: 20px;
+    transform: translateX(0%);
+    transition: transform 0.28s cubic-bezier(0.65, 0, 0.35, 1);
+    pointer-events: none;
+    z-index: 0;
+}
+.basemaps-mode.mode-overlay .basemaps-mode-indicator {
+    transform: translateX(100%);
+}
 .basemaps-mode a.basemaps-mode-btn {
+    position: relative;
+    z-index: 1;
     flex: 1;
     padding: 6px 10px;
     font-size: 11px;
@@ -64,18 +89,17 @@
     white-space: nowrap;
     color: #333 !important;
     text-decoration: none;
-    background: #f5f5f5;
-    transition: background 0.15s ease, color 0.15s ease;
+    background: transparent;
+    transition: color 0.28s ease;
 }
 .basemaps-mode a.basemaps-mode-btn:hover {
-    background: #ebebeb;
+    color: #000 !important;
 }
 .basemaps-mode a.basemaps-mode-btn.active {
-    background: #FF9900;
     color: #fff !important;
 }
 .basemaps-mode a.basemaps-mode-btn.active:hover {
-    background: #FF9900;
+    color: #fff !important;
 }
 .basemap.overlay-active img {
     border-color: #2277cc;
