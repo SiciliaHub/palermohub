@@ -159,7 +159,9 @@
   .sidebar-pane.active {
     display: block; }
   .sidebar-pane h3 {
-    margin: 24px 0 8px; }
+    margin: 24px 0 8px;
+    font-family: "Fraunces", "Inter", Georgia, serif;
+    font-weight: 600; }
   .sidebar-pane p {
     margin: 0 0 16px;
     line-height: 1.5; }
@@ -178,8 +180,9 @@
   height: 44px;
   padding: 0 24px;
   line-height: 44px;
-  font-size: 15px;
-  font-weight: 700;
+  font-family: "Fraunces", "Inter", Georgia, serif;
+  font-size: 17px;
+  font-weight: 600;
   letter-spacing: 0.2px;
   color: #fff;
   background-color: #CC7A00; }

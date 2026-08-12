@@ -1,6 +1,7 @@
 /* foglio di stile atlante cartografico palermo -
 giovan battista vitrano per opendatasicilia.it */
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&display=swap');
 
 @font-face {font-family:fontawesome;
 src:url("fonts/fontawesome-webfont.eot?") format("eot"),
@@ -10,7 +11,7 @@ url("fonts/fontawesome-webfont.ttf") format("truetype"),
 url("fontst/fontawesome-webfont.svg#fontawesome") format("svg");
 font-weight:normal; font-style:normal;}
 
-html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; background-color:#ffffff; 
+html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px "Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; background-color:#ffffff; 
 /*background-image:url(../images/ods_02.png); background-size: 30px 30px;background-repeat:no-repeat;background-position:5px 3px;background-attachment: fixed;*/}
 
 /*
@@ -27,7 +28,7 @@ html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px 
 
 /* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it  */
 
- #map { height: 100%; top:0px; /*top:-86px;*/ /*menu seconda versione*/ font: 11px "Open Sans", Helvetica Neue, fontawesome, Arial, Helvetica, sans-serif; background-color: #fff; z-index: 1000;}
+ #map { height: 100%; top:0px; /*top:-86px;*/ /*menu seconda versione*/ font: 11px "Inter", "Open Sans", Helvetica Neue, fontawesome, Arial, Helvetica, sans-serif; background-color: #fff; z-index: 1000;}
  
 #foia { position:fixed; bottom:80px; left:60px; z-index: 1020;}
 
@@ -59,9 +60,9 @@ html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px 
 /**/
 #itaf { position:fixed; bottom:110px; right:37px; z-index: 1014;}
 
-.lorem {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
+.lorem {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
 
- @media (min-width: 320px) and (max-width: 1024px) { .lorem {font-style: italic; color: #4E4B4B; text-align: left; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 8.5px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
+ @media (min-width: 320px) and (max-width: 1024px) { .lorem {font-style: italic; color: #4E4B4B; text-align: left; font-family:"Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 8.5px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
 
 a:link {color: #FF9900;	text-decoration:none;}
 a:visited {	color: #FF9900;}/* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it */
@@ -81,7 +82,7 @@ a:active {color: #FF0000; text-decoration:none; }
 
 @media (min-width: 220px) and (max-width: 736px) { #breadcrumbs {padding-top:5px; padding-left:10px;  }}
 
-.breadcrumbs{padding-left:12px; padding-top:5px;  color: #4E4B4B; font-size:12px; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; text-align: left;
+.breadcrumbs{padding-left:12px; padding-top:5px;  color: #4E4B4B; font-size:12px; font-family:"Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; text-align: left;
 }
 
 @media (min-width: 220px) and (max-width: 736px) { .breadcrumbs {font-size:8px; padding-top:0px; padding-left:10px; }}
@@ -150,7 +151,7 @@ hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900; margin-t
 /* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it */ .clip {    width: 42px;    border: 2px solid #FFF;    margin: 2 2px;    border-radius: 40px;    box-shadow: 0 1px 5px rgba(0,0,0,0.65)	} .clip_tab {width:98%;height:98%;border-radius: 5px; -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) }
 
 #detra {
-font: 14px "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;
+font: 14px "Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;
 position:fixed;
 top:45px;
 right:10px;
@@ -205,7 +206,8 @@ z-index: 1010;}
 .popup h2 {
   margin-top: 0;
   color: #333;
- font-family: 'Open Sans', Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
+ font-family: 'Fraunces', 'Inter', Georgia, serif;
+ font-weight: 600;
 }
 .popup .close {
   position: absolute;
@@ -273,7 +275,7 @@ z-index: 1010;}
   
     cursor: default;
     display: inline-block;
-    font-family: 'Open Sans', Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
+    font-family: 'Inter', 'Open Sans', Arial, 'Arial Unicode MS', Helvetica, Sans-Serif;
     overflow: -moz-hidden-unscrollable;
     overflow-wrap: normal;
     page-break-inside: avoid;
@@ -293,19 +295,19 @@ hr {border: 0; background-color: #fff;  border-top: 1px dashed #ff9900;}
 .clip_resize {width: 100%; /*height: 100%;*/ border-radius: 5px;  -moz-border-radius: 5px;  -webkit-border-radius: 5px;border: 1px solid #ccc;background-color:#fff; padding:1px; box-shadow: 0 2px 5px rgba(0,0,0,0.2) } 
 
 /* nuove classi per footer */
-.lorem {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}
+.lorem {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}
 .awesome {font-style:fontawesome;  color: #4E4B4B;  }
-.footer {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; font-size: 14px;}
+.footer {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; font-size: 14px;}
 
- .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 12px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
+ .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 12px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
  
-  @media (min-width: 320px) and (max-width: 1024px) { .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 9.8px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
+  @media (min-width: 320px) and (max-width: 1024px) { .lorem2 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 9.8px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
   
 .ods_footer {
 	font-style: italic;
 	color: #F5F5F5;
 	text-align: justify;
-	font-family: "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;
+	font-family: "Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;
 	font-size: 1.20em;
 }
 @media (min-width: 320px) and (max-width: 736px) { .footer {font-size: 0.9em } }
@@ -391,7 +393,7 @@ box-shadow: 0 1px 1.5px rgba(0,0,0,0.65);
 }
 
 /* estratte da inline style="" in index.html */
-.sidebar-tabs strong { font-family: "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; letter-spacing: -0.5px; }
+.sidebar-tabs strong { font-family: "Inter", "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; letter-spacing: -0.5px; }
 .tab-fs-10 { font-size: 10px; }
 .tab-fs-11 { font-size: 11px; }
 .tab-fs-13 { font-size: 13px; }

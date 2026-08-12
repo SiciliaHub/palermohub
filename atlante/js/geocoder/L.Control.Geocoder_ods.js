@@ -71,6 +71,10 @@ L.Control.GeocoderOds = L.Control.extend({
         this._input.value = "";
         this._clearBtn.style.display = "none";
         this._hideResults();
+        if (this._marker) {
+            this._map.removeLayer(this._marker);
+            this._marker = null;
+        }
         this._input.focus();
     },
 
