@@ -4,6 +4,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html>
 
@@ -51,7 +53,7 @@
 <link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
 
 <link href="atlante/css/leaflet.css" rel="stylesheet" type="text/css"> 
-<link href="atlante/css/leaflet-sidebar.css?v=1" rel="stylesheet" type="text/css">
+<link href="atlante/css/leaflet-sidebar.css?v=4" rel="stylesheet" type="text/css">
 
 <link href="atlante/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link href="lib/css/LControlMousePosition_ods.css?v=1" rel="stylesheet" type="text/css">
@@ -75,7 +77,6 @@
 <script type="text/javascript" src="atlante/js/sidebar/leaflet-sidebar.js"></script>
 <script src="atlante/js/hash/leaflet-hash.js"></script>
 <script src="atlante/js/tileoverlay/leaflet-tileoverlay-mask.js"></script>
-<script src="atlante/js/social/jquery_csbuttons.js"></script>
 <script src="lib/js/mouseposition/LControlMousePosition.js"></script>
 <script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
 <script src="atlante/js/basemap/L.Control.Basemaps_02_timeslider.js?v=1"></script>
@@ -210,10 +211,10 @@ $(document).ready(function(){
 		<li role="presentation"> <a href="#ppe" title="P.P.E. del centro storico di Palermo, 1993" role="tab"><strong class="tab-fs-13">'93</strong></a></li>
 		<li role="presentation" class="tab-group-end"> <a href="#prg" title="Variante Generale al PRG di Palermo, 2004" role="tab"><strong class="tab-fs-13">'04</strong></a></li>
         <li role="presentation"><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
-        <li role="presentation"><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
+        <li role="presentation" class="tab-group-end"> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="ODS" width="20" height="20" loading="lazy" /></a></li>
          </ul>
           <ul role="tablist">
-          <li role="presentation"> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="ODS" width="20" height="20" loading="lazy" /></a></li>
+          <li role="presentation"><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
          <li role="presentation"><a href="#tools" title="Configurazione" role="tab"><i class="fa fa-cog" aria-hidden="true"></i></a></li>
          </ul></div>
     <!-- Tab panes -->
@@ -548,28 +549,32 @@ Un ringraziamento particolare va a <a href="https://twitter.com/napo" target="_b
       <!-- Tab condividi -->
             <div class="sidebar-pane" id="share">
                 <h1 class="sidebar-header">Condividi questa mappa<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1><br><br>
-                <p class="lorem"><strong>Puoi condividere online la mappe con altre persone.</strong></p>
-                <p class="lorem"><strong>Condividi:</strong></p >
-<div id="social"><p >
-		<a href="#" title="Condividi su Facebook" class="csbuttons soc" data-type="facebook"><img src="atlante/images/fb.png" alt="facebook" width="32" height="32" loading="lazy"></a>&nbsp;&nbsp;
-	    <a href="#" title="Condividi su Twitter" class="csbuttons soc" data-type="twitter"><img src="atlante/images/tw.png" alt="twitter" width="32" height="32" loading="lazy"></a>&nbsp;&nbsp;
-		<a href="#" title="Condividi su GooglePlus" class="csbuttons soc" data-type="google" ><img src="atlante/images/gp.png"width="32" height="32" alt="google" loading="lazy"></a>&nbsp;&nbsp;
-		<a href="#" title="Condividi su Linkedin" class="csbuttons soc" data-type="linkedin"><img src="atlante/images/in.png"width="32" height="32" alt="linkedin" loading="lazy"></a>&nbsp;&nbsp;
-    <a href="#" title="Condividi su Pinterest" class="csbuttons soc" data-type="pinterest"><img src="atlante/images/pin.png" width="32" height="32"alt="pinterest" loading="lazy"></a></p>
-</div>
-<script>
-			$(document).ready(function(){
-				$('.csbuttons').cSButtons({total : "#total","url" 	: "https://siciliahub.github.io/palermohub/index_atlante.html",});
-			});
-		</script><br>
- <label for="url breve"><p class="lorem2"><strong>URL breve</strong><br><br></p></label>
-<input name="url breve" type="text" autofocus id="url_breve" title="url breve" Value="https://goo.gl/LCbpMW" readonly><br>
-<hr>
-<br>
-<p class="lorem"><strong>Includi la mappa</strong></p>   
-       <textarea name="atlante" maxlength="2000" autofocus readonly id="iframe" title="Atlante Cartografico di Palermo"><iframe width="100%" height="800px" frameBorder="0" src="https://palermohub.opendatasicilia.it/index_atlante.html#14/38.1114/13.3534"></iframe><a href="https://palermohub.opendatasicilia.it/index_atlante.html#14/38.1114/13.3534" title="Visualizza l&rsquo;Atlante delle carte tecniche storiche di Palermo a schermo intero">Visualizza a schermo intero</a>
-</textarea><br><br>
-     <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
+                <p class="lorem"><strong>Condividi su:</strong></p>
+                <div class="share-social" id="share-social">
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="Condividi su Facebook" data-share="facebook"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-facebook fa-stack-1x fa-inverse"></i></span></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="Condividi su X (Twitter)" data-share="twitter"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-twitter fa-stack-1x fa-inverse"></i></span></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="Condividi su WhatsApp" data-share="whatsapp"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-whatsapp fa-stack-1x fa-inverse"></i></span></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="Condividi su Telegram" data-share="telegram"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-telegram fa-stack-1x fa-inverse"></i></span></a>
+                    <a href="#" target="_blank" rel="noopener noreferrer" title="Condividi su LinkedIn" data-share="linkedin"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-linkedin fa-stack-1x fa-inverse"></i></span></a>
+                    <a href="#" title="Condividi via email" data-share="email"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span></a>
+                </div>
+                <hr>
+                <p class="lorem2"><strong>Link diretto</strong></p>
+                <div class="share-copy-row">
+                    <input type="text" id="share_url" readonly>
+                    <button type="button" class="share-copy-btn" data-copy-target="share_url" title="Copia link"><i class="fa fa-clipboard" aria-hidden="true"></i></button>
+                </div>
+                <hr>
+                <p class="lorem"><strong>Includi la mappa nel tuo sito</strong></p>
+                <div class="share-iframe-settings">
+                    <label class="share-field">Larghezza<input type="text" id="iframe_width" value="100%"></label>
+                    <label class="share-field">Altezza (px)<input type="number" id="iframe_height" value="800" min="200" step="50"></label>
+                    <label class="share-checkbox"><input type="checkbox" id="iframe_include_view" checked> Includi posizione e zoom attuali</label>
+                </div>
+                <textarea maxlength="2000" readonly id="iframe" title="Atlante Cartografico di Palermo"></textarea><br><br>
+                <button type="button" class="share-copy-btn share-copy-btn--wide" data-copy-target="iframe" title="Copia il codice iframe"><i class="fa fa-clipboard" aria-hidden="true"></i> Copia codice</button><br><br>
+                <a id="share_fullscreen_link" href="#" target="_blank" rel="noopener noreferrer" title="Visualizza l&rsquo;Atlante delle carte tecniche storiche di Palermo a schermo intero">Visualizza a schermo intero</a>
+                <p class="lorem">Copia e incolla questo codice in documenti HTML per incorporare questa mappa nelle tue pagine web.<br> Copy and paste this code into HTML documents to embed this map on web pages.</p>
             </div>
             
              <!-- Tab strumenti -->
@@ -841,11 +846,33 @@ var credctrl = L.controlCredits({
 var overlayBasemaps = [osm, google, googlesat, palermo1580, palermo1754, palermo1860, palermo1877, nuova, palermo1891, palermo1893, ctc, omira, irta, prg62, sas, ppecs, Palermo_50k, City_Plans_Palermo, prg04, ctr10k];
 
 <!-- una sola mappa storica sovrapposta alla volta: le due strisce a cerchietti aggiungono/rimuovono layer con map.addLayer/removeLayer, che non genera l'evento overlayadd del vecchio L.Control.Layers - qui si ascolta l'evento nativo layeradd -->
+var basemapCaptionToTab = {
+	'1580': 'storia', '1754': 'storia', '1860': 'storia', '1877': 'storia',
+	'1882': 'storia', '1891': 'storia', '1893': 'storia',
+	'1935': 'omira', '1941': 'usarmymap', '1943': 'usarmymap',
+	'1956': 'irta', '1962': 'prg62', '1987': 'sas', '1993': 'ppe', '2004': 'prg'
+};
+function syncBasemapDot(layer) {
+	// pallino blu sull'icona della sidebar corrispondente alla mappa storica sovrapposta in uso
+	var tabs = document.querySelectorAll('.sidebar-tabs .basemap-current');
+	for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('basemap-current'); }
+	var caption = layer && layer.options && layer.options.caption;
+	var tabId = basemapCaptionToTab[caption];
+	if (tabId) {
+		var link = document.querySelector('.sidebar-tabs a[href="#' + tabId + '"]');
+		if (link) { link.closest('li').classList.add('basemap-current'); }
+	}
+}
 map.on('layeradd', function(e) {
 	if (overlayBasemaps.indexOf(e.layer) === -1) { return; }
 	overlayBasemaps.forEach(function(layer) {
 		if (layer !== e.layer && map.hasLayer(layer)) { map.removeLayer(layer); }
 	});
+	syncBasemapDot(e.layer);
+});
+// la mappa storica di default è già aggiunta al caricamento, prima che il listener sopra si registri: sync iniziale esplicito
+overlayBasemaps.forEach(function(layer) {
+	if (map.hasLayer(layer)) { syncBasemapDot(layer); }
 });
 			var hash = new L.Hash(map);
 			var sidebar = L.control.sidebar('sidebar').addTo(map);
@@ -856,6 +883,89 @@ map.on('layeradd', function(e) {
             tileY: 0,
             tileZ: 1
 		    }));
+
+// tab "Condividi": link, icone social e impostazioni iframe aggiornati in base alla vista corrente della mappa
+function updateShareTab() {
+	var currentUrl = window.location.href;
+	var urlInput = document.getElementById('share_url');
+	if (urlInput) { urlInput.value = currentUrl; }
+
+	var baseUrl = window.location.origin + window.location.pathname;
+	var includeView = document.getElementById('iframe_include_view');
+	var widthInput = document.getElementById('iframe_width');
+	var heightInput = document.getElementById('iframe_height');
+	var iframeSrc = (includeView && includeView.checked) ? currentUrl : baseUrl;
+	var width = (widthInput && widthInput.value.trim()) || '100%';
+	var height = (heightInput && heightInput.value.trim()) || '800';
+
+	var iframeCode = '<iframe width="' + width + '" height="' + height + 'px" frameborder="0" src="' + iframeSrc + '"></iframe>\n' +
+		'<a href="' + iframeSrc + '" title="Visualizza l’Atlante delle carte tecniche storiche di Palermo a schermo intero">Visualizza a schermo intero</a>';
+
+	var iframeTextarea = document.getElementById('iframe');
+	if (iframeTextarea) { iframeTextarea.value = iframeCode; }
+
+	var fullscreenLink = document.getElementById('share_fullscreen_link');
+	if (fullscreenLink) { fullscreenLink.href = iframeSrc; }
+
+	var shareText = document.title || 'Atlante delle carte tecniche storiche di Palermo';
+	var encodedUrl = encodeURIComponent(currentUrl);
+	var encodedText = encodeURIComponent(shareText);
+	var shareLinks = {
+		facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl,
+		twitter: 'https://twitter.com/intent/tweet?url=' + encodedUrl + '&text=' + encodedText,
+		whatsapp: 'https://api.whatsapp.com/send?text=' + encodedText + '%20' + encodedUrl,
+		telegram: 'https://t.me/share/url?url=' + encodedUrl + '&text=' + encodedText,
+		linkedin: 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodedUrl,
+		email: 'mailto:?subject=' + encodedText + '&body=' + encodedUrl
+	};
+	var socialLinks = document.querySelectorAll('#share-social a[data-share]');
+	for (var s = 0; s < socialLinks.length; s++) {
+		var type = socialLinks[s].getAttribute('data-share');
+		if (shareLinks[type]) { socialLinks[s].href = shareLinks[type]; }
+	}
+}
+
+function copyShareField(btn) {
+	var el = document.getElementById(btn.getAttribute('data-copy-target'));
+	if (!el) { return; }
+	el.select();
+	el.setSelectionRange(0, el.value.length);
+	var showCopied = function() {
+		var original = btn.innerHTML;
+		btn.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
+		setTimeout(function() { btn.innerHTML = original; }, 1200);
+	};
+	if (navigator.clipboard && navigator.clipboard.writeText) {
+		navigator.clipboard.writeText(el.value).then(showCopied, function() {
+			document.execCommand('copy');
+			showCopied();
+		});
+	} else {
+		document.execCommand('copy');
+		showCopied();
+	}
+}
+
+var shareCopyButtons = document.querySelectorAll('.share-copy-btn');
+for (var c = 0; c < shareCopyButtons.length; c++) {
+	shareCopyButtons[c].addEventListener('click', function() { copyShareField(this); });
+}
+
+var shareSettingIds = ['iframe_width', 'iframe_height', 'iframe_include_view'];
+for (var f = 0; f < shareSettingIds.length; f++) {
+	var settingEl = document.getElementById(shareSettingIds[f]);
+	if (settingEl) {
+		settingEl.addEventListener('input', updateShareTab);
+		settingEl.addEventListener('change', updateShareTab);
+	}
+}
+
+sidebar.on('content', function(e) { if (e.id === 'share') { updateShareTab(); } });
+window.addEventListener('hashchange', function() {
+	var sharePane = document.getElementById('share');
+	if (sharePane && sharePane.classList.contains('active')) { updateShareTab(); }
+});
+updateShareTab();
 
         </script>
          <!-- header -->       
