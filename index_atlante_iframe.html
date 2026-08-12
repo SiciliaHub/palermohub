@@ -604,11 +604,16 @@ Un ringraziamento particolare va a <a href="https://twitter.com/napo" target="_b
           
   <!-- carto Storica -->
 <script type="text/JavaScript">
-        var southWest = L.latLng(38.098969492479725, 13.41679573059082),
-            northEast = L.latLng(38.13779704369437, 13.310022354125977),
+        // bounding box del Comune di Palermo con un margine oltre il confine amministrativo
+        var southWest = L.latLng(38.0570, 13.2181),
+            northEast = L.latLng(38.2546, 13.4598),
     	      bounds = L.latLngBounds(southWest, northEast);
 
-        var map = L.map('map', {attributionControl:true}).setView([38.11127,13.3534422], 14 );
+        var map = L.map('map', {attributionControl:true, maxBounds: bounds, maxBoundsViscosity: 1.0}).setView([38.1157,13.3613], 15 );
+
+// il marker-icon.png di default non è sotto atlante/css/images (dove Leaflet lo cerca in base a leaflet.css), ma qui: fix icona rotta nel popup del geocoder
+L.Icon.Default.imagePath = 'atlante/images/';
+
 var basemaps = [
 		  		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
      attribution:'&copy;<a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
