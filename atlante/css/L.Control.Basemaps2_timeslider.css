@@ -1,0 +1,243 @@
+.basemaps {
+    padding: 0px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    max-width: 340px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    padding-bottom: 6px;
+}
+.basemaps.closed {
+    display: block;
+    background: none;
+    box-shadow: none;
+    padding-bottom: 0;
+}
+.basemaps.closed .basemap {
+    display: none;
+}
+.basemaps.closed .basemap.alt {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+}
+.basemaps.closed .basemap.alt img {
+    margin: 5px 10px 0 0;
+    order: 2;
+}
+.basemaps.closed .basemap.alt .basemap-caption {
+    margin: 0 0 0 85px;
+    order: 1;
+}
+.basemaps.closed .basemap.alt h4 {
+    display: none;
+}
+.basemaps.closed .basemaps-group {
+    display: none;
+}
+.basemaps.closed .basemaps-title,
+.basemaps.closed .basemaps-mode,
+.basemaps.closed .basemaps-mode-description,
+.basemaps.closed .basemaps-help-toggle,
+.basemaps.closed .basemaps-help-panel,
+.basemaps.closed .basemaps-timeslider {
+    display: none;
+}
+/* eccezione: in modalità "Storica sovrapposta" lo slider resta visibile e
+   utilizzabile anche a pannello chiuso, per scorrere gli anni senza dover
+   riaprire il pannello con l'hover */
+.basemaps.closed .basemaps-mode.mode-overlay ~ .basemaps-timeslider {
+    display: block;
+}
+.basemaps-mode-description {
+    flex-basis: 100%;
+    margin: 0 10px 6px 10px;
+    font-size: 11px;
+    color: #666;
+    line-height: 1.4;
+}
+.basemaps-help-toggle {
+    flex-basis: 100%;
+    display: block;
+    margin: 0 10px 6px 10px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #999 !important;
+    text-decoration: none !important;
+}
+.basemaps-help-toggle:hover,
+.basemaps-help-toggle.open {
+    color: #FF9900 !important;
+}
+.basemaps-help-panel {
+    display: none;
+    flex-basis: 100%;
+    margin: 0 10px 8px 10px;
+    padding: 10px 12px;
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 6px;
+}
+.basemaps-help-panel.open {
+    display: block;
+}
+.basemaps-help-panel .basemap-help-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+.basemaps-help-panel .basemap-help-step:last-child {
+    margin-bottom: 0;
+}
+.basemaps-help-panel .basemap-help-step i {
+    flex: 0 0 16px;
+    font-size: 13px;
+    color: #FF9900;
+    text-align: center;
+    margin-top: 1px;
+}
+.basemaps-help-panel .basemap-help-step div {
+    font-size: 10.5px;
+    color: #444;
+    line-height: 1.4;
+}
+.basemaps-title {
+    flex-basis: 100%;
+    margin: 4px 0 0 10px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #333;
+}
+.basemaps-mode {
+    position: relative;
+    flex-basis: 100%;
+    display: flex;
+    min-width: 170px;
+    margin: 4px 10px 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background: #f5f5f5;
+    overflow: hidden;
+}
+.basemaps-mode-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: #FF9900;
+    border-radius: 20px;
+    transform: translateX(0%);
+    transition: transform 0.28s cubic-bezier(0.65, 0, 0.35, 1);
+    pointer-events: none;
+    z-index: 0;
+}
+.basemaps-mode.mode-overlay .basemaps-mode-indicator {
+    transform: translateX(100%);
+}
+.basemaps-mode a.basemaps-mode-btn {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    color: #333 !important;
+    text-decoration: none;
+    background: transparent;
+    transition: color 0.28s ease;
+}
+.basemaps-mode a.basemaps-mode-btn:hover {
+    color: #000 !important;
+}
+.basemaps-mode a.basemaps-mode-btn.active {
+    color: #fff !important;
+}
+.basemaps-mode a.basemaps-mode-btn.active:hover {
+    color: #fff !important;
+}
+.basemap.overlay-active img {
+    border-color: #2277cc;
+    box-shadow: 0 0 0 2px #2277cc;
+}
+/* foglio di stile atlante cartografico palermo -
+ giovan battista vitrano per opendatasicilia.it */
+.basemaps-group {
+    flex-basis: 100%;
+    margin: 6px 0 0 10px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
+}
+.basemap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+.basemap.active img {
+    border-color: orange;
+    box-shadow: 2px 2px 4px #000;
+}
+.basemap img {
+	width: 50px;
+    border: 2px solid #FFF;
+    margin: 5px 0px 0px 10px;
+    border-radius: 40px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.65)
+}
+.basemap-caption {
+    margin: 2px 0 5px 10px;
+    font-size: 11px;
+    color: #333;
+    text-align: center;
+	    font-weight: 700;
+}
+.basemaps-timeslider {
+    display: none;
+    flex-basis: 100%;
+    margin: 0 10px 8px 10px;
+}
+.basemaps-mode.mode-overlay ~ .basemaps-timeslider {
+    display: block;
+}
+.basemaps-timeslider-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 2px;
+    text-shadow: -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff, 1px 1px 2px #fff, 0 0 4px #fff;
+}
+.basemaps-timeslider-current {
+    font-size: 13px;
+    font-weight: bold;
+    color: #cc7300;
+}
+.basemaps-timeslider-input {
+    width: 100%;
+    accent-color: #FF9900;
+    cursor: pointer;
+    filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff);
+}
+.basemaps-timeslider-name {
+    margin-top: 2px;
+    font-size: 10.5px;
+    font-weight: 600;
+    color: #333;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff, 1px 1px 2px #fff, 0 0 4px #fff;
+}
