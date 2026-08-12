@@ -1,6 +1,6 @@
 .sidebar {
   position: absolute;
-  top: 80px;
+  top: 40px;
   bottom: 0;
   width: 100%;
   overflow: hidden;
@@ -9,7 +9,7 @@
     width: 40px; }
   @media (min-width: 768px) {
     .sidebar {
-      top: 80px;
+      top: 10px;
       bottom: 10px;
       transition: width 500ms; } }
   @media (min-width: 768px) and (max-width: 991px) {
@@ -35,7 +35,7 @@
       right: 10px; } }
 
 .sidebar-tabs {
-  top: 0px;
+  top: 0;
   bottom: 0;
   height: 100%;
   background-color: #fff; }
