@@ -718,6 +718,13 @@ var basemaps = [
   label: 'Carta Tecnica di Palermo - Sas 1987',
   iconURL: 'legend/basemap/sas_clip.jpg', caption: '1987', group: '1900-oggi'}),
 
+ L.tileLayer('https://palermohub.github.io/PRG2004/CSG/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Carta Tecnica Comunale CSG 2k 1989/91',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Carta Tecnica Comunale CSG 2k 1989/91',
+ iconURL: 'legend/basemap/irta_clip.jpg', caption: '1989', group: '1900-oggi'
+              }),
+
     L.tileLayer('https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.png', {
   attribution: 'Base cartografica: P.P.E. del centro storico 1993',
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
@@ -741,6 +748,13 @@ var basemaps = [
   minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
   label: 'Variante Generale 2004',
   iconURL: 'legend/basemap/prg04_clip.jpg', caption: '2004', group: 'Cartografia tecnica'}),
+
+ L.tileLayer('https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png', {
+ attribution: 'Base cartografica: Carta Tecnica Comunale 2k 2007/09',
+ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
+ label: 'Carta Tecnica Comunale 2k 2007/09',
+ iconURL: 'legend/basemap/irta_clip.jpg', caption: '2007', group: 'Cartografia tecnica'
+              }),
 
 <!-- crt 10k -->
   L.tileLayer('https://siciliahub.github.io/palermohub/carto/ctr_pa_10k/{z}/{x}/{y}.png', {
@@ -766,8 +780,8 @@ L.control.mousePosition().addTo(map);
 L.control.geocoderOds().addTo(map);
   map.on("mousemove", function(e) {
   palermo1580.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1754.setCenter(e.containerPoint.x, e.containerPoint.y); nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1860.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1877.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1891.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); 
-  sas.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); 
-  prg04.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); osm.setCenter(e.containerPoint.x, e.containerPoint.y); google.setCenter(e.containerPoint.x, e.containerPoint.y); googlesat.setCenter(e.containerPoint.x, e.containerPoint.y); ctr10k.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  sas.setCenter(e.containerPoint.x, e.containerPoint.y); csg.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); 
+  prg04.setCenter(e.containerPoint.x, e.containerPoint.y); ctc2k.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); osm.setCenter(e.containerPoint.x, e.containerPoint.y); google.setCenter(e.containerPoint.x, e.containerPoint.y); googlesat.setCenter(e.containerPoint.x, e.containerPoint.y); ctr10k.setCenter(e.containerPoint.x, e.containerPoint.y); 
          })
 	
   var osm = L.tileLayer.mask("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -818,12 +832,18 @@ minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Piano Regolatore Generale
 
 var prg04 = L.tileLayer.mask("https://siciliahub.github.io/mappe/palermo_hub/data/prg2004/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Variante Generale al P.R.G. vigente al 2016 | 1:5k - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, tms: true, label: 'Variante Generale 2004 | 1:5k (max zoom 17)', iconURL: 'legend/basemap/prg04_clip.jpg', caption: '2004', group: 'Cartografia tecnica' });
 
+var ctc2k = L.tileLayer.mask("https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Carta Tecnica Comunale 2k 2007/09 - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta Tecnica Comunale 2k 2007/09', iconURL: 'legend/basemap/irta_clip.jpg', caption: '2007', group: 'Cartografia tecnica' });
+
 var ctr10k = L.tileLayer.mask("https://siciliahub.github.io/mappe/palermo_hub/data/ctr10k/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Carta Tecnica Regionale 10k 2012/13 | 1:10k - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 12,   maxZoom: 17, maxNativeZoom: 17, tms: true, label: 'Carta Tecnica Regionale | 1:10k 2012/13 (max zoom 17)', iconURL: 'legend/basemap/ctr_clip.jpg', caption: '2012', group: 'Cartografia tecnica' });
 
 	
 var sas = L.tileLayer.mask("https://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Sas 1987 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano" rel="noopener noreferrer">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli" rel="noopener noreferrer">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro" rel="noopener noreferrer">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
 minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta tecnica Sas 1987 | 1:5k', iconURL: 'legend/basemap/sas_clip.jpg', caption: '1987', group: '1900-oggi' });
+
+var csg = L.tileLayer.mask("https://palermohub.github.io/PRG2004/CSG/{z}/{x}/{y}.png", {
+      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Carta Tecnica Comunale CSG 2k 1989/91 - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
+minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta Tecnica Comunale CSG 2k 1989/91', iconURL: 'legend/basemap/irta_clip.jpg', caption: '1989', group: '1900-oggi' });
 
 var ctc = L.tileLayer.mask("https://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png", {
       attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Ufficio Tecnico Comunale 1:8k | 1908 - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
@@ -848,7 +868,7 @@ var credctrl = L.controlCredits({
     text: "Interactive mapping<br/>by opendatasicilia"
 }).addTo(map);
 
-var overlayBasemaps = [osm, google, googlesat, palermo1580, palermo1754, palermo1860, palermo1877, nuova, palermo1891, palermo1893, ctc, omira, irta, prg62, sas, ppecs, Palermo_50k, City_Plans_Palermo, prg04, ctr10k];
+var overlayBasemaps = [osm, google, googlesat, palermo1580, palermo1754, palermo1860, palermo1877, nuova, palermo1891, palermo1893, ctc, omira, irta, prg62, sas, csg, ppecs, Palermo_50k, City_Plans_Palermo, prg04, ctc2k, ctr10k];
 
 <!-- una sola mappa storica sovrapposta alla volta: le due strisce a cerchietti aggiungono/rimuovono layer con map.addLayer/removeLayer, che non genera l'evento overlayadd del vecchio L.Control.Layers - qui si ascolta l'evento nativo layeradd -->
 var basemapCaptionToTab = {
