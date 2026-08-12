@@ -129,6 +129,13 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 .basemap-help-step div { font-size: 13px; color: #444; line-height: 1.4; }
 #modal-basemap-help .flythat-close.basemap-help-close { position: absolute; top: 8px; right: 12px; font-size: 20px; color: #999; }
 #modal-basemap-help .basemap-help-ok { display: block; margin: 4px auto 0 auto; padding: 8px 20px; border: none; border-radius: 20px; background: #FF9900; color: #fff; font-weight: bold; cursor: pointer; }
+
+.info-resource-links { margin-bottom: 16px; }
+.info-resource-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 8px; background: #fafafa; border: 1px solid #eee; border-radius: 8px; text-decoration: none !important; }
+.info-resource-link:hover { background: #fff4e6; border-color: #FF9900; }
+.info-resource-link i { flex: 0 0 18px; font-size: 15px; color: #FF9900; text-align: center; }
+.info-resource-link span { font-size: 13px; line-height: 1.4; color: #444; }
+.info-resource-link:hover span { color: #FF9900; }
 #modal-basemap-help .basemap-help-ok:hover { background: #e68a00; }
 </style>
 </head>
@@ -195,16 +202,14 @@ $(document).ready(function(){
             <ul role="tablist">
         <li role="presentation"><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
 	    <li role="presentation"> <a href="#storia" title="Cenni storici" role="tab"><img src="legend/storia/logo_cs.png" alt="ODS" width="45" height="45" loading="lazy" /></a></li>
-        <li role="presentation" class="tab-group-start"> <a href="#omira" title="Carta Tecnica Omira 1935" role="tab"><strong class="tab-fs-10">OMIRA</strong></a></li>
-        <li role="presentation"> <a href="#irta" title="Carta Tecnica IRTA 1959" role="tab"><strong class="tab-fs-11">IRTA</strong></a></li>
-		<li role="presentation"> <a href="#prg62" title="PRG aggiornato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" role="tab"><strong class="tab-fs-13">62</strong></a></li>
-		<li role="presentation"> <a href="#prg" title="Variante Generale al PRG di Palermo" role="tab"><strong class="tab-fs-13">V.G.</strong></a></li>
-        <li role="presentation"> <a href="#sas" title="Carta Tecnica SAS 1987" role="tab"><strong class="tab-fs-13">S.A.S.</strong></a></li>
-		<li role="presentation"> <a href="#ppe" title="P.P.E. del centro storico di Palermo" role="tab"><strong class="tab-fs-13">P.P.E.</strong></a></li>
-		<li role="presentation" class="tab-group-end"> <a href="#usarmymap" title="U.S. Army Map Service, 1943-1944" role="tab"><strong class="tab-fs-13">U.S.</strong></a></li>
-        <li role="presentation"> <a href="https://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Documenti/Repertorio_cartografico_CRICD.pdf" title="Book - Repertorio cartografico & aerofotografico" target="_blank" role="tab" rel="noopener noreferrer"><i class="fa fa-book" aria-hidden="true"></i></a></li>
+        <li role="presentation" class="tab-group-start"> <a href="#omira" title="Carta Tecnica Omira 1935" role="tab"><strong class="tab-fs-13">'35</strong></a></li>
+        <li role="presentation"> <a href="#usarmymap" title="U.S. Army Map Service, 1941-1944" role="tab"><strong class="tab-fs-13">'41</strong></a></li>
+        <li role="presentation"> <a href="#irta" title="Carta Tecnica IRTA 1956" role="tab"><strong class="tab-fs-13">'56</strong></a></li>
+		<li role="presentation"> <a href="#prg62" title="PRG aggiornato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" role="tab"><strong class="tab-fs-13">'62</strong></a></li>
+        <li role="presentation"> <a href="#sas" title="Carta Tecnica SAS 1987" role="tab"><strong class="tab-fs-13">'87</strong></a></li>
+		<li role="presentation"> <a href="#ppe" title="P.P.E. del centro storico di Palermo, 1993" role="tab"><strong class="tab-fs-13">'93</strong></a></li>
+		<li role="presentation" class="tab-group-end"> <a href="#prg" title="Variante Generale al PRG di Palermo, 2004" role="tab"><strong class="tab-fs-13">'04</strong></a></li>
         <li role="presentation"><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
-        <li role="presentation"> <a href="https://opendatasicilia.it/2017/04/06/osservare-il-cambiamento-di-una-citta-grazie-alla-cartografia-il-caso-di-palermo" title="Leggi l'articolo su #opendatasicilia.it" target="_blank" role="tab" rel="noopener noreferrer"><i class="fa fa-bookmark"></i></a></li>
         <li role="presentation"><a href="#share"  title="Condividi questa mappa"role="tab"><i class="fa fa-share-alt"></i></a></li>
          </ul>
           <ul role="tablist">
@@ -522,6 +527,10 @@ La morfologia primo del territorio. L'insediamento punico. La città romana e bi
  <!-- Tab info -->
       <div class="sidebar-pane" id="info">
       <h2 class="sidebar-header">Informazioni<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2><br><br>
+ <div class="info-resource-links">
+   <a class="info-resource-link" href="https://opendatasicilia.it/2017/04/06/osservare-il-cambiamento-di-una-citta-grazie-alla-cartografia-il-caso-di-palermo" title="Leggi l'articolo su #opendatasicilia.it" target="_blank" rel="noopener noreferrer"><i class="fa fa-bookmark" aria-hidden="true"></i><span>Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo</span></a>
+   <a class="info-resource-link" href="https://www.sitr.regione.sicilia.it/wp-content/uploads/Documenti/Download-Documenti/Repertorio_cartografico_CRICD.pdf" title="Book - Repertorio cartografico & aerofotografico" target="_blank" rel="noopener noreferrer"><i class="fa fa-book" aria-hidden="true"></i><span>Repertorio cartografico &amp; aerofotografico (PDF)</span></a>
+ </div>
  <p class="lorem"> <strong>Realizzato da:</strong><br><a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli" rel="noopener noreferrer">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro" rel="noopener noreferrer">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a><br>per <strong><a href="https://opendatasicilia.it/" Title="Open Data Sicilia" target="_blank" rel="noopener noreferrer">Open Data Sicilia</a></strong><br>
   <p class="lorem"> <strong>Rielaborazione 2026</strong>:<br>
 Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener">@gbvitrano</a> in collaborazione con <a href="https://claude.ai/" target="_blank" rel="noopener">Claude AI (Anthropic)</a> che ha affiancato le scelte architetturali, l'ottimizzazione del codice e lo sviluppo delle funzionalità di visualizzazione geospaziale.</p><br>
