@@ -1,22 +1,101 @@
 .basemaps {
     padding: 0px;
-	top:20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    max-width: 340px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    padding-bottom: 6px;
+}
+.basemaps.closed {
+    display: block;
+    background: none;
+    box-shadow: none;
+    padding-bottom: 0;
 }
 .basemaps.closed .basemap {
     display: none;
 }
 .basemaps.closed .basemap.alt {
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.basemaps.closed .basemap.alt img {
+    margin: 5px 10px 0 0;
+    order: 2;
+}
+.basemaps.closed .basemap.alt .basemap-caption {
+    margin: 0 0 0 85px;
+    order: 1;
 }
 .basemaps.closed .basemap.alt h4 {
     display: none;
 }
+.basemaps.closed .basemaps-group {
+    display: none;
+}
+.basemaps-title {
+    flex-basis: 100%;
+    margin: 4px 0 0 10px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #333;
+}
+.basemaps-mode {
+    flex-basis: 100%;
+    display: flex;
+    min-width: 170px;
+    margin: 4px 10px 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+}
+.basemaps-mode a.basemaps-mode-btn {
+    flex: 1;
+    padding: 6px 10px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    white-space: nowrap;
+    color: #333 !important;
+    text-decoration: none;
+    background: #f5f5f5;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.basemaps-mode a.basemaps-mode-btn:hover {
+    background: #ebebeb;
+}
+.basemaps-mode a.basemaps-mode-btn.active {
+    background: #FF9900;
+    color: #fff !important;
+}
+.basemaps-mode a.basemaps-mode-btn.active:hover {
+    background: #FF9900;
+}
+.basemap.overlay-active img {
+    border-color: #2277cc;
+    box-shadow: 0 0 0 2px #2277cc;
+}
 /* foglio di stile atlante cartografico palermo -
  giovan battista vitrano per opendatasicilia.it */
+.basemaps-group {
+    flex-basis: 100%;
+    margin: 6px 0 0 10px;
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    text-transform: uppercase;
+}
 .basemap {
-    display: inline-block; 
-	 todo: flexbox? 
-	     cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
 }
 .basemap.active img {
     border-color: orange;
@@ -25,7 +104,14 @@
 .basemap img {
 	width: 50px;
     border: 2px solid #FFF;
-    margin: 5px 0px 5px 10px;
+    margin: 5px 0px 0px 10px;
     border-radius: 40px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.65)
+}
+.basemap-caption {
+    margin: 2px 0 5px 10px;
+    font-size: 11px;
+    color: #333;
+    text-align: center;
+	    font-weight: 700;
 }

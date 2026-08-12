@@ -327,6 +327,7 @@
 	border-radius: 5px;
 	}
 .leaflet-control-layers-toggle {
+	margin-top: 30px;
 	background-image: url(../images/omira_clip.jpg);
 	background-size: 42px 42px;
 	width: 42px;

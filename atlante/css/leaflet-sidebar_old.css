@@ -6,7 +6,7 @@
   overflow: hidden;
   z-index: 2000; }
   .sidebar.collapsed {
-    width: 40px; }
+    width: 60px; }
   @media (min-width: 768px) {
     .sidebar {
       top: 10px;
@@ -48,28 +48,19 @@
     width: 40px;
     margin: 0;
     padding: 0; }
-    .sidebar-tabs > ul {
-      max-height: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
-      scrollbar-width: thin; }
     .sidebar-tabs > li, .sidebar-tabs > ul > li {
       width: 100%;
       height: 40px;
       color: #333;
       font-size: 12pt;
       overflow: hidden;
-      transition: all 120ms; }
-      .sidebar-tabs > li.tab-group-start, .sidebar-tabs > ul > li.tab-group-start {
-        border-top: 1px solid #eee; }
-      .sidebar-tabs > li.tab-group-end, .sidebar-tabs > ul > li.tab-group-end {
-        border-bottom: 1px solid #eee; }
+      transition: all 80ms; }
       .sidebar-tabs > li:hover, .sidebar-tabs > ul > li:hover {
-        color: #cc7a00;
-        background-color: #fff3e0; }
+        color: #000;
+        background-color: #eee; }
       .sidebar-tabs > li.active, .sidebar-tabs > ul > li.active {
         color: #fff;
-        background-color: #FF9900; }
+        background-color: #0074d9; }
       .sidebar-tabs > li.disabled, .sidebar-tabs > ul > li.disabled {
         color: rgba(51, 51, 51, 0.4); }
         .sidebar-tabs > li.disabled:hover, .sidebar-tabs > ul > li.disabled:hover {
@@ -77,21 +68,13 @@
         .sidebar-tabs > li.disabled > a, .sidebar-tabs > ul > li.disabled > a {
           cursor: default; }
       .sidebar-tabs > li > a, .sidebar-tabs > ul > li > a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: block;
         width: 100%;
         height: 100%;
         line-height: 40px;
         color: inherit;
         text-decoration: none;
         text-align: center; }
-      .sidebar-tabs > li > a img, .sidebar-tabs > ul > li > a img {
-        max-width: 24px;
-        max-height: 24px;
-        width: auto;
-        height: auto;
-        object-fit: contain; }
   .sidebar-tabs > ul + ul {
     bottom: 0; }
 /* foglio di stile atlante cartografico palermo -
@@ -137,7 +120,7 @@
   line-height: 40px;
   font-size: 14.4pt;
   color: #fff;
-  background-color: #FF9900; }
+  background-color: #0074d9; }
   .sidebar-right .sidebar-header {
     padding-left: 40px; }
 

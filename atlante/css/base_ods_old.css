@@ -63,6 +63,10 @@ html, body {padding: 0; overflow: hidden;    margin: 0;height: 100%; font: 12px 
 
  @media (min-width: 320px) and (max-width: 1024px) { .lorem {font-style: italic; color: #4E4B4B; text-align: left; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 8.5px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
 
+.lorem1 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 11px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }
+
+ @media (min-width: 320px) and (max-width: 1024px) { .lorem1 {font-style: italic; color: #4E4B4B; text-align: justify; font-family:"Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif;    font-size: 8.5px;}.awesome {font-style:fontawesome;  color: #4E4B4B; }}
+ 
 a:link {color: #FF9900;	text-decoration:none;}
 a:visited {	color: #FF9900;}/* foglio di stile atlante cartografico palermo - giovan battista vitrano per opendatasicilia.it */
 a:hover {color: ##4E4B4B; text-decoration:underline; } 
@@ -125,6 +129,20 @@ a:active {color: #FF0000; text-decoration:none; }
     margin: 2 2px;    border-radius: 40px;    box-shadow: 0 1px 5px rgba(0,0,0,0.6); }
 
  @media (min-width: 320px) and (max-width: 1024px) { .legenda {font-style: normal; font-weight:bold; font-size:12px; color: #4E4B4B; text-align: justify; } }
+
+.legenda1 {font-style: normal; font-weight:bold; font-size:12px; color: #4E4B4B; text-align: justify;}
+
+ @media (min-width: 320px) and (max-width: 1024px) { .legenda1 {font-style: normal; font-weight:bold; font-size:9px; color: #4E4B4B; text-align: justify; }}
+
+.legenda1 a:link{color: #4E4B4B;	text-decoration:none;}
+.legenda1 a:visited {	color: #4E4B4B;}
+.legenda1 a:hover {color: #FFFFFF; text-decoration:underline; } 
+
+.legenda2 {font-style: normal; font-weight:bold; font-size:12px; color: #4E4B4B; text-align: justify; }
+.legenda2 a:link{color: #4E4B4B;	text-decoration:none;}
+.legenda2 a:visited {	color: #4E4B4B;}
+.legenda2 a:hover {color: #FF9900; text-decoration:underline; } 
+.legenda3 {font-style: normal; font-weight:normal; font-size:10px; color: #4E4B4B; text-align: justify; }
 
 #leg3d {	position: fixed; width: 120;	height: 101px;	background-color: /*rgba(255,255,255,1);*/ rgba(255,255,255,0.80);	box-shadow: 0 1px 5px rgba(0,0,0,0.65);	padding: 0;	top: 60px; right: 20px;	z-index: 1000;}
 
@@ -389,25 +407,3 @@ color:#4E4B4B;
 padding:5px 5px;
 box-shadow: 0 1px 1.5px rgba(0,0,0,0.65);
 }
-
-/* estratte da inline style="" in index.html */
-.sidebar-tabs strong { font-family: "Open Sans", Helvetica Neue, Arial, Helvetica, sans-serif; letter-spacing: -0.5px; }
-.tab-fs-10 { font-size: 10px; }
-.tab-fs-11 { font-size: 11px; }
-.tab-fs-13 { font-size: 13px; }
-
-.table-collapse { border-collapse: collapse; }
-
-.text-center { text-align: center; }
-
-.no-border { border-width: 0; }
-
-.iframe-embed { overflow: hidden; height: 430px; width: 100%; position: absolute; left: 0; right: 0; bottom: 0; }
-.iframe-embed--ppe { top: 780px; }
-.iframe-embed--prg { top: 600px; }
-
-/* controlli mappa in alto a dx: prima due offset scollegati (30px sul toggle
-   Layers, 20px sul basemap strip) simulavano lo spazio per non finire sotto
-   il banner fisso #titolo; un'unica regola sul contenitore evita di doverli
-   tenere sincronizzati a mano */
-.leaflet-top.leaflet-right { margin-top: 30px; }

@@ -19,61 +19,8 @@ L.Control.Basemaps = L.Control.extend({
             L.DomEvent.disableScrollPropagation(container);
         }
 
-        if (this.options.title) {
-            var titleNode = L.DomUtil.create("div", "basemaps-title", container);
-            titleNode.textContent = this.options.title;
-        }
-
-        this._mode = "base";
-        this.overlayLayer = null;
-
-        if (this.options.overlays) {
-            var modeRow = L.DomUtil.create("div", "basemaps-mode", container);
-            var baseBtn = L.DomUtil.create("a", "basemaps-mode-btn active", modeRow);
-            baseBtn.href = "#";
-            baseBtn.textContent = "Base";
-            var overlayBtn = L.DomUtil.create("a", "basemaps-mode-btn", modeRow);
-            overlayBtn.href = "#";
-            overlayBtn.textContent = "Storica sovrapposta";
-
-            L.DomEvent.on(baseBtn, "click", function(e) {
-                L.DomEvent.stop(e);
-                this._mode = "base";
-                L.DomUtil.addClass(baseBtn, "active");
-                L.DomUtil.removeClass(overlayBtn, "active");
-                L.DomUtil.removeClass(container, "closed");
-            }, this);
-            L.DomEvent.on(overlayBtn, "click", function(e) {
-                L.DomEvent.stop(e);
-                this._mode = "overlay";
-                L.DomUtil.addClass(overlayBtn, "active");
-                L.DomUtil.removeClass(baseBtn, "active");
-                L.DomUtil.removeClass(container, "closed");
-            }, this);
-
-            // trova l'overlay già attivo sulla mappa (es. la mappa storica di default) per mostrarlo evidenziato fin da subito
-            this.options.overlays.forEach(function(o) {
-                if (o && map.hasLayer(o)) {
-                    this.overlayLayer = o;
-                }
-            }, this);
-        }
-
-        var lastGroup = null;
-
         this.options.basemaps.forEach(function(d, i) {
             var basemapClass = "basemap";
-
-            if (d.options && d.options.group && d.options.group !== lastGroup) {
-                lastGroup = d.options.group;
-                var groupHeader = L.DomUtil.create("h4", "basemaps-group", container);
-                groupHeader.textContent = lastGroup;
-            }
-
-            var overlayLayer = this.options.overlays ? this.options.overlays[i] : null;
-            if (overlayLayer && overlayLayer === this.overlayLayer) {
-                basemapClass += " overlay-active";
-            }
 
             if (i === 0) {
                 this.basemap = d;
@@ -138,10 +85,6 @@ L.Control.Basemaps = L.Control.extend({
             if (d.options && d.options.label) {
                 imgNode.title = d.options.label;
             }
-            if (d.options && d.options.caption) {
-                var captionNode = L.DomUtil.create("span", "basemap-caption", basemapNode);
-                captionNode.textContent = d.options.caption;
-            }
 
             L.DomEvent.on(
                 basemapNode,
@@ -153,20 +96,6 @@ L.Control.Basemaps = L.Control.extend({
                             L.DomUtil.removeClass(container, "closed");
                             return;
                         }
-                    }
-
-                    if (this._mode === "overlay") {
-                        if (!overlayLayer || overlayLayer === this.overlayLayer) { return; }
-                        if (this.overlayLayer) { map.removeLayer(this.overlayLayer); }
-                        map.addLayer(overlayLayer);
-                        this.overlayLayer = overlayLayer;
-
-                        var prevOverlayNode = container.getElementsByClassName("basemap overlay-active")[0];
-                        if (prevOverlayNode) { L.DomUtil.removeClass(prevOverlayNode, "overlay-active"); }
-                        L.DomUtil.addClass(basemapNode, "overlay-active");
-
-                        L.DomUtil.addClass(container, "closed");
-                        return;
                     }
 
                     //if different, remove previous basemap, and add new one
