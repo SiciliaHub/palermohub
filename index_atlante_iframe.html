@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -50,13 +45,13 @@
 <link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
 
 <link href="atlante/css/leaflet.css" rel="stylesheet" type="text/css"> 
-<link href="atlante/css/leaflet-sidebar.css" rel="stylesheet" type="text/css">
+<link href="atlante/css/leaflet-sidebar.css?v=1" rel="stylesheet" type="text/css">
 
 <link href="atlante/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-<link href="lib/css/LControlMousePosition_ods.css" rel="stylesheet" type="text/css">
+<link href="lib/css/LControlMousePosition_ods.css?v=1" rel="stylesheet" type="text/css">
 <link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
-<link href="atlante/css/L.Control.Basemaps2.css?v=2" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Basemaps2.css?v=10" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
  <!-- css popup  -->
@@ -76,7 +71,7 @@
 <script src="atlante/js/social/jquery_csbuttons.js"></script>
 <script src="lib/js/mouseposition/LControlMousePosition.js"></script>
 <script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
-<script src="atlante/js/basemap/L.Control.Basemaps_02.js?v=2"></script>
+<script src="atlante/js/basemap/L.Control.Basemaps_02.js?v=5"></script>
 
   <!-- script automatico mobile/desktop --> 
 <script> document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min' + ((screen && screen.width < 737) ? '_mobile' : '') + '.js"><\/script>'); </script>
@@ -144,8 +139,12 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
   <a href="#close" class="close flythat-close basemap-help-close" aria-label="Chiudi">&times;</a>
   <h3><i class="fa fa-map-o" aria-hidden="true"></i>Come funziona il selettore delle mappe</h3>
   <div class="basemap-help-step">
+    <i class="fa fa-mouse-pointer" aria-hidden="true"></i>
+    <div>In alto a destra c'è un cerchietto: passaci sopra col mouse (o toccalo su mobile) per aprire il pannello completo.</div>
+  </div>
+  <div class="basemap-help-step">
     <i class="fa fa-toggle-on" aria-hidden="true"></i>
-    <div>In alto a destra scegli la modalità: <strong>Base</strong> oppure <strong>Storica sovrapposta</strong>.</div>
+    <div>Nel pannello scegli la modalità: <strong>Base</strong> oppure <strong>Storica sovrapposta</strong>.</div>
   </div>
   <div class="basemap-help-step">
     <i class="fa fa-globe" aria-hidden="true"></i>
@@ -157,7 +156,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
   </div>
   <div class="basemap-help-step">
     <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
-    <div>Clicca un cerchietto per selezionarlo: il bordo arancione o blu indica quello attivo.</div>
+    <div>Clicca un cerchietto per selezionarlo: il bordo arancione o blu indica quello attivo. Il pannello si richiude da solo quando allontani il mouse.</div>
   </div>
   <button type="button" class="basemap-help-ok close">Ho capito</button>
 </div>

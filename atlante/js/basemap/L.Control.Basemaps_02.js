@@ -37,12 +37,20 @@ L.Control.Basemaps = L.Control.extend({
             overlayBtn.href = "#";
             overlayBtn.textContent = "Storica sovrapposta";
 
+            var modeDescription = L.DomUtil.create("div", "basemaps-mode-description", container);
+            var modeDescriptions = {
+                base: "Seleziona la cartografia da usare come base.",
+                overlay: "Seleziona la cartografia storica da sovrapporre alla mappa attuale."
+            };
+            modeDescription.textContent = modeDescriptions.base;
+
             L.DomEvent.on(baseBtn, "click", function(e) {
                 L.DomEvent.stop(e);
                 this._mode = "base";
                 L.DomUtil.addClass(baseBtn, "active");
                 L.DomUtil.removeClass(overlayBtn, "active");
                 L.DomUtil.removeClass(modeRow, "mode-overlay");
+                modeDescription.textContent = modeDescriptions.base;
                 L.DomUtil.removeClass(container, "closed");
             }, this);
             L.DomEvent.on(overlayBtn, "click", function(e) {
@@ -51,6 +59,7 @@ L.Control.Basemaps = L.Control.extend({
                 L.DomUtil.addClass(overlayBtn, "active");
                 L.DomUtil.removeClass(baseBtn, "active");
                 L.DomUtil.addClass(modeRow, "mode-overlay");
+                modeDescription.textContent = modeDescriptions.overlay;
                 L.DomUtil.removeClass(container, "closed");
             }, this);
 
@@ -193,6 +202,36 @@ L.Control.Basemaps = L.Control.extend({
                 this
             );
         }, this);
+
+        if (this.options.overlays) {
+            var helpToggle = L.DomUtil.create("a", "basemaps-help-toggle", container);
+            helpToggle.href = "#";
+            helpToggle.innerHTML = '<i class="fa fa-question-circle" aria-hidden="true"></i> Come funziona il selettore delle mappe';
+
+            var helpPanel = L.DomUtil.create("div", "basemaps-help-panel", container);
+            helpPanel.innerHTML =
+                '<div class="basemap-help-step"><i class="fa fa-mouse-pointer" aria-hidden="true"></i>' +
+                    '<div>In alto a destra c\'è un cerchietto: passaci sopra col mouse (o toccalo su mobile) per aprire il pannello completo.</div></div>' +
+                '<div class="basemap-help-step"><i class="fa fa-toggle-on" aria-hidden="true"></i>' +
+                    '<div>Nel pannello scegli la modalità: <strong>Base</strong> oppure <strong>Storica sovrapposta</strong>.</div></div>' +
+                '<div class="basemap-help-step"><i class="fa fa-globe" aria-hidden="true"></i>' +
+                    '<div>Modalità <strong>Base</strong>: i cerchietti cambiano la mappa di sfondo (satellite, OpenStreetMap...).</div></div>' +
+                '<div class="basemap-help-step"><i class="fa fa-clone" aria-hidden="true"></i>' +
+                    '<div>Modalità <strong>Storica sovrapposta</strong>: i cerchietti sovrappongono una mappa storica del passato su quella attuale.</div></div>' +
+                '<div class="basemap-help-step"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i>' +
+                    '<div>Clicca un cerchietto per selezionarlo: il bordo arancione o blu indica quello attivo. Il pannello si richiude da solo quando allontani il mouse.</div></div>';
+
+            L.DomEvent.on(helpToggle, "click", function(e) {
+                L.DomEvent.stop(e);
+                if (L.DomUtil.hasClass(helpPanel, "open")) {
+                    L.DomUtil.removeClass(helpPanel, "open");
+                    L.DomUtil.removeClass(helpToggle, "open");
+                } else {
+                    L.DomUtil.addClass(helpPanel, "open");
+                    L.DomUtil.addClass(helpToggle, "open");
+                }
+            }, this);
+        }
 
         if (this.options.basemaps.length > 2 && !L.Browser.mobile) {
             L.DomEvent.on(
