@@ -80,7 +80,7 @@ L.Control.GeocoderOds = L.Control.extend({
 
     _search: function(query) {
         var url = "https://nominatim.openstreetmap.org/search?format=json&limit=6&addressdetails=0&accept-language=it"
-            + "&viewbox=" + this.options.viewbox + "&bounded=0"
+            + "&viewbox=" + this.options.viewbox + "&bounded=1"
             + "&q=" + encodeURIComponent(query);
 
         fetch(url, { headers: { "Accept": "application/json" } })
