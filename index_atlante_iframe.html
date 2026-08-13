@@ -60,6 +60,7 @@
 <link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Basemaps2_timeslider.css?v=1" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Toolbar.css?v=1" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Geocoder_ods.css?v=1" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
@@ -80,6 +81,7 @@
 <script src="lib/js/mouseposition/LControlMousePosition.js"></script>
 <script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
 <script src="atlante/js/basemap/L.Control.Basemaps_02_timeslider.js?v=1"></script>
+<script src="atlante/js/toolbar/L.Control.Toolbar.js?v=1"></script>
 <script src="atlante/js/geocoder/L.Control.Geocoder_ods.js?v=2"></script>
 
   <!-- script automatico mobile/desktop --> 
@@ -176,8 +178,8 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
   <a href="#close" class="close flythat-close basemap-help-close" aria-label="Chiudi">&times;</a>
   <h3><i class="fa fa-map-o" aria-hidden="true"></i>Come funziona il selettore delle mappe</h3>
   <div class="basemap-help-step">
-    <i class="fa fa-mouse-pointer" aria-hidden="true"></i>
-    <div>In alto a destra c'è un cerchietto: passaci sopra col mouse (o toccalo su mobile) per aprire il pannello completo.</div>
+    <i class="fa fa-th-large" aria-hidden="true"></i>
+    <div>Nella barra degli strumenti in alto, l'icona con l'anteprima della mappa attiva apre il pannello di selezione.</div>
   </div>
   <div class="basemap-help-step">
     <i class="fa fa-toggle-on" aria-hidden="true"></i>
@@ -193,11 +195,11 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
   </div>
   <div class="basemap-help-step">
     <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
-    <div>Clicca un cerchietto per selezionarlo: il bordo arancione o blu indica quello attivo. Il pannello si richiude da solo quando allontani il mouse.</div>
+    <div>Clicca un cerchietto per selezionarlo: il bordo arancione indica quello attivo. Il pannello si chiude ricliccando l'icona della mappa o toccando fuori.</div>
   </div>
   <div class="basemap-help-step">
     <i class="fa fa-sliders" aria-hidden="true"></i>
-    <div>In basso trovi lo <strong>slider temporale</strong>: trascinalo per scorrere velocemente tra tutte le mappe storiche in ordine cronologico, dal 1893 a oggi.</div>
+    <div>Lo <strong>slider temporale</strong> è sempre visibile nella barra in alto: trascinalo per scorrere velocemente tra tutte le mappe storiche in ordine cronologico, dal passato a oggi.</div>
   </div>
   <button type="button" class="basemap-help-ok close">Ho capito</button>
 </div>
@@ -709,7 +711,9 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
             northEast = L.latLng(38.2546, 13.4598),
     	      bounds = L.latLngBounds(southWest, northEast);
 
-        var map = L.map('map', {attributionControl:true, maxBounds: bounds, maxBoundsViscosity: 1.0}).setView([38.1157,13.3613], 15 );
+        var INITIAL_CENTER = [38.1157,13.3613];
+        var INITIAL_ZOOM = 15;
+        var map = L.map('map', {attributionControl:true, maxBounds: bounds, maxBoundsViscosity: 1.0}).setView(INITIAL_CENTER, INITIAL_ZOOM);
 
 // il marker-icon.png di default non è sotto atlante/css/images (dove Leaflet lo cerca in base a leaflet.css), ma qui: fix icona rotta nel popup del geocoder
 L.Icon.Default.imagePath = 'atlante/images/';
@@ -877,7 +881,9 @@ var basemaps = [
 L.control.mousePosition().addTo(map);
 
 <!-- ricerca indirizzo / geocoding -->
-L.control.geocoderOds().addTo(map);
+// creato ma non aggiunto alla mappa qui: viene innestato nella toolbar
+// tramite toolbar.attachSearch() piu' sotto
+var geocoderOdsControl = L.control.geocoderOds();
   map.on("mousemove", function(e) {
   palermo1580.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1754.setCenter(e.containerPoint.x, e.containerPoint.y); nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1860.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1877.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1891.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); 
   sas.setCenter(e.containerPoint.x, e.containerPoint.y); csg.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); 
@@ -1002,13 +1008,28 @@ overlayBasemaps.forEach(function(layer) {
 });
 			var hash = new L.Hash(map);
 			var sidebar = L.control.sidebar('sidebar').addTo(map);
-	   map.addControl(L.control.basemaps({
+		   var toolbar = L.control.toolbar({
+			   homeCenter: INITIAL_CENTER,
+			   homeZoom: INITIAL_ZOOM
+		   }).addTo(map);
+		   toolbar.attachSearch(geocoderOdsControl);
+	   var basemapsControl = L.control.basemaps({
             basemaps: basemaps,
             overlays: overlayBasemaps,
             tileX: 0,
             tileY: 0,
-            tileZ: 1
-		    }));
+            tileZ: 1,
+            embedded: true
+		    });
+	   // niente map.addControl: il pannello basemaps viene innestato
+	   // direttamente nel dropdown della toolbar (vedi attachBasemaps)
+	   toolbar.attachBasemaps(basemapsControl);
+
+	   // sposta lo slider temporale (creato dal controllo basemaps) dentro la
+	   // toolbar in alto, cosi' resta sempre visibile invece che nascosto nel
+	   // pannello basemaps
+	   var timesliderNode = basemapsControl._container.querySelector('.basemaps-timeslider');
+	   if (timesliderNode) { toolbar.attachTimeslider(timesliderNode); }
 
 // tab "Condividi": link, icone social e impostazioni iframe aggiornati in base alla vista corrente della mappa
 function updateShareTab() {

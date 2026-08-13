@@ -164,9 +164,16 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
      * Close the sidebar (if necessary).
      */
     close: function() {
-        // keep the tab highlight on close so the collapsed sidebar still
-        // shows which pane was last open (active class is only reassigned
-        // by open(), never cleared here)
+        var i, child;
+
+        // remove active highlight so the tab can be reopened by a
+        // single click (otherwise _onClick sees 'active' and calls
+        // close() again instead of open())
+        for (i = this._tabitems.length - 1; i >= 0; i--) {
+            child = this._tabitems[i];
+            if (L.DomUtil.hasClass(child, 'active'))
+                L.DomUtil.removeClass(child, 'active');
+        }
 
         // close sidebar
         if (!L.DomUtil.hasClass(this._sidebar, 'collapsed')) {

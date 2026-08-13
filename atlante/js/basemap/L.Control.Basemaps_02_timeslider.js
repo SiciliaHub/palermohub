@@ -1,17 +1,21 @@
 L.Control.Basemaps = L.Control.extend({
     _map: null,
-    includes: L.Evented ? L.Evented.prototype : L.Mixin.Event,
+    includes: L.Evented ? L.Evented.prototype : L.Mixin.Events,
     options: {
         position: "topright",
         tileX: 0,
         tileY: 0,
         tileZ: 0,
-        layers: [] // list of basemap layer objects, first in list is default and added to map with this control
+        layers: [], // list of basemap layer objects, first in list is default and added to map with this control
+        // se true: niente stato "closed" compatto, niente hover-per-aprire,
+        // niente doppio-tap su mobile. Usato quando il pannello e' innestato
+        // in un dropdown esterno (toolbar) che gia' gestisce apertura/chiusura
+        embedded: false
     },
     basemap: null,
     onAdd: function(map) {
         this._map = map;
-        var container = L.DomUtil.create("div", "basemaps leaflet-control closed");
+        var container = L.DomUtil.create("div", "basemaps leaflet-control" + (this.options.embedded ? "" : " closed"));
 
         // disable events
         L.DomEvent.disableClickPropagation(container);
@@ -152,7 +156,7 @@ L.Control.Basemaps = L.Control.extend({
             if (prevActive) { L.DomUtil.removeClass(prevActive, "overlay-active"); }
             if (newNode) { L.DomUtil.addClass(newNode, "overlay-active"); }
 
-            if (closePanel) { L.DomUtil.addClass(container, "closed"); }
+            if (closePanel && !self.options.embedded) { L.DomUtil.addClass(container, "closed"); }
 
             updateSliderForLayer(newLayer);
         }
@@ -255,7 +259,9 @@ L.Control.Basemaps = L.Control.extend({
                 function() {
                     // intercept open click on mobile devices, and on desktop when il pannello
                     // resta chiuso in modalità overlay (lo slider compatto non apre più con l'hover)
-                    if (this.options.basemaps.length > 2 && (L.Browser.mobile || this._mode === "overlay")) {
+                    // salta l'intercetto in modalità "embedded": l'apertura/chiusura e' gia'
+                    // gestita dal dropdown esterno, quindi ogni click deve selezionare subito
+                    if (!this.options.embedded && this.options.basemaps.length > 2 && (L.Browser.mobile || this._mode === "overlay")) {
                         if (L.DomUtil.hasClass(container, "closed")) {
                             L.DomUtil.removeClass(container, "closed");
                             return;
@@ -282,7 +288,11 @@ L.Control.Basemaps = L.Control.extend({
                         L.DomUtil.removeClass(container.getElementsByClassName("basemap alt")[0], "alt");
                         L.DomUtil.addClass(container.getElementsByClassName("basemap")[altIdx], "alt");
 
-                        L.DomUtil.addClass(container, "closed");
+                        // stessa icona "compatta" di sempre (il nodo .basemap.alt): la si
+                        // notifica a chi la usa come icona del pulsante mappe (es. la toolbar)
+                        this.fire("basemapchange", { url: imgNode.src, title: imgNode.title });
+
+                        if (!this.options.embedded) { L.DomUtil.addClass(container, "closed"); }
                     }
                 },
                 this
@@ -331,7 +341,7 @@ L.Control.Basemaps = L.Control.extend({
             }, this);
         }
 
-        if (this.options.basemaps.length > 2 && !L.Browser.mobile) {
+        if (!this.options.embedded && this.options.basemaps.length > 2 && !L.Browser.mobile) {
             L.DomEvent.on(
                 container,
                 "mouseenter",
@@ -353,6 +363,14 @@ L.Control.Basemaps = L.Control.extend({
                 },
                 this
             );
+        }
+
+        // notifica l'icona di partenza (la mappa base davvero attiva, non
+        // quella "alt" suggerita) a chi la usa come icona del pulsante
+        // mappe (es. la toolbar): all'avvio e' sempre basemaps[0] (OSM)
+        var initialActiveImg = container.querySelector(".basemap.active img");
+        if (initialActiveImg) {
+            this.fire("basemapchange", { url: initialActiveImg.src, title: initialActiveImg.title });
         }
 
         this._container = container;

@@ -1,0 +1,185 @@
+/* atlante/css/leaflet.css nasconde di proposito tutti i .leaflet-control
+   nel corner sinistro (per lasciare spazio alla sidebar): qui serve una
+   specificita' maggiore per far rispuntare solo la nostra toolbar */
+.leaflet-left .map-toolbar.leaflet-control {
+    display: flex !important;
+}
+.map-toolbar {
+    /* centrata in alto rispetto al viewport, indipendente dal corner
+       leaflet (topleft) a cui il controllo resta agganciato nel DOM */
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1002;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 6px;
+    background: rgba(255,255,255,0.95);
+    border-radius: 30px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+    margin: 0;
+    max-width: calc(100vw - 20px);
+    box-sizing: border-box;
+}
+.map-toolbar-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    flex: 0 0 auto;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #333 !important;
+    text-decoration: none !important;
+    font-size: 12px;
+    overflow: hidden;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.map-toolbar-btn:hover {
+    background: #f5f5f5;
+}
+.map-toolbar-btn.active {
+    background: #FF9900;
+    border-color: #FF9900;
+    color: #fff !important;
+}
+/* icona della mappa attiva (pulsante "basemaps"): l'immagine copre l'icona
+   fa finche' non c'e' una mappa da mostrare (this._setButtonImage) */
+.map-toolbar-btn-img {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.map-toolbar-btn.has-img .map-toolbar-btn-img {
+    display: block;
+}
+.map-toolbar-btn.has-img i {
+    display: none;
+}
+.map-toolbar-btn.has-img {
+    /* cerchio arancio sempre presente per evidenziare che l'icona mostra
+       la mappa base attualmente attiva, non solo quando il dropdown e' aperto */
+    box-shadow: 0 0 0 2px #FF9900;
+}
+.map-toolbar-btn.active.has-img {
+    box-shadow: 0 0 0 2px #FF9900, 0 0 0 4px rgba(255,153,0,0.35);
+}
+.map-toolbar-dropdown-wrap {
+    /* NON position:relative: cosi' il dropdown (position:absolute) si
+       aggancia alla piu' vicina ancestor posizionata, che e' .map-toolbar
+       stessa (position:fixed) e non questo wrapper. Il timeslider e' piu'
+       alto dei pulsanti e allunga la barra: ancorarsi al wrapper del
+       pulsante (alto solo quanto il pulsante, centrato nella riga) dava un
+       gap variabile invece che "8px sotto il bordo vero della barra" */
+    flex: 0 0 auto;
+}
+.map-toolbar-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    z-index: 1;
+    max-height: calc(100vh - 90px);
+    overflow-y: auto;
+}
+.map-toolbar-dropdown.open {
+    display: block;
+}
+/* i controlli innestati (geocoder, basemaps) portano gia' le loro classi
+   leaflet-control (float, cursor...): qui lo si annulla perche' sono
+   innestati nel dropdown e non in un corner leaflet vero e proprio */
+.map-toolbar-dropdown .leaflet-control-geocoder-ods,
+.map-toolbar-dropdown .basemaps {
+    float: none;
+    margin: 0;
+}
+/* dentro il dropdown il pannello basemaps deve restare sempre espanso
+   (niente stato "closed" compatto: la visibilita' e' gia' gestita dal
+   dropdown stesso) */
+.map-toolbar-dropdown .basemaps.closed {
+    display: flex;
+    background: rgba(255,255,255,0.9);
+    box-shadow: none;
+    padding-bottom: 6px;
+}
+.map-toolbar-dropdown .basemaps.closed .basemap {
+    display: flex;
+}
+.map-toolbar-dropdown .basemaps.closed .basemaps-title,
+.map-toolbar-dropdown .basemaps.closed .basemaps-mode,
+.map-toolbar-dropdown .basemaps.closed .basemaps-mode-description,
+.map-toolbar-dropdown .basemaps.closed .basemaps-help-toggle,
+.map-toolbar-dropdown .basemaps.closed .basemaps-group {
+    display: block;
+}
+.map-toolbar-timeslider-slot {
+    display: flex;
+    align-items: center;
+}
+.map-toolbar-timeslider-slot .basemaps-timeslider {
+    display: block !important;
+    flex-basis: auto;
+    min-width: 180px;
+    max-width: 260px;
+    margin: 0 4px;
+}
+.map-toolbar-timeslider-slot .basemaps-timeslider-label {
+    text-shadow: none;
+}
+.map-toolbar-timeslider-slot .basemaps-timeslider-current {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 5px;
+    border-radius: 50%;
+    background: #FF9900;
+    color: #fff;
+    font-size: 11px;
+}
+.map-toolbar-timeslider-slot .basemaps-timeslider-name {
+    /* sul desktop il nome della mappa storica resta, ma su una riga sola */
+    text-shadow: none;
+    -webkit-line-clamp: 1;
+    max-width: 100%;
+}
+@media (max-width: 600px) {
+    .map-toolbar {
+        gap: 4px;
+        padding: 4px 5px;
+    }
+    .map-toolbar-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 11px;
+    }
+    .map-toolbar-timeslider-slot .basemaps-timeslider {
+        min-width: 110px;
+        max-width: 140px;
+        margin: 0 2px;
+    }
+    .map-toolbar-timeslider-slot .basemaps-timeslider-label {
+        font-size: 9px;
+    }
+    .map-toolbar-timeslider-slot .basemaps-timeslider-current {
+        min-width: 18px;
+        height: 18px;
+        font-size: 9px;
+    }
+    /* sotto i 600px il nome della mappa storica appesantisce troppo la
+       barra: resta comunque leggibile tramite il pulsante info/popup */
+    .map-toolbar-timeslider-slot .basemaps-timeslider-name {
+        display: none;
+    }
+}
