@@ -71,7 +71,17 @@ L.Control.SideBySide.prototype._updateClip = function() {
     this._range.style.width = size.x + "px";
 
     var clipLeft = "rect(" + [nw.y, clipX, se.y, nw.x].join("px,") + "px)";
-    var clipRight = "rect(" + [nw.y, se.x, se.y, clipX].join("px,") + "px)";
+    // "blendRight": la mappa destra (storica) resta ritagliata su tutta la
+    // mappa (non solo la meta' destra), cosi' quando il layer sinistro
+    // (base) e' reso trasparente la storica traspare anche a sinistra
+    // invece di lasciare vedere lo sfondo vuoto sotto. Il layer sinistro va
+    // pero' portato in cima allo stack (vedi index_occhio_panel_poc.html,
+    // leftLayer.bringToFront() dopo l'aggiunta del layer destro): altrimenti
+    // la storica, ritagliata a tutta pagina, coprirebbe anche la meta'
+    // sinistra della base.
+    var clipRight = this.options.blendRight
+        ? "rect(" + [nw.y, se.x, se.y, nw.x].join("px,") + "px)"
+        : "rect(" + [nw.y, se.x, se.y, clipX].join("px,") + "px)";
 
     this._leftLayers.forEach(function(layer) {
         var el = layer.getContainer && layer.getContainer();

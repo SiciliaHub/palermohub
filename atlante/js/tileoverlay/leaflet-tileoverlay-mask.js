@@ -52,7 +52,10 @@
 		options : {
 			maskWidth : 300,
 			maskHeight : 300,
-			maskUrl : maskUrlDefault
+			maskUrl : maskUrlDefault,
+			// opacita' persistente del cerchio "occhio di bue" (0-1): distinta dal
+			// dimming temporaneo 0.5 applicato durante lo zoom (vedi _mapEventHandler)
+			maskOpacity : 1
 		},
 		_tileEventHandler : {
 			"tileload" : function(e) {
@@ -89,11 +92,11 @@
 			},
 			"zoomstart" : function(e) {
 				if (this._e1)
-					this._e1.style.opacity = 0.5;
+					this._e1.style.opacity = 0.5 * this.options.maskOpacity;
 			},
 			"zoomend" : function(e) {
 				if (this._e1)
-					this._e1.style.opacity = 1.0;
+					this._e1.style.opacity = this.options.maskOpacity;
 			}
 		},
 		onRemove : function(map) {
@@ -112,7 +115,7 @@
 			this._e1 = $e("svg", {
 				width : "100%",
 				height : "100%",
-				style : "pointer-events:none;position:relative;"
+				style : "pointer-events:none;position:relative;opacity:" + this.options.maskOpacity + ";"
 			});
 			this._e2 = $e("defs");
 			this._e3 = $e("mask", {
@@ -143,10 +146,34 @@
 			this.setCenter(cnt.clientWidth * 0.5, cnt.clientHeight * 0.5);
 		},
 		setCenter : function(x, y) {
+			this._lastCx = x;
+			this._lastCy = y;
 			if (this._e4) {
 				this._e4.setAttribute("x", x - this.options.maskWidth * 0.5);
 				this._e4.setAttribute("y", y - this.options.maskHeight * 0.5);
 			}
+			return this;
+		},
+		// raggio dinamico del cerchio "occhio di bue": aggiorna sia le dimensioni
+		// dell'immagine di maschera (_e4) sia il riquadro <mask> (_e3), poi
+		// riposiziona sul centro corrente (setCenter usa maskWidth/maskHeight per
+		// ricalcolare l'offset x/y dell'immagine mascherante)
+		setMaskRadius : function(radiusPx) {
+			var size = radiusPx * 2;
+			this.options.maskWidth = size;
+			this.options.maskHeight = size;
+			if (this._e4) {
+				this._e4.setAttribute("width", size);
+				this._e4.setAttribute("height", size);
+			}
+			if (this._lastCx !== undefined) { this.setCenter(this._lastCx, this._lastCy); }
+			return this;
+		},
+		// trasparenza persistente del cerchio (0-1): non va confusa col dimming
+		// temporaneo 0.5x applicato durante lo zoom, che ora e' relativo a questo valore
+		setMaskOpacity : function(value) {
+			this.options.maskOpacity = value;
+			if (this._e1) { this._e1.style.opacity = value; }
 			return this;
 		}
 	});

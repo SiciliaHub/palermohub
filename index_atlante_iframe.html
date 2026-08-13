@@ -119,6 +119,34 @@ function MM_swapImage() { //v3.0
 a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
 </style>
 <style type="text/css">
+/* POC: pannello impostazioni confronto (raggio/trasparenza occhio di bue,
+   trasparenza mappa di base) - vedi wiring in fondo alla pagina */
+.occhio-settings-panel {
+	background: rgba(255,255,255,0.97);
+	border-radius: 10px;
+	box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+	padding: 12px 14px;
+	width: 260px;
+	box-sizing: border-box;
+}
+.occhio-settings-row {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-bottom: 10px;
+}
+.occhio-settings-row:last-child {
+	margin-bottom: 0;
+}
+.occhio-settings-row label {
+	font-size: 12px;
+	color: #333;
+}
+.occhio-settings-row input[type="range"] {
+	width: 100%;
+}
+</style>
+<style type="text/css">
 #modal-basemap-help { width: 90%; max-width: 380px; background: #fff; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.35); padding: 18px 20px; box-sizing: border-box; }
 @media (max-width: 480px) {
   #modal-basemap-help {
@@ -1005,6 +1033,7 @@ map.on('layeradd', function(e) {
 		if (layer !== e.layer && map.hasLayer(layer)) { map.removeLayer(layer); }
 	});
 	syncBasemapDot(e.layer);
+	applyOcchioSettings(e.layer);
 	if (sideBySideActive) { refreshSideBySide(e.layer); }
 });
 // la mappa storica di default è già aggiunta al caricamento, prima che il listener sopra si registri: sync iniziale esplicito
@@ -1109,6 +1138,15 @@ function refreshSideBySide(overlayLayerHint) {
 
 	sbsRightLayer = rightLayer;
 	if (!map.hasLayer(rightLayer)) { map.addLayer(rightLayer); }
+	// POC: la storica (rightLayer) resta disegnata a tutta pagina (vedi
+	// blendRight in L.Control.SideBySide-poc.js) invece che ritagliata solo
+	// sulla meta' destra, cosi' abbassando la trasparenza della base
+	// (leftLayer, vedi slider "Trasparenza mappa di base") si intravede
+	// anche a sinistra. Ma per funzionare la base deve stare SOPRA nello
+	// stack di disegno, altrimenti la storica (ritagliata a tutta pagina)
+	// coprirebbe anche la meta' sinistra: portArla in primo piano ora che
+	// rightLayer e' stato (ri)aggiunto sopra di lei.
+	leftLayer.bringToFront();
 	// nasconde il cerchietto "occhio di bue" (SVG di leaflet-tileoverlay-mask.js) del
 	// layer storico mascherato, altrimenti resta visibile sovrapposto al confronto
 	if (overlayLayer && overlayLayer._e1) {
@@ -1116,8 +1154,9 @@ function refreshSideBySide(overlayLayerHint) {
 		overlayLayer._e1.style.display = 'none';
 	}
 
-	sideBySideControl = L.control.sideBySide([leftLayer], [rightLayer], { initialRatio: previousRatio }).addTo(map);
+	sideBySideControl = L.control.sideBySide([leftLayer], [rightLayer], { initialRatio: previousRatio, blendRight: true }).addTo(map);
 	L.DomUtil.addClass(sbsBtn, 'active');
+	if (basemapsControl.basemap) { basemapsControl.basemap.setOpacity(baseOpacity); }
 }
 
 function activateSideBySide() {
@@ -1148,6 +1187,7 @@ L.DomEvent.on(sbsBtn, 'click', function(e) {
 // confronto invece di uscirne (vedi anche map.on('layeradd') per l'overlay)
 basemapsControl.on('basemapchange', function() {
 	if (sideBySideActive) { refreshSideBySide(); }
+	if (basemapsControl.basemap) { basemapsControl.basemap.setOpacity(baseOpacity); }
 });
 
 // aggiunge un passo sulla modalita' confronto affiancato al pannello guida del
@@ -1158,8 +1198,81 @@ var basemapsHelpPanel = basemapsControl._container.querySelector('.basemaps-help
 if (basemapsHelpPanel) {
 	var sbsHelpStep = L.DomUtil.create('div', 'basemap-help-step', basemapsHelpPanel);
 	sbsHelpStep.innerHTML = '<i class="fa fa-columns" aria-hidden="true"></i>' +
-		'<div>L\'icona <strong>a colonne</strong> nella barra degli strumenti attiva il confronto <strong>affiancato</strong>: mostra la mappa storica sovrapposta e quella di base divise da uno slider trascinabile, al posto dell\'effetto "occhio di bue".</div>';
+		'<div>L\'icona <strong>a colonne</strong> nella barra degli strumenti attiva il confronto <strong>affiancato</strong>: mostra la mappa storica sovrapposta e quella di base divise da uno slider trascinabile, al posto dell\'effetto "occhio di bue". Abbassando la trasparenza della mappa di base (vedi icona <strong>impostazioni</strong>) si intravede la mappa storica anche a sinistra del divisore.</div>';
+
+	var settingsHelpStep = L.DomUtil.create('div', 'basemap-help-step', basemapsHelpPanel);
+	settingsHelpStep.innerHTML = '<i class="fa fa-sliders" aria-hidden="true"></i>' +
+		'<div>L\'icona <strong>impostazioni</strong> nella barra degli strumenti apre un pannello per regolare il <strong>raggio</strong> e la <strong>trasparenza</strong> dell\'effetto "occhio di bue", e la <strong>trasparenza della mappa di base</strong> nel confronto affiancato.</div>';
 }
+
+// POC: pannello impostazioni confronto (raggio/trasparenza occhio di bue +
+// trasparenza mappa di base nel confronto affiancato). Iniettato qui come il
+// pulsante side-by-side sopra, con dropdown "fatto a mano" (non registrato in
+// toolbar._dropdowns: quel meccanismo di apertura/chiusura e' privato al file
+// condiviso L.Control.Toolbar.js, che qui non tocchiamo per restare isolati
+// nella copia POC) ma stile riuso dalle classi .map-toolbar-dropdown-wrap/
+// .map-toolbar-dropdown gia' definite in L.Control.Toolbar.css.
+var occhioRadius = 150;   // px, default plugin: maskWidth 300 => raggio 150
+var occhioOpacity = 1;    // 0-1, trasparenza persistente cerchio occhio di bue
+var baseOpacity = 1;      // 0-1, trasparenza layer base (side by side e vista normale)
+
+function applyOcchioSettings(layer) {
+	if (layer && layer.setMaskRadius) {
+		layer.setMaskRadius(occhioRadius);
+		layer.setMaskOpacity(occhioOpacity);
+	}
+}
+// applica ai layer occhio di bue gia' presenti sulla mappa al caricamento
+// (es. la mappa storica di default aggiunta inline con .addTo(map))
+overlayBasemaps.forEach(function(layer) {
+	if (map.hasLayer(layer)) { applyOcchioSettings(layer); }
+});
+
+var settingsWrap = L.DomUtil.create('div', 'map-toolbar-dropdown-wrap');
+var settingsBtn = L.DomUtil.create('a', 'map-toolbar-btn map-toolbar-occhio-settings', settingsWrap);
+settingsBtn.href = '#';
+settingsBtn.title = 'Impostazioni confronto (raggio/trasparenza)';
+settingsBtn.innerHTML = '<i class="fa fa-sliders" aria-hidden="true"></i>';
+var settingsPanel = L.DomUtil.create('div', 'map-toolbar-dropdown occhio-settings-panel', settingsWrap);
+settingsPanel.innerHTML =
+	'<div class="occhio-settings-row">' +
+		'<label for="occhio-radius-range">Raggio occhio di bue: <span id="occhio-radius-value">' + occhioRadius + '</span> px</label>' +
+		'<input type="range" id="occhio-radius-range" min="40" max="400" step="10" value="' + occhioRadius + '">' +
+	'</div>' +
+	'<div class="occhio-settings-row">' +
+		'<label for="occhio-opacity-range">Trasparenza mappa storica (occhio di bue): <span id="occhio-opacity-value">100</span>%</label>' +
+		'<input type="range" id="occhio-opacity-range" min="0" max="100" step="5" value="100">' +
+	'</div>' +
+	'<div class="occhio-settings-row">' +
+		'<label for="base-opacity-range">Trasparenza mappa di base (confronto affiancato): <span id="base-opacity-value">100</span>%</label>' +
+		'<input type="range" id="base-opacity-range" min="0" max="100" step="5" value="100">' +
+	'</div>';
+if (infoBtnNode) { toolbar._container.insertBefore(settingsWrap, infoBtnNode); } else { toolbar._container.appendChild(settingsWrap); }
+L.DomEvent.disableClickPropagation(settingsWrap);
+
+L.DomEvent.on(settingsBtn, 'click', function(e) {
+	L.DomEvent.stop(e);
+	L.DomUtil.hasClass(settingsPanel, 'open') ? L.DomUtil.removeClass(settingsPanel, 'open') : L.DomUtil.addClass(settingsPanel, 'open');
+});
+L.DomEvent.on(document, 'click', function(e) {
+	if (!settingsWrap.contains(e.target)) { L.DomUtil.removeClass(settingsPanel, 'open'); }
+});
+
+document.getElementById('occhio-radius-range').addEventListener('input', function(e) {
+	occhioRadius = parseInt(e.target.value, 10);
+	document.getElementById('occhio-radius-value').textContent = occhioRadius;
+	applyOcchioSettings(basemapsControl.overlayLayer);
+});
+document.getElementById('occhio-opacity-range').addEventListener('input', function(e) {
+	occhioOpacity = parseInt(e.target.value, 10) / 100;
+	document.getElementById('occhio-opacity-value').textContent = e.target.value;
+	applyOcchioSettings(basemapsControl.overlayLayer);
+});
+document.getElementById('base-opacity-range').addEventListener('input', function(e) {
+	baseOpacity = parseInt(e.target.value, 10) / 100;
+	document.getElementById('base-opacity-value').textContent = e.target.value;
+	if (basemapsControl.basemap) { basemapsControl.basemap.setOpacity(baseOpacity); }
+});
 
 // tab "Condividi": link, icone social e impostazioni iframe aggiornati in base alla vista corrente della mappa
 function updateShareTab() {
