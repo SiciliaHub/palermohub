@@ -107,12 +107,23 @@ L.Control.Basemaps = L.Control.extend({
                 var sliderYearTo = L.DomUtil.create("span", "basemaps-timeslider-bound", sliderLabelRow);
                 sliderYearTo.textContent = yearEntries[yearEntries.length - 1].year;
 
-                sliderInput = L.DomUtil.create("input", "basemaps-timeslider-input", sliderRow);
+                var sliderTrack = L.DomUtil.create("div", "basemaps-timeslider-track", sliderRow);
+                var sliderPrevBtn = L.DomUtil.create("a", "basemaps-timeslider-nav basemaps-timeslider-prev", sliderTrack);
+                sliderPrevBtn.href = "#";
+                sliderPrevBtn.innerHTML = "&#10094;";
+                sliderPrevBtn.title = "Mappa precedente";
+
+                sliderInput = L.DomUtil.create("input", "basemaps-timeslider-input", sliderTrack);
                 sliderInput.type = "range";
                 sliderInput.min = 0;
                 sliderInput.max = yearEntries.length - 1;
                 sliderInput.step = 1;
                 sliderInput.value = 0;
+
+                var sliderNextBtn = L.DomUtil.create("a", "basemaps-timeslider-nav basemaps-timeslider-next", sliderTrack);
+                sliderNextBtn.href = "#";
+                sliderNextBtn.innerHTML = "&#10095;";
+                sliderNextBtn.title = "Mappa successiva";
 
                 var sliderTicksId = "basemaps-timeslider-ticks-" + L.Util.stamp(this);
                 var sliderTicks = L.DomUtil.create("datalist", null, sliderRow);
@@ -306,6 +317,25 @@ L.Control.Basemaps = L.Control.extend({
                 if (entry) {
                     applyOverlayLayer(entry.layer, entry.node, false);
                 }
+            }, this);
+
+            var goToSliderIndex = function(delta) {
+                var idx = parseInt(sliderInput.value, 10) + delta;
+                idx = Math.max(0, Math.min(yearEntries.length - 1, idx));
+                sliderInput.value = idx;
+                var entry = yearEntries[idx];
+                if (entry) {
+                    applyOverlayLayer(entry.layer, entry.node, false);
+                }
+            };
+
+            L.DomEvent.on(sliderPrevBtn, "click", function(e) {
+                L.DomEvent.stop(e);
+                goToSliderIndex(-1);
+            }, this);
+            L.DomEvent.on(sliderNextBtn, "click", function(e) {
+                L.DomEvent.stop(e);
+                goToSliderIndex(1);
             }, this);
         }
 

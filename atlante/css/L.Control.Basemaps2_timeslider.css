@@ -240,12 +240,37 @@
     font-weight: bold;
     color: #cc7300;
 }
+.basemaps-timeslider-track {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 4px;
+}
 .basemaps-timeslider-input {
     width: 100%;
-    margin-bottom: 4px;
+    flex: 1 1 auto;
+    margin-bottom: 0;
     accent-color: #FF9900;
     cursor: pointer;
     filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff);
+}
+.basemaps-timeslider-nav {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: rgba(255,153,0,0.15);
+    color: #cc7300 !important;
+    font-size: 10px;
+    text-decoration: none !important;
+    -webkit-tap-highlight-color: transparent;
+}
+.basemaps-timeslider-nav:hover {
+    background: #FF9900;
+    color: #fff !important;
 }
 .basemaps-timeslider-name {
     margin-top: 2px;

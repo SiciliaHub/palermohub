@@ -149,10 +149,19 @@
     font-size: 11px;
 }
 .map-toolbar-timeslider-slot .basemaps-timeslider-name {
-    /* sul desktop il nome della mappa storica resta, ma su una riga sola */
-    text-shadow: none;
+    /* portato fuori dalla pillola (non ne influenza piu' la larghezza):
+       ancorato a .map-toolbar (position:fixed, e' l'ancestor posizionato
+       piu' vicino) e centrato sotto la barra, a tutta la sua larghezza.
+       Alone bianco per restare leggibile sopra qualsiasi sfondo di mappa */
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    top: 100%;
+    margin-top: 6px;
     -webkit-line-clamp: 1;
-    max-width: 100%;
+    max-width: none;
+    text-shadow: -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff, 1px 1px 2px #fff, 0 0 5px #fff, 0 0 5px #fff;
+	font-weight: 700;
 }
 @media (max-width: 600px) {
     .map-toolbar {
