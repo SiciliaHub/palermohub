@@ -75,6 +75,9 @@
 <script src="atlante/js/basemap/L.Control.Basemaps_02_timeslider.js?v=1"></script>
 <script src="atlante/js/toolbar/L.Control.Toolbar.js?v=1"></script>
 <script src="atlante/js/geocoder/L.Control.Geocoder_ods.js?v=2"></script>
+<!-- effetto side by side: divide la mappa in due riquadri comparabili con uno slider -->
+<script src="atlante/js/sidebyside/L.Control.SideBySide.js?v=1"></script>
+<link href="atlante/js/sidebyside/L.Control.SideBySide.css?v=1" rel="stylesheet" type="text/css">
 
   <!-- script automatico mobile/desktop --> 
 <script> document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min' + ((screen && screen.width < 737) ? '_mobile' : '') + '.js"><\/script>'); </script>
@@ -192,6 +195,10 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
   <div class="basemap-help-step">
     <i class="fa fa-sliders" aria-hidden="true"></i>
     <div>Lo <strong>slider temporale</strong> è sempre visibile nella barra in alto: trascinalo per scorrere velocemente tra tutte le mappe storiche in ordine cronologico, dal passato a oggi.</div>
+  </div>
+  <div class="basemap-help-step">
+    <i class="fa fa-columns" aria-hidden="true"></i>
+    <div>L'icona <strong>a colonne</strong> nella barra in alto attiva il confronto <strong>affiancato</strong>: mostra la mappa storica sovrapposta e quella di base divise da uno slider trascinabile, invece dell'effetto "occhio di bue".</div>
   </div>
   <button type="button" class="basemap-help-ok close">Ho capito</button>
 </div>
@@ -987,12 +994,18 @@ function syncBasemapDot(layer) {
 		if (link) { link.closest('li').classList.add('basemap-current'); }
 	}
 }
+var sideBySideActive = false;
+var sideBySideControl = null;
+var sbsRightLayer = null;
+var sbsHiddenOverlay = null;
+
 map.on('layeradd', function(e) {
 	if (overlayBasemaps.indexOf(e.layer) === -1) { return; }
 	overlayBasemaps.forEach(function(layer) {
 		if (layer !== e.layer && map.hasLayer(layer)) { map.removeLayer(layer); }
 	});
 	syncBasemapDot(e.layer);
+	if (sideBySideActive) { refreshSideBySide(e.layer); }
 });
 // la mappa storica di default è già aggiunta al caricamento, prima che il listener sopra si registri: sync iniziale esplicito
 overlayBasemaps.forEach(function(layer) {
@@ -1022,6 +1035,131 @@ overlayBasemaps.forEach(function(layer) {
 	   // pannello basemaps
 	   var timesliderNode = basemapsControl._container.querySelector('.basemaps-timeslider');
 	   if (timesliderNode) { toolbar.attachTimeslider(timesliderNode); }
+
+// pulsante "side by side" in toolbar: confronta la mappa di base attuale
+// (basemapsControl.basemap, es. OSM) con la mappa storica attualmente
+// sovrapposta come "occhio di bue" (basemapsControl.overlayLayer), affiancate
+// da uno slider trascinabile (vedi atlante/js/sidebyside/L.Control.SideBySide.js).
+// Il layer storico usato per il confronto NON e' quello mascherato a cerchio
+// (in overlayBasemaps: il suo container reale resta nascosto apposta per
+// l'effetto "occhio di bue", vedi leaflet-tileoverlay-mask.js) ma il suo
+// gemello semplice nell'array "basemaps" (stessa URL tile, usato altrimenti
+// solo per le icone del pannello mappe): i due array sono allineati per indice.
+// Iniettato qui invece che in L.Control.Toolbar.js perche' la funzionalita'
+// e' esclusiva di questa pagina.
+var sbsBtn = L.DomUtil.create('a', 'map-toolbar-btn map-toolbar-sidebyside');
+sbsBtn.href = '#';
+sbsBtn.title = 'Confronta affiancate (side by side)';
+sbsBtn.innerHTML = '<i class="fa fa-columns" aria-hidden="true"></i>';
+var infoBtnNode = toolbar._container.querySelector('.map-toolbar-info');
+if (infoBtnNode) { toolbar._container.insertBefore(sbsBtn, infoBtnNode); } else { toolbar._container.appendChild(sbsBtn); }
+L.DomEvent.disableClickPropagation(sbsBtn);
+
+// versione "piatta" (senza occhio di bue) del layer storico mascherato: viene
+// clonata al volo dalla URL/opzioni del layer mascherato stesso, invece di
+// riusare l'array "basemaps" (pensato solo per le icone del pannello: alcune
+// voci li' dentro hanno URL diverse/rotte rispetto al layer mascherato
+// corrispondente, es. la voce 2012 punta a un percorso che risponde 404).
+// La clona viene tenuta in cache sul layer mascherato per non ricrearla ad
+// ogni refresh.
+function getRealCounterpart(overlayLayer) {
+	if (!overlayLayer) { return null; }
+	if (!overlayLayer._sbsPlainLayer) {
+		overlayLayer._sbsPlainLayer = L.tileLayer(overlayLayer._url, overlayLayer.options);
+	}
+	return overlayLayer._sbsPlainLayer;
+}
+
+// (ri)costruisce il confronto con la coppia di layer attualmente scelta
+// dall'utente (base + storica sovrapposta). overlayLayerHint viene passato
+// dal listener layeradd quando il cambio arriva da li': in quel momento
+// basemapsControl.overlayLayer non e' ancora aggiornato (viene assegnato
+// dopo l'addLayer che genera l'evento), quindi si usa il layer appena
+// aggiunto invece di rileggerlo dal controllo.
+function refreshSideBySide(overlayLayerHint) {
+	var leftLayer = basemapsControl.basemap;
+	var overlayLayer = overlayLayerHint || basemapsControl.overlayLayer;
+	var rightLayer = getRealCounterpart(overlayLayer);
+
+	if (sbsHiddenOverlay && sbsHiddenOverlay !== overlayLayer && sbsHiddenOverlay._e1) {
+		sbsHiddenOverlay._e1.style.display = '';
+		sbsHiddenOverlay = null;
+	}
+
+	// preserva la posizione dello slider attraverso il refresh, invece di
+	// farlo ripartire sempre dal centro ad ogni cambio mappa
+	var previousRatio = sideBySideControl ? sideBySideControl._range.value : 50;
+
+	// il vecchio controllo va rimosso PRIMA di rimuovere il vecchio rightLayer
+	// dalla mappa: SideBySide.remove() pulisce lo style.clip leggendo
+	// getContainer() dei layer che stava confrontando, e removeLayer() azzera
+	// quel container (torna null) - nell'ordine sbagliato getContainer()
+	// lancia un errore che interrompe il resto del refresh, lasciando lo stato
+	// bloccato per tutti i cambi successivi.
+	if (sideBySideControl) { sideBySideControl.remove(); sideBySideControl = null; }
+	if (sbsRightLayer && sbsRightLayer !== rightLayer && map.hasLayer(sbsRightLayer)) {
+		map.removeLayer(sbsRightLayer);
+	}
+
+	if (!rightLayer || !leftLayer || rightLayer === leftLayer) {
+		// nessuna mappa storica selezionata (o coincide con la base): il confronto non ha senso
+		deactivateSideBySide();
+		return;
+	}
+
+	sbsRightLayer = rightLayer;
+	if (!map.hasLayer(rightLayer)) { map.addLayer(rightLayer); }
+	// nasconde il cerchietto "occhio di bue" (SVG di leaflet-tileoverlay-mask.js) del
+	// layer storico mascherato, altrimenti resta visibile sovrapposto al confronto
+	if (overlayLayer && overlayLayer._e1) {
+		sbsHiddenOverlay = overlayLayer;
+		overlayLayer._e1.style.display = 'none';
+	}
+
+	sideBySideControl = L.control.sideBySide([leftLayer], [rightLayer], { initialRatio: previousRatio }).addTo(map);
+	L.DomUtil.addClass(sbsBtn, 'active');
+}
+
+function activateSideBySide() {
+	if (!basemapsControl.overlayLayer) {
+		alert('Seleziona prima una mappa storica dal pannello mappe: verra\' confrontata con la mappa di base attuale.');
+		return;
+	}
+	sideBySideActive = true;
+	refreshSideBySide();
+}
+
+function deactivateSideBySide() {
+	sideBySideActive = false;
+	if (sideBySideControl) { sideBySideControl.remove(); sideBySideControl = null; }
+	if (sbsHiddenOverlay && sbsHiddenOverlay._e1) { sbsHiddenOverlay._e1.style.display = ''; }
+	sbsHiddenOverlay = null;
+	if (sbsRightLayer && map.hasLayer(sbsRightLayer)) { map.removeLayer(sbsRightLayer); }
+	sbsRightLayer = null;
+	L.DomUtil.removeClass(sbsBtn, 'active');
+}
+
+L.DomEvent.on(sbsBtn, 'click', function(e) {
+	L.DomEvent.stop(e);
+	if (sideBySideActive) { deactivateSideBySide(); } else { activateSideBySide(); }
+});
+
+// mentre il confronto e' attivo, il cambio di mappa di base aggiorna il
+// confronto invece di uscirne (vedi anche map.on('layeradd') per l'overlay)
+basemapsControl.on('basemapchange', function() {
+	if (sideBySideActive) { refreshSideBySide(); }
+});
+
+// aggiunge un passo sulla modalita' confronto affiancato al pannello guida del
+// selettore mappe (L.Control.Basemaps_02_timeslider.js e' condiviso con altre
+// pagine che non hanno questo pulsante, quindi il passo si aggiunge qui via JS
+// invece che nel file sorgente del controllo)
+var basemapsHelpPanel = basemapsControl._container.querySelector('.basemaps-help-panel');
+if (basemapsHelpPanel) {
+	var sbsHelpStep = L.DomUtil.create('div', 'basemap-help-step', basemapsHelpPanel);
+	sbsHelpStep.innerHTML = '<i class="fa fa-columns" aria-hidden="true"></i>' +
+		'<div>L\'icona <strong>a colonne</strong> nella barra degli strumenti attiva il confronto <strong>affiancato</strong>: mostra la mappa storica sovrapposta e quella di base divise da uno slider trascinabile, al posto dell\'effetto "occhio di bue".</div>';
+}
 
 // tab "Condividi": link, icone social e impostazioni iframe aggiornati in base alla vista corrente della mappa
 function updateShareTab() {
