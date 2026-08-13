@@ -1,13 +1,27 @@
+.leaflet-top.leaflet-right {
+    z-index: 1001;
+}
 .basemaps {
     padding: 0px;
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start;
     max-width: 340px;
+    max-height: calc(100vh - 24px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
     background: rgba(255,255,255,0.9);
     border-radius: 8px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.4);
     padding-bottom: 6px;
+}
+@media (max-width: 480px) {
+    .basemaps {
+        max-width: calc(100vw - 20px);
+        max-height: 65vh;
+    }
 }
 .basemaps.closed {
     display: block;
@@ -205,6 +219,8 @@
 .basemaps-timeslider {
     display: none;
     flex-basis: 100%;
+    min-width: 0;
+    box-sizing: border-box;
     margin: 0 10px 8px 10px;
 }
 .basemaps-mode.mode-overlay ~ .basemaps-timeslider {
@@ -226,6 +242,7 @@
 }
 .basemaps-timeslider-input {
     width: 100%;
+    margin-bottom: 4px;
     accent-color: #FF9900;
     cursor: pointer;
     filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff);
@@ -236,8 +253,11 @@
     font-weight: 600;
     color: #333;
     text-align: center;
-    white-space: nowrap;
+    line-height: 1.3;
+    white-space: normal;
     overflow: hidden;
-    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
     text-shadow: -1px -1px 2px #fff, 1px -1px 2px #fff, -1px 1px 2px #fff, 1px 1px 2px #fff, 0 0 4px #fff;
 }

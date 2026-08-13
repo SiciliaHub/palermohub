@@ -7,6 +7,9 @@
   z-index: 2000; }
   .sidebar.collapsed {
     width: 40px; }
+  @media (max-width: 767px) {
+    .sidebar {
+      top: 12px; } }
   @media (min-width: 768px) {
     .sidebar {
       top: 80px;

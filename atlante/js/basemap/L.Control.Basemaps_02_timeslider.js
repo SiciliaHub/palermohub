@@ -110,6 +110,15 @@ L.Control.Basemaps = L.Control.extend({
                 sliderInput.step = 1;
                 sliderInput.value = 0;
 
+                var sliderTicksId = "basemaps-timeslider-ticks-" + L.Util.stamp(this);
+                var sliderTicks = L.DomUtil.create("datalist", null, sliderRow);
+                sliderTicks.id = sliderTicksId;
+                for (var ti = 0; ti < yearEntries.length; ti++) {
+                    var tickOption = L.DomUtil.create("option", null, sliderTicks);
+                    tickOption.value = ti;
+                }
+                sliderInput.setAttribute("list", sliderTicksId);
+
                 sliderNameLabel = L.DomUtil.create("div", "basemaps-timeslider-name", sliderRow);
                 sliderNameLabel.textContent = yearEntries[0].label;
                 sliderNameLabel.title = yearEntries[0].label;
