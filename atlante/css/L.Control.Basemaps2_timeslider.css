@@ -307,6 +307,17 @@
 .basemaps-timeslider-accuracy-alta { background: #2e7d32; }
 .basemaps-timeslider-accuracy-media { background: #e6a700; }
 .basemaps-timeslider-accuracy-bassa { background: #c62828; }
+/* pallino accanto all'anno corrente: raggruppati in un wrapper cosi' lo
+   space-between della label row non li separa, e l'allineamento e' al
+   centro del testo invece del margine-top pensato per il name-row */
+.basemaps-timeslider-current-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+}
+.basemaps-timeslider-current-wrap .basemaps-timeslider-accuracy {
+    margin-top: 0;
+}
 .basemap-help-accuracy-sample {
     display: inline-block;
     width: 9px;
@@ -314,4 +325,47 @@
     margin-top: 5px;
     box-shadow: none;
     vertical-align: middle;
+}
+/* legenda fissa della precisione georeferenziazione, angolo bottomleft:
+   Leaflet la piazza nel corner .leaflet-bottom.leaflet-left, gia' animato
+   in sync con l'apertura/chiusura della sidebar da leaflet-sidebar.css.
+   atlante/css/leaflet.css nasconde pero' di proposito tutti i .leaflet-control
+   nel corner sinistro per lasciare spazio alla sidebar (.leaflet-left
+   .leaflet-control { display:none }): serve la stessa contro-regola gia'
+   usata per la toolbar (vedi L.Control.Toolbar.css) per farla rispuntare. */
+.leaflet-left .basemaps-accuracy-legend.leaflet-control {
+    display: block !important;
+    /* solleva la legenda sopra la barra attribution di Leaflet, altrimenti
+       il testo lungo dell'attribution (bottomright) la sovrappone in basso */
+    margin-bottom: 50px !important;
+}
+.basemaps-accuracy-legend {
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.9);
+    border-radius: 8px;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+    font-size: 10.5px;
+    color: #333;
+    cursor: help;
+}
+.basemaps-accuracy-legend-title {
+    font-size: 10px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 4px;
+    white-space: nowrap;
+}
+.basemaps-accuracy-legend-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.basemaps-accuracy-legend-row + .basemaps-accuracy-legend-row {
+    margin-top: 3px;
+}
+.basemaps-accuracy-legend-row .basemaps-timeslider-accuracy {
+    margin-top: 0;
+}
+.basemaps-accuracy-legend-label {
+    white-space: nowrap;
 }

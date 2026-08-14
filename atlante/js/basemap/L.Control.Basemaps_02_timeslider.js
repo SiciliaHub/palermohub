@@ -126,8 +126,10 @@ L.Control.Basemaps = L.Control.extend({
                 var sliderLabelRow = L.DomUtil.create("div", "basemaps-timeslider-label", sliderRow);
                 var sliderYearFrom = L.DomUtil.create("span", "basemaps-timeslider-bound", sliderLabelRow);
                 sliderYearFrom.textContent = yearEntries[0].year;
-                sliderYearLabel = L.DomUtil.create("span", "basemaps-timeslider-current", sliderLabelRow);
+                var sliderCurrentWrap = L.DomUtil.create("span", "basemaps-timeslider-current-wrap", sliderLabelRow);
+                sliderYearLabel = L.DomUtil.create("span", "basemaps-timeslider-current", sliderCurrentWrap);
                 sliderYearLabel.textContent = yearEntries[0].year;
+                sliderAccuracyDot = L.DomUtil.create("span", "basemaps-timeslider-accuracy", sliderCurrentWrap);
                 var sliderYearTo = L.DomUtil.create("span", "basemaps-timeslider-bound", sliderLabelRow);
                 sliderYearTo.textContent = yearEntries[yearEntries.length - 1].year;
 
@@ -162,11 +164,32 @@ L.Control.Basemaps = L.Control.extend({
                 sliderInput.setAttribute("list", sliderTicksId);
 
                 var nameRow = L.DomUtil.create("div", "basemaps-timeslider-name-row", sliderRow);
-                sliderAccuracyDot = L.DomUtil.create("span", "basemaps-timeslider-accuracy", nameRow);
                 sliderNameLabel = L.DomUtil.create("span", "basemaps-timeslider-name", nameRow);
                 sliderNameLabel.textContent = yearEntries[0].label;
                 sliderNameLabel.title = yearEntries[0].label;
                 setAccuracyDot(sliderAccuracyDot, yearEntries[0].accuracy);
+
+                // legenda fissa della precisione: sta nell'angolo bottomleft di Leaflet,
+                // che leaflet-sidebar.css gia' sincronizza (transition + offset) con
+                // l'apertura/chiusura della sidebar, quindi nessun sync JS aggiuntivo serve
+                var accuracyLegend = L.control({ position: "bottomleft" });
+                accuracyLegend.onAdd = function() {
+                    var legendDiv = L.DomUtil.create("div", "basemaps-accuracy-legend");
+                    L.DomEvent.disableClickPropagation(legendDiv);
+                    legendDiv.title = "Precisione della georeferenziazione delle mappe storiche";
+                    var legendTitle = L.DomUtil.create("div", "basemaps-accuracy-legend-title", legendDiv);
+                    legendTitle.textContent = "Precisione georeferenziazione";
+                    ["alta", "media", "bassa"].forEach(function(key) {
+                        var row = L.DomUtil.create("div", "basemaps-accuracy-legend-row", legendDiv);
+                        var dot = L.DomUtil.create("span", "basemaps-timeslider-accuracy", row);
+                        setAccuracyDot(dot, key);
+                        var label = L.DomUtil.create("span", "basemaps-accuracy-legend-label", row);
+                        label.textContent = ACCURACY_META[key].label;
+                    });
+                    return legendDiv;
+                };
+                accuracyLegend.addTo(map);
+                this._accuracyLegend = accuracyLegend;
             }
         }
 
@@ -457,6 +480,9 @@ L.Control.Basemaps = L.Control.extend({
 
         this._container = container;
         return this._container;
+    },
+    onRemove: function(map) {
+        if (this._accuracyLegend) { map.removeControl(this._accuracyLegend); }
     }
 });
 
