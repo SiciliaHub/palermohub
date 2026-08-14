@@ -339,6 +339,18 @@
        il testo lungo dell'attribution (bottomright) la sovrappone in basso */
     margin-bottom: 50px !important;
 }
+@media (max-width: 480px) {
+    /* su mobile l'attribution va su piu' righe e con margin-bottom la legenda
+       resta comunque coperta o fuori schermo: la ancoro con position fixed
+       a una distanza fissa dal bordo inferiore, indipendente dall'attribution */
+    .leaflet-left .basemaps-accuracy-legend.leaflet-control {
+        position: fixed !important;
+        left: 40px !important;
+        bottom: 140px !important;
+        margin-bottom: 0 !important;
+        top: auto !important;
+    }
+}
 .basemaps-accuracy-legend {
     padding: 6px 10px;
     background: rgba(255,255,255,0.9);

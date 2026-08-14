@@ -147,7 +147,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 }
 </style>
 <style type="text/css">
-#modal-basemap-help { width: 90%; max-width: 380px; background: #fff; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.35); padding: 18px 20px; box-sizing: border-box; }
+#modal-basemap-help { width: 90%; max-width: 640px; max-height: 85vh; background: #fff; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.35); padding: 20px 24px; box-sizing: border-box; overflow-y: auto; -webkit-overflow-scrolling: touch; }
 @media (max-width: 480px) {
   #modal-basemap-help {
     width: 100vw;
@@ -160,8 +160,16 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
     padding: 20px 20px 28px;
   }
 }
-#modal-basemap-help h3 { margin: 0 0 12px 0; font-size: 16px; color: #333; }
+#modal-basemap-help h3 { margin: 0 0 4px 0; font-size: 18px; color: #333; }
 #modal-basemap-help h3 i { color: #FF9900; margin-right: 6px; }
+#modal-basemap-help .guida-intro { margin: 0 0 18px 0; font-size: 13px; color: #666; line-height: 1.5; }
+#modal-basemap-help .guida-section { margin-bottom: 22px; }
+#modal-basemap-help .guida-section:last-of-type { margin-bottom: 8px; }
+#modal-basemap-help .guida-section-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px 0; font-size: 14px; font-weight: bold; color: #333; }
+#modal-basemap-help .guida-section-title i { color: #FF9900; font-size: 15px; }
+#modal-basemap-help .guida-section p { margin: 0 0 8px 0; font-size: 13px; color: #444; line-height: 1.45; }
+#modal-basemap-help .guida-shot { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 1px 6px rgba(0,0,0,0.15); margin-top: 6px; }
+#modal-basemap-help .guida-shot.guida-shot-legend { width: auto; max-width: 220px; }
 .basemap-help-step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
 .basemap-help-step i { flex: 0 0 22px; font-size: 18px; color: #FF9900; text-align: center; margin-top: 2px; }
 .basemap-help-step div { font-size: 13px; color: #444; line-height: 1.4; }
@@ -197,37 +205,45 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 <!-- fine div per popup novità -->
 
 <!-- div per popup guida selettore mappe -->
-<div class="flythat" data-autoOpen="false" data-autoClose="5000" data-backdropColorRGBA="rgba(0,0,0,0.55)" id="modal-basemap-help">
+<div class="flythat" data-autoOpen="false" data-autoClose="false" data-backdropColorRGBA="rgba(0,0,0,0.55)" id="modal-basemap-help">
   <a href="#close" class="close flythat-close basemap-help-close" aria-label="Chiudi">&times;</a>
-  <h3><i class="fa fa-map-o" aria-hidden="true"></i>Come funziona il selettore delle mappe</h3>
-  <div class="basemap-help-step">
-    <i class="fa fa-th-large" aria-hidden="true"></i>
-    <div>Nella barra degli strumenti in alto, l'icona con l'anteprima della mappa attiva apre il pannello di selezione.</div>
+  <h3><i class="fa fa-map-o" aria-hidden="true"></i>Guida alla mappa</h3>
+  <p class="guida-intro">L'Atlante mostra il territorio di Palermo attraverso oltre 400 anni di cartografia: dalle incisioni cinquecentesche ai rilievi aerofotogrammetrici più recenti, sovrapposti alla mappa attuale per confrontare come la città è cambiata. Qui sotto tutte le modalità di visualizzazione, con un esempio reale per ciascuna.</p>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-globe" aria-hidden="true"></i>Modalità Base</div>
+    <p>Nel pannello del selettore mappe (icona con l'anteprima, in alto) scegli la tab <strong>Base cartografica</strong>: i cerchietti cambiano la mappa di sfondo attuale (OpenStreetMap, Google, Satellite). Nessuna mappa storica è sovrapposta.</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-pannello-base.jpg" alt="Pannello del selettore mappe con la tab Base cartografica attiva" loading="lazy">
+    <p style="margin-top:8px;">Esempio con base <strong>Satellite</strong> attiva:</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-base-satellite.jpg" alt="Mappa satellitare di Palermo come base cartografica" loading="lazy">
   </div>
-  <div class="basemap-help-step">
-    <i class="fa fa-toggle-on" aria-hidden="true"></i>
-    <div>Nel pannello scegli la modalità: <strong>Base</strong> oppure <strong>Storica sovrapposta</strong>.</div>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-clone" aria-hidden="true"></i>Modalità Storica sovrapposta — occhio di bue</div>
+    <p>Tab <strong>Storica sovrapposta</strong>: i cerchietti sovrappongono una mappa storica alla mappa attuale con l'effetto <strong>"occhio di bue"</strong>, un cerchio che segue il mouse e rivela cosa c'era in quel punto nel passato.</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-pannello-storica.jpg" alt="Pannello del selettore mappe con la tab Storica sovrapposta attiva" loading="lazy">
+    <p style="margin-top:8px;">Esempio: carta di Palermo del 1580 sovrapposta a OpenStreetMap, con l'occhio di bue sul centro storico:</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-occhio-di-bue.jpg" alt="Effetto occhio di bue con la mappa storica del 1580 sovrapposta al centro storico di Palermo" loading="lazy">
   </div>
-  <div class="basemap-help-step">
-    <i class="fa fa-globe" aria-hidden="true"></i>
-    <div>Modalità <strong>Base</strong>: i cerchietti cambiano la mappa di sfondo (satellite, OpenStreetMap...).</div>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-columns" aria-hidden="true"></i>Confronto affiancato</div>
+    <p>L'icona <strong>a colonne</strong> nella barra in alto, disponibile in modalità Storica sovrapposta, sostituisce l'occhio di bue con uno <strong>slider verticale trascinabile</strong> che divide lo schermo tra mappa storica e mappa attuale.</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-affiancato.jpg" alt="Confronto affiancato tra la mappa storica del 1580 e la mappa attuale, divise da uno slider verticale" loading="lazy">
   </div>
-  <div class="basemap-help-step">
-    <i class="fa fa-clone" aria-hidden="true"></i>
-    <div>Modalità <strong>Storica sovrapposta</strong>: i cerchietti sovrappongono una mappa storica del passato su quella attuale.</div>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-sliders" aria-hidden="true"></i>Slider temporale</div>
+    <p>Sempre visibile nella barra in alto: trascinalo per scorrere velocemente tra tutte le mappe storiche in ordine cronologico, dal 1580 a oggi. La mappa e la sovrapposizione si aggiornano istantaneamente.</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-timeslider.jpg" alt="Slider temporale spostato su un anno intermedio, con la mappa storica corrispondente sovrapposta" loading="lazy">
   </div>
-  <div class="basemap-help-step">
-    <i class="fa fa-hand-pointer-o" aria-hidden="true"></i>
-    <div>Clicca un cerchietto per selezionarlo: il bordo arancione indica quello attivo. Il pannello si chiude ricliccando l'icona della mappa o toccando fuori.</div>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-circle" aria-hidden="true"></i>Precisione della georeferenziazione</div>
+    <p>Il pallino colorato accanto al nome della mappa storica (e la legenda fissa in basso a sinistra) indica quanto è affidabile la sovrapposizione: <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-alta basemap-help-accuracy-sample"></span> <strong>verde</strong> = rilievo aerofotogrammetrico o cartografia tecnica moderna, buona corrispondenza; <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-media basemap-help-accuracy-sample"></span> <strong>giallo</strong> = rilievo pre-aerofotogrammetria, corrispondenza approssimativa; <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-bassa basemap-help-accuracy-sample"></span> <strong>rosso</strong> = disegno o incisione storica non rilevata scientificamente, sovrapposizione puramente indicativa. È un giudizio editoriale sulla fonte, non una misura: l'occhio di bue e lo swipe non vanno letti come pixel-perfect su queste mappe.</p>
+    <img class="guida-shot guida-shot-legend" src="atlante/img/guida/guida-legenda-precisione.png" alt="Legenda della precisione di georeferenziazione, in basso a sinistra sulla mappa" loading="lazy">
   </div>
-  <div class="basemap-help-step">
-    <i class="fa fa-sliders" aria-hidden="true"></i>
-    <div>Lo <strong>slider temporale</strong> è sempre visibile nella barra in alto: trascinalo per scorrere velocemente tra tutte le mappe storiche in ordine cronologico, dal passato a oggi.</div>
-  </div>
-  <div class="basemap-help-step">
-    <i class="fa fa-columns" aria-hidden="true"></i>
-    <div>L'icona <strong>a colonne</strong> nella barra in alto attiva il confronto <strong>affiancato</strong>: mostra la mappa storica sovrapposta e quella di base divise da uno slider trascinabile, invece dell'effetto "occhio di bue".</div>
-  </div>
+
   <button type="button" class="basemap-help-ok close">Ho capito</button>
 </div>
 <!-- fine div per popup guida selettore mappe -->
@@ -659,7 +675,7 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
     <p class="lorem"><a href="https://github.com/SiciliaHub/mappe"  title="Mappa create dagli utenti della comunità OpenDataSicilia" target="_blank" rel="noopener noreferrer">SiciliaHub/mappe</a>: <a href="https://github.com/SiciliaHub/mappe" title="SiciliaHub/mappe" target="_blank" rel="noopener noreferrer">repo github</a> in cui si trovano le mappa create dagli utenti della comunità <a href="https://opendatasicilia.it/" title="OpenDataSicilia.it" target="_blank" rel="noopener noreferrer">OpenDataSicilia.it</a></p>
     <p class="lorem"><strong>Pianta della Città di Palermo e dintorni, redatta dall'Ufficio Tecnico Municipale - 19xx - scala 1:8000 - Fonte Map Warper - <a href="https://mapwarper.net/users/6031" target="_blank" rel="noopener noreferrer"> Uploaded by utente</a></strong></p>
     <p class="lorem">Un ringraziamento particolare va a <a href="https://twitter.com/napo" target="_blank" title="Maurizio Napolitano" rel="noopener noreferrer">@napo</a> che con il lavoro: <a href="https://medium.com/@napo/mappa-di-trento-1915-da-un-libro-di-cesare-battisti-84935794b1ed#.w7hqdcsuv" target="_blank" title="mappa di Trento 1915 - da un libro di Cesare Battisti" rel="noopener noreferrer">mappa di Trento 1915 - da un libro di Cesare Battisti</a> ci ha fatto riscoprire la bellezza e l'importanza delle mappa storiche.</p>
-    <img src="lib/js/popup/atlante_news.jpg" width="370" height="230" title="Gestione della Cartografia" class="clip_resize" alt="Gestione della Cartografia" loading="lazy" />
+    <img src="atlante/img/guida/guida-pannello-base.jpg" width="370" height="260" title="Pannello del selettore mappe" class="clip_resize" alt="Pannello del selettore mappe con la tab Base cartografica attiva" loading="lazy" />
   </div>
   <div class="techmap-block">
     <h4 class="techmap-block-title"><i class="fa fa-creative-commons" aria-hidden="true"></i>Licenza</h4>
@@ -1366,17 +1382,7 @@ updateShareTab();
     <!-- popup  -->
 <script src="lib/js/popup/jquery.flythat.min.js"></script>
 
-<!-- guida selettore mappe: mostrata solo al primo avvio -->
-<script>
-$(window).on('load', function() {
-	try {
-		if (!localStorage.getItem('atlante_basemap_help_seen')) {
-			localStorage.setItem('atlante_basemap_help_seen', '1');
-			setTimeout(function() { $('#modal-basemap-help').flythat('open'); }, 800);
-		}
-	} catch (e) { /* localStorage non disponibile: nessuna guida, nessun errore bloccante */ }
-});
-</script>
+<!-- guida selettore mappe: apertura automatica disattivata, si apre solo dall'icona "i" in toolbar -->
 
 </body>
 </html>

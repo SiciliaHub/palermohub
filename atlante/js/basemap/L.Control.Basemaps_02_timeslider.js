@@ -181,6 +181,7 @@ L.Control.Basemaps = L.Control.extend({
                     legendTitle.textContent = "Precisione georeferenziazione";
                     ["alta", "media", "bassa"].forEach(function(key) {
                         var row = L.DomUtil.create("div", "basemaps-accuracy-legend-row", legendDiv);
+                        row.title = ACCURACY_META[key].title;
                         var dot = L.DomUtil.create("span", "basemaps-timeslider-accuracy", row);
                         setAccuracyDot(dot, key);
                         var label = L.DomUtil.create("span", "basemaps-accuracy-legend-label", row);
