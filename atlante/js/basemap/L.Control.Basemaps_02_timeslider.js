@@ -31,6 +31,24 @@ L.Control.Basemaps = L.Control.extend({
         this._mode = "base";
         this.overlayLayer = null;
 
+        // precisione della georeferenziazione: giudizio editoriale (non una misura), su 3 fasce,
+        // per non far credere che lo swipe/l'occhio di bue siano accurati quanto le mappe moderne
+        // anche per i rilievi ottocenteschi non triangolati
+        var ACCURACY_META = {
+            alta: { label: "Precisione alta", title: "Precisione alta: rilievo aerofotogrammetrico o cartografia tecnica moderna, buona corrispondenza con la mappa attuale." },
+            media: { label: "Precisione media", title: "Precisione media: rilievo topografico/catastale pre-aerofotogrammetria, corrispondenza approssimativa con la mappa attuale." },
+            bassa: { label: "Precisione bassa", title: "Precisione bassa: disegno o incisione storica non rilevata scientificamente, la sovrapposizione è puramente indicativa." }
+        };
+        function setAccuracyDot(dotNode, accuracy) {
+            if (!dotNode) { return; }
+            dotNode.className = "basemaps-timeslider-accuracy";
+            var meta = ACCURACY_META[accuracy];
+            if (!meta) { dotNode.style.display = "none"; dotNode.title = ""; return; }
+            dotNode.style.display = "";
+            L.DomUtil.addClass(dotNode, "basemaps-timeslider-accuracy-" + accuracy);
+            dotNode.title = meta.title;
+        }
+
         if (this.options.overlays) {
             var modeRow = L.DomUtil.create("div", "basemaps-mode", container);
             var modeIndicator = L.DomUtil.create("span", "basemaps-mode-indicator", modeRow);
@@ -75,6 +93,7 @@ L.Control.Basemaps = L.Control.extend({
             }, this);
 
             var currentYear = new Date().getFullYear();
+            var modernCount = 0;
             var yearEntries = [];
             this.options.basemaps.forEach(function(d, i) {
                 var overlayLayer = this.options.overlays[i];
@@ -86,10 +105,14 @@ L.Control.Basemaps = L.Control.extend({
                 } else if (d.options && d.options.group === "Basi moderne") {
                     // OSM/Google/Satellite non hanno un anno storico: rappresentano la cartografia
                     // di oggi, quindi diventano l'estremo destro dello slider (anno corrente).
-                    year = currentYear;
+                    // Ora che la traccia è in anni reali, più basi moderne allo stesso anno
+                    // finirebbero sovrapposte nello stesso punto: le si distanzia di un anno
+                    // l'una dall'altra, restando comunque vicinissime a "oggi".
+                    year = currentYear - modernCount;
+                    modernCount++;
                 }
                 if (year) {
-                    yearEntries.push({ year: year, layer: overlayLayer, node: null, label: (d.options && d.options.label) || caption });
+                    yearEntries.push({ year: year, layer: overlayLayer, node: null, label: (d.options && d.options.label) || caption, accuracy: d.options && d.options.georefAccuracy });
                 }
             }, this);
             yearEntries.sort(function(a, b) { return a.year - b.year; });
@@ -97,6 +120,7 @@ L.Control.Basemaps = L.Control.extend({
             var sliderInput = null;
             var sliderYearLabel = null;
             var sliderNameLabel = null;
+            var sliderAccuracyDot = null;
             if (yearEntries.length >= 2) {
                 var sliderRow = L.DomUtil.create("div", "basemaps-timeslider", container);
                 var sliderLabelRow = L.DomUtil.create("div", "basemaps-timeslider-label", sliderRow);
@@ -115,10 +139,13 @@ L.Control.Basemaps = L.Control.extend({
 
                 sliderInput = L.DomUtil.create("input", "basemaps-timeslider-input", sliderTrack);
                 sliderInput.type = "range";
-                sliderInput.min = 0;
-                sliderInput.max = yearEntries.length - 1;
+                // min/max/value in anni reali (non indici): il browser posiziona
+                // thumb e tacche linearmente sul valore, quindi la distanza fisica
+                // sullo slider riflette la distanza cronologica reale tra le mappe.
+                sliderInput.min = yearEntries[0].year;
+                sliderInput.max = yearEntries[yearEntries.length - 1].year;
                 sliderInput.step = 1;
-                sliderInput.value = 0;
+                sliderInput.value = yearEntries[0].year;
 
                 var sliderNextBtn = L.DomUtil.create("a", "basemaps-timeslider-nav basemaps-timeslider-next", sliderTrack);
                 sliderNextBtn.href = "#";
@@ -130,13 +157,16 @@ L.Control.Basemaps = L.Control.extend({
                 sliderTicks.id = sliderTicksId;
                 for (var ti = 0; ti < yearEntries.length; ti++) {
                     var tickOption = L.DomUtil.create("option", null, sliderTicks);
-                    tickOption.value = ti;
+                    tickOption.value = yearEntries[ti].year;
                 }
                 sliderInput.setAttribute("list", sliderTicksId);
 
-                sliderNameLabel = L.DomUtil.create("div", "basemaps-timeslider-name", sliderRow);
+                var nameRow = L.DomUtil.create("div", "basemaps-timeslider-name-row", sliderRow);
+                sliderAccuracyDot = L.DomUtil.create("span", "basemaps-timeslider-accuracy", nameRow);
+                sliderNameLabel = L.DomUtil.create("span", "basemaps-timeslider-name", nameRow);
                 sliderNameLabel.textContent = yearEntries[0].label;
                 sliderNameLabel.title = yearEntries[0].label;
+                setAccuracyDot(sliderAccuracyDot, yearEntries[0].accuracy);
             }
         }
 
@@ -146,12 +176,13 @@ L.Control.Basemaps = L.Control.extend({
             if (!sliderInput) { return; }
             for (var k = 0; k < yearEntries.length; k++) {
                 if (yearEntries[k].layer === layer) {
-                    sliderInput.value = k;
+                    sliderInput.value = yearEntries[k].year;
                     if (sliderYearLabel) { sliderYearLabel.textContent = yearEntries[k].year; }
                     if (sliderNameLabel) {
                         sliderNameLabel.textContent = yearEntries[k].label;
                         sliderNameLabel.title = yearEntries[k].label;
                     }
+                    setAccuracyDot(sliderAccuracyDot, yearEntries[k].accuracy);
                     return;
                 }
             }
@@ -310,9 +341,24 @@ L.Control.Basemaps = L.Control.extend({
             );
         }, this);
 
+        // trova la entry con l'anno più vicino al valore trascinato: la traccia ora
+        // è in anni reali, quindi tra due mappe storiche ci sono anni "vuoti"
+        function nearestEntryIndex(year) {
+            var bestIdx = 0;
+            var bestDiff = Infinity;
+            for (var n = 0; n < yearEntries.length; n++) {
+                var diff = Math.abs(yearEntries[n].year - year);
+                if (diff < bestDiff) {
+                    bestDiff = diff;
+                    bestIdx = n;
+                }
+            }
+            return bestIdx;
+        }
+
         if (sliderInput) {
             L.DomEvent.on(sliderInput, "input", function() {
-                var idx = parseInt(sliderInput.value, 10);
+                var idx = nearestEntryIndex(parseInt(sliderInput.value, 10));
                 var entry = yearEntries[idx];
                 if (entry) {
                     applyOverlayLayer(entry.layer, entry.node, false);
@@ -320,11 +366,11 @@ L.Control.Basemaps = L.Control.extend({
             }, this);
 
             var goToSliderIndex = function(delta) {
-                var idx = parseInt(sliderInput.value, 10) + delta;
+                var idx = nearestEntryIndex(parseInt(sliderInput.value, 10)) + delta;
                 idx = Math.max(0, Math.min(yearEntries.length - 1, idx));
-                sliderInput.value = idx;
                 var entry = yearEntries[idx];
                 if (entry) {
+                    sliderInput.value = entry.year;
                     applyOverlayLayer(entry.layer, entry.node, false);
                 }
             };
@@ -357,7 +403,13 @@ L.Control.Basemaps = L.Control.extend({
                 '<div class="basemap-help-step"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i>' +
                     '<div>Clicca un cerchietto per selezionarlo: il bordo arancione o blu indica quello attivo. Il pannello si richiude da solo quando allontani il mouse.</div></div>' +
                 '<div class="basemap-help-step"><i class="fa fa-sliders" aria-hidden="true"></i>' +
-                    '<div>In basso trovi lo <strong>slider temporale</strong>: trascinalo per scorrere velocemente tra tutte le mappe storiche in ordine cronologico, dal 1893 a oggi.</div></div>';
+                    '<div>In basso trovi lo <strong>slider temporale</strong>: trascinalo per scorrere velocemente tra tutte le mappe storiche in ordine cronologico, dal 1893 a oggi.</div></div>' +
+                '<div class="basemap-help-step"><i class="fa fa-circle" aria-hidden="true"></i>' +
+                    '<div>Il <strong>pallino colorato</strong> vicino al nome della mappa storica indica quanto è affidabile la sua georeferenziazione: ' +
+                    '<span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-alta basemap-help-accuracy-sample"></span> <strong>verde</strong> = rilievo aerofotogrammetrico o cartografia tecnica moderna, buona corrispondenza; ' +
+                    '<span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-media basemap-help-accuracy-sample"></span> <strong>giallo</strong> = rilievo pre-aerofotogrammetria, corrispondenza approssimativa; ' +
+                    '<span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-bassa basemap-help-accuracy-sample"></span> <strong>rosso</strong> = disegno o incisione storica non rilevata scientificamente, sovrapposizione puramente indicativa. ' +
+                    'È un giudizio editoriale sulla fonte, non una misura: lo swipe e l\'occhio di bue non vanno letti come pixel-perfect su queste mappe.</div></div>';
 
             L.DomEvent.on(helpToggle, "click", function(e) {
                 L.DomEvent.stop(e);
