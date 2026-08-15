@@ -194,11 +194,7 @@ L.Control.Basemaps = L.Control.extend({
                         var label = L.DomUtil.create("span", "basemaps-accuracy-legend-label", row);
                         label.textContent = ACCURACY_META[key].label;
                     });
-                    // su mobile la legenda parte chiusa (solo titolo) per non
-                    // occupare spazio fisso sulla mappa; tap per espandere/richiudere
-                    if (window.matchMedia("(max-width: 480px)").matches) {
-                        legendDiv.classList.add("collapsed");
-                    }
+                    // legenda parte sempre aperta (anche mobile); tap per espandere/richiudere
                     L.DomEvent.on(legendDiv, "click", function () {
                         legendDiv.classList.toggle("collapsed");
                     });

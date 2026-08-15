@@ -349,8 +349,8 @@
        la legenda finisce sotto la barra e viene tagliata a meta'. */
     .leaflet-left .basemaps-accuracy-legend.leaflet-control {
         position: fixed !important;
-        left: 46px !important;
-        bottom: 140px !important;
+        left: 0px !important;
+        bottom: 90px !important;
         margin-bottom: 0 !important;
         top: auto !important;
         max-width: calc(100vw - 56px);
