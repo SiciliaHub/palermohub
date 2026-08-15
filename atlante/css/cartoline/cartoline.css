@@ -250,3 +250,45 @@ a.ct-btn-flickr:hover, a.ct-btn-flickr:active { color: #fff !important; border-c
 .leaflet-overlay-pane svg { position: absolute !important; top: 0; left: 0; }
 
 .ct-spider-leg { pointer-events: none; }
+
+/* bottone "torna in cima": sidebar sinistra/destra e guida mappe */
+.back-to-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: #FF9900;
+  color: #fff;
+  font-size: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  cursor: pointer;
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 150ms;
+}
+.back-to-top.visible { opacity: 1; pointer-events: auto; }
+.back-to-top:hover { background: #e68a00; }
+
+#sidebar-left-totop {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+}
+
+#sidebar-right-totop {
+  /* sidebar destra: la barra tab e' larga 40px sul lato destro del content,
+     quindi il bottone resta ancorato a destra ma spostato oltre la tab-strip */
+  position: absolute;
+  bottom: 16px;
+  right: 52px;
+}
+
+#guida-totop {
+  position: sticky;
+  bottom: 8px;
+  margin: 8px 0 0 auto;
+}

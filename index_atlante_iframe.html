@@ -52,9 +52,9 @@
 <link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Basemaps2_timeslider.css?v=2" rel="stylesheet" type="text/css">
-<link href="atlante/css/L.Control.Toolbar.css?v=5" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Toolbar.css?v=14" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Geocoder_ods.css?v=1" rel="stylesheet" type="text/css">
-<link href="atlante/css/cartoline/cartoline.css?v=4" rel="stylesheet" type="text/css">
+<link href="atlante/css/cartoline/cartoline.css?v=6" rel="stylesheet" type="text/css">
 <link href="atlante/css/bottom-nav.css?v=3" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
@@ -226,6 +226,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
   </div>
 
   <button type="button" class="basemap-help-ok close">Ho capito</button>
+  <button type="button" class="back-to-top" id="guida-totop" title="Torna in cima" aria-label="Torna in cima"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
 </div>
 <!-- fine div per popup guida selettore mappe -->
 
@@ -725,6 +726,7 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
   </div>
       </div>
     </div>
+  <button type="button" class="back-to-top" id="sidebar-left-totop" title="Torna in cima" aria-label="Torna in cima"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
 </div>
 
 <button id="sidebar-left-fab" type="button" title="Apri menu" aria-label="Apri menu">
@@ -819,6 +821,7 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
   </div>
     </div>
   </div>
+  <button type="button" class="back-to-top" id="sidebar-right-totop" title="Torna in cima" aria-label="Torna in cima"><i class="fa fa-chevron-up" aria-hidden="true"></i></button>
 </div>
 
 <button id="sidebar-right-fab" type="button" title="Cartoline storiche" aria-label="Apri cartoline storiche">
@@ -859,6 +862,7 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
 
 <!-- Biblioteche e bene comune digitale: gallery cartoline storiche (sidebar destra) -->
 <script src="atlante/js/cartoline/cartoline.js?v=2"></script>
+<script src="atlante/js/back-to-top.js?v=1"></script>
 
 </body>
 </html>
