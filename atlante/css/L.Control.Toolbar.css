@@ -97,12 +97,24 @@
        gap variabile invece che "8px sotto il bordo vero della barra" */
     flex: 0 0 auto;
 }
+/* .leaflet-top e .leaflet-bottom (leaflet.css) hanno entrambi z-index:1000
+   fisso: sono stacking context propri, quindi lo z-index del dropdown
+   (sotto) conta solo dentro al proprio corner e non basta a salire sopra
+   un altro corner con z-index uguale (vince l'ordine nel DOM). La legenda
+   .basemaps-accuracy-legend vive in .leaflet-bottom.leaflet-left: bisogna
+   alzare lo z-index del corner .leaflet-top.leaflet-left che contiene la
+   toolbar, non solo quello del dropdown. */
+.leaflet-top.leaflet-left {
+    z-index: 2010;
+}
 .map-toolbar-dropdown {
     display: none;
     position: absolute;
     top: calc(100% + 8px);
     left: 0;
-    z-index: 1;
+    /* sopra logo (#logo z-index:1000) e legenda (#legenda z-index:999,
+       .basemaps-accuracy-legend z-index:1001) quando aperto */
+    z-index: 2000;
     max-height: calc(100vh - 90px);
     overflow-y: auto;
 }
