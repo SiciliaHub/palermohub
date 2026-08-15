@@ -350,7 +350,7 @@
     .leaflet-left .basemaps-accuracy-legend.leaflet-control {
         position: fixed !important;
         left: 0px !important;
-        bottom: 90px !important;
+        bottom: 150px !important;
         margin-bottom: 0 !important;
         top: auto !important;
         max-width: calc(100vw - 56px);

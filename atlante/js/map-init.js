@@ -323,6 +323,49 @@ overlayBasemaps.forEach(function(layer) {
 				});
 			}
 
+			// barra mobile sul bordo inferiore (bottom-nav.css): stessi due
+			// FAB sopra piu' toggle rapido effetti mappa e apertura guida
+			(function () {
+				var btnMenu = document.getElementById('bottom-nav-menu');
+				var btnCartoline = document.getElementById('bottom-nav-cartoline');
+				var btnEffetti = document.getElementById('bottom-nav-effetti');
+				var btnGuida = document.getElementById('bottom-nav-guida');
+
+				// secondo click sullo stesso pulsante deve richiudere la sidebar
+				// gia' aperta su quel tab, non riaprirla (era un no-op prima)
+				function isPaneOpen(sidebarEl, paneId) {
+					if (sidebarEl.classList.contains('collapsed')) { return false; }
+					var pane = sidebarEl.querySelector('.sidebar-pane.active');
+					return !!pane && pane.id === paneId;
+				}
+				if (btnMenu) {
+					btnMenu.addEventListener('click', function () {
+						if (isPaneOpen(sidebarLeftEl0, 'home')) { sidebar.close(); } else { sidebar.open('home'); }
+					});
+				}
+				if (btnCartoline) {
+					btnCartoline.addEventListener('click', function () {
+						if (isPaneOpen(sidebarRightEl0, 'cartoline')) { sidebarRight.close(); } else { sidebarRight.open('cartoline'); }
+					});
+				}
+				if (btnEffetti) {
+					btnEffetti.addEventListener('click', function () {
+						var toggle = document.getElementById('cartoline-noeffects-toggle');
+						if (!toggle) { return; }
+						toggle.checked = !toggle.checked;
+						toggle.dispatchEvent(new Event('change'));
+						btnEffetti.classList.toggle('active', toggle.checked);
+					});
+				}
+				if (btnGuida) {
+					btnGuida.addEventListener('click', function () {
+						if (!window.jQuery) { return; }
+						var modal = jQuery('#modal-basemap-help');
+						if (modal.is(':visible')) { modal.flythat('close'); } else { modal.flythat('open'); }
+					});
+				}
+			})();
+
 			// mobile: solo una sidebar aperta alla volta — l'apertura dell'una chiude l'altra
 			(function () {
 				var mqMobile = window.matchMedia('(max-width: 767px)');

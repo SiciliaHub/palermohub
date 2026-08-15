@@ -52,9 +52,10 @@
 <link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Basemaps2_timeslider.css?v=2" rel="stylesheet" type="text/css">
-<link href="atlante/css/L.Control.Toolbar.css?v=3" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Toolbar.css?v=5" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Geocoder_ods.css?v=1" rel="stylesheet" type="text/css">
-<link href="atlante/css/cartoline/cartoline.css?v=3" rel="stylesheet" type="text/css">
+<link href="atlante/css/cartoline/cartoline.css?v=4" rel="stylesheet" type="text/css">
+<link href="atlante/css/bottom-nav.css?v=3" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
  <!-- css popup  -->
@@ -824,10 +825,31 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
   <i class="fa fa-image" aria-hidden="true"></i>
 </button>
 
+<!-- barra mobile sul bordo inferiore: sostituisce i due FAB sopra sotto i 767px,
+     pattern piu' familiare su smartphone (raggiungibile col pollice) -->
+<nav id="bottom-nav" aria-label="Navigazione mobile">
+  <button type="button" id="bottom-nav-menu" aria-label="Apri menu">
+    <i class="fa fa-bars" aria-hidden="true"></i>
+    <span class="bottom-nav-caption">Menu</span>
+  </button>
+  <button type="button" id="bottom-nav-effetti" aria-label="Effetti mappa">
+    <i class="fa fa-clone" aria-hidden="true"></i>
+    <span class="bottom-nav-caption">Effetti</span>
+  </button>
+  <button type="button" id="bottom-nav-cartoline" aria-label="Apri cartoline storiche">
+    <i class="fa fa-image" aria-hidden="true"></i>
+    <span class="bottom-nav-caption">Cartoline</span>
+  </button>
+  <button type="button" id="bottom-nav-guida" aria-label="Apri guida">
+    <i class="fa fa-question-circle" aria-hidden="true"></i>
+    <span class="bottom-nav-caption">Guida</span>
+  </button>
+</nav>
+
   <div id="map" class="sidebar-map"></div>
           
   <!-- carto Storica -->
-<script src="atlante/js/map-init.js?v=3"></script>
+<script src="atlante/js/map-init.js?v=6"></script>
          <!-- header -->
 
     <!-- popup  -->
