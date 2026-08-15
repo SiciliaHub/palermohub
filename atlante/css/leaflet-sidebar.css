@@ -1,6 +1,6 @@
 .sidebar {
   position: absolute;
-  top: 80px;
+  top: 90px;
   bottom: 0;
   width: 100%;
   overflow: hidden;
@@ -9,10 +9,10 @@
     width: 40px; }
   @media (max-width: 767px) {
     .sidebar {
-      top: 12px; } }
+      top: 22px; } }
   @media (min-width: 768px) {
     .sidebar {
-      top: 80px;
+      top: 90px;
       bottom: 10px;
       transition: width 500ms; } }
   @media (min-width: 768px) and (max-width: 991px) {

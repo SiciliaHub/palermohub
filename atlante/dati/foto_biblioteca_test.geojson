@@ -1,0 +1,689 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 38537842766,
+    "url": "https://farm5.staticflickr.com/4546/38537842766_1478e53401_o.jpg",
+    "title": "Piazza della Rivoluzione",
+    "editor": null,
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "190",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (190)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.114157,
+    "longitude": 13.366606,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/38537842766",
+    "album_title": null,
+    "album_id": null,
+    "album_count_photo": null,
+    "album_link_album": null,
+    " place_of_publishing": null,
+    "geographic_place": "Piazza della Rivoluzione, Palermo",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "I",
+    "Quartiere": "Tribunali-Castellammare",
+    "UPL": "Tribunali o Kalsa"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.366606,
+     38.114157
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 24954625178,
+    "url": "https://farm5.staticflickr.com/4554/24954625178_122bda1526_o.jpg",
+    "title": "Palermo – Foro Italico e Monte Pellegrino",
+    "editor": "Dr. Trenkler Co, Lipsia",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "340",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (340)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.115617,
+    "longitude": 13.374996,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/24954625178",
+    "album_title": "Palermo, Sant'Erasmo",
+    "album_id": 72157690260513700,
+    "album_count_photo": 39,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157690260513735",
+    " place_of_publishing": null,
+    "geographic_place": "Foro Italico, Palermo",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "I",
+    "Quartiere": "Tribunali-Castellammare",
+    "UPL": "Tribunali o Kalsa"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.374996,
+     38.115617
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 24723531748,
+    "url": "https://farm5.staticflickr.com/4583/24723531748_55e6634808_o.jpg",
+    "title": "Palermo - via Matteo Bonello",
+    "editor": null,
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "264",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (264)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.11381,
+    "longitude": 13.355684,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/24723531748",
+    "album_title": "Palermo, le Vie",
+    "album_id": 72157687154069600,
+    "album_count_photo": 116,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157687154069622",
+    " place_of_publishing": null,
+    "geographic_place": "Palermo, via Matteo Bonello, cattedrale",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "I",
+    "Quartiere": "Palazzo Reale - Monte di Pietà",
+    "UPL": "Monte di Pieà o Seralcadi"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.355684,
+     38.11381
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 26900605189,
+    "url": "https://farm5.staticflickr.com/4575/26900605189_0ddc904e6f_o.jpg",
+    "title": "Palermo - Piazza Gius. Verdi",
+    "editor": "Devaux, Paris",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "213",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (213)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.120445,
+    "longitude": 13.35813,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/26900605189",
+    "album_title": "Palermo, le Vie",
+    "album_id": 72157687154069600,
+    "album_count_photo": 116,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157687154069622",
+    " place_of_publishing": null,
+    "geographic_place": "Piazza Verdi, Palermo",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "I",
+    "Quartiere": "Palazzo Reale - Monte di Pietà",
+    "UPL": "Monte di Pieà o Seralcadi"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.35813,
+     38.120445
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 30073134058,
+    "url": "https://farm2.staticflickr.com/1767/30073134058_7a263ecf3f_o.jpg",
+    "title": "Palermo – Villa Trabia",
+    "editor": "G. Valdes, Palermo",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "226",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VII (226)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.129695,
+    "longitude": 13.347015,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/30073134058",
+    "album_title": "Palermo, Ville e dimore storiche",
+    "album_id": 72157698240123200,
+    "album_count_photo": 103,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157698240123224",
+    " place_of_publishing": null,
+    "geographic_place": "Villa Trabia, Palermo",
+    "place_of_publishing": "pp. 401. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "VIII",
+    "Quartiere": "Politeama",
+    "UPL": "S.Francesco di Paola - Terrasanta"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.347015,
+     38.129695
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 42133278290,
+    "url": "https://farm2.staticflickr.com/1797/42133278290_c67e2d7775_o.jpg",
+    "title": "Palermo – Villa Trabia – terre Rosse",
+    "editor": "G. Valdes,. Palermo",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "229",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VII (229)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.12978,
+    "longitude": 13.347015,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/42133278290",
+    "album_title": "Palermo, Ville e dimore storiche",
+    "album_id": 72157698240123200,
+    "album_count_photo": 103,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157698240123224",
+    " place_of_publishing": null,
+    "geographic_place": "Villa Trabia, Terre Rosse, Palermo",
+    "place_of_publishing": "pp. 401. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "VIII",
+    "Quartiere": "Politeama",
+    "UPL": "S.Francesco di Paola - Terrasanta"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.347015,
+     38.12978
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 37829671515,
+    "url": "https://farm5.staticflickr.com/4567/37829671515_28d8bf81da_o.jpg",
+    "title": "Piazza del Campo",
+    "editor": "Eduardo Messina e C., Palermo",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "233",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (233)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.143222,
+    "longitude": 13.357218,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/37829671515",
+    "album_title": "Palermo, le Piazze",
+    "album_id": 72157666391675500,
+    "album_count_photo": 115,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157666391675469",
+    " place_of_publishing": null,
+    "geographic_place": "Piazza del Campo, Palermo",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "VIII",
+    "Quartiere": "Montepellegrino",
+    "UPL": "Montepellegrino"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.357218,
+     38.143222
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 24513540388,
+    "url": "https://farm5.staticflickr.com/4546/24513540388_2975575193_o.jpg",
+    "title": "Palermo - Barca da pesca",
+    "editor": null,
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "58",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (58)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.132058,
+    "longitude": 13.373322,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/24513540388",
+    "album_title": "Palermo, il Porto",
+    "album_id": 72157687801943500,
+    "album_count_photo": 72,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157687801943471",
+    " place_of_publishing": null,
+    "geographic_place": "Porto, barche, molo, banchina, navi, Monte Pellegrino, Palermo",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "VIII",
+    "Quartiere": "Montepellegrino",
+    "UPL": "Cantieri"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.373322,
+     38.132058
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 39785061284,
+    "url": "https://farm5.staticflickr.com/4741/39785061284_5d7e1c850a_o.jpg",
+    "title": "Palermo - In riva al mare",
+    "editor": "Devaux, Paris",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "409",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (409)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.112704,
+    "longitude": 13.378536,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/39785061284",
+    "album_title": "Palermo, le vie dell'Acqua",
+    "album_id": 72157691908983200,
+    "album_count_photo": 17,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157691908983201",
+    " place_of_publishing": null,
+    "geographic_place": "Ponte di mare",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "Vista dal mare",
+    "Quartiere": "Vista dal mare",
+    "UPL": "Vista dal mare"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.378536,
+     38.112704
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 40631718391,
+    "url": "https://farm5.staticflickr.com/4721/40631718391_1f43f76638_o.jpg",
+    "title": "Palermo - Fiume Oreto",
+    "editor": null,
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "416",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (416)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.112704,
+    "longitude": 13.378536,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/40631718391",
+    "album_title": "Palermo, le vie dell'Acqua",
+    "album_id": 72157691908983200,
+    "album_count_photo": 17,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157691908983201",
+    " place_of_publishing": null,
+    "geographic_place": "Fiume Oreto, Palermo",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "Vista dal mare",
+    "Quartiere": "Vista dal mare",
+    "UPL": "Vista dal mare"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.378536,
+     38.112704
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 38354434212,
+    "url": "https://farm5.staticflickr.com/4522/38354434212_aeb1409376_o.jpg",
+    "title": "Porta Nuova (esterno)",
+    "editor": "G. Valdes, Palermo",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "107",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (107)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.111977,
+    "longitude": 13.352036,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/38354434212",
+    "album_title": "Palermo, le Porte",
+    "album_id": 72157687308321700,
+    "album_count_photo": 65,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157687308321742",
+    " place_of_publishing": null,
+    "geographic_place": "porta Nuova, Palermo",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "IV",
+    "Quartiere": "Cuba-Calatafimi",
+    "UPL": "Cuba - Calatafimi"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.352036,
+     38.111977
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 38380158212,
+    "url": "https://farm5.staticflickr.com/4518/38380158212_ce669b8b91_o.jpg",
+    "title": "Palermo - Porta Colonna",
+    "editor": "Devaux, Paris",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "137",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VI (137)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.112513,
+    "longitude": 13.349804,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/38380158212",
+    "album_title": "Palermo, le Porte",
+    "album_id": 72157687308321700,
+    "album_count_photo": 65,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157687308321742",
+    " place_of_publishing": null,
+    "geographic_place": "Porta Colonna, Palermo",
+    "place_of_publishing": "pp. 418. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "IV",
+    "Quartiere": "Cuba-Calatafimi",
+    "UPL": "Cuba - Calatafimi"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.349804,
+     38.112513
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 26512935687,
+    "url": "https://farm1.staticflickr.com/895/26512935687_868f8f655c_o.jpg",
+    "title": "Palermo - Zisa",
+    "editor": null,
+    "author": null,
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "14",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VII (14)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.116984,
+    "longitude": 13.34105,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/26512935687",
+    "album_title": "Palermo, la Zisa",
+    "album_id": 72157689677139100,
+    "album_count_photo": 17,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157689677139110",
+    " place_of_publishing": null,
+    "geographic_place": "Palermo, Zisa, castello della Zisa",
+    "place_of_publishing": "pp. 401. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "V",
+    "Quartiere": "Zisa",
+    "UPL": "Zisa - Ingastone"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.34105,
+     38.116984
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 26844418977,
+    "url": "https://farm1.staticflickr.com/973/26844418977_ebe79d6eee_o.jpg",
+    "title": "Palermo – La Zisa – Costruzione del secolo XII",
+    "editor": "G. genova Scarpinato",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "19",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VII (19)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.117558,
+    "longitude": 13.34208,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/26844418977",
+    "album_title": "Palermo, la Zisa",
+    "album_id": 72157689677139100,
+    "album_count_photo": 17,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157689677139110",
+    " place_of_publishing": null,
+    "geographic_place": "Castello della Zisa, Palermo",
+    "place_of_publishing": "pp. 401. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "V",
+    "Quartiere": "Zisa",
+    "UPL": "Zisa - Ingastone"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.34208,
+     38.117558
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 33195306728,
+    "url": "https://farm8.staticflickr.com/7802/33195306728_7d57cff1c2_o.jpg",
+    "title": "Palermo - Villa Giulia",
+    "editor": null,
+    "author": null,
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "01",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VIII (01)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.113608,
+    "longitude": 13.375511,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/33195306728",
+    "album_title": "Palermo, Parchi e Ville",
+    "album_id": 72157704964923100,
+    "album_count_photo": 14,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157704964923074",
+    " place_of_publishing": null,
+    "geographic_place": "Palermo, Villa Giulia",
+    "place_of_publishing": "pp. 401. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "II",
+    "Quartiere": "Oreto- Stazione",
+    "UPL": "Corso dei Mille - S.Erasmo"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.375511,
+     38.113608
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 33195418708,
+    "url": "https://farm8.staticflickr.com/7924/33195418708_b2aedb2475_o.jpg",
+    "title": "Palermo - Villa Giulia Piazza del Centro",
+    "editor": null,
+    "author": null,
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "03",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VIII (03)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.113709,
+    "longitude": 13.375511,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/33195418708",
+    "album_title": "Palermo, Parchi e Ville",
+    "album_id": 72157704964923100,
+    "album_count_photo": 14,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157704964923074",
+    " place_of_publishing": null,
+    "geographic_place": "Palermo, Villa Giulia",
+    "place_of_publishing": "pp. 401. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "II",
+    "Quartiere": "Oreto- Stazione",
+    "UPL": "Corso dei Mille - S.Erasmo"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.375511,
+     38.113709
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 44443758415,
+    "url": "https://farm2.staticflickr.com/1958/44443758415_2a36763692_o.jpg",
+    "title": "Palermo - Sport Café Restaurant",
+    "editor": null,
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "398",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VII (398)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.147127,
+    "longitude": 13.342659,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/44443758415",
+    "album_title": "Palermo, i Caffè e i ristoranti",
+    "album_id": 72157696870242700,
+    "album_count_photo": 18,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157696870242730",
+    " place_of_publishing": null,
+    "geographic_place": "Sport Café Restaurant, Palermo",
+    "place_of_publishing": "pp. 401. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "VIII",
+    "Quartiere": "Libertà",
+    "UPL": "Vittorio Veneto"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.342659,
+     38.147127
+    ]
+   }
+  },
+  {
+   "type": "Feature",
+   "properties": {
+    "risorsa": 28863179157,
+    "url": "https://farm1.staticflickr.com/854/28863179157_a9c4f631e0_o.jpg",
+    "title": "Palermo – Collezione Chiaramonte Bordonaro – La Madonna col Divin Figlio (A. van Dyck)",
+    "editor": "G. Pedone Lauriel, Palermo",
+    "author": "Di Benedetto, Enrico",
+    "contributor": "Collezione del Fondo Di Benedetto",
+    "shelfmark": "Biblioteca comunale di Palermo - Sezione manoscritti e rari",
+    "page": "197",
+    "year of publishing": null,
+    "issuance": "collezione",
+    "identifier": "VII (197)",
+    "licence": "CC BY SA 4.0",
+    "city": "Palermo",
+    "latitude": 38.131079,
+    "longitude": 13.352851,
+    "href": "https://www.flickr.com/photos/biblioteca-comunale-palermo/28863179157",
+    "album_title": "Palermo, Ville e dimore storiche",
+    "album_id": 72157698240123200,
+    "album_count_photo": 103,
+    "album_link_album": "https://www.flickr.com/photos/biblioteca-comunale-palermo/sets/72157698240123224",
+    " place_of_publishing": null,
+    "geographic_place": "Villa Bordonaro, Palermo",
+    "place_of_publishing": "pp. 401. E. Di Benedetto: Palermo - varia XIX – XX secolo",
+    "Circoscrizione": "VIII",
+    "Quartiere": "Libertà",
+    "UPL": "Notarbartolo - Giardino Inglese"
+   },
+   "geometry": {
+    "type": "Point",
+    "coordinates": [
+     13.352851,
+     38.131079
+    ]
+   }
+  }
+ ]
+}

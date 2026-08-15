@@ -3,7 +3,7 @@
 
 <head>
 <title>Atlante delle Carte Tecniche storiche di Palermo</title>
-  <meta charset="utf-8" />
+<meta charset="utf-8" />
 <meta name="author" content="Giovan Battista Vitrano per OpenDataSicilia.it">
 <meta name="description" content="Palermo hub - Osservare il cambiamento di una città grazie alla cartografia: il caso di Palermo ">
 <meta name="keywords" content="Open Data Sicilia, cartografia storica, palermo,">
@@ -170,6 +170,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 #modal-basemap-help .guida-section p { margin: 0 0 8px 0; font-size: 13px; color: #444; line-height: 1.45; }
 #modal-basemap-help .guida-shot { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 1px 6px rgba(0,0,0,0.15); margin-top: 6px; }
 #modal-basemap-help .guida-shot.guida-shot-legend { width: auto; max-width: 220px; }
+#modal-basemap-help .guida-shot.guida-shot-small { width: auto; max-width: 200px; }
 .basemap-help-step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
 .basemap-help-step i { flex: 0 0 22px; font-size: 18px; color: #FF9900; text-align: center; margin-top: 2px; }
 .basemap-help-step div { font-size: 13px; color: #444; line-height: 1.4; }
@@ -192,6 +193,159 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 .techmap-block p.lorem:last-child { margin-bottom: 0; }
 .techmap-block table { margin-left: auto; margin-right: auto; }
 .techmap-block img.clip_resize { max-width: 100%; height: auto; }
+/* gallery cartoline storiche in sidebar destra (foto_biblioteca.geojson) */
+/* fix: atlante/js/leaflet/leaflet.js (0.7.x) marca le icone cliccabili con la
+   classe "leaflet-clickable", ma atlante/css/leaflet.css riabilita i click
+   (pointer-events) solo su ".leaflet-interactive" (nome Leaflet 1.x) — le
+   icone restano quindi pointer-events:none e i marker/cluster non ricevono
+   mai il click. Disallineamento preesistente tra le due versioni vendorizzate,
+   non introdotto da questa gallery: qui si ripristina il comportamento atteso. */
+.leaflet-marker-icon.leaflet-clickable,
+.leaflet-image-layer.leaflet-clickable { pointer-events: auto !important; }
+#sidebar-right .sidebar-pane { padding: 16px 16px 24px; }
+
+/* sidebar-right in stile "off-canvas + FAB": chiusa esce interamente fuori
+   schermo (invece della striscia bianca a tutta altezza con solo l'icona),
+   riapertura tramite pulsante flottante in alto a destra sopra la mappa. */
+#sidebar-right.sidebar { transition: transform 350ms ease, visibility 0s linear 0s; transform: translateX(0); visibility: visible; }
+/* .sidebar.collapsed (leaflet-sidebar.css) riduce width a 40px: qui va
+   neutralizzato, altrimenti translateX(100%) scivola solo di 40px invece
+   che dell'intera larghezza, lasciando una striscia visibile a destra.
+   translateX va oltre il 100% (+40px di margine) e si aggiunge
+   visibility:hidden/pointer-events:none per eliminare qualunque residuo
+   (bordo, box-shadow, arrotondamenti) che il solo transform potrebbe
+   lasciare visibile/cliccabile sul bordo destro. */
+#sidebar-right.sidebar.collapsed {
+  width: 100%;
+  transform: translateX(calc(100% + 40px));
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: none;
+  transition: transform 350ms ease, visibility 0s linear 350ms;
+}
+@media (min-width: 768px) and (max-width: 991px) { #sidebar-right.sidebar.collapsed { width: 305px; } }
+@media (min-width: 992px) and (max-width: 1199px) { #sidebar-right.sidebar.collapsed { width: 390px; } }
+@media (min-width: 1200px) { #sidebar-right.sidebar.collapsed { width: 460px; } }
+#sidebar-right .sidebar-content { left: 0; right: 40px; }
+.sidebar-right ~ .sidebar-map { margin-right: 0 !important; }
+@media (min-width: 768px) {
+  .sidebar-right ~ .sidebar-map .leaflet-right { right: 10px !important; }
+}
+
+#sidebar-right-fab {
+  position: absolute; top: 80px; right: 20px; z-index: 2001;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #CC7A00; border: none; font-size: 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35); cursor: pointer;
+  transition: opacity 200ms, transform 200ms, background 150ms, color 150ms;
+}
+#sidebar-right-fab:hover { background: #FF9900; color: #fff; }
+#sidebar-right.sidebar:not(.collapsed) ~ #sidebar-right-fab {
+  opacity: 0; transform: scale(.6); pointer-events: none;
+}
+.cartoline-intro { font-size: 12px; color: #666; line-height: 1.5; margin: 0 0 12px 0; }
+.cartoline-toggles-bar { display: flex; gap: 8px; background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 8px; margin-bottom: 12px; }
+.ct-icon-toggle { position: relative; flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 8px 4px; border-radius: 8px; background: #fff; border: 1px solid #ddd; color: #888; font-size: 16px; cursor: pointer; text-align: center; transition: border-color .15s, background .15s, color .15s; }
+.ct-icon-toggle input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.ct-icon-toggle-caption { font-size: 9.5px; font-weight: 600; line-height: 1.25; color: inherit; }
+.ct-icon-toggle.active { border-color: #FF9900; background: #fff7ec; color: #b96a00; }
+
+.cartoline-filters-card { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+.cartoline-filters-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.cartoline-filters-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: #999; }
+.cartoline-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.cartoline-filters select { width: 100%; font-size: 12.5px; padding: 6px 8px; border-radius: 6px; border: 1px solid #ccc; background: #fff; min-width: 0; }
+.cartoline-filters button.reset { flex: 0 0 auto; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; border: 1px solid #ccc; background: #fafafa; color: #666; cursor: pointer; }
+.cartoline-filters button.reset:hover { background: #eee; color: #333; }
+.cartoline-filters select.has-value { border-color: #FF9900; background: #fff7ec; font-weight: 600; color: #b96a00; }
+.cartoline-active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.cartoline-active-filters:empty { display: none; margin-top: 0; }
+.ct-filter-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; background: #fff7ec; border: 1px solid #FF9900; color: #b96a00; padding: 3px 4px 3px 8px; border-radius: 12px; }
+.ct-filter-chip strong { font-weight: 700; }
+.ct-filter-chip button { border: none; background: transparent; color: #b96a00; font-size: 13px; line-height: 1; cursor: pointer; padding: 0 3px; }
+.ct-filter-chip button:hover { color: #7a4600; }
+.cartoline-count { font-size: 11px; color: #888; margin: 8px 0 0; }
+
+/* filtri+contatore restano visibili durante lo scroll della gallery: lo
+   scroll avviene su .sidebar-content (vedi leaflet-sidebar.css), quindi
+   sticky con top:0 aggancia a quel contenitore */
+.cartoline-filters-sticky { position: sticky; top: -1px; z-index: 5; background: rgba(255,255,255,.97); padding-bottom: 10px; margin: 0 0 12px; }
+
+.cartoline-gallery { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 992px) { .cartoline-gallery { grid-template-columns: repeat(2, 1fr); } }
+.cartoline-card { perspective: 1200px; height: 340px; cursor: pointer; border-left: 4px solid var(--ct-zone-color, #ccc); border-radius: 8px; }
+.cartoline-card-inner { position: relative; width: 100%; height: 100%; transition: transform .55s cubic-bezier(.4,.2,.2,1); transform-style: preserve-3d; box-shadow: 0 2px 6px rgba(0,0,0,.18); border-radius: 0 8px 8px 0; }
+.cartoline-card.flipped .cartoline-card-inner { transform: rotateY(180deg); }
+.cartoline-card-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 0 8px 8px 0; overflow: hidden; background: #fff; }
+.cartoline-card-front { display: flex; flex-direction: column; }
+.cartoline-card-front .ct-photo { position: relative; }
+.cartoline-card-front img { width: 100%; height: 220px; object-fit: cover; display: block; background: #ddd; }
+.cartoline-card-front .ct-photo-overlay { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px 10px 6px; background: linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0)); }
+.cartoline-card-front .ct-title { font-size: 12.5px; font-weight: 600; line-height: 1.3; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.cartoline-card-front .ct-zone { font-size: 10.5px; color: #ffcf8a; font-weight: bold; margin-top: 2px; }
+.cartoline-card-front .ct-territorio { padding: 6px 10px 4px; margin-top: auto; border-top: 1px solid #f0f0f0; }
+.cartoline-card-front .ct-terr-item { display: block; font-size: 9.5px; color: #777; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cartoline-card-front .ct-terr-item strong { font-size: 8.5px; text-transform: uppercase; letter-spacing: .2px; color: #999; font-weight: 700; margin-right: 4px; }
+.cartoline-card-front .ct-flip-hint { padding: 0 10px 8px; font-size: 9.5px; color: #999; font-style: italic; }
+.cartoline-card-back { transform: rotateY(180deg); background: #2b2b2b; color: #eee; padding: 10px 12px; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.cartoline-card-back .ct-back-title { font-size: 12px; font-weight: bold; margin-bottom: 8px; color: #fff; line-height: 1.3; position: sticky; top: 0; background: #2b2b2b; padding-bottom: 4px; }
+.cartoline-card-back dl { margin: 0 0 8px 0; }
+.cartoline-card-back dt { font-size: 9px; font-weight: bold; text-transform: uppercase; letter-spacing: .3px; color: #FF9900; margin-top: 6px; }
+.cartoline-card-back dd { font-size: 10.5px; color: #ddd; margin: 1px 0 0 0; line-height: 1.35; }
+.cartoline-card-back dd a { color: #ffb84d; }
+.cartoline-card-back .ct-tag { display: inline-block; font-size: 9.5px; background: #FF9900; color: #fff; padding: 1px 7px; border-radius: 8px; }
+.ct-actions { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; flex: 0 0 auto; }
+.ct-actions a { font-size: 11px; text-align: center; padding: 6px 8px; border-radius: 5px; }
+/* !important necessario: il foglio globale base_ods.css definisce a:link/a:hover
+   con specificita' (0,1,1), superiore alla singola classe .ct-btn-* (0,1,0) —
+   senza forzare qui il testo arancione finiva su sfondo arancione (illeggibile) */
+a.ct-btn-map, a.ct-btn-map:link, a.ct-btn-map:visited { background: #FF9900; color: #fff !important; font-weight: bold; text-decoration: none !important; }
+a.ct-btn-map:hover, a.ct-btn-map:active { background: #e68a00; color: #fff !important; text-decoration: none !important; }
+a.ct-btn-flickr, a.ct-btn-flickr:link, a.ct-btn-flickr:visited { background: transparent; color: #ccc !important; border: 1px solid #555; text-decoration: none !important; }
+a.ct-btn-flickr:hover, a.ct-btn-flickr:active { color: #fff !important; border-color: #999; text-decoration: none !important; }
+.cartoline-card-front a.ct-btn-flickr, .cartoline-card-front a.ct-btn-flickr:link, .cartoline-card-front a.ct-btn-flickr:visited { border-color: #ddd; color: #888 !important; }
+.cartoline-card-front a.ct-btn-flickr:hover { color: #333 !important; border-color: #999; }
+.cartoline-card-front .ct-actions-front { flex-direction: row; margin: 4px 10px 0; gap: 6px; }
+.cartoline-card-front .ct-actions-front a { flex: 1 1 0; font-size: 10px; padding: 6px 4px; }
+.cartoline-card.hidden { display: none; }
+.cartoline-empty { display: none; padding: 20px 10px; text-align: center; color: #999; font-size: 12px; }
+
+.cartoline-marker-pop { text-align: center; font-size: 12px; }
+.cartoline-marker-pop img { width: 150px; height: 100px; object-fit: cover; border-radius: 6px; margin-bottom: 5px; }
+.cartoline-marker-pop .ct-go-card { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: bold; color: #b96a00; text-decoration: none; }
+
+.ct-cluster-wrap { background: transparent; border: none; }
+.ct-cluster-icon { display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,153,0,0.85); color: #fff; font-weight: bold; font-size: 12px; box-shadow: 0 0 0 4px rgba(255,153,0,0.25), 0 1px 4px rgba(0,0,0,.4); cursor: pointer; }
+
+/* pulsante confronto affiancato disabilitato mentre "Disattiva effetti mappa" e' attivo */
+.map-toolbar-sidebyside.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+
+.ct-dot-wrap { background: transparent; border: none; }
+.ct-dot { width: 14px; height: 14px; border-radius: 50%; background: #2277cc; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.5); cursor: pointer; }
+
+/* fix: in questa versione di Leaflet (0.7.x) leaflet-marker-pane e
+   leaflet-popup-pane sono position:static (niente stacking context proprio),
+   quindi lo z-index del pane (600/700, vedi leaflet.css) e' ignorato dal
+   browser: vince semplicemente il marker con lo z-index numerico piu' alto
+   (assegnato in base alla posizione Y), che puo' finire sopra al popup. Si
+   forza qui uno z-index sempre piu' alto di qualsiasi marker sulla mappa. */
+.leaflet-popup { z-index: 10000 !important; }
+
+/* fix: l'SVG creato da L.Polyline (le "zampe" del ventaglio) riceve dal JS
+   attributi width/height nativi molto grandi (es. 2000x1357, l'area di
+   disegno del path) senza mai un position:absolute (stesso problema di
+   versione di cui sopra: ".leaflet-pane > svg" nel CSS non matcha perche'
+   il pane non ha la classe generica "leaflet-pane"). Essendo position:static,
+   quell'SVG gonfia l'altezza reale del contenitore condiviso con marker-pane
+   e popup-pane (l'ho misurato: passava da poche decine di px a 1360px con
+   una sola polyline), e il popup calcola la sua posizione (bottom:1px) su
+   quell'altezza gonfiata finendo centinaia di px fuori dallo schermo. Con
+   position:absolute l'SVG esce dal flusso normale e non altera piu' l'altezza
+   dei pane vicini (la sua resa visiva era gia' basata su 0,0 quindi invariata). */
+.leaflet-overlay-pane svg { position: absolute !important; top: 0; left: 0; }
+
+.ct-spider-leg { pointer-events: none; }
 </style>
 </head>
 <body onload="MM_preloadImages('prg_1962/tav_03c.jpg','prg_1962/tav_04c.jpg','prg_1962/clip/tav_08c.jpg.jpg','prg_1962/clip/tav_01c.jpg','prg_1962/clip/tav_02c.jpg','prg_1962/clip/tav_03c.jpg','prg_1962/clip/tav_04c.jpg','prg_1962/clip/tav_05c.jpg','prg_1962/clip/tav_06c.jpg','prg_1962/clip/tav_07c.jpg','prg_1962/clip/tav_09c.jpg')">
@@ -242,6 +396,32 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
     <div class="guida-section-title"><i class="fa fa-circle" aria-hidden="true"></i>Precisione della georeferenziazione</div>
     <p>Il pallino colorato accanto al nome della mappa storica (e la legenda fissa in basso a sinistra) indica quanto è affidabile la sovrapposizione: <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-alta basemap-help-accuracy-sample"></span> <strong>verde</strong> = rilievo aerofotogrammetrico o cartografia tecnica moderna, buona corrispondenza; <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-media basemap-help-accuracy-sample"></span> <strong>giallo</strong> = rilievo pre-aerofotogrammetria, corrispondenza approssimativa; <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-bassa basemap-help-accuracy-sample"></span> <strong>rosso</strong> = disegno o incisione storica non rilevata scientificamente, sovrapposizione puramente indicativa. È un giudizio editoriale sulla fonte, non una misura: l'occhio di bue e lo swipe non vanno letti come pixel-perfect su queste mappe.</p>
     <img class="guida-shot guida-shot-legend" src="atlante/img/guida/guida-legenda-precisione.png" alt="Legenda della precisione di georeferenziazione, in basso a sinistra sulla mappa" loading="lazy">
+  </div>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-image" aria-hidden="true"></i>Novità: Cartoline storiche</div>
+    <p>Nella sidebar a destra (icona con la cornice, in alto a destra della mappa) trovi oltre <strong>770 cartoline e foto storiche di Palermo</strong> dalla Teca digitale della Biblioteca Comunale, pubblicate su Flickr con licenza aperta CC BY-SA 4.0. Ogni scheda mostra l'immagine, il quartiere e i dati territoriali; cliccandola si "gira" mostrando i dettagli completi sul retro.</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-cartoline-sidebar.jpg" alt="Sidebar destra con la gallery di cartoline storiche, i due interruttori e i filtri" loading="lazy">
+  </div>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-filter" aria-hidden="true"></i>Filtrare le cartoline</div>
+    <p>I cinque menu a tendina (Circoscrizione, Quartiere, UPL, Zona, Album) sono <strong>interconnessi</strong>: scegliendo un valore, gli altri si aggiornano mostrando solo le opzioni ancora compatibili, cosi' non si arriva mai a una combinazione senza risultati. Ogni filtro attivo appare come etichetta rimovibile sotto i menu, e il bottone <strong>Azzera</strong> li resetta tutti insieme.</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-cartoline-filtro.jpg" alt="Filtro Circoscrizione attivo, con l'etichetta del filtro sotto i menu e il conteggio delle cartoline aggiornato" loading="lazy">
+  </div>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-map-marker" aria-hidden="true"></i>Le cartoline sulla mappa</div>
+    <p>Appena un filtro e' attivo (o si accende <strong>"Mostra tutti i marker"</strong>), le cartoline corrispondenti compaiono sulla mappa come pallini blu, raggruppati in cluster numerati dove sono vicine: un click su un cluster zooma per separarli, o li apre "a ventaglio" se lo zoom non basta. Cliccando un pallino si apre un'anteprima con link diretto alla scheda completa; dalla scheda, il bottone <strong>"Vedi sulla mappa"</strong> fa il percorso inverso, isolando quel marker e centrando la mappa su di esso.</p>
+    <img class="guida-shot" src="atlante/img/guida/guida-cartoline-mappa.jpg" alt="Cluster di marker arancioni sulla mappa con il filtro Circoscrizione attivo" loading="lazy">
+    <p style="margin-top:8px;">L'anteprima al click su un marker:</p>
+    <img class="guida-shot guida-shot-small" src="atlante/img/guida/guida-cartoline-popup.png" alt="Popup di anteprima di una cartolina cliccata sulla mappa, con link alla scheda" loading="lazy">
+  </div>
+
+  <div class="guida-section">
+    <div class="guida-section-title"><i class="fa fa-flickr" aria-hidden="true"></i>Aprire la foto originale su Flickr</div>
+    <p>Cliccando una scheda si gira e mostra sul retro tutti i metadati (autore, collocazione, luogo, album...) e il link <strong>"Apri la risorsa su Flickr"</strong>, che porta alla pagina originale sul canale Flickr della Biblioteca Comunale di Palermo — utile per vedere la foto a piena risoluzione o il resto dell'album di provenienza.</p>
+    <img class="guida-shot guida-shot-small" src="atlante/img/guida/guida-cartoline-flickr.png" alt="Retro di una scheda cartolina con i metadati e il link Apri la risorsa su Flickr" loading="lazy">
   </div>
 
   <button type="button" class="basemap-help-ok close">Ho capito</button>
@@ -745,644 +925,97 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
       </div>
     </div>
 </div>
+
+
+<!-- Biblioteche e bene comune digitale: sidebar destra con gallery cartoline storiche (foto_biblioteca.geojson) -->
+<div id="sidebar-right" class="sidebar collapsed">
+  <div class="sidebar-tabs">
+    <ul role="tablist">
+      <li role="presentation"><a href="#cartoline" title="Cartoline storiche" role="tab"><i class="fa fa-image" aria-hidden="true"></i></a></li>
+    </ul>
+    <ul role="tablist">
+      <li role="presentation"><a href="#info" title="Info" role="tab"><i class="fa fa-info-circle" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+  <div class="sidebar-content">
+    <div class="sidebar-pane active" id="cartoline">
+      <h2 class="sidebar-header">#Viaggioneltempo<span class="sidebar-close"><i class="fa fa-caret-right"></i></span></h2><br><br>
+  <div class="techmap-block">
+    <h4 class="techmap-block-title"><i class="fa fa-image" aria-hidden="true"></i>Biblioteche e bene comune digitale</h4>
+    <p class="lorem">Dall&rsquo;11 al 16 marzo 2019 la Presidenza del Consiglio dei Ministri, Dipartimento della Funzione Pubblica organizza a livello nazionale la &ldquo;Settimana dell&rsquo;Amministrazione aperta&rdquo; con l&rsquo;obiettivo di promuovere la cultura e la pratica della trasparenza, della partecipazione e della accountability nelle amministrazioni pubbliche e nella società e accrescere la fiducia dei cittadini nelle istituzioni. Per il Comune di Palermo ha aderito la Biblioteca Comunale presentando il progetto Teca digitale.</p>
+  </div>
+
+      <div class="cartoline-toggles-bar">
+        <label class="ct-icon-toggle" for="cartoline-showall-toggle" title="Mostra tutti i marker">
+          <input type="checkbox" id="cartoline-showall-toggle">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+          <span class="ct-icon-toggle-caption">Mostra tutti i marker</span>
+        </label>
+        <label class="ct-icon-toggle" for="cartoline-noeffects-toggle" title="Disattiva effetti mappa (occhio di bue/affiancato)">
+          <input type="checkbox" id="cartoline-noeffects-toggle">
+          <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+          <span class="ct-icon-toggle-caption">Disattiva effetti mappa</span>
+        </label>
+      </div>
+
+      <div class="cartoline-filters-sticky">
+        <div class="cartoline-filters-card">
+          <div class="cartoline-filters-head">
+            <span class="cartoline-filters-title">Filtra le cartoline</span>
+            <button class="reset" id="cartoline-reset-filters" type="button">Azzera</button>
+          </div>
+          <div class="cartoline-filters">
+            <select id="cartoline-filter-circoscrizione"><option value="">Tutte le circoscrizioni</option></select>
+            <select id="cartoline-filter-zona"><option value="">Tutti i quartieri</option></select>
+            <select id="cartoline-filter-upl"><option value="">Tutte le UPL</option></select>
+            <select id="cartoline-filter-place"><option value="">Tutte le zone</option></select>
+            <select id="cartoline-filter-album"><option value="">Tutti gli album</option></select>
+          </div>
+          <div class="cartoline-active-filters" id="cartoline-active-filters"></div>
+        </div>
+        <p class="cartoline-count" id="cartoline-count"></p>
+      </div>
+
+      <div class="cartoline-gallery" id="cartoline-gallery"></div>
+      <div class="cartoline-empty" id="cartoline-empty">Nessuna cartolina corrisponde ai filtri scelti.</div>
+    </div>
+    <div class="sidebar-pane" id="info">
+      <h2 class="sidebar-header">Info<span class="sidebar-close"><i class="fa fa-caret-right"></i></span></h2><br><br>
+  <div class="techmap-block">
+    <h4 class="techmap-block-title"><i class="fa fa-info-circle" aria-hidden="true"></i>Il progetto</h4>
+    <p class="lorem">Dall&rsquo;11 al 16 marzo 2019 la Presidenza del Consiglio dei Ministri, <a href="http://www.funzionepubblica.gov.it/" target="_blank" rel="noopener noreferrer">Dipartimento della Funzione Pubblica</a> organizza a livello nazionale la &ldquo;<a href="http://open.gov.it/saa/" target="_blank" rel="noopener noreferrer">Settimana dell&rsquo;Amministrazione aperta</a>&rdquo; con l&rsquo;obiettivo di promuovere la cultura e la pratica della trasparenza, della partecipazione e della accountability nelle amministrazioni pubbliche e nella società e accrescere la fiducia dei cittadini nelle istituzioni. Per il Comune di Palermo ha aderito la <a href="https://docs.google.com/document/d/1FOwSyu_n5VtIaKQERatrWk6mz5RkLr9DqXR0G1FHRmA/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Biblioteca Comunale</a> presentando il progetto Teca digitale.</p>
+    <p class="lorem">Il progetto nasce a fine 2017, quando sono state pubblicate su <a href="https://www.flickr.com/photos/biblioteca-comunale-palermo/albums" target="_blank" rel="noopener noreferrer">Flickr</a> le prime scansioni delle cartoline della Collezione fotografica di <strong>Enrico Di Benedetto</strong>, con illustrazione e immagini di <strong>Palermo</strong> tra il <strong>XIX</strong> ed il <strong>XX</strong> secolo, un progetto che consente a noi cittadini di fare <a href="http://opendatasicilia.it/2019/03/11/palermo-un-meraviglioso-viaggio-nel-tempo-grazie-alla-biblioteca-comunale-di-palermo/" target="_blank" rel="noopener noreferrer">un meraviglioso viaggio nel tempo</a> (cit.).</p>
+    <p class="lorem">Ad oggi sono state pubblicate più di 800 cartoline, ad ognuna è associato a un &ldquo;corredo informativo&rdquo; costituito da: titolo, posizione geografica, gallerie di appartenenza, tag, licenza e metadati (non sono dati presenti in tutte le immagini, ma nella grandissima parte), tutte pubblicate con una <strong>licenza aperta <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a> che ne consente il riuso</strong>.</p>
+    <p class="lorem">Grazie all&rsquo;uso della licenza <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.it" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>, alla buona struttura dei metadati e all&rsquo;analisi di <a href="https://twitter.com/aborruso" target="_blank" rel="noopener noreferrer">@aborruso</a>, partendo dagli album di <a href="https://www.flickr.com/photos/biblioteca-comunale-palermo/albums" target="_blank" rel="noopener noreferrer">Flickr</a> con il web scraping ha ottenuto i dati grezzi ottimi per un <strong>riuso</strong>. <strong><a href="https://github.com/opendatasicilia/flickr-biblioteca-comunale-palermo" target="_blank" rel="noopener noreferrer">Qui</a></strong> maggiori dettagli sulla la tecnica usata per recuperare i dati.</p>
+  </div>
+  <div class="techmap-block">
+    <h4 class="techmap-block-title"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>Note</h4>
+    <p class="lorem"><em>Le informazioni visibili e condivise non comportano la visualizzazione di dati sensibili.</em><br>
+    <em>Data la natura esclusivamente informativa degli elaborati grafici e dei testi riportati, questi non costituiscono atti ufficiali.</em><br>
+    <em>Per accedere agli atti ufficiali si rinvia agli elaborati definitivi allegati alle specifiche deliberazioni.</em></p>
+    <p class="lorem"><strong>Si declina ogni responsabilità sulla veridicità dei dati.</strong></p>
+  </div>
+    </div>
+  </div>
+</div>
+
+<button id="sidebar-right-fab" type="button" title="Cartoline storiche" aria-label="Apri cartoline storiche">
+  <i class="fa fa-image" aria-hidden="true"></i>
+</button>
+
   <div id="map" class="sidebar-map"></div>
           
   <!-- carto Storica -->
-<script type="text/JavaScript">
-        // bounding box del Comune di Palermo con un margine oltre il confine amministrativo
-        var southWest = L.latLng(38.0570, 13.2181),
-            northEast = L.latLng(38.2546, 13.4598),
-    	      bounds = L.latLngBounds(southWest, northEast);
+<script src="atlante/js/map-init.js"></script>
+         <!-- header -->
 
-        var INITIAL_CENTER = [38.1157,13.3613];
-        var INITIAL_ZOOM = 15;
-        var map = L.map('map', {attributionControl:true, maxBounds: bounds, maxBoundsViscosity: 1.0}).setView(INITIAL_CENTER, INITIAL_ZOOM);
-
-// il marker-icon.png di default non è sotto atlante/css/images (dove Leaflet lo cerca in base a leaflet.css), ma qui: fix icona rotta nel popup del geocoder
-L.Icon.Default.imagePath = 'atlante/images/';
-
-var basemaps = [
-		  		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-     attribution:'&copy;<a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-      minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-	  label: 'OpenStreetMap', caption: 'OSM', group: 'Basi moderne'
-        }),
-
-  L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
-  attribution: 'Source: Google Road - Map data ©2015 Google',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-	 	  label: 'Google Road', caption: 'Google', group: 'Basi moderne'
-              }),
-
-  L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-  attribution: 'Source: Google Satellite - Map data ©2015 Google',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'Google Satellite', caption: 'Satellite', group: 'Basi moderne'
-              }),
-
-<!-- carte storiche -->
-
- L.tileLayer('https://mapwarper.net/maps/tile/60119/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Città di Palermo 1580 - carta di Maiocco e Bonifacio',
- minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
- label: 'Città di Palermo 1580 - carta di Maiocco e Bonifacio | gallica.bnf.fr / BnF Bibliothèque nationale de France',
- iconURL: 'legend/basemap/1580_clip.jpg', caption: '1580', group: '1500-1800', georefAccuracy: 'bassa'
-              }),
-
- L.tileLayer('https://mapwarper.net/maps/tile/60176/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Città di Palermo 1754',
- minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
- label: 'La città di Palermo di Giuseppe Vasi, 1754-59 | Library of Congress Geography and Map Division Washington',
- iconURL: 'legend/basemap/1754_clip.jpg', caption: '1754', group: '1500-1800', georefAccuracy: 'bassa'
-              }),
-
- L.tileLayer('https://mapwarper.net/maps/tile/60203/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Pianta topografica Palermo 1860',
- minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
- label: 'Pianta topografica | Palermo 1860 circa | Harvard Map Collection, Harvard University',
- iconURL: 'legend/basemap/1860_clip.jpg', caption: '1860', group: '1800-1900', georefAccuracy: 'bassa'
-              }),
-
- L.tileLayer('https://mapwarper.net/maps/tile/60203/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Costa nord, Baia di Palermo 1877',
- minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
- label: 'Costa nord, Baia di Palermo 1877 1:36,417 | Fonte: Wisconsin-Milwaukee University',
- iconURL: 'legend/basemap/1877_clip.jpg', caption: '1877', group: '1800-1900', georefAccuracy: 'media'
-              }),
-
- L.tileLayer('https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Città di Palermo 1882',
- minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
- label: 'Nuova pianta della Città di Palermo 1882 | gallica.bnf.fr / BnF Bibliothèque nationale de France',
- iconURL: 'legend/basemap/1882_clip.jpg', caption: '1882', group: '1800-1900', georefAccuracy: 'media'
-              }),
-
- L.tileLayer('https://mapwarper.net/maps/tile/60209/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Nuova pianta della Città di Palermo 1891',
- minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
- label: 'Nuova pianta della Città di Palermo 1891 | Harvard Map Collection, Harvard University',
- iconURL: 'legend/basemap/1891_clip.jpg', caption: '1891', group: '1800-1900', georefAccuracy: 'media'
-			   }),
-
- L.tileLayer('https://mapwarper.net/maps/tile/19658/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Carta tecnica 1893',
- minZoom: 13,   maxZoom: 17, maxNativeZoom: 17,
- label: 'Carta tecnica 1893',
- iconURL: 'legend/basemap/1893_clip.jpg', caption: '1893', group: '1800-1900', georefAccuracy: 'media'
-              }),
-
- L.tileLayer('https://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Carta Tecnica di Palermo - Ufficio Tecnico Comunale  1908',
- minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
- label: 'Carta Tecnica di Palermo - Ufficio Tecnico Comunale  1908',
- iconURL: 'legend/basemap/ctc_clip.jpg', caption: '1908', group: '1900-oggi', georefAccuracy: 'media'
-              }),
-
- L.tileLayer('https://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Omira 1935',
- minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
- label: 'Omira 1935',
- iconURL: 'legend/basemap/omira_clip.jpg', caption: '1935', group: '1900-oggi', georefAccuracy: 'alta'
-              }),
-
-  L.tileLayer('https://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: Carta Tecnica di Palermo - Irta 1956',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'Carta Tecnica di Palermo - Irta 1956',
-  iconURL: 'legend/basemap/irta_clip.jpg', caption: '1956', group: '1900-oggi', georefAccuracy: 'alta'
-              }),
-
-  L.tileLayer('https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: Piano Regolatore Generale 1962',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'Piano Regolatore Generale 1962',
-  iconURL: 'legend/basemap/prg62_clip.jpg', caption: '1962', group: '1900-oggi', georefAccuracy: 'alta'
-              }),
-
-  L.tileLayer('https://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: Carta Tecnica di Palermo - Sas 1987',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'Carta Tecnica di Palermo - Sas 1987',
-  iconURL: 'legend/basemap/sas_clip.jpg', caption: '1987', group: '1900-oggi', georefAccuracy: 'alta'}),
-
- L.tileLayer('https://palermohub.github.io/PRG2004/CSG/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Carta Tecnica Comunale CSG 2k 1989/91',
- minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
- label: 'Carta Tecnica Comunale CSG 2k 1989/91',
- iconURL: 'legend/basemap/irta_clip.jpg', caption: '1989', group: '1900-oggi', georefAccuracy: 'alta'
-              }),
-
-    L.tileLayer('https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: P.P.E. del centro storico 1993',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'P.P.E. del centro storico 1993',
-  iconURL: 'legend/basemap/ppe_clip.jpg', caption: '1993', group: '1900-oggi', georefAccuracy: 'alta'}),
-
-  L.tileLayer('https://mapwarper.net/maps/tile/45321/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: U.S. Army Map Service, 1941 Series 4229 | Palermo',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'U.S. Army Map Service, 1941 Series 4229 | Palermo',
-  iconURL: 'legend/basemap/us41_clip.jpg', caption: '1941', group: '1900-oggi', georefAccuracy: 'media'}),
-
-  L.tileLayer('https://mapwarper.net/maps/tile/45304/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: U.S. Army Map Service, 1943-1944 | City Plans Palermo',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'U.S. Army Map Service, 1943-1944 | City Plans Palermo',
-  iconURL: 'legend/basemap/us43_clip.jpg', caption: '1943', group: '1900-oggi', georefAccuracy: 'media'}),
-
-  L.tileLayer('https://mapwarper.net/maps/tile/56402/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: Variante Generale 2004',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'Variante Generale 2004',
-  iconURL: 'legend/basemap/prg04_clip.jpg', caption: '2004', group: 'Cartografia tecnica', georefAccuracy: 'alta'}),
-
- L.tileLayer('https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png', {
- attribution: 'Base cartografica: Carta Tecnica Comunale 2k 2007/09',
- minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
- label: 'Carta Tecnica Comunale 2k 2007/09',
- iconURL: 'legend/basemap/irta_clip.jpg', caption: '2007', group: 'Cartografia tecnica', georefAccuracy: 'alta'
-              }),
-
-<!-- crt 10k -->
-  L.tileLayer('https://siciliahub.github.io/palermohub/carto/ctr_pa_10k/{z}/{x}/{y}.png', {
-  attribution: 'Base cartografica: Carta Tecnica Regionale 10k 2012/13',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18,
-  label: 'Carta Tecnica Regionale 10k',
-  iconURL: 'legend/basemap/ctr_clip.jpg', caption: '2012', group: 'Cartografia tecnica', georefAccuracy: 'alta'}),
-
-	 ];
-	<!-- fine base mappa -->	
-		
-	<!-- scala mappa -->		
-		var graphicScale = L.control.graphicScale({
-		doubleLine: true,
-		fill: 'hollow',
-        showSubunits: true
-	}).addTo(map);
-		
-<!-- muose coordinate -->
-L.control.mousePosition().addTo(map);
-
-<!-- ricerca indirizzo / geocoding -->
-// creato ma non aggiunto alla mappa qui: viene innestato nella toolbar
-// tramite toolbar.attachSearch() piu' sotto
-var geocoderOdsControl = L.control.geocoderOds();
-  map.on("mousemove", function(e) {
-  palermo1580.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1754.setCenter(e.containerPoint.x, e.containerPoint.y); nuova.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1860.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1877.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1891.setCenter(e.containerPoint.x, e.containerPoint.y); palermo1893.setCenter(e.containerPoint.x, e.containerPoint.y); omira.setCenter(e.containerPoint.x, e.containerPoint.y); irta.setCenter(e.containerPoint.x, e.containerPoint.y); 
-  sas.setCenter(e.containerPoint.x, e.containerPoint.y); csg.setCenter(e.containerPoint.x, e.containerPoint.y); ctc.setCenter(e.containerPoint.x, e.containerPoint.y); City_Plans_Palermo.setCenter(e.containerPoint.x, e.containerPoint.y); Palermo_50k.setCenter(e.containerPoint.x, e.containerPoint.y); 
-  prg04.setCenter(e.containerPoint.x, e.containerPoint.y); ctc2k.setCenter(e.containerPoint.x, e.containerPoint.y); prg62.setCenter(e.containerPoint.x, e.containerPoint.y); ppecs.setCenter(e.containerPoint.x, e.containerPoint.y); osm.setCenter(e.containerPoint.x, e.containerPoint.y); google.setCenter(e.containerPoint.x, e.containerPoint.y); googlesat.setCenter(e.containerPoint.x, e.containerPoint.y); ctr10k.setCenter(e.containerPoint.x, e.containerPoint.y); 
-         })
-	
-  var osm = L.tileLayer.mask("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-  attribution:'&copy;<a href="https://openstreetmap.org">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-  minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'OpenStreetMap', caption: 'OSM', group: 'Basi moderne'});
-
- var google = L.tileLayer.mask("https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", {
- attribution:'Source: Google Road - Map data ©2021 Google',
- minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Google Road', caption: 'Google', group: 'Basi moderne'});
-
- var googlesat = L.tileLayer.mask("https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", {
- attribution:'Source: Google Satellite - Map data ©2021 Google',
- minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Google Satellite', caption: 'Satellite', group: 'Basi moderne'});
- 
-var palermo1580 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60119/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Palermo , città principalissima nella Sicilia | Presbiter Horatius Maiocchus inventor ; Natalis Bonifatius fecit, Romae apud Claudii Duchetti | Autore  Bonifazio , Natale ( 1538-1592 ). Graveur | Fonte: gallica.bnf.fr / BnF Bibliothèque nationale de France - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, label: 'Città di Palermo 1580 | Fonte: gallica.bnf.fr / BnF', iconURL: 'legend/basemap/1580_clip.jpg', caption: '1580', group: '1500-1800' }).addTo(map);
-	        
-var palermo1754 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60176/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - La città di Palermo di Giuseppe Vasi, 1754-59 | Fonte: Library of Congress Geography and Map Division Washington - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, label: 'Città di Palermo 1754 | Fonte: Library of Congress Geography and Map Division Washington', iconURL: 'legend/basemap/1754_clip.jpg', caption: '1754', group: '1500-1800' });
-
-var palermo1860 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60203/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Pianta topografica | Palermo 1860 circa | Fonte: Harvard Map Collection, Harvard University - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, label: 'Pianta topografica | Palermo 1860 circa | Fonte: Harvard Map Collection, Harvard University', iconURL: 'legend/basemap/1860_clip.jpg', caption: '1860', group: '1800-1900' });
-
-var palermo1877 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60399/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Costa nord, Baia di Palermo 1877 1:36,417 | Fonte: Wisconsin-Milwaukee University - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, label: 'Costa nord, Baia di Palermo 1877 | 1:36,417 | Fonte: Wisconsin-Milwaukee University', iconURL: 'legend/basemap/1877_clip.jpg', caption: '1877', group: '1800-1900' });
-
-var nuova = L.tileLayer.mask("https://mapwarper.net/maps/tile/33126/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Nuova pianta della Città di Palermo 1:1k | Seconda edizione Riveduta 1882 Luigi Pedone Laurieri - Editore | Lit. Bizzarrelli & Sanzò - Fonte: gallica.bnf.fr / BnF Bibliothèque nationale de France - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, label: 'Città di Palermo 1882 | 1:1k Fonte: gallica.bnf.fr / BnF', iconURL: 'legend/basemap/1882_clip.jpg', caption: '1882', group: '1800-1900' });
-	  
-var palermo1891 = L.tileLayer.mask("https://mapwarper.net/maps/tile/60209/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Nuova pianta della Città di Palermo 1891 1:10k | Carlo Clausen, editore | Fonte: Harvard Map Collection, Harvard University - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, label: 'Nuova pianta della Città di Palermo 1891 1:10k | Fonte: Harvard Map Collection, Harvard University', iconURL: 'legend/basemap/1891_clip.jpg', caption: '1891', group: '1800-1900' });
-
- var palermo1893 = L.tileLayer.mask("https://mapwarper.net/maps/tile/19658/{z}/{x}/{y}.png ", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - 1893 | 1:13K - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano" rel="noopener noreferrer">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli" rel="noopener noreferrer">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro" rel="noopener noreferrer">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 16, maxNativeZoom: 16, label: 'Carta tecnica 1893 | 1:13k (max zoom 16)', iconURL: 'legend/basemap/1893_clip.jpg', caption: '1893', group: '1800-1900'});
-   							
-var omira = L.tileLayer.mask("https://mapwarper.net/maps/tile/19706/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank"  title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Omira 1935 | 1:5K - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano" rel="noopener noreferrer">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli" rel="noopener noreferrer">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro" rel="noopener noreferrer">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta tecnica Omira 1935 | 1:5k', iconURL: 'legend/basemap/omira_clip.jpg', caption: '1935', group: '1900-oggi'});
-
-var irta = L.tileLayer.mask("https://mapwarper.net/maps/tile/19792/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Irta 1956 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano" rel="noopener noreferrer">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli" rel="noopener noreferrer">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro" rel="noopener noreferrer">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta tecnica Irta 1956 | 1:5k', iconURL: 'legend/basemap/irta_clip.jpg', caption: '1956', group: '1900-oggi'});
-	
-var prg62 = L.tileLayer.mask("https://mapwarper.net/maps/tile/52666/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - PRG aggiornato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>,  <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro" rel="noopener noreferrer">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Piano Regolatore Generale 1962 | 1:5k', iconURL: 'legend/basemap/prg62_clip.jpg', caption: '1962', group: '1900-oggi'});
-
-var prg04 = L.tileLayer.mask("https://siciliahub.github.io/mappe/palermo_hub/data/prg2004/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Variante Generale al P.R.G. vigente al 2016 | 1:5k - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, tms: true, label: 'Variante Generale 2004 | 1:5k (max zoom 17)', iconURL: 'legend/basemap/prg04_clip.jpg', caption: '2004', group: 'Cartografia tecnica' });
-
-var ctc2k = L.tileLayer.mask("https://siciliahub.github.io/Tiles/ctr_pa_2k/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Carta Tecnica Comunale 2k 2007/09 - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta Tecnica Comunale 2k 2007/09', iconURL: 'legend/basemap/irta_clip.jpg', caption: '2007', group: 'Cartografia tecnica' });
-
-var ctr10k = L.tileLayer.mask("https://siciliahub.github.io/mappe/palermo_hub/data/ctr10k/{z}/{x}/{y}.png", { attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Carta Tecnica Regionale 10k 2012/13 | 1:10k - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>', minZoom: 12,   maxZoom: 17, maxNativeZoom: 17, tms: true, label: 'Carta Tecnica Regionale | 1:10k 2012/13 (max zoom 17)', iconURL: 'legend/basemap/ctr_clip.jpg', caption: '2012', group: 'Cartografia tecnica' });
-
-	
-var sas = L.tileLayer.mask("https://mapwarper.net/maps/tile/19785/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Sas 1987 | 1:5k - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano" rel="noopener noreferrer">@napo</a>, <a href=" https://twitter.com/Piersoft" target="_blank" title="Francesco Piero Paolicelli" rel="noopener noreferrer">@piersoft</a>, <a href="https://twitter.com/cirospat" target="_blank" title="Ciro Spataro" rel="noopener noreferrer">@cirospat</a> e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta tecnica Sas 1987 | 1:5k', iconURL: 'legend/basemap/sas_clip.jpg', caption: '1987', group: '1900-oggi' });
-
-var csg = L.tileLayer.mask("https://palermohub.github.io/PRG2004/CSG/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Carta Tecnica Comunale CSG 2k 1989/91 - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta Tecnica Comunale CSG 2k 1989/91', iconURL: 'legend/basemap/irta_clip.jpg', caption: '1989', group: '1900-oggi' });
-
-var ctc = L.tileLayer.mask("https://mapwarper.net/maps/tile/25750/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - Carta Tecnica di Palermo - Ufficio Tecnico Comunale 1:8k | 1908 - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'Carta tecnica Municipale 1908 | 1:8k', iconURL: 'legend/basemap/ctc_clip.jpg', caption: '1908', group: '1900-oggi'});
-
-var City_Plans_Palermo = L.tileLayer.mask("https://mapwarper.net/maps/tile/45304/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - City Plans Palermo 1:10k- U.S. Army Map Service, 1943-1944 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano" rel="noopener noreferrer">@napo</a>, <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, label: 'U.S. Army Map Service, 1943-1944 | City Plans Palermo 1:10k', iconURL: 'legend/basemap/us43_clip.jpg', caption: '1943', group: '1900-oggi'});
-
-var Palermo_50k = L.tileLayer.mask("https://mapwarper.net/maps/tile/45321/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Cartografia storica - Palermo 1:50k | Series 4229, U.S. Army Map Service, 1941 - Rielaborazione di: <a href="https://twitter.com/aborruso" target="_blank" title="Andrea Borruso" rel="noopener noreferrer">@aborruso</a>, <a href="https://twitter.com/napo"target="_blank" title="Maurizio Napolitano" rel="noopener noreferrer">@napo</a>, e <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 17, maxNativeZoom: 17, label: 'U.S. Army Map Service, 1941 Series 4229 | Palermo 1:50k', iconURL: 'legend/basemap/us41_clip.jpg', caption: '1941', group: '1900-oggi'});
-
-var ppecs = L.tileLayer.mask("https://mapwarper.net/maps/tile/52867/{z}/{x}/{y}.png", {
-      attribution: '<a href="https://github.com/frogcat/leaflet-tileoverlay-mask" target="_blank" title="Leaflet-tileoverlay-mask" rel="noopener noreferrer">Leaflet-tileoverlay-mask</a> - Piano Particolareggiato Esecutivo del centro storico di Palermo - Palermo 1:500 - Rielaborazione di: <a href="https://twitter.com/gbvitrano" target="_blank" title="Giovan Battista Vitrano" rel="noopener noreferrer">@gbvitrano</a>  per <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia" rel="noopener noreferrer">@opendatasicilia</a>',
-minZoom: 13,   maxZoom: 18, maxNativeZoom: 18, label: 'P.P.E. del centro storico 1993 | 1:500', iconURL: 'legend/basemap/ppe_clip.jpg', caption: '1993', group: '1900-oggi'});
-
-<!-- credits -->
-var credctrl = L.controlCredits({
-    image: "lib/images/opendatasicilia_dredits.png",
-    link: "https://opendatasicilia.it/",
-    text: "Interactive mapping<br/>by opendatasicilia"
-}).addTo(map);
-
-var overlayBasemaps = [osm, google, googlesat, palermo1580, palermo1754, palermo1860, palermo1877, nuova, palermo1891, palermo1893, ctc, omira, irta, prg62, sas, csg, ppecs, Palermo_50k, City_Plans_Palermo, prg04, ctc2k, ctr10k];
-
-<!-- una sola mappa storica sovrapposta alla volta: le due strisce a cerchietti aggiungono/rimuovono layer con map.addLayer/removeLayer, che non genera l'evento overlayadd del vecchio L.Control.Layers - qui si ascolta l'evento nativo layeradd -->
-var basemapCaptionToTab = {
-	'1580': 'storia', '1754': 'storia', '1860': 'storia', '1877': 'storia',
-	'1882': 'storia', '1891': 'storia', '1893': 'storia',
-	'1935': 'omira', '1941': 'usarmymap', '1943': 'usarmymap',
-	'1956': 'irta', '1962': 'prg62', '1987': 'sas', '1993': 'ppe', '2004': 'prg',
-	'1989': 'ctr2012', '2007': 'ctr2012', '2012': 'ctr2012'
-};
-function syncBasemapDot(layer) {
-	// pallino blu sull'icona della sidebar corrispondente alla mappa storica sovrapposta in uso
-	var tabs = document.querySelectorAll('.sidebar-tabs .basemap-current');
-	for (var i = 0; i < tabs.length; i++) { tabs[i].classList.remove('basemap-current'); }
-	var caption = layer && layer.options && layer.options.caption;
-	var tabId = basemapCaptionToTab[caption];
-	if (tabId) {
-		var link = document.querySelector('.sidebar-tabs a[href="#' + tabId + '"]');
-		if (link) { link.closest('li').classList.add('basemap-current'); }
-	}
-}
-var sideBySideActive = false;
-var sideBySideControl = null;
-var sbsRightLayer = null;
-var sbsHiddenOverlay = null;
-
-map.on('layeradd', function(e) {
-	if (overlayBasemaps.indexOf(e.layer) === -1) { return; }
-	overlayBasemaps.forEach(function(layer) {
-		if (layer !== e.layer && map.hasLayer(layer)) { map.removeLayer(layer); }
-	});
-	syncBasemapDot(e.layer);
-	applyOcchioSettings(e.layer);
-	if (sideBySideActive) { refreshSideBySide(e.layer); }
-});
-// la mappa storica di default è già aggiunta al caricamento, prima che il listener sopra si registri: sync iniziale esplicito
-overlayBasemaps.forEach(function(layer) {
-	if (map.hasLayer(layer)) { syncBasemapDot(layer); }
-});
-			var hash = new L.Hash(map);
-			var sidebar = L.control.sidebar('sidebar').addTo(map);
-		   var toolbar = L.control.toolbar({
-			   homeCenter: INITIAL_CENTER,
-			   homeZoom: INITIAL_ZOOM
-		   }).addTo(map);
-		   toolbar.attachSearch(geocoderOdsControl);
-	   var basemapsControl = L.control.basemaps({
-            basemaps: basemaps,
-            overlays: overlayBasemaps,
-            tileX: 0,
-            tileY: 0,
-            tileZ: 1,
-            embedded: true
-		    });
-	   // niente map.addControl: il pannello basemaps viene innestato
-	   // direttamente nel dropdown della toolbar (vedi attachBasemaps)
-	   toolbar.attachBasemaps(basemapsControl);
-
-	   // sposta lo slider temporale (creato dal controllo basemaps) dentro la
-	   // toolbar in alto, cosi' resta sempre visibile invece che nascosto nel
-	   // pannello basemaps
-	   var timesliderNode = basemapsControl._container.querySelector('.basemaps-timeslider');
-	   if (timesliderNode) { toolbar.attachTimeslider(timesliderNode); }
-
-// pulsante "side by side" in toolbar: confronta la mappa di base attuale
-// (basemapsControl.basemap, es. OSM) con la mappa storica attualmente
-// sovrapposta come "occhio di bue" (basemapsControl.overlayLayer), affiancate
-// da uno slider trascinabile (vedi atlante/js/sidebyside/L.Control.SideBySide.js).
-// Il layer storico usato per il confronto NON e' quello mascherato a cerchio
-// (in overlayBasemaps: il suo container reale resta nascosto apposta per
-// l'effetto "occhio di bue", vedi leaflet-tileoverlay-mask.js) ma il suo
-// gemello semplice nell'array "basemaps" (stessa URL tile, usato altrimenti
-// solo per le icone del pannello mappe): i due array sono allineati per indice.
-// Iniettato qui invece che in L.Control.Toolbar.js perche' la funzionalita'
-// e' esclusiva di questa pagina.
-var sbsBtn = L.DomUtil.create('a', 'map-toolbar-btn map-toolbar-sidebyside');
-sbsBtn.href = '#';
-sbsBtn.title = 'Confronta affiancate (side by side)';
-sbsBtn.innerHTML = '<i class="fa fa-columns" aria-hidden="true"></i>';
-var infoBtnNode = toolbar._container.querySelector('.map-toolbar-info');
-if (infoBtnNode) { toolbar._container.insertBefore(sbsBtn, infoBtnNode); } else { toolbar._container.appendChild(sbsBtn); }
-L.DomEvent.disableClickPropagation(sbsBtn);
-
-// versione "piatta" (senza occhio di bue) del layer storico mascherato: viene
-// clonata al volo dalla URL/opzioni del layer mascherato stesso, invece di
-// riusare l'array "basemaps" (pensato solo per le icone del pannello: alcune
-// voci li' dentro hanno URL diverse/rotte rispetto al layer mascherato
-// corrispondente, es. la voce 2012 punta a un percorso che risponde 404).
-// La clona viene tenuta in cache sul layer mascherato per non ricrearla ad
-// ogni refresh.
-function getRealCounterpart(overlayLayer) {
-	if (!overlayLayer) { return null; }
-	if (!overlayLayer._sbsPlainLayer) {
-		overlayLayer._sbsPlainLayer = L.tileLayer(overlayLayer._url, overlayLayer.options);
-	}
-	return overlayLayer._sbsPlainLayer;
-}
-
-// (ri)costruisce il confronto con la coppia di layer attualmente scelta
-// dall'utente (base + storica sovrapposta). overlayLayerHint viene passato
-// dal listener layeradd quando il cambio arriva da li': in quel momento
-// basemapsControl.overlayLayer non e' ancora aggiornato (viene assegnato
-// dopo l'addLayer che genera l'evento), quindi si usa il layer appena
-// aggiunto invece di rileggerlo dal controllo.
-function refreshSideBySide(overlayLayerHint) {
-	var leftLayer = basemapsControl.basemap;
-	var overlayLayer = overlayLayerHint || basemapsControl.overlayLayer;
-	var rightLayer = getRealCounterpart(overlayLayer);
-
-	if (sbsHiddenOverlay && sbsHiddenOverlay !== overlayLayer && sbsHiddenOverlay._e1) {
-		sbsHiddenOverlay._e1.style.display = '';
-		sbsHiddenOverlay = null;
-	}
-
-	// preserva la posizione dello slider attraverso il refresh, invece di
-	// farlo ripartire sempre dal centro ad ogni cambio mappa
-	var previousRatio = sideBySideControl ? sideBySideControl._range.value : 50;
-
-	// il vecchio controllo va rimosso PRIMA di rimuovere il vecchio rightLayer
-	// dalla mappa: SideBySide.remove() pulisce lo style.clip leggendo
-	// getContainer() dei layer che stava confrontando, e removeLayer() azzera
-	// quel container (torna null) - nell'ordine sbagliato getContainer()
-	// lancia un errore che interrompe il resto del refresh, lasciando lo stato
-	// bloccato per tutti i cambi successivi.
-	if (sideBySideControl) { sideBySideControl.remove(); sideBySideControl = null; }
-	if (sbsRightLayer && sbsRightLayer !== rightLayer && map.hasLayer(sbsRightLayer)) {
-		map.removeLayer(sbsRightLayer);
-	}
-
-	if (!rightLayer || !leftLayer || rightLayer === leftLayer) {
-		// nessuna mappa storica selezionata (o coincide con la base): il confronto non ha senso
-		deactivateSideBySide();
-		return;
-	}
-
-	sbsRightLayer = rightLayer;
-	if (!map.hasLayer(rightLayer)) { map.addLayer(rightLayer); }
-	// POC: la storica (rightLayer) resta disegnata a tutta pagina (vedi
-	// blendRight in L.Control.SideBySide-poc.js) invece che ritagliata solo
-	// sulla meta' destra, cosi' abbassando la trasparenza della base
-	// (leftLayer, vedi slider "Trasparenza mappa di base") si intravede
-	// anche a sinistra. Ma per funzionare la base deve stare SOPRA nello
-	// stack di disegno, altrimenti la storica (ritagliata a tutta pagina)
-	// coprirebbe anche la meta' sinistra: portArla in primo piano ora che
-	// rightLayer e' stato (ri)aggiunto sopra di lei.
-	leftLayer.bringToFront();
-	// nasconde il cerchietto "occhio di bue" (SVG di leaflet-tileoverlay-mask.js) del
-	// layer storico mascherato, altrimenti resta visibile sovrapposto al confronto
-	if (overlayLayer && overlayLayer._e1) {
-		sbsHiddenOverlay = overlayLayer;
-		overlayLayer._e1.style.display = 'none';
-	}
-
-	sideBySideControl = L.control.sideBySide([leftLayer], [rightLayer], { initialRatio: previousRatio, blendRight: true }).addTo(map);
-	L.DomUtil.addClass(sbsBtn, 'active');
-	if (basemapsControl.basemap) { basemapsControl.basemap.setOpacity(baseOpacity); }
-}
-
-function activateSideBySide() {
-	if (!basemapsControl.overlayLayer) {
-		alert('Seleziona prima una mappa storica dal pannello mappe: verra\' confrontata con la mappa di base attuale.');
-		return;
-	}
-	sideBySideActive = true;
-	refreshSideBySide();
-}
-
-function deactivateSideBySide() {
-	sideBySideActive = false;
-	if (sideBySideControl) { sideBySideControl.remove(); sideBySideControl = null; }
-	if (sbsHiddenOverlay && sbsHiddenOverlay._e1) { sbsHiddenOverlay._e1.style.display = ''; }
-	sbsHiddenOverlay = null;
-	if (sbsRightLayer && map.hasLayer(sbsRightLayer)) { map.removeLayer(sbsRightLayer); }
-	sbsRightLayer = null;
-	L.DomUtil.removeClass(sbsBtn, 'active');
-}
-
-L.DomEvent.on(sbsBtn, 'click', function(e) {
-	L.DomEvent.stop(e);
-	if (sideBySideActive) { deactivateSideBySide(); } else { activateSideBySide(); }
-});
-
-// mentre il confronto e' attivo, il cambio di mappa di base aggiorna il
-// confronto invece di uscirne (vedi anche map.on('layeradd') per l'overlay)
-basemapsControl.on('basemapchange', function() {
-	if (sideBySideActive) { refreshSideBySide(); }
-	if (basemapsControl.basemap) { basemapsControl.basemap.setOpacity(baseOpacity); }
-});
-
-// aggiunge un passo sulla modalita' confronto affiancato al pannello guida del
-// selettore mappe (L.Control.Basemaps_02_timeslider.js e' condiviso con altre
-// pagine che non hanno questo pulsante, quindi il passo si aggiunge qui via JS
-// invece che nel file sorgente del controllo)
-var basemapsHelpPanel = basemapsControl._container.querySelector('.basemaps-help-panel');
-if (basemapsHelpPanel) {
-	var sbsHelpStep = L.DomUtil.create('div', 'basemap-help-step', basemapsHelpPanel);
-	sbsHelpStep.innerHTML = '<i class="fa fa-columns" aria-hidden="true"></i>' +
-		'<div>L\'icona <strong>a colonne</strong> nella barra degli strumenti attiva il confronto <strong>affiancato</strong>: mostra la mappa storica sovrapposta e quella di base divise da uno slider trascinabile, al posto dell\'effetto "occhio di bue". Abbassando la trasparenza della mappa di base (vedi icona <strong>impostazioni</strong>) si intravede la mappa storica anche a sinistra del divisore.</div>';
-
-	var settingsHelpStep = L.DomUtil.create('div', 'basemap-help-step', basemapsHelpPanel);
-	settingsHelpStep.innerHTML = '<i class="fa fa-sliders" aria-hidden="true"></i>' +
-		'<div>L\'icona <strong>impostazioni</strong> nella barra degli strumenti apre un pannello per regolare il <strong>raggio</strong> e la <strong>trasparenza</strong> dell\'effetto "occhio di bue", e la <strong>trasparenza della mappa di base</strong> nel confronto affiancato.</div>';
-}
-
-// POC: pannello impostazioni confronto (raggio/trasparenza occhio di bue +
-// trasparenza mappa di base nel confronto affiancato). Iniettato qui come il
-// pulsante side-by-side sopra, con dropdown "fatto a mano" (non registrato in
-// toolbar._dropdowns: quel meccanismo di apertura/chiusura e' privato al file
-// condiviso L.Control.Toolbar.js, che qui non tocchiamo per restare isolati
-// nella copia POC) ma stile riuso dalle classi .map-toolbar-dropdown-wrap/
-// .map-toolbar-dropdown gia' definite in L.Control.Toolbar.css.
-var occhioRadius = 150;   // px, default plugin: maskWidth 300 => raggio 150
-var occhioOpacity = 1;    // 0-1, trasparenza persistente cerchio occhio di bue
-var baseOpacity = 1;      // 0-1, trasparenza layer base (side by side e vista normale)
-
-function applyOcchioSettings(layer) {
-	if (layer && layer.setMaskRadius) {
-		layer.setMaskRadius(occhioRadius);
-		layer.setMaskOpacity(occhioOpacity);
-	}
-}
-// applica ai layer occhio di bue gia' presenti sulla mappa al caricamento
-// (es. la mappa storica di default aggiunta inline con .addTo(map))
-overlayBasemaps.forEach(function(layer) {
-	if (map.hasLayer(layer)) { applyOcchioSettings(layer); }
-});
-
-var settingsWrap = L.DomUtil.create('div', 'map-toolbar-dropdown-wrap');
-var settingsBtn = L.DomUtil.create('a', 'map-toolbar-btn map-toolbar-occhio-settings', settingsWrap);
-settingsBtn.href = '#';
-settingsBtn.title = 'Impostazioni confronto (raggio/trasparenza)';
-settingsBtn.innerHTML = '<i class="fa fa-sliders" aria-hidden="true"></i>';
-var settingsPanel = L.DomUtil.create('div', 'map-toolbar-dropdown occhio-settings-panel', settingsWrap);
-settingsPanel.innerHTML =
-	'<div class="occhio-settings-row">' +
-		'<label for="occhio-radius-range">Raggio occhio di bue: <span id="occhio-radius-value">' + occhioRadius + '</span> px</label>' +
-		'<input type="range" id="occhio-radius-range" min="40" max="400" step="10" value="' + occhioRadius + '">' +
-	'</div>' +
-	'<div class="occhio-settings-row">' +
-		'<label for="occhio-opacity-range">Trasparenza mappa storica (occhio di bue): <span id="occhio-opacity-value">100</span>%</label>' +
-		'<input type="range" id="occhio-opacity-range" min="0" max="100" step="5" value="100">' +
-	'</div>' +
-	'<div class="occhio-settings-row">' +
-		'<label for="base-opacity-range">Trasparenza mappa di base (confronto affiancato): <span id="base-opacity-value">100</span>%</label>' +
-		'<input type="range" id="base-opacity-range" min="0" max="100" step="5" value="100">' +
-	'</div>';
-if (infoBtnNode) { toolbar._container.insertBefore(settingsWrap, infoBtnNode); } else { toolbar._container.appendChild(settingsWrap); }
-L.DomEvent.disableClickPropagation(settingsWrap);
-
-L.DomEvent.on(settingsBtn, 'click', function(e) {
-	L.DomEvent.stop(e);
-	L.DomUtil.hasClass(settingsPanel, 'open') ? L.DomUtil.removeClass(settingsPanel, 'open') : L.DomUtil.addClass(settingsPanel, 'open');
-});
-L.DomEvent.on(document, 'click', function(e) {
-	if (!settingsWrap.contains(e.target)) { L.DomUtil.removeClass(settingsPanel, 'open'); }
-});
-
-document.getElementById('occhio-radius-range').addEventListener('input', function(e) {
-	occhioRadius = parseInt(e.target.value, 10);
-	document.getElementById('occhio-radius-value').textContent = occhioRadius;
-	applyOcchioSettings(basemapsControl.overlayLayer);
-});
-document.getElementById('occhio-opacity-range').addEventListener('input', function(e) {
-	occhioOpacity = parseInt(e.target.value, 10) / 100;
-	document.getElementById('occhio-opacity-value').textContent = e.target.value;
-	applyOcchioSettings(basemapsControl.overlayLayer);
-});
-document.getElementById('base-opacity-range').addEventListener('input', function(e) {
-	baseOpacity = parseInt(e.target.value, 10) / 100;
-	document.getElementById('base-opacity-value').textContent = e.target.value;
-	if (basemapsControl.basemap) { basemapsControl.basemap.setOpacity(baseOpacity); }
-});
-
-// tab "Condividi": link, icone social e impostazioni iframe aggiornati in base alla vista corrente della mappa
-function updateShareTab() {
-	var currentUrl = window.location.href;
-	var urlInput = document.getElementById('share_url');
-	if (urlInput) { urlInput.value = currentUrl; }
-
-	var baseUrl = window.location.origin + window.location.pathname;
-	var includeView = document.getElementById('iframe_include_view');
-	var widthInput = document.getElementById('iframe_width');
-	var heightInput = document.getElementById('iframe_height');
-	var iframeSrc = (includeView && includeView.checked) ? currentUrl : baseUrl;
-	var width = (widthInput && widthInput.value.trim()) || '100%';
-	var height = (heightInput && heightInput.value.trim()) || '800';
-
-	var iframeCode = '<iframe width="' + width + '" height="' + height + 'px" frameborder="0" src="' + iframeSrc + '"></iframe>\n' +
-		'<a href="' + iframeSrc + '" title="Visualizza l’Atlante delle carte tecniche storiche di Palermo a schermo intero">Visualizza a schermo intero</a>';
-
-	var iframeTextarea = document.getElementById('iframe');
-	if (iframeTextarea) { iframeTextarea.value = iframeCode; }
-
-	var fullscreenLink = document.getElementById('share_fullscreen_link');
-	if (fullscreenLink) { fullscreenLink.href = iframeSrc; }
-
-	var shareText = document.title || 'Atlante delle carte tecniche storiche di Palermo';
-	var encodedUrl = encodeURIComponent(currentUrl);
-	var encodedText = encodeURIComponent(shareText);
-	var shareLinks = {
-		facebook: 'https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl,
-		twitter: 'https://twitter.com/intent/tweet?url=' + encodedUrl + '&text=' + encodedText,
-		whatsapp: 'https://api.whatsapp.com/send?text=' + encodedText + '%20' + encodedUrl,
-		telegram: 'https://t.me/share/url?url=' + encodedUrl + '&text=' + encodedText,
-		linkedin: 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodedUrl,
-		email: 'mailto:?subject=' + encodedText + '&body=' + encodedUrl
-	};
-	var socialLinks = document.querySelectorAll('#share-social a[data-share]');
-	for (var s = 0; s < socialLinks.length; s++) {
-		var type = socialLinks[s].getAttribute('data-share');
-		if (shareLinks[type]) { socialLinks[s].href = shareLinks[type]; }
-	}
-}
-
-function copyShareField(btn) {
-	var el = document.getElementById(btn.getAttribute('data-copy-target'));
-	if (!el) { return; }
-	el.select();
-	el.setSelectionRange(0, el.value.length);
-	var showCopied = function() {
-		var original = btn.innerHTML;
-		btn.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
-		setTimeout(function() { btn.innerHTML = original; }, 1200);
-	};
-	if (navigator.clipboard && navigator.clipboard.writeText) {
-		navigator.clipboard.writeText(el.value).then(showCopied, function() {
-			document.execCommand('copy');
-			showCopied();
-		});
-	} else {
-		document.execCommand('copy');
-		showCopied();
-	}
-}
-
-var shareCopyButtons = document.querySelectorAll('.share-copy-btn');
-for (var c = 0; c < shareCopyButtons.length; c++) {
-	shareCopyButtons[c].addEventListener('click', function() { copyShareField(this); });
-}
-
-var shareSettingIds = ['iframe_width', 'iframe_height', 'iframe_include_view'];
-for (var f = 0; f < shareSettingIds.length; f++) {
-	var settingEl = document.getElementById(shareSettingIds[f]);
-	if (settingEl) {
-		settingEl.addEventListener('input', updateShareTab);
-		settingEl.addEventListener('change', updateShareTab);
-	}
-}
-
-sidebar.on('content', function(e) { if (e.id === 'share') { updateShareTab(); } });
-window.addEventListener('hashchange', function() {
-	var sharePane = document.getElementById('share');
-	if (sharePane && sharePane.classList.contains('active')) { updateShareTab(); }
-});
-updateShareTab();
-
-        </script>
-         <!-- header -->       
-<div id="titolo"class="leaflet-control"> 
-<a href="teca_digitale.html#15/38.1234/13.3613" title="Mappa dei progetti Teca digitale, immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr, tutte pubblicate con una licenza aperta CC BY-SA 4.0 che ne consente il riuso - Rielaborazione dati OpenDataSicilia" class="btn btn--s btn--orange" target="_parent">#viaggioneltempo</a><br>
-   </div> 
-   
     <!-- popup  -->
 <script src="lib/js/popup/jquery.flythat.min.js"></script>
 
 <!-- guida selettore mappe: apertura automatica disattivata, si apre solo dall'icona "i" in toolbar -->
+
+<!-- Biblioteche e bene comune digitale: gallery cartoline storiche (sidebar destra) -->
+<script src="atlante/js/cartoline/cartoline.js"></script>
 
 </body>
 </html>

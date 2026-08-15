@@ -117,6 +117,13 @@ L.Control.Basemaps = L.Control.extend({
             }, this);
             yearEntries.sort(function(a, b) { return a.year - b.year; });
 
+            // punto di partenza dello slider: l'overlay già attivo in mappa
+            // (rilevato sopra), non semplicemente il primo/piu' vecchio anno
+            var initialEntry = yearEntries[0];
+            for (var ie = 0; ie < yearEntries.length; ie++) {
+                if (yearEntries[ie].layer === this.overlayLayer) { initialEntry = yearEntries[ie]; break; }
+            }
+
             var sliderInput = null;
             var sliderYearLabel = null;
             var sliderNameLabel = null;
@@ -128,7 +135,7 @@ L.Control.Basemaps = L.Control.extend({
                 sliderYearFrom.textContent = yearEntries[0].year;
                 var sliderCurrentWrap = L.DomUtil.create("span", "basemaps-timeslider-current-wrap", sliderLabelRow);
                 sliderYearLabel = L.DomUtil.create("span", "basemaps-timeslider-current", sliderCurrentWrap);
-                sliderYearLabel.textContent = yearEntries[0].year;
+                sliderYearLabel.textContent = initialEntry.year;
                 sliderAccuracyDot = L.DomUtil.create("span", "basemaps-timeslider-accuracy", sliderCurrentWrap);
                 var sliderYearTo = L.DomUtil.create("span", "basemaps-timeslider-bound", sliderLabelRow);
                 sliderYearTo.textContent = yearEntries[yearEntries.length - 1].year;
@@ -147,7 +154,7 @@ L.Control.Basemaps = L.Control.extend({
                 sliderInput.min = yearEntries[0].year;
                 sliderInput.max = yearEntries[yearEntries.length - 1].year;
                 sliderInput.step = 1;
-                sliderInput.value = yearEntries[0].year;
+                sliderInput.value = initialEntry.year;
 
                 var sliderNextBtn = L.DomUtil.create("a", "basemaps-timeslider-nav basemaps-timeslider-next", sliderTrack);
                 sliderNextBtn.href = "#";
@@ -165,9 +172,9 @@ L.Control.Basemaps = L.Control.extend({
 
                 var nameRow = L.DomUtil.create("div", "basemaps-timeslider-name-row", sliderRow);
                 sliderNameLabel = L.DomUtil.create("span", "basemaps-timeslider-name", nameRow);
-                sliderNameLabel.textContent = yearEntries[0].label;
-                sliderNameLabel.title = yearEntries[0].label;
-                setAccuracyDot(sliderAccuracyDot, yearEntries[0].accuracy);
+                sliderNameLabel.textContent = initialEntry.label;
+                sliderNameLabel.title = initialEntry.label;
+                setAccuracyDot(sliderAccuracyDot, initialEntry.accuracy);
 
                 // legenda fissa della precisione: sta nell'angolo bottomleft di Leaflet,
                 // che leaflet-sidebar.css gia' sincronizza (transition + offset) con
