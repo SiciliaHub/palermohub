@@ -315,6 +315,13 @@ overlayBasemaps.forEach(function(layer) {
 					sidebarRight.open('cartoline');
 				});
 			}
+			var sidebarLeftEl0 = document.getElementById('sidebar');
+			var sidebarLeftFab = document.getElementById('sidebar-left-fab');
+			if (sidebarLeftFab) {
+				sidebarLeftFab.addEventListener('click', function () {
+					sidebar.open('home');
+				});
+			}
 
 			// bug Chromium (mobile viewport meta, verificato con Playwright headless
 			// in isMobile+hasTouch, cioe' la stessa modalita' del device toolbar di
@@ -339,6 +346,26 @@ overlayBasemaps.forEach(function(layer) {
 						sidebarRightEl0.style.display = '';
 					}
 				}).observe(sidebarRightEl0, { attributes: true, attributeFilter: ['class'] });
+			})();
+
+			// stesso fix del box off-canvas della destra, ma solo sotto i 768px:
+			// da 768px in su la sinistra resta la striscia 40px normale (mai
+			// off-canvas), quindi il bug del innerWidth gonfiato non si applica.
+			(function () {
+				var hideTimer = null;
+				var mq = window.matchMedia('(max-width: 767px)');
+				function sync() {
+					clearTimeout(hideTimer);
+					if (!mq.matches) { sidebarLeftEl0.style.display = ''; return; }
+					if (sidebarLeftEl0.classList.contains('collapsed')) {
+						hideTimer = setTimeout(function () { sidebarLeftEl0.style.display = 'none'; }, 360);
+					} else {
+						sidebarLeftEl0.style.display = '';
+					}
+				}
+				if (mq.matches && sidebarLeftEl0.classList.contains('collapsed')) { sidebarLeftEl0.style.display = 'none'; }
+				new MutationObserver(sync).observe(sidebarLeftEl0, { attributes: true, attributeFilter: ['class'] });
+				mq.addEventListener('change', sync);
 			})();
 		   var toolbar = L.control.toolbar({
 			   homeCenter: INITIAL_CENTER,
