@@ -172,8 +172,13 @@
     /* dimensioni ridotte ~15% rispetto al desktop per stare comode su
        schermi stretti e lasciare margine alla centratura (left:50%+transform) */
     .map-toolbar {
-        gap: 3px;
-        padding: 3px 4px;
+        /* gap/padding/dimensione pulsanti fluidi (clamp) invece di valori fissi:
+           su schermi molto stretti (iPhone SE, ~320px) i pulsanti fissi a 20px
+           non ci stavano tutti e finivano a ridosso del bordo arrotondato della
+           pillola (effetto "tagliato"); ora si restringono in proporzione alla
+           larghezza reale del viewport */
+        gap: clamp(1px, 0.8vw, 3px);
+        padding: 3px clamp(6px, 2vw, 8px);
         /* centratura reale: 10px fissi a sx e dx invece della vecchia
            formula calc(50vw...) che dava margini asimmetrici; spostata
            piu' in basso (top) per non incollarsi al bordo schermo */
@@ -185,14 +190,26 @@
         max-width: none;
     }
     .map-toolbar-btn {
-        width: 20px;
-        height: 20px;
-        font-size: 9.5px;
+        width: clamp(16px, 5.2vw, 20px);
+        height: clamp(16px, 5.2vw, 20px);
+        font-size: clamp(8px, 2.6vw, 9.5px);
+        flex-shrink: 0;
+    }
+    .map-toolbar-timeslider-slot {
+        /* lo slot va fatto crescere (non solo lo slider al suo interno):
+           senza flex-grow qui lo slot resta stretto quanto il suo contenuto
+           minimo e lo spazio libero avanzato dai pulsanti (larghezza fissa
+           via clamp) finisce vuoto a destra della pillola */
+        flex: 1 1 auto;
+        min-width: 0;
     }
     .map-toolbar-timeslider-slot .basemaps-timeslider {
-        min-width: 94px;
+        /* flex-shrink reale: la barra del tempo e' l'unico elemento non a
+           dimensione fissa, quindi e' lei ad assorbire lo spazio mancante
+           quando i pulsanti (larghezza minima clamp sopra) non bastano piu' */
+        min-width: 60px;
         max-width: none;
-        flex: 1 1 auto;
+        flex: 1 1 60px;
         margin: 0 2px;
     }
     .map-toolbar-timeslider-slot .basemaps-timeslider-label {
