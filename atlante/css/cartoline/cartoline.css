@@ -1,0 +1,242 @@
+#modal-basemap-help { width: 90%; max-width: 640px; max-height: 85vh; background: #fff; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.35); padding: 20px 24px; box-sizing: border-box; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+@media (max-width: 480px) {
+  #modal-basemap-help {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 20px 28px;
+  }
+}
+#modal-basemap-help h3 { margin: 0 0 4px 0; font-size: 18px; color: #333; }
+#modal-basemap-help h3 i { color: #FF9900; margin-right: 6px; }
+#modal-basemap-help .guida-intro { margin: 0 0 18px 0; font-size: 13px; color: #666; line-height: 1.5; }
+#modal-basemap-help .guida-section { margin-bottom: 22px; }
+#modal-basemap-help .guida-section:last-of-type { margin-bottom: 8px; }
+#modal-basemap-help .guida-section-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px 0; font-size: 14px; font-weight: bold; color: #333; }
+#modal-basemap-help .guida-section-title i { color: #FF9900; font-size: 15px; }
+#modal-basemap-help .guida-section p { margin: 0 0 8px 0; font-size: 13px; color: #444; line-height: 1.45; }
+#modal-basemap-help .guida-shot { display: block; width: 100%; height: auto; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 1px 6px rgba(0,0,0,0.15); margin-top: 6px; }
+#modal-basemap-help .guida-shot.guida-shot-legend { width: auto; max-width: 220px; }
+#modal-basemap-help .guida-shot.guida-shot-small { width: auto; max-width: 200px; }
+.basemap-help-step { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.basemap-help-step i { flex: 0 0 22px; font-size: 18px; color: #FF9900; text-align: center; margin-top: 2px; }
+.basemap-help-step div { font-size: 13px; color: #444; line-height: 1.4; }
+#modal-basemap-help .flythat-close.basemap-help-close { position: absolute; top: 8px; right: 12px; font-size: 20px; color: #999; }
+#modal-basemap-help .basemap-help-ok { display: block; margin: 4px auto 0 auto; padding: 8px 20px; border: none; border-radius: 20px; background: #FF9900; color: #fff; font-weight: bold; cursor: pointer; }
+
+.info-resource-links { margin-bottom: 16px; }
+.info-resource-link { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 8px; background: #fafafa; border: 1px solid #eee; border-radius: 8px; text-decoration: none !important; }
+.info-resource-link:hover { background: #fff4e6; border-color: #FF9900; }
+.info-resource-link i { flex: 0 0 18px; font-size: 15px; color: #FF9900; text-align: center; }
+.info-resource-link span { font-size: 13px; line-height: 1.4; color: #444; }
+.info-resource-link:hover span { color: #FF9900; }
+#modal-basemap-help .basemap-help-ok:hover { background: #e68a00; }
+
+.techmap-block { background: #fafafa; border: 1px solid #eee; border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; }
+.techmap-block-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px 0; font-size: 14px; color: #333; }
+.techmap-block-title i { color: #FF9900; }
+.techmap-block-year { margin-left: auto; font-size: 11px; font-weight: 600; color: #777; background: #fff; border: 1px solid #eee; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+.techmap-block p.lorem { margin-bottom: 8px; }
+.techmap-block p.lorem:last-child { margin-bottom: 0; }
+.techmap-block table { margin-left: auto; margin-right: auto; }
+.techmap-block img.clip_resize { max-width: 100%; height: auto; }
+/* gallery cartoline storiche in sidebar destra (foto_biblioteca.geojson) */
+/* fix: atlante/js/leaflet/leaflet.js (0.7.x) marca le icone cliccabili con la
+   classe "leaflet-clickable", ma atlante/css/leaflet.css riabilita i click
+   (pointer-events) solo su ".leaflet-interactive" (nome Leaflet 1.x) — le
+   icone restano quindi pointer-events:none e i marker/cluster non ricevono
+   mai il click. Disallineamento preesistente tra le due versioni vendorizzate,
+   non introdotto da questa gallery: qui si ripristina il comportamento atteso. */
+.leaflet-marker-icon.leaflet-clickable,
+.leaflet-image-layer.leaflet-clickable { pointer-events: auto !important; }
+#sidebar-right .sidebar-pane { padding: 16px 16px 24px; }
+
+/* sidebar-right in stile "off-canvas + FAB": chiusa esce interamente fuori
+   schermo (invece della striscia bianca a tutta altezza con solo l'icona),
+   riapertura tramite pulsante flottante in alto a destra sopra la mappa. */
+#sidebar-right.sidebar { transition: transform 350ms ease, visibility 0s linear 0s; transform: translateX(0); visibility: visible; }
+/* .sidebar.collapsed (leaflet-sidebar.css) riduce width a 40px: qui va
+   neutralizzato, altrimenti translateX(100%) scivola solo di 40px invece
+   che dell'intera larghezza, lasciando una striscia visibile a destra.
+   translateX va oltre il 100% (+40px di margine) e si aggiunge
+   visibility:hidden/pointer-events:none per eliminare qualunque residuo
+   (bordo, box-shadow, arrotondamenti) che il solo transform potrebbe
+   lasciare visibile/cliccabile sul bordo destro. */
+#sidebar-right.sidebar.collapsed {
+  width: 100%;
+  transform: translateX(calc(100% + 40px));
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: none;
+  transition: transform 350ms ease, visibility 0s linear 350ms;
+}
+@media (min-width: 768px) and (max-width: 991px) { #sidebar-right.sidebar.collapsed { width: 305px; } }
+@media (min-width: 992px) and (max-width: 1199px) { #sidebar-right.sidebar.collapsed { width: 390px; } }
+@media (min-width: 1200px) { #sidebar-right.sidebar.collapsed { width: 460px; } }
+#sidebar-right .sidebar-content { left: 0; right: 40px; }
+.sidebar-right ~ .sidebar-map { margin-right: 0 !important; }
+@media (min-width: 768px) {
+  .sidebar-right ~ .sidebar-map .leaflet-right { right: 10px !important; }
+}
+
+#sidebar-right-fab {
+  position: absolute; top: 80px; right: 20px; z-index: 2001;
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: #fff; color: #CC7A00; border: none; font-size: 18px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.35); cursor: pointer;
+  transition: opacity 200ms, transform 200ms, background 150ms, color 150ms;
+}
+#sidebar-right-fab:hover { background: #FF9900; color: #fff; }
+#sidebar-right.sidebar:not(.collapsed) ~ #sidebar-right-fab {
+  opacity: 0; transform: scale(.6); pointer-events: none;
+}
+
+/* solo mobile: sidebar sinistra nello stesso stile "off-canvas + FAB" della
+   destra (chiusa esce interamente fuori schermo, riapertura via FAB in alto
+   a sinistra). Da 768px in su resta il comportamento originale a striscia
+   40px con le tab sempre visibili. */
+@media (max-width: 767px) {
+  /* leaflet-sidebar.css riserva margin-left:40px alla mappa per la striscia
+     icone, tolto solo da 768px in su (vedi .sidebar-left ~ .sidebar-map):
+     ora che sotto i 768px la sidebar e' off-canvas (niente striscia visibile)
+     quel margine va azzerato anche qui, altrimenti resta una fascia bianca
+     a sinistra larga 40px (lo stesso fix gia' presente per la destra). */
+  .sidebar-left ~ .sidebar-map { margin-left: 0 !important; }
+  #sidebar.sidebar { transition: transform 350ms ease, visibility 0s linear 0s; transform: translateX(0); visibility: visible; }
+  #sidebar.sidebar.collapsed {
+    width: 100%;
+    transform: translateX(calc(-100% - 40px));
+    visibility: hidden;
+    pointer-events: none;
+    box-shadow: none;
+    transition: transform 350ms ease, visibility 0s linear 350ms;
+  }
+  #sidebar-left-fab {
+    position: absolute; top: 80px; left: 20px; z-index: 2001;
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    background: #fff; color: #CC7A00; border: none; font-size: 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.35); cursor: pointer;
+    transition: opacity 200ms, transform 200ms, background 150ms, color 150ms;
+  }
+  #sidebar-left-fab:hover { background: #FF9900; color: #fff; }
+  #sidebar.sidebar:not(.collapsed) ~ #sidebar-left-fab {
+    opacity: 0; transform: scale(.6); pointer-events: none;
+  }
+}
+@media (min-width: 768px) {
+  #sidebar-left-fab { display: none; }
+}
+
+.cartoline-intro { font-size: 12px; color: #666; line-height: 1.5; margin: 0 0 12px 0; }
+.cartoline-toggles-bar { display: flex; gap: 8px; background: #fafafa; border: 1px solid #eee; border-radius: 10px; padding: 8px; margin-bottom: 12px; }
+.ct-icon-toggle { position: relative; flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 8px 4px; border-radius: 8px; background: #fff; border: 1px solid #ddd; color: #888; font-size: 16px; cursor: pointer; text-align: center; transition: border-color .15s, background .15s, color .15s; }
+.ct-icon-toggle input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.ct-icon-toggle-caption { font-size: 9.5px; font-weight: 600; line-height: 1.25; color: inherit; }
+.ct-icon-toggle.active { border-color: #FF9900; background: #fff7ec; color: #b96a00; }
+
+.cartoline-filters-card { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+.cartoline-filters-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; cursor: pointer; }
+.cartoline-filters-head-actions { display: flex; align-items: center; gap: 8px; }
+.cartoline-filters-caret { font-size: 12px; color: #999; transition: transform .2s; }
+.cartoline-filters-card.collapsed .cartoline-filters-head { margin-bottom: 0; }
+.cartoline-filters-card.collapsed .cartoline-filters-caret { transform: rotate(-90deg); }
+.cartoline-filters-card.collapsed .cartoline-filters-body { display: none; }
+.cartoline-filters-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: #999; }
+.cartoline-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
+.cartoline-filters select { width: 100%; font-size: 12.5px; padding: 6px 8px; border-radius: 6px; border: 1px solid #ccc; background: #fff; min-width: 0; }
+.cartoline-filters button.reset { flex: 0 0 auto; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; border: 1px solid #ccc; background: #fafafa; color: #666; cursor: pointer; }
+.cartoline-filters button.reset:hover { background: #eee; color: #333; }
+.cartoline-filters select.has-value { border-color: #FF9900; background: #fff7ec; font-weight: 600; color: #b96a00; }
+.cartoline-active-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.cartoline-active-filters:empty { display: none; margin-top: 0; }
+.ct-filter-chip { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; background: #fff7ec; border: 1px solid #FF9900; color: #b96a00; padding: 3px 4px 3px 8px; border-radius: 12px; }
+.ct-filter-chip strong { font-weight: 700; }
+.ct-filter-chip button { border: none; background: transparent; color: #b96a00; font-size: 13px; line-height: 1; cursor: pointer; padding: 0 3px; }
+.ct-filter-chip button:hover { color: #7a4600; }
+.cartoline-count { font-size: 11px; color: #888; margin: 8px 0 0; }
+
+/* filtri+contatore restano visibili durante lo scroll della gallery: lo
+   scroll avviene su .sidebar-content (vedi leaflet-sidebar.css), quindi
+   sticky con top:0 aggancia a quel contenitore */
+.cartoline-filters-sticky { position: sticky; top: -1px; z-index: 5; background: rgba(255,255,255,.97); padding-bottom: 10px; margin: 0 0 12px; }
+
+.cartoline-gallery { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 992px) { .cartoline-gallery { grid-template-columns: repeat(2, 1fr); } }
+.cartoline-card { perspective: 1200px; height: 340px; cursor: pointer; border-left: 4px solid var(--ct-zone-color, #ccc); border-radius: 8px; }
+.cartoline-card-inner { position: relative; width: 100%; height: 100%; transition: transform .55s cubic-bezier(.4,.2,.2,1); transform-style: preserve-3d; box-shadow: 0 2px 6px rgba(0,0,0,.18); border-radius: 0 8px 8px 0; }
+.cartoline-card.flipped .cartoline-card-inner { transform: rotateY(180deg); }
+.cartoline-card-face { position: absolute; inset: 0; backface-visibility: hidden; border-radius: 0 8px 8px 0; overflow: hidden; background: #fff; }
+.cartoline-card-front { display: flex; flex-direction: column; }
+.cartoline-card-front .ct-photo { position: relative; }
+.cartoline-card-front img { width: 100%; height: 220px; object-fit: cover; display: block; background: #ddd; }
+.cartoline-card-front .ct-photo-overlay { position: absolute; left: 0; right: 0; bottom: 0; padding: 20px 10px 6px; background: linear-gradient(to top, rgba(0,0,0,.75), rgba(0,0,0,0)); }
+.cartoline-card-front .ct-title { font-size: 12.5px; font-weight: 600; line-height: 1.3; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,.6); }
+.cartoline-card-front .ct-zone { font-size: 10.5px; color: #ffcf8a; font-weight: bold; margin-top: 2px; }
+.cartoline-card-front .ct-territorio { padding: 6px 10px 4px; margin-top: auto; border-top: 1px solid #f0f0f0; }
+.cartoline-card-front .ct-terr-item { display: block; font-size: 9.5px; color: #777; line-height: 1.5; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.cartoline-card-front .ct-terr-item strong { font-size: 8.5px; text-transform: uppercase; letter-spacing: .2px; color: #999; font-weight: 700; margin-right: 4px; }
+.cartoline-card-front .ct-flip-hint { padding: 0 10px 8px; font-size: 9.5px; color: #999; font-style: italic; }
+.cartoline-card-back { transform: rotateY(180deg); background: #2b2b2b; color: #eee; padding: 10px 12px; display: flex; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch; }
+.cartoline-card-back .ct-back-title { font-size: 12px; font-weight: bold; margin-bottom: 8px; color: #fff; line-height: 1.3; position: sticky; top: 0; background: #2b2b2b; padding-bottom: 4px; }
+.cartoline-card-back dl { margin: 0 0 8px 0; }
+.cartoline-card-back dt { font-size: 9px; font-weight: bold; text-transform: uppercase; letter-spacing: .3px; color: #FF9900; margin-top: 6px; }
+.cartoline-card-back dd { font-size: 10.5px; color: #ddd; margin: 1px 0 0 0; line-height: 1.35; }
+.cartoline-card-back dd a { color: #ffb84d; }
+.cartoline-card-back .ct-tag { display: inline-block; font-size: 9.5px; background: #FF9900; color: #fff; padding: 1px 7px; border-radius: 8px; }
+.ct-actions { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; flex: 0 0 auto; }
+.ct-actions a { font-size: 11px; text-align: center; padding: 6px 8px; border-radius: 5px; }
+/* !important necessario: il foglio globale base_ods.css definisce a:link/a:hover
+   con specificita' (0,1,1), superiore alla singola classe .ct-btn-* (0,1,0) —
+   senza forzare qui il testo arancione finiva su sfondo arancione (illeggibile) */
+a.ct-btn-map, a.ct-btn-map:link, a.ct-btn-map:visited { background: #FF9900; color: #fff !important; font-weight: bold; text-decoration: none !important; }
+a.ct-btn-map:hover, a.ct-btn-map:active { background: #e68a00; color: #fff !important; text-decoration: none !important; }
+a.ct-btn-flickr, a.ct-btn-flickr:link, a.ct-btn-flickr:visited { background: transparent; color: #ccc !important; border: 1px solid #555; text-decoration: none !important; }
+a.ct-btn-flickr:hover, a.ct-btn-flickr:active { color: #fff !important; border-color: #999; text-decoration: none !important; }
+.cartoline-card-front a.ct-btn-flickr, .cartoline-card-front a.ct-btn-flickr:link, .cartoline-card-front a.ct-btn-flickr:visited { border-color: #ddd; color: #888 !important; }
+.cartoline-card-front a.ct-btn-flickr:hover { color: #333 !important; border-color: #999; }
+.cartoline-card-front .ct-actions-front { flex-direction: row; margin: 4px 10px 0; gap: 6px; }
+.cartoline-card-front .ct-actions-front a { flex: 1 1 0; font-size: 10px; padding: 6px 4px; }
+.cartoline-card.hidden { display: none; }
+.cartoline-empty { display: none; padding: 20px 10px; text-align: center; color: #999; font-size: 12px; }
+
+.cartoline-marker-pop { text-align: center; font-size: 12px; }
+.cartoline-marker-pop img { width: 150px; height: 100px; object-fit: cover; border-radius: 6px; margin-bottom: 5px; }
+.cartoline-marker-pop .ct-go-card { display: inline-block; margin-top: 4px; font-size: 11px; font-weight: bold; color: #b96a00; text-decoration: none; }
+
+.ct-cluster-wrap { background: transparent; border: none; }
+.ct-cluster-icon { display: flex; align-items: center; justify-content: center; border-radius: 50%; background: rgba(255,153,0,0.85); color: #fff; font-weight: bold; font-size: 12px; box-shadow: 0 0 0 4px rgba(255,153,0,0.25), 0 1px 4px rgba(0,0,0,.4); cursor: pointer; }
+
+/* pulsante confronto affiancato disabilitato mentre "Disattiva effetti mappa" e' attivo */
+.map-toolbar-sidebyside.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+
+.ct-dot-wrap { background: transparent; border: none; }
+.ct-dot { width: 14px; height: 14px; border-radius: 50%; background: #2277cc; border: 2px solid #fff; box-shadow: 0 1px 3px rgba(0,0,0,.5); cursor: pointer; }
+
+/* fix: in questa versione di Leaflet (0.7.x) leaflet-marker-pane e
+   leaflet-popup-pane sono position:static (niente stacking context proprio),
+   quindi lo z-index del pane (600/700, vedi leaflet.css) e' ignorato dal
+   browser: vince semplicemente il marker con lo z-index numerico piu' alto
+   (assegnato in base alla posizione Y), che puo' finire sopra al popup. Si
+   forza qui uno z-index sempre piu' alto di qualsiasi marker sulla mappa. */
+.leaflet-popup { z-index: 10000 !important; }
+
+/* fix: l'SVG creato da L.Polyline (le "zampe" del ventaglio) riceve dal JS
+   attributi width/height nativi molto grandi (es. 2000x1357, l'area di
+   disegno del path) senza mai un position:absolute (stesso problema di
+   versione di cui sopra: ".leaflet-pane > svg" nel CSS non matcha perche'
+   il pane non ha la classe generica "leaflet-pane"). Essendo position:static,
+   quell'SVG gonfia l'altezza reale del contenitore condiviso con marker-pane
+   e popup-pane (l'ho misurato: passava da poche decine di px a 1360px con
+   una sola polyline), e il popup calcola la sua posizione (bottom:1px) su
+   quell'altezza gonfiata finendo centinaia di px fuori dallo schermo. Con
+   position:absolute l'SVG esce dal flusso normale e non altera piu' l'altezza
+   dei pane vicini (la sua resa visiva era gia' basata su 0,0 quindi invariata). */
+.leaflet-overlay-pane svg { position: absolute !important; top: 0; left: 0; }
+
+.ct-spider-leg { pointer-events: none; }
