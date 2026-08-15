@@ -9,7 +9,7 @@
     width: 40px; }
   @media (max-width: 767px) {
     .sidebar {
-      top: 60px; } }
+      top: 0; } }
   @media (min-width: 768px) {
     .sidebar {
       top: 90px;
