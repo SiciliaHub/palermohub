@@ -15,7 +15,19 @@ L.Control.Toolbar = L.Control.extend({
             L.DomEvent.disableScrollPropagation(container);
         }
 
-        var homeBtn = L.DomUtil.create("a", "map-toolbar-btn map-toolbar-home", container);
+        // pulsante "+" visibile solo mobile (CSS): apre/chiude gli strumenti
+        // secondari per lasciare la pillola compatta di default, come il
+        // resto della toolbar il timeslider non e' mai nascosto da questo
+        this._dialToggle = L.DomUtil.create("a", "map-toolbar-btn map-toolbar-dial-toggle", container);
+        this._dialToggle.href = "#";
+        this._dialToggle.title = "Altri strumenti";
+        this._dialToggle.innerHTML = '<i class="fa fa-plus" aria-hidden="true"></i>';
+        L.DomEvent.on(this._dialToggle, "click", function(e) {
+            L.DomEvent.stop(e);
+            this.toggleDial();
+        }, this);
+
+        var homeBtn = L.DomUtil.create("a", "map-toolbar-btn map-toolbar-home map-toolbar-collapsible", container);
         homeBtn.href = "#";
         homeBtn.title = "Torna alla vista iniziale";
         homeBtn.innerHTML = '<i class="fa fa-home" aria-hidden="true"></i>';
@@ -26,7 +38,7 @@ L.Control.Toolbar = L.Control.extend({
             }
         }, this);
 
-        var fullscreenBtn = L.DomUtil.create("a", "map-toolbar-btn map-toolbar-fullscreen", container);
+        var fullscreenBtn = L.DomUtil.create("a", "map-toolbar-btn map-toolbar-fullscreen map-toolbar-collapsible", container);
         fullscreenBtn.href = "#";
         fullscreenBtn.title = "Schermo intero";
         fullscreenBtn.innerHTML = '<i class="fa fa-expand" aria-hidden="true"></i>';
@@ -61,10 +73,12 @@ L.Control.Toolbar = L.Control.extend({
 
         this._basemapsWrap = this._createDropdownButton(container, "basemaps", "fa-map-o", "Scegli la mappa");
         this._searchWrap = this._createDropdownButton(container, "search", "fa-search", "Cerca un indirizzo");
+        L.DomUtil.addClass(this._basemapsWrap, "map-toolbar-collapsible");
+        L.DomUtil.addClass(this._searchWrap, "map-toolbar-collapsible");
 
         this._timesliderSlot = L.DomUtil.create("div", "map-toolbar-timeslider-slot", container);
 
-        var infoBtn = L.DomUtil.create("a", "map-toolbar-btn map-toolbar-info", container);
+        var infoBtn = L.DomUtil.create("a", "map-toolbar-btn map-toolbar-info map-toolbar-collapsible", container);
         infoBtn.href = "#";
         infoBtn.title = "Come funziona la mappa";
         infoBtn.innerHTML = '<i class="fa fa-info" aria-hidden="true"></i>';
@@ -81,9 +95,10 @@ L.Control.Toolbar = L.Control.extend({
                 var d = self._dropdowns[name];
                 if (!d.wrap.contains(e.target)) { self.closeDropdown(name); }
             });
+            if (!container.contains(e.target)) { self.closeDial(); }
         });
         L.DomEvent.on(document, "keydown", function(e) {
-            if (e.keyCode === 27) { self.closeAllDropdowns(); }
+            if (e.keyCode === 27) { self.closeAllDropdowns(); self.closeDial(); }
         });
 
         this._container = container;
@@ -201,6 +216,32 @@ L.Control.Toolbar = L.Control.extend({
     closeAllDropdowns: function() {
         var self = this;
         Object.keys(this._dropdowns).forEach(function(name) { self.closeDropdown(name); });
+    },
+
+    // solo mobile (il pulsante e' nascosto via CSS su desktop): mostra/nasconde
+    // i pulsanti .map-toolbar-collapsible, il timeslider resta sempre visibile
+    toggleDial: function() {
+        if (L.DomUtil.hasClass(this._container, "dial-open")) {
+            this.closeDial();
+        } else {
+            this.openDial();
+        }
+    },
+
+    openDial: function() {
+        L.DomUtil.addClass(this._container, "dial-open");
+        L.DomUtil.addClass(this._dialToggle, "active");
+        this._dialToggle.innerHTML = '<i class="fa fa-times" aria-hidden="true"></i>';
+        this._dialToggle.title = "Chiudi altri strumenti";
+    },
+
+    closeDial: function() {
+        if (!L.DomUtil.hasClass(this._container, "dial-open")) { return; }
+        L.DomUtil.removeClass(this._container, "dial-open");
+        L.DomUtil.removeClass(this._dialToggle, "active");
+        this._dialToggle.innerHTML = '<i class="fa fa-plus" aria-hidden="true"></i>';
+        this._dialToggle.title = "Altri strumenti";
+        this.closeAllDropdowns();
     }
 });
 

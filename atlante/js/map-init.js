@@ -455,7 +455,7 @@ overlayBasemaps.forEach(function(layer) {
 // solo per le icone del pannello mappe): i due array sono allineati per indice.
 // Iniettato qui invece che in L.Control.Toolbar.js perche' la funzionalita'
 // e' esclusiva di questa pagina.
-var sbsBtn = L.DomUtil.create('a', 'map-toolbar-btn map-toolbar-sidebyside');
+var sbsBtn = L.DomUtil.create('a', 'map-toolbar-btn map-toolbar-sidebyside map-toolbar-collapsible');
 sbsBtn.href = '#';
 sbsBtn.title = 'Confronta affiancate (side by side)';
 sbsBtn.innerHTML = '<i class="fa fa-columns" aria-hidden="true"></i>';
@@ -608,7 +608,7 @@ overlayBasemaps.forEach(function(layer) {
 	if (map.hasLayer(layer)) { applyOcchioSettings(layer); }
 });
 
-var settingsWrap = L.DomUtil.create('div', 'map-toolbar-dropdown-wrap');
+var settingsWrap = L.DomUtil.create('div', 'map-toolbar-dropdown-wrap map-toolbar-collapsible');
 var settingsBtn = L.DomUtil.create('a', 'map-toolbar-btn map-toolbar-occhio-settings', settingsWrap);
 settingsBtn.href = '#';
 settingsBtn.title = 'Impostazioni confronto (raggio/trasparenza)';

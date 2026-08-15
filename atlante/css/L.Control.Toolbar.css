@@ -53,6 +53,11 @@
     border-color: #FF9900;
     color: #fff !important;
 }
+/* pulsante "+" (speed-dial): esiste nel DOM solo per mobile, su desktop
+   la barra mostra gia' tutto e non serve un extra toggle */
+.map-toolbar-dial-toggle {
+    display: none;
+}
 /* icona della mappa attiva (pulsante "basemaps"): l'immagine copre l'icona
    fa finche' non c'e' una mappa da mostrare (this._setButtonImage) */
 .map-toolbar-btn-img {
@@ -80,6 +85,10 @@
     box-shadow: 0 0 0 2px #FF9900, 0 0 0 4px rgba(255,153,0,0.35);
 }
 .map-toolbar-dropdown-wrap {
+    /* border-radius = quello del bottone circolare interno: senza,
+       il box-shadow di .map-toolbar-collapsible (mobile) disegnava
+       angoli quadrati dietro l'icona rotonda */
+    border-radius: 50%;
     /* NON position:relative: cosi' il dropdown (position:absolute) si
        aggancia alla piu' vicina ancestor posizionata, che e' .map-toolbar
        stessa (position:fixed) e non questo wrapper. Il timeslider e' piu'
@@ -190,9 +199,9 @@
         max-width: none;
     }
     .map-toolbar-btn {
-        width: clamp(16px, 5.2vw, 20px);
-        height: clamp(16px, 5.2vw, 20px);
-        font-size: clamp(8px, 2.6vw, 9.5px);
+        width: clamp(26px, 8.5vw, 34px);
+        height: clamp(26px, 8.5vw, 34px);
+        font-size: clamp(13px, 4.2vw, 16px);
         flex-shrink: 0;
     }
     .map-toolbar-timeslider-slot {
@@ -224,5 +233,94 @@
        barra: resta comunque leggibile tramite il pulsante info/popup */
     .map-toolbar-timeslider-slot .basemaps-timeslider-name {
         display: none;
+    }
+
+    /* speed-dial (variante F testata in test_mobile_toolbar_variants.html):
+       niente piu' pillola unica orizzontale. Il FAB "+" resta ancorato in
+       alto a sinistra (stesso top:40px); sotto si apre una colonna
+       verticale con home/fullscreen/basemap/cerca/info. Il timeslider
+       esce dal flusso della colonna e resta sempre visibile come pillola
+       separata a destra del FAB, mai nascosto dal toggle */
+    .map-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        gap: clamp(4px, 1.5vw, 6px);
+    }
+    .map-toolbar-dial-toggle {
+        display: flex;
+        order: -1;
+        background: #fff;
+        box-shadow: 0 1px 6px rgba(0,0,0,.35);
+        /* la pillola timeslider (a destra, stesso top:0) e' piu' alta del
+           FAB (padding+label+slider), quindi condividendo top:0 i bordi
+           superiori combaciano ma i centri no; nudge verso il basso per
+           centrare il FAB sull'altezza della pillola. position:relative
+           sposta solo la resa visiva, non riserva spazio nel flusso: senza
+           margin-bottom pari, il FAB scendeva sovrapponendosi al bottone
+           Home sottostante nella colonna aperta */
+        position: relative;
+        top: 8px;
+        margin-bottom: 8px;
+    }
+    .map-toolbar-collapsible {
+        /* ogni pulsante ha ora la propria ombra/sfondo (la pillola che li
+           conteneva tutti e' sparita sopra) */
+        box-shadow: 0 1px 6px rgba(0,0,0,.35);
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        transition: max-height 0.22s ease, opacity 0.18s ease;
+    }
+    .map-toolbar.dial-open .map-toolbar-collapsible {
+        max-height: 44px;
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .map-toolbar-timeslider-slot {
+        /* fuori dal flusso della colonna: pillola propria, ancorata allo
+           stesso top:40px del FAB, a destra di esso, larghezza fino al
+           bordo destro del vincolo (right:10px gia' sul container) */
+        position: absolute;
+        top: 0;
+        left: calc(clamp(26px, 8.5vw, 34px) + 12px);
+        right: 0;
+        background: rgba(255,255,255,0.95);
+        border-radius: 30px;
+        box-shadow: 0 1px 6px rgba(0,0,0,.35);
+        padding: 3px clamp(6px, 2vw, 8px);
+    }
+    /* i dropdown (basemap/cerca) restano ancorati a .map-toolbar (fixed):
+       ora la colonna puo' essere piu' alta della pillola timeslider, quindi
+       si aprono sotto tutta la colonna aperta invece che sotto il singolo
+       bottone - comportamento accettato per questa variante */
+
+    /* su mobile la guida e' gia' raggiungibile dalla bottom-nav (#bottom-nav-guida):
+       il pulsante info nella colonna e' ridondante, si toglie del tutto */
+    .map-toolbar-info {
+        display: none !important;
+    }
+
+    /* dropdown (basemap/cerca): su mobile NON restano piu' ancorati sotto
+       il bottone che li apre (li portava fuori schermo/dietro la legenda,
+       vedi screenshot 2026-08-15_20h29_47). Si sganciano dal flusso della
+       colonna e si piazzano fissi appena sotto la pillola del timeslider,
+       stessa larghezza esatta di .map-toolbar-timeslider-slot (che inizia
+       dopo il FAB: clamp(26px,8.5vw,34px)+12px, piu' i 10px di left del
+       .map-toolbar - qui il dropdown e' fixed rispetto al viewport, non
+       piu' figlio di .map-toolbar, quindi va ricalcolato in assoluto
+       invece di ereditarlo) e davanti alla legenda (#legenda z-index:999) */
+    .map-toolbar-dropdown {
+        position: fixed;
+        top: 94px;
+        left: calc(10px + clamp(26px, 8.5vw, 34px) + 12px);
+        right: 10px;
+        width: auto;
+        max-width: none;
+        max-height: calc(100vh - 100px);
+        z-index: 2002;
     }
 }
