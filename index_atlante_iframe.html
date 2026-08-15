@@ -250,6 +250,12 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
    a sinistra). Da 768px in su resta il comportamento originale a striscia
    40px con le tab sempre visibili. */
 @media (max-width: 767px) {
+  /* leaflet-sidebar.css riserva margin-left:40px alla mappa per la striscia
+     icone, tolto solo da 768px in su (vedi .sidebar-left ~ .sidebar-map):
+     ora che sotto i 768px la sidebar e' off-canvas (niente striscia visibile)
+     quel margine va azzerato anche qui, altrimenti resta una fascia bianca
+     a sinistra larga 40px (lo stesso fix gia' presente per la destra). */
+  .sidebar-left ~ .sidebar-map { margin-left: 0 !important; }
   #sidebar.sidebar { transition: transform 350ms ease, visibility 0s linear 0s; transform: translateX(0); visibility: visible; }
   #sidebar.sidebar.collapsed {
     width: 100%;
