@@ -457,10 +457,26 @@
           applyFilters();
         });
       });
-      document.getElementById('cartoline-reset-filters').addEventListener('click', function () {
+      document.getElementById('cartoline-reset-filters').addEventListener('click', function (e) {
+        e.stopPropagation();
         FILTER_DEFS.forEach(function (def) { currentFilters[def.key] = ''; });
         refreshFilterOptions();
         applyFilters();
+      });
+
+      var isMobile = window.matchMedia('(max-width: 767px)').matches;
+      [
+        ['cartoline-info-card', 'cartoline-info-toggle'],
+        ['cartoline-toggles-card', 'cartoline-toggles-toggle'],
+        ['cartoline-filters-card', 'cartoline-filters-toggle']
+      ].forEach(function (pair) {
+        var card = document.getElementById(pair[0]);
+        var head = document.getElementById(pair[1]);
+        if (isMobile) { card.classList.add('collapsed'); }
+        head.addEventListener('click', function (e) {
+          if (e.target.closest('button')) { return; }
+          card.classList.toggle('collapsed');
+        });
       });
       document.getElementById('cartoline-showall-toggle').addEventListener('change', function (e) {
         e.target.closest('.ct-icon-toggle').classList.toggle('active', e.target.checked);

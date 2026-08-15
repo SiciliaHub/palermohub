@@ -51,8 +51,8 @@
 <link href="lib/css/LControlMousePosition_ods.css?v=1" rel="stylesheet" type="text/css">
 <link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
-<link href="atlante/css/L.Control.Basemaps2_timeslider.css?v=1" rel="stylesheet" type="text/css">
-<link href="atlante/css/L.Control.Toolbar.css?v=1" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Basemaps2_timeslider.css?v=2" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Toolbar.css?v=2" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Geocoder_ods.css?v=1" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
@@ -72,7 +72,7 @@
 <script src="atlante/js/tileoverlay/leaflet-tileoverlay-mask.js"></script>
 <script src="lib/js/mouseposition/LControlMousePosition.js"></script>
 <script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
-<script src="atlante/js/basemap/L.Control.Basemaps_02_timeslider.js?v=1"></script>
+<script src="atlante/js/basemap/L.Control.Basemaps_02_timeslider.js?v=2"></script>
 <script src="atlante/js/toolbar/L.Control.Toolbar.js?v=1"></script>
 <script src="atlante/js/geocoder/L.Control.Geocoder_ods.js?v=2"></script>
 <!-- effetto side by side: divide la mappa in due riquadri comparabili con uno slider -->
@@ -252,7 +252,12 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
 .ct-icon-toggle.active { border-color: #FF9900; background: #fff7ec; color: #b96a00; }
 
 .cartoline-filters-card { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 12px; margin-bottom: 12px; }
-.cartoline-filters-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+.cartoline-filters-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 10px; cursor: pointer; }
+.cartoline-filters-head-actions { display: flex; align-items: center; gap: 8px; }
+.cartoline-filters-caret { font-size: 12px; color: #999; transition: transform .2s; }
+.cartoline-filters-card.collapsed .cartoline-filters-head { margin-bottom: 0; }
+.cartoline-filters-card.collapsed .cartoline-filters-caret { transform: rotate(-90deg); }
+.cartoline-filters-card.collapsed .cartoline-filters-body { display: none; }
 .cartoline-filters-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: #999; }
 .cartoline-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; }
 .cartoline-filters select { width: 100%; font-size: 12.5px; padding: 6px 8px; border-radius: 6px; border: 1px solid #ccc; background: #fff; min-width: 0; }
@@ -940,38 +945,56 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
   <div class="sidebar-content">
     <div class="sidebar-pane active" id="cartoline">
       <h2 class="sidebar-header">#Viaggioneltempo<span class="sidebar-close"><i class="fa fa-caret-right"></i></span></h2><br><br>
-  <div class="techmap-block">
-    <h4 class="techmap-block-title"><i class="fa fa-image" aria-hidden="true"></i>Biblioteche e bene comune digitale</h4>
-    <p class="lorem">Dall&rsquo;11 al 16 marzo 2019 la Presidenza del Consiglio dei Ministri, Dipartimento della Funzione Pubblica organizza a livello nazionale la &ldquo;Settimana dell&rsquo;Amministrazione aperta&rdquo; con l&rsquo;obiettivo di promuovere la cultura e la pratica della trasparenza, della partecipazione e della accountability nelle amministrazioni pubbliche e nella società e accrescere la fiducia dei cittadini nelle istituzioni. Per il Comune di Palermo ha aderito la Biblioteca Comunale presentando il progetto Teca digitale.</p>
+  <div class="cartoline-filters-card" id="cartoline-info-card">
+    <div class="cartoline-filters-head" id="cartoline-info-toggle">
+      <span class="cartoline-filters-title"><i class="fa fa-image" aria-hidden="true"></i> Biblioteche e bene comune digitale</span>
+      <i class="fa fa-chevron-down cartoline-filters-caret" aria-hidden="true"></i>
+    </div>
+    <div class="cartoline-filters-body">
+      <p class="lorem">Dall&rsquo;11 al 16 marzo 2019 la Presidenza del Consiglio dei Ministri, Dipartimento della Funzione Pubblica organizza a livello nazionale la &ldquo;Settimana dell&rsquo;Amministrazione aperta&rdquo; con l&rsquo;obiettivo di promuovere la cultura e la pratica della trasparenza, della partecipazione e della accountability nelle amministrazioni pubbliche e nella società e accrescere la fiducia dei cittadini nelle istituzioni. Per il Comune di Palermo ha aderito la Biblioteca Comunale presentando il progetto Teca digitale.</p>
+    </div>
   </div>
 
-      <div class="cartoline-toggles-bar">
-        <label class="ct-icon-toggle" for="cartoline-showall-toggle" title="Mostra tutti i marker">
-          <input type="checkbox" id="cartoline-showall-toggle">
-          <i class="fa fa-eye" aria-hidden="true"></i>
-          <span class="ct-icon-toggle-caption">Mostra tutti i marker</span>
-        </label>
-        <label class="ct-icon-toggle" for="cartoline-noeffects-toggle" title="Disattiva effetti mappa (occhio di bue/affiancato)">
-          <input type="checkbox" id="cartoline-noeffects-toggle">
-          <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
-          <span class="ct-icon-toggle-caption">Disattiva effetti mappa</span>
-        </label>
+      <div class="cartoline-filters-card" id="cartoline-toggles-card">
+        <div class="cartoline-filters-head" id="cartoline-toggles-toggle">
+          <span class="cartoline-filters-title">Effetti mappa</span>
+          <i class="fa fa-chevron-down cartoline-filters-caret" aria-hidden="true"></i>
+        </div>
+        <div class="cartoline-filters-body">
+          <div class="cartoline-toggles-bar">
+            <label class="ct-icon-toggle" for="cartoline-showall-toggle" title="Mostra tutti i marker">
+              <input type="checkbox" id="cartoline-showall-toggle">
+              <i class="fa fa-eye" aria-hidden="true"></i>
+              <span class="ct-icon-toggle-caption">Mostra tutti i marker</span>
+            </label>
+            <label class="ct-icon-toggle" for="cartoline-noeffects-toggle" title="Disattiva effetti mappa (occhio di bue/affiancato)">
+              <input type="checkbox" id="cartoline-noeffects-toggle">
+              <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+              <span class="ct-icon-toggle-caption">Disattiva effetti mappa</span>
+            </label>
+          </div>
+        </div>
       </div>
 
       <div class="cartoline-filters-sticky">
-        <div class="cartoline-filters-card">
-          <div class="cartoline-filters-head">
+        <div class="cartoline-filters-card" id="cartoline-filters-card">
+          <div class="cartoline-filters-head" id="cartoline-filters-toggle">
             <span class="cartoline-filters-title">Filtra le cartoline</span>
-            <button class="reset" id="cartoline-reset-filters" type="button">Azzera</button>
+            <span class="cartoline-filters-head-actions">
+              <button class="reset" id="cartoline-reset-filters" type="button">Azzera</button>
+              <i class="fa fa-chevron-down cartoline-filters-caret" aria-hidden="true"></i>
+            </span>
           </div>
-          <div class="cartoline-filters">
-            <select id="cartoline-filter-circoscrizione"><option value="">Tutte le circoscrizioni</option></select>
-            <select id="cartoline-filter-zona"><option value="">Tutti i quartieri</option></select>
-            <select id="cartoline-filter-upl"><option value="">Tutte le UPL</option></select>
-            <select id="cartoline-filter-place"><option value="">Tutte le zone</option></select>
-            <select id="cartoline-filter-album"><option value="">Tutti gli album</option></select>
+          <div class="cartoline-filters-body">
+            <div class="cartoline-filters">
+              <select id="cartoline-filter-circoscrizione"><option value="">Tutte le circoscrizioni</option></select>
+              <select id="cartoline-filter-zona"><option value="">Tutti i quartieri</option></select>
+              <select id="cartoline-filter-upl"><option value="">Tutte le UPL</option></select>
+              <select id="cartoline-filter-place"><option value="">Tutte le zone</option></select>
+              <select id="cartoline-filter-album"><option value="">Tutti gli album</option></select>
+            </div>
+            <div class="cartoline-active-filters" id="cartoline-active-filters"></div>
           </div>
-          <div class="cartoline-active-filters" id="cartoline-active-filters"></div>
         </div>
         <p class="cartoline-count" id="cartoline-count"></p>
       </div>
@@ -1006,7 +1029,7 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
   <div id="map" class="sidebar-map"></div>
           
   <!-- carto Storica -->
-<script src="atlante/js/map-init.js"></script>
+<script src="atlante/js/map-init.js?v=2"></script>
          <!-- header -->
 
     <!-- popup  -->
@@ -1015,7 +1038,7 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
 <!-- guida selettore mappe: apertura automatica disattivata, si apre solo dall'icona "i" in toolbar -->
 
 <!-- Biblioteche e bene comune digitale: gallery cartoline storiche (sidebar destra) -->
-<script src="atlante/js/cartoline/cartoline.js"></script>
+<script src="atlante/js/cartoline/cartoline.js?v=2"></script>
 
 </body>
 </html>

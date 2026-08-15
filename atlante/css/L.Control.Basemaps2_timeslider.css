@@ -342,13 +342,19 @@
 @media (max-width: 480px) {
     /* su mobile l'attribution va su piu' righe e con margin-bottom la legenda
        resta comunque coperta o fuori schermo: la ancoro con position fixed
-       a una distanza fissa dal bordo inferiore, indipendente dall'attribution */
+       a una distanza fissa dal bordo inferiore, indipendente dall'attribution.
+       left:46px (verificato con screenshot headless): la barra .sidebar-tabs
+       collassata a sinistra occupa 0-40px con z-index 2000, sopra la legenda
+       (leaflet-control, z-index molto piu' basso) - con left inferiore a 40px
+       la legenda finisce sotto la barra e viene tagliata a meta'. */
     .leaflet-left .basemaps-accuracy-legend.leaflet-control {
         position: fixed !important;
-        left: 40px !important;
+        left: 46px !important;
         bottom: 140px !important;
         margin-bottom: 0 !important;
         top: auto !important;
+        max-width: calc(100vw - 56px);
+        box-sizing: border-box;
     }
 }
 .basemaps-accuracy-legend {
@@ -381,3 +387,10 @@
 .basemaps-accuracy-legend-label {
     white-space: nowrap;
 }
+
+/* legenda collassabile: su mobile parte chiusa (solo pallino "i" compatto),
+   tap per espandere - vedi toggle in L.Control.Basemaps_02_timeslider.js */
+.basemaps-accuracy-legend { cursor: pointer; }
+.basemaps-accuracy-legend.collapsed { padding: 6px 8px; }
+.basemaps-accuracy-legend.collapsed .basemaps-accuracy-legend-title { margin-bottom: 0; }
+.basemaps-accuracy-legend.collapsed .basemaps-accuracy-legend-row { display: none; }

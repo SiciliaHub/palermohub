@@ -19,7 +19,12 @@
     background: rgba(255,255,255,0.95);
     border-radius: 30px;
     box-shadow: 0 1px 6px rgba(0,0,0,0.35);
-    margin: 0;
+    /* !important necessario: leaflet.css applica margin-left:10px a
+       .leaflet-left .leaflet-control (per staccarli dal bordo del corner);
+       qui il controllo e' invece centrato via left:50%+transform, quindi
+       quel margin residuo lo spostava di 10px a destra rompendo la
+       centratura reale sul viewport (verificato con screenshot headless) */
+    margin: 0 !important;
     max-width: calc(100vw - 20px);
     box-sizing: border-box;
 }
@@ -164,27 +169,29 @@
 	font-weight: 700;
 }
 @media (max-width: 600px) {
+    /* dimensioni ridotte ~15% rispetto al desktop per stare comode su
+       schermi stretti e lasciare margine alla centratura (left:50%+transform) */
     .map-toolbar {
-        gap: 4px;
-        padding: 4px 5px;
+        gap: 3px;
+        padding: 3px 4px;
     }
     .map-toolbar-btn {
-        width: 24px;
-        height: 24px;
-        font-size: 11px;
+        width: 20px;
+        height: 20px;
+        font-size: 9.5px;
     }
     .map-toolbar-timeslider-slot .basemaps-timeslider {
-        min-width: 110px;
-        max-width: 140px;
+        min-width: 94px;
+        max-width: 119px;
         margin: 0 2px;
     }
     .map-toolbar-timeslider-slot .basemaps-timeslider-label {
-        font-size: 9px;
+        font-size: 8px;
     }
     .map-toolbar-timeslider-slot .basemaps-timeslider-current {
-        min-width: 18px;
-        height: 18px;
-        font-size: 9px;
+        min-width: 15px;
+        height: 15px;
+        font-size: 8px;
     }
     /* sotto i 600px il nome della mappa storica appesantisce troppo la
        barra: resta comunque leggibile tramite il pulsante info/popup */

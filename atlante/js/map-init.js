@@ -308,12 +308,38 @@ overlayBasemaps.forEach(function(layer) {
 			var hash = new L.Hash(map);
 			var sidebar = L.control.sidebar('sidebar').addTo(map);
 			var sidebarRight = L.control.sidebar('sidebar-right', { position: 'right' }).addTo(map);
+			var sidebarRightEl0 = document.getElementById('sidebar-right');
 			var sidebarRightFab = document.getElementById('sidebar-right-fab');
 			if (sidebarRightFab) {
 				sidebarRightFab.addEventListener('click', function () {
 					sidebarRight.open('cartoline');
 				});
 			}
+
+			// bug Chromium (mobile viewport meta, verificato con Playwright headless
+			// in isMobile+hasTouch, cioe' la stessa modalita' del device toolbar di
+			// Chrome/Brave DevTools): #sidebar-right chiusa resta position:fixed e
+			// si sposta fuori schermo solo via transform (translateX molto ampio,
+			// vedi CSS #sidebar-right.sidebar.collapsed). Questo box, pur invisibile,
+			// viene comunque conteggiato nel calcolo del layout viewport mobile,
+			// gonfiando window.innerWidth ben oltre la larghezza reale dello schermo
+			// (misurato: 430px -> 900px) e scentrando qualunque elemento posizionato
+			// con left:50% (la toolbar in alto, in primis). overflow:hidden su
+			// html/body NON basta a evitarlo (verificato). Fix: display:none quando
+			// chiusa (rimuove il box dal layout), ripristinato solo durante
+			// l'animazione di apertura/chiusura cosi' lo scivolamento resta visibile.
+			(function () {
+				var hideTimer = null;
+				if (sidebarRightEl0.classList.contains('collapsed')) { sidebarRightEl0.style.display = 'none'; }
+				new MutationObserver(function () {
+					clearTimeout(hideTimer);
+					if (sidebarRightEl0.classList.contains('collapsed')) {
+						hideTimer = setTimeout(function () { sidebarRightEl0.style.display = 'none'; }, 360);
+					} else {
+						sidebarRightEl0.style.display = '';
+					}
+				}).observe(sidebarRightEl0, { attributes: true, attributeFilter: ['class'] });
+			})();
 		   var toolbar = L.control.toolbar({
 			   homeCenter: INITIAL_CENTER,
 			   homeZoom: INITIAL_ZOOM
