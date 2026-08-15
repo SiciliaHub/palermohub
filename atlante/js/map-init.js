@@ -323,6 +323,17 @@ overlayBasemaps.forEach(function(layer) {
 				});
 			}
 
+			// mobile: solo una sidebar aperta alla volta — l'apertura dell'una chiude l'altra
+			(function () {
+				var mqMobile = window.matchMedia('(max-width: 767px)');
+				sidebar.on('opening', function () {
+					if (mqMobile.matches) { sidebarRight.close(); }
+				});
+				sidebarRight.on('opening', function () {
+					if (mqMobile.matches) { sidebar.close(); }
+				});
+			})();
+
 			// bug Chromium (mobile viewport meta, verificato con Playwright headless
 			// in isMobile+hasTouch, cioe' la stessa modalita' del device toolbar di
 			// Chrome/Brave DevTools): #sidebar-right chiusa resta position:fixed e

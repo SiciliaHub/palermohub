@@ -174,18 +174,15 @@
     .map-toolbar {
         gap: 3px;
         padding: 3px 4px;
-        /* misurato con Playwright a 430px: la centratura left:50%+transform
-           dava left=74.5px, width=281px (right implicito=74.5px, simmetrico).
-           Per allargare la barra mantenendo lo stesso bordo sx e fermarla a
-           20px dal bordo dx, si fissa left con la stessa formula (era
-           (100vw-281)/2 = 50vw-140.5px) e si ricava width di conseguenza
-           (100vw - 20px(dx) - left) = 50vw+120.5px, cosi' il bordo sx non si
-           sposta e quello dx arriva sempre a 20px dallo schermo */
-        left: calc(50vw - 140.5px);
-        right: auto;
+        /* centratura reale: 10px fissi a sx e dx invece della vecchia
+           formula calc(50vw...) che dava margini asimmetrici; spostata
+           piu' in basso (top) per non incollarsi al bordo schermo */
+        top: 16px;
+        left: 10px;
+        right: 10px;
         transform: none;
-        width: calc(50vw + 120.5px);
-        max-width: calc(50vw + 120.5px);
+        width: auto;
+        max-width: none;
     }
     .map-toolbar-btn {
         width: 20px;
