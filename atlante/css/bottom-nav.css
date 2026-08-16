@@ -6,6 +6,9 @@
 #bottom-nav { display: none; }
 
 @media (max-width: 767px) {
+  /* "Mostra tutti i marker" e "Overlay mappa" gia' presenti nella bottom-nav */
+  #cartoline-toggles-card { display: none; }
+
   #bottom-nav {
     display: flex;
     position: fixed;
