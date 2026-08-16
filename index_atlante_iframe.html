@@ -765,13 +765,14 @@ Web app progettata e sviluppata da <a href="https://www.linkedin.com/in/gbvitran
           <div class="cartoline-toggles-bar">
             <label class="ct-icon-toggle" for="cartoline-showall-toggle" title="Mostra tutti i marker">
               <input type="checkbox" id="cartoline-showall-toggle">
-              <i class="fa fa-eye" aria-hidden="true"></i>
+              <i class="fa fa-eye-slash ct-icon-eye" aria-hidden="true"></i>
               <span class="ct-icon-toggle-caption">Mostra tutti i marker</span>
             </label>
-            <label class="ct-icon-toggle" for="cartoline-noeffects-toggle" title="Disattiva effetti mappa (occhio di bue/affiancato)">
+            <label class="ct-icon-toggle" for="cartoline-noeffects-toggle" title="Disattiva overlay mappa (occhio di bue/affiancato)">
               <input type="checkbox" id="cartoline-noeffects-toggle">
-              <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
-              <span class="ct-icon-toggle-caption">Disattiva effetti mappa</span>
+              <svg class="ct-icon-layers" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              <svg class="ct-icon-layers-off" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:none"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+              <span class="ct-icon-toggle-caption">Overlay mappa</span>
             </label>
           </div>
         </div>
