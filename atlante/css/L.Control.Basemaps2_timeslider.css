@@ -86,7 +86,7 @@
 }
 .basemaps-help-toggle:hover,
 .basemaps-help-toggle.open {
-    color: #FF9900 !important;
+    color: var(--accent) !important;
 }
 .basemaps-help-panel {
     display: none;
@@ -112,7 +112,7 @@
 .basemaps-help-panel .basemap-help-step i {
     flex: 0 0 16px;
     font-size: 13px;
-    color: #FF9900;
+    color: var(--accent);
     text-align: center;
     margin-top: 1px;
 }
@@ -145,7 +145,7 @@
     left: 0;
     width: 50%;
     height: 100%;
-    background: #FF9900;
+    background: var(--accent);
     border-radius: 20px;
     transform: translateX(0%);
     transition: transform 0.28s cubic-bezier(0.65, 0, 0.35, 1);
@@ -250,7 +250,7 @@
     width: 100%;
     flex: 1 1 auto;
     margin-bottom: 0;
-    accent-color: #FF9900;
+    accent-color: var(--accent);
     cursor: pointer;
     filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 2px #fff);
 }
@@ -269,7 +269,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 .basemaps-timeslider-nav:hover {
-    background: #FF9900;
+    background: var(--accent);
     color: #fff !important;
 }
 .basemaps-timeslider-name-row {

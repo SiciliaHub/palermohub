@@ -44,7 +44,7 @@
 
   #bottom-nav button.active,
   #bottom-nav button:active {
-    color: #FF9900;
+    color: var(--accent);
   }
 
   /* i vecchi FAB in alto restano nel DOM (li apre ancora bottom-nav.js) ma

@@ -49,8 +49,8 @@
     background: #f5f5f5;
 }
 .map-toolbar-btn.active {
-    background: #FF9900;
-    border-color: #FF9900;
+    background: var(--accent);
+    border-color: var(--accent);
     color: #fff !important;
 }
 /* pulsante "+" (speed-dial): esiste nel DOM solo per mobile, su desktop
@@ -79,10 +79,10 @@
 .map-toolbar-btn.has-img {
     /* cerchio arancio sempre presente per evidenziare che l'icona mostra
        la mappa base attualmente attiva, non solo quando il dropdown e' aperto */
-    box-shadow: 0 0 0 2px #FF9900;
+    box-shadow: 0 0 0 2px var(--accent);
 }
 .map-toolbar-btn.active.has-img {
-    box-shadow: 0 0 0 2px #FF9900, 0 0 0 4px rgba(255,153,0,0.35);
+    box-shadow: 0 0 0 2px var(--accent), 0 0 0 4px rgba(255,153,0,0.35);
 }
 .map-toolbar-dropdown-wrap {
     /* border-radius = quello del bottone circolare interno: senza,
@@ -170,7 +170,7 @@
     height: 22px;
     padding: 0 5px;
     border-radius: 50%;
-    background: #FF9900;
+    background: var(--accent);
     color: #fff;
     font-size: 11px;
 }
@@ -335,4 +335,30 @@
         max-height: calc(100vh - 100px);
         z-index: 2002;
     }
+}
+
+/* Pannello impostazioni confronto (raggio/trasparenza occhio di bue, trasparenza mappa di base) */
+.occhio-settings-panel {
+    background: rgba(255,255,255,0.97);
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.35);
+    padding: 12px 14px;
+    width: 260px;
+    box-sizing: border-box;
+}
+.occhio-settings-row {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 10px;
+}
+.occhio-settings-row:last-child {
+    margin-bottom: 0;
+}
+.occhio-settings-row label {
+    font-size: 12px;
+    color: #333;
+}
+.occhio-settings-row input[type="range"] {
+    width: 100%;
 }

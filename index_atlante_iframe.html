@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 
 <head>
 <title>Atlante delle Carte Tecniche storiche di Palermo</title>
@@ -37,24 +37,24 @@
 <!-- twitter -->
 
 <!-- css remoto -->
-<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+<link href="atlante/css/fontawesome-subset.css" rel="stylesheet" type="text/css"/>
 <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
 
  <!-- css -->
-<link href="atlante/css/base_ods.css?v=3" rel="stylesheet" type="text/css">
+<link href="atlante/css/base_ods.css?v=5" rel="stylesheet" type="text/css">
 <link rel="stylesheet" href="lib/css/btns.min.css" type="text/css">
 
 <link href="atlante/css/leaflet.css" rel="stylesheet" type="text/css"> 
-<link href="atlante/css/leaflet-sidebar.css?v=7" rel="stylesheet" type="text/css">
+<link href="atlante/css/leaflet-sidebar.css?v=8" rel="stylesheet" type="text/css">
 
 <link href="atlante/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 <link href="lib/css/LControlMousePosition_ods.css?v=1" rel="stylesheet" type="text/css">
 <link href="lib/css/scalebar_ods.css" rel="stylesheet" type="text/css">
 <link href="lib/css/Leaflet_GraphicScale_min.css" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Basemaps2_timeslider.css?v=2" rel="stylesheet" type="text/css">
-<link href="atlante/css/L.Control.Toolbar.css?v=14" rel="stylesheet" type="text/css">
+<link href="atlante/css/L.Control.Toolbar.css?v=15" rel="stylesheet" type="text/css">
 <link href="atlante/css/L.Control.Geocoder_ods.css?v=1" rel="stylesheet" type="text/css">
-<link href="atlante/css/cartoline/cartoline.css?v=6" rel="stylesheet" type="text/css">
+<link href="atlante/css/cartoline/cartoline.css?v=8" rel="stylesheet" type="text/css">
 <link href="atlante/css/bottom-nav.css?v=3" rel="stylesheet" type="text/css">
 
 <link rel="stylesheet" href="lib/js/credits/leaflet-control-credits.css" />
@@ -117,37 +117,6 @@ function MM_swapImage() { //v3.0
 }
 </script>
 
-<style type="text/css">
-a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hover {color: #FF9900; text-decoration:underline; }a:active {color: #FF0000; text-decoration:none; }
-</style>
-<style type="text/css">
-/* POC: pannello impostazioni confronto (raggio/trasparenza occhio di bue,
-   trasparenza mappa di base) - vedi wiring in fondo alla pagina */
-.occhio-settings-panel {
-	background: rgba(255,255,255,0.97);
-	border-radius: 10px;
-	box-shadow: 0 1px 6px rgba(0,0,0,0.35);
-	padding: 12px 14px;
-	width: 260px;
-	box-sizing: border-box;
-}
-.occhio-settings-row {
-	display: flex;
-	flex-direction: column;
-	gap: 4px;
-	margin-bottom: 10px;
-}
-.occhio-settings-row:last-child {
-	margin-bottom: 0;
-}
-.occhio-settings-row label {
-	font-size: 12px;
-	color: #333;
-}
-.occhio-settings-row input[type="range"] {
-	width: 100%;
-}
-</style>
 </head>
 <body onload="MM_preloadImages('prg_1962/tav_03c.jpg','prg_1962/tav_04c.jpg','prg_1962/clip/tav_08c.jpg.jpg','prg_1962/clip/tav_01c.jpg','prg_1962/clip/tav_02c.jpg','prg_1962/clip/tav_03c.jpg','prg_1962/clip/tav_04c.jpg','prg_1962/clip/tav_05c.jpg','prg_1962/clip/tav_06c.jpg','prg_1962/clip/tav_07c.jpg','prg_1962/clip/tav_09c.jpg')">
 
@@ -165,7 +134,18 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
   <h3><i class="fa fa-map-o" aria-hidden="true"></i>Guida alla mappa</h3>
   <p class="guida-intro">L'Atlante mostra il territorio di Palermo attraverso oltre 400 anni di cartografia: dalle incisioni cinquecentesche ai rilievi aerofotogrammetrici più recenti, sovrapposti alla mappa attuale per confrontare come la città è cambiata. Qui sotto tutte le modalità di visualizzazione, con un esempio reale per ciascuna.</p>
 
-  <div class="guida-section">
+  <nav class="guida-toc" aria-label="Indice della guida">
+    <a href="#guida-sec-base" class="guida-toc-item"><i class="fa fa-globe" aria-hidden="true"></i>Base</a>
+    <a href="#guida-sec-occhio" class="guida-toc-item"><i class="fa fa-clone" aria-hidden="true"></i>Occhio di bue</a>
+    <a href="#guida-sec-affiancato" class="guida-toc-item"><i class="fa fa-columns" aria-hidden="true"></i>Affiancato</a>
+    <a href="#guida-sec-slider" class="guida-toc-item"><i class="fa fa-sliders" aria-hidden="true"></i>Slider temporale</a>
+    <a href="#guida-sec-precisione" class="guida-toc-item"><i class="fa fa-circle" aria-hidden="true"></i>Precisione</a>
+    <a href="#guida-sec-cartoline" class="guida-toc-item"><i class="fa fa-image" aria-hidden="true"></i>Cartoline</a>
+    <a href="#guida-sec-filtri" class="guida-toc-item"><i class="fa fa-filter" aria-hidden="true"></i>Filtri</a>
+    <a href="#guida-sec-mappa" class="guida-toc-item"><i class="fa fa-map-marker" aria-hidden="true"></i>Cartoline su mappa</a>
+  </nav>
+
+  <div class="guida-section" id="guida-sec-base">
     <div class="guida-section-title"><i class="fa fa-globe" aria-hidden="true"></i>Modalità Base</div>
     <p>Nel pannello del selettore mappe (icona con l'anteprima, in alto) scegli la tab <strong>Base cartografica</strong>: i cerchietti cambiano la mappa di sfondo attuale (OpenStreetMap, Google, Satellite). Nessuna mappa storica è sovrapposta.</p>
     <img class="guida-shot" src="atlante/img/guida/guida-pannello-base.jpg" alt="Pannello del selettore mappe con la tab Base cartografica attiva" loading="lazy">
@@ -173,7 +153,7 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
     <img class="guida-shot" src="atlante/img/guida/guida-base-satellite.jpg" alt="Mappa satellitare di Palermo come base cartografica" loading="lazy">
   </div>
 
-  <div class="guida-section">
+  <div class="guida-section" id="guida-sec-occhio">
     <div class="guida-section-title"><i class="fa fa-clone" aria-hidden="true"></i>Modalità Storica sovrapposta — occhio di bue</div>
     <p>Tab <strong>Storica sovrapposta</strong>: i cerchietti sovrappongono una mappa storica alla mappa attuale con l'effetto <strong>"occhio di bue"</strong>, un cerchio che segue il mouse e rivela cosa c'era in quel punto nel passato.</p>
     <img class="guida-shot" src="atlante/img/guida/guida-pannello-storica.jpg" alt="Pannello del selettore mappe con la tab Storica sovrapposta attiva" loading="lazy">
@@ -181,37 +161,37 @@ a:link {color: #FF9900;	text-decoration:none;} a:visited {	color: #FF9900;}a:hov
     <img class="guida-shot" src="atlante/img/guida/guida-occhio-di-bue.jpg" alt="Effetto occhio di bue con la mappa storica del 1580 sovrapposta al centro storico di Palermo" loading="lazy">
   </div>
 
-  <div class="guida-section">
+  <div class="guida-section" id="guida-sec-affiancato">
     <div class="guida-section-title"><i class="fa fa-columns" aria-hidden="true"></i>Confronto affiancato</div>
     <p>L'icona <strong>a colonne</strong> nella barra in alto, disponibile in modalità Storica sovrapposta, sostituisce l'occhio di bue con uno <strong>slider verticale trascinabile</strong> che divide lo schermo tra mappa storica e mappa attuale.</p>
     <img class="guida-shot" src="atlante/img/guida/guida-affiancato.jpg" alt="Confronto affiancato tra la mappa storica del 1580 e la mappa attuale, divise da uno slider verticale" loading="lazy">
   </div>
 
-  <div class="guida-section">
+  <div class="guida-section" id="guida-sec-slider">
     <div class="guida-section-title"><i class="fa fa-sliders" aria-hidden="true"></i>Slider temporale</div>
     <p>Sempre visibile nella barra in alto: trascinalo per scorrere velocemente tra tutte le mappe storiche in ordine cronologico, dal 1580 a oggi. La mappa e la sovrapposizione si aggiornano istantaneamente.</p>
     <img class="guida-shot" src="atlante/img/guida/guida-timeslider.jpg" alt="Slider temporale spostato su un anno intermedio, con la mappa storica corrispondente sovrapposta" loading="lazy">
   </div>
 
-  <div class="guida-section">
+  <div class="guida-section" id="guida-sec-precisione">
     <div class="guida-section-title"><i class="fa fa-circle" aria-hidden="true"></i>Precisione della georeferenziazione</div>
     <p>Il pallino colorato accanto al nome della mappa storica (e la legenda fissa in basso a sinistra) indica quanto è affidabile la sovrapposizione: <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-alta basemap-help-accuracy-sample"></span> <strong>verde</strong> = rilievo aerofotogrammetrico o cartografia tecnica moderna, buona corrispondenza; <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-media basemap-help-accuracy-sample"></span> <strong>giallo</strong> = rilievo pre-aerofotogrammetria, corrispondenza approssimativa; <span class="basemaps-timeslider-accuracy basemaps-timeslider-accuracy-bassa basemap-help-accuracy-sample"></span> <strong>rosso</strong> = disegno o incisione storica non rilevata scientificamente, sovrapposizione puramente indicativa. È un giudizio editoriale sulla fonte, non una misura: l'occhio di bue e lo swipe non vanno letti come pixel-perfect su queste mappe.</p>
     <img class="guida-shot guida-shot-legend" src="atlante/img/guida/guida-legenda-precisione.png" alt="Legenda della precisione di georeferenziazione, in basso a sinistra sulla mappa" loading="lazy">
   </div>
 
-  <div class="guida-section">
+  <div class="guida-section" id="guida-sec-cartoline">
     <div class="guida-section-title"><i class="fa fa-image" aria-hidden="true"></i>Novità: Cartoline storiche</div>
     <p>Nella sidebar a destra (icona con la cornice, in alto a destra della mappa) trovi oltre <strong>770 cartoline e foto storiche di Palermo</strong> dalla Teca digitale della Biblioteca Comunale, pubblicate su Flickr con licenza aperta CC BY-SA 4.0. Ogni scheda mostra l'immagine, il quartiere e i dati territoriali; cliccandola si "gira" mostrando i dettagli completi sul retro.</p>
     <img class="guida-shot" src="atlante/img/guida/guida-cartoline-sidebar.jpg" alt="Sidebar destra con la gallery di cartoline storiche, i due interruttori e i filtri" loading="lazy">
   </div>
 
-  <div class="guida-section">
+  <div class="guida-section" id="guida-sec-filtri">
     <div class="guida-section-title"><i class="fa fa-filter" aria-hidden="true"></i>Filtrare le cartoline</div>
     <p>I cinque menu a tendina (Circoscrizione, Quartiere, UPL, Zona, Album) sono <strong>interconnessi</strong>: scegliendo un valore, gli altri si aggiornano mostrando solo le opzioni ancora compatibili, cosi' non si arriva mai a una combinazione senza risultati. Ogni filtro attivo appare come etichetta rimovibile sotto i menu, e il bottone <strong>Azzera</strong> li resetta tutti insieme.</p>
     <img class="guida-shot" src="atlante/img/guida/guida-cartoline-filtro.jpg" alt="Filtro Circoscrizione attivo, con l'etichetta del filtro sotto i menu e il conteggio delle cartoline aggiornato" loading="lazy">
   </div>
 
-  <div class="guida-section">
+  <div class="guida-section" id="guida-sec-mappa">
     <div class="guida-section-title"><i class="fa fa-map-marker" aria-hidden="true"></i>Le cartoline sulla mappa</div>
     <p>Appena un filtro e' attivo (o si accende <strong>"Mostra tutti i marker"</strong>), le cartoline corrispondenti compaiono sulla mappa come pallini blu, raggruppati in cluster numerati dove sono vicine: un click su un cluster zooma per separarli, o li apre "a ventaglio" se lo zoom non basta. Cliccando un pallino si apre un'anteprima con link diretto alla scheda completa; dalla scheda, il bottone <strong>"Vedi sulla mappa"</strong> fa il percorso inverso, isolando quel marker e centrando la mappa su di esso.</p>
     <img class="guida-shot" src="atlante/img/guida/guida-cartoline-mappa.jpg" alt="Cluster di marker arancioni sulla mappa con il filtro Circoscrizione attivo" loading="lazy">
@@ -251,14 +231,14 @@ $(document).ready(function(){
             <ul role="tablist">
         <li role="presentation"><a href="#home" role="tab"><i class="fa fa-bars"></i></a></li>
 	    <li role="presentation"> <a href="#storia" title="Cenni storici" role="tab"><img src="legend/storia/logo_cs.png" alt="ODS" width="45" height="45" loading="lazy" /></a></li>
-        <li role="presentation" class="tab-group-start"> <a href="#omira" title="Carta Tecnica Omira 1935" role="tab"><strong class="tab-fs-13">'35</strong></a></li>
-        <li role="presentation"> <a href="#usarmymap" title="U.S. Army Map Service, 1941-1944" role="tab"><strong class="tab-fs-13">'41</strong></a></li>
-        <li role="presentation"> <a href="#irta" title="Carta Tecnica IRTA 1956" role="tab"><strong class="tab-fs-13">'56</strong></a></li>
-		<li role="presentation"> <a href="#prg62" title="PRG aggiornato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" role="tab"><strong class="tab-fs-13">'62</strong></a></li>
-        <li role="presentation"> <a href="#sas" title="Carta Tecnica SAS 1987" role="tab"><strong class="tab-fs-13">'87</strong></a></li>
-		<li role="presentation"> <a href="#ppe" title="P.P.E. del centro storico di Palermo, 1993" role="tab"><strong class="tab-fs-13">'93</strong></a></li>
-		<li role="presentation"> <a href="#prg" title="Variante Generale al PRG di Palermo, 2004" role="tab"><strong class="tab-fs-13">'04</strong></a></li>
-		<li role="presentation" class="tab-group-end"> <a href="#ctr2012" title="Carte tecniche recenti" role="tab"><strong class="tab-fs-13">'12</strong></a></li>
+        <li role="presentation" class="tab-group-start"> <a href="#omira" title="Carta Tecnica Omira 1935" role="tab"><strong class="tab-fs-13">'35</strong><span class="tab-label">Omira</span></a></li>
+        <li role="presentation"> <a href="#usarmymap" title="U.S. Army Map Service, 1941-1944" role="tab"><strong class="tab-fs-13">'41</strong><span class="tab-label">US Army</span></a></li>
+        <li role="presentation"> <a href="#irta" title="Carta Tecnica IRTA 1956" role="tab"><strong class="tab-fs-13">'56</strong><span class="tab-label">IRTA</span></a></li>
+		<li role="presentation"> <a href="#prg62" title="PRG aggiornato con i provvedimenti del d.p.r.s. n 110/a del 28/06/1962 e con le successive varianti fino a giugno 1984" role="tab"><strong class="tab-fs-13">'62</strong><span class="tab-label">PRG</span></a></li>
+        <li role="presentation"> <a href="#sas" title="Carta Tecnica SAS 1987" role="tab"><strong class="tab-fs-13">'87</strong><span class="tab-label">SAS</span></a></li>
+		<li role="presentation"> <a href="#ppe" title="P.P.E. del centro storico di Palermo, 1993" role="tab"><strong class="tab-fs-13">'93</strong><span class="tab-label">PPE</span></a></li>
+		<li role="presentation"> <a href="#prg" title="Variante Generale al PRG di Palermo, 2004" role="tab"><strong class="tab-fs-13">'04</strong><span class="tab-label">PRG</span></a></li>
+		<li role="presentation" class="tab-group-end"> <a href="#ctr2012" title="Carte tecniche recenti" role="tab"><strong class="tab-fs-13">'12</strong><span class="tab-label">CTR</span></a></li>
         <li role="presentation"><a href="#info"  title="Informazioni"role="tab"><i class="fa fa-info"></i></a></li>
         <li role="presentation" class="tab-group-end"> <a href="#about" title="About" role="tab"><img src="legend/logoods.svg" alt="ODS" width="20" height="20" loading="lazy" /></a></li>
          </ul>
@@ -280,12 +260,12 @@ $(document).ready(function(){
   <div class="techmap-block">
     <h4 class="techmap-block-title"><i class="fa fa-map-o" aria-hidden="true"></i>Un "fiume" limitrofo a Villa Sperlinga</h4>
       <p class="lorem">Il “Passo di Rigano” che costeggia Villa Sperlinga è un colpo d’occhio.<br><br>
-        <a href="#17/38.13889/13.33927"><img src="atlante/images/gbimg10.jpg" width="370" height="230" title="Villa Trabia" class="clip_resize" alt="Villa Trabia" loading="lazy" /></a> </p>
+        <a href="#17/38.13889/13.33927"><img src="atlante/images/gbimg10.jpg" width="370" height="230" title="Passo di Rigano" class="clip_resize" alt="Passo di Rigano" loading="lazy" /></a> </p>
   </div>
   <div class="techmap-block">
     <h4 class="techmap-block-title"><i class="fa fa-map-o" aria-hidden="true"></i>Il mare era "più vicino"</h4>
       <p class="lorem">Era subito dopo Porta Felice e probabilmente se ne sentiva molto più forte la presenza.<br><br>
-        <a href="#17/38.12060/13.36958"><img src="atlante/images/gbimg03.jpg" width="370" height="230" title="Villa Trabia" class="clip_resize" alt="Villa Trabia" loading="lazy" /></a> </p>
+        <a href="#17/38.12060/13.36958"><img src="atlante/images/gbimg03.jpg" width="370" height="230" title="Porta Felice" class="clip_resize" alt="Porta Felice" loading="lazy" /></a> </p>
   </div>
       <p class="lorem">...e ora scopri anche tu i cambiamenti nel tuo quartiere, …..buon viaggio nella storia cartografica della città di Palermo.<br><br>
        </div>
@@ -599,7 +579,7 @@ La morfologia primo del territorio. L'insediamento punico. La città romana e bi
 	  <!-- palermo 1862 -->	
   <div class="techmap-block">
     <h4 class="techmap-block-title"><i class="fa fa-map-o" aria-hidden="true"></i>Nuova pianta della Città di Palermo 1862 1:10k | Fonte: Harvard Map Collection, Harvard University</h4>
-	    <img src="legend/storia/palermo_1862.jpg" width="370" height="auto" title="Nuova pianta della Città di Palermo 1862 1:10k | Fonte: Harvard Map Collection, Harvard University" class="clip_resize" alt="Nuova pianta della Città di Palermo 1891" loading="lazy" />   <br /><br />
+	    <img src="legend/storia/palermo_1862.jpg" width="370" height="auto" title="Nuova pianta della Città di Palermo 1862 1:10k | Fonte: Harvard Map Collection, Harvard University" class="clip_resize" alt="Nuova pianta della Città di Palermo 1862" loading="lazy" />   <br /><br />
 	  <p class="lorem">La carta, quasi certamente di produzione italiana (non riporta alcuna informazione relativa all'edizione), risale agli anni Sessanta dell’Ottocento.<br />L'indubbio modello è la carta, la prima dell'epoca post-unitaria, fatta redigere nel 1862 dal prefetto Torelli (grazie per la correzione ad Antonino D'Amico); ne riporta anche un clamoroso errore, “Piano degli Otto” per “Piano degli Orti”.<br /> Rispetto al modello la rappresentazione è, fatto singolare, del tutto priva dei territori extramurari a sud e ad ovest; l’estensione verso nord è, in compenso, più ampia di quanto necessario per comprendere il porto.<br /> Un aspetto interessante per una carta generale della città (ma non inedito: è presente in particolare nella “Pianta geometrica” del Villabianca, 1777), è la presenza del “colore bleu (che) corrisponde alle parti della città le quali fino alla seconda metà del 12° secolo erano occupate dal mare”.<br /> Ultima annotazione: le vie della città murata sono indicate con un numero, ma il file che ho disposizione non contiene la relativa legenda. 
 	  <br /><br />Descrizione di: <strong><a href="https://www.facebook.com/groups/palermodiunavolta/posts/10159657462548007/" Title="Piero Genova" target="_blank" rel="noopener noreferrer">Piero Genova</a> per il Gruppo   <a href="https://www.facebook.com/groups/palermodiunavolta" Title="Palermo di Una Volta" target="_blank" rel="noopener noreferrer">Palermo di Una Volta</a></strong></p> 
 	 <p class="lorem"><strong> KML: </strong><a href="https://mapwarper.net/maps/60203.kml" Title="Scarica il file KML per visualizzarlo con Google Earth" target="_blank" rel="noopener noreferrer">Download KML file </a></p> 

@@ -725,8 +725,12 @@ function copyShareField(btn) {
 	el.setSelectionRange(0, el.value.length);
 	var showCopied = function() {
 		var original = btn.innerHTML;
-		btn.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
-		setTimeout(function() { btn.innerHTML = original; }, 1200);
+		btn.classList.add('share-copy-btn--copied');
+		btn.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i> Copiato!';
+		setTimeout(function() {
+			btn.classList.remove('share-copy-btn--copied');
+			btn.innerHTML = original;
+		}, 1500);
 	};
 	if (navigator.clipboard && navigator.clipboard.writeText) {
 		navigator.clipboard.writeText(el.value).then(showCopied, function() {

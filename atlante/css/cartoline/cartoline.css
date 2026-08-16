@@ -24,7 +24,11 @@
 #modal-basemap-help h3 { margin: 0 0 4px 0; font-size: 18px; color: #333; }
 #modal-basemap-help h3 i { color: #FF9900; margin-right: 6px; }
 #modal-basemap-help .guida-intro { margin: 0 0 18px 0; font-size: 13px; color: #666; line-height: 1.5; }
-#modal-basemap-help .guida-section { margin-bottom: 22px; }
+#modal-basemap-help .guida-toc { position: sticky; top: -20px; z-index: 2; display: flex; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 10px 0 14px; margin: -20px 0 18px; background: #fff; scrollbar-width: thin; }
+#modal-basemap-help .guida-toc-item { flex: 0 0 auto; display: flex; align-items: center; gap: 6px; padding: 6px 12px; border: 1px solid #eee; border-radius: 16px; background: #fafafa; color: #444; font-size: 12px; font-weight: 600; white-space: nowrap; text-decoration: none !important; }
+#modal-basemap-help .guida-toc-item i { color: #FF9900; font-size: 12px; }
+#modal-basemap-help .guida-toc-item:hover { background: #fff4e6; border-color: #FF9900; color: #FF9900; }
+#modal-basemap-help .guida-section { margin-bottom: 22px; scroll-margin-top: 68px; }
 #modal-basemap-help .guida-section:last-of-type { margin-bottom: 8px; }
 #modal-basemap-help .guida-section-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px 0; font-size: 14px; font-weight: bold; color: #333; }
 #modal-basemap-help .guida-section-title i { color: #FF9900; font-size: 15px; }
@@ -47,11 +51,12 @@
 #modal-basemap-help .basemap-help-ok:hover { background: #e68a00; }
 
 .techmap-block { background: #fafafa; border: 1px solid #eee; border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; }
-.techmap-block-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px 0; font-size: 14px; color: #333; }
+.techmap-block-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px 0; font-size: 14px; color: #333; font-family: "Fraunces", "Inter", Georgia, serif; font-weight: 600; }
 .techmap-block-title i { color: #FF9900; }
 .techmap-block-year { margin-left: auto; font-size: 11px; font-weight: 600; color: #777; background: #fff; border: 1px solid #eee; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
 .techmap-block p.lorem { margin-bottom: 8px; }
 .techmap-block p.lorem:last-child { margin-bottom: 0; }
+.techmap-block p.lorem:first-child { font-style: normal; text-align: left; color: #333; font-size: 12px; }
 .techmap-block table { margin-left: auto; margin-right: auto; }
 .techmap-block img.clip_resize { max-width: 100%; height: auto; }
 /* gallery cartoline storiche in sidebar destra (foto_biblioteca.geojson) */

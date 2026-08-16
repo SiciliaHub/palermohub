@@ -44,7 +44,7 @@
 }
 
 .geocoder-ods-clear:hover {
-    color: #FF9900;
+    color: var(--accent);
 }
 
 .geocoder-ods-results {
@@ -73,7 +73,7 @@
 
 .geocoder-ods-result:hover {
     background: #fafafa;
-    color: #FF9900;
+    color: var(--accent);
 }
 
 .geocoder-ods-empty {
