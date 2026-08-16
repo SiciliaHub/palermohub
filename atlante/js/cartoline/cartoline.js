@@ -479,12 +479,22 @@
         });
       });
       document.getElementById('cartoline-showall-toggle').addEventListener('change', function (e) {
-        e.target.closest('.ct-icon-toggle').classList.toggle('active', e.target.checked);
+        var label = e.target.closest('.ct-icon-toggle');
+        label.classList.toggle('active', e.target.checked);
+        var eyeIcon = label.querySelector('.ct-icon-eye');
+        if (eyeIcon) { eyeIcon.classList.toggle('fa-eye', e.target.checked); eyeIcon.classList.toggle('fa-eye-slash', !e.target.checked); }
         showAllOverride = e.target.checked;
         applyFilters();
       });
       document.getElementById('cartoline-noeffects-toggle').addEventListener('change', function (e) {
-        e.target.closest('.ct-icon-toggle').classList.toggle('active', e.target.checked);
+        var label = e.target.closest('.ct-icon-toggle');
+        label.classList.toggle('active', e.target.checked);
+        var layersIcon = label.querySelector('.ct-icon-layers');
+        var layersOffIcon = label.querySelector('.ct-icon-layers-off');
+        if (layersIcon && layersOffIcon) {
+          layersIcon.style.display = e.target.checked ? 'none' : '';
+          layersOffIcon.style.display = e.target.checked ? '' : 'none';
+        }
         setMapEffectsDisabled(e.target.checked);
       });
 

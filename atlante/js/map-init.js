@@ -349,38 +349,37 @@ overlayBasemaps.forEach(function(layer) {
 						if (isPaneOpen(sidebarRightEl0, 'cartoline')) { sidebarRight.close(); } else { sidebarRight.open('cartoline'); }
 					});
 				}
-				// swap icona fa-X in fa-Y sul primo <i> del bottone, in base allo stato "on"
-				function swapIcon(btn, iconOff, iconOn, on) {
-					var icon = btn.querySelector('i');
+				// sincronizza bottone bottom-nav con lo stato di un checkbox (sidebar),
+				// qualunque sia il lato che ha innescato il toggle
+				function bindNavToggle(btn, checkboxId, onSync) {
+					if (!btn) { return; }
+					var toggle = document.getElementById(checkboxId);
+					if (!toggle) { return; }
+					function sync() {
+						btn.classList.toggle('active', toggle.checked);
+						onSync(toggle.checked);
+					}
+					btn.addEventListener('click', function () {
+						toggle.checked = !toggle.checked;
+						toggle.dispatchEvent(new Event('change'));
+					});
+					toggle.addEventListener('change', sync);
+					sync();
+				}
+				bindNavToggle(btnEffetti, 'cartoline-noeffects-toggle', function (on) {
+					var layersIcon = btnEffetti.querySelector('.bn-icon-layers');
+					var layersOffIcon = btnEffetti.querySelector('.bn-icon-layers-off');
+					if (layersIcon && layersOffIcon) {
+						layersIcon.style.display = on ? 'none' : '';
+						layersOffIcon.style.display = on ? '' : 'none';
+					}
+				});
+				bindNavToggle(btnShowall, 'cartoline-showall-toggle', function (on) {
+					var icon = btnShowall.querySelector('i');
 					if (!icon) { return; }
-					icon.classList.remove(iconOff, iconOn);
-					icon.classList.add(on ? iconOn : iconOff);
-				}
-				if (btnEffetti) {
-					var effettiLayersIcon = btnEffetti.querySelector('.bn-icon-layers');
-					var effettiLayersOffIcon = btnEffetti.querySelector('.bn-icon-layers-off');
-					btnEffetti.addEventListener('click', function () {
-						var toggle = document.getElementById('cartoline-noeffects-toggle');
-						if (!toggle) { return; }
-						toggle.checked = !toggle.checked;
-						toggle.dispatchEvent(new Event('change'));
-						btnEffetti.classList.toggle('active', toggle.checked);
-						if (effettiLayersIcon && effettiLayersOffIcon) {
-							effettiLayersIcon.style.display = toggle.checked ? 'none' : '';
-							effettiLayersOffIcon.style.display = toggle.checked ? '' : 'none';
-						}
-					});
-				}
-				if (btnShowall) {
-					btnShowall.addEventListener('click', function () {
-						var toggle = document.getElementById('cartoline-showall-toggle');
-						if (!toggle) { return; }
-						toggle.checked = !toggle.checked;
-						toggle.dispatchEvent(new Event('change'));
-						btnShowall.classList.toggle('active', toggle.checked);
-						swapIcon(btnShowall, 'fa-eye-slash', 'fa-eye', toggle.checked);
-					});
-				}
+					icon.classList.remove('fa-eye-slash', 'fa-eye');
+					icon.classList.add(on ? 'fa-eye' : 'fa-eye-slash');
+				});
 				if (btnGuida) {
 					btnGuida.addEventListener('click', function () {
 						if (!window.jQuery) { return; }
