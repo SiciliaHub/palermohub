@@ -329,6 +329,7 @@ overlayBasemaps.forEach(function(layer) {
 				var btnMenu = document.getElementById('bottom-nav-menu');
 				var btnCartoline = document.getElementById('bottom-nav-cartoline');
 				var btnEffetti = document.getElementById('bottom-nav-effetti');
+				var btnShowall = document.getElementById('bottom-nav-showall');
 				var btnGuida = document.getElementById('bottom-nav-guida');
 
 				// secondo click sullo stesso pulsante deve richiudere la sidebar
@@ -348,13 +349,36 @@ overlayBasemaps.forEach(function(layer) {
 						if (isPaneOpen(sidebarRightEl0, 'cartoline')) { sidebarRight.close(); } else { sidebarRight.open('cartoline'); }
 					});
 				}
+				// swap icona fa-X in fa-Y sul primo <i> del bottone, in base allo stato "on"
+				function swapIcon(btn, iconOff, iconOn, on) {
+					var icon = btn.querySelector('i');
+					if (!icon) { return; }
+					icon.classList.remove(iconOff, iconOn);
+					icon.classList.add(on ? iconOn : iconOff);
+				}
 				if (btnEffetti) {
+					var effettiLayersIcon = btnEffetti.querySelector('.bn-icon-layers');
+					var effettiLayersOffIcon = btnEffetti.querySelector('.bn-icon-layers-off');
 					btnEffetti.addEventListener('click', function () {
 						var toggle = document.getElementById('cartoline-noeffects-toggle');
 						if (!toggle) { return; }
 						toggle.checked = !toggle.checked;
 						toggle.dispatchEvent(new Event('change'));
 						btnEffetti.classList.toggle('active', toggle.checked);
+						if (effettiLayersIcon && effettiLayersOffIcon) {
+							effettiLayersIcon.style.display = toggle.checked ? 'none' : '';
+							effettiLayersOffIcon.style.display = toggle.checked ? '' : 'none';
+						}
+					});
+				}
+				if (btnShowall) {
+					btnShowall.addEventListener('click', function () {
+						var toggle = document.getElementById('cartoline-showall-toggle');
+						if (!toggle) { return; }
+						toggle.checked = !toggle.checked;
+						toggle.dispatchEvent(new Event('change'));
+						btnShowall.classList.toggle('active', toggle.checked);
+						swapIcon(btnShowall, 'fa-eye-slash', 'fa-eye', toggle.checked);
 					});
 				}
 				if (btnGuida) {
