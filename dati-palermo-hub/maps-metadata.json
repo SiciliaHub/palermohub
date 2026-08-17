@@ -867,6 +867,20 @@
     "fonte": "Comune di Palermo",
     "descrizione": "Incidenti rilevati dalla Polizia Municipale di Palermo - Umap (tot. incidenti 3340)"
   },
+  "teca_digitale_iframe.html": {
+    "titolo": "Biblioteche e bene comune digitale",
+    "categoria": "Cultura",
+    "territorio": "Palermo",
+    "autore": "@aborruso",
+    "anno": "2019",
+    "tags": [
+      "Foto Storiche",
+      "Teca Digitale",
+      "Palermo"
+    ],
+    "fonte": "Comune di Palermo",
+    "descrizione": "Mappa dei progetti Teca digitale immagini storiche che il Sistema Bibliotecario Cittadino di Palermo ha reso disponibile online sul social network flickr tutte pubblicate con una licenza aperta CC BY-"
+  },
   "teca_digitale.html": {
     "titolo": "Teca Digitale e Bene Comune",
     "categoria": "Cultura",
@@ -1062,6 +1076,20 @@
     ],
     "fonte": "OpenStreetMap",
     "descrizione": "Mappa intereattiva dei ponti e viadotti siciliani utilizzando Tableau Public usando i dati di OpenStreetMap (utilizzando overpass-turbo.eu)"
+  },
+  "ponti_sicilia_linee.html": {
+    "titolo": "Sicilia - Ponti e viadotti Agosto 2018 - Tableau public (linee)",
+    "categoria": "Infrastrutture",
+    "territorio": "Sicilia",
+    "autore": "@gbvitrano",
+    "anno": "2018",
+    "tags": [
+      "Ponti",
+      "Viadotti",
+      "Sicilia"
+    ],
+    "fonte": "OpenStreetMap",
+    "descrizione": "Mappa intereattiva dei ponti e viadotti siciliani (vista a linee) utilizzando Tableau Public usando i dati di OpenStreetMap (utilizzando overpass-turbo.eu)"
   },
   "ponti_viadotti_sicilia.html": {
     "titolo": "Sicilia - Ponti e viadotti Agosto 2018",
@@ -1765,6 +1793,20 @@
     "descrizione": "Modello digitale del terreno #DTM – del territorio di Palermo"
   },
   "index_atlante.html": {
+    "titolo": "L'atlante delle carte storiche si rinnova: nuovo redesign per esplorare le cartografie e foto nel tempo",
+    "categoria": "Storia",
+    "territorio": "Palermo",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "Atlante",
+      "Cartografia Storica",
+      "Palermo"
+    ],
+    "fonte": "Comune di Palermo",
+    "descrizione": "Osservare il cambiamento di una città grazie alla cartografia... Rispetto alla mappa pubblicata ad Aprile 2017 è stata aggiunta una nuova carta tecnica ed è stato migliorato il passaggio da una carta "
+  },
+  "index_atlante_iframe.html": {
     "titolo": "L'atlante delle carte storiche si rinnova: nuovo redesign per esplorare le cartografie e foto nel tempo",
     "categoria": "Storia",
     "territorio": "Palermo",
@@ -2750,5 +2792,33 @@
     ],
     "fonte": "Climatology Lab",
     "descrizione": "Mappa bivariata interattiva di temperatura e precipitazioni per i 391 comuni della Sicilia, dati TerraClimate 1950-2025 mese per mese. Confronta clima caldo/freddo e secco/piovoso comune per comune."
+  },
+  "emergenza_idrica.html": {
+    "titolo": "Emergenza idrica in Sicilia | 2024",
+    "categoria": "Ambiente",
+    "territorio": "Sicilia",
+    "autore": "@gbvitrano",
+    "anno": "2024",
+    "tags": [
+      "Emergenza Idrica",
+      "Siccità",
+      "Sicilia"
+    ],
+    "fonte": "OpenDataSicilia",
+    "descrizione": "Mappa dei Comuni siciliani soggetti alla riduzione della fornitura idrica"
+  },
+  "emergenza_idrica_iframe.html": {
+    "titolo": "Emergenza idrica in Sicilia | 2024",
+    "categoria": "Ambiente",
+    "territorio": "Sicilia",
+    "autore": "@gbvitrano",
+    "anno": "2024",
+    "tags": [
+      "Emergenza Idrica",
+      "Siccità",
+      "Sicilia"
+    ],
+    "fonte": "OpenDataSicilia",
+    "descrizione": "Mappa dei Comuni siciliani soggetti alla riduzione della fornitura idrica"
   }
 }
