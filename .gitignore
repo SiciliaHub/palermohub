@@ -4,3 +4,6 @@ scripts/grant_ga4_access.py
 scripts/requirements-analytics.txt
 scripts/update_ga4_analytics.py
 pmtiles/catasto-app-api.html
+lib/js/client/ph-header_04.js
+lib/js/client/ph-header_01.js
+lib/js/client/ph-header_01.js
