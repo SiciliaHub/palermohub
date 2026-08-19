@@ -1220,6 +1220,16 @@ hr {
     box-shadow: var(--shadow-heavy);
 }
 
+.map-card-flip .map-card-inner {
+    /* batte "[data-theme] * { transform: translateZ(0); }" (piu' avanti nel
+       file). Deve essere rotateY(0deg) e non "none": con "none" non c'e'
+       nessuna funzione rotateY da abbinare a quella dello stato .flipped,
+       quindi il browser interpola via decomposizione di matrice invece che
+       per-funzione, e a 180 gradi quella decomposizione e' degenere: la
+       rotazione scatta invece di animare. */
+    transform: rotateY(0deg);
+}
+
 .map-card-flip.flipped .map-card-inner {
     transform: rotateY(180deg);
 }
@@ -2399,7 +2409,7 @@ select {
    SMOOTH TRANSITIONS & PERFORMANCE
    ======================================== */
 
-*, *::before, *::after {
+*:not(.map-card-inner), *::before, *::after {
     transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
 }
 
@@ -2425,7 +2435,7 @@ select {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
+    *:not(.map-card-inner), *::before, *::after {
         transition: none !important;
         animation: none !important;
     }
