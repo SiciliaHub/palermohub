@@ -1242,6 +1242,20 @@ hr {
    la rotazione statica e lascia il retro sempre visibile sopra al fronte */
 .map-card-flip .map-card-back {
     transform: rotateY(180deg);
+    background: #1b1f27;
+    border-color: #1b1f27;
+}
+
+.map-card-back .map-title,
+.map-card-back .map-authors strong,
+.map-card-back .map-info-item strong,
+.map-card-back .map-info-item {
+    color: #f5f6f8;
+}
+
+.map-card-back .author-list,
+.map-card-back .map-info-item {
+    color: #c7cbd3;
 }
 
 .map-card-front .map-content {
@@ -1276,6 +1290,10 @@ hr {
     flex-direction: column;
 }
 
+.map-card-back .map-card-footer {
+    justify-content: flex-end;
+}
+
 .map-open-btn {
     flex-shrink: 0;
     padding: 0.5rem 1.1rem;
@@ -1294,7 +1312,7 @@ hr {
 }
 
 .map-content {
-    padding: 1.5rem;
+    padding: 0.75rem;
 }
 
 .map-title {
@@ -1318,21 +1336,32 @@ hr {
 
 .map-meta {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
+    mask-image: linear-gradient(to right, black calc(100% - 20px), transparent 100%);
+}
+
+.map-meta::-webkit-scrollbar {
+    display: none;
 }
 
 .meta-tag {
     background: var(--primary-color);
     color: var(--white);
-    padding: 0.25rem 0.75rem;
+    padding: 0.25rem 0.5rem;
     border-radius: 20px;
     font-size: 0.65rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
     position: relative;
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .meta-tag:hover {
