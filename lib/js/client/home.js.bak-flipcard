@@ -1222,35 +1222,28 @@ function updateSuggestionSelection() {
 function hideSuggestions() {
     const suggestionsContainer = document.getElementById('smart-suggestions');
     const filtersSection = document.querySelector('.filters-section');
-
-    // Se non c'era nulla di aperto (nessun suggerimento, nessuna ricerca attiva),
-    // non c'e' nulla da "chiudere": evita di richiamare applyFilters()/displayMaps()
-    // ad ogni singolo click sulla pagina (es. click sulle card flip), che altrimenti
-    // ricrea tutte le card e annulla lo stato "flipped" appena impostato dal click.
-    const wasActive = (suggestionsContainer && suggestionsContainer.classList.contains('visible')) ||
-                       (filtersSection && filtersSection.classList.contains('search-active'));
-
+    
     if (suggestionsContainer) {
         suggestionsContainer.classList.remove('visible');
     }
-
+    
     // Controlla se c'è ancora testo di ricerca
     const searchInput = document.getElementById('smart-search-input');
     const hasSearchText = searchInput && searchInput.value.trim().length >= 2;
-
+    
     // Rimuovi la classe search-active solo se non c'è testo di ricerca
     if (!hasSearchText) {
         if (filtersSection) {
             filtersSection.classList.remove('search-active', 'expanded');
         }
-
+        
         // Se non c'è più ricerca attiva, applica un soft reset
-        if (wasActive && searchInput && searchInput.value.trim() === '') {
+        if (searchInput && searchInput.value.trim() === '') {
             // Solo riapplica i filtri senza reset completo
             applyFilters();
         }
     }
-
+    
     selectedSuggestion = -1;
     hideSearchStatus();
 }
@@ -2044,42 +2037,29 @@ function displayMaps() {
         const safeFonte = sanitizeText((map.fontedati || 'N/A').split(',')[0]) || 'N/A';
 
         if (isGridView) {
-            return `<div class="map-card map-card-flip"
-                         data-map-url="${mapUrl}"
+            return `<div class="map-card" 
+                         data-map-url="${mapUrl}" 
                          data-map-data="${mapDataEncoded}"
                          data-map-index="${index}">
-              <div class="map-card-inner">
-                <div class="map-card-face map-card-front">
-                  <img src="${imageUrl}"
-                       alt="${safeTitle}"
-                       class="map-image"
-                       onerror="this.src='${fallbackUrl}';">
-                  <div class="map-content">
-                      <h3 class="map-title">${safeTitle}</h3>
-                      <p class="map-description">${safeDescription}</p>
-                      <div class="map-meta">${tags}</div>
-                      <div class="map-card-footer">
-                          <div class="map-flip-hint"><i class="fas fa-sync-alt"></i> Clicca per i dettagli</div>
-                          <button type="button" class="map-open-btn"><i class="fas fa-external-link-alt"></i> Apri mappa</button>
-                      </div>
-                  </div>
+                <img src="${imageUrl}" 
+                     alt="${safeTitle}" 
+                     class="map-image" 
+                     onerror="this.src='${fallbackUrl}';">
+                <div class="map-content">
+                    <h3 class="map-title">${safeTitle}</h3>
+                    <p class="map-description">${safeDescription}</p>
+                    <div class="map-meta">${tags}</div>
+                    <div class="map-authors">
+                        <strong><i class="fas fa-users"></i> Autori:</strong>
+                        <div class="author-list">${authors}</div>
+                    </div>
+                    <div class="map-info">
+                        <div class="map-info-item"><strong><i class="fas fa-map-marked-alt"></i> Territorio:</strong> ${territories}</div>
+                        <div class="map-info-item"><strong><i class="fas fa-calendar-alt"></i> Anno:</strong> ${safeAnno}</div>
+                        <div class="map-info-item"><strong><i class="fas fa-database"></i> Fonte:</strong> ${safeFonte}</div>
+                        <div class="map-info-item"><strong><i class="fas fa-folder"></i> Categoria:</strong> ${safeCategoria}</div>
+                    </div>
                 </div>
-                <div class="map-card-face map-card-back">
-                  <div class="map-content">
-                      <h3 class="map-title">${safeTitle}</h3>
-                      <div class="map-authors">
-                          <strong><i class="fas fa-users"></i> Autori:</strong>
-                          <div class="author-list">${authors}</div>
-                      </div>
-                      <div class="map-info">
-                          <div class="map-info-item"><strong><i class="fas fa-map-marked-alt"></i> Territorio:</strong> ${territories}</div>
-                          <div class="map-info-item"><strong><i class="fas fa-calendar-alt"></i> Anno:</strong> ${safeAnno}</div>
-                          <div class="map-info-item"><strong><i class="fas fa-database"></i> Fonte:</strong> ${safeFonte}</div>
-                          <div class="map-info-item"><strong><i class="fas fa-folder"></i> Categoria:</strong> ${safeCategoria}</div>
-                      </div>
-                  </div>
-                </div>
-              </div>
             </div>`;
         } else {
             return `<div class="map-card" 
@@ -2143,23 +2123,13 @@ function displayMaps() {
         
         // Event listener per click normale
         card.addEventListener('click', function(event) {
-            // Ignora click su tag e author (filtrano, non aprono/girano la card)
+            // Ignora click su tag e author
             if (event.target.closest('.meta-tag, .author-tag')) {
                 return;
             }
-
-            // Card "flip" (vista griglia): il click gira la card avanti/indietro,
-            // solo il pulsante "Apri mappa" sul retro naviga davvero.
-            if (card.classList.contains('map-card-flip')) {
-                const openBtn = event.target.closest('.map-open-btn');
-                if (!openBtn) {
-                    card.classList.toggle('flipped');
-                    return;
-                }
-            }
-
+            
             console.log(`[EVENT] Card ${index} clicked, URL: ${mapUrl}`);
-
+            
             const mapData = safeJsonDecode(mapDataStr);
             if (!mapData) {
                 console.error(`[EVENT] Failed to decode map data for card ${index}`);
@@ -2169,7 +2139,7 @@ function displayMaps() {
                 }
                 return;
             }
-
+            
             handleMapClick(event, mapUrl, mapData);
         });
         
@@ -2433,22 +2403,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Ricalcola colonne griglia al resize (ultima riga sempre piena). displayMaps()
-    // ricrea tutte le card da zero, quindi va richiamato SOLO se il numero di
-    // colonne e' davvero cambiato: un resize minimo (es. comparsa/scomparsa della
-    // scrollbar) altrimenti ricostruiva la griglia inutilmente e cancellava lo
-    // stato "flipped" delle card appena girate dall'utente.
+    // Ricalcola colonne griglia al resize (ultima riga sempre piena)
     let gridResizeTimeout;
-    let lastGridColumnsCount = getGridColumns(document.getElementById('maps-container'));
     window.addEventListener('resize', () => {
         clearTimeout(gridResizeTimeout);
         gridResizeTimeout = setTimeout(() => {
-            if (currentViewMode !== 'pagination' || !isGridView) return;
-            const container = document.getElementById('maps-container');
-            const cols = getGridColumns(container);
-            if (cols === lastGridColumnsCount) return;
-            lastGridColumnsCount = cols;
-            displayMaps();
+            if (currentViewMode === 'pagination' && isGridView) displayMaps();
         }, 200);
     });
 
