@@ -141,11 +141,10 @@
     
     <!-- Container per iframe - occupa tutto lo spazio tra header e footer -->
     <div class="iframe-container">
-        <iframe id="main-iframe" 
-                src="https://palermohub.github.io/Pendolarismo_2021/" 
+        <iframe id="main-iframe"
+                src="https://palermohub.github.io/Pendolarismo_2021/"
                 title="Pendolarismo per lavoro 2021 - Flussi tra comuni italiani "
-                allowfullscreen
-                loading="lazy">
+                allowfullscreen>
         </iframe>
     </div>
     
@@ -161,6 +160,27 @@
 
 
 <script>
+// Sync route mappa (#zoom/lat/lng) tra iframe cross-origin e barra indirizzi
+(function() {
+    const IFRAME_ORIGIN = 'https://palermohub.github.io';
+    const iframe = document.getElementById('main-iframe');
+
+    // All'apertura: inoltra l'hash corrente del wrapper all'app dentro l'iframe
+    if (window.location.hash) {
+        const src = new URL(iframe.src);
+        src.hash = window.location.hash;
+        iframe.src = src.href;
+    }
+
+    // Quando l'app dentro l'iframe cambia vista, aggiorna la barra indirizzi
+    window.addEventListener('message', function(e) {
+        if (e.origin !== IFRAME_ORIGIN || !e.data || e.data.type !== 'hash:route') return;
+        const url = new URL(window.location.href);
+        url.hash = e.data.hash || '';
+        history.replaceState(null, '', url);
+    });
+})();
+
 // Gestione layout con header e footer PalermoHub
 document.addEventListener('DOMContentLoaded', function() {
     // Leggi parametri URL e crea breadcrumbs

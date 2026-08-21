@@ -139,11 +139,10 @@
     
     <!-- Container per iframe - occupa tutto lo spazio tra header e footer -->
     <div class="iframe-container">
-        <iframe id="main-iframe" 
-                src="https://palermohub.github.io/potere_d-acquisto_reale/" 
+        <iframe id="main-iframe"
+                src="https://palermohub.github.io/potere_d-acquisto_reale/"
                 title="Potere d'acquisto reale nei comuni e province italiane: reddito IRPEF 2024 corretto per il costo della vita (OMI e NIC Istat). Mappa interattiva, classifiche e vista bivariata."
-                allowfullscreen
-                loading="lazy">
+                allowfullscreen>
         </iframe>
     </div>
     
@@ -159,6 +158,37 @@
 
 
 <script>
+// Sync route mappa (?regione/provincia/comune=...#zoom/lat/lng) tra iframe cross-origin e barra indirizzi
+(function() {
+    const IFRAME_ORIGIN = 'https://palermohub.github.io';
+    const GEO_PARAMS = ['regione', 'provincia', 'comune'];
+    const iframe = document.getElementById('main-iframe');
+
+    // All'apertura: inoltra i parametri geo/hash correnti del wrapper all'app dentro l'iframe
+    const wrapperParams = new URLSearchParams(window.location.search);
+    const hasGeoParam = GEO_PARAMS.some((k) => wrapperParams.has(k));
+    if (hasGeoParam || window.location.hash) {
+        const src = new URL(iframe.src);
+        GEO_PARAMS.forEach((k) => {
+            if (wrapperParams.has(k)) src.searchParams.set(k, wrapperParams.get(k));
+        });
+        src.hash = window.location.hash;
+        iframe.src = src.href;
+    }
+
+    // Quando l'app dentro l'iframe cambia geo/vista, aggiorna la barra indirizzi
+    window.addEventListener('message', function(e) {
+        if (e.origin !== IFRAME_ORIGIN || !e.data || e.data.type !== 'geo:route') return;
+        const url = new URL(window.location.href);
+        GEO_PARAMS.forEach((k) => {
+            if (e.data[k]) url.searchParams.set(k, e.data[k]);
+            else url.searchParams.delete(k);
+        });
+        url.hash = e.data.hash || '';
+        history.replaceState(null, '', url);
+    });
+})();
+
 // Gestione layout con header e footer PalermoHub
 document.addEventListener('DOMContentLoaded', function() {
     // Leggi parametri URL e crea breadcrumbs
