@@ -140,11 +140,10 @@
     
     <!-- Container per iframe - occupa tutto lo spazio tra header e footer -->
     <div class="iframe-container">
-        <iframe id="main-iframe" 
-                src="https://palermohub.github.io/peba/index.html" 
+        <iframe id="main-iframe"
+                src="https://palermohub.github.io/peba/index.html"
                 title="Piano di Eliminazione delle Barriere Architettoniche"
-                allowfullscreen
-                loading="lazy">
+                allowfullscreen>
         </iframe>
     </div>
     
@@ -160,6 +159,31 @@
 
 
 <script>
+// Sync route mappa PEBA (?scheda=...#zoom/lat/lng) tra iframe cross-origin e barra indirizzi
+(function() {
+    const IFRAME_ORIGIN = 'https://palermohub.github.io';
+    const iframe = document.getElementById('main-iframe');
+
+    // All'apertura: inoltra scheda/hash correnti del wrapper all'app dentro l'iframe
+    const scheda = new URLSearchParams(window.location.search).get('scheda');
+    if (scheda || window.location.hash) {
+        const src = new URL(iframe.src);
+        if (scheda) src.searchParams.set('scheda', scheda);
+        src.hash = window.location.hash;
+        iframe.src = src.href;
+    }
+
+    // Quando l'app dentro l'iframe cambia scheda/vista, aggiorna la barra indirizzi
+    window.addEventListener('message', function(e) {
+        if (e.origin !== IFRAME_ORIGIN || !e.data || e.data.type !== 'peba:route') return;
+        const url = new URL(window.location.href);
+        if (e.data.scheda) url.searchParams.set('scheda', e.data.scheda);
+        else url.searchParams.delete('scheda');
+        url.hash = e.data.hash || '';
+        history.replaceState(null, '', url);
+    });
+})();
+
 // Gestione layout con header e footer PalermoHub
 document.addEventListener('DOMContentLoaded', function() {
     // Leggi parametri URL e crea breadcrumbs
