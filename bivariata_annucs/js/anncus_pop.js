@@ -137,27 +137,15 @@ let activeAnomLbl = null; // 'civ','pop'
 const protocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', protocol.tile.bind(protocol));
 
+// --- OpenFreeMap style URLs ---
+const OFM_STYLE_DARK  = 'https://tiles.openfreemap.org/styles/fiord';
+const OFM_STYLE_LIGHT = 'https://tiles.openfreemap.org/styles/positron';
+let currentOfmStyle = (localStorage.getItem('anncus-theme') === 'light') ? OFM_STYLE_LIGHT : OFM_STYLE_DARK;
+
 // --- Map ---
 const map = new maplibregl.Map({
   container: 'map',
-  style: {
-    version: 8,
-    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-    sources: {
-      'carto-dark': {
-        type: 'raster',
-        tiles: [
-          'https://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-          'https://b.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-          'https://c.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-          'https://d.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-        ],
-        tileSize: 256,
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
-      },
-    },
-    layers: [{ id: 'carto-dark', type: 'raster', source: 'carto-dark' }],
-  },
+  style: currentOfmStyle,
   center: [13.3265, 38.135],
   zoom: 11,
   minZoom: 11,
@@ -183,10 +171,13 @@ const LAYER_GROUPS = {
   upl:   { ids: ['upl-fill', 'upl-border'],                         active: false, title: 'Unità di Paesaggio · Palermo',      subtitle: 'Aggregati per UPL · ANNCSU + ISTAT' },
 };
 
-map.on('load', () => {
+function addCustomLayers() {
   // --- Sources ---
   map.addSource('sezioni',   { type: 'vector', url: 'pmtiles://https://palermohub.github.io/pmtiles/anncus_pop/sezioni.pmtiles' });
   map.addSource('aggregati', { type: 'vector', url: 'pmtiles://https://palermohub.github.io/pmtiles/anncus_pop/aggregati.pmtiles' });
+
+  // Etichette OpenFreeMap (Positron/Fiord) sopra i nostri poligoni
+  const firstLabelId = map.getStyle().layers.find(l => l.type === 'symbol')?.id;
 
   // --- Sezioni bivariata ---
   map.addLayer({
@@ -198,11 +189,11 @@ map.on('load', () => {
         '1-3','#5ac8c8','2-3','#5698b9','3-3','#3b4994','#444'],
       'fill-opacity': 0.82,
     },
-  });
+  }, firstLabelId);
   map.addLayer({
     id: 'sezioni-biv-border', type: 'line', source: 'sezioni', 'source-layer': 'sezioni',
     paint: { 'line-color': 'rgba(0,0,0,0.22)', 'line-width': 0.6 },
-  });
+  }, firstLabelId);
 
   // --- Sezioni densità popolazione (nascosta) ---
   map.addLayer({
@@ -216,12 +207,12 @@ map.on('load', () => {
         23643.31,'#bd0026',29414.47,'#800026',38558.02,'#4d0019'],
       'fill-opacity': 0.82,
     },
-  });
+  }, firstLabelId);
   map.addLayer({
     id: 'sezioni-dens-border', type: 'line', source: 'sezioni', 'source-layer': 'sezioni',
     layout: { visibility: 'none' },
     paint: { 'line-color': 'rgba(0,0,0,0.22)', 'line-width': 0.5 },
-  });
+  }, firstLabelId);
 
   // --- Anomalie bivariata (nascosta) ---
   map.addLayer({
@@ -232,94 +223,53 @@ map.on('load', () => {
       'fill-color': ['case', ['>', ['get', 'cls_civici'], ['get', 'cls_pop']], '#ff6b35', '#4ecdc4'],
       'fill-opacity': 0.88,
     },
-  });
+  }, firstLabelId);
 
   // --- Quartieri (nascosto) ---
   map.addLayer({
     id: 'quartieri-fill', type: 'fill', source: 'aggregati', 'source-layer': 'quartieri',
     layout: { visibility: 'none' },
     paint: { 'fill-color': ['coalesce', ['get', 'col_modale'], '#444'], 'fill-opacity': 0.55 },
-  });
+  }, firstLabelId);
   map.addLayer({
     id: 'quartieri-border', type: 'line', source: 'aggregati', 'source-layer': 'quartieri',
     layout: { visibility: 'none' },
     paint: { 'line-color': '#5ac8c8', 'line-width': 1.5 },
-  });
+  }, firstLabelId);
 
   // --- Circoscrizioni (nascosta) ---
   map.addLayer({
     id: 'circoscrizioni-fill', type: 'fill', source: 'aggregati', 'source-layer': 'circoscrizioni',
     layout: { visibility: 'none' },
     paint: { 'fill-color': ['coalesce', ['get', 'col_modale'], '#444'], 'fill-opacity': 0.45 },
-  });
+  }, firstLabelId);
   map.addLayer({
     id: 'circoscrizioni-border', type: 'line', source: 'aggregati', 'source-layer': 'circoscrizioni',
     layout: { visibility: 'none' },
     paint: { 'line-color': '#be64ac', 'line-width': 2 },
-  });
+  }, firstLabelId);
 
   // --- UPL (nascosta) ---
   map.addLayer({
     id: 'upl-fill', type: 'fill', source: 'aggregati', 'source-layer': 'upl',
     layout: { visibility: 'none' },
     paint: { 'fill-color': ['coalesce', ['get', 'col_modale'], '#444'], 'fill-opacity': 0.50 },
-  });
+  }, firstLabelId);
   map.addLayer({
     id: 'upl-border', type: 'line', source: 'aggregati', 'source-layer': 'upl',
     layout: { visibility: 'none' },
     paint: { 'line-color': '#fdb434', 'line-width': 1.5 },
-  });
-
-  // --- Etichette CartoDB sopra tutto ---
-  map.addSource('carto-labels', {
-    type: 'raster',
-    tiles: [
-      'https://a.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png',
-      'https://b.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png',
-    ],
-    tileSize: 256,
-  });
-  map.addLayer({ id: 'carto-labels', type: 'raster', source: 'carto-labels' });
-
-  // Source/layer CartoDB light — per theme switch
-  map.addSource('carto-light', {
-    type: 'raster',
-    tiles: [
-      'https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-      'https://b.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-    ],
-    tileSize: 256,
-  });
-  map.addLayer(
-    { id: 'carto-light', type: 'raster', source: 'carto-light', layout: { visibility: 'none' } },
-    'sezioni-biv'
-  );
-  map.addSource('carto-labels-light', {
-    type: 'raster',
-    tiles: [
-      'https://a.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
-      'https://b.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
-    ],
-    tileSize: 256,
-  });
-  map.addLayer({ id: 'carto-labels-light', type: 'raster', source: 'carto-labels-light', layout: { visibility: 'none' } });
-
-  // Applica tema salvato ai layer basemap
-  const _t = localStorage.getItem('anncus-theme');
-  if (_t === 'light') {
-    map.setLayoutProperty('carto-dark',         'visibility', 'none');
-    map.setLayoutProperty('carto-light',        'visibility', 'visible');
-    map.setLayoutProperty('carto-labels',       'visibility', 'none');
-    map.setLayoutProperty('carto-labels-light', 'visibility', 'visible');
-  }
+  }, firstLabelId);
 
   setupHover();
   applyFilters();
   updateLegends('biv');
-});
+}
+
+map.on('load', addCustomLayers);
 
 // --- Fetch props leggeri per statistiche e zoom ---
-fetch('bivariata_annucs/dati/sezioni_stats.json')
+fetch('dati/sezioni_stats.json')
   .then(r => r.json())
   .then(d => { PROPS = d.props; BBOXES = d.bboxes; updateStats(); });
 
@@ -579,11 +529,11 @@ const btnTheme = document.getElementById('btn-theme');
 function applyTheme(dark) {
   document.body.classList.toggle('dark', dark);
   btnTheme.title = dark ? 'Tema chiaro' : 'Tema scuro';
-  if (map.getLayer('carto-light')) {
-    map.setLayoutProperty('carto-dark',         'visibility', dark ? 'visible' : 'none');
-    map.setLayoutProperty('carto-light',        'visibility', dark ? 'none'    : 'visible');
-    map.setLayoutProperty('carto-labels',       'visibility', dark ? 'visible' : 'none');
-    map.setLayoutProperty('carto-labels-light', 'visibility', dark ? 'none'    : 'visible');
+  const targetStyle = dark ? OFM_STYLE_DARK : OFM_STYLE_LIGHT;
+  if (targetStyle !== currentOfmStyle) {
+    currentOfmStyle = targetStyle;
+    map.setStyle(targetStyle, { diff: false });
+    map.once('style.load', addCustomLayers);
   }
   localStorage.setItem('anncus-theme', dark ? 'dark' : 'light');
 }
