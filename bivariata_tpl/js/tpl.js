@@ -137,27 +137,17 @@ let activeAnomLbl = null; // 'civ','pop'
 const protocol = new pmtiles.Protocol();
 maplibregl.addProtocol('pmtiles', protocol.tile.bind(protocol));
 
+// --- Basemap OpenFreeMap ---
+const BASEMAP_STYLES = {
+  light: 'https://tiles.openfreemap.org/styles/positron',
+  dark:  'https://tiles.openfreemap.org/styles/fiord',
+};
+const initialTheme = localStorage.getItem('anncus-theme') === 'light' ? 'light' : 'dark';
+
 // --- Map ---
 const map = new maplibregl.Map({
   container: 'map',
-  style: {
-    version: 8,
-    glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
-    sources: {
-      'carto-dark': {
-        type: 'raster',
-        tiles: [
-          'https://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-          'https://b.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-          'https://c.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-          'https://d.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png',
-        ],
-        tileSize: 256,
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
-      },
-    },
-    layers: [{ id: 'carto-dark', type: 'raster', source: 'carto-dark' }],
-  },
+  style: BASEMAP_STYLES[initialTheme],
   center: [13.3265, 38.135],
   zoom: 11,
   minZoom: 11,
@@ -171,7 +161,10 @@ const map = new maplibregl.Map({
 });
 map.touchZoomRotate.disableRotation();
 
-map.addControl(new maplibregl.AttributionControl({ compact: true }), 'bottom-right');
+map.addControl(new maplibregl.AttributionControl({
+  compact: true,
+  customAttribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://openmaptiles.org/">OpenMapTiles</a> · <a href="https://openfreemap.org/">OpenFreeMap</a>',
+}), 'bottom-right');
 
 // --- Layer groups config ---
 const LAYER_GROUPS = {
@@ -183,10 +176,20 @@ const LAYER_GROUPS = {
   upl:   { ids: ['upl-fill', 'upl-border'],                         active: false, title: 'Unità di Paesaggio · Palermo',      subtitle: 'Aggregati per UPL · GTFS AMAT + ISTAT' },
 };
 
-map.on('load', () => {
+// Id del primo layer symbol dello stile OFM corrente — i nostri layer vanno
+// inseriti subito sotto, così le etichette del basemap restano sempre sopra.
+function firstSymbolLayerId() {
+  const layers = map.getStyle().layers || [];
+  const l = layers.find(l => l.type === 'symbol');
+  return l && l.id;
+}
+
+function initLayers() {
   // --- Sources ---
   map.addSource('sezioni',   { type: 'vector', url: 'pmtiles://https://palermohub.github.io/pmtiles/tpl/sezioni_bivariate.pmtiles' });
   map.addSource('aggregati', { type: 'vector', url: 'pmtiles://https://palermohub.github.io/pmtiles/tpl/territorio.pmtiles' });
+
+  const beforeId = firstSymbolLayerId();
 
   // --- Sezioni bivariata ---
   map.addLayer({
@@ -198,11 +201,11 @@ map.on('load', () => {
         '1-3','#7ab8c8','2-3','#5898a8','3-3','#306878','#444'],
       'fill-opacity': 0.82,
     },
-  });
+  }, beforeId);
   map.addLayer({
     id: 'sezioni-biv-border', type: 'line', source: 'sezioni', 'source-layer': 'sezioni',
     paint: { 'line-color': 'rgba(0,0,0,0.22)', 'line-width': 0.6 },
-  });
+  }, beforeId);
 
   // --- Sezioni densità popolazione (nascosta) ---
   map.addLayer({
@@ -222,12 +225,12 @@ map.on('load', () => {
         87.68,'#4d0019'],
       'fill-opacity': 0.82,
     },
-  });
+  }, beforeId);
   map.addLayer({
     id: 'sezioni-dens-border', type: 'line', source: 'sezioni', 'source-layer': 'sezioni',
     layout: { visibility: 'none' },
     paint: { 'line-color': 'rgba(0,0,0,0.22)', 'line-width': 0.5 },
-  });
+  }, beforeId);
 
   // --- Anomalie bivariata (nascosta) ---
   map.addLayer({
@@ -238,7 +241,7 @@ map.on('load', () => {
       'fill-color': ['case', ['>', ['get', 'cls_x'], ['get', 'cls_y']], '#c89050', '#4090a8'],
       'fill-opacity': 0.88,
     },
-  });
+  }, beforeId);
 
   // --- Quartieri (nascosto) ---
   map.addLayer({
@@ -248,12 +251,12 @@ map.on('load', () => {
       '1-1','#f0ece4','2-1','#e8d0a4','3-1','#c89050',
       '1-2','#c8d8d4','2-2','#a8b8b0','3-2','#809098',
       '1-3','#7ab8c8','2-3','#5898a8','3-3','#306878','#444'], 'fill-opacity': 0.55 },
-  });
+  }, beforeId);
   map.addLayer({
     id: 'quartieri-border', type: 'line', source: 'aggregati', 'source-layer': 'quartieri',
     layout: { visibility: 'none' },
     paint: { 'line-color': '#7ab8c8', 'line-width': 1.5 },
-  });
+  }, beforeId);
 
   // --- Circoscrizioni (nascosta) ---
   map.addLayer({
@@ -263,12 +266,12 @@ map.on('load', () => {
       '1-1','#f0ece4','2-1','#e8d0a4','3-1','#c89050',
       '1-2','#c8d8d4','2-2','#a8b8b0','3-2','#809098',
       '1-3','#7ab8c8','2-3','#5898a8','3-3','#306878','#444'], 'fill-opacity': 0.45 },
-  });
+  }, beforeId);
   map.addLayer({
     id: 'circoscrizioni-border', type: 'line', source: 'aggregati', 'source-layer': 'circoscrizioni',
     layout: { visibility: 'none' },
     paint: { 'line-color': '#c89050', 'line-width': 2 },
-  });
+  }, beforeId);
 
   // --- UPL (nascosta) ---
   map.addLayer({
@@ -278,56 +281,25 @@ map.on('load', () => {
       '1-1','#f0ece4','2-1','#e8d0a4','3-1','#c89050',
       '1-2','#c8d8d4','2-2','#a8b8b0','3-2','#809098',
       '1-3','#7ab8c8','2-3','#5898a8','3-3','#306878','#444'], 'fill-opacity': 0.50 },
-  });
+  }, beforeId);
   map.addLayer({
     id: 'upl-border', type: 'line', source: 'aggregati', 'source-layer': 'upl',
     layout: { visibility: 'none' },
     paint: { 'line-color': '#fdb434', 'line-width': 1.5 },
-  });
+  }, beforeId);
+}
 
-  // --- Etichette CartoDB sopra tutto ---
-  map.addSource('carto-labels', {
-    type: 'raster',
-    tiles: [
-      'https://a.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png',
-      'https://b.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}{r}.png',
-    ],
-    tileSize: 256,
+// Riapplica visibilità gruppo attivo + filtri dopo un initLayers() (es. cambio tema)
+function restoreLayerState() {
+  Object.values(LAYER_GROUPS).forEach(g => {
+    const v = g.active ? 'visible' : 'none';
+    g.ids.forEach(lid => { if (map.getLayer(lid)) map.setLayoutProperty(lid, 'visibility', v); });
   });
-  map.addLayer({ id: 'carto-labels', type: 'raster', source: 'carto-labels' });
+  applyFilters();
+}
 
-  // Source/layer CartoDB light — per theme switch
-  map.addSource('carto-light', {
-    type: 'raster',
-    tiles: [
-      'https://a.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-      'https://b.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png',
-    ],
-    tileSize: 256,
-  });
-  map.addLayer(
-    { id: 'carto-light', type: 'raster', source: 'carto-light', layout: { visibility: 'none' } },
-    'sezioni-biv'
-  );
-  map.addSource('carto-labels-light', {
-    type: 'raster',
-    tiles: [
-      'https://a.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
-      'https://b.basemaps.cartocdn.com/light_only_labels/{z}/{x}/{y}{r}.png',
-    ],
-    tileSize: 256,
-  });
-  map.addLayer({ id: 'carto-labels-light', type: 'raster', source: 'carto-labels-light', layout: { visibility: 'none' } });
-
-  // Applica tema salvato ai layer basemap
-  const _t = localStorage.getItem('anncus-theme');
-  if (_t === 'light') {
-    map.setLayoutProperty('carto-dark',         'visibility', 'none');
-    map.setLayoutProperty('carto-light',        'visibility', 'visible');
-    map.setLayoutProperty('carto-labels',       'visibility', 'none');
-    map.setLayoutProperty('carto-labels-light', 'visibility', 'visible');
-  }
-
+map.on('load', () => {
+  initLayers();
   setupHover();
   applyFilters();
   updateLegends('biv');
@@ -587,14 +559,18 @@ map.on('zoom', () => {
 });
 
 const btnTheme = document.getElementById('btn-theme');
+let currentBasemapTheme = initialTheme;
 function applyTheme(dark) {
   document.body.classList.toggle('dark', dark);
   btnTheme.title = dark ? 'Tema chiaro' : 'Tema scuro';
-  if (map.getLayer('carto-light')) {
-    map.setLayoutProperty('carto-dark',         'visibility', dark ? 'visible' : 'none');
-    map.setLayoutProperty('carto-light',        'visibility', dark ? 'none'    : 'visible');
-    map.setLayoutProperty('carto-labels',       'visibility', dark ? 'visible' : 'none');
-    map.setLayoutProperty('carto-labels-light', 'visibility', dark ? 'none'    : 'visible');
+  const wantTheme = dark ? 'dark' : 'light';
+  if (wantTheme !== currentBasemapTheme) {
+    currentBasemapTheme = wantTheme;
+    map.setStyle(BASEMAP_STYLES[wantTheme], { diff: false });
+    map.once('style.load', () => {
+      initLayers();
+      restoreLayerState();
+    });
   }
   localStorage.setItem('anncus-theme', dark ? 'dark' : 'light');
 }
@@ -603,8 +579,8 @@ btnTheme.addEventListener('click', () => {
   applyTheme(!document.body.classList.contains('dark'));
 });
 
-const savedTheme = localStorage.getItem('anncus-theme');
-if (savedTheme) applyTheme(savedTheme === 'dark');
+document.body.classList.toggle('dark', initialTheme === 'dark');
+btnTheme.title = initialTheme === 'dark' ? 'Tema chiaro' : 'Tema scuro';
 
 // ── Search area + filter modal ────────────────────────────────────────
 const searchInput   = document.getElementById('anncus-search-input');
