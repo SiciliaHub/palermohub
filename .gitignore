@@ -1,5 +1,7 @@
 legend/clip_index/cheat-sheet_gb01-1.pdf
 .claude/worktrees/
+.claude/settings.local.json
+pmtiles/.claude/settings.local.json
 scripts/grant_ga4_access.py
 scripts/requirements-analytics.txt
 scripts/update_ga4_analytics.py
