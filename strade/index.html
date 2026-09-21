@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+<meta name="description" content="Mappa interattiva dei lavori di rifacimento manto stradale e marciapiedi nella I Circoscrizione di Palermo: 25 vie e piazze coinvolte, stato interventi, lunghezza tratti.">
+<meta name="keywords" content="lavori stradali Palermo, manto stradale, I Circoscrizione Palermo, marciapiedi, mappa interattiva, OpenData Sicilia, cantieri Palermo">
+<title>Lavori manto stradale - I Circoscrizione Palermo</title>
+<link rel="icon" href="img/favicon.ico">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"
+      integrity="sha384-MinO0mNliZ3vwppuPOUnGa+iq619pfMhLVUXfC4LHwSCvF9H+6P/KO4Q7qBOYV5V"
+      crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<link rel="stylesheet" href="css/mappa-lavori.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-badge">
+                <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+            </div>
+            <div class="title-group">
+                <h1>Lavori manto stradale</h1>
+                <div class="subtitle">I Circoscrizione &middot; Palermo</div>
+            </div>
+            <img src="img/opendatasicilia.png" alt="OpenData Sicilia" style="height: 50px; margin-left: auto;">
+        </div>
+    </div>
+
+    <div id="map"></div>
+
+    <div class="info-panel" id="infoPanel">
+        <h3 onclick="toggleInfoPanel()">
+            Informazioni
+            <span class="toggle-icon"><i class="fa fa-chevron-down"></i></span>
+        </h3>
+        <div class="info-panel-content">
+            <p class="intro-text">25 vie/piazze elencate nel comunicato per interventi di rifacimento del manto stradale e dei marciapiedi.</p>
+            <div class="legend-item"><div class="legend-line"></div><span>Rete stradale (dati OSM/QGIS)</span></div>
+            <div class="legend-item"><div class="legend-line approssimato"></div><span>Piazza/Vicolo Scalzi (ricostruita da screenshot, non da dato OSM)</span></div>
+            <div class="stats">
+                <div class="stat-box"><div class="stat-number" id="streetCount">0</div><div class="stat-label">Vie/piazze</div></div>
+                <div class="stat-box"><div class="stat-number" id="streetKm">0</div><div class="stat-label">Km rete</div></div>
+            </div>
+            <div class="circ-breakdown" id="circBreakdown">
+                <div class="circ-breakdown-title">Distribuzione per circoscrizione</div>
+                <div class="circ-breakdown-list" id="circBreakdownList"></div>
+            </div>
+            <div class="source-info">
+                <p>Fonte: <a href="https://www.comune.palermo.it/novita/prima-circoscrizione-al-via-interventi-su-strade-e-marciapiedi-per-108-milioni-di-euro/" target="_blank" rel="noopener noreferrer">Comunicato stampa</a></p>
+                <p class="cronoprogramma-info"><i class="fa fa-clock"></i> Cronoprogramma non ancora disponibile: il Comune non ha reso note data di avvio e durata dei lavori.</p>
+            </div>
+
+            <div class="credits-section">
+                <div class="credits-toggle" onclick="toggleCredits()">
+                    <span>Crediti</span>
+                    <span class="credits-icon"><i class="fa fa-chevron-down"></i></span>
+                </div>
+                <div class="credits-content" id="creditsContent">
+                    <p><strong>Dati &amp; rielaborazione:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener">gbvitrano</a> per OpenData Sicilia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="street-list-toggle">
+        <button class="toggle-btn" onclick="toggleStreetPanel()">
+            <i class="fa fa-list"></i>
+            <span>Elenco Vie</span>
+        </button>
+    </div>
+    <div class="street-panel" id="streetPanel">
+        <div class="street-panel-header"><h4>Vie e Piazze</h4></div>
+        <div class="street-list" id="streetList"></div>
+    </div>
+
+    <div class="map-controls">
+        <button class="control-btn" onclick="mapZoomIn()" title="Zoom In"><i class="fa fa-plus"></i></button>
+        <button class="control-btn" onclick="mapZoomOut()" title="Zoom Out"><i class="fa fa-minus"></i></button>
+        <button class="control-btn" onclick="resetView()" title="Reimposta vista"><i class="fa fa-crosshairs"></i></button>
+        <button class="control-btn" id="satelliteBtn" onclick="toggleSatellite()" title="Vista satellite"><i class="fa fa-satellite"></i></button>
+    </div>
+
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"
+        integrity="sha384-SYKAG6cglRMN0RVvhNeBY0r3FYKNOJtznwA0v7B5Vp9tr31xAHsZC0DqkQ/pZDmj"
+        crossorigin="anonymous"></script>
+<script src="js/mappa-lavori.js"></script>
+</body>
+</html>
