@@ -48,7 +48,7 @@ const layerStates = {
 
 // MAPPATURA TRA ID PULSANTI E ID LAYER SULLA MAPPA
 const layerMapping = {
-    'basemap': 'raster-tiles-layer',
+    'basemap': null, // gestito via window.baseLayerIds (tutti i layer dello stile OpenFreeMap)
     'vincoli_lin': 'vincoli_lin',
     'vincoli_ar': 'vincoli_ar',
     'particelle': 'Particelle catastali',
@@ -117,7 +117,7 @@ function toggleLayers() {
 }
 
 function toggleLayer(layerId) {
-    if (!layerMapping[layerId]) {
+    if (!(layerId in layerMapping)) {
         console.warn(`Nessun mapping trovato per il layer: ${layerId}`);
         return;
     }
@@ -133,13 +133,20 @@ function toggleLayer(layerId) {
         }
     }
     
-    if (window.map && window.map.getLayer(layerMapping[layerId])) {
+    if (layerId === 'basemap' && window.map && Array.isArray(window.baseLayerIds)) {
+        const vis = layerStates[layerId] ? 'visible' : 'none';
+        window.baseLayerIds.forEach(id => {
+            if (window.map.getLayer(id)) {
+                window.map.setLayoutProperty(id, 'visibility', vis);
+            }
+        });
+    } else if (window.map && window.map.getLayer(layerMapping[layerId])) {
         window.map.setLayoutProperty(
-            layerMapping[layerId], 
-            'visibility', 
+            layerMapping[layerId],
+            'visibility',
             layerStates[layerId] ? 'visible' : 'none'
         );
-        
+
         if (layerId === 'particelle') {
             window.map.setLayoutProperty(
                 'particelle-labels',
@@ -1284,27 +1291,7 @@ try {
 
     const map = new maplibregl.Map({
         container: "map",
-        style: {
-            version: 8,
-            glyphs: "https://api.mapbox.com/fonts/v1/mapbox/{fontstack}/{range}.pbf?access_token=eyJ1IjoiZ2J2aXRyYW5vIiwiYSI6ImNtNWpwMDloejBtN3ozM3F3NzJvZGh2ZG4ifQ.AXXkYYL7XY6RBVXpJ2IrBA",
-            sources: {
-                "raster-tiles": {
-                    type: "raster",
-                    tiles: ["https://a.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png"],
-                    tileSize: 256,
-                    attribution: '© OpenStreetMap contributors, © CARTO'
-                }
-            },
-            layers: [
-                {
-                    id: "raster-tiles-layer",
-                    type: "raster",
-                    source: "raster-tiles",
-                    minzoom: 10,
-                    maxzoom: 22
-                }
-            ]
-        },
+        style: "https://tiles.openfreemap.org/styles/positron",
         center: [13.33225, 38.14074],
         zoom: isMobile ? 11 : 12,
         maxBounds: [[13.1, 37.9785], [13.55, 38.2919]],
@@ -1324,6 +1311,7 @@ try {
         try {
             hideLoader();
             console.log('Mappa caricata con successo');
+            window.baseLayerIds = map.getStyle().layers.map(l => l.id);
             initializeMapLayers();
             loadCiviciIndex('civici_index.json');
             initZoomSlider();
@@ -1687,7 +1675,7 @@ function initializeMapLayers() {
                     layout: {
                         "text-field": ["get", "Zona_OMI"],
                         "text-size": ["interpolate", ["linear"], ["zoom"], 10, 9, 14, 13],
-                        "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+                        "text-font": ["Noto Sans Bold"],
                         "text-allow-overlap": false,
                         "text-ignore-placement": false,
                         "text-anchor": "center",
@@ -1724,7 +1712,7 @@ function initializeMapLayers() {
             layout: {
                 "text-field": ["concat", "F. ", ["get", "Foglio"], " - ", "P. ", ["get", "Paricella"]],
                 "text-size": ["interpolate", ["linear"], ["zoom"], 15, isMobile ? 4 : 5, 19, isMobile ? 10 : 12],
-                "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+                "text-font": ["Noto Sans Regular"],
                 "text-allow-overlap": false,
                 "text-ignore-placement": false,
                 "text-anchor": "center",
@@ -1771,7 +1759,7 @@ function initializeMapLayers() {
                     ["concat", ["get", "Civico"], "/", ["get", "Esponente"]],
                     ["get", "Civico"]
                 ],
-                "text-font": ["Open Sans Bold", "Arial Unicode MS Bold"],
+                "text-font": ["Noto Sans Bold"],
                 "text-size": [
                     "interpolate", ["linear"], ["zoom"],
                     14, isMobile ? 7 : 8,
