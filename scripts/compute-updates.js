@@ -18,17 +18,24 @@ function parse(t) {
 
 function byUrl(file) {
   const rows = parse(fs.readFileSync(file, 'utf8'));
-  const u = rows[0].map(h => h.trim().toLowerCase()).indexOf('url');
+  const h = rows[0].map(x => x.trim().toLowerCase());
+  const u = h.indexOf('url');
   const m = {};
-  rows.slice(1).forEach(r => { if (r[u]) m[r[u].trim()] = r.map(x => x.trim()).join('\u0001'); });
+  rows.slice(1).forEach(r => { if (r[u]) { const o = {}; h.forEach((k, i) => { o[k] = (r[i] || '').trim(); }); m[r[u].trim()] = o; } });
   return m;
+}
+
+// confronta solo le colonne presenti in entrambe le righe (una colonna nuova non deve segnare tutto come cambiato)
+const IGNORA = ['aggiornamento'];
+function changed(a, b) {
+  return Object.keys(a).some(k => k in b && !IGNORA.includes(k) && a[k] !== b[k]);
 }
 
 function compute(oldM, newM, prev, today, keepDays = 90) {
   const out = {};
   const limit = Date.parse(today) - keepDays * 864e5;
   for (const [k, d] of Object.entries(prev)) if (Date.parse(d) >= limit) out[k] = d;
-  for (const k in newM) if (k in oldM && oldM[k] !== newM[k]) out[k] = today; // ponytail: le mappe nuove non contano, hanno già `data`
+  for (const k in newM) if (k in oldM && changed(oldM[k], newM[k])) out[k] = today; // ponytail: le mappe nuove non contano, hanno già `data`
   return out;
 }
 
