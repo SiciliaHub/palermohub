@@ -341,6 +341,14 @@ jobs:
           exit 1
         fi
         
+    - name: Compute updated maps
+      if: steps.changes.outputs.changes == 'true'
+      run: |
+        # confronto riga per riga (chiave URL) tra CSV attuale e nuovo -> dati-palermo-hub/updates.json
+        if [ -f "dati-palermo-hub/palermo-hub.csv" ]; then
+          node scripts/compute-updates.js dati-palermo-hub/palermo-hub.csv new_palermo-hub.csv dati-palermo-hub/updates.json
+        fi
+
     - name: Backup and update files
       if: steps.changes.outputs.changes == 'true'
       run: |
