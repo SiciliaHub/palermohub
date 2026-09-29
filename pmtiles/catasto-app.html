@@ -135,7 +135,7 @@
         <div class="layer-card">
             <h3><div class="layer-icon" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);"><i class="fas fa-map"></i></div> Catasto</h3>
             <div class="layer-grid">
-                <button id="particelle" Title="Ultimo aggiornamento Febbraio 2026" class="active">
+                <button id="particelle" Title="Ultimo aggiornamento Settembre 2026" class="active">
                     <span>Particelle Catastali</span>
                     <div class="layer-toggle"></div>
                 </button>
@@ -236,7 +236,7 @@
         </div>
 
         <p style="font-size: 14px; margin-top: 20px; opacity: 0.8;">
-            Dati catastali aggiornati a Febbraio 2026 (S.I.T.R. Sicilia) e Agenzia delle Entrate
+            Dati catastali aggiornati a Settembre 2026 (S.I.T.R. Sicilia) e Agenzia delle Entrate
         </p>
         <div id="search-error"></div>
     </div>
@@ -265,6 +265,7 @@
             </button>
             <div id="sidepanel-tabs">
                 <button onclick="showSection('section1')" class="active">Info</button>
+                <button onclick="showSection('section7')">Guida</button>
                 <button onclick="showSection('section2')">Strumenti</button>
                 <button onclick="showSection('section3')">Ricerca</button>
                 <button onclick="showSection('section4')">PDF</button>
@@ -286,13 +287,69 @@
                      <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br>
                      <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p>
                    <hr>
-                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> con aggiornamenti ssemestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Febbraio 2026</strong>.<br><br>
+                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> con aggiornamenti ssemestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Settembre 2026</strong>.<br><br>
                     L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
                     <hr>
                     <p><strong>Autore:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" title="@gbvitrano su LinkedIn" target="_blank">@gbvitrano</a> &amp; <a href="https://claude.ai" title="Claude AI - Anthropic" target="_blank">Claude AI (Anthropic)</a></p>
                     <p><strong>Sviluppo tecnico:</strong> Collaborazione human–<a href="https://claude.ai" title="Claude AI - Anthropic" target="_blank">Claude AI (Anthropic)</a>, che ha supportato lo sviluppo dell'architettura modulare, l'ottimizzazione del codice e l'implementazione di funzionalità avanzate di visualizzazione.</p>
                     <hr>
                     <p><strong>Disclaimer:</strong> I contenuti presenti in questa sezione, compresi testi ed elementi grafici, hanno carattere puramente informativo e divulgativo.  <br><br> Non sono presenti dati personali o sensibili. Si precisa che questi materiali non costituiscono documenti ufficiali né hanno alcun valore legale.  <br> <br>Per consultare la documentazione ufficiale e legalmente vincolante, si prega di fare riferimento agli atti definitivi allegati alle relative deliberazioni degli organi competenti.</p>
+            </div>
+
+            <div id="section7" class="sidepanel-section">
+                <h2>Guida all'uso</h2>
+                <p>La mappa mostra <strong>particelle catastali</strong>, <strong>zonizzazione e vincoli del PRG</strong>, <strong>zone OMI</strong> e <strong>numeri civici</strong> di Palermo. In alto, i pulsanti della barra dei comandi danno accesso a tutte le funzioni.</p>
+
+                <h3>1. Muoversi sulla mappa</h3>
+                <figure class="guida-fig"><img src="guida/01_mappa.jpg" loading="lazy" alt="Vista iniziale: barra dei comandi in alto, cursore dello zoom sotto di essa"><figcaption>Vista iniziale: barra dei comandi in alto, cursore dello zoom sotto di essa</figcaption></figure>
+                <ul>
+                    <li><strong>Spostare</strong>: trascina con il mouse o con un dito.</li>
+                    <li><strong>Zoom</strong>: rotellina del mouse, pizzico su mobile, oppure il cursore (livelli 12–18) e i numeri sotto di esso.</li>
+                    <li><i class="fas fa-home"></i> riporta alla vista iniziale; <i class="fas fa-expand"></i> attiva lo schermo intero.</li>
+                    <li>Le etichette <em>F. foglio - P. particella</em> compaiono con lo zoom avanzato.</li>
+                </ul>
+
+                <h3>2. Gestire i livelli (Layers)</h3>
+                <figure class="guida-fig"><img src="guida/02_layers.jpg" loading="lazy" alt="Pannello Layers: ogni livello si accende e spegne con l'interruttore"><figcaption>Pannello Layers: ogni livello si accende e spegne con l'interruttore</figcaption></figure>
+                <p>Il pulsante <strong>Layers</strong> apre il pannello dei livelli:</p>
+                <ul>
+                    <li><strong>Zonizzazione PRG</strong>: zone territoriali omogenee (Variante Generale 2004 e PPE del centro storico).</li>
+                    <li><strong>Vincoli urbanistici</strong>: lineari e areali, attivabili anche separatamente dal sottomenu <i class="fas fa-caret-down"></i>.</li>
+                    <li><strong>Particelle catastali</strong>: perimetri e numerazione di foglio e particella.</li>
+                    <li><strong>Zone OMI</strong>: 51 zone con le quotazioni immobiliari dell'Agenzia delle Entrate.</li>
+                    <li><strong>Numeri civici</strong>: 165.000+ civici (ANNCSU).</li>
+                    <li><strong>Cartografia</strong>: Carta Tecnica 2k, mappa di base e Google Satellite.</li>
+                </ul>
+                <figure class="guida-fig"><img src="guida/03_omi_civici.jpg" loading="lazy" alt="Esempio con Numeri Civici e Zone OMI attivi insieme alla zonizzazione"><figcaption>Esempio con Numeri Civici e Zone OMI attivi insieme alla zonizzazione</figcaption></figure>
+
+                <h3>3. Ottenere le informazioni di un punto</h3>
+                <figure class="guida-fig"><img src="guida/06_scheda_pdf.jpg" loading="lazy" alt="Clic su una particella: scheda con dati catastali e piano urbanistico"><figcaption>Clic su una particella: scheda con dati catastali e piano urbanistico</figcaption></figure>
+                <p>Clicca (o tocca) un punto della mappa: appare una <strong>scheda unica</strong> con i dati di tutti i livelli sovrapposti in quel punto: particella (foglio, numero), strumento urbanistico e circoscrizione, vincoli, zona OMI o civico.</p>
+                <p>Il pulsante blu <strong>Visura su SISTER</strong> apre il servizio dell'Agenzia delle Entrate per la visura della particella (richiede l'accesso a SISTER).</p>
+
+                <h3>4. Cercare una particella o un civico</h3>
+                <figure class="guida-fig"><img src="guida/04_ricerca.jpg" loading="lazy" alt="Finestra di ricerca: interruttore tra Foglio/Particella e Via/Civico"><figcaption>Finestra di ricerca: interruttore tra Foglio/Particella e Via/Civico</figcaption></figure>
+                <ol>
+                    <li>Porta la mappa nella zona di interesse: la ricerca opera <strong>solo sull'area visibile</strong>.</li>
+                    <li>Premi <strong>Cerca</strong>.</li>
+                    <li>Scegli la modalità con l'interruttore: <em>Foglio / Particella</em> oppure <em>Via / Civico</em> (il nome della via ha il suggerimento automatico).</li>
+                    <li>Inserisci i dati e premi <strong>Avvia ricerca</strong>.</li>
+                </ol>
+                <figure class="guida-fig"><img src="guida/05_risultato_ricerca.jpg" loading="lazy" alt="La particella trovata viene evidenziata e la mappa si centra su di essa"><figcaption>La particella trovata viene evidenziata e la mappa si centra su di essa</figcaption></figure>
+                <p>Se compare <em>"Nessuna particella trovata"</em>, sposta la mappa sulla zona giusta e riprova.</p>
+
+                <h3>5. Scheda PDF</h3>
+                <p>Dopo una ricerca compare il pulsante <strong>PDF</strong> nella barra dei comandi: genera una scheda con mappa, dati catastali, zonizzazione e vincoli. Su smartphone ruota il dispositivo in <strong>orizzontale</strong> (landscape).</p>
+
+                <h3>6. Vista satellitare sincronizzata</h3>
+                <figure class="guida-fig"><img src="guida/07_satellite.jpg" loading="lazy" alt="Minimappa satellitare in basso a sinistra, centrata sul mirino"><figcaption>Minimappa satellitare in basso a sinistra, centrata sul mirino</figcaption></figure>
+                <p>Il pulsante <strong>Satellite</strong> apre una finestra con la foto aerea che segue la mappa principale (mirino al centro). Chiudila con <strong>×</strong>. Per coprire l'intera mappa usa invece il livello <em>Google Satellite</em>.</p>
+
+                <h3>Consigli</h3>
+                <ul>
+                    <li>Il link dell'indirizzo del browser conserva zoom e posizione: puoi condividerlo.</li>
+                    <li>Se i livelli sembrano mancanti, controlla di aver superato lo zoom minimo e che siano attivi nel pannello Layers.</li>
+                </ul>
             </div>
 
             <div id="section2" class="sidepanel-section">
@@ -361,7 +418,7 @@
     </div>
 
     <!-- News Popup - Numeri Civici (scade 2026-04-10) -->
-    <div id="news-popup-overlay">
+    <div id="news-popup-overlay" style="display:none">
         <div id="news-popup">
             <div class="news-popup-header">
                 <div class="news-icon"><i class="fas fa-location-dot"></i></div>
