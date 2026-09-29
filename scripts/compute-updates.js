@@ -31,10 +31,8 @@ function changed(a, b) {
   return Object.keys(a).some(k => k in b && !IGNORA.includes(k) && a[k] !== b[k]);
 }
 
-function compute(oldM, newM, prev, today, keepDays = 90) {
-  const out = {};
-  const limit = Date.parse(today) - keepDays * 864e5;
-  for (const [k, d] of Object.entries(prev)) if (Date.parse(d) >= limit) out[k] = d;
+function compute(oldM, newM, prev, today) {
+  const out = { ...prev }; // le date restano per sempre; il badge scade lato home (30 giorni)
   for (const k in newM) if (k in oldM && changed(oldM[k], newM[k])) out[k] = today; // ponytail: le mappe nuove non contano, hanno già `data`
   return out;
 }
