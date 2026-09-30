@@ -1439,7 +1439,7 @@ function initializeMapLayers() {
 
         window.map.addSource("catasto", {
             type: "vector",
-            url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle_0926.pmtiles",
+            url: "pmtiles://https://palermohub.github.io/PRG2004/particelle/particelle.pmtiles",
             attribution: "Catasto - fonte dati <b>SITR Sicilia - Agenzia delle Entrate</b>"
         });
 
