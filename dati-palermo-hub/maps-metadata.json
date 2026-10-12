@@ -2820,5 +2820,19 @@
     ],
     "fonte": "ISTAT",
     "descrizione": "Mappa interattiva della popolazione di Palermo: esplora i dati del Censimento ISTAT 2021 per sezione censuaria con un raggio mobile, confronta due zone, disegna aree personalizzate e analizza piramide"
+  },
+  "https://palermodigitaltwin.opendatasicilia.it/presentazione.html": {
+    "titolo": "Palermo Digital Twin",
+    "categoria": "Territorio",
+    "territorio": "Palermo",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "igital Twin",
+      "Catasto",
+      "PRG"
+    ],
+    "fonte": "Comune di Palermo",
+    "descrizione": "Il gemello digitale di Palermo: catasto, PRG e vincoli, popolazione, edifici 3D, isole di calore, rischi, trasporti e mappe storiche su una sola mappa. Un clic su un luogo apre la scheda con tutti i d"
   }
 }
