@@ -2834,5 +2834,20 @@
     ],
     "fonte": "Comune di Palermo",
     "descrizione": "Il gemello digitale di Palermo: catasto, PRG e vincoli, popolazione, edifici 3D, isole di calore, rischi, trasporti e mappe storiche su una sola mappa. Un clic su un luogo apre la scheda con tutti i d"
+  },
+  "llpp_26_28.html": {
+    "titolo": "Piano triennale OO.PP. Palermo 2026-2028",
+    "categoria": "Territorio",
+    "territorio": "Palermo",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "piano triennale",
+      "OO.PP.",
+      "2026-2028",
+      "lavori pubblici"
+    ],
+    "fonte": "Comune di Palermo",
+    "descrizione": "Mappa interattiva del Programma triennale dei lavori pubblici 2026-2028 del Comune di Palermo: 548 interventi con filtri, schede e statistiche."
   }
 }
