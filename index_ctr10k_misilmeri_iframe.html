@@ -105,6 +105,9 @@
 <script src="lib/js/mouseposition/LControlMousePosition.js"></script>
 <script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>     
 <script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>
 <script src="lib/js/print/leaflet.easyPrint.js"></script>
 <script src="lib/js/countryselect/Leaflet.CountrySelect.js" charset="UTF-8"></script>
 <script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
@@ -316,10 +319,19 @@ map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qg
 var bounds_group = new L.featureGroup([]);
 	  
 <!-- mappe di base -->	  
+// OpenFreeMap Positron (vettoriale chiaro, senza key). Shim per L.Control.Basemaps: anteprima raster + bringToBack
+function openFreeMapPositron() {
+	var l = L.maplibreGL({style: 'https://tiles.openfreemap.org/styles/positron', attribution: '<a href="https://openfreemap.org" target="_blank">OpenFreeMap</a> &copy; <a href="https://www.openmaptiles.org/" target="_blank">OpenMapTiles</a> Data from <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'});
+	l._url = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
+	l._getSubdomain = function() { return ''; };
+	l.bringToBack = function() { return this; };
+	l.options.label = 'OpenFreeMap Positron';
+	return l;
+}
 var basemaps = [ 
 L.tileLayer('https://mt1.google.com/vt/lyrs=p&x={x}&y={y}&z={z}', { attribution: 'Dati cartografici &#9400; 2017 Google - <a href="https://www.google.com/intl/it_it/help/terms_maps.html">Termini</a>', minZoom: 11,    maxZoom: 18, maxNativeZoom: 18,   label: 'Google Terrain'}), 
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 11,    maxZoom: 18, maxNativeZoom: 18,   label: 'Map tiles by CartoDB'}),
+openFreeMapPositron(),
 
 L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {attribution: 'Source: Google Satellite - Map data ©2015 Google',
 				minZoom: 11,    maxZoom: 18, maxNativeZoom: 18,   label: 'Google Satellite'}),

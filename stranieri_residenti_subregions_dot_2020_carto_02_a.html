@@ -352,7 +352,10 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
 <script src="lib/js/sidebar/leaflet-sidebar.js"></script>
 <script src="lib/js/zoomhome/leaflet.zoomhome.js"></script>   
 <script type="text/javascript" src="lib/js/credits/leaflet-control-credits.js"></script>
-<script src="lib/js/basemap/L.Control.Basemaps.js"></script>  
+<script src="lib/js/basemap/L.Control.Basemaps.js"></script>
+<link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet">
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/@maplibre/maplibre-gl-leaflet@0.0.22/leaflet-maplibre-gl.js"></script>  
   <!-- script automatico mobile/desktop --> 
 <script> if (screen && screen.width < 737) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_mobile_carto.js"><\/script>'); } </script>
 <script> if (screen && screen.width > 738) { document.write('<script type="text/javascript" src="lib/js/graphicscale/Leaflet_GraphicScale_min_carto.js"><\/script>'); } </script> 
@@ -418,6 +421,15 @@ var credctrl = L.controlCredits({
 }).addTo(map);
 		
 		<!-- L.control.basemaps --> 
+// OpenFreeMap Positron (vettoriale chiaro, senza key). Shim per L.Control.Basemaps: anteprima raster + bringToBack
+function openFreeMapPositron() {
+	var l = L.maplibreGL({style: 'https://tiles.openfreemap.org/styles/positron', attribution: '<a href="https://openfreemap.org" target="_blank">OpenFreeMap</a> &copy; <a href="https://www.openmaptiles.org/" target="_blank">OpenMapTiles</a> Data from <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'});
+	l._url = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
+	l._getSubdomain = function() { return ''; };
+	l.bringToBack = function() { return this; };
+	l.options.label = 'OpenFreeMap Positron';
+	return l;
+}
 var basemaps = [ 
 L.tileLayer('https://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', {
           attribution: '<a href="https://cartodb.com/basemaps/">Map tiles by CartoDB, under CC BY 3.0. Data by OpenStreetMap, under ODbL.</a>',
@@ -431,7 +443,7 @@ L.tileLayer('https://a.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}@2x.png', 
 		 //  iconURL: 'legend/basemap/cartodb.png'
 		 }),
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>, &copy; <a href="https://cartodb.com/attributions">CartoDB</a> - <a target="_blank" href="https://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>', minZoom: 12,  maxZoom: 15, maxNativeZoom: 15,label: 'Map tiles by CartoDB'}),
+openFreeMapPositron(),
 
   L.tileLayer('https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
   attribution: 'Source: Google Satellite - Map data ©2022 Google',
