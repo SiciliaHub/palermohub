@@ -127,14 +127,23 @@
 <script src="https://siciliahub.github.io/mappe/palermo_hub/data/VigilidelFuocosicilia2.js"></script>
 <script src="https://siciliahub.github.io/mappe/palermo_hub/data/GuardiadiFinanza0.js"></script>
 
+<style>/* controlli Leaflet sopra la basemap MapLibre (gl-layer) */.leaflet-control-container{position:relative;z-index:5000}
+@media (min-width:769px){html body.header-modal-open{padding-top:107px}body.header-modal-open #sidebar{top:117px}}
+#pdt-banner{position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:6000;display:flex;align-items:center;gap:10px;max-width:calc(100% - 120px);padding:8px 14px;background:#fff;border:2px solid #d62828;border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.35);font:14px/1.3 Arial,sans-serif;color:#222;text-decoration:none}
+#pdt-banner:hover{background:#fff4f4}
+#pdt-banner .pdt-badge{flex:none;background:#d62828;color:#fff;font-weight:700;font-size:12px;letter-spacing:.5px;padding:3px 9px;border-radius:12px;animation:pdt-pulse 1.6s infinite}
+@keyframes pdt-pulse{50%{opacity:.55}}
+#pdt-banner{transition:top .4s cubic-bezier(.25,.8,.25,1)}
+body.header-modal-open #pdt-banner{top:117px}
+@media (max-width:600px){#pdt-banner{font-size:12px;padding:6px 10px;top:60px;max-width:calc(100% - 20px)}body.header-modal-open #pdt-banner{top:105px}}</style>
 </head>
 
 <body>
- <!-- header -->    
+ <!-- header 
 <header>
      <div data-includeHTML="menu.html"></div>
           
-</header>
+</header> -->    
 
 <!-- Sidebar SX -->
 <div id="sidebar" class="sidebar collapsed">
@@ -313,6 +322,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
       </ul> </div></div> </div>  
   
 <!-- Mappa  -->
+<a id="pdt-banner" href="https://palermodigitaltwin.opendatasicilia.it/mappa.html?v=v1z.xdLPbhMxEAbwV4nm7Oyu7f3rWwUoqkQl1AhxiKLK2QzJqLv21nYWSJR34V14MeSmEKg4RuTm-Q7255_mAC2oBZeJ5I1gsk54zkXNuGAZy5YMNKgFtORa61tHe7KGgMHgbMA44LSlkTqEJYMAKmOwAgW9Hlb267TdknYWGHhQB1gH1ROS8uhG2pMaeUxHUJzBSwZqcQBagwLvximXw-O6fgIGgQYLCr70HhgY2yMoeHNzPwMGO9eBgm0Ig1dp6snotrO7dUJ-cLpfEZqACYVUu3ZDfoM2fX6rRZ_GYT67fbidf7i_eZih7eyGtCge0zs9zNGN6NJPd_PTCRiMtj01jP8aY4fsXOejofDj-2RzuqXdIjCwwz5-8T9W7PQ3dP6l2YjOkzWggCcyicln63odQAH1eoPpYDYR12njB-3QBFDB7ZDByu7M2oNalEkpyryomawS3tR1Ixivk7IsmrxiecwakeXL45H9ocLPKm9xsJ4CTZ52OqAz2tF1XfjlXKq8qH67VNElz-pa8uiSNbwoX7GIM8t76iPKr2W5som4oEkm5D925UQiuJCvTOTZ5F2HPZpAk4AhWHN1FXkxFckrWfytUmR5I-pnlrrIZVyV5XF5PB5_Ag#12/38.14128/13.3192" target="_blank" rel="noopener"><span class="pdt-badge">NOVITÀ</span><span>Scopri la <strong>nuova mappa delle aree di emergenza</strong>, uno dei tanti strati informativi di <strong>Palermo Digital Twin</strong> &rarr;</span></a>
 <div id="map" class="sidebar-map"></div>
         <script>
         var highlightLayer;
@@ -336,7 +346,7 @@ Siamo un gruppo di cittadini con diverse storie, competenze, professioni. Siamo 
             }
         });	
 	
-var map = L.map('map', { zoomControl:false, maxZoom:20, minZoom:7}).fitBounds([[38.0391060456,13.140160209],[38.2277793856,13.4984503497]]);
+var map = L.map('map', { zoomControl:false, maxZoom:20, minZoom:9, maxBounds:[[35.3,11.8],[39.0,15.8]], maxBoundsViscosity:1.0}).fitBounds([[38.0391060456,13.140160209],[38.2277793856,13.4984503497]]);
 map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> - Rielaborazione di: <a href="https://twitter.com/opendatasicilia" target="_blank" title="opendatasicilia">@opendatasicilia</a>');
 var bounds_group = new L.featureGroup([]);
 
@@ -387,9 +397,6 @@ var select = L.countrySelect({title:"Seleziona il Comune di interesse!"});
 			
 <!-- muose coordinate -->	
 		   L.control.mousePosition().addTo(map);
-	    map.on("mousemove", function(e) {
-		baselayer.setCenter(e.containerPoint.x, e.containerPoint.y); e_sat.setCenter(e.containerPoint.x, e.containerPoint.y);
-         }) 		
 			
 <!-- funzioni mappa -->
         function setBounds() {
