@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PalermoHub  - Terremoti Italia</title>
+<link rel="canonical" href="https://palermohub.opendatasicilia.it/terremoti_italia.html">
+<meta name="description" data-i18n-content="html.descrizione" content="Mappa dei terremoti in Italia in tempo reale e dall'archivio, con le allerte meteo-idro della Protezione Civile.">
+<meta name="creation_Date" content="29/10/26">
+
+<!-- Anteprima di condivisione: Open Graph (Facebook, LinkedIn, WhatsApp, Telegram) e Twitter/X -->
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Terremoti Italia">
+<meta property="og:title" content="Terremoti Italia — mappa dei terremoti in tempo reale">
+<meta property="og:description" data-i18n-content="html.descrizione" content="Mappa dei terremoti in Italia in tempo reale e dall'archivio, con le allerte meteo-idro della Protezione Civile.">
+<meta property="og:url" content="https://palermohub.opendatasicilia.it/terremoti_italia.html">
+<meta property="og:image" content="https://palermohub.github.io/terremoti-italia/img/social-1200x630.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Mappa dell'Italia con i terremoti recenti e il titolo Terremoti Italia">
+<meta property="og:locale" content="it_IT">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Terremoti Italia — mappa dei terremoti in tempo reale">
+<meta name="twitter:description" data-i18n-content="html.descrizione" content="Mappa dei terremoti in Italia in tempo reale e dall'archivio, con le allerte meteo-idro della Protezione Civile.">
+<meta name="twitter:image" content="https://palermohub.github.io/terremoti-italia/img/social-1200x630.png">
+<meta name="twitter:image:alt" content="Mappa dell'Italia con i terremoti recenti e il titolo Terremoti Italia">
+
+    <link rel="shortcut icon" href="favicon.ico"/> 
+	<link rel="icon" href="favicon.png" type="image/png"/> 
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" />
+     <!--	 
+	 <link rel="stylesheet" href="lib/css/page.css">  -->
+	 <link rel="stylesheet" href="lib/css/template.css">
+	 
+	 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KHR1GHDRQS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-KHR1GHDRQS');
+</script>
+
+    <!-- CSS per iframe tra header e footer -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Layout principale */
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header PalermoHub - altezza automatica */
+        .ph-header {
+            flex-shrink: 0;
+            background: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            z-index: 1000;
+        }
+        
+        /* Container iframe - occupa tutto lo spazio rimanente */
+        .iframe-container {
+            flex: 1;
+            display: flex;
+            width: 100%;
+            min-height: 0; /* Importante per il flex */
+        }
+        
+        /* Iframe che riempie il container */
+        #main-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+        
+        /* Footer PalermoHub - altezza automatica */
+        .ph-footer {
+            flex-shrink: 0;
+            background: #f8f9fa;
+            border-top: 1px solid #dee2e6;
+            z-index: 1000;
+        }
+        
+        /* Nasconde scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        
+        body {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        /* Layout di fallback se gli script PH non caricano */
+        .fallback-header {
+            height: 60px;
+            background: #343a40;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            font-weight: bold;
+        }
+        
+        .fallback-footer {
+            height: 50px;
+            background: #6c757d;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+    </style>
+	
+</head>
+<body>
+    <!-- Header PalermoHub -->
+    <div class="ph-header">
+        <!-- Il contenuto dell'header verrà inserito qui dagli script -->
+    </div>
+    
+    <!-- Container per iframe - occupa tutto lo spazio tra header e footer -->
+    <div class="iframe-container">
+        <iframe id="main-iframe" 
+                src="workinprogress.html" 
+                title="Terremoti Italia"
+                allowfullscreen
+                loading="lazy">
+        </iframe>
+    </div>
+    
+    <!-- Footer PalermoHub -->
+    <div class="ph-footer">
+        <!-- Il contenuto del footer verrà inserito qui dagli script -->
+    </div>
+
+<!-- Inclusione header e footer PalermoHub -->
+<link rel="stylesheet" href="lib/css/ph-css.css">
+    <script src="lib/js/client/ph-header.js"></script>
+    <script src="lib/js/client/ph-footer.js"></script>
+
+
+<script>
+// Gestione layout con header e footer PalermoHub
+document.addEventListener('DOMContentLoaded', function() {
+    // Leggi parametri URL e crea breadcrumbs
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('mapTitle')) {
+        // Il codice creerà automaticamente i breadcrumbs
+        if (typeof initMapPageBreadcrumbs === 'function') {
+            initMapPageBreadcrumbs();
+        }
+    }
+    
+    // Verifica se header e footer sono stati caricati correttamente
+    setTimeout(function() {
+        const header = document.querySelector('.ph-header');
+        const footer = document.querySelector('.ph-footer');
+        
+        // Se gli elementi PH non sono stati popolati, usa layout alternativo
+        if (!header?.innerHTML || !footer?.innerHTML) {
+            console.log('Layout PalermoHub non disponibile, uso layout alternativo');
+            document.body.classList.add('no-ph-layout');
+        }
+    }, 1000);
+    
+    // Esempio di come cambiare il src dell'iframe
+    // document.getElementById('main-iframe').src = 'https://example.com';
+});	
+</script>
+</script>
+</body>
+</html>
