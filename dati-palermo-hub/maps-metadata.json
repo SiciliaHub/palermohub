@@ -2849,5 +2849,19 @@
     ],
     "fonte": "Comune di Palermo",
     "descrizione": "Mappa interattiva del Programma triennale dei lavori pubblici 2026-2028 del Comune di Palermo: 548 interventi con filtri, schede e statistiche."
+  },
+  "terremoti_italia.html": {
+    "titolo": "Terremoti Italia — mappa dei terremoti in tempo reale",
+    "categoria": "Sicurezza",
+    "territorio": "Italia",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "Terremoti",
+      "Italia",
+      "Sismicità"
+    ],
+    "fonte": "INGV",
+    "descrizione": "Mappa dei terremoti in Italia in tempo reale e dall'archivio, con le allerte meteo-idro della Protezione Civile."
   }
 }
