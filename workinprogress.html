@@ -2,9 +2,33 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Work in progress</title>
+<style>
+  body { margin: 0; min-height: 100vh; display: grid; place-content: center; justify-items: center; gap: 28px; font-family: "Segoe UI", system-ui, sans-serif; }
+  .promo { text-align: center; max-width: min(90vw, 900px); }
+  .promo .tag { display: inline-block; padding: 6px 16px; border-radius: 999px; background: #e5a62f; color: #0d1420; font-weight: 700; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; }
+  .promo h1 { margin: 16px 0 10px; font-size: clamp(28px, 5vw, 56px); line-height: 1.1; font-weight: 800; color: #0d1420; }
+  .promo h1 em { font-style: normal; color: #e5a62f; }
+  .promo p { margin: 0; font-size: clamp(16px, 2vw, 22px); color: #4a5568; }
+  .promo p b { color: #0d1420; }
+  /* 90% della dimensione precedente, ridotta ancora se serve per stare tutto in altezza (promo ~260px + cartello appeso .16w) */
+  .wrap { --w: min(81vw, 1080px, calc((100vh - 260px) / .69)); position: relative; width: var(--w); margin-bottom: calc(var(--w) * .16); }
+  .wrap img { display: block; }
+  .wrap .bg { width: 100%; height: auto; }
+  .wrap .wip { position: absolute; left: 50%; bottom: -30%; transform: translateX(-50%); width: 20%; height: auto; }
+</style>
 </head>
 
 <body>
+<div class="promo">
+  <span class="tag">Prossimamente</span>
+  <h1>Stiamo preparando la <em>mappa dei terremoti</em> in Italia!</h1>
+  <p>Sismi in tempo reale, dati INGV e allerte della Protezione Civile. <b>Presto online su PalermoHub.</b></p>
+</div>
+<div class="wrap">
+  <img class="bg" src="legend/social-1200x630.png" alt="">
+  <img class="wip" src="legend/workinprogress.png" alt="Work in progress">
+</div>
 </body>
 </html>
