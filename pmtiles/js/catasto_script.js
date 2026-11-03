@@ -4,34 +4,12 @@
 // Versione ottimizzata per dispositivi mobili
 // =========================
 
-// =========================
-// NEWS POPUP (scade 2026-04-10)
-// =========================
-function initNewsPopup() {
-    const overlay = document.getElementById('news-popup-overlay');
-    if (!overlay) return;
-    const expiry = new Date('2026-04-10');
-    if (new Date() > expiry) {
-        overlay.style.display = 'none';
-        return;
-    }
-    setTimeout(() => closeNewsPopup(), 10000);
-}
-
-function closeNewsPopup() {
-    const overlay = document.getElementById('news-popup-overlay');
-    if (overlay) {
-        overlay.style.animation = 'fadeOutOverlay 0.25s ease forwards';
-        setTimeout(() => { overlay.style.display = 'none'; }, 250);
-    }
-}
-
 // VARIABILI GLOBALI
 let isSatelliteOverlayOpen = false;
 let satelliteMap = null;
-let layerPanelOpen = false;
 let currentPopup = null;
-let isMobile = window.innerWidth <= 768;
+const mqMobile = window.matchMedia('(max-width: 899px)');
+let isMobile = mqMobile.matches;
 
 // STATO DEI LAYER
 const layerStates = {
@@ -69,7 +47,6 @@ function hideLoader() {
         loader.style.transition = 'opacity 0.5s ease';
         setTimeout(() => {
             loader.style.display = 'none';
-            setTimeout(() => initNewsPopup(), 3000);
         }, 500);
     }
 }
@@ -78,7 +55,7 @@ function hideLoader() {
 // RILEVAMENTO MOBILE E ORIENTAMENTO
 // =========================
 function detectMobile() {
-    isMobile = window.innerWidth <= 768;
+    isMobile = mqMobile.matches;
     updateMobileUI();
 }
 
@@ -94,26 +71,42 @@ function updateMobileUI() {
 // =========================
 // FUNZIONI LAYER SWITCHER OTTIMIZZATE
 // =========================
-function toggleLayers() {
-    const panel = document.getElementById('layer-panel');
-    const btn = document.querySelector('.command-btn');
-    layerPanelOpen = !layerPanelOpen;
-    
-    if (layerPanelOpen) {
-        panel.classList.add('active');
-        btn.classList.add('active');
-        if (isMobile && window.map) {
-            window.map.scrollZoom.disable();
-            window.map.dragPan.disable();
-        }
-    } else {
-        panel.classList.remove('active');
-        btn.classList.remove('active');
-        if (isMobile && window.map) {
-            window.map.scrollZoom.enable();
-            window.map.dragPan.enable();
-        }
+const PANEL_TABS = ['livelli', 'cerca', 'info'];
+
+function openPanel(tab) {
+    const panel = document.getElementById('panel');
+    if (!panel) return;
+    // su mobile un secondo tocco sul tab attivo chiude il pannello
+    if (isMobile && panel.classList.contains('open') && panel.dataset.tab === tab) { closePanel(); return; }
+    panel.dataset.tab = tab;
+    panel.classList.add('open');
+    PANEL_TABS.forEach(t => {
+        const b = document.getElementById('tab-' + t);
+        if (b) b.setAttribute('aria-selected', t === tab ? 'true' : 'false');
+    });
+    if (tab === 'cerca') {
+        if (window._civicoMarker) { window._civicoMarker.remove(); window._civicoMarker = null; }
+        setTimeout(() => { const f = document.getElementById('foglio'); if (f && !isMobile) f.focus(); }, 50);
     }
+    if (tab === 'info') {
+        const badge = document.getElementById('info-badge');
+        if (badge) badge.remove();
+    }
+}
+
+function closePanel() {
+    const panel = document.getElementById('panel');
+    if (!panel || !isMobile) return;
+    panel.classList.remove('open');
+    const b = document.getElementById('tab-' + panel.dataset.tab);
+    if (b) b.focus();
+}
+
+function toggleLegend(btn) {
+    const box = document.getElementById('prg-legend');
+    const open = box.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    btn.textContent = open ? 'Nascondi legenda PRG' : 'Mostra legenda PRG';
 }
 
 function toggleLayer(layerId) {
@@ -126,11 +119,8 @@ function toggleLayer(layerId) {
     
     const button = document.getElementById(layerId);
     if (button) {
-        if (layerStates[layerId]) {
-            button.classList.add('active');
-        } else {
-            button.classList.remove('active');
-        }
+        button.classList.toggle('active', layerStates[layerId]);
+        if (button.getAttribute('role') === 'radio') button.setAttribute('aria-checked', layerStates[layerId] ? 'true' : 'false');
     }
     
     if (layerId === 'basemap' && window.map && Array.isArray(window.baseLayerIds)) {
@@ -192,15 +182,6 @@ function toggleLayer(layerId) {
     }
 }
 
-function toggleVincoliSubmenu() {
-    const container = document.querySelector('.vincoli-container');
-    container.classList.toggle('active');
-
-    if (isMobile && navigator.vibrate) {
-        navigator.vibrate(30);
-    }
-}
-
 function toggleVincoliMain() {
     // Lo stato principale è attivo se almeno uno dei due sub-layer è attivo
     const anyActive = layerStates['vincoli_lin'] || layerStates['vincoli_ar'];
@@ -229,43 +210,50 @@ function syncVincoliMain() {
     if (mainBtn) mainBtn.classList.toggle('active', anyActive);
 }
 
+const BG_LAYERS = ['basemap', 'satellite', 'carta_tecnica'];
+
+// sfondo: una sola opzione attiva alla volta
+function setBackground(id) {
+    BG_LAYERS.forEach(k => { if ((k === id) !== layerStates[k]) toggleLayer(k); });
+}
+
 function initLayerButtons() {
     const vincoliMain = document.getElementById('vincoli-main');
-    if (vincoliMain) {
-        vincoliMain.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const toggle = e.target.closest('.layer-toggle');
-            if (toggle) {
-                toggleVincoliMain();
-            } else {
-                toggleVincoliSubmenu();
-            }
-        });
-    }
-    
-    const layerButtons = ['basemap', 'vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'carta_tecnica', 'satellite', 'zonizzazione', 'zone_omi'];
-    layerButtons.forEach(layerId => {
-        const button = document.getElementById(layerId);
-        if (button) {
-            button.addEventListener('click', function(e) {
-                e.stopPropagation();
-                toggleLayer(layerId);
-            });
-        }
+    if (vincoliMain) vincoliMain.addEventListener('click', toggleVincoliMain);
+
+    BG_LAYERS.forEach(id => {
+        const b = document.getElementById(id);
+        if (b) b.addEventListener('click', () => setBackground(id));
     });
-    
-    if (isMobile) {
-        document.addEventListener('touchstart', function(e) {
-            const layerPanel = document.getElementById('layer-panel');
-            const commandBar = document.querySelector('.command-bar');
-            
-            if (layerPanelOpen && 
-                layerPanel && !layerPanel.contains(e.target) && 
-                commandBar && !commandBar.contains(e.target)) {
-                toggleLayers();
-            }
-        });
-    }
+
+    ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'zonizzazione', 'zone_omi'].forEach(layerId => {
+        const button = document.getElementById(layerId);
+        if (button) button.addEventListener('click', () => toggleLayer(layerId));
+    });
+}
+
+// avviso accanto ai livelli che non si vedono perche' lo zoom e' troppo basso
+function updateZoomHints() {
+    if (!window.map) return;
+    const z = window.map.getZoom();
+    Object.keys(layerMapping).forEach(id => {
+        const btn = document.getElementById(id);
+        const lid = layerMapping[id];
+        const layer = lid && window.map.getLayer(lid);
+        if (!btn || !layer) return;
+        const min = layer.minzoom || 0;
+        if (min <= 0) return;
+        let hint = btn.querySelector('.lyr-hint');
+        if (!hint) {
+            hint = document.createElement('span');
+            hint.className = 'lyr-hint';
+            btn.insertBefore(hint, btn.querySelector('.lyr-sw, .lyr-radio'));
+        }
+        const low = z < min;
+        hint.hidden = !low;
+        hint.textContent = 'da zoom ' + Math.ceil(min);
+        btn.classList.toggle('out-of-zoom', low);
+    });
 }
 
 // =========================
@@ -275,6 +263,8 @@ function toggleSatelliteOverlay() {
     const satelliteOverlay = document.getElementById("satellite-overlay");
     const crosshairMain = document.querySelector(".crosshair-main");
 
+    const satBtn = document.getElementById('satellite-btn');
+    if (satBtn) { satBtn.classList.toggle('active', !isSatelliteOverlayOpen); satBtn.setAttribute('aria-pressed', !isSatelliteOverlayOpen ? 'true' : 'false'); }
     if (isSatelliteOverlayOpen) {
         satelliteOverlay.style.display = "none";
         if (crosshairMain) crosshairMain.style.display = "none";
@@ -339,43 +329,8 @@ function toggleSatelliteOverlay() {
 // =========================
 // FUNZIONI RICERCA OTTIMIZZATE PER MOBILE
 // =========================
-function toggleSearchPopup() {
-    const searchPopup = document.getElementById("search-popup");
-    searchPopup.classList.toggle("active");
-    if (searchPopup.classList.contains("active") && window._civicoMarker) {
-        window._civicoMarker.remove();
-        window._civicoMarker = null;
-    }
-    
-    if (isMobile) {
-        if (searchPopup.classList.contains("active")) {
-            document.body.style.overflow = 'hidden';
-            if (window.map) {
-                window.map.scrollZoom.disable();
-                window.map.dragPan.disable();
-            }
-        } else {
-            document.body.style.overflow = '';
-            if (window.map) {
-                window.map.scrollZoom.enable();
-                window.map.dragPan.enable();
-            }
-        }
-    }
-    
-    if (searchPopup.classList.contains("active")) {
-        setTimeout(() => {
-            const foglioInput = document.getElementById("foglio");
-            if (foglioInput) {
-                foglioInput.focus();
-            }
-        }, 300);
-    }
-    
-    if (isMobile && navigator.vibrate) {
-        navigator.vibrate(50);
-    }
-}
+// dopo un risultato: su mobile libera la mappa, su desktop lascia il pannello com'e'
+function toggleSearchPopup() { closePanel(); }
 
 function loadCiviciIndex(url) {
     fetch(url)
@@ -436,11 +391,10 @@ function selectOdonimo(name) {
 }
 
 function switchSearchMode(mode) {
-    document.getElementById('search-mode-foglio').style.display = mode === 'foglio' ? 'block' : 'none';
-    document.getElementById('search-mode-civico').style.display = mode === 'civico' ? 'block' : 'none';
-    document.getElementById('search-mode-toggle').classList.toggle('civico-active', mode === 'civico');
-    document.getElementById('label-foglio').classList.toggle('active', mode === 'foglio');
-    document.getElementById('label-civico').classList.toggle('active', mode === 'civico');
+    document.getElementById('search-mode-foglio').hidden = mode !== 'foglio';
+    document.getElementById('search-mode-civico').hidden = mode !== 'civico';
+    document.getElementById('label-foglio').setAttribute('aria-pressed', mode === 'foglio' ? 'true' : 'false');
+    document.getElementById('label-civico').setAttribute('aria-pressed', mode === 'civico' ? 'true' : 'false');
     document.getElementById('search-error').textContent = '';
     const infoText = document.getElementById('search-info-text');
     if (infoText) infoText.textContent = mode === 'civico'
@@ -629,112 +583,14 @@ function searchParticella() {
     }
 }
 
-// =========================
-// FUNZIONI SIDEPANEL OTTIMIZZATE PER MOBILE - FIXED
-// =========================
-function toggleBackToTopVisibility() {
-    const backToTopBtn = document.getElementById('back-to-top');
-    const sidepanelContent = document.getElementById('sidepanel-content');
-    
-    if (!backToTopBtn || !sidepanelContent) return;
-    
-    // Mostra il button se si è scrollato oltre 200px nel sidepanel
-    if (sidepanelContent.scrollTop > 200) {
-        backToTopBtn.classList.add('show');
-    } else {
-        backToTopBtn.classList.remove('show');
-    }
-}
-
-function scrollToTop() {
-    const sidepanelContent = document.getElementById('sidepanel-content');
-    if (sidepanelContent) {
-        sidepanelContent.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }
-    
-    if (isMobile && navigator.vibrate) {
-        navigator.vibrate(50);
-    }
-}
-
-function toggleSidepanel() {
-    const badge = document.getElementById('info-badge');
-    if (badge) badge.remove();
-
-    const sidepanel = document.getElementById('sidepanel');
-    const backToTopBtn = document.getElementById('back-to-top');
-    const isActive = sidepanel.classList.toggle('active');
-    
-    // Gestisci visibilità e z-index del back-to-top button
-    if (backToTopBtn) {
-        if (isActive) {
-            backToTopBtn.style.zIndex = '10002';
-            // Mostra subito il button quando il sidepanel si apre
-            setTimeout(() => {
-                backToTopBtn.classList.add('show');
-            }, 300);
-        } else {
-            backToTopBtn.style.zIndex = '10001';
-            // Nascondi il button quando il sidepanel si chiude
-            backToTopBtn.classList.remove('show');
-        }
-    }
-    
-    if (isMobile) {
-        if (isActive) {
-            if (window.map) {
-                window.map.scrollZoom.disable();
-                window.map.dragPan.disable();
-            }
-            document.body.style.overflow = 'hidden';
-        } else {
-            if (window.map) {
-                window.map.scrollZoom.enable();
-                window.map.dragPan.enable();
-            }
-            document.body.style.overflow = '';
-        }
-    }
-    
-    if (isMobile && navigator.vibrate) {
-        navigator.vibrate(50);
-    }
-}
-
-function showSection(sectionId) {
-    const sections = document.querySelectorAll('.sidepanel-section');
-    const buttons = document.querySelectorAll('#sidepanel-tabs button');
-    
-    sections.forEach(section => {
-        section.classList.remove('active');
-        section.style.display = 'none';
-    });
-    
-    buttons.forEach(button => {
-        button.classList.remove('active');
-    });
-    
-    const targetSection = document.getElementById(sectionId);
-    if (targetSection) {
-        targetSection.style.display = 'block';
-        setTimeout(() => {
-            targetSection.classList.add('active');
-        }, 10);
-    }
-    
-    event.target.classList.add('active');
-    
-    const content = document.getElementById('sidepanel-content');
-    if (content) {
-        content.scrollTop = 0;
-    }
-    
-    if (isMobile && navigator.vibrate) {
-        navigator.vibrate(30);
-    }
+function showSection(sectionId, btn) {
+    document.querySelectorAll('.sidepanel-section').forEach(sec => sec.classList.remove('active'));
+    document.querySelectorAll('#sidepanel-tabs button').forEach(b => b.classList.remove('active'));
+    const target = document.getElementById(sectionId);
+    if (target) target.classList.add('active');
+    if (btn) btn.classList.add('active');
+    const body = document.querySelector('.panel-body');
+    if (body) body.scrollTop = 0;
 }
 
 // =========================
@@ -1208,37 +1064,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!e.target.closest("#search-mode-civico")) closeOdonimoDropdown();
         });
         
-        // AGGIUNGI EVENT LISTENER PER LO SCROLL DEL SIDEPANEL
-        const sidepanelContent = document.getElementById('sidepanel-content');
-        if (sidepanelContent) {
-            sidepanelContent.addEventListener('scroll', toggleBackToTopVisibility);
-        }
-        
-        // ASSICURATI CHE IL BACK-TO-TOP BUTTON SIA NASCOSTO INIZIALMENTE
-        const backToTopBtn = document.getElementById('back-to-top');
-        if (backToTopBtn) {
-            backToTopBtn.classList.remove('show');
-        }
-        
-        if (isMobile) {
-            window.addEventListener('orientationchange', () => {
-                setTimeout(() => {
-                    detectMobile();
-                    if (window.map) {
-                        window.map.resize();
-                    }
-                }, 500);
-            });
-            
-            window.addEventListener('resize', () => {
-                detectMobile();
-                if (window.map) {
-                    window.map.resize();
-                }
-            });
-        }
-        
-        console.log('Layer states initialized:', layerStates);
+        mqMobile.addEventListener('change', () => {
+            detectMobile();
+            if (window.map) window.map.resize();
+        });
+
+                console.log('Layer states initialized:', layerStates);
         console.log('Mobile mode:', isMobile);
         
     } catch (error) {
@@ -1260,16 +1091,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, 4000);
 	
-	const sidepanelContent = document.getElementById('sidepanel-content');
-if (sidepanelContent) {
-    sidepanelContent.addEventListener('scroll', () => {
-        if (sidepanelContent.scrollTop > 10) {
-            sidepanelContent.classList.add('scrolling');
-        } else {
-            sidepanelContent.classList.remove('scrolling');
-        }
-    });
-}
 });
 
 // =========================
@@ -1299,6 +1120,7 @@ try {
         pitch: 0,
         dragRotate: false,
         preserveDrawingBuffer: true,
+        attributionControl: { compact: true },
         touchZoomRotate: true,
         touchPitch: false
     });
@@ -1311,10 +1133,14 @@ try {
         try {
             hideLoader();
             console.log('Mappa caricata con successo');
+            // attribuzioni compatte: chiuse finche' non si tocca il pulsante (i)
+            const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+            if (attrib) attrib.classList.remove('maplibregl-compact-show');
             window.baseLayerIds = map.getStyle().layers.map(l => l.id);
             initializeMapLayers();
             loadCiviciIndex('civici_index.json');
             initZoomSlider();
+            updateZoomHints();
         } catch (error) {
             console.error('Errore durante il caricamento dei layer:', error);
             hideLoader();
@@ -1995,32 +1821,11 @@ document.addEventListener('fullscreenchange', () => {
 // ZOOM SLIDER
 // =========================
 function initZoomSlider() {
-    const slider = document.getElementById('zoom-slider');
-    if (!slider || !window.map) return;
-
-    const z0 = Math.round(window.map.getZoom());
-    slider.value = Math.min(Math.max(z0, 12), 18);
-    _syncZoomUI(Math.round(slider.value));
-
-    slider.addEventListener('input', () => {
-        const z = parseInt(slider.value);
-        window.map.easeTo({ zoom: z, duration: 300 });
-        _syncZoomUI(z);
-    });
-
+    if (!window.map) return;
+    _syncZoomUI(Math.round(window.map.getZoom()));
     window.map.on('zoom', () => {
-        const z = window.map.getZoom();
-        const clamped = Math.min(Math.max(z, 12), 18);
-        slider.value = clamped;
-        _syncZoomUI(Math.round(clamped));
-    });
-
-    window.map.on('rotate', () => {
-        const bearing = window.map.getBearing();
-        const icon = document.getElementById('bearing-icon');
-        if (icon) icon.style.transform = `rotate(${-bearing}deg)`;
-        const btn = document.getElementById('bearing-btn');
-        if (btn) btn.classList.toggle('active', Math.abs(bearing) > 0.5);
+        _syncZoomUI(Math.round(window.map.getZoom()));
+        updateZoomHints();
     });
 }
 
@@ -2035,16 +1840,8 @@ function resetBearing() {
 }
 
 function _syncZoomUI(zoom) {
-    document.querySelectorAll('.zoom-tick').forEach(t => {
-        t.classList.toggle('active', parseInt(t.dataset.zoom) === zoom);
-    });
     const badge = document.getElementById('zoom-level-display');
     if (badge) badge.textContent = zoom;
-    const slider = document.getElementById('zoom-slider');
-    if (slider) {
-        const pct = ((zoom - 12) / 6) * 100;
-        slider.style.background = `linear-gradient(to right, #ff9900 ${pct}%, #e1e5e9 ${pct}%)`;
-    }
 }
 
 console.log('✅ Mobile-Optimized Catasto Script Loaded Successfully');
@@ -2060,25 +1857,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // aria-pressed dei livelli sempre allineato alla classe .active
-    document.querySelectorAll('#layer-panel button').forEach(btn => {
-        const sync = () => btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
+    // aria-pressed dei livelli sempre allineato alla classe .active (i radio dello sfondo usano aria-checked)
+    document.querySelectorAll('#layer-panel button.lyr-row').forEach(btn => {
+        const attr = btn.getAttribute('role') === 'radio' ? 'aria-checked' : 'aria-pressed';
+        const sync = () => btn.setAttribute(attr, btn.classList.contains('active') ? 'true' : 'false');
         sync();
         new MutationObserver(sync).observe(btn, { attributes: true, attributeFilter: ['class'] });
     });
 
-    // aria-checked dell'interruttore di ricerca
-    const toggle = document.getElementById('search-mode-toggle');
-    if (toggle) {
-        const sync = () => toggle.setAttribute('aria-checked', toggle.classList.contains('civico-active') ? 'true' : 'false');
-        new MutationObserver(sync).observe(toggle, { attributes: true, attributeFilter: ['class'] });
-    }
-
-    // Esc chiude ricerca, pannello info, pannello livelli
+    // Esc chiude il pannello (mobile) e restituisce il focus al tab che lo ha aperto
     document.addEventListener('keydown', e => {
-        if (e.key !== 'Escape') return;
-        if (document.getElementById('search-popup')?.classList.contains('active')) toggleSearchPopup();
-        else if (document.getElementById('sidepanel')?.classList.contains('active')) toggleSidepanel();
-        else if (typeof layerPanelOpen !== 'undefined' && layerPanelOpen) toggleLayers();
+        if (e.key === 'Escape') closePanel();
     });
 });
