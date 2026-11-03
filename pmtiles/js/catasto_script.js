@@ -4,10 +4,71 @@
 // Versione ottimizzata per dispositivi mobili
 // =========================
 
-// TEMA: ?theme=dark|light forza il tema (utile quando la pagina e' in un iframe); altrimenti segue il sistema
-{
-    const t = new URLSearchParams(location.search).get('theme');
-    if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+// =========================
+// TEMA CHIARO/SCURO
+// Priorita': ?theme=dark|light nell'indirizzo, poi scelta salvata col pulsante, poi sistema.
+// Cambia l'interfaccia (data-theme sul <html>) e la mappa di base (positron <-> dark).
+// =========================
+const BASE_STYLES = {
+    light: 'https://tiles.openfreemap.org/styles/positron',
+    dark: 'https://tiles.openfreemap.org/styles/dark'
+};
+const mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+let themeLocked = false; // true se l'utente (o l'indirizzo) ha scelto: il sistema non decide piu'
+
+function initialTheme() {
+    const q = new URLSearchParams(location.search).get('theme');
+    if (q === 'dark' || q === 'light') { themeLocked = true; return q; }
+    let saved = null;
+    try { saved = localStorage.getItem('catasto-theme'); } catch (e) {}
+    if (saved === 'dark' || saved === 'light') { themeLocked = true; return saved; }
+    return mqDark.matches ? 'dark' : 'light';
+}
+document.documentElement.dataset.theme = initialTheme();
+
+function applyTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    const btn = document.getElementById('theme-btn');
+    if (btn) {
+        const dark = theme === 'dark';
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        btn.title = dark ? 'Passa al tema chiaro' : 'Passa al tema scuro';
+        btn.setAttribute('aria-label', btn.title);
+        const i = btn.querySelector('i');
+        if (i) i.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+    }
+    applyBaseStyle(theme);
+}
+
+function toggleTheme() {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    themeLocked = true;
+    try { localStorage.setItem('catasto-theme', next); } catch (e) {}
+    applyTheme(next);
+}
+
+mqDark.addEventListener('change', e => { if (!themeLocked) applyTheme(e.matches ? 'dark' : 'light'); });
+
+// sostituisce solo la mappa di base: sorgenti e layer dell'app restano dove sono
+function applyBaseStyle(theme) {
+    const map = window.map;
+    if (!map || !window.baseLayerIds || window._baseTheme === theme) return;
+    window._baseTheme = theme;
+    const oldBaseLayers = new Set(window.baseLayerIds);
+    const oldBaseSources = new Set(window.baseSourceIds || []);
+    map.setStyle(BASE_STYLES[theme], {
+        diff: false,
+        transformStyle: (prev, next) => {
+            const sources = Object.assign({}, next.sources);
+            Object.keys(prev.sources).forEach(k => { if (!oldBaseSources.has(k)) sources[k] = prev.sources[k]; });
+            const custom = prev.layers.filter(l => !oldBaseLayers.has(l.id));
+            const base = next.layers.map(l => layerStates.basemap ? l
+                : Object.assign({}, l, { layout: Object.assign({}, l.layout, { visibility: 'none' }) }));
+            window.baseLayerIds = next.layers.map(l => l.id);
+            window.baseSourceIds = Object.keys(next.sources);
+            return Object.assign({}, next, { sources, layers: [...base, ...custom] });
+        }
+    });
 }
 
 // DATA DI AGGIORNAMENTO DEL CATASTO: unico punto da modificare.
@@ -1124,7 +1185,7 @@ try {
 
     const map = new maplibregl.Map({
         container: "map",
-        style: "https://tiles.openfreemap.org/styles/positron",
+        style: BASE_STYLES[document.documentElement.dataset.theme] || BASE_STYLES.light,
         center: [13.33225, 38.14074],
         zoom: isMobile ? 11 : 12,
         maxBounds: [[13.1, 37.9785], [13.55, 38.2919]],
@@ -1149,6 +1210,9 @@ try {
             const attrib = document.querySelector('.maplibregl-ctrl-attrib');
             if (attrib) attrib.classList.remove('maplibregl-compact-show');
             window.baseLayerIds = map.getStyle().layers.map(l => l.id);
+            window.baseSourceIds = Object.keys(map.getStyle().sources);
+            window._baseTheme = document.documentElement.dataset.theme;
+            applyTheme(document.documentElement.dataset.theme);
             initializeMapLayers();
             loadCiviciIndex('civici_index.json');
             initZoomSlider();

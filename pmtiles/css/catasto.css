@@ -690,3 +690,7 @@ body {
 
 .lyr-link { min-height: 44px; display: inline-flex; align-items: center; }
 @media (max-width: 380px) { .lyr-swatch:not(.sw-base):not(.sw-aerea):not(.sw-ctc) { display: none; } .lyr-name { white-space: normal; } }
+.guida-fig { margin: 8px 16px 12px; }
+.guida-fig a { display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--line-strong); }
+.guida-fig img { display: block; width: 100%; height: auto; border-radius: 0; box-shadow: none; }
+.guida-fig figcaption { font-size: 12px; opacity: 1; color: var(--ink-2); text-align: left; margin-top: 6px; }
