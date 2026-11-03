@@ -295,9 +295,9 @@ function toggleSatelliteOverlay() {
                     sources: {
                         satellite: {
                             type: "raster",
-                            tiles: ["https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"],
+                            tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
                             tileSize: 256,
-                            attribution: "Immagini ©2025 Google - "
+                            attribution: "Immagini © Esri, Maxar, Earthstar Geographics - "
                         }
                     },
                     layers: [{
@@ -1457,9 +1457,9 @@ function initializeMapLayers() {
 
         window.map.addSource("satellite", {
             type: "raster",
-            tiles: ["https://mt1.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"],
+            tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
             tileSize: 256,
-            attribution: "Immagini ©2025 Google - "
+            attribution: "Immagini © Esri, Maxar, Earthstar Geographics - "
         });
 
         window.map.addSource("zto", {
@@ -2048,3 +2048,37 @@ function _syncZoomUI(zoom) {
 }
 
 console.log('✅ Mobile-Optimized Catasto Script Loaded Successfully');
+
+// =========================
+// ACCESSIBILITA': tastiera, aria-pressed, Esc
+// =========================
+document.addEventListener('DOMContentLoaded', () => {
+    // div/span con role="button" o "switch": Invio e Spazio attivano il click
+    document.querySelectorAll('[role="button"][tabindex], [role="switch"][tabindex]').forEach(el => {
+        el.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); }
+        });
+    });
+
+    // aria-pressed dei livelli sempre allineato alla classe .active
+    document.querySelectorAll('#layer-panel button').forEach(btn => {
+        const sync = () => btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
+        sync();
+        new MutationObserver(sync).observe(btn, { attributes: true, attributeFilter: ['class'] });
+    });
+
+    // aria-checked dell'interruttore di ricerca
+    const toggle = document.getElementById('search-mode-toggle');
+    if (toggle) {
+        const sync = () => toggle.setAttribute('aria-checked', toggle.classList.contains('civico-active') ? 'true' : 'false');
+        new MutationObserver(sync).observe(toggle, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    // Esc chiude ricerca, pannello info, pannello livelli
+    document.addEventListener('keydown', e => {
+        if (e.key !== 'Escape') return;
+        if (document.getElementById('search-popup')?.classList.contains('active')) toggleSearchPopup();
+        else if (document.getElementById('sidepanel')?.classList.contains('active')) toggleSidepanel();
+        else if (typeof layerPanelOpen !== 'undefined' && layerPanelOpen) toggleLayers();
+    });
+});

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Variante Generale e Particelle catastali e stampa scheda pdf - By OpenDataSicilia</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="favicon.ico">
     <meta name="author" content="Giovan Battista Vitrano per Open Data Sicilia">
     <script src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
@@ -16,27 +16,45 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
     
-    <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
+    <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/catasto-app.html">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
     <meta property="og:description" content="Variante Generale e Particelle catastali e stampa scheda pdf - By OpenDataSicilia">
     <meta property="og:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="palermohub.opendatasicilia.it">
-    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/pmtiles/prg_part_catastali.html">
+    <meta property="twitter:url" content="https://palermohub.opendatasicilia.it/pmtiles/catasto-app.html">
     <meta name="twitter:title" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
     <meta name="twitter:description" content="Variante Generale e Particelle catastali e stampa scheda pdf - By OpenDataSicilia">
     <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
-    <link rel="stylesheet" href="css/catasto.css"></head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KHR1GHDRQS"></script>
+    <link rel="canonical" href="https://palermohub.opendatasicilia.it/pmtiles/catasto-app.html">
+    <link rel="stylesheet" href="css/catasto.css">
     <script>
+      // Analytics solo dopo consenso esplicito (localStorage 'ga-consent' = 'granted')
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-KHR1GHDRQS');
+      function loadAnalytics() {
+        if (window.__gaLoaded) return;
+        window.__gaLoaded = true;
+        const s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KHR1GHDRQS';
+        document.head.appendChild(s);
+        gtag('js', new Date());
+        gtag('config', 'G-KHR1GHDRQS');
+      }
+      function setConsent(granted) {
+        try { localStorage.setItem('ga-consent', granted ? 'granted' : 'denied'); } catch (e) {}
+        document.getElementById('consent-banner').hidden = true;
+        if (granted) loadAnalytics();
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        let c = null;
+        try { c = localStorage.getItem('ga-consent'); } catch (e) {}
+        if (c === 'granted') loadAnalytics();
+        else if (c !== 'denied') document.getElementById('consent-banner').hidden = false;
+      });
     </script>
-    
-
 </head>
 <body>
     <div id="map"></div>
@@ -45,24 +63,24 @@
     <!-- Mobile-Optimized Floating Command Bar -->
     <div class="command-bar">
         <button class="command-btn" onclick="toggleLayers()" title="Visualizza gestione livelli">
-            <i class="fas fa-layer-group"></i>
+            <i aria-hidden="true" class="fas fa-layer-group"></i>
             <span>Layers</span>
         </button>
         <button class="command-btn" onclick="toggleSearchPopup()" title="Trova la particella catastale che stai cercando">
-            <i class="fas fa-search"></i>
+            <i aria-hidden="true" class="fas fa-search"></i>
             <span>Cerca</span>
         </button>
         <button class="command-btn" id="pdf-cmd" onclick="generatePDF()" style="display: none;" title="PDF">
-            <i class="fas fa-file-pdf"></i>
+            <i aria-hidden="true" class="fas fa-file-pdf"></i>
             <span>PDF</span>
         </button>
         <button class="command-btn" onclick="toggleSatelliteOverlay()" title="Attiva overlay satellitare sincronizzato con le particelle catastali">
-            <i class="fas fa-satellite"></i>
+            <i aria-hidden="true" class="fas fa-satellite"></i>
             <span>Satellite</span>
         </button>
         <button class="command-btn" id="info-btn" onclick="toggleSidepanel()" title="Attiva pannello informativo">
             <span class="info-badge-wrapper">
-                <i class="fas fa-info-circle"></i>
+                <i aria-hidden="true" class="fas fa-info-circle"></i>
                 <span class="info-badge" id="info-badge"></span>
             </span>
             <span>Info</span>
@@ -72,27 +90,27 @@
     <!-- Zoom Slider Bar -->
     <div class="zoom-bar" id="zoom-bar">
         <div class="zoom-bar-actions">
-            <button class="zoom-bar-btn" onclick="resetMapHome()" title="Vista iniziale">
-                <i class="fas fa-home"></i>
+            <button class="zoom-bar-btn" onclick="resetMapHome()" title="Vista iniziale" aria-label="Vista iniziale">
+                <i aria-hidden="true" class="fas fa-home"></i>
             </button>
           <!--  <button class="zoom-bar-btn" id="bearing-btn" onclick="resetBearing()" title="Reimposta orientamento Nord">
-                <i class="fas fa-compass" id="bearing-icon"></i>
+                <i aria-hidden="true" class="fas fa-compass" id="bearing-icon"></i>
             </button>  -->
-            <button class="zoom-bar-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Schermo intero">
-                <i class="fas fa-expand" id="fullscreen-icon"></i>
+            <button class="zoom-bar-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Schermo intero" aria-label="Schermo intero">
+                <i aria-hidden="true" class="fas fa-expand" id="fullscreen-icon"></i>
             </button>
         </div>
         <div class="zoom-bar-divider"></div>
         <div class="zoom-slider-track">
-            <input type="range" id="zoom-slider" min="12" max="18" step="1" value="12">
+            <input type="range" id="zoom-slider" aria-label="Livello di zoom" min="12" max="18" step="1" value="12">
             <div class="zoom-ticks">
-                <span class="zoom-tick" data-zoom="12" onclick="window.map&&window.map.easeTo({zoom:12,duration:300})">12</span>
-                <span class="zoom-tick" data-zoom="13" onclick="window.map&&window.map.easeTo({zoom:13,duration:300})">13</span>
-                <span class="zoom-tick" data-zoom="14" onclick="window.map&&window.map.easeTo({zoom:14,duration:300})">14</span>
-                <span class="zoom-tick" data-zoom="15" onclick="window.map&&window.map.easeTo({zoom:15,duration:300})">15</span>
-                <span class="zoom-tick" data-zoom="16" onclick="window.map&&window.map.easeTo({zoom:16,duration:300})">16</span>
-                <span class="zoom-tick" data-zoom="17" onclick="window.map&&window.map.easeTo({zoom:17,duration:300})">17</span>
-                <span class="zoom-tick" data-zoom="18" onclick="window.map&&window.map.easeTo({zoom:18,duration:300})">18</span>
+                <span class="zoom-tick" data-zoom="12" role="button" tabindex="0" aria-label="Zoom 12" onclick="window.map&&window.map.easeTo({zoom:12,duration:300})">12</span>
+                <span class="zoom-tick" data-zoom="13" role="button" tabindex="0" aria-label="Zoom 13" onclick="window.map&&window.map.easeTo({zoom:13,duration:300})">13</span>
+                <span class="zoom-tick" data-zoom="14" role="button" tabindex="0" aria-label="Zoom 14" onclick="window.map&&window.map.easeTo({zoom:14,duration:300})">14</span>
+                <span class="zoom-tick" data-zoom="15" role="button" tabindex="0" aria-label="Zoom 15" onclick="window.map&&window.map.easeTo({zoom:15,duration:300})">15</span>
+                <span class="zoom-tick" data-zoom="16" role="button" tabindex="0" aria-label="Zoom 16" onclick="window.map&&window.map.easeTo({zoom:16,duration:300})">16</span>
+                <span class="zoom-tick" data-zoom="17" role="button" tabindex="0" aria-label="Zoom 17" onclick="window.map&&window.map.easeTo({zoom:17,duration:300})">17</span>
+                <span class="zoom-tick" data-zoom="18" role="button" tabindex="0" aria-label="Zoom 18" onclick="window.map&&window.map.easeTo({zoom:18,duration:300})">18</span>
             </div>
         </div>
         <span class="zoom-level-badge" id="zoom-level-display">12</span>
@@ -101,9 +119,9 @@
     <!-- Mobile-Optimized Layer Cards -->
     <div class="layer-switcher" id="layer-panel">
         <div class="layer-card">
-            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);"><i class="fas fa-city"></i></div> Zonizzazione</h3>
+            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #8e44ad 0%, #9b59b6 100%);"><i aria-hidden="true" class="fas fa-city"></i></div> Zonizzazione</h3>
             <div class="layer-grid">
-                <button id="zonizzazione" Title="Zonizzazione PRG 2004 (ZTO e PPE)" class="active">
+                <button id="zonizzazione" title="Zonizzazione PRG 2004 (ZTO e PPE)" class="active">
                     <span>Zonizzazione PRG</span>
                     <div class="layer-toggle"></div>
                 </button>
@@ -111,10 +129,10 @@
         </div>
 
         <div class="layer-card">
-            <h3><div class="layer-icon"><i class="fas fa-shield-alt"></i></div> Vincoli</h3>
+            <h3><div class="layer-icon"><i aria-hidden="true" class="fas fa-shield-alt"></i></div> Vincoli</h3>
             <div class="layer-grid">
                 <div class="vincoli-container">
-                    <button id="vincoli-main" Title="Vincoli Urbanistici"class="active">
+                    <button id="vincoli-main" title="Vincoli Urbanistici" class="active">
                         <span>Vincoli Urbanistici</span>
                         <div class="layer-toggle"></div>
                     </button>
@@ -133,9 +151,9 @@
         </div>
 
         <div class="layer-card">
-            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);"><i class="fas fa-map"></i></div> Catasto</h3>
+            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);"><i aria-hidden="true" class="fas fa-map"></i></div> Catasto</h3>
             <div class="layer-grid">
-                <button id="particelle" Title="Ultimo aggiornamento Settembre 2026" class="active">
+                <button id="particelle" title="Ultimo aggiornamento Settembre 2026" class="active">
                     <span>Particelle Catastali</span>
                     <div class="layer-toggle"></div>
                 </button>
@@ -143,9 +161,9 @@
         </div>
 
         <div class="layer-card">
-            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #ff9900 0%, #e68800 100%);"><i class="fas fa-euro-sign"></i></div> Quotazioni OMI</h3>
+            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #ff9900 0%, #e68800 100%);"><i aria-hidden="true" class="fas fa-euro-sign"></i></div> Quotazioni OMI</h3>
             <div class="layer-grid">
-                <button id="zone_omi" Title="Zone OMI 2025 - II semestre - Agenzia delle Entrate">
+                <button id="zone_omi" title="Zone OMI 2025 - II semestre - Agenzia delle Entrate">
                     <span>Zone OMI 2025 S2</span>
                     <div class="layer-toggle"></div>
                 </button>
@@ -153,9 +171,9 @@
         </div>
 
         <div class="layer-card">
-            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);"><i class="fas fa-location-dot"></i></div> Numeri Civici</h3>
+            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #e67e22 0%, #f39c12 100%);"><i aria-hidden="true" class="fas fa-location-dot"></i></div> Numeri Civici</h3>
             <div class="layer-grid">
-                <button id="civici" Title="Numeri Civici - Aggiornamento Febbraio 2026">
+                <button id="civici" title="Numeri Civici - Aggiornamento Febbraio 2026">
                     <span>Numeri Civici</span>
                     <div class="layer-toggle"></div>
                 </button>
@@ -163,18 +181,18 @@
         </div>
 
         <div class="layer-card">
-            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);"><i class="fas fa-globe"></i></div> Cartografia</h3>
+            <h3><div class="layer-icon" style="background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);"><i aria-hidden="true" class="fas fa-globe"></i></div> Cartografia</h3>
             <div class="layer-grid">
-                <button id="carta_tecnica" Title="Carta Tecnica Comunale 2k 2007/09">
+                <button id="carta_tecnica" title="Carta Tecnica Comunale 2k 2007/09">
                     <span>Carta Tecnica 2k</span>
                     <div class="layer-toggle"></div>
                 </button>
-                <button id="basemap" Title="Mostra/nascondi la mappa di base" class="active">
+                <button id="basemap" title="Mostra/nascondi la mappa di base" class="active">
                     <span>Mappa di base</span>
                     <div class="layer-toggle"></div>
                 </button>
-                <button id="satellite" Title="Attiva foto aerea di Google Maps">
-                    <span>Google Satellite</span>
+                <button id="satellite" title="Attiva foto aerea di Google Maps">
+                    <span>Foto aerea</span>
                     <div class="layer-toggle"></div>
                 </button>
             </div>
@@ -189,26 +207,26 @@
     </div>
 
     <!-- Mobile-Optimized Search Tab -->
-    <div class="search-tab" onclick="toggleSearchPopup()">
-        <i class="fas fa-search"></i>
+    <div class="search-tab" role="button" tabindex="0" aria-label="Apri la ricerca" onclick="toggleSearchPopup()">
+        <i aria-hidden="true" class="fas fa-search"></i>
     </div>
   <!--
     <div class="pdf-tab" id="pdf-tab" onclick="generatePDF()">
-        <i class="fas fa-file-pdf"></i>
+        <i aria-hidden="true" class="fas fa-file-pdf"></i>
     </div> -->
 
     <!-- Full-Screen Mobile Search Modal -->
 <div class="search-popup" id="search-popup">
     <div class="search-container">
-        <button class="search-close" onclick="toggleSearchPopup()" title="Chiudi ricerca">×</button>
+        <button class="search-close" onclick="toggleSearchPopup()" title="Chiudi ricerca" aria-label="Chiudi ricerca">×</button>
         <h3>Ricerca Particella</h3>
 
         <div class="search-info">
-            <i class="fas fa-info-circle"></i>
+            <i aria-hidden="true" class="fas fa-info-circle"></i>
             <span id="search-info-text">La ricerca funziona sull'area visibile della mappa. Naviga prima nella zona di interesse, poi avvia la ricerca.</span>
         </div>
 
-        <div class="search-mode-toggle" id="search-mode-toggle" onclick="switchSearchMode(this.classList.contains('civico-active') ? 'foglio' : 'civico')">
+        <div class="search-mode-toggle" id="search-mode-toggle" role="switch" tabindex="0" aria-checked="false" aria-label="Cerca per via e civico" onclick="switchSearchMode(this.classList.contains('civico-active') ? 'foglio' : 'civico')">
             <span class="search-toggle-label active" id="label-foglio">Foglio / Particella</span>
             <div class="search-toggle-track">
                 <div class="search-toggle-thumb"></div>
@@ -218,8 +236,8 @@
 
         <div id="search-mode-foglio" class="search-mode-panel">
             <div class="search-inputs">
-                <input type="number" id="foglio" placeholder="Numero Foglio" min="1">
-                <input type="number" id="particella" placeholder="Numero Particella" min="1">
+                <input type="number" id="foglio" inputmode="numeric" aria-label="Numero foglio" placeholder="Numero Foglio" min="1">
+                <input type="number" id="particella" inputmode="numeric" aria-label="Numero particella" placeholder="Numero Particella" min="1">
             </div>
             <button onclick="searchParticella()" title="Avvia ricerca della particella">Avvia ricerca</button>
         </div>
@@ -227,10 +245,10 @@
         <div id="search-mode-civico" class="search-mode-panel" style="display:none">
             <div class="search-inputs">
                 <div class="odonimo-wrapper">
-                    <input type="text" id="odonimo" placeholder="Nome via (es. VIA ROMA)" autocomplete="off">
+                    <input type="text" id="odonimo" aria-label="Nome via" placeholder="Nome via (es. VIA ROMA)" autocomplete="off">
                     <div id="odonimo-dropdown" class="odonimo-dropdown"></div>
                 </div>
-                <input type="text" id="civico-search" placeholder="Numero civico (es. 10)" autocomplete="off">
+                <input type="text" id="civico-search" inputmode="numeric" aria-label="Numero civico" placeholder="Numero civico (es. 10)" autocomplete="off">
             </div>
             <button onclick="searchByCivico()" title="Avvia ricerca per via e civico">Avvia ricerca</button>
         </div>
@@ -245,7 +263,7 @@
     <!-- Mobile-Optimized Satellite Overlay -->
     <div id="satellite-overlay">
         <div class="satellite-controls">
-            <button class="satellite-btn" onclick="toggleSatelliteOverlay()" title="Chiudi">×</button>
+            <button class="satellite-btn" onclick="toggleSatelliteOverlay()" title="Chiudi" aria-label="Chiudi la vista satellitare">×</button>
         </div>
         <div id="satellite-map"></div>
         <div class="crosshair-minimap"></div>
@@ -254,14 +272,14 @@
     <!-- Mobile-Optimized Bottom Drawer -->
 	
     <div id="sidepanel">
-        <div id="sidepanel-tab" onclick="toggleSidepanel()">
+        <div id="sidepanel-tab" role="button" tabindex="0" aria-label="Apri o chiudi il pannello informazioni" aria-controls="sidepanel-content" onclick="toggleSidepanel()">
             <i id="tab-icon" class="fas fa-chevron-up"></i>
          <!--   <span>Informazioni</span>  -->
         </div>
         <div id="sidepanel-content">
             <!-- Back to Top Button -->
             <button id="back-to-top" title="Torna in alto" class="back-to-top-btn" onclick="scrollToTop()">
-                <i class="fas fa-arrow-up"></i>
+                <i aria-hidden="true" class="fas fa-arrow-up"></i>
             </button>
             <div id="sidepanel-tabs">
                 <button onclick="showSection('section1')" class="active">Info</button>
@@ -277,17 +295,17 @@
                 <h2>Variante Generale e dati catastali</h2>
                 <p><em><strong>Dal 1° gennaio 2025, l'accesso telematico alle banche dati </strong>ipotecarie e <strong>catastali diventa gratuito</strong>, segnando un'importante semplificazione per professionisti, pubbliche amministrazioni e cittadini. <br>La novità è contenuta nel <a href="https://www.agenziaentrate.gov.it/portale/web/guest/-/provvedimento-del-30-dicembre-20-3">provvedimento</a> dell'Agenzia delle Entrate del 30 dicembre 2024, che attua le disposizioni introdotte dall'articolo 7 del decreto legislativo n. 139/2024.</em></p>
                 <hr>
-                <p><strong>Variente Generle al P.R.G.</strong> - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br>
+                <p><strong>Variante Generale al P.R.G.</strong> - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br>
                 Rielaborazione a cura di @opendatasicilia su opendata del Comune di Palermo. <br><br>
                 <strong> Fonte dati Zonizzazione e vincoli -</strong> <br><a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=11" title="Opendata Palermo - Urbanistica" target="_blank">Urbanistica</a>   <br>
                 <a href="https://www.comune.palermo.it/opendata_dld.php?id=320t" title="Perimetrazione Zonizzazione P.R.G. vigente" target="_blank" > Perimetrazione Zonizzazione P.R.G. vigente;</a><br>
                 <a href="https://www.comune.palermo.it/opendata_dld.php?id=321" title="Vincoli vigenti della Variante al P.R.G." target="_blank" >Vincoli vigenti della Variante al P.R.G.</a> -  <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong>
                   <p class="lorem"><strong>La variante Generale al P.R.G. è stata redatta dal Settore Urbanistica nel 2004 oggi Area Urbanistica della rigenerazione urbana, della mobilità e del centro storico</strong><br>
                     <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=103" target="_blank">Qui gli elaborati della Variante Generale</a></p>
-                     <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Uffico Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br>
+                     <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Ufficio Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br>
                      <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p>
                    <hr>
-                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> con aggiornamenti ssemestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Settembre 2026</strong>.<br><br>
+                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> con aggiornamenti semestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Settembre 2026</strong>.<br><br>
                     L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
                     <hr>
                     <p><strong>Autore:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" title="@gbvitrano su LinkedIn" target="_blank">@gbvitrano</a> &amp; <a href="https://claude.ai" title="Claude AI - Anthropic" target="_blank">Claude AI (Anthropic)</a></p>
@@ -305,7 +323,7 @@
                 <ul>
                     <li><strong>Spostare</strong>: trascina con il mouse o con un dito.</li>
                     <li><strong>Zoom</strong>: rotellina del mouse, pizzico su mobile, oppure il cursore (livelli 12–18) e i numeri sotto di esso.</li>
-                    <li><i class="fas fa-home"></i> riporta alla vista iniziale; <i class="fas fa-expand"></i> attiva lo schermo intero.</li>
+                    <li><i aria-hidden="true" class="fas fa-home"></i> riporta alla vista iniziale; <i aria-hidden="true" class="fas fa-expand"></i> attiva lo schermo intero.</li>
                     <li>Le etichette <em>F. foglio - P. particella</em> compaiono con lo zoom avanzato.</li>
                 </ul>
 
@@ -314,11 +332,11 @@
                 <p>Il pulsante <strong>Layers</strong> apre il pannello dei livelli:</p>
                 <ul>
                     <li><strong>Zonizzazione PRG</strong>: zone territoriali omogenee (Variante Generale 2004 e PPE del centro storico).</li>
-                    <li><strong>Vincoli urbanistici</strong>: lineari e areali, attivabili anche separatamente dal sottomenu <i class="fas fa-caret-down"></i>.</li>
+                    <li><strong>Vincoli urbanistici</strong>: lineari e areali, attivabili anche separatamente dal sottomenu <i aria-hidden="true" class="fas fa-caret-down"></i>.</li>
                     <li><strong>Particelle catastali</strong>: perimetri e numerazione di foglio e particella.</li>
                     <li><strong>Zone OMI</strong>: 51 zone con le quotazioni immobiliari dell'Agenzia delle Entrate.</li>
                     <li><strong>Numeri civici</strong>: 165.000+ civici (ANNCSU).</li>
-                    <li><strong>Cartografia</strong>: Carta Tecnica 2k, mappa di base e Google Satellite.</li>
+                    <li><strong>Cartografia</strong>: Carta Tecnica 2k, mappa di base e Foto aerea.</li>
                 </ul>
                 <figure class="guida-fig"><img src="guida/03_omi_civici.jpg" loading="lazy" alt="Esempio con Numeri Civici e Zone OMI attivi insieme alla zonizzazione"><figcaption>Esempio con Numeri Civici e Zone OMI attivi insieme alla zonizzazione</figcaption></figure>
 
@@ -343,7 +361,7 @@
 
                 <h3>6. Vista satellitare sincronizzata</h3>
                 <figure class="guida-fig"><img src="guida/07_satellite.jpg" loading="lazy" alt="Minimappa satellitare in basso a sinistra, centrata sul mirino"><figcaption>Minimappa satellitare in basso a sinistra, centrata sul mirino</figcaption></figure>
-                <p>Il pulsante <strong>Satellite</strong> apre una finestra con la foto aerea che segue la mappa principale (mirino al centro). Chiudila con <strong>×</strong>. Per coprire l'intera mappa usa invece il livello <em>Google Satellite</em>.</p>
+                <p>Il pulsante <strong>Satellite</strong> apre una finestra con la foto aerea che segue la mappa principale (mirino al centro). Chiudila con <strong>×</strong>. Per coprire l'intera mappa usa invece il livello <em>Foto aerea</em>.</p>
 
                 <h3>Consigli</h3>
                 <ul>
@@ -421,8 +439,8 @@
     <div id="news-popup-overlay" style="display:none">
         <div id="news-popup">
             <div class="news-popup-header">
-                <div class="news-icon"><i class="fas fa-location-dot"></i></div>
-                <h3>Novità: Numeri Civici e Zome OMI ntegrati in mappa</h3>
+                <div class="news-icon"><i aria-hidden="true" class="fas fa-location-dot"></i></div>
+                <h3>Novità: Numeri Civici e Zone OMI integrate in mappa</h3>
                 <span class="news-badge">Nuovo</span>
             </div>
             <div class="news-popup-body">
@@ -437,7 +455,7 @@
                     su odonimo, quartiere, circoscrizione e unità di primo livello (UPL).
                 </p>
                 <div class="news-hint">
-                    <i class="fas fa-layer-group" style="margin-right:5px;color:#e67e22;"></i>
+                    <i aria-hidden="true" class="fas fa-layer-group" style="margin-right:5px;color:#e67e22;"></i>
                     Per visualizzarli, attiva il layer <strong>Numeri Civici</strong> nel pannello <em>Layers</em>.
                 </div>
             </div>
@@ -449,7 +467,7 @@
 						 <p>Ogni zona OMI individua un’area specifica del territorio comunale (ad esempio Centro storico, Borgo Vecchio, Politeama, Oreto, Mondello, ecc.) per stimarne il valore di mercato.
                 </p>
                <div class="news-hint">
-                    <i class="fas fa-layer-group" style="margin-right:5px;color:#e67e22;"></i>
+                    <i aria-hidden="true" class="fas fa-layer-group" style="margin-right:5px;color:#e67e22;"></i>
                     Per visualizzarli, attiva il layer <strong>Zone OMI 2025 S2</strong> nel pannello <em>Layers</em>.
                 </div>			
 							
@@ -469,6 +487,15 @@
         <div class="wait-content">
             <p>Generazione del PDF in corso...</p>
             <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Consenso analytics -->
+    <div id="consent-banner" role="dialog" aria-label="Consenso statistiche" hidden>
+        <p>Usiamo Google Analytics per statistiche anonime di utilizzo, solo con il tuo consenso.</p>
+        <div>
+            <button type="button" onclick="setConsent(false)">Rifiuta</button>
+            <button type="button" class="primary" onclick="setConsent(true)">Accetta</button>
         </div>
     </div>
 

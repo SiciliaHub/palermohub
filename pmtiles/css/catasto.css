@@ -91,7 +91,7 @@ body {
     color: var(--text);
     cursor: pointer;
     font-weight: 600;
-    font-size: 9px;
+    font-size: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     flex-direction: column;
@@ -311,7 +311,7 @@ body {
 
 #vincoli-main::after {
     content: '▼';
-    font-size: 10px;
+    font-size: 12px;
     transition: transform 0.3s ease;
     margin-left: 6px;
 }
@@ -325,7 +325,7 @@ body {
     margin: 4px 0;
     background: white;
     border-color: var(--border-soft);
-    font-size: 11px;
+    font-size: 12px;
     min-height: 40px;
     padding: 10px 12px;
 }
@@ -849,7 +849,7 @@ body {
 }
 
 #sidepanel-tab i {
-    font-size: 11px;
+    font-size: 12px;
     color: #aaa;
     transition: color 0.3s ease, transform 0.3s ease;
 }
@@ -911,7 +911,7 @@ body {
 }
 
 .back-to-top-btn span {
-    font-size: 10px;
+    font-size: 12px;
     line-height: 1;
 }
 
@@ -1329,7 +1329,7 @@ body {
 }
 
 .zoom-tick {
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-muted);
     cursor: pointer;
@@ -1357,7 +1357,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 700;
     flex-shrink: 0;
     font-family: 'Poppins', sans-serif;
@@ -1381,7 +1381,7 @@ body {
     width: auto !important;
     text-align: center !important;
     z-index: 1000 !important;
-    font-size: 11px !important;
+    font-size: 12px !important;
     border-radius: 4px !important;
     padding: 4px 8px !important;
     white-space: nowrap !important;
@@ -1437,7 +1437,7 @@ body {
     .maplibregl-ctrl-attrib {
         top: 60px !important;
         right: 10px !important;
-        font-size: 9px !important;
+        font-size: 12px !important;
         padding: 5px 10px !important;
         font-weight: 600 !important;
         letter-spacing: 0.5px !important;
@@ -1613,7 +1613,7 @@ body {
     margin-left: auto;
     background: rgba(255,255,255,0.25);
     color: #fff;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 600;
     padding: 3px 8px;
     border-radius: 20px;
@@ -1779,7 +1779,7 @@ hr + .info-card {
     background: #0052a3;
 }
 .sister-btn i {
-    font-size: 10px;
+    font-size: 12px;
     flex-shrink: 0;
 }
 .sister-coords {
@@ -1787,7 +1787,7 @@ hr + .info-card {
     background: rgba(255,255,255,0.2);
     border-radius: 4px;
     padding: 1px 5px;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 500;
     letter-spacing: 0.02em;
 }
@@ -1798,7 +1798,7 @@ hr + .info-card {
     color: #fff;
     padding: 2px 9px;
     border-radius: 20px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
     margin-left: auto;
@@ -1825,7 +1825,7 @@ hr + .info-card {
 .omi-main-summary::-webkit-details-marker { display: none; }
 .omi-main-summary::before {
     content: '▶';
-    font-size: 8px;
+    font-size: 12px;
     color: var(--primary);
     transition: transform 0.18s;
     flex-shrink: 0;
@@ -1835,7 +1835,7 @@ hr + .info-card {
 }
 .omi-main-summary i {
     color: var(--primary);
-    font-size: 11px;
+    font-size: 12px;
 }
 .omi-tipi {
     display: flex;
@@ -1862,7 +1862,7 @@ summary.omi-tipo-summary {
 summary.omi-tipo-summary::-webkit-details-marker { display: none; }
 summary.omi-tipo-summary::before {
     content: '▶';
-    font-size: 8px;
+    font-size: 12px;
     color: var(--primary);
     transition: transform 0.18s;
     flex-shrink: 0;
@@ -1878,13 +1878,13 @@ details[open] > summary.omi-tipo-summary::before {
     flex: 1;
 }
 .omi-stato-tag {
-    font-size: 10px;
+    font-size: 12px;
     color: #888;
     font-style: normal;
     white-space: nowrap;
 }
 .omi-tipo-preview {
-    font-size: 11px;
+    font-size: 12px;
     color: #ff9900;
     font-weight: 600;
     white-space: nowrap;
@@ -1902,7 +1902,7 @@ details[open] > summary.omi-tipo-summary::before {
     gap: 6px;
 }
 .omi-val-lbl {
-    font-size: 11px;
+    font-size: 12px;
     color: #888;
     display: block;
     margin-bottom: 2px;
@@ -1915,12 +1915,12 @@ details[open] > summary.omi-tipo-summary::before {
 }
 .omi-sup {
     color: #bbb;
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 400;
 }
 .omi-footer {
     margin-top: 8px;
-    font-size: 11px;
+    font-size: 12px;
     color: #999;
     border-top: 1px solid #eee;
     padding-top: 6px;
@@ -1945,3 +1945,25 @@ details[open] > summary.omi-tipo-summary::before {
 }
 
 .guida-fig{margin:12px 0;text-align:center}.guida-fig img{max-width:100%;height:auto;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.25)}.guida-fig figcaption{font-size:.85em;opacity:.75;margin-top:6px}
+
+/* ===== ACCESSIBILITA' ===== */
+:focus-visible { outline: 3px solid #15191C; outline-offset: 2px; }
+[hidden] { display: none !important; }
+
+#consent-banner {
+    position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 99999;
+    max-width: 480px; box-sizing: border-box; padding: 16px;
+    background: #fff; color: #15191C; border: 1px solid #C9CEC8; border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(21,25,28,.18); font-size: 14px; line-height: 1.45;
+}
+#consent-banner p { margin: 0 0 12px; }
+#consent-banner div { display: flex; gap: 8px; justify-content: flex-end; }
+#consent-banner button {
+    min-height: 44px; padding: 0 18px; border-radius: 8px; cursor: pointer;
+    border: 1px solid #C9CEC8; background: #fff; color: #15191C; font: 500 14px 'Poppins', sans-serif;
+}
+#consent-banner button.primary { background: #FF9900; border-color: #FF9900; color: #1A1100; font-weight: 600; }
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
