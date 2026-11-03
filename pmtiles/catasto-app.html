@@ -7,16 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="favicon.ico">
     <meta name="author" content="Giovan Battista Vitrano per Open Data Sicilia">
-    <script src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
+    <script defer src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
     <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
-    <script src="https://unpkg.com/pmtiles@2.4.0/dist/index.js"></script>
+    <script defer src="https://unpkg.com/pmtiles@2.4.0/dist/index.js"></script>
     <link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ibm-plex-sans-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script defer src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
     
     <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/catasto-app.html">
     <meta property="og:type" content="website">
@@ -31,6 +31,7 @@
     <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
     <link rel="canonical" href="https://palermohub.opendatasicilia.it/pmtiles/catasto-app.html">
     <link rel="stylesheet" href="css/catasto.css">
+    <script defer src="js/catasto_script.js"></script>
 </head>
 <body>
     <aside id="panel" data-tab="livelli" aria-label="Pannello di controllo">
@@ -50,10 +51,10 @@
             </div>
             <p class="stamp">Dati catastali a <span data-catasto-data>Settembre 2026</span></p>
             <div class="tabs" role="tablist" aria-label="Sezioni del pannello">
-                <button type="button" role="tab" id="tab-livelli" aria-selected="true" aria-controls="layer-panel" onclick="openPanel('livelli')"><i aria-hidden="true" class="fas fa-layer-group"></i><span>Livelli</span></button>
-                <button type="button" role="tab" id="tab-cerca" aria-selected="false" aria-controls="search-popup" onclick="openPanel('cerca')"><i aria-hidden="true" class="fas fa-search"></i><span>Cerca</span></button>
-                <button type="button" role="tab" id="tab-info" aria-selected="false" aria-controls="sidepanel" onclick="openPanel('info')"><i aria-hidden="true" class="fas fa-info-circle"></i><span>Info</span><span class="info-badge" id="info-badge" aria-hidden="true"></span></button>
-                <button type="button" role="tab" id="tab-tecnica" aria-selected="false" aria-controls="tech-panel" onclick="openPanel('tecnica')"><i aria-hidden="true" class="fas fa-gears"></i><span>Tecnica</span></button>
+                <button type="button" role="tab" id="tab-livelli" aria-selected="true" aria-controls="layer-panel" data-action="openPanel" data-arg="livelli"><i aria-hidden="true" class="fas fa-layer-group"></i><span>Livelli</span></button>
+                <button type="button" role="tab" id="tab-cerca" aria-selected="false" aria-controls="search-popup" data-action="openPanel" data-arg="cerca"><i aria-hidden="true" class="fas fa-search"></i><span>Cerca</span></button>
+                <button type="button" role="tab" id="tab-info" aria-selected="false" aria-controls="sidepanel" data-action="openPanel" data-arg="info"><i aria-hidden="true" class="fas fa-info-circle"></i><span>Info</span><span class="info-badge" id="info-badge" aria-hidden="true"></span></button>
+                <button type="button" role="tab" id="tab-tecnica" aria-selected="false" aria-controls="tech-panel" data-action="openPanel" data-arg="tecnica"><i aria-hidden="true" class="fas fa-gears"></i><span>Tecnica</span></button>
             </div>
         </div>
 
@@ -65,7 +66,7 @@
                     <button type="button" class="lyr-row active" id="zonizzazione" title="Zonizzazione PRG 2004 (ZTO e PPE)">
                         <span class="lyr-ico ico-zon" aria-hidden="true"><i class="fas fa-city"></i></span><span class="lyr-name">Zonizzazione PRG</span><span class="lyr-swatch sw-zto" aria-hidden="true"></span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
-                    <button type="button" class="lyr-link" aria-expanded="false" aria-controls="prg-legend" onclick="toggleLegend(this)">Mostra legenda PRG</button>
+                    <button type="button" class="lyr-link" aria-expanded="false" aria-controls="prg-legend" data-action="toggleLegend">Mostra legenda PRG</button>
                     <div class="lyr-legend" id="prg-legend"><img src="legenda.svg" loading="lazy" alt="Legenda della zonizzazione PRG"></div>
                     <button type="button" class="lyr-row active" id="vincoli-main" title="Vincoli urbanistici">
                         <span class="lyr-ico ico-vin" aria-hidden="true"><i class="fas fa-shield-alt"></i></span><span class="lyr-name">Vincoli urbanistici</span><span class="lyr-swatch sw-vin" aria-hidden="true"></span><span class="lyr-sw" aria-hidden="true"></span>
@@ -91,7 +92,7 @@
                     </button>
                 </section>
 
-                <section class="lyr-group" role="radiogroup" aria-labelledby="g-bg">
+                <div class="lyr-group" role="radiogroup" aria-labelledby="g-bg">
                     <h3 id="g-bg">Mappe di base</h3>
                     <button type="button" class="lyr-row active" id="basemap" role="radio" aria-checked="true">
                         <span class="lyr-ico ico-map" aria-hidden="true"><i class="fas fa-globe"></i></span><span class="lyr-name">Mappa</span><span class="lyr-swatch sw-base" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
@@ -102,7 +103,7 @@
                     <button type="button" class="lyr-row" id="carta_tecnica" role="radio" aria-checked="false" title="Carta Tecnica Comunale 2k 2007/09">
                         <span class="lyr-ico ico-ctc" aria-hidden="true"><i class="fas fa-ruler-combined"></i></span><span class="lyr-name">Carta tecnica 2k</span><span class="lyr-swatch sw-ctc" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
                     </button>
-                </section>
+                </div>
             </div>
 
             <!-- Ricerca -->
@@ -111,8 +112,8 @@
                 <p class="search-info" id="search-info-text">La ricerca funziona sull'area visibile della mappa. Naviga prima nella zona di interesse, poi avvia la ricerca.</p>
 
                 <div class="seg" role="group" aria-label="Tipo di ricerca">
-                    <button type="button" id="label-foglio" aria-pressed="true" onclick="switchSearchMode('foglio')">Foglio / particella</button>
-                    <button type="button" id="label-civico" aria-pressed="false" onclick="switchSearchMode('civico')">Via / civico</button>
+                    <button type="button" id="label-foglio" aria-pressed="true" data-action="switchSearchMode" data-arg="foglio">Foglio / particella</button>
+                    <button type="button" id="label-civico" aria-pressed="false" data-action="switchSearchMode" data-arg="civico">Via / civico</button>
                 </div>
 
                 <div id="search-mode-foglio" class="search-mode-panel">
@@ -120,7 +121,7 @@
                         <input type="number" id="foglio" inputmode="numeric" aria-label="Numero foglio" placeholder="Foglio" min="1">
                         <input type="number" id="particella" inputmode="numeric" aria-label="Numero particella" placeholder="Particella" min="1">
                     </div>
-                    <button type="button" class="btn" onclick="searchParticella()">Cerca particella</button>
+                    <button type="button" class="btn" data-action="searchParticella">Cerca particella</button>
                 </div>
 
                 <div id="search-mode-civico" class="search-mode-panel" hidden>
@@ -131,11 +132,11 @@
                         </div>
                         <input type="text" id="civico-search" inputmode="numeric" aria-label="Numero civico" placeholder="Numero civico (es. 10)" autocomplete="off">
                     </div>
-                    <button type="button" class="btn" onclick="searchByCivico()">Cerca civico</button>
+                    <button type="button" class="btn" data-action="searchByCivico">Cerca civico</button>
                 </div>
 
                 <div id="search-error" role="alert"></div>
-                <button type="button" class="btn secondary" id="pdf-cmd" onclick="generatePDF()" style="display: none;"><i aria-hidden="true" class="fas fa-file-pdf"></i> Scarica scheda PDF</button>
+                <button type="button" class="btn secondary" id="pdf-cmd" data-action="generatePDF"><i aria-hidden="true" class="fas fa-file-pdf"></i> Scarica scheda PDF</button>
                 <p class="search-note">Dati catastali aggiornati a <span data-catasto-data>Settembre 2026</span> (S.I.T.R. Sicilia) e Agenzia delle Entrate.</p>
             </div>
 
@@ -257,7 +258,7 @@
                     <details>
                         <summary><span class="inf-ico ico-map" aria-hidden="true"><i class="fas fa-circle-play"></i></span>Video demo</summary>
                         <p>Video di presentazione realizzato sulla versione precedente della mappa: le funzioni principali sono le stesse, ma i pulsanti ora sono in posti diversi.</p>
-                        <div class="video"><iframe src="https://www.youtube.com/embed/N_gdK7NBvU4?si=7yUCGTg8wOD_cJ_2&amp;start=3" title="Video demo" loading="lazy" allowfullscreen></iframe>
+                        <div class="video"><iframe data-src="https://www.youtube.com/embed/N_gdK7NBvU4?si=7yUCGTg8wOD_cJ_2&amp;start=3" title="Video demo" allowfullscreen></iframe>
                                         </div>
                     </details>
 
@@ -273,30 +274,30 @@
 
     <!-- Controlli mappa -->
     <div class="map-ctl" role="group" aria-label="Controlli mappa">
-        <button type="button" onclick="window.map && window.map.zoomIn()" title="Ingrandisci" aria-label="Ingrandisci">+</button>
-        <button type="button" onclick="window.map && window.map.zoomOut()" title="Riduci" aria-label="Riduci">&minus;</button>
-        <button type="button" onclick="resetMapHome()" title="Vista iniziale" aria-label="Vista iniziale"><i aria-hidden="true" class="fas fa-home"></i></button>
-        <button type="button" id="fullscreen-btn" onclick="toggleFullscreen()" title="Schermo intero" aria-label="Schermo intero"><i aria-hidden="true" class="fas fa-expand" id="fullscreen-icon"></i></button>
-        <button type="button" id="theme-btn" onclick="toggleTheme()" title="Passa al tema scuro" aria-label="Passa al tema scuro" aria-pressed="false"><i aria-hidden="true" class="fas fa-moon"></i></button>
-        <button type="button" id="satellite-btn" onclick="toggleSatelliteOverlay()" title="Minimappa con foto aerea sincronizzata" aria-label="Minimappa con foto aerea" aria-pressed="false"><i aria-hidden="true" class="fas fa-satellite"></i></button>
+        <button type="button" data-action="zoomIn" title="Ingrandisci" aria-label="Ingrandisci">+</button>
+        <button type="button" data-action="zoomOut" title="Riduci" aria-label="Riduci">&minus;</button>
+        <button type="button" data-action="resetMapHome" title="Vista iniziale" aria-label="Vista iniziale"><i aria-hidden="true" class="fas fa-home"></i></button>
+        <button type="button" id="fullscreen-btn" data-action="toggleFullscreen" title="Schermo intero" aria-label="Schermo intero"><i aria-hidden="true" class="fas fa-expand" id="fullscreen-icon"></i></button>
+        <button type="button" id="theme-btn" data-action="toggleTheme" title="Passa al tema scuro" aria-label="Passa al tema scuro" aria-pressed="false"><i aria-hidden="true" class="fas fa-moon"></i></button>
+        <button type="button" id="satellite-btn" data-action="toggleSatelliteOverlay" title="Minimappa con foto aerea sincronizzata" aria-label="Minimappa con foto aerea" aria-pressed="false"><i aria-hidden="true" class="fas fa-satellite"></i></button>
     </div>
     <div class="zoom-badge" aria-live="off">Zoom <span id="zoom-level-display">12</span></div>
 
     <!-- Scheda particella / punto -->
-    <aside id="scheda" class="scheda" role="dialog" aria-labelledby="scheda-title" hidden>
+    <div id="scheda" class="scheda" role="dialog" aria-labelledby="scheda-title" hidden>
         <div class="scheda-handle" aria-hidden="true"></div>
         <header class="scheda-hdr">
             <h2 id="scheda-title" tabindex="-1"></h2>
-            <button type="button" class="scheda-close" aria-label="Chiudi scheda" onclick="closeScheda()">&times;</button>
+            <button type="button" class="scheda-close" aria-label="Chiudi scheda" data-action="closeScheda">&times;</button>
         </header>
         <div class="scheda-body" id="scheda-body"></div>
         <div class="scheda-actions" id="scheda-actions"></div>
-    </aside>
+    </div>
 
     <!-- Minimappa satellitare -->
     <div id="satellite-overlay">
         <div class="satellite-controls">
-            <button type="button" class="satellite-btn" onclick="toggleSatelliteOverlay()" title="Chiudi" aria-label="Chiudi la minimappa">×</button>
+            <button type="button" class="satellite-btn" data-action="toggleSatelliteOverlay" title="Chiudi" aria-label="Chiudi la minimappa">×</button>
         </div>
         <div id="satellite-map"></div>
         <div class="crosshair-minimap"></div>
@@ -311,7 +312,7 @@
         <button type="button" class="lb-btn lb-close" aria-label="Chiudi la galleria">&times;</button>
         <button type="button" class="lb-btn lb-prev" aria-label="Immagine precedente">&lsaquo;</button>
         <figure>
-            <img id="lb-img" alt="">
+            <img id="lb-img" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="">
             <figcaption><span id="lb-cap"></span> <span id="lb-count" class="lb-count" aria-live="polite"></span></figcaption>
         </figure>
         <button type="button" class="lb-btn lb-next" aria-label="Immagine successiva">&rsaquo;</button>
@@ -339,6 +340,5 @@
         </div>
     </div>
 
-    <script src="js/catasto_script.js"></script>	
 </body>
 </html>

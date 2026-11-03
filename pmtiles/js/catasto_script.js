@@ -444,7 +444,7 @@ function renderOdonimoDropdown(matches) {
     if (!dropdown) return;
     if (matches.length === 0) { dropdown.style.display = 'none'; return; }
     dropdown.innerHTML = matches.map(m =>
-        `<div class="odonimo-option" onmousedown="selectOdonimo('${m.replace(/'/g, "\\'")}')">${m}</div>`
+        `<div class="odonimo-option" data-name="${esc(m)}">${esc(m)}</div>`
     ).join('');
     dropdown.style.display = 'block';
 }
@@ -1055,10 +1055,50 @@ function setupMapInteractions() {
 }
 
 // =========================
+// AZIONI DELL'INTERFACCIA (delega di evento: niente onclick inline nell'HTML)
+// Ogni elemento con data-action="nome" [data-arg="x"] chiama la funzione corrispondente.
+// =========================
+const ACTIONS = {
+    openPanel: el => openPanel(el.dataset.arg),
+    switchSearchMode: el => switchSearchMode(el.dataset.arg),
+    toggleLegend: el => toggleLegend(el),
+    searchParticella: () => searchParticella(),
+    searchByCivico: () => searchByCivico(),
+    generatePDF: () => generatePDF(),
+    zoomIn: () => window.map && window.map.zoomIn(),
+    zoomOut: () => window.map && window.map.zoomOut(),
+    resetMapHome: () => resetMapHome(),
+    toggleFullscreen: () => toggleFullscreen(),
+    toggleTheme: () => toggleTheme(),
+    toggleSatelliteOverlay: () => toggleSatelliteOverlay(),
+    closeScheda: () => closeScheda()
+};
+
+function initActions() {
+    document.addEventListener('click', e => {
+        const el = e.target.closest('[data-action]');
+        const fn = el && ACTIONS[el.dataset.action];
+        if (fn) fn(el);
+    });
+    // suggerimenti della via: mousedown (non click) per anticipare il blur dell'input
+    const dd = document.getElementById('odonimo-dropdown');
+    if (dd) dd.addEventListener('mousedown', e => {
+        const opt = e.target.closest('.odonimo-option');
+        if (opt) selectOdonimo(opt.dataset.name);
+    });
+    // il video parte a richiesta: l'iframe riceve l'indirizzo solo quando si apre la sezione
+    const vid = document.querySelector('iframe[data-src]');
+    if (vid) vid.closest('details').addEventListener('toggle', function () {
+        if (this.open && !vid.src) vid.src = vid.dataset.src;
+    });
+}
+
+// =========================
 // EVENT LISTENERS E INIZIALIZZAZIONE OTTIMIZZATI CON GESTIONE ERRORI
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
     initGallery();
+    initActions();
     document.querySelectorAll('[data-catasto-data]').forEach(el => { el.textContent = DATA_CATASTO; });
     const btnPart = document.getElementById('particelle');
     if (btnPart) btnPart.title = 'Ultimo aggiornamento ' + DATA_CATASTO;
@@ -1273,7 +1313,7 @@ function openScheda({ particella, html }) {
         title.textContent = `F. ${particella.foglio} · P. ${particella.particella}`;
         title.className = 'mono';
         actions.innerHTML =
-            `<button type="button" class="btn" onclick="generatePDF()"><i aria-hidden="true" class="fas fa-file-pdf"></i> Scarica scheda PDF</button>` +
+            `<button type="button" class="btn" data-action="generatePDF"><i aria-hidden="true" class="fas fa-file-pdf"></i> Scarica scheda PDF</button>` +
             `<a class="sister-btn" href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" title="Accedi a SISTER con SPID e inserisci Foglio ${esc(particella.foglio)}, Particella ${esc(particella.particella)}"><i aria-hidden="true" class="fas fa-external-link-alt"></i> Visura su SISTER <span class="sister-coords">Fg.${esc(particella.foglio)} · P.${esc(particella.particella)}</span></a>`;
     } else {
         title.textContent = 'Informazioni sul punto';
