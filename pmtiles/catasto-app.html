@@ -32,9 +32,6 @@
     <link rel="stylesheet" href="css/catasto.css">
 </head>
 <body>
-    <div id="map"></div>
-    <div class="crosshair-main"></div>
-
     <aside id="panel" data-tab="livelli" aria-label="Pannello di controllo">
         <div class="panel-head">
             <div class="brand">
@@ -233,6 +230,10 @@
         <div id="satellite-map"></div>
         <div class="crosshair-minimap"></div>
     </div>
+
+    <!-- Mappa: dopo i pannelli, cosi' Tab passa prima da pannello, scheda e controlli -->
+    <div id="map"></div>
+    <div class="crosshair-main"></div>
 
     <!-- Wait Popup -->
     <div id="pdf-wait-popup" class="wait-popup">

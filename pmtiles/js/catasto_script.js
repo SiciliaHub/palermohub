@@ -4,6 +4,12 @@
 // Versione ottimizzata per dispositivi mobili
 // =========================
 
+// TEMA: ?theme=dark|light forza il tema (utile quando la pagina e' in un iframe); altrimenti segue il sistema
+{
+    const t = new URLSearchParams(location.search).get('theme');
+    if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t;
+}
+
 // DATA DI AGGIORNAMENTO DEL CATASTO: unico punto da modificare.
 // Viene usata nel PDF e in ogni elemento con [data-catasto-data] della pagina.
 const DATA_CATASTO = 'Settembre 2026';
