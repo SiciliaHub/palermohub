@@ -4,6 +4,10 @@
 // Versione ottimizzata per dispositivi mobili
 // =========================
 
+// DATA DI AGGIORNAMENTO DEL CATASTO: unico punto da modificare.
+// Viene usata nel PDF e in ogni elemento con [data-catasto-data] della pagina.
+const DATA_CATASTO = 'Settembre 2026';
+
 // VARIABILI GLOBALI
 let isSatelliteOverlayOpen = false;
 let satelliteMap = null;
@@ -745,7 +749,7 @@ async function generatePDF() {
                 doc.addImage(mapImage, "PNG", margin, margin + 48, imgWidth, imgHeight);
                 
                 // Disclaimer e fonte dati
-                const disclaimerText = `Fonte dati catastali S.I.T.R. Sicilia - Ultimo aggiornamento Agosto 2025, rilasciati con licenza CC-BY 4.0.
+                const disclaimerText = `Fonte dati catastali S.I.T.R. Sicilia - Ultimo aggiornamento ${DATA_CATASTO}, rilasciati con licenza CC-BY 4.0.
 Fonte dati ZTO e vincoli: opendata Comune di Palermo, rilasciati con licenza CC-BY 4.0.
 
 L'Agenzia delle entrate è l'amministrazione titolare dei dati, rilasciati con licenza CC-BY 4.0.
@@ -986,6 +990,9 @@ function setupMapInteractions() {
 // EVENT LISTENERS E INIZIALIZZAZIONE OTTIMIZZATI CON GESTIONE ERRORI
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('[data-catasto-data]').forEach(el => { el.textContent = DATA_CATASTO; });
+    const btnPart = document.getElementById('particelle');
+    if (btnPart) btnPart.title = 'Ultimo aggiornamento ' + DATA_CATASTO;
     console.log('🚀 Mobile-Optimized Catasto Interface Loaded');
     
     try {
