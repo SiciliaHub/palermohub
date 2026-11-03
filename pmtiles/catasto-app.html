@@ -37,7 +37,20 @@
 
     <aside id="panel" data-tab="livelli" aria-label="Pannello di controllo">
         <div class="panel-head">
-            <h1 class="panel-title">Catasto e PRG di Palermo <span class="panel-sub">Particelle, zonizzazione, vincoli, OMI</span></h1>
+            <div class="brand">
+                <svg class="brand-mark" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false">
+                    <rect width="40" height="40" rx="9" fill="#1F1A14"/>
+                    <path d="M7 12l11-4 6 5-4 9-10-2z" fill="none" stroke="#F5F1E8" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M24 13l9 3-2 10-11-4z" fill="#FF9900" stroke="#F5F1E8" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M9 24l11-2 4 9-12 2z" fill="none" stroke="#F5F1E8" stroke-width="1.5" stroke-linejoin="round"/>
+                    <path d="M24 22l8 4-3 8-5-3z" fill="none" stroke="#F5F1E8" stroke-width="1.5" stroke-linejoin="round"/>
+                </svg>
+                <div>
+                    <h1 class="panel-title">Catasto e PRG di Palermo</h1>
+                    <p class="panel-sub">Particelle, zonizzazione, vincoli e valori OMI</p>
+                </div>
+            </div>
+            <p class="stamp">Dati catastali a <span data-catasto-data>Settembre 2026</span></p>
             <div class="tabs" role="tablist" aria-label="Sezioni del pannello">
                 <button type="button" role="tab" id="tab-livelli" aria-selected="true" aria-controls="layer-panel" onclick="openPanel('livelli')"><i aria-hidden="true" class="fas fa-layer-group"></i><span>Livelli</span></button>
                 <button type="button" role="tab" id="tab-cerca" aria-selected="false" aria-controls="search-popup" onclick="openPanel('cerca')"><i aria-hidden="true" class="fas fa-search"></i><span>Cerca</span></button>
@@ -95,6 +108,7 @@
 
             <!-- Ricerca -->
             <div id="search-popup" role="tabpanel" aria-labelledby="tab-cerca">
+                <h2 class="tab-title">Trova una particella o un civico</h2>
                 <p class="search-info" id="search-info-text">La ricerca funziona sull'area visibile della mappa. Naviga prima nella zona di interesse, poi avvia la ricerca.</p>
 
                 <div class="seg" role="group" aria-label="Tipo di ricerca">
