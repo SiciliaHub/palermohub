@@ -1950,19 +1950,6 @@ details[open] > summary.omi-tipo-summary::before {
 :focus-visible { outline: 3px solid #15191C; outline-offset: 2px; }
 [hidden] { display: none !important; }
 
-#consent-banner {
-    position: fixed; left: 12px; right: 12px; bottom: 12px; z-index: 99999;
-    max-width: 480px; box-sizing: border-box; padding: 16px;
-    background: #fff; color: #15191C; border: 1px solid #C9CEC8; border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(21,25,28,.18); font-size: 14px; line-height: 1.45;
-}
-#consent-banner p { margin: 0 0 12px; }
-#consent-banner div { display: flex; gap: 8px; justify-content: flex-end; }
-#consent-banner button {
-    min-height: 44px; padding: 0 18px; border-radius: 8px; cursor: pointer;
-    border: 1px solid #C9CEC8; background: #fff; color: #15191C; font: 500 14px 'Poppins', sans-serif;
-}
-#consent-banner button.primary { background: #FF9900; border-color: #FF9900; color: #1A1100; font-weight: 600; }
 
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }

@@ -295,9 +295,9 @@ function toggleSatelliteOverlay() {
                     sources: {
                         satellite: {
                             type: "raster",
-                            tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+                            tiles: ["https://map.sitr.regione.sicilia.it/gis/services/ortofoto/ortofoto_2022_20cm_sicilia/ImageServer/WMSServer?service=WMS&version=1.3.0&request=GetMap&layers=0&styles=&crs=EPSG:3857&bbox={bbox-epsg-3857}&width=256&height=256&format=image/jpeg"],
                             tileSize: 256,
-                            attribution: "Immagini © Esri, Maxar, Earthstar Geographics - "
+                            attribution: "Ortofoto 2022 © Regione Siciliana - SITR - "
                         }
                     },
                     layers: [{
@@ -1457,9 +1457,9 @@ function initializeMapLayers() {
 
         window.map.addSource("satellite", {
             type: "raster",
-            tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+            tiles: ["https://map.sitr.regione.sicilia.it/gis/services/ortofoto/ortofoto_2022_20cm_sicilia/ImageServer/WMSServer?service=WMS&version=1.3.0&request=GetMap&layers=0&styles=&crs=EPSG:3857&bbox={bbox-epsg-3857}&width=256&height=256&format=image/jpeg"],
             tileSize: 256,
-            attribution: "Immagini © Esri, Maxar, Earthstar Geographics - "
+            attribution: "Ortofoto 2022 © Regione Siciliana - SITR - "
         });
 
         window.map.addSource("zto", {

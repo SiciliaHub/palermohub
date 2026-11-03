@@ -29,32 +29,6 @@
     <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
     <link rel="canonical" href="https://palermohub.opendatasicilia.it/pmtiles/catasto-app.html">
     <link rel="stylesheet" href="css/catasto.css">
-    <script>
-      // Analytics solo dopo consenso esplicito (localStorage 'ga-consent' = 'granted')
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      function loadAnalytics() {
-        if (window.__gaLoaded) return;
-        window.__gaLoaded = true;
-        const s = document.createElement('script');
-        s.async = true;
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-KHR1GHDRQS';
-        document.head.appendChild(s);
-        gtag('js', new Date());
-        gtag('config', 'G-KHR1GHDRQS');
-      }
-      function setConsent(granted) {
-        try { localStorage.setItem('ga-consent', granted ? 'granted' : 'denied'); } catch (e) {}
-        document.getElementById('consent-banner').hidden = true;
-        if (granted) loadAnalytics();
-      }
-      document.addEventListener('DOMContentLoaded', function () {
-        let c = null;
-        try { c = localStorage.getItem('ga-consent'); } catch (e) {}
-        if (c === 'granted') loadAnalytics();
-        else if (c !== 'denied') document.getElementById('consent-banner').hidden = false;
-      });
-    </script>
 </head>
 <body>
     <div id="map"></div>
@@ -487,15 +461,6 @@
         <div class="wait-content">
             <p>Generazione del PDF in corso...</p>
             <div class="spinner"></div>
-        </div>
-    </div>
-
-    <!-- Consenso analytics -->
-    <div id="consent-banner" role="dialog" aria-label="Consenso statistiche" hidden>
-        <p>Usiamo Google Analytics per statistiche anonime di utilizzo, solo con il tuo consenso.</p>
-        <div>
-            <button type="button" onclick="setConsent(false)">Rifiuta</button>
-            <button type="button" class="primary" onclick="setConsent(true)">Accetta</button>
         </div>
     </div>
 
