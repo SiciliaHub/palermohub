@@ -664,9 +664,33 @@ function searchParticella() {
 }
 
 // =========================
+// LIBRERIE A RICHIESTA (jsPDF, Turf): scaricate al primo uso, non all'avvio.
+// Sono bundle UMD: uno <script> con integrity (SRI), non import(), che non porta l'integrity.
+// =========================
+const LIBS = {
+    jspdf: { src: 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', sri: 'sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk', global: 'jspdf' },
+    turf: { src: 'https://unpkg.com/@turf/turf@6.5.0/turf.min.js', sri: 'sha384-82q0nm29xZzIo5BMtDYnh2/NxeO6FoaK1S/0nF84w3cEsqbBfun3JdMyDVYWfVY5', global: 'turf' }
+};
+const libLoads = {};
+function loadLib(name) {
+    const lib = LIBS[name];
+    if (window[lib.global]) return Promise.resolve(window[lib.global]);
+    return libLoads[name] || (libLoads[name] = new Promise((resolve, reject) => {
+        const el = document.createElement('script');
+        el.src = lib.src;
+        el.integrity = lib.sri;
+        el.crossOrigin = 'anonymous';
+        el.onload = () => resolve(window[lib.global]);
+        el.onerror = () => { delete libLoads[name]; el.remove(); reject(new Error('Impossibile caricare ' + name)); }; // il tentativo successivo riprova
+        document.head.appendChild(el);
+    }));
+}
+
+// =========================
 // FUNZIONI PDF OTTIMIZZATE PER MOBILE
 // =========================
-function calculateAreasAndIntersections(features) {
+async function calculateAreasAndIntersections(features) {
+    await loadLib('turf');
     const particellaFeature = features.find(f => f.layer.id === "Particelle catastali");
     if (!particellaFeature) return null;
 
@@ -733,7 +757,7 @@ async function generatePDF() {
     }
     
     try {
-        const { jsPDF } = window.jspdf;
+        const { jsPDF } = await loadLib('jspdf');
         const doc = new jsPDF();
         const margin = 20;
         const pageWidth = doc.internal.pageSize.getWidth();
@@ -855,7 +879,7 @@ by @opendatasicilia`;
                 
                 // Calcola aree se disponibili
                 try {
-                    const areaData = calculateAreasAndIntersections(features);
+                    const areaData = await calculateAreasAndIntersections(features);
                     if (areaData) {
                         doc.text(`• Area totale della particella: ${areaData.particellaArea} m²`, margin, yPos);
                         yPos += 5;
