@@ -620,3 +620,13 @@ body {
 .sister-btn { white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 14px; box-sizing: border-box; border-radius: var(--radius-ctl); background: #0B5CC4; color: #fff !important; text-decoration: none; font: 600 14px var(--font-ui); }
 .sister-btn:hover { background: #094A9F; }
 .sister-coords { overflow: hidden; text-overflow: ellipsis; min-width: 0; margin-left: auto; padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,.22); font: 500 13px var(--font-mono); }
+
+/* icone dei livelli (come nel pannello precedente) */
+.lyr-ico { flex: none; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.ico-zon { background: #7B3F98; color: #fff; }
+.ico-cat { background: #2E8B57; color: #fff; }
+.ico-vin, .ico-omi { background: var(--accent); color: var(--accent-ink); }
+.ico-civ { background: #F28C1E; color: var(--accent-ink); }
+.lyr-row { gap: 10px; }
+.lyr-name { white-space: nowrap; }
+.lyr-ico + .lyr-name + .lyr-swatch, .lyr-ico ~ .lyr-swatch { width: 20px; height: 14px; }
