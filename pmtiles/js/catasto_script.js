@@ -7,7 +7,6 @@
 // VARIABILI GLOBALI
 let isSatelliteOverlayOpen = false;
 let satelliteMap = null;
-let currentPopup = null;
 const mqMobile = window.matchMedia('(max-width: 899px)');
 let isMobile = mqMobile.matches;
 
@@ -554,14 +553,10 @@ function searchParticella() {
             window.map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
         }
 
-        const popup = new maplibregl.Popup({
-            closeOnClick: true,
-            offset: isMobile ? [0, -10] : [0, 0],
-            maxWidth: isMobile ? '280px' : '300px'
-        })
-            .setLngLat(bounds.getCenter())
-            .setHTML(`<div style="text-align: center; padding: 5px;"><b>Particelle catastali</b><br><b>Foglio:</b> ${foglio}<br><b>Particella:</b> ${particella}</div>`)
-            .addTo(window.map);
+        openScheda({
+            particella: { foglio, particella },
+            html: '<p class="sc-src">Tocca la particella sulla mappa per vedere zonizzazione, vincoli e quotazioni OMI.</p>'
+        });
 
         toggleSearchPopup();
         
@@ -1160,17 +1155,62 @@ try {
 // =========================
 // HELPER: CARD GENERICA PER TUTTI I LAYER NON-OMI
 // =========================
-function buildInfoCard(iconClass, title, rows, footer = '') {
-    const rowsHTML = rows
+function esc(v) {
+    return String(v ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function buildDl(rows) {
+    const items = rows
         .filter(r => r.val != null && r.val !== 'N/A' && r.val !== '' && r.val !== 'NULL')
-        .map(r => `<div class="info-row"><span class="info-lbl">${r.lbl}</span><span class="info-val">${r.val}</span></div>`)
+        .map(r => `<div><dt>${esc(r.lbl)}</dt><dd>${esc(r.val)}</dd></div>`)
         .join('');
-    const footerHTML = footer ? `<div class="info-card-footer">${footer}</div>` : '';
-    return `<div class="info-card">
-        <div class="info-card-hdr"><i class="${iconClass}"></i><span>${title}</span></div>
-        <div class="info-card-body">${rowsHTML}</div>
-        ${footerHTML}
-    </div>`;
+    return `<dl class="sc-dl">${items}</dl>`;
+}
+
+// sezione della scheda: titolo + elenco etichetta/valore
+function buildInfoCard(title, rows) {
+    return `<section class="sc-sec"><h3>${esc(title)}</h3>${buildDl(rows)}</section>`;
+}
+
+function setCurrentParticella(foglio, particella, geometry) {
+    const coords = geometry.type === 'MultiPolygon' ? geometry.coordinates[0][0] : geometry.coordinates[0];
+    const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
+    window.currentParticella = { foglio, particella, bounds: coords, center: bounds.getCenter() };
+    const pdfCmd = document.getElementById('pdf-cmd');
+    if (pdfCmd) pdfCmd.style.display = 'flex';
+}
+
+function openScheda({ particella, html }) {
+    const el = document.getElementById('scheda');
+    const title = document.getElementById('scheda-title');
+    const actions = document.getElementById('scheda-actions');
+    if (!el) return;
+    if (particella) {
+        if (particella.geometry) setCurrentParticella(particella.foglio, particella.particella, particella.geometry);
+        title.textContent = `F. ${particella.foglio} · P. ${particella.particella}`;
+        title.className = 'mono';
+        actions.innerHTML =
+            `<button type="button" class="btn" onclick="generatePDF()"><i aria-hidden="true" class="fas fa-file-pdf"></i> Scarica scheda PDF</button>` +
+            `<a class="btn secondary" href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" title="Accedi a SISTER con SPID e inserisci Foglio ${esc(particella.foglio)}, Particella ${esc(particella.particella)}">Visura su SISTER</a>`;
+    } else {
+        title.textContent = 'Informazioni sul punto';
+        title.className = '';
+        actions.innerHTML = '';
+    }
+    document.getElementById('scheda-body').innerHTML = html;
+    el.hidden = false;
+    el.scrollTop = 0;
+    document.getElementById('scheda-body').scrollTop = 0;
+    if (isMobile) closePanel();
+    title.focus();
+}
+
+function closeScheda() {
+    const el = document.getElementById('scheda');
+    if (!el || el.hidden) return;
+    el.hidden = true;
+    const canvas = document.querySelector('.maplibregl-canvas');
+    if (canvas) canvas.focus({ preventScroll: true });
 }
 
 // HELPER: POPUP QUOTAZIONI OMI
@@ -1179,77 +1219,50 @@ function buildInfoCard(iconClass, title, rows, footer = '') {
 function buildOMIPopup(omiFeatures) {
     if (!omiFeatures || omiFeatures.length === 0) return '';
     const p0 = omiFeatures[0].properties;
+    const clean = v => String(v ?? '').replace(/^'|'$/g, '').trim();
 
-    // Converte valori numerici anche se salvati come stringa con virgola decimale (es. "1,4")
+    // numeri anche se salvati come stringa con virgola decimale (es. "1,4")
     const parseOMI = v => {
         if (v == null) return null;
         const n = typeof v === 'string' ? parseFloat(v.replace(',', '.')) : Number(v);
         return isNaN(n) ? null : n;
     };
+    const fmt = n => n.toLocaleString('it-IT');
+    const supMap = { 'L': 'sup. lorda', 'N': 'sup. netta' };
 
-    const zona     = p0.Zona_OMI || p0.Zona || '—';
-    const fascia      = p0.Fascia || p0.Fasce || '—';
-    const fasciaDescr = (p0.Fascia_Descr || '').replace(/^'|'$/g, '').trim();
-    const descr    = (p0.Zona_Descr || '').replace(/^'|'$/g, '').trim();
-    const microzona = p0.Microzona;
-    const semestre = p0.Anno_Semestre ? `OMI ${p0.Anno_Semestre.replace(' / ', ' S')}` : 'OMI 2025 S2';
-    const tipoPrev  = (p0.Descr_tip_prev || '').replace(/^'|'$/g, '').trim();
+    const zona = p0.Zona_OMI || p0.Zona || '—';
+    const fascia = p0.Fascia || p0.Fasce || '—';
+    const fasciaDescr = clean(p0.Fascia_Descr);
+    const semestre = p0.Anno_Semestre ? `OMI ${String(p0.Anno_Semestre).replace(' / ', ' S')}` : 'OMI 2025 S2';
+    const tipoPrev = clean(p0.Descr_tip_prev);
     const codTipPrev = p0.Cod_tip_prev || '';
-    const supMap   = { 'L': 'sup.lorda', 'N': 'sup.netta' };
 
     const tipiHTML = omiFeatures.map(f => {
-        const p    = f.properties;
-        const tipo  = (p.Descr_Tipologia || '—').replace(/^'|'$/g, '').trim();
-        const stato = p.Stato || '';
-        const cMin  = parseOMI(p.Compr_min), cMax = parseOMI(p.Compr_max);
-        const lMin  = parseOMI(p.Loc_min),   lMax = parseOMI(p.Loc_max);
-        const supC  = supMap[p.Sup_NL_compr] || '';
-        const supL  = supMap[p.Sup_NL_loc]   || '';
-        const compStr = (cMin != null && cMax != null)
-            ? `${cMin.toLocaleString('it-IT')} – ${cMax.toLocaleString('it-IT')} €/m²${supC ? ` <small class="omi-sup">(${supC})</small>` : ''}` : '—';
-        const locStr = (lMin != null && lMax != null)
-            ? `${lMin.toLocaleString('it-IT')} – ${lMax.toLocaleString('it-IT')} €/m²/mese${supL ? ` <small class="omi-sup">(${supL})</small>` : ''}` : '—';
-        const previewStr = cMin != null && cMax != null
-            ? `${cMin.toLocaleString('it-IT')}–${cMax.toLocaleString('it-IT')} €/m²` : '';
-        return `
-        <details class="omi-tipo">
-            <summary class="omi-tipo-summary">
-                <span class="omi-tipo-name">${tipo}</span>
-                ${stato ? `<em class="omi-stato-tag">${stato}</em>` : ''}
-                ${previewStr ? `<span class="omi-tipo-preview">${previewStr}</span>` : ''}
-            </summary>
-            <div class="omi-tipo-body">
-                <div class="omi-tipo-values">
-                    <div><span class="omi-val-lbl">Compravendita</span><br><span class="omi-val">${compStr}</span></div>
-                    <div><span class="omi-val-lbl">Locazione</span><br><span class="omi-val">${locStr}</span></div>
-                </div>
-            </div>
+        const p = f.properties;
+        const cMin = parseOMI(p.Compr_min), cMax = parseOMI(p.Compr_max);
+        const lMin = parseOMI(p.Loc_min), lMax = parseOMI(p.Loc_max);
+        const sup = k => supMap[p[k]] ? ` (${supMap[p[k]]})` : '';
+        const comp = (cMin != null && cMax != null) ? `${fmt(cMin)} – ${fmt(cMax)} €/m²${sup('Sup_NL_compr')}` : '—';
+        const loc = (lMin != null && lMax != null) ? `${fmt(lMin)} – ${fmt(lMax)} €/m²/mese${sup('Sup_NL_loc')}` : '—';
+        const preview = (cMin != null && cMax != null) ? `${fmt(cMin)}–${fmt(cMax)} €/m²` : '';
+        return `<details class="sc-det">
+            <summary><span>${esc(clean(p.Descr_Tipologia) || '—')}${p.Stato ? ` <em>${esc(p.Stato)}</em>` : ''}</span>${preview ? `<span class="sc-prev">${esc(preview)}</span>` : ''}</summary>
+            <dl class="sc-dl"><div><dt>Compravendita</dt><dd>${esc(comp)}</dd></div><div><dt>Locazione</dt><dd>${esc(loc)}</dd></div></dl>
         </details>`;
     }).join('');
 
-    const fasciaDisplay = fasciaDescr ? `${fascia} – ${fasciaDescr}` : fascia;
-
-    return `
-    <div class="info-card">
-        <div class="info-card-hdr">
-            <i class="fas fa-euro-sign"></i>
-            <span>Quotazioni OMI</span>
-            <span class="omi-zona-badge">Zona ${zona}</span>
-        </div>
-        <div class="info-card-body">
-            <div class="info-row"><span class="info-lbl">Fascia</span><span class="info-val">${fasciaDisplay}</span></div>
-            <div class="info-row"><span class="info-lbl">Descrizione</span><span class="info-val">${descr}</span></div>
-            ${microzona != null && microzona !== '' ? `<div class="info-row"><span class="info-lbl">Microzona</span><span class="info-val">${microzona}</span></div>` : ''}
-        </div>
-        <details class="omi-main-details">
-            <summary class="omi-main-summary">
-                <i class="fas fa-home"></i>
-                Tipo prevalente: <b>${codTipPrev ? `[${codTipPrev}] ` : ''}${tipoPrev || '—'}</b>
-            </summary>
-            <div class="omi-tipi">${tipiHTML}</div>
-            <div class="omi-footer">Fonte: Agenzia delle Entrate — ${semestre}</div>
-        </details>
-    </div>`;
+    const prevalente = `${codTipPrev ? `[${esc(codTipPrev)}] ` : ''}${esc(tipoPrev || '—')}`;
+    return `<section class="sc-sec">
+        <h3>Quotazioni OMI <span class="sc-badge">Zona ${esc(zona)}</span></h3>
+        ${buildDl([
+            { lbl: 'Fascia', val: fasciaDescr ? `${fascia} – ${fasciaDescr}` : fascia },
+            { lbl: 'Descrizione', val: clean(p0.Zona_Descr) },
+            { lbl: 'Microzona', val: p0.Microzona }
+        ])}
+        <p class="sc-prevalente">Tipo prevalente: <b>${prevalente}</b></p>
+        ${tipiHTML}
+        <p class="sc-src">Fonte: Agenzia delle Entrate — ${esc(semestre)}</p>
+    </section>`;
 }
 
 // =========================
@@ -1639,97 +1652,66 @@ function initializeMapLayers() {
             }
         });
 
-        // CLICK EVENT PER POPUP UNIFICATO OTTIMIZZATO PER MOBILE
+        // CLICK: scheda unica con i dati di tutti i livelli sotto il punto
         window.map.on("click", e => {
             const features = window.map.queryRenderedFeatures(e.point, {
                 layers: ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Zone OMI", "Particelle catastali", "Numeri Civici"]
             });
+            if (features.length === 0) { closeScheda(); return; }
 
-            if (features.length > 0) {
-                if (currentPopup) {
-                    currentPopup.remove();
-                    currentPopup = null;
-                }
+            // una stessa geometria spezzata tra tessere compare piu' volte: tieni una sola feature per layer+dati
+            const seen = new Set();
+            const unique = features.filter(f => {
+                const k = f.layer.id + JSON.stringify(f.properties);
+                return seen.has(k) ? false : seen.add(k);
+            });
 
-                // Raggruppa le feature OMI per Zona_OMI (più tipologie per zona)
-                const omiByZona = {};
-                const nonOmiFeatures = [];
-                features.forEach(feature => {
-                    if (feature.layer.id === "Zone OMI") {
-                        const z = feature.properties.Zona_OMI || 'unknown';
-                        if (!omiByZona[z]) omiByZona[z] = [];
-                        omiByZona[z].push(feature);
-                    } else {
-                        nonOmiFeatures.push(feature);
-                    }
-                });
+            // OMI raggruppate per zona (una riga per tipologia); particella sempre per prima
+            const omiByZona = {};
+            const others = [];
+            unique.forEach(f => {
+                if (f.layer.id === "Zone OMI") {
+                    const z = f.properties.Zona_OMI || 'unknown';
+                    (omiByZona[z] = omiByZona[z] || []).push(f);
+                } else others.push(f);
+            });
+            others.sort((a, b) => (b.layer.id === "Particelle catastali") - (a.layer.id === "Particelle catastali"));
 
-                // Costruisci contenuto: prima altri layer, poi OMI alla fine
-                const omiParts = Object.values(omiByZona).map(grp => buildOMIPopup(grp));
-                const otherParts = nonOmiFeatures.map(feature => {
-                    const p = feature.properties;
-                    if (feature.layer.id === "cs") {
-                        return buildInfoCard('fas fa-city', 'Piano Urbanistico', [
-                            { lbl: 'Strumento', val: 'PPE' },
-                            { lbl: 'Circoscrizione', val: p.Circoscriz }
-                        ]);
-                    } else if (feature.layer.id === "Info Vin. areali") {
-                        return buildInfoCard('fas fa-shield-alt', 'Vincolo Areale', [
-                            { lbl: 'Tipo', val: p.tipo },
-                            { lbl: 'Descrizione', val: p.descrizone }
-                        ]);
-                    } else if (feature.layer.id === "Info Vin. lineari") {
-                        return buildInfoCard('fas fa-draw-polygon', 'Vincolo Lineare', [
-                            { lbl: 'Tipo', val: p.TIPO },
-                            { lbl: 'Descrizione', val: p.DESCRIZION }
-                        ]);
-                    } else if (feature.layer.id === "Info Netto storico") {
-                        return buildInfoCard('fas fa-scroll', 'Netto Storico', [
-                            { lbl: 'ZTO', val: p.ZTO },
-                            { lbl: 'Descrizione', val: p.DESCRIZION }
-                        ]);
-                    } else if (feature.layer.id === "Info ZTO") {
-                        return buildInfoCard('fas fa-map', 'Zonizzazione', [
-                            { lbl: 'ZTO', val: p.ZTO },
-                            { lbl: 'Descrizione', val: p.DESCRIZION }
-                        ]);
-                    } else if (feature.layer.id === "Particelle catastali") {
-                        const sisterFooter = `<a href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" class="sister-btn" title="Accedi a SISTER con SPID — inserisci Foglio ${p.Foglio} e Particella ${p.Paricella}"><i class="fas fa-external-link-alt"></i> Visura su SISTER <span class="sister-coords">Fg.${p.Foglio} · P.${p.Paricella}</span></a>`;
-                        return buildInfoCard('fas fa-table-cells', 'Particella Catastale', [
-                            { lbl: 'Foglio', val: p.Foglio },
-                            { lbl: 'Particella', val: p.Paricella }
-                        ], sisterFooter);
-                    } else if (feature.layer.id === "Numeri Civici") {
+            let part = null;
+            const parts = others.map(f => {
+                const p = f.properties;
+                switch (f.layer.id) {
+                    case "cs":
+                        return buildInfoCard('Piano urbanistico', [{ lbl: 'Strumento', val: 'PPE' }, { lbl: 'Circoscrizione', val: p.Circoscriz }]);
+                    case "Info Vin. areali":
+                        return buildInfoCard('Vincolo areale', [{ lbl: 'Tipo', val: p.tipo }, { lbl: 'Descrizione', val: p.descrizone }]);
+                    case "Info Vin. lineari":
+                        return buildInfoCard('Vincolo lineare', [{ lbl: 'Tipo', val: p.TIPO }, { lbl: 'Descrizione', val: p.DESCRIZION }]);
+                    case "Info Netto storico":
+                        return buildInfoCard('Netto storico', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }]);
+                    case "Info ZTO":
+                        return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }]);
+                    case "Particelle catastali":
+                        if (!part) part = f; // foglio e particella stanno gia' nell'intestazione
+                        return '';
+                    case "Numeri Civici": {
                         const esp = p.Esponente;
                         const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;
-                        return buildInfoCard('fas fa-map-marker-alt', 'Numero Civico', [
-                            { lbl: 'Civico', val: civico },
-                            { lbl: 'Odonimo', val: p.Odonimo },
-                            { lbl: 'Circoscrizione', val: p.Circoscrizione },
-                            { lbl: 'Quartiere', val: p.Quartiere },
-                            { lbl: 'UPL', val: p.UPL }
+                        return buildInfoCard('Numero civico', [
+                            { lbl: 'Civico', val: civico }, { lbl: 'Odonimo', val: p.Odonimo },
+                            { lbl: 'Circoscrizione', val: p.Circoscrizione }, { lbl: 'Quartiere', val: p.Quartiere }, { lbl: 'UPL', val: p.UPL }
                         ]);
                     }
-                    return '';
-                }).filter(c => c !== '');
-
-                const unifiedTooltipContent = [...otherParts, ...omiParts].join("<hr>");
-
-                // Popup ottimizzato per mobile
-                currentPopup = new maplibregl.Popup({
-                    closeOnClick: true,
-                    maxWidth: isMobile ? '320px' : '390px',
-                    offset: isMobile ? [0, -10] : [0, 0]
-                })
-                    .setLngLat(e.lngLat)
-                    .setHTML(`<div class="unified-popup" style="padding: ${isMobile ? '8px' : '10px'}; font-size: ${isMobile ? '13px' : '14px'};">${unifiedTooltipContent}</div>`)
-                    .addTo(window.map);
-                    
-                // Feedback vibrazione su mobile
-                if (isMobile && navigator.vibrate) {
-                    navigator.vibrate(30);
+                    default: return '';
                 }
-            }
+            });
+            const omi = Object.values(omiByZona).map(buildOMIPopup);
+
+            openScheda({
+                particella: part ? { foglio: part.properties.Foglio, particella: part.properties.Paricella, geometry: part.geometry } : null,
+                html: [...parts, ...omi].join('')
+            });
+            if (isMobile && navigator.vibrate) navigator.vibrate(30);
         });
 
         // CURSOR EVENTS (solo desktop)
@@ -1867,6 +1849,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Esc chiude il pannello (mobile) e restituisce il focus al tab che lo ha aperto
     document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') closePanel();
+        if (e.key !== 'Escape') return;
+        const sc = document.getElementById('scheda');
+        if (sc && !sc.hidden) closeScheda(); else closePanel();
     });
 });

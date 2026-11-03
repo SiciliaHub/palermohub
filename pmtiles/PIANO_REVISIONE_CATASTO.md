@@ -11,7 +11,7 @@ File coinvolti: `pmtiles/catasto-app.html`, `pmtiles/css/catasto.css`, `pmtiles/
 | Fase | Contenuto | Stato |
 |---|---|---|
 | 1 | Correzioni rapide | Fatta, da commitare |
-| 2 | Nuova interfaccia | 2.1–2.3, 2.4 (base), 2.5 fatte; restano 2.6 scheda, 2.7 Informazioni, 2.8 tema scuro |
+| 2 | Nuova interfaccia | 2.1–2.6 fatte (2.4 in versione base); restano 2.7 Informazioni, 2.8 tema scuro |
 | 3 | Struttura del codice | Da fare |
 
 ### Fase 1, già applicata

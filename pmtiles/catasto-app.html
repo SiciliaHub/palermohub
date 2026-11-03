@@ -294,6 +294,17 @@
     </div>
     <div class="zoom-badge" aria-live="off">Zoom <span id="zoom-level-display">12</span></div>
 
+    <!-- Scheda particella / punto -->
+    <aside id="scheda" class="scheda" role="dialog" aria-labelledby="scheda-title" hidden>
+        <div class="scheda-handle" aria-hidden="true"></div>
+        <header class="scheda-hdr">
+            <h2 id="scheda-title" tabindex="-1"></h2>
+            <button type="button" class="scheda-close" aria-label="Chiudi scheda" onclick="closeScheda()">&times;</button>
+        </header>
+        <div class="scheda-body" id="scheda-body"></div>
+        <div class="scheda-actions" id="scheda-actions"></div>
+    </aside>
+
     <!-- Minimappa satellitare -->
     <div id="satellite-overlay">
         <div class="satellite-controls">

@@ -337,245 +337,45 @@ body {
     touch-action: manipulation;
 }
 
-/* ========== INFO CARD (tutti i layer non-OMI) ========== */
-.info-card {
-    font-family: var(--font-ui);
-    color: #222;
-    min-width: 240px;
+/* ========== SCHEDA PARTICELLA / PUNTO ========== */
+.scheda {
+    position: fixed; top: 12px; right: 12px; width: 340px; max-height: calc(100dvh - 320px); min-height: 200px;
+    display: flex; flex-direction: column;
+    background: var(--panel); color: var(--ink); border: 1px solid var(--line-strong); border-radius: var(--radius-panel);
+    box-shadow: var(--shadow-lg); z-index: var(--z-card); user-select: text; -webkit-user-select: text;
 }
-hr + .info-card {
-    margin-top: 10px;
-}
-.info-card-hdr {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 700;
-    font-size: 13px;
-    color: #111;
-    margin-bottom: 7px;
-    padding-bottom: 6px;
-    border-bottom: 2px solid #f0f0f0;
-}
-.info-card-hdr i {
-    color: var(--primary);
-    width: 16px;
-    text-align: center;
-    font-size: 13px;
-}
-.info-card-body {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 10px;
-    font-size: 12px;
-    line-height: 1.4;
-}
-.info-lbl {
-    color: #888;
-    white-space: nowrap;
-    min-width: 80px;
-    flex-shrink: 0;
-}
-.info-val {
-    font-weight: 600;
-    color: #222;
-    text-align: justify;
-}
+.scheda[hidden] { display: none; }
+.scheda-handle { display: none; }
+.scheda-hdr { display: flex; align-items: flex-start; gap: 8px; padding: 14px 8px 10px 16px; border-bottom: 1px solid var(--line); }
+.scheda-hdr h2 { flex: 1; margin: 0; font: 600 17px/1.3 var(--font-ui); outline: none; }
+.scheda-hdr h2.mono { font: 500 20px/1.25 var(--font-mono); overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+.scheda-close { flex: none; width: 44px; height: 44px; margin: -8px 0 0; border: 0; background: none; font-size: 26px; line-height: 1; color: var(--ink-2); cursor: pointer; border-radius: var(--radius-ctl); }
+.scheda-close:hover { background: var(--paper); color: var(--ink); }
+.scheda-body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 4px 16px 8px; }
+.scheda-actions { display: flex; flex-direction: column; gap: 8px; padding: 12px 16px 16px; border-top: 1px solid var(--line); }
+.scheda-actions:empty { display: none; }
+.scheda-actions .btn { text-decoration: none; }
 
-/* ========== SISTER BUTTON ========== */
-.info-card-footer {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid #f0f0f0;
-}
-.sister-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: #0066cc;
-    color: #fff !important;
-    text-decoration: none;
-    border-radius: 6px;
-    padding: 6px 10px;
-    font-size: 11.5px;
-    font-weight: 600;
-    font-family: var(--font-ui);
-    transition: background 0.18s;
-    justify-content: center;
-}
-.sister-btn:hover {
-    background: #0052a3;
-}
-.sister-btn i {
-    font-size: 12px;
-    flex-shrink: 0;
-}
-.sister-coords {
-    margin-left: auto;
-    background: rgba(255,255,255,0.2);
-    border-radius: 4px;
-    padding: 1px 5px;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-}
+.sc-sec { padding: 12px 0; border-bottom: 1px solid var(--line); }
+.sc-sec:last-child { border-bottom: 0; }
+.sc-sec h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font: 600 12px var(--font-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.sc-badge { margin-left: auto; padding: 2px 8px; border-radius: 10px; background: var(--accent); color: var(--accent-ink); font: 600 12px var(--font-ui); letter-spacing: 0; text-transform: none; }
+.sc-dl { margin: 0; }
+.sc-dl > div { display: grid; grid-template-columns: 104px 1fr; gap: 8px; padding: 3px 0; font-size: 14px; line-height: 1.4; }
+.sc-dl dt { color: var(--ink-2); }
+.sc-dl dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
+.sc-prevalente { margin: 8px 0 4px; font-size: 14px; }
+.sc-det { border: 1px solid var(--line); border-radius: var(--radius-ctl); margin-top: 6px; }
+.sc-det summary { display: flex; justify-content: space-between; gap: 8px; align-items: baseline; padding: 8px 10px; min-height: 44px; box-sizing: border-box; cursor: pointer; font-size: 14px; }
+.sc-det summary em { font-style: normal; color: var(--ink-2); font-size: 12px; }
+.sc-prev { font: 500 12px var(--font-mono); white-space: nowrap; color: var(--ink-2); }
+.sc-det .sc-dl { padding: 0 10px 8px; }
+.sc-src { margin: 8px 0 0; font-size: 12px; color: var(--ink-2); }
 
-/* ========== OMI POPUP STYLES ========== */
-.omi-zona-badge {
-    background: var(--primary);
-    color: var(--accent-ink);
-    padding: 2px 9px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    white-space: nowrap;
-    margin-left: auto;
-}
-/* Sezione collassabile principale (Tipo prevalente → prezzi) */
-.omi-main-details {
-    margin-top: 7px;
-}
-.omi-main-summary {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
-    list-style: none;
-    padding: 5px 7px;
-    background: #f0faf8;
-    border-radius: 5px;
-    border-left: 3px solid #ff9900;
-    font-size: 12px;
-    color: #333;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-}
-.omi-main-summary::-webkit-details-marker { display: none; }
-.omi-main-summary::before {
-    content: '▶';
-    font-size: 12px;
-    color: var(--primary);
-    transition: transform 0.18s;
-    flex-shrink: 0;
-}
-.omi-main-details[open] > .omi-main-summary::before {
-    transform: rotate(90deg);
-}
-.omi-main-summary i {
-    color: var(--primary);
-    font-size: 12px;
-}
-.omi-tipi {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-}
-/* Collapsible per tipologia */
-details.omi-tipo {
-    border-bottom: 1px solid #f0f0f0;
-}
-details.omi-tipo:last-child {
-    border-bottom: none;
-}
-summary.omi-tipo-summary {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-    list-style: none;
-    padding: 7px 2px;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-}
-summary.omi-tipo-summary::-webkit-details-marker { display: none; }
-summary.omi-tipo-summary::before {
-    content: '▶';
-    font-size: 12px;
-    color: var(--primary);
-    transition: transform 0.18s;
-    flex-shrink: 0;
-    margin-right: 2px;
-}
-details[open] > summary.omi-tipo-summary::before {
-    transform: rotate(90deg);
-}
-.omi-tipo-name {
-    font-weight: 600;
-    font-size: 12px;
-    color: #222;
-    flex: 1;
-}
-.omi-stato-tag {
-    font-size: 12px;
-    color: #888;
-    font-style: normal;
-    white-space: nowrap;
-}
-.omi-tipo-preview {
-    font-size: 12px;
-    color: #ff9900;
-    font-weight: 600;
-    white-space: nowrap;
-    margin-left: auto;
-}
-.omi-tipo-body {
-    padding: 5px 8px 8px 14px;
-    background: #f8fffe;
-    border-radius: 5px;
-    margin-bottom: 4px;
-}
-.omi-tipo-values {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-}
-.omi-val-lbl {
-    font-size: 12px;
-    color: #888;
-    display: block;
-    margin-bottom: 2px;
-}
-.omi-val {
-    font-size: 12px;
-    font-weight: 600;
-    color: #111;
-    line-height: 1.4;
-}
-.omi-sup {
-    color: #bbb;
-    font-size: 12px;
-    font-weight: 400;
-}
-.omi-footer {
-    margin-top: 8px;
-    font-size: 12px;
-    color: #999;
-    border-top: 1px solid #eee;
-    padding-top: 6px;
-}
-
-/* ========== POPUP BASE STYLES ========== */
-.maplibregl-popup-content {
-    background: #fff !important;
-    color: #222 !important;
-    border-radius: 10px !important;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.18) !important;
-    padding: 0 !important;
-}
-.unified-popup {
-    background: #fff;
-    border-radius: 10px;
-    overflow: hidden;
-}
-.maplibregl-popup-tip {
-    border-top-color: #fff !important;
-    border-bottom-color: #fff !important;
+@media (max-width: 899px) {
+    .scheda { top: auto; left: 0; right: 0; width: auto; bottom: var(--tab-h); max-height: 55dvh; border-radius: var(--radius-panel) var(--radius-panel) 0 0; border-bottom: 0; }
+    .scheda-handle { display: block; width: 36px; height: 4px; border-radius: 2px; background: var(--line-strong); margin: 8px auto 0; }
+    .scheda-hdr { padding-top: 6px; }
 }
 
 .guida-fig{margin:12px 0;text-align:center}.guida-fig img{max-width:100%;height:auto;border-radius:10px;box-shadow:0 2px 10px rgba(0,0,0,.25)}.guida-fig figcaption{font-size:.85em;opacity:.75;margin-top:6px}
