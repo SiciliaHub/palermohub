@@ -306,6 +306,17 @@
     <div id="map"></div>
     <div class="crosshair-main"></div>
 
+    <!-- Galleria immagini della guida -->
+    <dialog id="lightbox" aria-label="Galleria immagini della guida">
+        <button type="button" class="lb-btn lb-close" aria-label="Chiudi la galleria">&times;</button>
+        <button type="button" class="lb-btn lb-prev" aria-label="Immagine precedente">&lsaquo;</button>
+        <figure>
+            <img id="lb-img" alt="">
+            <figcaption><span id="lb-cap"></span> <span id="lb-count" class="lb-count" aria-live="polite"></span></figcaption>
+        </figure>
+        <button type="button" class="lb-btn lb-next" aria-label="Immagine successiva">&rsaquo;</button>
+    </dialog>
+
     <!-- Wait Popup -->
     <div id="pdf-wait-popup" class="wait-popup">
         <div class="wait-content">

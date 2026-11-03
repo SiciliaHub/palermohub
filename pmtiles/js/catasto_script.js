@@ -1058,6 +1058,7 @@ function setupMapInteractions() {
 // EVENT LISTENERS E INIZIALIZZAZIONE OTTIMIZZATI CON GESTIONE ERRORI
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
+    initGallery();
     document.querySelectorAll('[data-catasto-data]').forEach(el => { el.textContent = DATA_CATASTO; });
     const btnPart = document.getElementById('particelle');
     if (btnPart) btnPart.title = 'Ultimo aggiornamento ' + DATA_CATASTO;
@@ -1911,6 +1912,52 @@ function _syncZoomUI(zoom) {
 console.log('✅ Mobile-Optimized Catasto Script Loaded Successfully');
 
 // =========================
+// GALLERIA DELLE IMMAGINI DELLA GUIDA (finestra interna alla pagina)
+// =========================
+function initGallery() {
+    const dlg = document.getElementById('lightbox');
+    if (!dlg || typeof dlg.showModal !== 'function') return; // senza <dialog> restano i link all'immagine intera
+    const links = [...document.querySelectorAll('.guida-fig a')];
+    const img = document.getElementById('lb-img');
+    const cap = document.getElementById('lb-cap');
+    const count = document.getElementById('lb-count');
+    let idx = 0;
+
+    function show(i) {
+        idx = (i + links.length) % links.length;
+        const a = links[idx];
+        img.src = a.getAttribute('href');
+        img.alt = a.querySelector('img').alt;
+        cap.textContent = a.querySelector('img').alt;
+        count.textContent = `${idx + 1} / ${links.length}`;
+    }
+
+    links.forEach((a, i) => a.addEventListener('click', e => {
+        e.preventDefault();
+        show(i);
+        dlg.showModal();
+    }));
+    dlg.querySelector('.lb-prev').addEventListener('click', () => show(idx - 1));
+    dlg.querySelector('.lb-next').addEventListener('click', () => show(idx + 1));
+    dlg.querySelector('.lb-close').addEventListener('click', () => dlg.close());
+    // clic sullo sfondo scuro: chiude
+    dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+    dlg.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') show(idx - 1);
+        else if (e.key === 'ArrowRight') show(idx + 1);
+    });
+    // scorrimento con il dito
+    let x0 = null;
+    dlg.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+    dlg.addEventListener('touchend', e => {
+        if (x0 === null) return;
+        const dx = e.changedTouches[0].clientX - x0;
+        if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+        x0 = null;
+    });
+}
+
+// =========================
 // ACCESSIBILITA': tastiera, aria-pressed, Esc
 // =========================
 document.addEventListener('DOMContentLoaded', () => {
@@ -1931,7 +1978,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Esc chiude il pannello (mobile) e restituisce il focus al tab che lo ha aperto
     document.addEventListener('keydown', e => {
-        if (e.key !== 'Escape') return;
+        if (e.key !== 'Escape' || (document.getElementById('lightbox') && document.getElementById('lightbox').open)) return;
         const sc = document.getElementById('scheda');
         if (sc && !sc.hidden) closeScheda(); else closePanel();
     });
