@@ -608,10 +608,15 @@ body {
 .scheda-hdr { background: var(--paper); border-radius: var(--radius-panel) var(--radius-panel) 0 0; }
 .scheda-actions { background: var(--paper); border-radius: 0 0 var(--radius-panel) var(--radius-panel); }
 .sc-sec h3 { color: var(--ink); }
-.sc-sec h3::before { content: ""; width: 8px; height: 8px; background: var(--accent); border-radius: 2px; flex: none; }
 @media (max-width: 899px) {
     .panel-head { border-top: 0; order: 2; background: var(--panel); border-bottom: 0; border-top: 1px solid var(--line); }
     .brand, .stamp { display: none; }
     #panel.open { background: var(--paper); }
     .scheda { border-top-width: 4px; }
 }
+
+/* icone nelle sezioni della scheda e pulsante SISTER */
+.sc-sec h3 i { width: 18px; text-align: center; font-size: 14px; color: var(--accent-text); }
+.sister-btn { white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 14px; box-sizing: border-box; border-radius: var(--radius-ctl); background: #0B5CC4; color: #fff !important; text-decoration: none; font: 600 14px var(--font-ui); }
+.sister-btn:hover { background: #094A9F; }
+.sister-coords { overflow: hidden; text-overflow: ellipsis; min-width: 0; margin-left: auto; padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,.22); font: 500 13px var(--font-mono); }

@@ -572,7 +572,8 @@ function searchParticella() {
 
         openScheda({
             particella: { foglio, particella },
-            html: '<p class="sc-src">Tocca la particella sulla mappa per vedere zonizzazione, vincoli e quotazioni OMI.</p>'
+            html: buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: foglio }, { lbl: 'Particella', val: particella }], 'fas fa-table-cells') +
+                '<p class="sc-src">Tocca la particella sulla mappa per vedere zonizzazione, vincoli e quotazioni OMI.</p>'
         });
 
         toggleSearchPopup();
@@ -1178,8 +1179,9 @@ function buildDl(rows) {
 }
 
 // sezione della scheda: titolo + elenco etichetta/valore
-function buildInfoCard(title, rows) {
-    return `<section class="sc-sec"><h3>${esc(title)}</h3>${buildDl(rows)}</section>`;
+function buildInfoCard(title, rows, icon = '') {
+    const i = icon ? `<i aria-hidden="true" class="${icon}"></i>` : '';
+    return `<section class="sc-sec"><h3>${i}${esc(title)}</h3>${buildDl(rows)}</section>`;
 }
 
 function setCurrentParticella(foglio, particella, geometry) {
@@ -1201,7 +1203,7 @@ function openScheda({ particella, html }) {
         title.className = 'mono';
         actions.innerHTML =
             `<button type="button" class="btn" onclick="generatePDF()"><i aria-hidden="true" class="fas fa-file-pdf"></i> Scarica scheda PDF</button>` +
-            `<a class="btn secondary" href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" title="Accedi a SISTER con SPID e inserisci Foglio ${esc(particella.foglio)}, Particella ${esc(particella.particella)}">Visura su SISTER</a>`;
+            `<a class="sister-btn" href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" title="Accedi a SISTER con SPID e inserisci Foglio ${esc(particella.foglio)}, Particella ${esc(particella.particella)}"><i aria-hidden="true" class="fas fa-external-link-alt"></i> Visura su SISTER <span class="sister-coords">Fg.${esc(particella.foglio)} · P.${esc(particella.particella)}</span></a>`;
     } else {
         title.textContent = 'Informazioni sul punto';
         title.className = '';
@@ -1263,7 +1265,7 @@ function buildOMIPopup(omiFeatures) {
 
     const prevalente = `${codTipPrev ? `[${esc(codTipPrev)}] ` : ''}${esc(tipoPrev || '—')}`;
     return `<section class="sc-sec">
-        <h3>Quotazioni OMI <span class="sc-badge">Zona ${esc(zona)}</span></h3>
+        <h3><i aria-hidden="true" class="fas fa-euro-sign"></i>Quotazioni OMI <span class="sc-badge">Zona ${esc(zona)}</span></h3>
         ${buildDl([
             { lbl: 'Fascia', val: fasciaDescr ? `${fascia} – ${fasciaDescr}` : fascia },
             { lbl: 'Descrizione', val: clean(p0.Zona_Descr) },
@@ -1692,25 +1694,25 @@ function initializeMapLayers() {
                 const p = f.properties;
                 switch (f.layer.id) {
                     case "cs":
-                        return buildInfoCard('Piano urbanistico', [{ lbl: 'Strumento', val: 'PPE' }, { lbl: 'Circoscrizione', val: p.Circoscriz }]);
+                        return buildInfoCard('Piano urbanistico', [{ lbl: 'Strumento', val: 'PPE' }, { lbl: 'Circoscrizione', val: p.Circoscriz }], 'fas fa-city');
                     case "Info Vin. areali":
-                        return buildInfoCard('Vincolo areale', [{ lbl: 'Tipo', val: p.tipo }, { lbl: 'Descrizione', val: p.descrizone }]);
+                        return buildInfoCard('Vincolo areale', [{ lbl: 'Tipo', val: p.tipo }, { lbl: 'Descrizione', val: p.descrizone }], 'fas fa-shield-alt');
                     case "Info Vin. lineari":
-                        return buildInfoCard('Vincolo lineare', [{ lbl: 'Tipo', val: p.TIPO }, { lbl: 'Descrizione', val: p.DESCRIZION }]);
+                        return buildInfoCard('Vincolo lineare', [{ lbl: 'Tipo', val: p.TIPO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'fas fa-draw-polygon');
                     case "Info Netto storico":
-                        return buildInfoCard('Netto storico', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }]);
+                        return buildInfoCard('Netto storico', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'fas fa-scroll');
                     case "Info ZTO":
-                        return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }]);
+                        return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'fas fa-map');
                     case "Particelle catastali":
-                        if (!part) part = f; // foglio e particella stanno gia' nell'intestazione
-                        return '';
+                        if (!part) part = f;
+                        return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }], 'fas fa-table-cells');
                     case "Numeri Civici": {
                         const esp = p.Esponente;
                         const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;
                         return buildInfoCard('Numero civico', [
                             { lbl: 'Civico', val: civico }, { lbl: 'Odonimo', val: p.Odonimo },
                             { lbl: 'Circoscrizione', val: p.Circoscrizione }, { lbl: 'Quartiere', val: p.Quartiere }, { lbl: 'UPL', val: p.UPL }
-                        ]);
+                        ], 'fas fa-map-marker-alt');
                     }
                     default: return '';
                 }
