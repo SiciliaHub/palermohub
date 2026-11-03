@@ -225,6 +225,19 @@ function initLayerButtons() {
         if (b) b.addEventListener('click', () => setBackground(id));
     });
 
+    // etichetta "Nuovo" sui livelli recenti: sparisce al primo uso e il browser se lo ricorda
+    let seen = [];
+    try { seen = JSON.parse(localStorage.getItem('catasto-seen') || '[]'); } catch (e) {}
+    document.querySelectorAll('.lyr-new').forEach(tag => {
+        const row = tag.closest('.lyr-row');
+        if (seen.includes(row.id)) { tag.hidden = true; return; }
+        row.addEventListener('click', () => {
+            tag.hidden = true;
+            seen.push(row.id);
+            try { localStorage.setItem('catasto-seen', JSON.stringify(seen)); } catch (e) {}
+        });
+    });
+
     ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'zonizzazione', 'zone_omi'].forEach(layerId => {
         const button = document.getElementById(layerId);
         if (button) button.addEventListener('click', () => toggleLayer(layerId));
@@ -576,16 +589,6 @@ function searchParticella() {
             navigator.vibrate([100, 50, 100]);
         }
     }
-}
-
-function showSection(sectionId, btn) {
-    document.querySelectorAll('.sidepanel-section').forEach(sec => sec.classList.remove('active'));
-    document.querySelectorAll('#sidepanel-tabs button').forEach(b => b.classList.remove('active'));
-    const target = document.getElementById(sectionId);
-    if (target) target.classList.add('active');
-    if (btn) btn.classList.add('active');
-    const body = document.querySelector('.panel-body');
-    if (body) body.scrollTop = 0;
 }
 
 // =========================

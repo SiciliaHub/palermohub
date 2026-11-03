@@ -72,10 +72,10 @@
                         <span class="lyr-swatch sw-part" aria-hidden="true"></span><span class="lyr-name">Particelle catastali</span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="lyr-row" id="zone_omi" title="Zone OMI 2025 - II semestre - Agenzia delle Entrate">
-                        <span class="lyr-swatch sw-omi" aria-hidden="true"></span><span class="lyr-name">Zone OMI 2025 S2</span><span class="lyr-sw" aria-hidden="true"></span>
+                        <span class="lyr-swatch sw-omi" aria-hidden="true"></span><span class="lyr-name">Zone OMI 2025 S2</span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="lyr-row" id="civici" title="Numeri Civici - Aggiornamento Febbraio 2026">
-                        <span class="lyr-swatch sw-civ" aria-hidden="true">12</span><span class="lyr-name">Numeri civici</span><span class="lyr-sw" aria-hidden="true"></span>
+                        <span class="lyr-swatch sw-civ" aria-hidden="true">12</span><span class="lyr-name">Numeri civici</span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
                 </section>
 
@@ -128,152 +128,58 @@
 
             <!-- Informazioni -->
             <div id="sidepanel" role="tabpanel" aria-labelledby="tab-info">
-                <div id="sidepanel-content">
-                    <div id="sidepanel-tabs">
-                        <button type="button" onclick="showSection('section1', this)" class="active">Info</button>
-                        <button type="button" onclick="showSection('section7', this)">Guida</button>
-                        <button type="button" onclick="showSection('section2', this)">Strumenti</button>
-                        <button type="button" onclick="showSection('section3', this)">Ricerca</button>
-                        <button type="button" onclick="showSection('section4', this)">PDF</button>
-                        <button type="button" onclick="showSection('section5', this)">Video</button>
-                    </div>
+                <div class="info-tab">
+                    <details open>
+                        <summary>Guida</summary>
+                        <p>La mappa mostra <strong>particelle catastali</strong>, <strong>zonizzazione e vincoli del PRG</strong>, <strong>zone OMI</strong> e <strong>numeri civici</strong> di Palermo.</p>
+                        <h3>Muoversi</h3>
+                        <ul>
+                            <li>Trascina per spostarti; rotellina o pizzico per lo zoom.</li>
+                            <li>I pulsanti a destra: + e &minus; per lo zoom, vista iniziale, schermo intero e minimappa con foto aerea.</li>
+                            <li>Le etichette <em>F. foglio &middot; P. particella</em> compaiono con lo zoom avanzato.</li>
+                        </ul>
+                        <h3>Livelli</h3>
+                        <ul>
+                            <li>Il tab <strong>Livelli</strong> accende e spegne ogni livello. Il campione a sinistra mostra il colore in mappa.</li>
+                            <li>Le <strong>mappe di base</strong> si scelgono una alla volta: Mappa, Foto aerea, Carta tecnica 2k.</li>
+                            <li>Se vedi <em>da zoom 14</em> accanto a un livello, avvicinati per vederlo.</li>
+                            <li>La legenda del PRG si apre dal link sotto Zonizzazione.</li>
+                        </ul>
+                        <h3>Informazioni su un punto</h3>
+                        <p>Clicca o tocca la mappa: la scheda riporta particella, strumento urbanistico, vincoli, zona OMI e civico. <strong>Visura su SISTER</strong> apre il servizio dell'Agenzia delle Entrate (serve l'accesso a SISTER).</p>
+                        <h3>Cercare</h3>
+                        <ol>
+                            <li>Porta la mappa nella zona di interesse: la ricerca per foglio e particella opera sull'area visibile.</li>
+                            <li>Apri <strong>Cerca</strong> e scegli <em>Foglio / particella</em> oppure <em>Via / civico</em> (la via ha il suggerimento automatico).</li>
+                            <li>Se la particella non si trova, sposta la mappa sulla zona giusta e riprova.</li>
+                        </ol>
+                        <h3>Scheda PDF</h3>
+                        <p>Dopo una ricerca o un clic su una particella, <strong>Scarica scheda PDF</strong> crea un documento con mappa, dati catastali, zonizzazione e vincoli. Su smartphone ruota il dispositivo in orizzontale.</p>
+                        <h3>Condividere</h3>
+                        <p>L'indirizzo del browser conserva posizione e zoom: puoi copiarlo e inviarlo.</p>
+                    </details>
 
-            <div id="section1" class="sidepanel-section active">
-                <h2>Variante Generale e dati catastali</h2>
-                <p><em><strong>Dal 1° gennaio 2025, l'accesso telematico alle banche dati </strong>ipotecarie e <strong>catastali diventa gratuito</strong>, segnando un'importante semplificazione per professionisti, pubbliche amministrazioni e cittadini. <br>La novità è contenuta nel <a href="https://www.agenziaentrate.gov.it/portale/web/guest/-/provvedimento-del-30-dicembre-20-3">provvedimento</a> dell'Agenzia delle Entrate del 30 dicembre 2024, che attua le disposizioni introdotte dall'articolo 7 del decreto legislativo n. 139/2024.</em></p>
-                <hr>
-                <p><strong>Variante Generale al P.R.G.</strong> - Zonizzazione e vincoli sul territorio adeguati ai D. Dir 558 e 124/DRU/02 di approvazione - Luglio 2003 - Presa D'atto Delibera 7/2004 e Piano Particolareggiato Esecutivo del centro storico.<br>
-                Rielaborazione a cura di @opendatasicilia su opendata del Comune di Palermo. <br><br>
-                <strong> Fonte dati Zonizzazione e vincoli -</strong> <br><a href="https://www.comune.palermo.it/" title="Sito ufficiale del Comune di Palermo" target="_blank">Comune di Palermo</a> , <a href="https://www.comune.palermo.it/opendata.php" title="Opendata Comune di Palermo" target="_blank">Opendata</a> , <a href="https://www.comune.palermo.it/opendata_menus.php?sel=11" title="Opendata Palermo - Urbanistica" target="_blank">Urbanistica</a>   <br>
-                <a href="https://www.comune.palermo.it/opendata_dld.php?id=320t" title="Perimetrazione Zonizzazione P.R.G. vigente" target="_blank" > Perimetrazione Zonizzazione P.R.G. vigente;</a><br>
-                <a href="https://www.comune.palermo.it/opendata_dld.php?id=321" title="Vincoli vigenti della Variante al P.R.G." target="_blank" >Vincoli vigenti della Variante al P.R.G.</a> -  <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong>
-                  <p class="lorem"><strong>La variante Generale al P.R.G. è stata redatta dal Settore Urbanistica nel 2004 oggi Area Urbanistica della rigenerazione urbana, della mobilità e del centro storico</strong><br>
-                    <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=103" target="_blank">Qui gli elaborati della Variante Generale</a></p>
-                     <p class="lorem"><strong>Il Piano Particolareggiato Esecutivo (PPE) è stato redatto dall'Ufficio Centro Storico nel 1993, oggi Ufficio Città Storica</strong><br>
-                     <a href="https://www.comune.palermo.it/amministrazione_trasparente.php?sel=19&asel=171" target="_blank">Qui gli elaborati del PPE</a></p>
-                   <hr>
-                    <p><strong>Fonte dati catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" title="S.I.T.R. - Sistema Informativo Territoriale Regionale" target="_blank"><em>S.I.T.R. - Sistema Informativo Territoriale Regionale</em></a>, con aggiornamenti trimestrali e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> con aggiornamenti semestrali. I dati sono rilasciati con licenza <strong><a href="https://creativecommons.org/licenses/by/4.0/deed.it" title="CC-BY 4.0" target="_blank">CC-BY 4.0</a></strong> e quelli qui pubblicati sono aggiornati a <strong>Settembre 2026</strong>.<br><br>
-                    L'<a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" title="Geoportale Cartografico Catastale" target="_blank"><strong>Agenzia delle Entrate</strong></a> è l'amministrazione titolare dei dati, rilasciati con <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank">licenza <strong>CC-BY 4.0</strong></a>. <br>L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio</p>
-                    <hr>
-                    <p><strong>Autore:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" title="@gbvitrano su LinkedIn" target="_blank">@gbvitrano</a> &amp; <a href="https://claude.ai" title="Claude AI - Anthropic" target="_blank">Claude AI (Anthropic)</a></p>
-                    <p><strong>Sviluppo tecnico:</strong> Collaborazione human–<a href="https://claude.ai" title="Claude AI - Anthropic" target="_blank">Claude AI (Anthropic)</a>, che ha supportato lo sviluppo dell'architettura modulare, l'ottimizzazione del codice e l'implementazione di funzionalità avanzate di visualizzazione.</p>
-                    <hr>
-                    <p><strong>Disclaimer:</strong> I contenuti presenti in questa sezione, compresi testi ed elementi grafici, hanno carattere puramente informativo e divulgativo.  <br><br> Non sono presenti dati personali o sensibili. Si precisa che questi materiali non costituiscono documenti ufficiali né hanno alcun valore legale.  <br> <br>Per consultare la documentazione ufficiale e legalmente vincolante, si prega di fare riferimento agli atti definitivi allegati alle relative deliberazioni degli organi competenti.</p>
-            </div>
+                    <details>
+                        <summary>Fonti e licenze</summary>
+                        <ul>
+                            <li><strong>Zonizzazione e vincoli (Variante Generale al PRG 2004 e PPE):</strong> <a href="https://www.comune.palermo.it/opendata.php" target="_blank" rel="noopener">Comune di Palermo, Open Data</a>, licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC-BY 4.0</a>. Rielaborazione di @opendatasicilia.</li>
+                            <li><strong>Particelle catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" target="_blank" rel="noopener">S.I.T.R. Regione Siciliana</a> e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" target="_blank" rel="noopener">Agenzia delle Entrate</a>, CC-BY 4.0. Dati aggiornati a Settembre 2026.</li>
+                            <li><strong>Zone e quotazioni OMI:</strong> Agenzia delle Entrate, 2025 secondo semestre.</li>
+                            <li><strong>Numeri civici:</strong> <a href="https://www.anncsu.gov.it" target="_blank" rel="noopener">ANNCSU</a>, aggiornamento Febbraio 2026.</li>
+                            <li><strong>Foto aerea:</strong> ortofoto 2022 della Regione Siciliana (S.I.T.R.).</li>
+                            <li><strong>Mappa di base:</strong> &copy; contributori OpenStreetMap, OpenFreeMap, OpenMapTiles.</li>
+                        </ul>
+                        <p class="note">I contenuti hanno valore informativo, non sono documenti ufficiali e non hanno valore legale. Per gli atti vincolanti fai riferimento alle delibere degli organi competenti. L'Agenzia delle Entrate non risponde di danni derivanti dall'uso di questi dati.</p>
+                    </details>
 
-            <div id="section7" class="sidepanel-section">
-                <h2>Guida all'uso</h2>
-                <p>La mappa mostra <strong>particelle catastali</strong>, <strong>zonizzazione e vincoli del PRG</strong>, <strong>zone OMI</strong> e <strong>numeri civici</strong> di Palermo. In alto, i pulsanti della barra dei comandi danno accesso a tutte le funzioni.</p>
+                    <details>
+                        <summary>Crediti</summary>
+                        <p><strong>Autore:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener">@gbvitrano</a>, con lo sviluppo tecnico in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener">Claude AI (Anthropic)</a>.</p>
+                        <p>Grazie a <a href="https://x.com/aborruso" target="_blank" rel="noopener">@aborruso</a> e <a href="https://x.com/totofiandaca" target="_blank" rel="noopener">@totofiandaca</a> per gli insegnamenti e la condivisione di conoscenze.</p>
+                        <p>Progetto di <a href="https://opendatasicilia.it/" target="_blank" rel="noopener">OpenDataSicilia</a>. La versione base della mappa del PRG resta a <a href="https://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595" target="_blank" rel="noopener">questo indirizzo</a>.</p>
+                    </details>
 
-                <h3>1. Muoversi sulla mappa</h3>
-                <figure class="guida-fig"><img src="guida/01_mappa.jpg" loading="lazy" alt="Vista iniziale: barra dei comandi in alto, cursore dello zoom sotto di essa"><figcaption>Vista iniziale: barra dei comandi in alto, cursore dello zoom sotto di essa</figcaption></figure>
-                <ul>
-                    <li><strong>Spostare</strong>: trascina con il mouse o con un dito.</li>
-                    <li><strong>Zoom</strong>: rotellina del mouse, pizzico su mobile, oppure il cursore (livelli 12–18) e i numeri sotto di esso.</li>
-                    <li><i aria-hidden="true" class="fas fa-home"></i> riporta alla vista iniziale; <i aria-hidden="true" class="fas fa-expand"></i> attiva lo schermo intero.</li>
-                    <li>Le etichette <em>F. foglio - P. particella</em> compaiono con lo zoom avanzato.</li>
-                </ul>
-
-                <h3>2. Gestire i livelli (Layers)</h3>
-                <figure class="guida-fig"><img src="guida/02_layers.jpg" loading="lazy" alt="Pannello Layers: ogni livello si accende e spegne con l'interruttore"><figcaption>Pannello Layers: ogni livello si accende e spegne con l'interruttore</figcaption></figure>
-                <p>Il pulsante <strong>Layers</strong> apre il pannello dei livelli:</p>
-                <ul>
-                    <li><strong>Zonizzazione PRG</strong>: zone territoriali omogenee (Variante Generale 2004 e PPE del centro storico).</li>
-                    <li><strong>Vincoli urbanistici</strong>: lineari e areali, attivabili anche separatamente dal sottomenu <i aria-hidden="true" class="fas fa-caret-down"></i>.</li>
-                    <li><strong>Particelle catastali</strong>: perimetri e numerazione di foglio e particella.</li>
-                    <li><strong>Zone OMI</strong>: 51 zone con le quotazioni immobiliari dell'Agenzia delle Entrate.</li>
-                    <li><strong>Numeri civici</strong>: 165.000+ civici (ANNCSU).</li>
-                    <li><strong>Cartografia</strong>: Carta Tecnica 2k, mappa di base e Foto aerea.</li>
-                </ul>
-                <figure class="guida-fig"><img src="guida/03_omi_civici.jpg" loading="lazy" alt="Esempio con Numeri Civici e Zone OMI attivi insieme alla zonizzazione"><figcaption>Esempio con Numeri Civici e Zone OMI attivi insieme alla zonizzazione</figcaption></figure>
-
-                <h3>3. Ottenere le informazioni di un punto</h3>
-                <figure class="guida-fig"><img src="guida/06_scheda_pdf.jpg" loading="lazy" alt="Clic su una particella: scheda con dati catastali e piano urbanistico"><figcaption>Clic su una particella: scheda con dati catastali e piano urbanistico</figcaption></figure>
-                <p>Clicca (o tocca) un punto della mappa: appare una <strong>scheda unica</strong> con i dati di tutti i livelli sovrapposti in quel punto: particella (foglio, numero), strumento urbanistico e circoscrizione, vincoli, zona OMI o civico.</p>
-                <p>Il pulsante blu <strong>Visura su SISTER</strong> apre il servizio dell'Agenzia delle Entrate per la visura della particella (richiede l'accesso a SISTER).</p>
-
-                <h3>4. Cercare una particella o un civico</h3>
-                <figure class="guida-fig"><img src="guida/04_ricerca.jpg" loading="lazy" alt="Finestra di ricerca: interruttore tra Foglio/Particella e Via/Civico"><figcaption>Finestra di ricerca: interruttore tra Foglio/Particella e Via/Civico</figcaption></figure>
-                <ol>
-                    <li>Porta la mappa nella zona di interesse: la ricerca opera <strong>solo sull'area visibile</strong>.</li>
-                    <li>Premi <strong>Cerca</strong>.</li>
-                    <li>Scegli la modalità con l'interruttore: <em>Foglio / Particella</em> oppure <em>Via / Civico</em> (il nome della via ha il suggerimento automatico).</li>
-                    <li>Inserisci i dati e premi <strong>Avvia ricerca</strong>.</li>
-                </ol>
-                <figure class="guida-fig"><img src="guida/05_risultato_ricerca.jpg" loading="lazy" alt="La particella trovata viene evidenziata e la mappa si centra su di essa"><figcaption>La particella trovata viene evidenziata e la mappa si centra su di essa</figcaption></figure>
-                <p>Se compare <em>"Nessuna particella trovata"</em>, sposta la mappa sulla zona giusta e riprova.</p>
-
-                <h3>5. Scheda PDF</h3>
-                <p>Dopo una ricerca compare il pulsante <strong>PDF</strong> nella barra dei comandi: genera una scheda con mappa, dati catastali, zonizzazione e vincoli. Su smartphone ruota il dispositivo in <strong>orizzontale</strong> (landscape).</p>
-
-                <h3>6. Vista satellitare sincronizzata</h3>
-                <figure class="guida-fig"><img src="guida/07_satellite.jpg" loading="lazy" alt="Minimappa satellitare in basso a sinistra, centrata sul mirino"><figcaption>Minimappa satellitare in basso a sinistra, centrata sul mirino</figcaption></figure>
-                <p>Il pulsante <strong>Satellite</strong> apre una finestra con la foto aerea che segue la mappa principale (mirino al centro). Chiudila con <strong>×</strong>. Per coprire l'intera mappa usa invece il livello <em>Foto aerea</em>.</p>
-
-                <h3>Consigli</h3>
-                <ul>
-                    <li>Il link dell'indirizzo del browser conserva zoom e posizione: puoi condividerlo.</li>
-                    <li>Se i livelli sembrano mancanti, controlla di aver superato lo zoom minimo e che siano attivi nel pannello Layers.</li>
-                </ul>
-            </div>
-
-            <div id="section2" class="sidepanel-section">
-                <h2>Nuova mappa con particelle catastali e strumenti urbanistici vigenti di Palermo</h2>
-                <p> La nuova versione è completamente riprogettata e ottimizzata, grazie all'aiuto di <a href="https://x.com/deepseek_ai" title="DeepSeek AI" target="_blank">@deepseek_ai</a>, per offrire una migliore esperienza utente.</p>
-                <h3>Principali miglioramenti</h3>
-                <p>La novità più significativa riguarda la gestione dei tooltip. Nella versione precedente, in presenza di elementi sovrapposti nei livelli PMTiles, i tooltip si sovrapponevano creando confusione. Ora, lo script genera automaticamente un tooltip unificato che integra in modo ordinato le informazioni di tutti gli elementi presenti in un punto specifico.<br> Inoltre, è stato integrato un pratico modulo di ricerca che permette di individuare rapidamente fogli e particelle specifiche. <br> Infine è stata implementata una finestra dinamica che visualizza una mappa satellitare, la quale si sincronizza automaticamente con la mappa principale.</p>
-                <h3>Aspetti tecnici</h3>
-                <p>Il codice è stato completamente ristrutturato per garantire:</p>
-                <ul>
-                  <li>Maggiore stabilità e riduzione dei bug</li>
-                  <li>Performance ottimizzate</li>
-                  <li>Migliore gestione della visualizzazione dei dati</li>
-                  <li>Modulo di ricerca per Foglio e particella catastale</li>
-                  <li>Finestra dinamica per visualizzare la mappa satellitare</li>
-                </ul>
-                <h3>Mappa Variante Generale versione base</h3>
-                <p>La prima versione della mappa della Variante Generale rimane disponibile per la consultazione al seguente <a href="https://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595" title="Palermo - Zonizzazione e vincoli sul territorio" target="_blank"><b>indirizzo</b></a>.</p>
-                <h3>Ringraziamenti</h3>
-                <p>Un sentito ringraziamento va a <a href="https://x.com/aborruso" title="Andrea Borruso" target="_blank"><em>@aborruso</em></a> e <a href="https://x.com/totofiandaca" title="Totò Fiandaca" target="_blank">@totofiandaca</a>, i cui insegnamenti e la costante condivisione di conoscenze hanno contribuito in modo determinante alla realizzazione di questo progetto. Il loro supporto mi permette di implementare e migliorarmi nel campo della cartografia digitale.</p>
-                <hr>
-                <h3>I principali strumenti usati per realizzare la mappa</h3>
-                <ul>
-                    <li><strong><a href="https://qgis.org/" target="_blank">QGIS</a></strong> — elaborazione e gestione dei dati geografici</li>
-                    <li><strong><a href="https://plugins.qgis.org/plugins/CatastoIT_GML_Merger_Pro/" target="_blank">CatastoIT_GML_Merger_Pro</a></strong> — plugin QGIS per l'importazione e la fusione dei file GML catastali</li>
-                    <li><strong><a href="https://github.com/felt/tippecanoe" target="_blank">tippecanoe</a></strong> — conversione dei dati vettoriali in tile PMTiles ottimizzati</li>
-                    <li><strong><a href="https://maplibre.org/maplibre-gl-js/docs/" target="_blank">MapLibreGL JS 3.3</a></strong> — rendering della mappa interattiva</li>
-                    <li><strong><a href="https://github.com/protomaps/PMTiles" target="_blank">PMTiles 2.4</a></strong> — distribuzione serverless dei tile vettoriali e raster</li>
-                    <li><strong><a href="https://rawgit.com/MrRio/jsPDF/master/docs/" target="_blank">jsPDF 2.5</a></strong> — generazione delle schede PDF</li>
-                    <li><strong><a href="https://turfjs.org/" target="_blank">Turf.js 6</a></strong> — analisi geometrica e calcolo delle aree</li>
-                    <li><strong><a href="https://interactjs.io/" target="_blank">Interact.js</a></strong> — gestione del pannello informativo ridimensionabile</li>
-                </ul>
-            </div>
-
-            <div id="section3" class="sidepanel-section">
-                <h2>Ricerca geografica delle particelle catastali</h2>
-                <p> Il layer <b>Particelle Catastali</b> viene esposto in formato PMTiles.</p>
-                <p> Il <b>PMTiles</b> è un formato di file progettato per archiviare e servire dati geospaziali, come mappe vettoriali o raster, in modo efficiente. È un formato basato su tessere (tiles), che permette di suddividere i dati in piccole porzioni (tiles) per un accesso rapido e selettivo. <br> La particolarità di PMTiles è che è un formato monolitico, cioè tutti i dati sono contenuti in un unico file, a differenza di altri formati che richiedono molteplici file separati. Questo lo rende più semplice da gestire e distribuire, ad esempio su un server web o su un CDN (Content Delivery Network).</p>
-                <h3>Cerca una Particella</h3>
-                <p> Viste le caratteristiche del PMTiles, Durante la ricerca con PMTiles, è necessario che la particella da visualizzare sia compresa nell'area mostrata sullo schermo del proprio dispositivo (PC desktop o mobile). In caso contrario, poichè il dato non sarà stato caricato, verrà mostrato un messaggio di errore.</p>
-                <h3>Ricerca con PMTiles</h3>
-                <p>Dato che il formato <strong>PMTiles</strong> è progettato per caricare solo le <strong>porzioni di dati</strong> (tiles) necessarie per visualizzare l'area attualmente visibile sullo schermo (monitor del PC o display del dispositivo), è fondamentale assicurarsi che la particella o l'oggetto geospaziale richiesto rientri nell'area visualizzata.</p>
-            </div>
-
-            <div id="section4" class="sidepanel-section">
-                <h2>Stampa PDF</h2>
-                <p>Una volta effettuata la ricerca della particella catastale tramite il pulsante 'Cerca', comparirà una nuova icona sottostante. <br><br>Cliccando su questa icona, il sistema genererà automaticamente un documento PDF che include una mappa dettagliata con la particella evidenziata. <br><br>Il documento contiene inoltre tutte le informazioni catastali della particella selezionata e i relativi dati urbanistici, compresi la zonizzazione dell'area e gli eventuali vincoli esistenti.</p>
-                <hr>
-                <p> <b>N.B. Non è possibile generare file pdf quando si usa un device mobile orientato in verticale (Portrait) </b><br><br>
-                Per generare PDF con le informazioni richieste, ruotare il dispositivo in orientamento orizzontale (modalità landscape).</p>
-            </div>
-
-            <div id="section5" class="sidepanel-section">
-                <h2>Video demo</h2>
-                <p>Video di presentazione delle nuove funzionalità introdotte sulla mappa</p>
-                <div style="max-width: 600px; width: 100%; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 20px;">
-                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: var(--radius);" src="https://www.youtube.com/embed/N_gdK7NBvU4?si=7yUCGTg8wOD_cJ_2&amp;start=3" frameborder="0" allowfullscreen></iframe>
-                </div>
-            </div>
+                    <p class="info-more"><a href="informazioni-tecniche.html" target="_blank" rel="noopener">Informazioni tecniche: PMTiles, ricerca, PDF, strumenti, video</a></p>
                 </div>
             </div>
         </div>
