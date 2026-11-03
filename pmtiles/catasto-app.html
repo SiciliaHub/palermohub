@@ -7,16 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="favicon.ico">
     <meta name="author" content="Giovan Battista Vitrano per Open Data Sicilia">
-    <script defer src="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.js"></script>
-    <link href="https://unpkg.com/maplibre-gl@3.3.0/dist/maplibre-gl.css" rel="stylesheet" />
-    <script defer src="https://unpkg.com/pmtiles@2.4.0/dist/index.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@6.16.0/dist/maplibre-gl.css" integrity="sha384-S+OnE5M4U3Qc2nR0RgljGrVs06xqfRg8L7uFk/pOF5+sRuSDG4oKkqKZmFrx7w09" crossorigin="anonymous">
     <link rel="preload" href="fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/ibm-plex-sans-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script defer src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script defer src="https://unpkg.com/@turf/turf@6/turf.min.js"></script>
+    <script defer src="https://unpkg.com/pmtiles@4.5.0/dist/pmtiles.js" integrity="sha384-pbKNZbDshUsLnZMIVsn/t+j3xEY9PGfuX5Z22l5rcy/obXz3EwaMx1F5d9sRsJMn" crossorigin="anonymous"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk" crossorigin="anonymous"></script>
+    <script defer src="https://unpkg.com/@turf/turf@6.5.0/turf.min.js" integrity="sha384-82q0nm29xZzIo5BMtDYnh2/NxeO6FoaK1S/0nF84w3cEsqbBfun3JdMyDVYWfVY5" crossorigin="anonymous"></script>
+    <!-- MapLibre GL 6 e' solo ES module: la import map fissa versione e SRI (nei browser che la supportano) -->
+    <script type="importmap">
+    {"imports": {"maplibre-gl": "https://unpkg.com/maplibre-gl@6.16.0/dist/maplibre-gl.mjs"},
+     "integrity": {"https://unpkg.com/maplibre-gl@6.16.0/dist/maplibre-gl.mjs": "sha384-uLwQnFL74rrONqIWx/ubL4wcAtA2h08tbMDZd9U4KbQ7GhaA7S1XKepHU89UkU7C"}}
+    </script>
+    <link rel="modulepreload" href="https://unpkg.com/maplibre-gl@6.16.0/dist/maplibre-gl.mjs" integrity="sha384-uLwQnFL74rrONqIWx/ubL4wcAtA2h08tbMDZd9U4KbQ7GhaA7S1XKepHU89UkU7C" crossorigin="anonymous">
     
     <meta property="og:url" content="https://palermohub.opendatasicilia.it/pmtiles/catasto-app.html">
     <meta property="og:type" content="website">
@@ -31,7 +33,7 @@
     <meta name="twitter:image" content="https://palermohub.opendatasicilia.it/pmtiles/catasto.jpg">
     <link rel="canonical" href="https://palermohub.opendatasicilia.it/pmtiles/catasto-app.html">
     <link rel="stylesheet" href="css/catasto.css">
-    <script defer src="js/catasto_script.js"></script>
+    <script type="module" src="js/catasto_script.js"></script>
 </head>
 <body>
     <aside id="panel" data-tab="livelli" aria-label="Pannello di controllo">
@@ -51,10 +53,10 @@
             </div>
             <p class="stamp">Dati catastali a <span data-catasto-data>Settembre 2026</span></p>
             <div class="tabs" role="tablist" aria-label="Sezioni del pannello">
-                <button type="button" role="tab" id="tab-livelli" aria-selected="true" aria-controls="layer-panel" data-action="openPanel" data-arg="livelli"><i aria-hidden="true" class="fas fa-layer-group"></i><span>Livelli</span></button>
-                <button type="button" role="tab" id="tab-cerca" aria-selected="false" aria-controls="search-popup" data-action="openPanel" data-arg="cerca"><i aria-hidden="true" class="fas fa-search"></i><span>Cerca</span></button>
-                <button type="button" role="tab" id="tab-info" aria-selected="false" aria-controls="sidepanel" data-action="openPanel" data-arg="info"><i aria-hidden="true" class="fas fa-info-circle"></i><span>Info</span><span class="info-badge" id="info-badge" aria-hidden="true"></span></button>
-                <button type="button" role="tab" id="tab-tecnica" aria-selected="false" aria-controls="tech-panel" data-action="openPanel" data-arg="tecnica"><i aria-hidden="true" class="fas fa-gears"></i><span>Tecnica</span></button>
+                <button type="button" role="tab" id="tab-livelli" aria-selected="true" aria-controls="layer-panel" data-action="openPanel" data-arg="livelli"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-layer-group"/></svg><span>Livelli</span></button>
+                <button type="button" role="tab" id="tab-cerca" aria-selected="false" aria-controls="search-popup" data-action="openPanel" data-arg="cerca"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-magnifying-glass"/></svg><span>Cerca</span></button>
+                <button type="button" role="tab" id="tab-info" aria-selected="false" aria-controls="sidepanel" data-action="openPanel" data-arg="info"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-circle-info"/></svg><span>Info</span><span class="info-badge" id="info-badge" aria-hidden="true"></span></button>
+                <button type="button" role="tab" id="tab-tecnica" aria-selected="false" aria-controls="tech-panel" data-action="openPanel" data-arg="tecnica"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-gears"/></svg><span>Tecnica</span></button>
             </div>
         </div>
 
@@ -62,14 +64,14 @@
             <!-- Livelli con legenda integrata -->
             <div id="layer-panel" role="tabpanel" aria-labelledby="tab-livelli">
                 <section class="lyr-group" aria-labelledby="g-urb">
-                    <h3 id="g-urb">Urbanistica</h3>
+                    <h2 id="g-urb">Urbanistica</h2>
                     <button type="button" class="lyr-row active" id="zonizzazione" title="Zonizzazione PRG 2004 (ZTO e PPE)">
-                        <span class="lyr-ico ico-zon" aria-hidden="true"><i class="fas fa-city"></i></span><span class="lyr-name">Zonizzazione PRG</span><span class="lyr-swatch sw-zto" aria-hidden="true"></span><span class="lyr-sw" aria-hidden="true"></span>
+                        <span class="lyr-ico ico-zon" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-city"/></svg></span><span class="lyr-name">Zonizzazione PRG</span><span class="lyr-swatch sw-zto" aria-hidden="true"></span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="lyr-link" aria-expanded="false" aria-controls="prg-legend" data-action="toggleLegend">Mostra legenda PRG</button>
                     <div class="lyr-legend" id="prg-legend"><img src="legenda.svg" loading="lazy" alt="Legenda della zonizzazione PRG"></div>
                     <button type="button" class="lyr-row active" id="vincoli-main" title="Vincoli urbanistici">
-                        <span class="lyr-ico ico-vin" aria-hidden="true"><i class="fas fa-shield-alt"></i></span><span class="lyr-name">Vincoli urbanistici</span><span class="lyr-swatch sw-vin" aria-hidden="true"></span><span class="lyr-sw" aria-hidden="true"></span>
+                        <span class="lyr-ico ico-vin" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-shield"/></svg></span><span class="lyr-name">Vincoli urbanistici</span><span class="lyr-swatch sw-vin" aria-hidden="true"></span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="lyr-row lyr-sub active" id="vincoli_lin">
                         <span class="lyr-swatch sw-vin-lin" aria-hidden="true"></span><span class="lyr-name">Lineari</span><span class="lyr-sw" aria-hidden="true"></span>
@@ -80,28 +82,28 @@
                 </section>
 
                 <section class="lyr-group" aria-labelledby="g-cat">
-                    <h3 id="g-cat">Catasto e valori</h3>
+                    <h2 id="g-cat">Catasto e valori</h2>
                     <button type="button" class="lyr-row active" id="particelle" title="Ultimo aggiornamento Settembre 2026">
-                        <span class="lyr-ico ico-cat" aria-hidden="true"><i class="fas fa-map"></i></span><span class="lyr-name">Particelle catastali</span><span class="lyr-swatch sw-part" aria-hidden="true"></span><span class="lyr-sw" aria-hidden="true"></span>
+                        <span class="lyr-ico ico-cat" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-map"/></svg></span><span class="lyr-name">Particelle catastali</span><span class="lyr-swatch sw-part" aria-hidden="true"></span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="lyr-row" id="zone_omi" title="Zone OMI 2025 - II semestre - Agenzia delle Entrate">
-                        <span class="lyr-ico ico-omi" aria-hidden="true"><i class="fas fa-euro-sign"></i></span><span class="lyr-name">Zone OMI 2025 S2</span><span class="lyr-swatch sw-omi" aria-hidden="true"></span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
+                        <span class="lyr-ico ico-omi" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-euro-sign"/></svg></span><span class="lyr-name">Zone OMI 2025 S2</span><span class="lyr-swatch sw-omi" aria-hidden="true"></span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="lyr-row" id="civici" title="Numeri Civici - Aggiornamento Febbraio 2026">
-                        <span class="lyr-ico ico-civ" aria-hidden="true"><i class="fas fa-location-dot"></i></span><span class="lyr-name">Numeri civici</span><span class="lyr-swatch sw-civ" aria-hidden="true">12</span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
+                        <span class="lyr-ico ico-civ" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-location-dot"/></svg></span><span class="lyr-name">Numeri civici</span><span class="lyr-swatch sw-civ" aria-hidden="true">12</span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
                 </section>
 
                 <div class="lyr-group" role="radiogroup" aria-labelledby="g-bg">
-                    <h3 id="g-bg">Mappe di base</h3>
+                    <h2 id="g-bg">Mappe di base</h2>
                     <button type="button" class="lyr-row active" id="basemap" role="radio" aria-checked="true">
-                        <span class="lyr-ico ico-map" aria-hidden="true"><i class="fas fa-globe"></i></span><span class="lyr-name">Mappa</span><span class="lyr-swatch sw-base" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
+                        <span class="lyr-ico ico-map" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-globe"/></svg></span><span class="lyr-name">Mappa</span><span class="lyr-swatch sw-base" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="lyr-row" id="satellite" role="radio" aria-checked="false" title="Ortofoto 2022 della Regione Siciliana">
-                        <span class="lyr-ico ico-aer" aria-hidden="true"><i class="fas fa-satellite"></i></span><span class="lyr-name">Foto aerea</span><span class="lyr-swatch sw-aerea" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
+                        <span class="lyr-ico ico-aer" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-satellite"/></svg></span><span class="lyr-name">Foto aerea</span><span class="lyr-swatch sw-aerea" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
                     </button>
                     <button type="button" class="lyr-row" id="carta_tecnica" role="radio" aria-checked="false" title="Carta Tecnica Comunale 2k 2007/09">
-                        <span class="lyr-ico ico-ctc" aria-hidden="true"><i class="fas fa-ruler-combined"></i></span><span class="lyr-name">Carta tecnica 2k</span><span class="lyr-swatch sw-ctc" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
+                        <span class="lyr-ico ico-ctc" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-ruler-combined"/></svg></span><span class="lyr-name">Carta tecnica 2k</span><span class="lyr-swatch sw-ctc" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
                     </button>
                 </div>
             </div>
@@ -136,7 +138,7 @@
                 </div>
 
                 <div id="search-error" role="alert"></div>
-                <button type="button" class="btn secondary" id="pdf-cmd" data-action="generatePDF"><i aria-hidden="true" class="fas fa-file-pdf"></i> Scarica scheda PDF</button>
+                <button type="button" class="btn secondary" id="pdf-cmd" data-action="generatePDF"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-file-pdf"/></svg> Scarica scheda PDF</button>
                 <p class="search-note">Dati catastali aggiornati a <span data-catasto-data>Settembre 2026</span> (S.I.T.R. Sicilia) e Agenzia delle Entrate.</p>
             </div>
 
@@ -144,16 +146,16 @@
             <div id="sidepanel" role="tabpanel" aria-labelledby="tab-info">
                 <div class="info-tab">
                     <details open>
-                        <summary><span class="inf-ico ico-zon" aria-hidden="true"><i class="fas fa-book-open"></i></span>Guida</summary>
+                        <summary><span class="inf-ico ico-zon" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-book-open"/></svg></span>Guida</summary>
                         <p>La mappa mostra <strong>particelle catastali</strong>, <strong>zonizzazione e vincoli del PRG</strong>, <strong>zone OMI</strong> e <strong>numeri civici</strong> di Palermo.</p>
-                        <h3><i class="fas fa-hand-pointer" aria-hidden="true"></i>Muoversi</h3>
+                        <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-hand-pointer"/></svg>Muoversi</h3>
                         <figure class="guida-fig"><a href="guida/01_mappa.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/01_mappa.jpg" loading="lazy" width="896" height="560" alt="Vista iniziale: pannello a sinistra, controlli della mappa a destra"></a><figcaption>Vista iniziale: pannello a sinistra, controlli della mappa a destra</figcaption></figure>
                         <ul>
                             <li>Trascina per spostarti; rotellina o pizzico per lo zoom.</li>
                             <li>I pulsanti a destra: + e &minus; per lo zoom, vista iniziale, schermo intero e minimappa con foto aerea.</li>
                             <li>Le etichette <em>F. foglio &middot; P. particella</em> compaiono con lo zoom avanzato.</li>
                         </ul>
-                        <h3><i class="fas fa-layer-group" aria-hidden="true"></i>Livelli</h3>
+                        <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-layer-group"/></svg>Livelli</h3>
                         <figure class="guida-fig"><a href="guida/02_layers.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/02_layers.jpg" loading="lazy" width="896" height="560" alt="Il tab Livelli con la legenda del PRG aperta"></a><figcaption>Il tab Livelli con la legenda del PRG aperta</figcaption></figure>
                         <ul>
                             <li>Il tab <strong>Livelli</strong> accende e spegne ogni livello. Il piccolo campione a destra del nome mostra il colore in mappa.</li>
@@ -162,10 +164,10 @@
                             <li>La legenda del PRG si apre dal link sotto Zonizzazione.</li>
                         </ul>
                         <figure class="guida-fig"><a href="guida/03_omi_civici.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/03_omi_civici.jpg" loading="lazy" width="896" height="560" alt="Zone OMI e numeri civici accesi insieme alla zonizzazione"></a><figcaption>Zone OMI e numeri civici accesi insieme alla zonizzazione</figcaption></figure>
-                        <h3><i class="fas fa-location-crosshairs" aria-hidden="true"></i>Informazioni su un punto</h3>
+                        <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-location-crosshairs"/></svg>Informazioni su un punto</h3>
                         <figure class="guida-fig"><a href="guida/06_scheda_pdf.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/06_scheda_pdf.jpg" loading="lazy" width="896" height="560" alt="Un clic sulla mappa apre la scheda con particella, piano e quotazioni OMI"></a><figcaption>Un clic sulla mappa apre la scheda con particella, piano e quotazioni OMI</figcaption></figure>
                         <p>Clicca o tocca la mappa: la scheda riporta particella, strumento urbanistico, vincoli, zona OMI e civico. <strong>Visura su SISTER</strong> apre il servizio dell'Agenzia delle Entrate (serve l'accesso a SISTER).</p>
-                        <h3><i class="fas fa-search" aria-hidden="true"></i>Cercare</h3>
+                        <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-magnifying-glass"/></svg>Cercare</h3>
                         <figure class="guida-fig"><a href="guida/04_ricerca.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/04_ricerca.jpg" loading="lazy" width="896" height="560" alt="Il tab Cerca: foglio e particella, oppure via e civico"></a><figcaption>Il tab Cerca: foglio e particella, oppure via e civico</figcaption></figure>
                         <ol>
                             <li>Porta la mappa nella zona di interesse: la ricerca per foglio e particella opera sull'area visibile.</li>
@@ -173,19 +175,19 @@
                             <li>Se la particella non si trova, sposta la mappa sulla zona giusta e riprova.</li>
                         </ol>
                         <figure class="guida-fig"><a href="guida/05_risultato_ricerca.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/05_risultato_ricerca.jpg" loading="lazy" width="896" height="560" alt="La particella trovata viene evidenziata e la scheda si apre con i pulsanti PDF e SISTER"></a><figcaption>La particella trovata viene evidenziata e la scheda si apre con i pulsanti PDF e SISTER</figcaption></figure>
-                        <h3><i class="fas fa-file-pdf" aria-hidden="true"></i>Scheda PDF</h3>
+                        <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-file-pdf"/></svg>Scheda PDF</h3>
                         <p>Dopo una ricerca o un clic su una particella, <strong>Scarica scheda PDF</strong> crea un documento con mappa, dati catastali, zonizzazione e vincoli. Su smartphone ruota il dispositivo in orizzontale.</p>
-                        <h3><i class="fas fa-satellite" aria-hidden="true"></i>Minimappa con foto aerea</h3>
+                        <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-satellite"/></svg>Minimappa con foto aerea</h3>
                         <figure class="guida-fig"><a href="guida/07_satellite.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/07_satellite.jpg" loading="lazy" width="896" height="560" alt="La minimappa in basso segue il centro della mappa principale"></a><figcaption>La minimappa in basso segue il centro della mappa principale</figcaption></figure>
                         <p>Il pulsante con il satellite tra i controlli a destra apre una piccola mappa con la foto aerea, centrata sul mirino. Chiudila con &times;. Per coprire tutta la mappa scegli <em>Foto aerea</em> tra le mappe di base.</p>
-                        <h3><i class="fas fa-circle-half-stroke" aria-hidden="true"></i>Tema chiaro e scuro</h3>
+                        <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-circle-half-stroke"/></svg>Tema chiaro e scuro</h3>
                         <p>Il pulsante con la luna (o il sole) tra i controlli a destra cambia il tema di pannelli e mappa di base. La scelta resta salvata nel browser.</p>
-                        <h3><i class="fas fa-share-nodes" aria-hidden="true"></i>Condividere</h3>
+                        <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-share-nodes"/></svg>Condividere</h3>
                         <p>L'indirizzo del browser conserva posizione e zoom: puoi copiarlo e inviarlo.</p>
                     </details>
 
                     <details>
-                        <summary><span class="inf-ico ico-cat" aria-hidden="true"><i class="fas fa-scale-balanced"></i></span>Fonti e licenze</summary>
+                        <summary><span class="inf-ico ico-cat" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-scale-balanced"/></svg></span>Fonti e licenze</summary>
                         <ul>
                             <li><strong>Zonizzazione e vincoli (Variante Generale al PRG 2004 e PPE):</strong> <a href="https://www.comune.palermo.it/opendata.php" target="_blank" rel="noopener">Comune di Palermo, Open Data</a>, licenza <a href="https://creativecommons.org/licenses/by/4.0/deed.it" target="_blank" rel="noopener">CC-BY 4.0</a>. Rielaborazione di @opendatasicilia.</li>
                             <li><strong>Particelle catastali:</strong> <a href="https://www.sitr.regione.sicilia.it/" target="_blank" rel="noopener">S.I.T.R. Regione Siciliana</a> e <a href="https://geoportale.cartografia.agenziaentrate.gov.it/age-inspire/srv/ita/catalog.search#/home" target="_blank" rel="noopener">Agenzia delle Entrate</a>, CC-BY 4.0. Dati aggiornati a <span data-catasto-data>Settembre 2026</span>.</li>
@@ -193,12 +195,13 @@
                             <li><strong>Numeri civici:</strong> <a href="https://www.anncsu.gov.it" target="_blank" rel="noopener">ANNCSU</a>, aggiornamento Febbraio 2026.</li>
                             <li><strong>Foto aerea:</strong> ortofoto 2022 della Regione Siciliana (S.I.T.R.).</li>
                             <li><strong>Mappa di base:</strong> &copy; contributori OpenStreetMap, OpenFreeMap, OpenMapTiles.</li>
+                            <li><strong>Icone:</strong> <a href="https://fontawesome.com/" target="_blank" rel="noopener">Font Awesome Free</a> 6.0.0, licenza <a href="https://fontawesome.com/license/free" target="_blank" rel="noopener">CC BY 4.0</a>.</li>
                         </ul>
                         <p class="note">I contenuti hanno valore informativo, non sono documenti ufficiali e non hanno valore legale. Per gli atti vincolanti fai riferimento alle delibere degli organi competenti. L'Agenzia delle Entrate non risponde di danni derivanti dall'uso di questi dati.</p>
                     </details>
 
                     <details>
-                        <summary><span class="inf-ico ico-civ" aria-hidden="true"><i class="fas fa-heart"></i></span>Crediti</summary>
+                        <summary><span class="inf-ico ico-civ" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-heart"/></svg></span>Crediti</summary>
                         <p><strong>Autore:</strong> <a href="https://www.linkedin.com/in/gbvitrano/" target="_blank" rel="noopener">@gbvitrano</a>, con lo sviluppo tecnico in collaborazione con <a href="https://claude.ai" target="_blank" rel="noopener">Claude AI (Anthropic)</a>.</p>
                         <p>Grazie a <a href="https://x.com/aborruso" target="_blank" rel="noopener">@aborruso</a> e <a href="https://x.com/totofiandaca" target="_blank" rel="noopener">@totofiandaca</a> per gli insegnamenti e la condivisione di conoscenze.</p>
                         <p>Progetto di <a href="https://opendatasicilia.it/" target="_blank" rel="noopener">OpenDataSicilia</a>. La versione base della mappa del PRG resta a <a href="https://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595" target="_blank" rel="noopener">questo indirizzo</a>.</p>
@@ -210,7 +213,7 @@
             <div id="tech-panel" role="tabpanel" aria-labelledby="tab-tecnica">
                 <div class="info-tab">
                     <details open>
-                        <summary><span class="inf-ico ico-zon" aria-hidden="true"><i class="fas fa-wand-magic-sparkles"></i></span>Novità e strumenti</summary>
+                        <summary><span class="inf-ico ico-zon" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-wand-magic-sparkles"/></svg></span>Novità e strumenti</summary>
                         <p>L'interfaccia è stata riprogettata con l'aiuto di <a href="https://x.com/deepseek_ai" title="DeepSeek AI" target="_blank" rel="noopener">@deepseek_ai</a> e di <a href="https://www.anthropic.com" title="Anthropic AI" target="_blank" rel="noopener">Anthropic AI</a> (Claude).</p>
                         <h3>Cosa c'è di nuovo</h3>
                         <ul>
@@ -231,8 +234,8 @@
                             <li><strong><a href="https://qgis.org/" target="_blank" rel="noopener">QGIS</a></strong> — elaborazione e gestione dei dati geografici</li>
                             <li><strong><a href="https://plugins.qgis.org/plugins/CatastoIT_GML_Merger_Pro/" target="_blank" rel="noopener">CatastoIT_GML_Merger_Pro</a></strong> — plugin QGIS per importare e fondere i file GML catastali</li>
                             <li><strong><a href="https://github.com/felt/tippecanoe" target="_blank" rel="noopener">tippecanoe</a></strong> — conversione dei dati vettoriali in tile PMTiles</li>
-                            <li><strong><a href="https://maplibre.org/maplibre-gl-js/docs/" target="_blank" rel="noopener">MapLibre GL JS 3.3</a></strong> — rendering della mappa interattiva</li>
-                            <li><strong><a href="https://github.com/protomaps/PMTiles" target="_blank" rel="noopener">PMTiles 2.4</a></strong> — distribuzione serverless dei tile</li>
+                            <li><strong><a href="https://maplibre.org/maplibre-gl-js/docs/" target="_blank" rel="noopener">MapLibre GL JS 6.16</a></strong> — rendering della mappa interattiva</li>
+                            <li><strong><a href="https://github.com/protomaps/PMTiles" target="_blank" rel="noopener">PMTiles 4.5</a></strong> — distribuzione serverless dei tile</li>
                             <li><strong><a href="https://rawgit.com/MrRio/jsPDF/master/docs/" target="_blank" rel="noopener">jsPDF 2.5</a></strong> — generazione delle schede PDF a partire dall'immagine della mappa</li>
                             <li><strong><a href="https://turfjs.org/" target="_blank" rel="noopener">Turf.js 6</a></strong> — calcolo delle aree e delle intersezioni nel PDF</li>
                             <li><strong><a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a></strong> — mappa di base chiara e scura</li>
@@ -240,7 +243,7 @@
                     </details>
 
                     <details>
-                        <summary><span class="inf-ico ico-cat" aria-hidden="true"><i class="fas fa-database"></i></span>Ricerca e PMTiles</summary>
+                        <summary><span class="inf-ico ico-cat" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-database"/></svg></span>Ricerca e PMTiles</summary>
                         <p>Il livello <strong>Particelle catastali</strong> è un file <strong>PMTiles</strong>: un formato che contiene in un unico file tutti i dati geografici, suddivisi in piccole tessere (tiles). Il browser scarica solo le tessere dell'area visibile, e il file può stare su un normale server web o su una CDN.</p>
                         <h3>Cosa cambia per la ricerca</h3>
                         <p>Con foglio e particella la ricerca opera sulle tessere già caricate, cioè sull'area visibile sullo schermo. Se la particella è fuori vista, compare un messaggio di errore: porta la mappa nella zona giusta e riprova.</p>
@@ -248,7 +251,7 @@
                     </details>
 
                     <details>
-                        <summary><span class="inf-ico ico-civ" aria-hidden="true"><i class="fas fa-file-pdf"></i></span>Stampa PDF</summary>
+                        <summary><span class="inf-ico ico-civ" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-file-pdf"/></svg></span>Stampa PDF</summary>
                         <p>Dopo una ricerca, oppure cliccando una particella, il pulsante <strong>Scarica scheda PDF</strong> compare nella scheda (e nel tab Cerca). Il documento contiene una mappa con la particella evidenziata, i dati catastali, la zonizzazione e gli eventuali vincoli.</p>
                         <p>La nota sulla fonte riporta la stessa data di aggiornamento del catasto indicata in "Fonti e licenze".</p>
                         <hr>
@@ -256,7 +259,7 @@
                     </details>
 
                     <details>
-                        <summary><span class="inf-ico ico-map" aria-hidden="true"><i class="fas fa-circle-play"></i></span>Video demo</summary>
+                        <summary><span class="inf-ico ico-map" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-circle-play"/></svg></span>Video demo</summary>
                         <p>Video di presentazione realizzato sulla versione precedente della mappa: le funzioni principali sono le stesse, ma i pulsanti ora sono in posti diversi.</p>
                         <div class="video"><iframe data-src="https://www.youtube.com/embed/N_gdK7NBvU4?si=7yUCGTg8wOD_cJ_2&amp;start=3" title="Video demo" allowfullscreen></iframe>
                                         </div>
@@ -276,10 +279,10 @@
     <div class="map-ctl" role="group" aria-label="Controlli mappa">
         <button type="button" data-action="zoomIn" title="Ingrandisci" aria-label="Ingrandisci">+</button>
         <button type="button" data-action="zoomOut" title="Riduci" aria-label="Riduci">&minus;</button>
-        <button type="button" data-action="resetMapHome" title="Vista iniziale" aria-label="Vista iniziale"><i aria-hidden="true" class="fas fa-home"></i></button>
-        <button type="button" id="fullscreen-btn" data-action="toggleFullscreen" title="Schermo intero" aria-label="Schermo intero"><i aria-hidden="true" class="fas fa-expand" id="fullscreen-icon"></i></button>
-        <button type="button" id="theme-btn" data-action="toggleTheme" title="Passa al tema scuro" aria-label="Passa al tema scuro" aria-pressed="false"><i aria-hidden="true" class="fas fa-moon"></i></button>
-        <button type="button" id="satellite-btn" data-action="toggleSatelliteOverlay" title="Minimappa con foto aerea sincronizzata" aria-label="Minimappa con foto aerea" aria-pressed="false"><i aria-hidden="true" class="fas fa-satellite"></i></button>
+        <button type="button" data-action="resetMapHome" title="Vista iniziale" aria-label="Vista iniziale"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-house"/></svg></button>
+        <button type="button" id="fullscreen-btn" data-action="toggleFullscreen" title="Schermo intero" aria-label="Schermo intero"><svg class="ic" id="fullscreen-icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-expand"/></svg></button>
+        <button type="button" id="theme-btn" data-action="toggleTheme" title="Passa al tema scuro" aria-label="Passa al tema scuro" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-moon"/></svg></button>
+        <button type="button" id="satellite-btn" data-action="toggleSatelliteOverlay" title="Minimappa con foto aerea sincronizzata" aria-label="Minimappa con foto aerea" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-satellite"/></svg></button>
     </div>
     <div class="zoom-badge" aria-live="off">Zoom <span id="zoom-level-display">12</span></div>
 

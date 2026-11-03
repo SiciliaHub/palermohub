@@ -1,3 +1,4 @@
+import * as maplibregl from 'maplibre-gl';
 
 // =========================
 // MOBILE-OPTIMIZED CATASTO PALERMO SCRIPT
@@ -34,8 +35,7 @@ function applyTheme(theme) {
         btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
         btn.title = dark ? 'Passa al tema chiaro' : 'Passa al tema scuro';
         btn.setAttribute('aria-label', btn.title);
-        const i = btn.querySelector('i');
-        if (i) i.className = dark ? 'fas fa-sun' : 'fas fa-moon';
+        setIcon(btn.querySelector('svg'), dark ? 'sun' : 'moon');
     }
     applyBaseStyle(theme);
 }
@@ -639,7 +639,7 @@ function searchParticella() {
 
         openScheda({
             particella: { foglio, particella },
-            html: buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: foglio }, { lbl: 'Particella', val: particella }], 'fas fa-table-cells') +
+            html: buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: foglio }, { lbl: 'Particella', val: particella }], 'table-cells') +
                 '<p class="sc-src">Tocca la particella sulla mappa per vedere zonizzazione, vincoli e quotazioni OMI.</p>'
         });
 
@@ -1233,7 +1233,7 @@ try {
         hash: true,
         pitch: 0,
         dragRotate: false,
-        preserveDrawingBuffer: true,
+        canvasContextAttributes: { preserveDrawingBuffer: true }, // serve al PDF (toDataURL)
         attributionControl: { compact: true },
         touchZoomRotate: true,
         touchPitch: false
@@ -1289,9 +1289,18 @@ function buildDl(rows) {
     return `<dl class="sc-dl">${items}</dl>`;
 }
 
+// icone: sprite icons.svg (Font Awesome Free 6.0.0, CC BY 4.0)
+function iconSvg(name) {
+    return `<svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-${name}"/></svg>`;
+}
+function setIcon(svg, name) {
+    const use = svg && svg.querySelector('use');
+    if (use) use.setAttribute('href', 'icons.svg#i-' + name);
+}
+
 // sezione della scheda: titolo + elenco etichetta/valore
 function buildInfoCard(title, rows, icon = '') {
-    const i = icon ? `<i aria-hidden="true" class="${icon}"></i>` : '';
+    const i = icon ? iconSvg(icon) : '';
     return `<section class="sc-sec"><h3>${i}${esc(title)}</h3>${buildDl(rows)}</section>`;
 }
 
@@ -1313,8 +1322,8 @@ function openScheda({ particella, html }) {
         title.textContent = `F. ${particella.foglio} · P. ${particella.particella}`;
         title.className = 'mono';
         actions.innerHTML =
-            `<button type="button" class="btn" data-action="generatePDF"><i aria-hidden="true" class="fas fa-file-pdf"></i> Scarica scheda PDF</button>` +
-            `<a class="sister-btn" href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" title="Accedi a SISTER con SPID e inserisci Foglio ${esc(particella.foglio)}, Particella ${esc(particella.particella)}"><i aria-hidden="true" class="fas fa-external-link-alt"></i> Visura su SISTER <span class="sister-coords">Fg.${esc(particella.foglio)} · P.${esc(particella.particella)}</span></a>`;
+            `<button type="button" class="btn" data-action="generatePDF">${iconSvg('file-pdf')} Scarica scheda PDF</button>` +
+            `<a class="sister-btn" href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" title="Accedi a SISTER con SPID e inserisci Foglio ${esc(particella.foglio)}, Particella ${esc(particella.particella)}">${iconSvg('up-right-from-square')} Visura su SISTER <span class="sister-coords">Fg.${esc(particella.foglio)} · P.${esc(particella.particella)}</span></a>`;
     } else {
         title.textContent = 'Informazioni sul punto';
         title.className = '';
@@ -1376,7 +1385,7 @@ function buildOMIPopup(omiFeatures) {
 
     const prevalente = `${codTipPrev ? `[${esc(codTipPrev)}] ` : ''}${esc(tipoPrev || '—')}`;
     return `<section class="sc-sec">
-        <h3><i aria-hidden="true" class="fas fa-euro-sign"></i>Quotazioni OMI <span class="sc-badge">Zona ${esc(zona)}</span></h3>
+        <h3>${iconSvg('euro-sign')}Quotazioni OMI <span class="sc-badge">Zona ${esc(zona)}</span></h3>
         ${buildDl([
             { lbl: 'Fascia', val: fasciaDescr ? `${fascia} – ${fasciaDescr}` : fascia },
             { lbl: 'Descrizione', val: clean(p0.Zona_Descr) },
@@ -1805,25 +1814,25 @@ function initializeMapLayers() {
                 const p = f.properties;
                 switch (f.layer.id) {
                     case "cs":
-                        return buildInfoCard('Piano urbanistico', [{ lbl: 'Strumento', val: 'PPE' }, { lbl: 'Circoscrizione', val: p.Circoscriz }], 'fas fa-city');
+                        return buildInfoCard('Piano urbanistico', [{ lbl: 'Strumento', val: 'PPE' }, { lbl: 'Circoscrizione', val: p.Circoscriz }], 'city');
                     case "Info Vin. areali":
-                        return buildInfoCard('Vincolo areale', [{ lbl: 'Tipo', val: p.tipo }, { lbl: 'Descrizione', val: p.descrizone }], 'fas fa-shield-alt');
+                        return buildInfoCard('Vincolo areale', [{ lbl: 'Tipo', val: p.tipo }, { lbl: 'Descrizione', val: p.descrizone }], 'shield');
                     case "Info Vin. lineari":
-                        return buildInfoCard('Vincolo lineare', [{ lbl: 'Tipo', val: p.TIPO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'fas fa-draw-polygon');
+                        return buildInfoCard('Vincolo lineare', [{ lbl: 'Tipo', val: p.TIPO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'draw-polygon');
                     case "Info Netto storico":
-                        return buildInfoCard('Netto storico', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'fas fa-scroll');
+                        return buildInfoCard('Netto storico', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'scroll');
                     case "Info ZTO":
-                        return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'fas fa-map');
+                        return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'map');
                     case "Particelle catastali":
                         if (!part) part = f;
-                        return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }], 'fas fa-table-cells');
+                        return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }], 'table-cells');
                     case "Numeri Civici": {
                         const esp = p.Esponente;
                         const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;
                         return buildInfoCard('Numero civico', [
                             { lbl: 'Civico', val: civico }, { lbl: 'Odonimo', val: p.Odonimo },
                             { lbl: 'Circoscrizione', val: p.Circoscrizione }, { lbl: 'Quartiere', val: p.Quartiere }, { lbl: 'UPL', val: p.UPL }
-                        ], 'fas fa-map-marker-alt');
+                        ], 'location-dot');
                     }
                     default: return '';
                 }
@@ -1918,7 +1927,7 @@ document.addEventListener('fullscreenchange', () => {
     const icon = document.getElementById('fullscreen-icon');
     if (!btn) return;
     const isFs = !!document.fullscreenElement;
-    if (icon) icon.className = isFs ? 'fas fa-compress' : 'fas fa-expand';
+    setIcon(icon, isFs ? 'compress' : 'expand');
     btn.classList.toggle('active', isFs);
 });
 
