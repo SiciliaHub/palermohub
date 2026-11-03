@@ -109,20 +109,20 @@
             <!-- Ricerca -->
             <div id="search-popup" role="tabpanel" aria-labelledby="tab-cerca">
                 <h2 class="tab-title">Trova una particella o un civico</h2>
-                <p class="search-info" id="search-info-text">La ricerca funziona sull'area visibile della mappa. Naviga prima nella zona di interesse, poi avvia la ricerca.</p>
+                <p class="search-info" id="search-info-text">Inserisci foglio e particella: la mappa si sposta da sola nel punto giusto.</p>
 
                 <div class="seg" role="group" aria-label="Tipo di ricerca">
                     <button type="button" id="label-foglio" aria-pressed="true" data-action="switchSearchMode" data-arg="foglio">Foglio / particella</button>
                     <button type="button" id="label-civico" aria-pressed="false" data-action="switchSearchMode" data-arg="civico">Via / civico</button>
                 </div>
 
-                <div id="search-mode-foglio" class="search-mode-panel">
+                <form id="search-mode-foglio" class="search-mode-panel">
                     <div class="search-inputs">
                         <input type="number" id="foglio" inputmode="numeric" aria-label="Numero foglio" placeholder="Foglio" min="1">
                         <input type="number" id="particella" inputmode="numeric" aria-label="Numero particella" placeholder="Particella" min="1">
                     </div>
-                    <button type="button" class="btn" data-action="searchParticella">Cerca particella</button>
-                </div>
+                    <button type="submit" class="btn">Cerca particella</button>
+                </form>
 
                 <div id="search-mode-civico" class="search-mode-panel" hidden>
                     <div class="search-inputs">
@@ -168,9 +168,8 @@
                         <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-magnifying-glass"/></svg>Cercare</h3>
                         <figure class="guida-fig"><a href="guida/04_ricerca.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/04_ricerca.jpg" loading="lazy" width="896" height="560" alt="Il tab Cerca: foglio e particella, oppure via e civico"></a><figcaption>Il tab Cerca: foglio e particella, oppure via e civico</figcaption></figure>
                         <ol>
-                            <li>Porta la mappa nella zona di interesse: la ricerca per foglio e particella opera sull'area visibile.</li>
-                            <li>Apri <strong>Cerca</strong> e scegli <em>Foglio / particella</em> oppure <em>Via / civico</em> (la via ha il suggerimento automatico).</li>
-                            <li>Se la particella non si trova, sposta la mappa sulla zona giusta e riprova.</li>
+                                                        <li>Apri <strong>Cerca</strong> e scegli <em>Foglio / particella</em> oppure <em>Via / civico</em> (la via ha il suggerimento automatico).</li>
+                            <li>Per foglio e particella la mappa si sposta da sola sul punto giusto; per la via serve che i civici siano caricati.</li>
                         </ol>
                         <figure class="guida-fig"><a href="guida/05_risultato_ricerca.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/05_risultato_ricerca.jpg" loading="lazy" width="896" height="560" alt="La particella trovata viene evidenziata e la scheda si apre con i pulsanti PDF e SISTER"></a><figcaption>La particella trovata viene evidenziata e la scheda si apre con i pulsanti PDF e SISTER</figcaption></figure>
                         <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-file-pdf"/></svg>Scheda PDF</h3>
@@ -244,7 +243,7 @@
                         <summary><span class="inf-ico ico-cat" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-database"/></svg></span>Ricerca e PMTiles</summary>
                         <p>Il livello <strong>Particelle catastali</strong> è un file <strong>PMTiles</strong>: un formato che contiene in un unico file tutti i dati geografici, suddivisi in piccole tessere (tiles). Il browser scarica solo le tessere dell'area visibile, e il file può stare su un normale server web o su una CDN.</p>
                         <h3>Cosa cambia per la ricerca</h3>
-                        <p>Con foglio e particella la ricerca opera sulle tessere già caricate, cioè sull'area visibile sullo schermo. Se la particella è fuori vista, compare un messaggio di errore: porta la mappa nella zona giusta e riprova.</p>
+                        <p>Con foglio e particella la ricerca legge un piccolo indice dei fogli (<code>fogli_index.json</code>), porta la mappa sul foglio, attende le tessere PMTiles e cerca la particella. Se il foglio o la particella non esistono compare un messaggio.</p>
                         <p>La ricerca per via e civico usa invece un indice completo dei civici, quindi funziona da qualsiasi punto della mappa.</p>
                     </details>
 

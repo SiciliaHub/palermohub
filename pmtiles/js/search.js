@@ -3,8 +3,10 @@ import { buildInfoCard, openScheda } from './card.js';
 import { state } from './state.js';
 import { closePanel, esc } from './ui.js';
 
+let civiciPromessa = null;
 export function loadCiviciIndex(url) {
-    fetch(url)
+    if (civiciPromessa) return civiciPromessa;
+    civiciPromessa = fetch(url)
         .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
         .then(data => {
             state.civiciIndex = data;
@@ -14,6 +16,27 @@ export function loadCiviciIndex(url) {
             // fallback: estrazione dai tile caricati nel viewport
             state.civiciIndex = null;
         });
+    return civiciPromessa;
+}
+
+// indice dei fogli (bbox), scaricato alla prima ricerca per foglio
+let fogliPromessa = null;
+function loadFogliIndex() {
+    if (!fogliPromessa) {
+        fogliPromessa = fetch('fogli_index.json')
+            .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+            .then(d => d.fogli)
+            .catch(e => { fogliPromessa = null; throw e; });
+    }
+    return fogliPromessa;
+}
+
+// attende che la mappa abbia finito di caricare le tessere (massimo 8 s)
+function waitIdle() {
+    return new Promise(resolve => {
+        const t = setTimeout(resolve, 8000);
+        state.map.once('idle', () => { clearTimeout(t); resolve(); });
+    });
 }
 
 export function extractOdonomi() {
@@ -172,83 +195,55 @@ export function searchByCivico() {
     }
 }
 
-export function searchParticella() {
-    const foglio = document.getElementById("foglio").value;
-    const particella = document.getElementById("particella").value;
+export async function searchParticella() {
     const errorDiv = document.getElementById("search-error");
     const pdfTab = document.getElementById("pdf-tab");
     const pdfCmd = document.getElementById("pdf-cmd");
-
-    if (!foglio || !particella) {
-        errorDiv.textContent = "Inserire sia il Foglio che la Particella";
+    const vibra = p => { if (state.isMobile && navigator.vibrate) navigator.vibrate(p); };
+    const fallito = msg => {
+        errorDiv.textContent = msg;
         if (pdfTab) pdfTab.style.display = "none";
         if (pdfCmd) pdfCmd.style.display = "none";
-        
-        if (state.isMobile && navigator.vibrate) {
-            navigator.vibrate([100, 50, 100]);
-        }
-        return;
-    }
+        if (state.map.getLayer("highlighted-polygon")) state.map.setFilter("highlighted-polygon", ["==", "id", ""]);
+        vibra([100, 50, 100]);
+    };
 
-    const features = state.map.querySourceFeatures("catasto", {
-        sourceLayer: "particelle",
-        filter: ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]
+    const foglio = String(parseInt(document.getElementById("foglio").value, 10) || '');
+    const particella = document.getElementById("particella").value.trim();
+    if (!foglio || !particella) return fallito("Inserire sia il Foglio che la Particella");
+
+    errorDiv.textContent = "Ricerca in corso…";
+    let fogli;
+    try { fogli = await loadFogliIndex(); }
+    catch { return fallito("Indice dei fogli non disponibile. Riprova tra poco."); }
+    const bb = fogli[foglio];
+    if (!bb) return fallito(`Foglio ${foglio} non trovato`);
+
+    // porta la mappa sul foglio, attende le tessere e cerca la particella
+    state.map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], { animate: false, padding: 20 });
+    await waitIdle();
+
+    const filtro = ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]];
+    const features = state.map.querySourceFeatures("catasto", { sourceLayer: "particelle", filter: filtro });
+    if (features.length === 0) return fallito(`Particella ${particella} non trovata nel foglio ${foglio}`);
+
+    errorDiv.textContent = "";
+    const geometry = features[0].geometry;
+    const coords = geometry.type === 'MultiPolygon' ? geometry.coordinates[0][0] : geometry.coordinates[0];
+    const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
+    if (pdfTab) pdfTab.style.display = "flex";
+    if (pdfCmd) pdfCmd.style.display = "flex";
+
+    state.map.fitBounds(bounds, { padding: state.isMobile ? 20 : 50, maxZoom: state.isMobile ? 16.5 : 17.5 });
+    if (state.map.getLayer("highlighted-polygon")) state.map.setFilter("highlighted-polygon", filtro);
+
+    openScheda({
+        particella: { foglio, particella, geometry },
+        html: buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: foglio }, { lbl: 'Particella', val: particella }], 'table-cells') +
+            '<p class="sc-src">Tocca la particella sulla mappa per vedere zonizzazione, vincoli e quotazioni OMI.</p>'
     });
-
-    if (features.length > 0) {
-        errorDiv.textContent = "";
-        state.currentParticella = {
-            foglio: foglio,
-            particella: particella,
-            bounds: features[0].geometry.coordinates[0],
-            center: features[0].geometry.coordinates[0].reduce(
-                (bounds, coord) => bounds.extend(coord),
-                new maplibregl.LngLatBounds(features[0].geometry.coordinates[0][0], features[0].geometry.coordinates[0][0])
-            ).getCenter()
-        };
-
-        if (pdfTab) pdfTab.style.display = "flex";
-        if (pdfCmd) pdfCmd.style.display = "flex";
-
-        const coordinates = features[0].geometry.coordinates[0];
-        const bounds = coordinates.reduce(
-            (bounds, coord) => bounds.extend(coord),
-            new maplibregl.LngLatBounds(coordinates[0], coordinates[0])
-        );
-
-        const padding = state.isMobile ? 20 : 50;
-        const maxZoom = state.isMobile ? 16.5 : 17.5;
-        
-        state.map.fitBounds(bounds, { padding: padding, maxZoom: maxZoom });
-
-        if (state.map.getLayer("highlighted-polygon")) {
-            state.map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
-        }
-
-        openScheda({
-            particella: { foglio, particella },
-            html: buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: foglio }, { lbl: 'Particella', val: particella }], 'table-cells') +
-                '<p class="sc-src">Tocca la particella sulla mappa per vedere zonizzazione, vincoli e quotazioni OMI.</p>'
-        });
-
-        closePanel();
-        
-        if (state.isMobile && navigator.vibrate) {
-            navigator.vibrate([50, 30, 50]);
-        }
-    } else {
-        errorDiv.textContent = "Nessuna particella trovata con i parametri specificati o la particella richiesta non è visibile nell'area corrente";
-        if (pdfTab) pdfTab.style.display = "none";
-        if (pdfCmd) pdfCmd.style.display = "none";
-        
-        if (state.map.getLayer("highlighted-polygon")) {
-            state.map.setFilter("highlighted-polygon", ["==", "id", ""]);
-        }
-        
-        if (state.isMobile && navigator.vibrate) {
-            navigator.vibrate([100, 50, 100]);
-        }
-    }
+    closePanel();
+    vibra([50, 30, 50]);
 }
 
 // collegamenti dei campi di ricerca (Invio, suggerimenti della via)
@@ -257,8 +252,8 @@ export function initSearch() {
         const el = document.getElementById(id);
         if (el) el.addEventListener('keypress', e => { if (e.key === 'Enter') { e.preventDefault(); fn(); } });
     };
-    enter('foglio', searchParticella);
-    enter('particella', searchParticella);
+    const form = document.getElementById('search-mode-foglio');
+    if (form) form.addEventListener('submit', e => { e.preventDefault(); searchParticella(); });
     enter('civico-search', searchByCivico);
 
     const odonimoInput = document.getElementById('odonimo');

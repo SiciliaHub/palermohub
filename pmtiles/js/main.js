@@ -6,7 +6,7 @@ import {
     toggleFullscreen, toggleLegend, toggleSatelliteOverlay, toggleTheme
 } from './ui.js';
 import { initializeMapLayers, initZoomSlider, updateZoomHints } from './layers.js';
-import { loadCiviciIndex, initSearch, searchByCivico, searchParticella, switchSearchMode } from './search.js';
+import { initSearch, searchByCivico, switchSearchMode } from './search.js';
 import { closeScheda } from './card.js';
 
 // Ogni elemento con data-action="nome" [data-arg="x"] chiama la funzione corrispondente (delega di evento).
@@ -14,7 +14,6 @@ const ACTIONS = {
     openPanel: el => openPanel(el.dataset.arg),
     switchSearchMode: el => switchSearchMode(el.dataset.arg),
     toggleLegend: el => toggleLegend(el),
-    searchParticella: () => searchParticella(),
     searchByCivico: () => searchByCivico(),
     // pdf.js (con jsPDF e Turf) si scarica solo al primo clic
     generatePDF: () => import('./pdf.js').then(m => m.generatePDF()),
@@ -95,7 +94,6 @@ function createMap() {
             state.baseTheme = document.documentElement.dataset.theme;
             applyTheme(document.documentElement.dataset.theme);
             initializeMapLayers();
-            loadCiviciIndex('civici_index.json');
             initZoomSlider();
             updateZoomHints();
         } catch (error) {
