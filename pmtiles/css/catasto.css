@@ -630,3 +630,15 @@ body {
 .lyr-row { gap: 10px; }
 .lyr-name { white-space: nowrap; }
 .lyr-ico + .lyr-name + .lyr-swatch, .lyr-ico ~ .lyr-swatch { width: 20px; height: 14px; }
+
+/* icone del tab Info */
+.info-tab summary { gap: 10px; }
+.info-tab summary::after { margin-left: auto; }
+.inf-ico { flex: none; width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.info-tab h3 { display: flex; align-items: center; gap: 8px; }
+.info-tab h3 i { width: 18px; text-align: center; color: var(--accent-text); }
+.info-more i { margin-right: 4px; }
+
+.ico-map { background: #2F6DB5; color: #fff; }
+.ico-aer { background: #55633F; color: #fff; }
+.ico-ctc { background: #C9A25A; color: var(--accent-ink); }
