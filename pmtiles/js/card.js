@@ -1,6 +1,7 @@
 import * as maplibregl from 'maplibre-gl';
 import { state } from './state.js';
 import { closePanel, esc, iconSvg } from './ui.js';
+import { syncUrl } from './urlstate.js';
 
 export function buildDl(rows) {
     const items = rows
@@ -22,6 +23,7 @@ export function setCurrentParticella(foglio, particella, geometry) {
     state.currentParticella = { foglio, particella, bounds: coords, center: bounds.getCenter() };
     const pdfCmd = document.getElementById('pdf-cmd');
     if (pdfCmd) pdfCmd.style.display = 'flex';
+    syncUrl();
 }
 
 export function openScheda({ particella, html }) {

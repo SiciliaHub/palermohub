@@ -1,6 +1,7 @@
 import { syncZoomUI } from './ui.js';
 import { onMapClick } from './card.js';
 import { layerMapping, layerStates, state } from './state.js';
+import { syncUrl } from './urlstate.js';
 
 export function toggleLayer(layerId) {
     if (!(layerId in layerMapping)) {
@@ -9,6 +10,7 @@ export function toggleLayer(layerId) {
     }
     
     layerStates[layerId] = !layerStates[layerId];
+    syncUrl();
     
     const button = document.getElementById(layerId);
     if (button) {
@@ -91,6 +93,7 @@ export function toggleVincoliMain() {
 
     const mainBtn = document.getElementById('vincoli-main');
     if (mainBtn) mainBtn.classList.toggle('active', newState);
+    syncUrl();
 
     if (state.isMobile && navigator.vibrate) {
         navigator.vibrate(50);

@@ -1,12 +1,13 @@
 // Avvio dell'app: azioni dell'interfaccia, creazione della mappa, caricamento a eventi.
 import * as maplibregl from 'maplibre-gl';
-import { BASE_STYLES, DATA_CATASTO, mqMobile, state } from './state.js';
+import { BASE_STYLES, DATA_CATASTO, layerStates, mqMobile, state } from './state.js';
 import {
     applyTheme, detectMobile, hideLoader, initA11y, initGallery, openPanel, resetMapHome,
     toggleFullscreen, toggleLegend, toggleSatelliteOverlay, toggleTheme
 } from './ui.js';
-import { initializeMapLayers, initZoomSlider, updateZoomHints } from './layers.js';
-import { initSearch, searchByCivico, switchSearchMode } from './search.js';
+import { initializeMapLayers, initZoomSlider, toggleLayer, syncVincoliMain, updateZoomHints } from './layers.js';
+import { initSearch, searchByCivico, searchParticella, switchSearchMode } from './search.js';
+import { readUrl, startUrlSync } from './urlstate.js';
 import { closeScheda } from './card.js';
 
 // Ogni elemento con data-action="nome" [data-arg="x"] chiama la funzione corrispondente (delega di evento).
@@ -54,6 +55,21 @@ function initPage() {
     });
 }
 
+// livelli e particella dall'indirizzo (?l=...&p=foglio-particella)
+function restoreFromUrl() {
+    const { livelli, particella } = readUrl();
+    if (livelli) {
+        Object.keys(layerStates).forEach(k => { if (livelli.has(k) !== layerStates[k]) toggleLayer(k); });
+        syncVincoliMain();
+    }
+    startUrlSync();
+    if (particella) {
+        document.getElementById('foglio').value = particella.foglio;
+        document.getElementById('particella').value = particella.particella;
+        searchParticella();
+    }
+}
+
 function createMap() {
     if (typeof pmtiles === 'undefined') {
         console.error('PMTiles non caricato');
@@ -94,6 +110,7 @@ function createMap() {
             state.baseTheme = document.documentElement.dataset.theme;
             applyTheme(document.documentElement.dataset.theme);
             initializeMapLayers();
+            restoreFromUrl();
             initZoomSlider();
             updateZoomHints();
         } catch (error) {
