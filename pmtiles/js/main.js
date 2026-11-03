@@ -1,0 +1,119 @@
+// Avvio dell'app: azioni dell'interfaccia, creazione della mappa, caricamento a eventi.
+import * as maplibregl from 'maplibre-gl';
+import { BASE_STYLES, DATA_CATASTO, mqMobile, state } from './state.js';
+import {
+    applyTheme, detectMobile, hideLoader, initA11y, initGallery, openPanel, resetMapHome,
+    toggleFullscreen, toggleLegend, toggleSatelliteOverlay, toggleTheme
+} from './ui.js';
+import { initializeMapLayers, initZoomSlider, updateZoomHints } from './layers.js';
+import { loadCiviciIndex, initSearch, searchByCivico, searchParticella, switchSearchMode } from './search.js';
+import { closeScheda } from './card.js';
+
+// Ogni elemento con data-action="nome" [data-arg="x"] chiama la funzione corrispondente (delega di evento).
+const ACTIONS = {
+    openPanel: el => openPanel(el.dataset.arg),
+    switchSearchMode: el => switchSearchMode(el.dataset.arg),
+    toggleLegend: el => toggleLegend(el),
+    searchParticella: () => searchParticella(),
+    searchByCivico: () => searchByCivico(),
+    // pdf.js (con jsPDF e Turf) si scarica solo al primo clic
+    generatePDF: () => import('./pdf.js').then(m => m.generatePDF()),
+    zoomIn: () => state.map && state.map.zoomIn(),
+    zoomOut: () => state.map && state.map.zoomOut(),
+    resetMapHome: () => resetMapHome(),
+    toggleFullscreen: () => toggleFullscreen(),
+    toggleTheme: () => toggleTheme(),
+    toggleSatelliteOverlay: () => toggleSatelliteOverlay(),
+    closeScheda: () => closeScheda()
+};
+
+function initActions() {
+    document.addEventListener('click', e => {
+        const el = e.target.closest('[data-action]');
+        const fn = el && ACTIONS[el.dataset.action];
+        if (fn) fn(el);
+    });
+    // il video parte a richiesta: l'iframe riceve l'indirizzo solo quando si apre la sezione
+    const vid = document.querySelector('iframe[data-src]');
+    if (vid) vid.closest('details').addEventListener('toggle', function () {
+        if (this.open && !vid.src) vid.src = vid.dataset.src;
+    });
+}
+
+function initPage() {
+    initGallery();
+    initActions();
+    initA11y();
+    initSearch();
+    document.querySelectorAll('[data-catasto-data]').forEach(el => { el.textContent = DATA_CATASTO; });
+    const btnPart = document.getElementById('particelle');
+    if (btnPart) btnPart.title = 'Ultimo aggiornamento ' + DATA_CATASTO;
+    detectMobile();
+    mqMobile.addEventListener('change', () => {
+        detectMobile();
+        if (state.map) state.map.resize();
+    });
+}
+
+function createMap() {
+    if (typeof pmtiles === 'undefined') {
+        console.error('PMTiles non caricato');
+        hideLoader();
+        return;
+    }
+    maplibregl.addProtocol('pmtiles', new pmtiles.Protocol().tile);
+
+    const map = new maplibregl.Map({
+        container: 'map',
+        style: BASE_STYLES[document.documentElement.dataset.theme] || BASE_STYLES.light,
+        center: [13.33225, 38.14074],
+        zoom: state.isMobile ? 11 : 12,
+        maxBounds: [[13.1, 37.9785], [13.55, 38.2919]],
+        hash: true,
+        pitch: 0,
+        dragRotate: false,
+        canvasContextAttributes: { preserveDrawingBuffer: true }, // serve al PDF (toDataURL)
+        attributionControl: { compact: true },
+        touchZoomRotate: true,
+        touchPitch: false
+    });
+    state.map = map;
+    if (new URLSearchParams(location.search).has('debug')) window.map = map; // solo per le prove da console
+
+    map.addControl(new maplibregl.ScaleControl({ unit: 'metric' }), 'bottom-left');
+
+    // il loader sparisce quando la mappa ha finito di disegnare, non dopo un tempo fisso
+    map.once('idle', hideLoader);
+
+    map.on('load', () => {
+        try {
+            // attribuzioni compatte: chiuse finche' non si tocca il pulsante (i)
+            const attrib = document.querySelector('.maplibregl-ctrl-attrib');
+            if (attrib) attrib.classList.remove('maplibregl-compact-show');
+            state.baseLayerIds = map.getStyle().layers.map(l => l.id);
+            state.baseSourceIds = Object.keys(map.getStyle().sources);
+            state.baseTheme = document.documentElement.dataset.theme;
+            applyTheme(document.documentElement.dataset.theme);
+            initializeMapLayers();
+            loadCiviciIndex('civici_index.json');
+            initZoomSlider();
+            updateZoomHints();
+        } catch (error) {
+            console.error('Errore durante il caricamento dei layer:', error);
+            hideLoader();
+        }
+    });
+
+    map.on('error', e => {
+        console.error('Errore mappa:', e);
+        hideLoader();
+    });
+}
+
+initPage();
+try {
+    createMap();
+} catch (error) {
+    console.error("Errore durante l'inizializzazione della mappa:", error);
+    hideLoader();
+}
