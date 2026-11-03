@@ -467,7 +467,7 @@ body {
 .panel-sub { font: 400 13px/1.35 var(--font-ui); color: var(--ink-2); margin: 2px 0 0; }
 .tabs { display: flex; margin: 0 -16px; padding: 0 16px; gap: 4px; }
 .tabs button {
-    flex: 1; min-height: 44px; background: none; border: 0; border-bottom: 3px solid transparent;
+    flex: 1; min-width: 0; min-height: 44px; background: none; border: 0; border-bottom: 3px solid transparent;
     font: 500 14px var(--font-ui); color: var(--ink-2); cursor: pointer;
     display: flex; align-items: center; justify-content: center; gap: 8px;
 }
@@ -477,7 +477,8 @@ body {
 .panel-body > [role="tabpanel"] { display: none; padding: 16px; }
 #panel[data-tab="livelli"] #layer-panel,
 #panel[data-tab="cerca"] #search-popup,
-#panel[data-tab="info"] #sidepanel { display: block; }
+#panel[data-tab="info"] #sidepanel,
+#panel[data-tab="tecnica"] #tech-panel { display: block; }
 .panel-foot { background: var(--panel); border-top: 1px solid var(--line); padding: 10px 16px; display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--ink-2); }
 .panel-foot img { width: 32px; height: 32px; }
 .panel-foot a { color: var(--accent-text); }
@@ -694,3 +695,9 @@ body {
 .guida-fig a { display: block; border-radius: 10px; overflow: hidden; border: 1px solid var(--line-strong); }
 .guida-fig img { display: block; width: 100%; height: auto; border-radius: 0; box-shadow: none; }
 .guida-fig figcaption { font-size: 12px; opacity: 1; color: var(--ink-2); text-align: left; margin-top: 6px; }
+
+#tech-panel { padding: 0; }
+#tech-panel .info-tab { padding: 0; }
+.video { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; margin: 8px 16px 16px; }
+.video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+@media (max-width: 899px) { .tabs button span { font-size: 12px; } }

@@ -93,7 +93,7 @@ In `css/catasto.css`, sostituire le variabili di `:root` (righe 9–28) con:
 
 ### 2.7 Pagina Informazioni al posto dei sette tab
 - Sezioni: Guida, Fonti e licenze, Crediti. Accordion con `<details>`.
-- Spostare in una pagina a parte (`pmtiles/informazioni-tecniche.html`) i contenuti dei tab Strumenti, Ricerca, PDF, Video: parlano di PMTiles e strumenti, non servono a chi cerca una particella.
+- Spostare in un tab «Tecnica» del pannello i contenuti dei tab Strumenti, Ricerca, PDF, Video: parlano di PMTiles e strumenti, non servono a chi cerca una particella.
 - Accorciare il disclaimer e i testi lunghi; tenere i link alle fonti e le licenze CC-BY 4.0.
 - Eliminare il popup novità (`#news-popup-overlay`, `initNewsPopup`). Al suo posto, un'etichetta "Nuovo" accanto ai livelli recenti, ricordata in `localStorage`.
 

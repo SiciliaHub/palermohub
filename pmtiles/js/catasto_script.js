@@ -141,7 +141,7 @@ function updateMobileUI() {
 // =========================
 // FUNZIONI LAYER SWITCHER OTTIMIZZATE
 // =========================
-const PANEL_TABS = ['livelli', 'cerca', 'info'];
+const PANEL_TABS = ['livelli', 'cerca', 'info', 'tecnica'];
 
 function openPanel(tab) {
     const panel = document.getElementById('panel');

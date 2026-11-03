@@ -52,6 +52,7 @@
                 <button type="button" role="tab" id="tab-livelli" aria-selected="true" aria-controls="layer-panel" onclick="openPanel('livelli')"><i aria-hidden="true" class="fas fa-layer-group"></i><span>Livelli</span></button>
                 <button type="button" role="tab" id="tab-cerca" aria-selected="false" aria-controls="search-popup" onclick="openPanel('cerca')"><i aria-hidden="true" class="fas fa-search"></i><span>Cerca</span></button>
                 <button type="button" role="tab" id="tab-info" aria-selected="false" aria-controls="sidepanel" onclick="openPanel('info')"><i aria-hidden="true" class="fas fa-info-circle"></i><span>Info</span><span class="info-badge" id="info-badge" aria-hidden="true"></span></button>
+                <button type="button" role="tab" id="tab-tecnica" aria-selected="false" aria-controls="tech-panel" onclick="openPanel('tecnica')"><i aria-hidden="true" class="fas fa-gears"></i><span>Tecnica</span></button>
             </div>
         </div>
 
@@ -200,8 +201,65 @@
                         <p>Grazie a <a href="https://x.com/aborruso" target="_blank" rel="noopener">@aborruso</a> e <a href="https://x.com/totofiandaca" target="_blank" rel="noopener">@totofiandaca</a> per gli insegnamenti e la condivisione di conoscenze.</p>
                         <p>Progetto di <a href="https://opendatasicilia.it/" target="_blank" rel="noopener">OpenDataSicilia</a>. La versione base della mappa del PRG resta a <a href="https://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595" target="_blank" rel="noopener">questo indirizzo</a>.</p>
                     </details>
+                </div>
+            </div>
 
-                    <p class="info-more"><a href="informazioni-tecniche.html" target="_blank" rel="noopener"><i class="fas fa-gears" aria-hidden="true"></i> Informazioni tecniche: PMTiles, ricerca, PDF, strumenti, video</a></p>
+            <!-- Informazioni tecniche -->
+            <div id="tech-panel" role="tabpanel" aria-labelledby="tab-tecnica">
+                <div class="info-tab">
+                    <details open>
+                        <summary><span class="inf-ico ico-zon" aria-hidden="true"><i class="fas fa-wand-magic-sparkles"></i></span>Novità e strumenti</summary>
+                        <p>L'interfaccia è stata riprogettata con l'aiuto di <a href="https://x.com/deepseek_ai" title="DeepSeek AI" target="_blank" rel="noopener">@deepseek_ai</a> e di <a href="https://www.anthropic.com" title="Anthropic AI" target="_blank" rel="noopener">Anthropic AI</a> (Claude).</p>
+                        <h3>Cosa c'è di nuovo</h3>
+                        <ul>
+                            <li><strong>Pannello a tab</strong> (Livelli, Cerca, Info, Tecnica) al posto della barra dei comandi e del cassetto inferiore; su smartphone diventa una barra in basso.</li>
+                            <li><strong>Scheda unica</strong> al clic: riunisce in un solo posto particella, piano urbanistico, vincoli, zona OMI e civico. Prima i dati dei livelli sovrapposti comparivano in un popup.</li>
+                            <li><strong>Ricerca</strong> per foglio e particella e per via e civico, con suggerimento sul nome della via.</li>
+                            <li><strong>Minimappa</strong> con foto aerea, sincronizzata con la mappa principale.</li>
+                            <li><strong>Foto aerea:</strong> ortofoto 2022 della Regione Siciliana.</li>
+                            <li><strong>Tema chiaro e scuro</strong>, anche per la mappa di base.</li>
+                            <li><strong>Accessibilità:</strong> uso da tastiera, testo ingrandibile, contrasti verificati.</li>
+                        </ul>
+                        <h3>Mappa Variante Generale versione base</h3>
+                        <p>La prima versione della mappa della Variante Generale resta disponibile a <a href="https://palermohub.opendatasicilia.it/index_prg.html#14/38.1185/13.3595" title="Palermo - Zonizzazione e vincoli sul territorio" target="_blank" rel="noopener">questo indirizzo</a>.</p>
+                        <h3>Ringraziamenti</h3>
+                        <p>Un sentito ringraziamento a <a href="https://x.com/aborruso" title="Andrea Borruso" target="_blank" rel="noopener"><em>@aborruso</em></a> e <a href="https://x.com/totofiandaca" title="Totò Fiandaca" target="_blank" rel="noopener">@totofiandaca</a>, i cui insegnamenti e la costante condivisione di conoscenze hanno contribuito in modo determinante a questo progetto.</p>
+                        <h3>Strumenti usati</h3>
+                        <ul>
+                            <li><strong><a href="https://qgis.org/" target="_blank" rel="noopener">QGIS</a></strong> — elaborazione e gestione dei dati geografici</li>
+                            <li><strong><a href="https://plugins.qgis.org/plugins/CatastoIT_GML_Merger_Pro/" target="_blank" rel="noopener">CatastoIT_GML_Merger_Pro</a></strong> — plugin QGIS per importare e fondere i file GML catastali</li>
+                            <li><strong><a href="https://github.com/felt/tippecanoe" target="_blank" rel="noopener">tippecanoe</a></strong> — conversione dei dati vettoriali in tile PMTiles</li>
+                            <li><strong><a href="https://maplibre.org/maplibre-gl-js/docs/" target="_blank" rel="noopener">MapLibre GL JS 3.3</a></strong> — rendering della mappa interattiva</li>
+                            <li><strong><a href="https://github.com/protomaps/PMTiles" target="_blank" rel="noopener">PMTiles 2.4</a></strong> — distribuzione serverless dei tile</li>
+                            <li><strong><a href="https://rawgit.com/MrRio/jsPDF/master/docs/" target="_blank" rel="noopener">jsPDF 2.5</a></strong> — generazione delle schede PDF a partire dall'immagine della mappa</li>
+                            <li><strong><a href="https://turfjs.org/" target="_blank" rel="noopener">Turf.js 6</a></strong> — calcolo delle aree e delle intersezioni nel PDF</li>
+                            <li><strong><a href="https://openfreemap.org/" target="_blank" rel="noopener">OpenFreeMap</a></strong> — mappa di base chiara e scura</li>
+                        </ul>
+                    </details>
+
+                    <details>
+                        <summary><span class="inf-ico ico-cat" aria-hidden="true"><i class="fas fa-database"></i></span>Ricerca e PMTiles</summary>
+                        <p>Il livello <strong>Particelle catastali</strong> è un file <strong>PMTiles</strong>: un formato che contiene in un unico file tutti i dati geografici, suddivisi in piccole tessere (tiles). Il browser scarica solo le tessere dell'area visibile, e il file può stare su un normale server web o su una CDN.</p>
+                        <h3>Cosa cambia per la ricerca</h3>
+                        <p>Con foglio e particella la ricerca opera sulle tessere già caricate, cioè sull'area visibile sullo schermo. Se la particella è fuori vista, compare un messaggio di errore: porta la mappa nella zona giusta e riprova.</p>
+                        <p>La ricerca per via e civico usa invece un indice completo dei civici, quindi funziona da qualsiasi punto della mappa.</p>
+                    </details>
+
+                    <details>
+                        <summary><span class="inf-ico ico-civ" aria-hidden="true"><i class="fas fa-file-pdf"></i></span>Stampa PDF</summary>
+                        <p>Dopo una ricerca, oppure cliccando una particella, il pulsante <strong>Scarica scheda PDF</strong> compare nella scheda (e nel tab Cerca). Il documento contiene una mappa con la particella evidenziata, i dati catastali, la zonizzazione e gli eventuali vincoli.</p>
+                        <p>La nota sulla fonte riporta la stessa data di aggiornamento del catasto indicata in "Fonti e licenze".</p>
+                        <hr>
+                        <p><strong>N.B.</strong> Il PDF viene creato dalla mappa che vedi a schermo: su smartphone in verticale (portrait) non è possibile. Ruota il dispositivo in orizzontale (landscape).</p>
+                    </details>
+
+                    <details>
+                        <summary><span class="inf-ico ico-map" aria-hidden="true"><i class="fas fa-circle-play"></i></span>Video demo</summary>
+                        <p>Video di presentazione realizzato sulla versione precedente della mappa: le funzioni principali sono le stesse, ma i pulsanti ora sono in posti diversi.</p>
+                        <div class="video"><iframe src="https://www.youtube.com/embed/N_gdK7NBvU4?si=7yUCGTg8wOD_cJ_2&amp;start=3" title="Video demo" loading="lazy" allowfullscreen></iframe>
+                                        </div>
+                    </details>
+
                 </div>
             </div>
         </div>
