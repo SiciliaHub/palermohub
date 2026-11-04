@@ -219,6 +219,34 @@ export function resetMapHome() {
     state.map.flyTo({ center: [13.33225, 38.14074], zoom: state.isMobile ? 11 : 12, bearing: 0, duration: 800 });
 }
 
+let locMarker = null, locWatch = null;
+// Primo clic: segue la posizione (marker + volo al primo fix). Secondo clic: smette e toglie il marker.
+export function locateMe() {
+    if (!state.map) return;
+    const btn = document.getElementById('locate-btn');
+    if (locWatch !== null) {
+        navigator.geolocation.clearWatch(locWatch);
+        locWatch = null;
+        if (locMarker) locMarker.remove();
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+        return;
+    }
+    if (!navigator.geolocation) { alert('Geolocalizzazione non supportata dal browser.'); return; }
+    btn.classList.add('active');
+    btn.setAttribute('aria-pressed', 'true');
+    let first = true;
+    locWatch = navigator.geolocation.watchPosition(pos => {
+        const c = [pos.coords.longitude, pos.coords.latitude];
+        if (!locMarker) locMarker = new maplibregl.Marker({ color: '#1a73e8' });
+        locMarker.setLngLat(c).addTo(state.map);
+        if (first) { first = false; state.map.flyTo({ center: c, zoom: Math.max(state.map.getZoom(), 17), duration: 800 }); }
+    }, err => {
+        locateMe(); // spegne tutto
+        alert(err.code === 1 ? 'Permesso di posizione negato.' : 'Posizione non disponibile.');
+    }, { enableHighAccuracy: true, timeout: 15000 });
+}
+
 export function syncZoomUI(zoom) {
     const badge = document.getElementById('zoom-level-display');
     if (badge) badge.textContent = zoom;

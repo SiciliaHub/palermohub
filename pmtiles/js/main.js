@@ -2,7 +2,7 @@
 import * as maplibregl from 'maplibre-gl';
 import { BASE_STYLES, DATA_CATASTO, layerStates, mqMobile, state } from './state.js';
 import {
-    applyTheme, detectMobile, hideLoader, initA11y, initGallery, openPanel, resetMapHome,
+    applyTheme, detectMobile, hideLoader, initA11y, initGallery, locateMe, openPanel, resetMapHome,
     toggleFullscreen, togglePanel, toggleLegend, toggleSatelliteOverlay, toggleTheme
 } from './ui.js';
 import { initializeMapLayers, initZoomSlider, toggleLayer, syncVincoliMain, updateZoomHints } from './layers.js';
@@ -21,6 +21,7 @@ const ACTIONS = {
     zoomIn: () => state.map && state.map.zoomIn(),
     zoomOut: () => state.map && state.map.zoomOut(),
     resetMapHome: () => resetMapHome(),
+    locateMe: () => locateMe(),
     toggleFullscreen: () => toggleFullscreen(),
     toggleTheme: () => toggleTheme(),
     toggleSatelliteOverlay: () => toggleSatelliteOverlay(),

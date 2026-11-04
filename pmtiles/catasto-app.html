@@ -155,7 +155,7 @@
                         <figure class="guida-fig"><a href="guida/01_mappa.jpg" target="_blank" rel="noopener" title="Apri l'immagine intera"><img src="guida/01_mappa.jpg" loading="lazy" width="896" height="560" alt="Vista iniziale: pannello a sinistra, controlli della mappa a destra"></a><figcaption>Vista iniziale: pannello a sinistra, controlli della mappa a destra</figcaption></figure>
                         <ul>
                             <li>Trascina per spostarti; rotellina o pizzico per lo zoom.</li>
-                            <li>I pulsanti a destra: + e &minus; per lo zoom, vista iniziale, schermo intero e minimappa con foto aerea.</li>
+                            <li>I pulsanti a destra: + e &minus; per lo zoom, vista iniziale, la tua posizione, schermo intero e minimappa con foto aerea.</li>
                             <li>Le etichette <em>F. foglio &middot; P. particella</em> compaiono con lo zoom avanzato.</li>
                         </ul>
                         <h3><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-layer-group"/></svg>Livelli</h3>
@@ -279,9 +279,10 @@
 
     <!-- Controlli mappa -->
     <div class="map-ctl" role="group" aria-label="Controlli mappa">
+        <button type="button" data-action="resetMapHome" title="Vista iniziale" aria-label="Vista iniziale"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-house"/></svg></button>
         <button type="button" data-action="zoomIn" title="Ingrandisci" aria-label="Ingrandisci">+</button>
         <button type="button" data-action="zoomOut" title="Riduci" aria-label="Riduci">&minus;</button>
-        <button type="button" data-action="resetMapHome" title="Vista iniziale" aria-label="Vista iniziale"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-house"/></svg></button>
+        <button type="button" id="locate-btn" data-action="locateMe" title="Mostra la mia posizione" aria-label="Mostra la mia posizione" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-location-crosshairs"/></svg></button>
         <button type="button" id="fullscreen-btn" data-action="toggleFullscreen" title="Schermo intero" aria-label="Schermo intero"><svg class="ic" id="fullscreen-icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-expand"/></svg></button>
         <button type="button" id="theme-btn" data-action="toggleTheme" title="Passa al tema scuro" aria-label="Passa al tema scuro" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-moon"/></svg></button>
         <button type="button" id="satellite-btn" data-action="toggleSatelliteOverlay" title="Minimappa con foto aerea sincronizzata" aria-label="Minimappa con foto aerea" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-satellite"/></svg></button>
