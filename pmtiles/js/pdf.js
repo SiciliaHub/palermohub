@@ -170,6 +170,11 @@ export async function generatePDF() {
         const cp = state.currentParticella;
         if (!cp.bounds || cp.bounds.length === 0) throw new Error("Bounds della particella non validi.");
 
+        // Zoom ottimale prima del render: la mappa visibile scalda la cache dei tile che usa poi la mappa del PDF
+        const bounds = cp.bounds.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(cp.bounds[0], cp.bounds[0]));
+        state.map.fitBounds(bounds, { padding: 50, maxZoom: 17.5, animate: false });
+        await new Promise(ok => { const t = setTimeout(ok, 8000); state.map.once('idle', () => { clearTimeout(t); ok(); }); });
+
         const [{ jsPDF }, shot] = await Promise.all([loadLib('jspdf'), renderOffscreenMap(cp)]);
         const { image: mapImage, ratio, features, omiByZona, civici } = shot;
         let areaData = null;
