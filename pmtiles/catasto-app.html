@@ -109,6 +109,14 @@
                         <span class="lyr-ico ico-ctc" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-ruler-combined"/></svg></span><span class="lyr-name">Carta tecnica 2k</span><span class="lyr-swatch sw-ctc" aria-hidden="true"></span><span class="lyr-radio" aria-hidden="true"></span>
                     </button>
                 </div>
+        <!-- Minimappa satellitare -->
+        <div id="satellite-overlay">
+            <div class="satellite-controls">
+                <button type="button" class="satellite-btn" data-action="toggleSatelliteOverlay" title="Chiudi" aria-label="Chiudi la minimappa">×</button>
+            </div>
+            <div id="satellite-map"></div>
+            <div class="crosshair-minimap"></div>
+        </div>
             </div>
 
             <!-- Ricerca -->
@@ -311,15 +319,6 @@
         </header>
         <div class="scheda-body" id="scheda-body"></div>
         <div class="scheda-actions" id="scheda-actions"></div>
-    </div>
-
-    <!-- Minimappa satellitare -->
-    <div id="satellite-overlay">
-        <div class="satellite-controls">
-            <button type="button" class="satellite-btn" data-action="toggleSatelliteOverlay" title="Chiudi" aria-label="Chiudi la minimappa">×</button>
-        </div>
-        <div id="satellite-map"></div>
-        <div class="crosshair-minimap"></div>
     </div>
 
     <!-- Mappa: dopo i pannelli, cosi' Tab passa prima da pannello, scheda e controlli -->

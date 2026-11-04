@@ -118,6 +118,16 @@ export function toggleLegend(btn) {
 }
 
 let isSatelliteOverlayOpen = false;
+
+// desktop: la minimappa sta nel tab Livelli (dopo le mappe di base); su mobile il pannello si chiude, quindi torna flottante nel body
+const wideMq = matchMedia('(min-width: 900px)');
+const dockSatellite = () => {
+    const o = document.getElementById('satellite-overlay');
+    const home = document.getElementById('layer-panel');
+    if (o && home) (wideMq.matches ? home : document.body).appendChild(o);
+};
+dockSatellite();
+wideMq.addEventListener('change', dockSatellite);
 let satelliteMap = null;
 
 
