@@ -129,6 +129,7 @@ const dockSatellite = () => {
 dockSatellite();
 wideMq.addEventListener('change', dockSatellite);
 let satelliteMap = null;
+let syncSatellite = null;
 
 
 export function toggleSatelliteOverlay() {
@@ -176,18 +177,18 @@ export function toggleSatelliteOverlay() {
                 attributionControl: false
             });
 
-            state.map.on("move", () => {
-                if (satelliteMap) {
-                    satelliteMap.setCenter(state.map.getCenter());
-                    satelliteMap.setZoom(state.map.getZoom());
-                }
-            });
-
-            state.map.on("zoom", () => {
-                if (satelliteMap) {
-                    satelliteMap.setZoom(state.map.getZoom());
-                }
-            });
+            // un solo listener (prima ne veniva aggiunto uno a ogni apertura); centro e zoom insieme
+            if (!syncSatellite) {
+                syncSatellite = () => {
+                    if (!satelliteMap) return;
+                    satelliteMap.resize();
+                    satelliteMap.jumpTo({ center: state.map.getCenter(), zoom: state.map.getZoom() });
+                };
+                state.map.on("move", syncSatellite);
+                state.map.on("resize", syncSatellite);
+            }
+            satelliteMap.once("load", syncSatellite);
+            syncSatellite();
         }
     }
 
