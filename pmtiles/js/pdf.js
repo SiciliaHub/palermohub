@@ -57,6 +57,30 @@ async function calculateAreasAndIntersections(features) {
     };
 }
 
+const dedupe = list => {
+    const seen = new Set();
+    return list.filter(f => { const k = JSON.stringify(f.properties); return seen.has(k) ? false : seen.add(k); });
+};
+
+// Zone OMI sotto il centro della particella + civici entro ~10 m dal suo ingombro (dai tile gia' caricati)
+async function collectOmiCivici(map, p) {
+    await loadLib('turf');
+    const pt = turf.point([p.center.lng ?? p.center[0], p.center.lat ?? p.center[1]]);
+    const omi = dedupe(map.getLayer("Zone OMI") ? map.querySourceFeatures("zone_omi", { sourceLayer: "Zone_OMI_2025_II" }) : [])
+        .filter(f => { try { return turf.booleanPointInPolygon(pt, f.geometry); } catch { return false; } });
+    const omiByZona = {};
+    omi.forEach(f => (omiByZona[f.properties.Zona_OMI || "?"] = omiByZona[f.properties.Zona_OMI || "?"] || []).push(f));
+
+    const pad = 0.0001;
+    const lngs = p.bounds.map(c => c.lng ?? c[0]), lats = p.bounds.map(c => c.lat ?? c[1]);
+    const [w, e, s, n] = [Math.min(...lngs) - pad, Math.max(...lngs) + pad, Math.min(...lats) - pad, Math.max(...lats) + pad];
+    const civici = dedupe(map.getLayer("Numeri Civici") ? map.querySourceFeatures("civici", { sourceLayer: "civici_wgs84" }) : [])
+        .filter(f => { const [x, y] = f.geometry.coordinates; return x >= w && x <= e && y >= s && y <= n; })
+        .map(f => ({ f, d: turf.distance(pt, f.geometry, { units: "meters" }) }))
+        .sort((a, b) => a.d - b.d).slice(0, 8);
+    return { omiByZona: Object.values(omiByZona), civici };
+}
+
 const MAP_W = 1200, MAP_H = 800; // 3:2, riempie la larghezza utile di un A4 verticale
 const QUERY_LAYERS = ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"];
 
@@ -86,6 +110,14 @@ async function renderOffscreenMap(p) {
         await new Promise(ok => map.once('load', ok));
         map.addLayer({ id: "pdf-fill", type: "fill", source: "catasto", "source-layer": "particelle", paint: { "fill-color": "#ffff00", "fill-opacity": 0.3 }, filter });
         map.addLayer({ id: "pdf-line", type: "line", source: "catasto", "source-layer": "particelle", paint: { "line-color": "#000000", "line-width": 4 }, filter });
+        // OMI e civici servono nel PDF anche se i livelli sono spenti: li accendo trasparenti perche' carichino i tile
+        const ghost = [["Zone OMI", "fill-opacity"], ["Numeri Civici", "text-opacity"]];
+        ghost.forEach(([id, prop]) => {
+            if (map.getLayer(id) && map.getLayoutProperty(id, "visibility") === "none") {
+                map.setLayoutProperty(id, "visibility", "visible");
+                map.setPaintProperty(id, prop, 0);
+            }
+        });
         await idle();
 
         const src = map.getCanvas();
@@ -98,11 +130,30 @@ async function renderOffscreenMap(p) {
         const features = map.queryRenderedFeatures(map.project(p.center), {
             layers: QUERY_LAYERS.filter(id => map.getLayer(id))
         });
-        return { image: out.toDataURL('image/jpeg', 0.85), ratio: out.height / out.width, features };
+        const extra = await collectOmiCivici(map, p);
+        return { image: out.toDataURL('image/jpeg', 0.85), ratio: out.height / out.width, features, ...extra };
     } finally {
         map.remove();
         box.remove();
     }
+}
+
+// Tavola catastale: stessa identità della pagina (carta neutra, arancio solo come evidenziatore).
+const INK = [26, 26, 26], MUTED = [110, 110, 110], RULE = [205, 205, 205], ACCENT = [255, 153, 0], ACCENT_TXT = [154, 84, 0];
+const M = 15; // margine pagina, mm
+const LAYER_LABEL = { "cs": "Circoscrizione", "Info Vin. areali": "Vincoli areali", "Info Vin. lineari": "Vincoli lineari", "Info Netto storico": "Netto storico", "Info ZTO": "Zonizzazione (ZTO)" };
+
+// Feature -> sezione { title, rows: [[etichetta, valore]] }
+function sectionFor(f) {
+    const p = f.properties, na = v => (v == null || v === "" ? "N/D" : String(v));
+    switch (f.layer.id) {
+        case "cs": return { title: "Circoscrizione", rows: [["Circoscrizione", na(p.Circoscriz)]] };
+        case "Info Vin. areali": return { title: "Vincolo areale", rows: [["Tipo", na(p.tipo)], ["Descrizione", na(p.descrizone)]] };
+        case "Info Vin. lineari": return { title: "Vincolo lineare", rows: [["Tipo", na(p.TIPO)], ["Descrizione", na(p.DESCRIZION)]] };
+        case "Info Netto storico": return { title: "Netto storico", rows: [["ZTO", na(p.ZTO)], ["Descrizione", na(p.DESCRIZION)]] };
+        case "Info ZTO": return { title: "Zonizzazione", rows: [["ZTO", na(p.ZTO)], ["Descrizione", na(p.DESCRIZION)]] };
+    }
+    return null;
 }
 
 export async function generatePDF() {
@@ -116,164 +167,175 @@ export async function generatePDF() {
     waitPopup.style.display = "flex";
 
     try {
-        const bounds = state.currentParticella.bounds;
-        if (!bounds || bounds.length === 0) throw new Error("Bounds della particella non validi.");
+        const cp = state.currentParticella;
+        if (!cp.bounds || cp.bounds.length === 0) throw new Error("Bounds della particella non validi.");
 
-        const [{ jsPDF }, shot] = await Promise.all([loadLib('jspdf'), renderOffscreenMap(state.currentParticella)]);
-        const { image: mapImage, ratio, features } = shot;
-        const doc = new jsPDF();
-        const margin = 20;
-        const pageWidth = doc.internal.pageSize.getWidth();
-        const pageHeight = doc.internal.pageSize.getHeight();
+        const [{ jsPDF }, shot] = await Promise.all([loadLib('jspdf'), renderOffscreenMap(cp)]);
+        const { image: mapImage, ratio, features, omiByZona, civici } = shot;
+        let areaData = null;
+        try { areaData = await calculateAreasAndIntersections(features); }
+        catch (e) { console.log("Errore nel calcolo delle aree:", e); }
 
-        doc.setFont("helvetica");
+        const doc = new jsPDF({ unit: "mm", format: "a4" });
+        const W = doc.internal.pageSize.getWidth(), H = doc.internal.pageSize.getHeight();
+        const CW = W - 2 * M, FOOT = H - 16;
+        const fmt = n => Number(n).toLocaleString("it-IT", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        const ink = c => doc.setTextColor(...c);
+        let y = 0;
 
-        // Aggiungi logo demo se disponibile
-        try {
-            const demoImageUrl = "https://palermohub.opendatasicilia.it/pmtiles/js/demo.png";
-            doc.addImage(demoImageUrl, "PNG", pageWidth - margin - 35.28, margin, 35.28, 18.7);
-        } catch (e) {
-            console.log("Logo non caricato, continuando senza logo");
-        }
+        const ensure = h => { if (y + h > FOOT) { doc.addPage(); y = M; } };
+        const heading = t => {
+            ensure(24);
+            y += 4;
+            doc.setFont("helvetica", "bold"); doc.setFontSize(9); ink(ACCENT_TXT);
+            doc.text(t.toUpperCase(), M, y);
+            doc.setDrawColor(...ACCENT); doc.setLineWidth(0.5); doc.line(M, y + 1.8, M + 12, y + 1.8);
+            doc.setDrawColor(...RULE); doc.setLineWidth(0.2); doc.line(M + 12, y + 1.8, W - M, y + 1.8);
+            y += 7;
+        };
+        const row = (label, value) => {
+            const lines = doc.splitTextToSize(value, CW - 38);
+            ensure(lines.length * 4.6 + 2);
+            doc.setFont("helvetica", "normal"); doc.setFontSize(8); ink(MUTED);
+            doc.text(label, M, y);
+            doc.setFontSize(9.5); ink(INK);
+            doc.text(lines, M + 38, y);
+            y += lines.length * 4.6 + 1.2;
+        };
 
-        // Titolo e info particella
-        doc.setFontSize(16);
-        doc.text(`Demo ricerca particella catastale`, pageWidth / 2, margin + 15, { align: "center" });
-        doc.setFontSize(12);
-        doc.text(`Foglio: ${state.currentParticella.foglio}`, margin, margin + 30);
-        doc.text(`Particella: ${state.currentParticella.particella}`, margin, margin + 35);
-
+        // Testata
+        doc.setFillColor(...ACCENT); doc.rect(0, 0, W, 4, "F");
+        y = 18;
+        doc.setFont("helvetica", "bold"); doc.setFontSize(8); ink(ACCENT_TXT);
+        doc.text("CATASTO SICILIA · SERVIZIO DIMOSTRATIVO", M, y);
         const now = new Date();
-        doc.setFontSize(8);
-        doc.text(`Documento generato il ${now.toLocaleDateString()} alle ${now.toLocaleTimeString()}`, margin, margin + 45);
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8); ink(MUTED);
+        doc.text(`${now.toLocaleDateString("it-IT")} ${now.toLocaleTimeString("it-IT", { hour: "2-digit", minute: "2-digit" })}`, W - M, y, { align: "right" });
+        y += 10;
+        doc.setFont("helvetica", "bold"); doc.setFontSize(22); ink(INK);
+        doc.text("Scheda particella catastale", M, y);
+        y += 5;
+
+        // Avviso ben visibile: documento dimostrativo
+        doc.setFillColor(255, 243, 224); doc.setDrawColor(...ACCENT); doc.setLineWidth(0.4);
+        doc.rect(M, y, CW, 11, "FD");
+        doc.setFillColor(...ACCENT); doc.rect(M, y, 2, 11, "F");
+        doc.setFont("helvetica", "bold"); doc.setFontSize(9.5); ink(ACCENT_TXT);
+        doc.text("DOCUMENTO SOLO DIMOSTRATIVO", M + 6, y + 4.6);
+        doc.setFont("helvetica", "normal"); doc.setFontSize(8); ink(INK);
+        doc.text("Non è un documento ufficiale e non ha valore legale. Non usare per atti, pratiche o certificazioni.", M + 6, y + 8.6);
+        y += 15;
+
+        // Dati chiave
+        const facts = [["Foglio", String(cp.foglio)], ["Particella", String(cp.particella)]];
+        if (areaData) facts.push(["Area", `${fmt(areaData.particellaArea)} m²`]);
+        const fw = CW / facts.length;
+        doc.setDrawColor(...RULE); doc.setLineWidth(0.2);
+        doc.line(M, y, W - M, y);
+        facts.forEach(([l, v], i) => {
+            const x = M + i * fw;
+            if (i) doc.line(x, y + 2, x, y + 15);
+            doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); ink(MUTED);
+            doc.text(l.toUpperCase(), x + (i ? 4 : 0), y + 6);
+            doc.setFont("helvetica", "bold"); doc.setFontSize(13); ink(INK);
+            doc.text(v, x + (i ? 4 : 0), y + 13);
+        });
+        y += 17;
+        doc.line(M, y, W - M, y);
+        y += 5;
 
         // Mappa
-        const imgWidth = pageWidth - 2 * margin;
-        const imgHeight = ratio * imgWidth;
-        doc.addImage(mapImage, "JPEG", margin, margin + 48, imgWidth, imgHeight);
+        const imgH = ratio * CW;
+        doc.addImage(mapImage, "JPEG", M, y, CW, imgH);
+        doc.setDrawColor(...INK); doc.setLineWidth(0.3); doc.rect(M, y, CW, imgH);
+        y += imgH + 4;
+        doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); ink(MUTED);
+        doc.text("Particella evidenziata in giallo con contorno nero. Mappa non in scala.", M, y);
+        y += 3;
 
-        // Disclaimer e fonte dati
-        const disclaimerText = `Fonte dati catastali S.I.T.R. Sicilia - Ultimo aggiornamento ${DATA_CATASTO}, rilasciati con licenza CC-BY 4.0.
-Fonte dati ZTO e vincoli: opendata Comune di Palermo, rilasciati con licenza CC-BY 4.0.
-
-L'Agenzia delle entrate è l'amministrazione titolare dei dati, rilasciati con licenza CC-BY 4.0.
-L'Agenzia delle Entrate non è responsabile per qualunque tipo di danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio dimostrativo.
-
-Disclaimer: I contenuti presenti in questo documento, compresi testi ed elementi grafici, hanno carattere puramente informativo e divulgativo. Non sono presenti dati personali o sensibili. Si precisa che questi materiali non costituiscono documenti ufficiali né hanno alcun valore legale. Per consultare la documentazione ufficiale e legalmente vincolante, si prega di fare riferimento agli atti definitivi allegati alle relative deliberazioni degli organi competenti.
-
-by @opendatasicilia`;
-        
-        doc.setFontSize(8);
-        let yPos = margin + 50 + imgHeight + 10;
-        const textLines = doc.splitTextToSize(disclaimerText, pageWidth - 2 * margin);
-        doc.text(textLines, margin, yPos);
-        yPos += textLines.length * 3 + 10;
-        
-        // Linea separatrice
-        doc.setLineWidth(0.5);
-        doc.setDrawColor(204, 204, 204);
-        doc.line(margin, yPos, pageWidth - margin, yPos);
-        yPos += 5;
-        
-        // Aggiungi sezione dati urbanistici
-        doc.setFontSize(14);
-        yPos += 8;
-        doc.text("Dati urbanistici:", margin, yPos);
-        yPos += 8;
-        doc.setFontSize(11);
-        
-        // Calcola aree se disponibili
-        try {
-            const areaData = await calculateAreasAndIntersections(features);
-            if (areaData) {
-                doc.text(`• Area totale della particella: ${areaData.particellaArea} m²`, margin, yPos);
-                yPos += 5;
-                areaData.intersections.forEach(intersection => {
-                    if (yPos > pageHeight - margin) {
-                        doc.addPage();
-                        yPos = margin;
-                    }
-                    doc.text(`• Area intersecata con ${intersection.layer}: ${intersection.area} m² (${intersection.percentage}%)`, margin, yPos);
-                    yPos += 5;
-                });
-            }
-        } catch (e) {
-            console.log("Errore nel calcolo delle aree:", e);
-            doc.text("• Calcolo aree non disponibile", margin, yPos);
-            yPos += 5;
+        // Aree e intersezioni
+        if (areaData && areaData.intersections.length) {
+            heading("Sovrapposizioni con i livelli");
+            doc.setFont("helvetica", "bold"); doc.setFontSize(8); ink(MUTED);
+            doc.text("Livello", M, y);
+            doc.text("Area (m²)", W - M - 28, y, { align: "right" });
+            doc.text("% particella", W - M, y, { align: "right" });
+            y += 4.5;
+            areaData.intersections.forEach(it => {
+                ensure(6);
+                doc.setFont("helvetica", "normal"); doc.setFontSize(9.5); ink(INK);
+                doc.text(LAYER_LABEL[it.layer] || it.layer, M, y);
+                doc.text(fmt(it.area), W - M - 28, y, { align: "right" });
+                doc.text(`${fmt(it.percentage)} %`, W - M, y, { align: "right" });
+                y += 5.5;
+            });
         }
-        
-        yPos += 5;
-        doc.setLineWidth(0.5);
-        doc.line(margin, yPos, pageWidth - margin, yPos);
-        yPos += 10;
-        
-        // Dettagli urbanistici
-        features.forEach(feature => {
-            if (yPos > pageHeight - margin - 20) {
-                doc.addPage();
-                yPos = margin;
-            }
-            
-            doc.setFontSize(11);
-            switch(feature.layer.id) {
-                case "cs":
-                    doc.text(`• Circoscrizione: ${feature.properties.Circoscriz || "N/A"}`, margin, yPos);
-                    yPos += 5;
-                    break;
-                case "Info Vin. areali":
-                    doc.text(`• Vincolo Areale:`, margin, yPos);
-                    yPos += 5;
-                    doc.text(`  Tipo: ${feature.properties.tipo || "N/A"}`, margin, yPos);
-                    yPos += 5;
-                    const descrizioneAreale = feature.properties.descrizone || "N/A";
-                    const descLines = doc.splitTextToSize(`  Descrizione: ${descrizioneAreale}`, pageWidth - 2 * margin - 10);
-                    doc.text(descLines, margin, yPos);
-                    yPos += descLines.length * 5;
-                    break;
-                case "Info Vin. lineari":
-                    doc.text(`• Vincolo Lineare:`, margin, yPos);
-                    yPos += 5;
-                    doc.text(`  Tipo: ${feature.properties.TIPO || "N/A"}`, margin, yPos);
-                    yPos += 5;
-                    const descrizioneLineare = feature.properties.DESCRIZION || "N/A";
-                    const descLinesLin = doc.splitTextToSize(`  Descrizione: ${descrizioneLineare}`, pageWidth - 2 * margin - 10);
-                    doc.text(descLinesLin, margin, yPos);
-                    yPos += descLinesLin.length * 5;
-                    break;
-                case "Info Netto storico":
-                    doc.text(`• Netto Storico:`, margin, yPos);
-                    yPos += 5;
-                    doc.text(`  ZTO: ${feature.properties.ZTO || "N/A"}`, margin, yPos);
-                    yPos += 5;
-                    const descrizioneNetto = feature.properties.DESCRIZION || "N/A";
-                    const descLinesNetto = doc.splitTextToSize(`  Descrizione: ${descrizioneNetto}`, pageWidth - 2 * margin - 10);
-                    doc.text(descLinesNetto, margin, yPos);
-                    yPos += descLinesNetto.length * 5;
-                    break;
-                case "Info ZTO":
-                    doc.text(`• Zonizzazione:`, margin, yPos);
-                    yPos += 5
-                    doc.text(`  ZTO: ${feature.properties.ZTO || "N/A"}`, margin, yPos);
-                    yPos += 5;
-                    const descrizioneZTO = feature.properties.DESCRIZION || "N/A";
-                    const descLinesZTO = doc.splitTextToSize(`  Descrizione: ${descrizioneZTO}`, pageWidth - 2 * margin - 10);
-                    doc.text(descLinesZTO, margin, yPos);
-                    yPos += descLinesZTO.length * 5;
-                    break;
-                case "Particelle catastali":
-                    doc.text(`• Dati Catastali:`, margin, yPos);
-                    yPos += 5;
-                    doc.text(`  Foglio: ${feature.properties.Foglio || "N/A"}`, margin, yPos);
-                    yPos += 5;
-                    doc.text(`  Particella: ${feature.properties.Paricella || "N/A"}`, margin, yPos);
-                    yPos += 5;
-                    break;
-            }
+
+        // Dettagli per livello
+        features.map(sectionFor).filter(Boolean).forEach(s => {
+            heading(s.title);
+            s.rows.forEach(([l, v]) => row(l, v));
         });
 
+        // Civici vicini
+        if (civici.length) {
+            heading("Numeri civici nelle vicinanze");
+            civici.forEach(({ f, d }) => {
+                const p = f.properties, esp = p.Esponente;
+                const num = (esp && esp !== "NULL" && esp !== "") ? `${p.Civico}/${esp}` : String(p.Civico ?? "N/D");
+                const where = [p.Quartiere, p.Circoscrizione].filter(v => v && v !== "NULL").join(" · ");
+                row(`${Math.round(d)} m`, `${p.Odonimo || "N/D"} ${num}${where ? ` (${where})` : ""}`);
+            });
+        }
+
+        // Quotazioni OMI
+        const clean = v => String(v ?? "").replace(/^'|'$/g, "").trim();
+        const num = v => { if (v == null) return null; const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? null : n; };
+        const range = (a, b, unit) => (num(a) != null && num(b) != null) ? `${num(a).toLocaleString("it-IT")} – ${num(b).toLocaleString("it-IT")} ${unit}` : "N/D";
+        omiByZona.forEach(list => {
+            const p0 = list[0].properties;
+            heading(`Quotazioni OMI · Zona ${p0.Zona_OMI || p0.Zona || "N/D"}`);
+            const fascia = p0.Fascia || p0.Fasce || "N/D", fd = clean(p0.Fascia_Descr);
+            row("Fascia", fd ? `${fascia} – ${fd}` : String(fascia));
+            if (clean(p0.Zona_Descr)) row("Descrizione", clean(p0.Zona_Descr));
+            if (p0.Microzona != null && p0.Microzona !== "") row("Microzona", String(p0.Microzona));
+            if (clean(p0.Descr_tip_prev)) row("Tipo prevalente", clean(p0.Descr_tip_prev));
+            list.forEach(f => {
+                const p = f.properties;
+                row(clean(p.Descr_Tipologia) + (p.Stato ? ` (${p.Stato})` : ""),
+                    `Compravendita ${range(p.Compr_min, p.Compr_max, "€/m²")}
+Locazione ${range(p.Loc_min, p.Loc_max, "€/m²/mese")}`);
+            });
+            doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); ink(MUTED);
+            ensure(5);
+            doc.text(`Fonte: Agenzia delle Entrate — OMI ${p0.Anno_Semestre ? String(p0.Anno_Semestre).replace(" / ", " S") : "2025 S2"}`, M, y);
+            y += 4;
+        });
+
+        // Note e fonti
+        const notes = `Fonte dati catastali: S.I.T.R. Sicilia, aggiornamento ${DATA_CATASTO}, licenza CC-BY 4.0. L'Agenzia delle Entrate è l'amministrazione titolare dei dati e non è responsabile per alcun danno diretto, indiretto o accidentale derivante dall'impiego delle informazioni raccolte tramite questo servizio dimostrativo.
+Fonte dati ZTO e vincoli: opendata Comune di Palermo, licenza CC-BY 4.0.
+I contenuti di questo documento hanno carattere puramente informativo e divulgativo, non contengono dati personali o sensibili e non costituiscono documenti ufficiali né hanno valore legale. Per la documentazione ufficiale si faccia riferimento agli atti definitivi delle relative deliberazioni degli organi competenti.`;
+        heading("Fonti e avvertenze");
+        doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); ink(MUTED);
+        doc.splitTextToSize(notes, CW).forEach(line => {
+            ensure(3.6);
+            doc.text(line, M, y);
+            y += 3.4;
+        });
+
+        // Piè di pagina
+        const n = doc.getNumberOfPages();
+        for (let i = 1; i <= n; i++) {
+            doc.setPage(i);
+            doc.setDrawColor(...RULE); doc.setLineWidth(0.2); doc.line(M, H - 12, W - M, H - 12);
+            doc.setFont("helvetica", "normal"); doc.setFontSize(7); ink(MUTED);
+            doc.text("Documento solo dimostrativo, senza valore legale · Catasto Sicilia · by @opendatasicilia", M, H - 8);
+            doc.text(`Pagina ${i} di ${n}`, W - M, H - 8, { align: "right" });
+        }
+
         waitPopup.style.display = "none";
-        doc.save(`particella_${state.currentParticella.foglio}_${state.currentParticella.particella}.pdf`);
+        doc.save(`particella_${cp.foglio}_${cp.particella}.pdf`);
         if (state.isMobile && navigator.vibrate) navigator.vibrate([50, 30, 50, 30, 50]);
     } catch (error) {
         console.error("Errore durante la generazione del PDF:", error);
