@@ -562,7 +562,7 @@ body.panel-hidden .panel-tab .ic { transform: rotate(180deg); }
 }
 @media (max-width: 899px) and (max-height: 500px) { #panel.open { height: 80dvh; } }
 /* desktop: la minimappa si apre nel tab Livelli, dopo le mappe di base */
-@media (min-width: 900px) { #satellite-overlay { position: relative; left: auto; right: auto; bottom: auto; width: 100%; height: auto; aspect-ratio: 1; margin: 12px 0 0; box-shadow: none; } }
+@media (min-width: 900px) { #satellite-overlay { position: relative; left: auto; right: auto; bottom: auto; width: 100%; height: clamp(140px, calc(100dvh - 745px), 313px); margin: 12px 0 0; /* 745px = intestazione + livelli + piede del pannello: il box riempie lo spazio che resta, senza scroll */ box-shadow: none; } }
 
 /* campioni dei livelli (colori indicativi di quelli in mappa) */
 .sw-zto { background: linear-gradient(90deg, #8FBF7A 0 33%, #F2D16B 33% 66%, #E3A0A0 66%); }
