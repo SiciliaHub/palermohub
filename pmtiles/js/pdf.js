@@ -65,6 +65,7 @@ const dedupe = list => {
 // Zone OMI sotto il centro della particella + civici entro ~10 m dal suo ingombro (dai tile gia' caricati)
 async function collectOmiCivici(map, p) {
     await loadLib('turf');
+    lg('turf ok');
     const pt = turf.point([p.center.lng ?? p.center[0], p.center.lat ?? p.center[1]]);
     const omi = dedupe(map.getLayer("Zone OMI") ? map.querySourceFeatures("zone_omi", { sourceLayer: "Zone_OMI_2025_II" }) : [])
         .filter(f => { try { return turf.booleanPointInPolygon(pt, f.geometry); } catch { return false; } });
@@ -107,11 +108,12 @@ async function renderOffscreenMap(p) {
         canvasContextAttributes: { preserveDrawingBuffer: true }
     });
     try {
-        const idle = () => new Promise((ok, ko) => {
-            const t = setTimeout(() => ko(new Error('Timeout mappa')), 25000);
+        const idle = () => new Promise(ok => {
+            const t = setTimeout(() => { console.warn('[PDF] idle timeout'); ok(); }, 30000);
             map.once('idle', () => { clearTimeout(t); ok(); });
         });
-        await new Promise((ok, ko) => { const t = setTimeout(() => ko(new Error('Timeout caricamento mappa')), 25000); map.once('load', () => { clearTimeout(t); ok(); }); map.once('error', e => console.warn('PDF map:', e.error)); });
+        // timeout 30s: se la rete e' lenta si stampa comunque quello che e' gia' stato disegnato
+        await new Promise(ok => { const t = setTimeout(() => { console.warn('[PDF] load timeout'); ok(); }, 30000); map.once('load', () => { clearTimeout(t); ok(); }); map.once('error', e => console.warn('PDF map:', e.error)); });
         map.addLayer({ id: "pdf-fill", type: "fill", source: "catasto", "source-layer": "particelle", paint: { "fill-color": "#ffff00", "fill-opacity": 0.3 }, filter });
         map.addLayer({ id: "pdf-line", type: "line", source: "catasto", "source-layer": "particelle", paint: { "line-color": "#000000", "line-width": 4 }, filter });
         // OMI e civici servono nel PDF anche se i livelli sono spenti: li accendo trasparenti perche' carichino i tile
@@ -136,6 +138,7 @@ async function renderOffscreenMap(p) {
         const features = map.queryRenderedFeatures(map.project(p.center), {
             layers: QUERY_LAYERS.filter(id => map.getLayer(id))
         });
+        lg('canvas ok');
         const extra = await collectOmiCivici(map, p);
         lg(`OMI zone=${extra.omiByZona.length} civici=${extra.civici.length}`);
         return { image: out.toDataURL('image/jpeg', 0.85), ratio: out.height / out.width, features, ...extra };
@@ -185,7 +188,7 @@ export async function generatePDF() {
         await new Promise(ok => { const t = setTimeout(ok, 8000); state.map.once('idle', () => { clearTimeout(t); ok(); }); });
 
         lg('zoom ok, render mappa');
-        const [{ jsPDF }, shot] = await Promise.all([loadLib('jspdf'), renderOffscreenMap(cp)]);
+        const [{ jsPDF }, , shot] = await Promise.all([loadLib('jspdf'), loadLib('turf'), renderOffscreenMap(cp)]);
         const { image: mapImage, ratio, features, omiByZona, civici } = shot;
         lg('mappa+jspdf ok, calcolo aree');
         let areaData = null;
