@@ -99,6 +99,8 @@ function createMap() {
 
     // il loader sparisce quando la mappa ha finito di disegnare, non dopo un tempo fisso
     map.once('idle', hideLoader);
+    // ponytail: 'idle' può non scattare mai (tile/animazioni in corso): tetto a 20s, poi la mappa si vede comunque
+    setTimeout(hideLoader, 20000);
 
     map.on('load', () => {
         try {
@@ -120,6 +122,8 @@ function createMap() {
     });
 
     map.on('error', e => {
+        // i 404 sui tile raster (zone senza dati) non sono errori fatali: il loader resta fino a 'idle'
+        if (e.error && e.error.status === 404) return;
         console.error('Errore mappa:', e);
         hideLoader();
     });

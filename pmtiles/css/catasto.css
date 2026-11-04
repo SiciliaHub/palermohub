@@ -232,13 +232,13 @@ body {
 .spinner:nth-child(2) {
     border-right: 4px solid var(--primary-light);
     animation: spin 1.5s linear infinite reverse;
-    transform: scale(0.8);
+    inset: 12px;
 }
 
 .spinner:nth-child(3) {
     border-bottom: 4px solid var(--primary-hover);
     animation: spin 1s linear infinite;
-    transform: scale(0.6);
+    inset: 24px;
 }
 
 @keyframes spin {
@@ -276,12 +276,12 @@ body {
     height: 100%;
     background: var(--accent);
     border-radius: 3px;
-    animation: loading 4s ease-in-out;
+    animation: loading 40s cubic-bezier(.1,.6,.3,1) forwards; /* ponytail: sale verso 95% finché hideLoader non chiude */
 }
 
 @keyframes loading {
     from { width: 0%; }
-    to { width: 100%; }
+    to { width: 95%; }
 }
 
 /* ===== WAIT POPUP ===== */

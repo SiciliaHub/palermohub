@@ -477,6 +477,16 @@ export function initializeMapLayers() {
             filter: ["==", "id", ""]
         });
 
+        // hover leggero particella: solo contorno
+        state.map.addLayer({
+            id: "hover-polygon",
+            type: "line",
+            source: "catasto",
+            "source-layer": "particelle",
+            paint: { "line-color": "#ff0000", "line-width": 2, "line-opacity": 0.6 },
+            filter: ["==", "id", ""]
+        });
+
         // AGGIUNGI LAYER NUMERI CIVICI (in cima allo stack per click detection)
         state.map.addLayer({
             id: "Numeri Civici",
@@ -572,26 +582,25 @@ export function initializeMapLayers() {
 export function setupMapInteractions() {
     // Mouse interactions per desktop
     if (!state.isMobile) {
-        state.map.on("mouseenter", "Particelle catastali", e => {
-            if (e.features.length > 0) {
-                state.map.getCanvas().style.cursor = "pointer";
-                const foglio = e.features[0].properties.Foglio;
-                const particella = e.features[0].properties.Paricella;
-                state.map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
-            }
+        state.map.on("mouseenter", "Particelle catastali", () => {
+            state.map.getCanvas().style.cursor = "pointer";
         });
 
+        // hover leggero: solo quando il mouse si ferma (150ms), layer separato da quello del click
+        let hoverTimer, lastHover = "";
         state.map.on("mousemove", e => {
-            const features = state.map.queryRenderedFeatures(e.point, { layers: ["Particelle catastali"] });
-            if (features.length > 0) {
-                const feature = features[0];
-                const foglio = feature.properties.Foglio;
-                const particella = feature.properties.Paricella;
-                state.map.setFilter("highlighted-polygon", ["all", ["==", "Foglio", foglio], ["==", "Paricella", particella]]);
-            } else {
-                state.map.setFilter("highlighted-polygon", ["==", "id", ""]);
-            }
+            clearTimeout(hoverTimer);
+            hoverTimer = setTimeout(() => {
+                const f = state.map.queryRenderedFeatures(e.point, { layers: ["Particelle catastali"] })[0];
+                const key = f ? `${f.properties.Foglio}-${f.properties.Paricella}` : "";
+                if (key === lastHover) return;
+                lastHover = key;
+                state.map.setFilter("hover-polygon", f
+                    ? ["all", ["==", "Foglio", f.properties.Foglio], ["==", "Paricella", f.properties.Paricella]]
+                    : ["==", "id", ""]);
+            }, 150);
         });
+        state.map.on("mouseout", () => { clearTimeout(hoverTimer); lastHover = ""; state.map.setFilter("hover-polygon", ["==", "id", ""]); });
     } else {
         // Touch interactions per mobile
         let touchTimeout;

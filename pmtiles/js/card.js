@@ -55,6 +55,7 @@ export function closeScheda() {
     const el = document.getElementById('scheda');
     if (!el || el.hidden) return;
     el.hidden = true;
+    if (state.map.getLayer("highlighted-polygon")) state.map.setFilter("highlighted-polygon", ["==", "id", ""]);
     const canvas = document.querySelector('.maplibregl-canvas');
     if (canvas) canvas.focus({ preventScroll: true });
 }
@@ -112,6 +113,10 @@ export function onMapClick(e) {
     const features = state.map.queryRenderedFeatures(e.point, {
         layers: ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Zone OMI", "Particelle catastali", "Numeri Civici"]
     });
+    const pf = features.find(f => f.layer.id === "Particelle catastali");
+    state.map.setFilter("highlighted-polygon", pf
+        ? ["all", ["==", "Foglio", pf.properties.Foglio], ["==", "Paricella", pf.properties.Paricella]]
+        : ["==", "id", ""]);
     if (features.length === 0) { closeScheda(); return; }
 
     // una stessa geometria spezzata tra tessere compare piu' volte: tieni una sola feature per layer+dati
