@@ -68,6 +68,7 @@ async function collectOmiCivici(map, p) {
     const pt = turf.point([p.center.lng ?? p.center[0], p.center.lat ?? p.center[1]]);
     const omi = dedupe(map.getLayer("Zone OMI") ? map.querySourceFeatures("zone_omi", { sourceLayer: "Zone_OMI_2025_II" }) : [])
         .filter(f => { try { return turf.booleanPointInPolygon(pt, f.geometry); } catch { return false; } });
+    if (!omi.length && map.getLayer("Zone OMI")) omi.push(...dedupe(map.queryRenderedFeatures(map.project(p.center), { layers: ["Zone OMI"] })));
     const omiByZona = {};
     omi.forEach(f => (omiByZona[f.properties.Zona_OMI || "?"] = omiByZona[f.properties.Zona_OMI || "?"] || []).push(f));
 
@@ -80,6 +81,9 @@ async function collectOmiCivici(map, p) {
         .sort((a, b) => a.d - b.d).slice(0, 8);
     return { omiByZona: Object.values(omiByZona), civici };
 }
+
+let T0 = 0;
+const lg = m => console.log(`[PDF] ${m} +${Math.round(performance.now() - T0)}ms`);
 
 const MAP_W = 1200, MAP_H = 800; // 3:2, riempie la larghezza utile di un A4 verticale
 const QUERY_LAYERS = ["cs", "Info Vin. areali", "Info Vin. lineari", "Info Netto storico", "Info ZTO", "Particelle catastali"];
@@ -107,7 +111,7 @@ async function renderOffscreenMap(p) {
             const t = setTimeout(() => ko(new Error('Timeout mappa')), 25000);
             map.once('idle', () => { clearTimeout(t); ok(); });
         });
-        await new Promise(ok => map.once('load', ok));
+        await new Promise((ok, ko) => { const t = setTimeout(() => ko(new Error('Timeout caricamento mappa')), 25000); map.once('load', () => { clearTimeout(t); ok(); }); map.once('error', e => console.warn('PDF map:', e.error)); });
         map.addLayer({ id: "pdf-fill", type: "fill", source: "catasto", "source-layer": "particelle", paint: { "fill-color": "#ffff00", "fill-opacity": 0.3 }, filter });
         map.addLayer({ id: "pdf-line", type: "line", source: "catasto", "source-layer": "particelle", paint: { "line-color": "#000000", "line-width": 4 }, filter });
         // OMI e civici servono nel PDF anche se i livelli sono spenti: li accendo trasparenti perche' carichino i tile
@@ -115,10 +119,12 @@ async function renderOffscreenMap(p) {
         ghost.forEach(([id, prop]) => {
             if (map.getLayer(id) && map.getLayoutProperty(id, "visibility") === "none") {
                 map.setLayoutProperty(id, "visibility", "visible");
-                map.setPaintProperty(id, prop, 0);
+                map.setPaintProperty(id, prop, 0.01); // non 0: a opacita' nulla i tile possono non caricarsi
             }
         });
+        lg('map load ok');
         await idle();
+        lg('map idle ok');
 
         const src = map.getCanvas();
         const out = document.createElement('canvas');
@@ -131,6 +137,7 @@ async function renderOffscreenMap(p) {
             layers: QUERY_LAYERS.filter(id => map.getLayer(id))
         });
         const extra = await collectOmiCivici(map, p);
+        lg(`OMI zone=${extra.omiByZona.length} civici=${extra.civici.length}`);
         return { image: out.toDataURL('image/jpeg', 0.85), ratio: out.height / out.width, features, ...extra };
     } finally {
         map.remove();
@@ -170,17 +177,22 @@ export async function generatePDF() {
         const cp = state.currentParticella;
         if (!cp.bounds || cp.bounds.length === 0) throw new Error("Bounds della particella non validi.");
 
+        T0 = performance.now();
+        lg('start');
         // Zoom ottimale prima del render: la mappa visibile scalda la cache dei tile che usa poi la mappa del PDF
         const bounds = cp.bounds.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(cp.bounds[0], cp.bounds[0]));
         state.map.fitBounds(bounds, { padding: 50, maxZoom: 17.5, animate: false });
         await new Promise(ok => { const t = setTimeout(ok, 8000); state.map.once('idle', () => { clearTimeout(t); ok(); }); });
 
+        lg('zoom ok, render mappa');
         const [{ jsPDF }, shot] = await Promise.all([loadLib('jspdf'), renderOffscreenMap(cp)]);
         const { image: mapImage, ratio, features, omiByZona, civici } = shot;
+        lg('mappa+jspdf ok, calcolo aree');
         let areaData = null;
         try { areaData = await calculateAreasAndIntersections(features); }
         catch (e) { console.log("Errore nel calcolo delle aree:", e); }
 
+        lg('aree ok, costruzione PDF');
         const doc = new jsPDF({ unit: "mm", format: "a4" });
         const W = doc.internal.pageSize.getWidth(), H = doc.internal.pageSize.getHeight();
         const CW = W - 2 * M, FOOT = H - 16;
@@ -340,6 +352,7 @@ I contenuti di questo documento hanno carattere puramente informativo e divulgat
         }
 
         waitPopup.style.display = "none";
+        lg('save');
         doc.save(`particella_${cp.foglio}_${cp.particella}.pdf`);
         if (state.isMobile && navigator.vibrate) navigator.vibrate([50, 30, 50, 30, 50]);
     } catch (error) {
