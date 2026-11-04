@@ -720,3 +720,5 @@ body {
 
 /* icone SVG (sprite icons.svg): dimensione e colore dal testo */
 .ic { width: 1em; height: 1em; fill: currentColor; vertical-align: -0.125em; flex: none; }
+
+.noscript { position: fixed; inset: 0; z-index: 9999; margin: 0; padding: 2rem; background: var(--bg, #fff); color: var(--ink, #1f1a14); font: 1rem/1.5 system-ui, sans-serif; }
