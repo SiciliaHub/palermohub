@@ -3,7 +3,7 @@ import * as maplibregl from 'maplibre-gl';
 import { BASE_STYLES, DATA_CATASTO, layerStates, mqMobile, state } from './state.js';
 import {
     applyTheme, detectMobile, hideLoader, initA11y, initGallery, openPanel, resetMapHome,
-    toggleFullscreen, toggleLegend, toggleSatelliteOverlay, toggleTheme
+    toggleFullscreen, togglePanel, toggleLegend, toggleSatelliteOverlay, toggleTheme
 } from './ui.js';
 import { initializeMapLayers, initZoomSlider, toggleLayer, syncVincoliMain, updateZoomHints } from './layers.js';
 import { initSearch, searchByCivico, searchParticella, switchSearchMode } from './search.js';
@@ -24,7 +24,8 @@ const ACTIONS = {
     toggleFullscreen: () => toggleFullscreen(),
     toggleTheme: () => toggleTheme(),
     toggleSatelliteOverlay: () => toggleSatelliteOverlay(),
-    closeScheda: () => closeScheda()
+    closeScheda: () => closeScheda(),
+    togglePanel: () => togglePanel()
 };
 
 function initActions() {

@@ -452,7 +452,7 @@ body {
 
 
 /* ===== NUOVA INTERFACCIA: pannello, tab, livelli, ricerca, controlli ===== */
-:root { --panel-w: 360px; --tab-h: 56px; color-scheme: light; }
+:root { --panel-w: 410px; --tab-h: 56px; color-scheme: light; }
 
 /* --- pannello (desktop: colonna a sinistra, la mappa occupa il resto) --- */
 #panel {
@@ -462,6 +462,14 @@ body {
     z-index: var(--z-panel); user-select: text; -webkit-user-select: text;
 }
 #map { left: var(--panel-w); }
+#panel, #map, .map-ctl, .zoom-badge { transition: transform .25s ease, left .25s ease; }
+@media (min-width: 900px) {
+    body.panel-hidden { --panel-w: 0px; }
+    body.panel-hidden #panel { transform: translateX(-410px); }
+}
+.panel-tab { position: fixed; top: 50%; margin-top: -24px; left: var(--panel-w); z-index: var(--z-panel); transition: left .25s ease; width: 24px; height: 48px; padding: 0; border: 1px solid var(--line-strong); border-left: 0; border-radius: 0 8px 8px 0; background: var(--panel); color: var(--ink); cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); }
+.panel-tab .ic { width: 16px; height: 16px; transition: transform .25s; }
+body.panel-hidden .panel-tab .ic { transform: rotate(180deg); }
 .panel-head { padding: 16px 16px 0; background: var(--panel); border-top: 4px solid var(--accent); border-bottom: 1px solid var(--line); }
 .panel-title { font: 600 18px/1.25 var(--font-ui); color: var(--ink); margin: 0; }
 .panel-sub { font: 400 13px/1.35 var(--font-ui); color: var(--ink-2); margin: 2px 0 0; }
@@ -530,7 +538,7 @@ body {
 .search-note { font-size: 12px; color: var(--ink-2); margin-top: 16px; }
 
 /* --- controlli mappa e badge --- */
-.map-ctl { position: fixed; right: 12px; bottom: 48px; z-index: var(--z-ctl); display: flex; flex-direction: column; gap: 8px; }
+.map-ctl { position: fixed; left: calc(var(--panel-w) + 40px); top: 12px; z-index: var(--z-ctl); display: flex; flex-direction: column; gap: 8px; }
 .map-ctl button {
     width: 44px; height: 44px; border-radius: var(--radius-ctl); border: 1px solid var(--control-border);
     background: var(--panel); color: var(--ink); font: 500 20px var(--font-ui); cursor: pointer;
@@ -575,12 +583,13 @@ body {
     .info-badge { position: absolute; top: 8px; left: calc(50% + 8px); margin: 0; }
     #panel:not(.open) .panel-body { display: none; }
     .panel-body { order: 1; border-bottom: 1px solid var(--line); }
-    .map-ctl { bottom: calc(var(--tab-h) + 40px); }
+    .map-ctl { left: 12px; top: 90px; }
+    .panel-tab { display: none; }
     .zoom-badge { left: 12px; bottom: calc(var(--tab-h) + 84px); }
     #satellite-overlay { bottom: calc(var(--tab-h) + 70px); }
 }
 @media (max-width: 899px) and (max-height: 500px) { #panel.open { height: 80dvh; } }
-@media (min-width: 900px) { #satellite-overlay { left: calc(var(--panel-w) + 12px); right: auto; width: 320px; bottom: 70px; } }
+@media (min-width: 900px) { #satellite-overlay { left: calc(var(--panel-w) + 40px); right: auto; width: 320px; bottom: 70px; } }
 
 /* campioni dei livelli (colori indicativi di quelli in mappa) */
 .sw-zto { background: linear-gradient(90deg, #8FBF7A 0 33%, #F2D16B 33% 66%, #E3A0A0 66%); }

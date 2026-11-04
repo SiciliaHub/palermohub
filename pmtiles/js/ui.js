@@ -188,6 +188,15 @@ export function toggleSatelliteOverlay() {
     }
 }
 
+// desktop: nasconde/mostra il pannello; --panel-w segue, quindi mappa e barra strumenti si muovono insieme
+export function togglePanel() {
+    const hidden = document.body.classList.toggle('panel-hidden');
+    const b = document.getElementById('panel-tab');
+    b.setAttribute('aria-expanded', hidden ? 'false' : 'true');
+    b.title = b.ariaLabel = hidden ? 'Mostra pannello' : 'Nascondi pannello';
+    if (state.map) { const t = Date.now(); (function f() { state.map.resize(); if (Date.now() - t < 300) requestAnimationFrame(f); })(); }
+}
+
 export function toggleFullscreen() {
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen();
