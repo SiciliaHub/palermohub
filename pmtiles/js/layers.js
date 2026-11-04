@@ -477,7 +477,15 @@ export function initializeMapLayers() {
             filter: ["==", "id", ""]
         });
 
-        // hover leggero particella: solo contorno
+        // hover leggero particella: sfondo + contorno
+        state.map.addLayer({
+            id: "hover-fill",
+            type: "fill",
+            source: "catasto",
+            "source-layer": "particelle",
+            paint: { "fill-color": "#ffff00", "fill-opacity": 0.25 },
+            filter: ["==", "id", ""]
+        });
         state.map.addLayer({
             id: "hover-polygon",
             type: "line",
@@ -595,12 +603,13 @@ export function setupMapInteractions() {
                 const key = f ? `${f.properties.Foglio}-${f.properties.Paricella}` : "";
                 if (key === lastHover) return;
                 lastHover = key;
-                state.map.setFilter("hover-polygon", f
+                setHover(f
                     ? ["all", ["==", "Foglio", f.properties.Foglio], ["==", "Paricella", f.properties.Paricella]]
                     : ["==", "id", ""]);
             }, 150);
         });
-        state.map.on("mouseout", () => { clearTimeout(hoverTimer); lastHover = ""; state.map.setFilter("hover-polygon", ["==", "id", ""]); });
+        const setHover = flt => ["hover-fill", "hover-polygon"].forEach(l => state.map.setFilter(l, flt));
+        state.map.on("mouseout", () => { clearTimeout(hoverTimer); lastHover = ""; setHover(["==", "id", ""]); });
     } else {
         // Touch interactions per mobile
         let touchTimeout;
