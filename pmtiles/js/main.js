@@ -7,7 +7,7 @@ import {
 } from './ui.js';
 import { initializeMapLayers, initZoomSlider, toggleLayer, syncVincoliMain, updateZoomHints } from './layers.js';
 import { initSearch, searchByCivico, searchParticella, switchSearchMode } from './search.js';
-import { readUrl, startUrlSync } from './urlstate.js';
+import { condividi, readUrl, startUrlSync } from './urlstate.js';
 import { closeScheda } from './card.js';
 
 // Ogni elemento con data-action="nome" [data-arg="x"] chiama la funzione corrispondente (delega di evento).
@@ -24,6 +24,7 @@ const ACTIONS = {
     locateMe: () => locateMe(),
     toggleFullscreen: () => toggleFullscreen(),
     toggleTheme: () => toggleTheme(),
+    share: el => condividi(el),
     toggleSatelliteOverlay: () => toggleSatelliteOverlay(),
     closeScheda: () => closeScheda(),
     togglePanel: () => togglePanel()

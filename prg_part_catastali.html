@@ -166,6 +166,12 @@
 <script>
 // Gestione layout con header e footer PalermoHub
 document.addEventListener('DOMContentLoaded', function() {
+    // link condiviso: query (livelli, particella) e hash (posizione) vanno all'app nell'iframe
+    if (location.hash || location.search.match(/[?&](l|p)=/)) {
+        const f = document.getElementById('main-iframe'), q = new URLSearchParams(location.search);
+        const k = new URLSearchParams(); ['l', 'p'].forEach(n => q.has(n) && k.set(n, q.get(n)));
+        f.src = 'pmtiles/catasto-app.html' + (k.size ? '?' + k.toString().replace(/%2C/g, ',') : '') + (location.hash || '#12/38.14074/13.33225');
+    }
     // Leggi parametri URL e crea breadcrumbs
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.has('mapTitle')) {
