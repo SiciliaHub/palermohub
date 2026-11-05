@@ -2863,5 +2863,19 @@
     ],
     "fonte": "INGV",
     "descrizione": "Mappa dei terremoti in Italia in tempo reale e dall'archivio, con le allerte meteo-idro della Protezione Civile."
+  },
+  "palermo-ordinata.html": {
+    "titolo": "Palermo, ordinata",
+    "categoria": "Territorio",
+    "territorio": "Palermo",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "Impronta a terra",
+      "Altezza edifici",
+      "Dati"
+    ],
+    "fonte": "Comune di Palermo",
+    "descrizione": "Gli edifici di Palermo, zona per zona, sollevati dalla mappa e ordinati dal più grande al più piccolo."
   }
 }
