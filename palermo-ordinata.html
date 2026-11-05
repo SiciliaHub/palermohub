@@ -194,6 +194,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // document.getElementById('main-iframe').src = 'https://example.com';
 });	
 </script>
+<script>
+  const BASE = 'https://palermohub.github.io/palermo-ordinata/';
+  const f = document.querySelector('iframe');   // adatta il selettore all'iframe esistente
+  f.src = BASE + location.hash;
+  addEventListener('message', e => {
+    if (e.origin === new URL(BASE).origin && e.data && e.data.type === 'palermo-ordinata')
+      history.replaceState(null, '', '#' + e.data.hash);
+  });
 </script>
 </body>
 </html>
