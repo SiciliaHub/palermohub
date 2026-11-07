@@ -17,6 +17,21 @@ export function buildInfoCard(title, rows, icon = '') {
     return `<section class="sc-sec"><h3>${i}${esc(title)}</h3>${buildDl(rows)}</section>`;
 }
 
+// area in m² di (Multi)Polygon GeoJSON, formula sferica come turf.area; anelli interni sottratti
+// ponytail: geometria da queryRenderedFeatures, tagliata ai bordi tessera; per particelle a cavallo puo' essere parziale (come nel PDF)
+const ringArea = r => {
+    let s = 0;
+    for (let i = 0; i < r.length - 1; i++) {
+        const [x1, y1] = r[i], [x2, y2] = r[i + 1], d = Math.PI / 180;
+        s += (x2 - x1) * d * (2 + Math.sin(y1 * d) + Math.sin(y2 * d));
+    }
+    return Math.abs(s * 6378137 * 6378137 / 2);
+};
+export function geomArea(g) {
+    const polys = g.type === 'MultiPolygon' ? g.coordinates : [g.coordinates];
+    return polys.reduce((t, [outer, ...holes]) => t + ringArea(outer) - holes.reduce((h, r) => h + ringArea(r), 0), 0);
+}
+
 export function setCurrentParticella(foglio, particella, geometry) {
     const coords = geometry.type === 'MultiPolygon' ? geometry.coordinates[0][0] : geometry.coordinates[0];
     const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
@@ -153,7 +168,7 @@ export function onMapClick(e) {
                 return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'map');
             case "Particelle catastali":
                 if (!part) part = f;
-                return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }], 'table-cells');
+                return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }, { lbl: 'Superficie', val: Math.round(geomArea(f.geometry)).toLocaleString('it-IT') + ' m²' }], 'table-cells');
             case "Numeri Civici": {
                 const esp = p.Esponente;
                 const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;
