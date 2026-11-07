@@ -444,7 +444,7 @@ export function initializeMapLayers() {
             id: "particelle-labels",
             type: "symbol",
             source: "catasto",
-            "source-layer": "particelle",
+            "source-layer": "particelle_label", // 1 punto per particella: v. tools/build_particelle_tiles.py
             layout: {
                 "text-field": ["concat", "F. ", ["get", "Foglio"], " - ", "P. ", ["get", "Paricella"]],
                 "text-size": ["interpolate", ["linear"], ["zoom"], 15, state.isMobile ? 4 : 5, 19, state.isMobile ? 10 : 12],
@@ -452,7 +452,6 @@ export function initializeMapLayers() {
                 "text-allow-overlap": false,
                 "text-ignore-placement": false,
                 "text-anchor": "center",
-                "text-offset": [0, 0.5],
                 visibility: "none"
             },
             paint: {
