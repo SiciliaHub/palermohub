@@ -606,6 +606,8 @@ body.panel-hidden .panel-tab .ic { transform: rotate(180deg); }
 .sc-sec h3 .ic { width: 18px; font-size: 14px; color: var(--accent-text); }
 .sister-btn { white-space: nowrap; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 14px; box-sizing: border-box; border-radius: var(--radius-ctl); background: #0B5CC4; color: #fff !important; text-decoration: none; font: 600 14px var(--font-ui); }
 .sister-btn:hover { background: #094A9F; }
+.twin-btn { background: #1F7A4D; }
+.twin-btn:hover { background: #17613C; }
 .sister-coords { overflow: hidden; text-overflow: ellipsis; min-width: 0; margin-left: auto; padding: 2px 8px; border-radius: 6px; background: rgba(255,255,255,.22); font: 500 13px var(--font-mono); }
 
 /* icone dei livelli (come nel pannello precedente) */

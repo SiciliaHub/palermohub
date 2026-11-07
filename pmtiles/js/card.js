@@ -52,7 +52,8 @@ export function openScheda({ particella, html }) {
         title.className = 'mono';
         actions.innerHTML =
             `<button type="button" class="btn" data-action="generatePDF">${iconSvg('file-pdf')} Scarica scheda PDF</button>` +
-            `<a class="sister-btn" href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" title="Accedi a SISTER con SPID e inserisci Foglio ${esc(particella.foglio)}, Particella ${esc(particella.particella)}">${iconSvg('up-right-from-square')} Visura su SISTER <span class="sister-coords">Fg.${esc(particella.foglio)} · P.${esc(particella.particella)}</span></a>`;
+            `<a class="sister-btn" href="https://sister3.agenziaentrate.gov.it/" target="_blank" rel="noopener noreferrer" title="Accedi a SISTER con SPID e inserisci Foglio ${esc(particella.foglio)}, Particella ${esc(particella.particella)}">${iconSvg('up-right-from-square')} Visura su SISTER <span class="sister-coords">Fg.${esc(particella.foglio)} · P.${esc(particella.particella)}</span></a>` +
+            `<a class="sister-btn twin-btn" href="https://palermodigitaltwin.link/fFAm3UL" target="_blank" rel="noopener noreferrer" title="Visita gli strati del Palermo Digital Twin su particelle catastali e Variante Generale al PRG">${iconSvg('up-right-from-square')} Palermo Digital Twin</a>`;
     } else {
         title.textContent = 'Informazioni sul punto';
         title.className = '';
