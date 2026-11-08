@@ -238,7 +238,8 @@ export async function searchParticella() {
     if (pdfTab) pdfTab.style.display = "flex";
     if (pdfCmd) pdfCmd.style.display = "flex";
 
-    state.map.fitBounds(bounds, { padding: state.isMobile ? 20 : 50, maxZoom: state.isMobile ? 16.5 : 17.5 });
+    // desktop: la scheda a destra copre la mappa, quindi lascia libero quel lato
+    state.map.fitBounds(bounds, { padding: state.isMobile ? 20 : { top: 60, bottom: 60, left: 50, right: 400 }, maxZoom: state.isMobile ? 16.5 : 17.5 });
     if (state.map.getLayer("highlighted-polygon")) state.map.setFilter("highlighted-polygon", filtro);
 
     openScheda({

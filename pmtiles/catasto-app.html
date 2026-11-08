@@ -320,6 +320,7 @@
         <button type="button" id="fullscreen-btn" data-action="toggleFullscreen" title="Schermo intero" aria-label="Schermo intero"><svg class="ic" id="fullscreen-icon" aria-hidden="true" focusable="false"><use href="icons.svg#i-expand"/></svg></button>
         <button type="button" data-action="share" title="Condividi" aria-label="Condividi"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-share-nodes"/></svg></button>
         <button type="button" id="theme-btn" data-action="toggleTheme" title="Passa al tema scuro" aria-label="Passa al tema scuro" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-moon"/></svg></button>
+        <button type="button" id="analisi-btn" data-action="openAnalisi" title="Analisi dei dati" aria-label="Analisi dei dati" aria-haspopup="dialog"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-chart-column"/></svg></button>
         <button type="button" id="satellite-btn" data-action="toggleSatelliteOverlay" title="Minimappa con foto aerea sincronizzata" aria-label="Minimappa con foto aerea" aria-pressed="false"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-satellite"/></svg></button>
     </div>
     <div class="zoom-badge" aria-live="off">Zoom <span id="zoom-level-display">12</span></div>
@@ -348,6 +349,22 @@
             <figcaption><span id="lb-cap"></span> <span id="lb-count" class="lb-count" aria-live="polite"></span></figcaption>
         </figure>
         <button type="button" class="lb-btn lb-next" aria-label="Immagine successiva">&rsaquo;</button>
+    </dialog>
+
+    <!-- Analisi dei dati: contenuti e grafici creati da js/analisi.js alla prima apertura -->
+    <dialog id="analisi" aria-labelledby="an-title">
+        <header class="an-hdr">
+            <div><h2 id="an-title">Analisi dei dati</h2><p class="an-sub">Catasto, zonizzazione PRG e vincoli &middot; <span data-catasto-data>Settembre 2026</span></p></div>
+            <button type="button" class="an-close" aria-label="Chiudi l'analisi" data-action="closeAnalisi">&times;</button>
+        </header>
+        <div class="an-tabs" role="tablist" aria-label="Sezioni dell'analisi">
+            <button type="button" role="tab" id="an-tab-fond" aria-selected="true" aria-controls="an-fond">Struttura fondiaria</button>
+            <button type="button" role="tab" id="an-tab-prg" aria-selected="false" aria-controls="an-prg" tabindex="-1">Zonizzazione PRG</button>
+            <button type="button" role="tab" id="an-tab-vinc" aria-selected="false" aria-controls="an-vinc" tabindex="-1">Vincoli</button>
+        </div>
+        <div class="an-body" id="an-body" aria-live="polite">
+            <p class="an-load">Caricamento dei dati...</p>
+        </div>
     </dialog>
 
     <!-- Wait Popup -->

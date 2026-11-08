@@ -24,6 +24,9 @@ const ACTIONS = {
     locateMe: () => locateMe(),
     toggleFullscreen: () => toggleFullscreen(),
     toggleTheme: () => toggleTheme(),
+    // analisi.js (grafici e dati) si scarica solo al primo clic
+    openAnalisi: () => import('./analisi.js').then(m => m.openAnalisi()),
+    closeAnalisi: () => document.getElementById('analisi').close(),
     share: el => condividi(el),
     toggleSatelliteOverlay: () => toggleSatelliteOverlay(),
     closeScheda: () => closeScheda(),

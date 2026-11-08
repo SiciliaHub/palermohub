@@ -339,7 +339,7 @@ export function initA11y() {
 
     // Esc chiude il pannello (mobile) e restituisce il focus al tab che lo ha aperto
     document.addEventListener('keydown', e => {
-        if (e.key !== 'Escape' || (document.getElementById('lightbox') && document.getElementById('lightbox').open)) return;
+        if (e.key !== 'Escape' || document.querySelector('dialog[open]')) return;
         const sc = document.getElementById('scheda');
         if (sc && !sc.hidden) closeScheda(); else closePanel();
     });

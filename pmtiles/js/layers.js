@@ -479,6 +479,24 @@ export function initializeMapLayers() {
             filter: ["==", "id", ""]
         });
 
+        // contorno spesso della particella evidenziata, sempre con lo stesso filtro del riempimento
+        state.map.addLayer({
+            id: "highlighted-polygon-outline",
+            type: "line",
+            source: "catasto",
+            "source-layer": "particelle",
+            paint: { "line-color": "#D40000", "line-width": 4 },
+            layout: { "line-join": "round" },
+            filter: ["==", "id", ""]
+        });
+        // ponytail: un solo punto di aggancio invece di toccare ogni setFilter("highlighted-polygon") in card/search/layers
+        const setFilterOrig = state.map.setFilter.bind(state.map);
+        state.map.setFilter = (id, filter, opts) => {
+            setFilterOrig(id, filter, opts);
+            if (id === "highlighted-polygon") setFilterOrig("highlighted-polygon-outline", filter, opts);
+            return state.map;
+        };
+
         // hover leggero particella: sfondo + contorno
         state.map.addLayer({
             id: "hover-fill",
