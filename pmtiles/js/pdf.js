@@ -53,6 +53,7 @@ async function calculateAreasAndIntersections(features) {
 
     return {
         particellaArea: particellaArea.toFixed(2),
+        supMq: Number(particellaFeature.properties.sup_mq) || null, // geometria intera, precalcolata nei tile
         intersections: intersections
     };
 }
@@ -249,7 +250,7 @@ export async function generatePDF() {
 
         // Dati chiave
         const facts = [["Foglio", String(cp.foglio)], ["Particella", String(cp.particella)]];
-        if (areaData) facts.push(["Area", `${fmt(areaData.particellaArea)} m²`]);
+        if (areaData) facts.push(areaData.supMq ? ["Superficie (calcolata)", `${fmt(areaData.supMq)} m²`] : ["Area (stima)", `≈ ${fmt(areaData.particellaArea)} m²`]);
         const fw = CW / facts.length;
         doc.setDrawColor(...RULE); doc.setLineWidth(0.2);
         doc.line(M, y, W - M, y);
