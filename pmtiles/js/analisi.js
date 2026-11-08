@@ -357,7 +357,11 @@ function sankeyZonaVincolo() {
         L[z].off += h; R[c].off += h;
         g.push(tip(el('path', { d: `M${X1} ${y1}C${m} ${y1} ${m} ${y2} ${X2} ${y2}`, fill: 'none', 'stroke-width': Math.max(h, .5), class: `an-flow g-${z}`, style: 'stroke:var(--c)' }), `${zl(z)} → ${cl(c)}: ${it(f[2])} particelle`));
     }));
-    zk.forEach(z => g.push(el('rect', { x: X1 - 8, y: L[z].y, width: 8, height: Math.max(L[z].h, 1), class: `g-${z}`, style: 'fill:var(--c)' }), el('text', { x: X1 - 14, y: L[z].y + L[z].h / 2 + 4, class: 'an-tick', 'text-anchor': 'end' }, zl(z).split(' · ')[0])));
+    // ponytail: sotto 11px l'etichetta si sovrapporrebbe alle vicine: resta solo il tooltip
+    zk.forEach(z => {
+        g.push(tip(el('rect', { x: X1 - 8, y: L[z].y, width: 8, height: Math.max(L[z].h, 1), class: `g-${z}`, style: 'fill:var(--c)' }), `${zl(z)}: ${it(zt[z])} particelle`));
+        if (L[z].h >= 11) g.push(el('text', { x: X1 - 14, y: L[z].y + L[z].h / 2 + 4, class: 'an-tick', 'text-anchor': 'end' }, zl(z).split(' · ')[0]));
+    });
     ck.forEach(c => g.push(el('rect', { x: X2, y: R[c].y, width: 8, height: Math.max(R[c].h, 1), class: `g-${c}`, style: 'fill:var(--c)' }), el('text', { x: X2 + 14, y: R[c].y + R[c].h / 2 + 4, class: 'an-tick' }, cl(c))));
     const s = svg(W, H + GAP * 2, 'Diagramma di flusso: particelle per zona di PRG e categoria di vincolo', ...g);
     s.style.minWidth = '560px';
