@@ -310,7 +310,7 @@ body {
 
 /* ========== SCHEDA PARTICELLA / PUNTO ========== */
 .scheda {
-    position: fixed; top: 12px; right: 12px; width: 340px; max-height: calc(100dvh - 320px); min-height: 200px;
+    position: fixed; top: 12px; right: 12px; bottom: 12px; width: 340px; min-height: 200px;
     display: flex; flex-direction: column;
     background: var(--panel); color: var(--ink); border: 1px solid var(--line-strong); border-radius: var(--radius-panel);
     box-shadow: var(--shadow-lg); z-index: var(--z-card); user-select: text; -webkit-user-select: text;
