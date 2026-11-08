@@ -343,6 +343,30 @@ body {
 .sc-det .sc-dl { padding: 0 10px 8px; }
 .sc-src { margin: 8px 0 0; font-size: 12px; color: var(--ink-2); }
 
+/* grafici scheda */
+.sc-stack { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: var(--line); margin: 4px 0 8px; }
+.sc-stack span { display: block; min-width: 3px; }
+.sc-leg { list-style: none; margin: 0; padding: 0; font-size: 13px; }
+.sc-leg li { display: flex; align-items: baseline; gap: 8px; padding: 3px 0; }
+.sc-leg li > span { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.sc-leg li > i { flex: none; width: 10px; height: 10px; border-radius: 2px; align-self: center; }
+.sc-leg b { font: 500 12px var(--font-mono); white-space: nowrap; }
+.sc-meter { flex: 0 0 72px; height: 8px; border-radius: 4px; background: var(--line); overflow: hidden; align-self: center; }
+.sc-meter i { display: block; height: 100%; background: var(--accent); }
+.sc-rows .sc-row { flex-wrap: wrap; }
+.sc-rows .sc-meter { flex: 1 0 100%; order: 3; }
+.sc-stato { margin: 4px 0 8px; font-weight: 600; font-size: 14px; }
+.sc-ok { color: #2e7d32; } .sc-warn { color: #b45309; }
+.sc-omi-chart { margin-top: 8px; }
+.sc-omi { padding: 6px 0; border-top: 1px solid var(--line); font-size: 13px; }
+.sc-omi-h { display: flex; justify-content: space-between; gap: 8px; font-weight: 500; }
+.sc-omi-h b { font: 600 12px var(--font-mono); color: var(--accent-text); }
+.sc-omi-r { display: grid; grid-template-columns: 48px 1fr; gap: 2px 8px; align-items: center; margin-top: 3px; }
+.sc-omi-r em { font-style: normal; color: var(--ink-2); font-size: 12px; }
+.sc-omi-r small { grid-column: 2; font: 500 11px var(--font-mono); color: var(--ink-2); }
+.sc-range { position: relative; height: 8px; border-radius: 4px; background: var(--line); }
+.sc-range i { position: absolute; top: 0; bottom: 0; border-radius: 4px; }
+
 @media (max-width: 899px) {
     .scheda { top: auto; left: 0; right: 0; width: auto; bottom: var(--tab-h); max-height: 55dvh; border-radius: var(--radius-panel) var(--radius-panel) 0 0; border-bottom: 0; }
     .scheda-handle { display: block; width: 36px; height: 4px; border-radius: 2px; background: var(--line-strong); margin: 8px auto 0; }

@@ -3,6 +3,7 @@ import { state } from './state.js';
 import { closePanel, esc, iconSvg } from './ui.js';
 import { syncUrl } from './urlstate.js';
 import { territorioDelPunto } from './territorio.js';
+import { shapeSection, zoneVincoliSection, omiChart, PLACEHOLDER } from './grafici.js';
 
 export function buildDl(rows) {
     const items = rows
@@ -128,6 +129,7 @@ export function buildOMIPopup(omiFeatures) {
             { lbl: 'Microzona', val: p0.Microzona }
         ])}
         <p class="sc-prevalente">Tipo prevalente: <b>${prevalente}</b></p>
+        ${omiChart(omiFeatures)}
         ${tipiHTML}
         <p class="sc-src">Fonte: Agenzia delle Entrate — ${esc(semestre)}</p>
     </section>`;
@@ -177,7 +179,7 @@ export function onMapClick(e) {
                 return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'map');
             case "Particelle catastali":
                 if (!part) part = f;
-                return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }, { lbl: 'Superficie', val: superficie(p, f.geometry) }], 'table-cells');
+                return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }, { lbl: 'Superficie', val: superficie(p, f.geometry) }], 'table-cells') + shapeSection(f.geometry) + PLACEHOLDER;
             case "Numeri Civici": {
                 const esp = p.Esponente;
                 const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;
@@ -198,4 +200,11 @@ export function onMapClick(e) {
         html: [...terr, ...parts, ...omi].join('')
     });
     if (state.isMobile && navigator.vibrate) navigator.vibrate(30);
+
+    if (part) {
+        const geom = part.geometry;
+        zoneVincoliSection(geom)
+            .then(h => { const el = document.getElementById('sc-async'); if (el) el.outerHTML = h; })
+            .catch(() => { const el = document.getElementById('sc-async'); if (el) el.remove(); });
+    }
 }

@@ -8,7 +8,7 @@ const LIBS = {
 
 const libLoads = {};
 
-function loadLib(name) {
+export function loadLib(name) {
     const lib = LIBS[name];
     if (window[lib.global]) return Promise.resolve(window[lib.global]);
     return libLoads[name] || (libLoads[name] = new Promise((resolve, reject) => {
