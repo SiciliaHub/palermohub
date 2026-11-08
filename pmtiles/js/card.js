@@ -33,6 +33,13 @@ export function geomArea(g) {
     return polys.reduce((t, [outer, ...holes]) => t + ringArea(outer) - holes.reduce((h, r) => h + ringArea(r), 0), 0);
 }
 
+// sup_mq precalcolato nei tile (geometria intera); altrimenti stima dalla geometria tagliata
+function superficie(p, geom) {
+    const pre = Number(p.sup_mq);
+    return pre > 0 ? Math.round(pre).toLocaleString('it-IT') + ' m² (calcolata)'
+                   : '≈ ' + Math.round(geomArea(geom)).toLocaleString('it-IT') + ' m² (stima)';
+}
+
 export function setCurrentParticella(foglio, particella, geometry) {
     const coords = geometry.type === 'MultiPolygon' ? geometry.coordinates[0][0] : geometry.coordinates[0];
     const bounds = coords.reduce((b, c) => b.extend(c), new maplibregl.LngLatBounds(coords[0], coords[0]));
@@ -170,7 +177,7 @@ export function onMapClick(e) {
                 return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'map');
             case "Particelle catastali":
                 if (!part) part = f;
-                return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }, { lbl: 'Superficie', val: Math.round(geomArea(f.geometry)).toLocaleString('it-IT') + ' m²' }], 'table-cells');
+                return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }, { lbl: 'Superficie', val: superficie(p, f.geometry) }], 'table-cells');
             case "Numeri Civici": {
                 const esp = p.Esponente;
                 const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;
