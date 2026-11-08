@@ -13,7 +13,7 @@ function stacked(items) {
     return `<div class="sc-stack" role="img" aria-label="Ripartizione">${bar}</div><ul class="sc-leg">${leg}</ul>`;
 }
 
-const sec = (title, icon, body) => `<section class="sc-sec"><h3>${iconSvg(icon)}${esc(title)}</h3>${body}</section>`;
+const sec = (title, icon, body, adv) => `<section class="sc-sec${adv ? ' sc-adv' : ''}"><h3>${iconSvg(icon)}${esc(title)}</h3>${body}</section>`;
 
 // ---- indici di forma (sincrono, nessuna libreria) ----
 // ponytail: proiezione equirettangolare locale, rettangolo minimo per scansione angoli a passo 2°
@@ -49,7 +49,7 @@ export function shapeSection(geom) {
             <li><span>Perimetro</span><b>${fmt(per)} m</b></li>
             <li><span>Rettangolo minimo</span><b>${fmt(lungo)} × ${fmt(corto)} m</b></li>
         </ul>
-        <p class="sc-src">Esito: ${giudizio}. Compattezza 1 = cerchio; rapporto lati 1 = quadrato.</p>`);
+        <p class="sc-src">Esito: ${giudizio}. Compattezza 1 = cerchio; rapporto lati 1 = quadrato.</p>`, true);
 }
 
 // ---- zone PRG e vincoli (async, turf) ----
@@ -84,7 +84,7 @@ export async function zoneVincoliSection(geom, selfId, sup_mq, zoneOmi) {
     const ztoTot = zto.reduce((t, [, a]) => t + a, 0);
     const items = zto.map(([lbl, a]) => ({ lbl, mq: Math.min(a, tot), pct: Math.min(a / tot * 100, 100) }));
     if (tot - ztoTot > tot * 0.01) items.push({ lbl: 'Non zonizzata / n.d.', mq: tot - ztoTot, pct: (tot - ztoTot) / tot * 100, color: '#bdbdbd' });
-    const zonaHtml = items.length ? sec('Ripartizione per zona PRG', 'map', stacked(items) + (zto.length > 1 ? '<p class="sc-src">La particella ricade in più zone.</p>' : '')) : '';
+    const zonaHtml = items.length ? sec('Ripartizione per zona PRG', 'map', stacked(items) + (zto.length > 1 ? '<p class="sc-src">La particella ricade in più zone.</p>' : ''), true) : '';
 
     // vincoli: areali + lineari (fascia 10 m dalla linea)
     // ponytail: buffer fisso 10 m sui lineari, la fascia reale dipende dal tipo di vincolo
@@ -150,7 +150,7 @@ async function distribuzioneSection(mq, foglio, codiciZto = [], zoneOmi = []) {
             riga(`Tutta Palermo (mediana ${fmt(d.mediana)} m²)`, percentileHist(mq, d.hist))
         ].filter(Boolean).join('');
         return sec('Dimensione rispetto alle altre', 'table-cells', `<ul class="sc-leg sc-rows">${righe}</ul>
-            <p class="sc-src">Percentile stimato sulle superfici del catasto (${esc(d.data_catasto)}).</p>`);
+            <p class="sc-src">Percentile stimato sulle superfici del catasto (${esc(d.data_catasto)}).</p>`, true);
     } catch { return ''; }
 }
 
@@ -191,7 +191,7 @@ function intornoSection(turf, part, selfId) {
             <li><span>Civici entro ${R_INTORNO} m</span><b>${nCiv}</b></li>
             ${dist ? `<li><span>Vincolo lineare più vicino</span><b>${fmt(dist.d)} m</b></li>` : ''}</ul>
             ${ids.length ? `<p class="sc-src">Confinanti (foglio/particella): ${esc(ids.join(', '))}</p>` : ''}
-            <p class="sc-src">Calcolo sulle tessere caricate in mappa${dist ? `; vincolo: ${esc(dist.t)}, distanza dal centro` : ''}.</p>`);
+            <p class="sc-src">Calcolo sulle tessere caricate in mappa${dist ? `; vincolo: ${esc(dist.t)}, distanza dal centro` : ''}.</p>`, true);
     } catch { return ''; }
 }
 
@@ -214,5 +214,5 @@ export function omiChart(omiFeatures) {
             ${r.lmin != null ? `<div class="sc-omi-r"><em>Affitto</em>${range(r.lmin, r.lmax, maxL, PAL[0])}<small>${r.lmin.toLocaleString('it-IT')}–${r.lmax.toLocaleString('it-IT')} €/m²·mese</small></div>` : ''}
         </div>`;
     }).join('');
-    return `<div class="sc-omi-chart">${body}<p class="sc-src">Rendimento lordo = affitto annuo / valore di vendita (punti medi dell'intervallo). Scale distinte per vendita e affitto.</p></div>`;
+    return `<div class="sc-omi-chart sc-adv">${body}<p class="sc-src">Rendimento lordo = affitto annuo / valore di vendita (punti medi dell'intervallo). Scale distinte per vendita e affitto.</p></div>`;
 }

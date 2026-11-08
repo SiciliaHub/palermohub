@@ -5,6 +5,18 @@ import { syncUrl } from './urlstate.js';
 import { territorioDelPunto } from './territorio.js';
 import { shapeSection, zoneVincoliSection, omiChart, PLACEHOLDER } from './grafici.js';
 
+// interruttore "Essenziale": nasconde le sezioni .sc-adv; scelta ricordata
+const semplice = document.getElementById('scheda-semplice');
+if (semplice) {
+    try { semplice.checked = localStorage.getItem('schedaSemplice') === '1'; } catch { /* storage non disponibile */ }
+    const applica = () => {
+        document.getElementById('scheda')?.classList.toggle('semplice', semplice.checked);
+        try { localStorage.setItem('schedaSemplice', semplice.checked ? '1' : '0'); } catch { /* ignora */ }
+    };
+    semplice.addEventListener('change', applica);
+    applica();
+}
+
 export function buildDl(rows) {
     const items = rows
         .filter(r => r.val != null && r.val !== 'N/A' && r.val !== '' && r.val !== 'NULL')
@@ -114,7 +126,7 @@ export function buildOMIPopup(omiFeatures) {
         const comp = (cMin != null && cMax != null) ? `${fmt(cMin)} – ${fmt(cMax)} €/m²${sup('Sup_NL_compr')}` : '—';
         const loc = (lMin != null && lMax != null) ? `${fmt(lMin)} – ${fmt(lMax)} €/m²/mese${sup('Sup_NL_loc')}` : '—';
         const preview = (cMin != null && cMax != null) ? `${fmt(cMin)}–${fmt(cMax)} €/m²` : '';
-        return `<details class="sc-det">
+        return `<details class="sc-det sc-adv">
             <summary><span>${esc(clean(p.Descr_Tipologia) || '—')}${p.Stato ? ` <em>${esc(p.Stato)}</em>` : ''}</span>${preview ? `<span class="sc-prev">${esc(preview)}</span>` : ''}</summary>
             <dl class="sc-dl"><div><dt>Compravendita</dt><dd>${esc(comp)}</dd></div><div><dt>Locazione</dt><dd>${esc(loc)}</dd></div></dl>
         </details>`;

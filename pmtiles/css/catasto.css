@@ -825,3 +825,19 @@ body.panel-hidden .panel-tab .ic { transform: rotate(180deg); }
 .an-matrix td.diag { font-weight: 700; background: var(--paper); }
 .an-matrix td.zero { color: var(--ink-2); opacity: .5; }
 @media (max-width: 899px) { .an-rank.zone li { grid-template-columns: 110px 1fr; } .an-subtabs { flex-wrap: nowrap; overflow-x: auto; } .an-subtabs button { flex-shrink: 0; } }
+
+/* scheda: modalita' "Essenziale" */
+.sc-switch { position: relative; display: flex; align-items: center; gap: 8px; margin-left: auto; min-height: 36px; padding: 0 8px; border-radius: var(--radius-ctl); font: 400 13px var(--font-ui); color: var(--ink); cursor: pointer; }
+.sc-switch:hover { background: var(--paper); }
+.sc-switch input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.sc-switch input:checked + .lyr-sw { background: var(--accent); }
+.sc-switch input:checked + .lyr-sw::after { transform: translateX(16px); }
+.sc-switch input:focus-visible + .lyr-sw { outline: 2px solid var(--accent-text); outline-offset: 2px; }
+.scheda.semplice .sc-adv { display: none; }
+
+/* intestazione scheda su una riga: titolo compatto, switch e chiusura stretti */
+.scheda-hdr { align-items: center; }
+.scheda-hdr h2, .scheda-hdr h2.mono { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; overflow-wrap: normal; }
+.scheda-hdr h2.mono { font-size: clamp(15px, 4.6vw, 18px); }
+.sc-switch { flex: none; margin-left: 0; gap: 6px; padding: 0 4px; font-size: 12px; }
+.scheda-close { flex: none; width: 36px; margin: 0; }
