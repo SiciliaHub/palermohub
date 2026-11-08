@@ -332,13 +332,45 @@ function panelParticelleVincoli() {
     const V = data.vincoli, t = html('table', 'an-table');
     t.innerHTML = '<caption>Particelle interessate per tipo di vincolo</caption><thead><tr><th scope="col">Vincolo</th><th scope="col" class="num">Particelle</th><th scope="col" class="num">Superficie</th></tr></thead>';
     const tb = html('tbody');
-    [...V.tipi].sort((a, b) => b.n - a.n).filter(x => x.n > 0).forEach(x => tb.append(html('tr', 'g-' + x.k, `<th scope="row"><i class="an-sw"></i>${x.t}</th><td class="num">${it(x.n)}</td><td class="num">${mq(x.mq)}</td>`)));
+    [...V.tipi].sort((a, b) => b.n - a.n).filter(x => x.n > 0).forEach(x => tb.append(html('tr', 'g-' + x.k, `<th scope="row"><i class="an-sw"></i>${x.t}</th><td class="num">${it(x.n)} · ${pct(x.n, data.n)}</td><td class="num">${mq(x.mq)} · ${pct(x.mq, data.ha * 1e4)}</td>`)));
     t.append(tb);
     const nv = V.n_vincoli, tot = nv.reduce((a, b) => a + b, 0), nomi = ['Nessun vincolo', '1 vincolo', '2 vincoli', '3 vincoli', '4 vincoli', '5 o più'];
     const hist = barre(nv.map((n, i) => ({ k: i ? 'pae' : 'P', l: nomi[i], v: n, txt: `${it(n)} · ${pct(n, tot)}` })));
     return panel('an-vint', 'an-tab-vint',
         fig('Quanti vincoli gravano su una particella', `Numero di tipi di vincolo diversi sovrapposti (almeno il ${data.prg.soglia_pct}% della particella).`, hist),
         fig('Particelle interessate', 'Quante particelle toccano ciascun tipo di vincolo e quanta superficie vi ricade.', t));
+}
+
+// Sankey zona (sinistra) -> categoria di vincolo (destra); larghezza = particelle in entrambe
+function sankeyZonaVincolo() {
+    const V = data.vincoli, P = data.prg, F = V.flusso, W = 720, X1 = 150, X2 = W - 190, GAP = 6, H = 380;
+    const zl = k => P.gruppi.find(g => g.k === k).l, cl = k => V.cat.find(c => c.k === k).l;
+    const tot = (idx) => { const m = {}; F.forEach(f => { m[f[idx]] = (m[f[idx]] || 0) + f[2]; }); return m; };
+    const zt = tot(0), ct = tot(1), zk = Object.keys(zt).sort((a, b) => zt[b] - zt[a]), ck = Object.keys(ct).sort((a, b) => ct[b] - ct[a]);
+    const sum = Object.values(zt).reduce((a, b) => a + b, 0);
+    const sc = (H - GAP * Math.max(zk.length, ck.length)) / sum;
+    const place = (keys, t) => { let y = 0; const o = {}; keys.forEach(k => { o[k] = { y, h: t[k] * sc, off: 0 }; y += t[k] * sc + GAP; }); return o; };
+    const L = place(zk, zt), R = place(ck, ct), g = [];
+    zk.forEach(z => ck.forEach(c => {
+        const f = F.find(x => x[0] === z && x[1] === c); if (!f) return;
+        const h = f[2] * sc, y1 = L[z].y + L[z].off + h / 2, y2 = R[c].y + R[c].off + h / 2, m = (X1 + X2) / 2;
+        L[z].off += h; R[c].off += h;
+        g.push(tip(el('path', { d: `M${X1} ${y1}C${m} ${y1} ${m} ${y2} ${X2} ${y2}`, fill: 'none', 'stroke-width': Math.max(h, .5), class: `an-flow g-${z}`, style: 'stroke:var(--c)' }), `${zl(z)} → ${cl(c)}: ${it(f[2])} particelle`));
+    }));
+    zk.forEach(z => g.push(el('rect', { x: X1 - 8, y: L[z].y, width: 8, height: Math.max(L[z].h, 1), class: `g-${z}`, style: 'fill:var(--c)' }), el('text', { x: X1 - 14, y: L[z].y + L[z].h / 2 + 4, class: 'an-tick', 'text-anchor': 'end' }, zl(z).split(' · ')[0])));
+    ck.forEach(c => g.push(el('rect', { x: X2, y: R[c].y, width: 8, height: Math.max(R[c].h, 1), class: `g-${c}`, style: 'fill:var(--c)' }), el('text', { x: X2 + 14, y: R[c].y + R[c].h / 2 + 4, class: 'an-tick' }, cl(c))));
+    const s = svg(W, H + GAP * 2, 'Diagramma di flusso: particelle per zona di PRG e categoria di vincolo', ...g);
+    s.style.minWidth = '560px';
+    return s;
+}
+
+function tabellaBuffer() {
+    const V = data.vincoli, t = html('table', 'an-table');
+    t.innerHTML = `<caption>Particelle entro una distanza dalla linea</caption><thead><tr><th scope="col">Tipo</th>${V.buffer_m.map(d => `<th scope="col" class="num">≤ ${d} m</th>`).join('')}</tr></thead>`;
+    const tb = html('tbody');
+    V.linee.forEach(l => tb.append(html('tr', null, `<th scope="row">${l.t}</th>${l.buf.map(n => `<td class="num">${it(n)} · ${pct(n, data.n)}</td>`).join('')}`)));
+    t.append(tb);
+    return t;
 }
 
 function panelPiuVincolate() {
@@ -354,7 +386,13 @@ function panelPiuVincolate() {
     lin.append(lb);
     return panel('an-vpiu', 'an-tab-vpiu',
         fig('Particelle più vincolate', 'Ordinate per numero di tipi di vincolo sovrapposti. Clicca una particella per vederla in mappa.', lottoClick(t)),
-        fig('Vincoli lineari', 'Corsi d’acqua, faglie e regie trazzere: quante particelle attraversano.', lin));
+        fig('Vincoli lineari', 'Corsi d’acqua, faglie e regie trazzere: lunghezza e quante particelle attraversano.', lin),
+        fig('Fasce di rispetto', 'Particelle che cadono entro una certa distanza dai vincoli lineari (buffer dalla linea): utile per stimare quanti lotti toccherebbe una fascia di rispetto.', tabellaBuffer()));
+}
+
+function panelFlusso() {
+    return panel('an-vflu', 'an-tab-vflu',
+        fig('Da zona di PRG a categoria di vincolo', `Larghezza = particelle che ricadono sia nella zona sia nella categoria (almeno ${data.prg.soglia_pct}% ciascuna). Una particella con più vincoli o zone compare in più flussi.`, sankeyZonaVincolo()));
 }
 
 // ---- Pagina ------------------------------------------------------------
@@ -421,7 +459,7 @@ function build() {
     const sezioni = [
         ['fond', 'Struttura fondiaria', [['sup', 'Superfici', sup], ['fram', 'Frammentazione', fram], ['forma', 'Forma', forma]]],
         ['prg', 'Zonizzazione PRG', [['zsup', 'Superficie per zona', panelSuperficieZone()], ['zint', 'Particelle × zone', panelIntersezione()], ['zcav', 'A cavallo', panelCavallo()]]],
-        ['vinc', 'Vincoli', [['vest', 'Estensione', panelEstensioneVincoli()], ['vint', 'Particelle interessate', panelParticelleVincoli()], ['vpiu', 'Più vincolate', panelPiuVincolate()]]]];
+        ['vinc', 'Vincoli', [['vest', 'Estensione', panelEstensioneVincoli()], ['vint', 'Particelle interessate', panelParticelleVincoli()], ['vpiu', 'Più vincolate', panelPiuVincolate()], ['vflu', 'Zona → vincolo', panelFlusso()]]]];
     sezioni.forEach(([id, nome, subs], i) => {
         const p = panel('an-' + id, 'an-tab-' + id, ...subtabs(nome, subs));
         p.hidden = i > 0;

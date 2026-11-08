@@ -27,7 +27,8 @@ from shapely.ops import transform, unary_union
 SRC = sys.argv[1] if len(sys.argv) > 1 else r"D:\GitHub - Clone\SiciliaHub\PRG2004\particelle\particelle.pmtiles"
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(os.path.dirname(__file__), "..", "analisi_particelle.json")
 PRG = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(SRC), "prg.pmtiles")
-SOGLIA_PCT = 5      # % della particella: sotto, l'appartenenza a una zona/vincolo e' scarto di bordo PRG 1:5000 / catasto
+BUFFER_M = [10, 50, 150]   # fasce di rispetto attorno ai vincoli lineari
+SOGLIA_PCT = 5     # % della particella: sotto, l'appartenenza a una zona/vincolo e' scarto di bordo PRG 1:5000 / catasto
 SOGLIA_MQ = 10      # m2 minimi di sovrapposizione
 N_CAVALLO = 40      # lunghezza elenco particelle a cavallo
 DATA_CATASTO = "Settembre 2026"   # allineare a DATA_CATASTO in js/state.js
@@ -239,6 +240,7 @@ g_netto = defaultdict(float)
 for c in codici: g_netto[gruppo(c)] += netto[c].area
 g_n = defaultdict(int); g_mq = defaultdict(float); c_n = defaultdict(int)
 mat = defaultdict(lambda: defaultdict(int))
+zms = {}    # particella -> gruppi di zona di cui e' membro (per il flusso zona -> vincolo)
 nz = defaultdict(int); cavallo = []; fuori = 0; mq_prg = 0.0
 for i in range(len(geo)):
     d = share_cod.get(i)
@@ -251,6 +253,7 @@ for i in range(len(geo)):
     mq_prg += sum(d.values())
     for g_, m in gg.items(): g_mq[g_] += m
     ms = [g_ for g_, m in gg.items() if membro(m, parea[i])]
+    zms[i] = ms
     for g_ in ms: g_n[g_] += 1
     for a in ms:
         for b in ms: mat[a][b] += 1
@@ -294,7 +297,7 @@ vmq = defaultdict(lambda: defaultdict(float))
 for a, v, m in zip(pi, vi, inter):
     vmq[a][tipi[vtipo[v]]] += m
 t_n = defaultdict(int); t_mq = defaultdict(float); c_vn = defaultdict(int); c_vmq = defaultdict(float)
-nvinc = defaultdict(int); piu_vincolate = []; n_vinc = 0
+nvinc = defaultdict(int); piu_vincolate = []; n_vinc = 0; flusso = defaultdict(int)
 for i, d in vmq.items():
     ts = [t for t, m in d.items() if membro(m, parea[i])]
     for t, m in d.items(): t_mq[t] += m
@@ -304,6 +307,8 @@ for i, d in vmq.items():
         c_vn[k] += 1
         c_vmq[k] += min(sum(m for t, m in d.items() if tipo_cat[t] == k), parea[i])
     if ts:
+        for g_ in zms.get(i, []):
+            for k in cs: flusso[(g_, k)] += 1
         n_vinc += 1; nvinc[min(len(ts), 5)] += 1
         piu_vincolate.append((len(ts), float(parea[i]), i, [FIX.get(t, t) for t in ts]))
 nvinc[0] = len(geo) - n_vinc
@@ -318,7 +323,9 @@ for pr_, g in prg["vl"]:
 ptree = STRtree(geo); vl = []
 for t, gs in sorted(lg.items()):
     u = unary_union(gs)
-    vl.append({"t": FIX.get(t, t), "km": round(u.length / 1000, 1), "n": len(set(ptree.query(u, predicate="intersects").tolist()))})
+    # fascia di rispetto: particelle entro d metri dalla linea (geometrie in UTM, quindi metri)
+    buf = [len(set(ptree.query(u.buffer(d), predicate="intersects").tolist())) for d in BUFFER_M]
+    vl.append({"t": FIX.get(t, t), "km": round(u.length / 1000, 1), "n": len(set(ptree.query(u, predicate="intersects").tolist())), "buf": buf})
 
 attivi = [k for k, _ in GRUPPI if g_n[k] > 0]
 PRG_OUT = {
@@ -339,7 +346,8 @@ VINC_OUT = {
                    key=lambda r: -r["ha"]),
     "n_vincoli": [nvinc[i] for i in range(6)],
     "piu_vincolate": [{"f": rows[i][0], "p": rows[i][1], "a": round(a, 1), "nv": nv, "t": ts} for nv, a, i, ts in piu_vincolate[:20]],
-    "linee": vl,
+    "linee": vl, "buffer_m": BUFFER_M,
+    "flusso": [[g_, k, n] for (g_, k), n in sorted(flusso.items())],
 }
 
 out = {

@@ -741,6 +741,7 @@ body.panel-hidden .panel-tab .ic { transform: rotate(180deg); }
 .an-note { margin: 4px 0 8px; font-size: 13px; line-height: 1.45; color: var(--ink-2); }
 .an-scroll { overflow-x: auto; }
 .an-svg { display: block; width: 100%; height: auto; }
+.an-flow { opacity: .45; } .an-flow:hover { opacity: .8; }
 .an-bar { fill: var(--accent); stroke: var(--accent-text); stroke-width: .5; }
 .an-grid { stroke: var(--line); stroke-width: 1; }
 .an-tick { font: 400 11px var(--font-mono); fill: var(--ink-2); }
