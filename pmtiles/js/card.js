@@ -203,7 +203,7 @@ export function onMapClick(e) {
 
     if (part) {
         const geom = part.geometry;
-        zoneVincoliSection(geom, part.properties.Foglio + '/' + part.properties.Paricella, part.properties.sup_mq)
+        zoneVincoliSection(geom, part.properties.Foglio + '/' + part.properties.Paricella, part.properties.sup_mq, Object.keys(omiByZona))
             .then(h => { const el = document.getElementById('sc-async'); if (el) el.outerHTML = h; })
             .catch(() => { const el = document.getElementById('sc-async'); if (el) el.remove(); });
     }

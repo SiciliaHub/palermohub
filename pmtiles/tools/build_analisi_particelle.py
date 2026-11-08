@@ -27,6 +27,8 @@ from shapely.ops import transform, unary_union
 SRC = sys.argv[1] if len(sys.argv) > 1 else r"D:\GitHub - Clone\SiciliaHub\PRG2004\particelle\particelle.pmtiles"
 OUT = sys.argv[2] if len(sys.argv) > 2 else os.path.join(os.path.dirname(__file__), "..", "analisi_particelle.json")
 PRG = sys.argv[3] if len(sys.argv) > 3 else os.path.join(os.path.dirname(SRC), "prg.pmtiles")
+OMI = sys.argv[4] if len(sys.argv) > 4 else os.path.join(os.path.dirname(os.path.dirname(SRC)), "civici", "Zone_OMI_2025_II.pmtiles")
+N_MIN_QUANT = 30   # campioni minimi per pubblicare i quantili di una zona
 BUFFER_M = [10, 50, 150]   # fasce di rispetto attorno ai vincoli lineari
 SOGLIA_PCT = 5     # % della particella: sotto, l'appartenenza a una zona/vincolo e' scarto di bordo PRG 1:5000 / catasto
 SOGLIA_MQ = 10      # m2 minimi di sovrapposizione
@@ -59,7 +61,7 @@ for (z, x, y), data in all_tiles(r.get_bytes):
     k = size / ext
     for ft in lay["features"]:
         p = ft["properties"]
-        fid = p.get("fid")
+        fid = p.get("fid", (p.get("Foglio"), p.get("Paricella")))   # i tile recenti non hanno piu' fid
         g = shape(ft["geometry"])
         if g.is_empty:
             continue
@@ -267,6 +269,37 @@ for g_ in g_netto:   # le particelle escludono strade e acque, quindi i mq in zo
     assert g_mq[g_] <= g_netto[g_] * 1.01 + 100, (g_, g_mq[g_], g_netto[g_])
 print("PRG ha netti / particelle:", {g_: (round(g_netto[g_] / 1e4), g_n[g_]) for g_, _ in GRUPPI if g_ in g_netto}, "| senza zona:", fuori, "| a cavallo:", len(cavallo))
 
+# ---- quantili di superficie per codice ZTO (stessa appartenenza del conteggio "n") e per zona OMI (punto interno)
+def quant(a):
+    return [len(a), *(q(np.asarray(a), p) for p in (5, 25, 50, 75, 95))]
+zto_aree = defaultdict(list)
+for i, d in share_cod.items():
+    for c, m in d.items():
+        if membro(m, parea[i]): zto_aree[c].append(area[i])
+q_zto = {c: quant(a) for c, a in zto_aree.items() if len(a) >= N_MIN_QUANT}
+omi_fr = defaultdict(list)
+ro = Reader(MmapSource(open(OMI, "rb"))); zo = ro.header()["max_zoom"]
+for (z, x, y), d in all_tiles(ro.get_bytes):
+    if z != zo:
+        continue
+    if d[:2] == b"\x1f\x8b":
+        d = gzip.decompress(d)
+    lay = mapbox_vector_tile.decode(d, y_coord_down=True).get("Zone_OMI_2025_II")
+    if not lay:
+        continue
+    size = 2 * ORIGINE / 2 ** z; x0, y0 = -ORIGINE + x * size, ORIGINE - y * size; k = size / lay.get("extent", 4096)
+    for ft in lay["features"]:    # piu' righe (tipologie) per zona, stessa geometria: si raggruppa per Zona_OMI
+        g = shape(ft["geometry"])
+        if not g.is_empty:
+            omi_fr[ft["properties"]["Zona_OMI"]].append(shapely.make_valid(transform(lambda xs, ys, z=None: (x0 + np.asarray(xs) * k, y0 - np.asarray(ys) * k), g)))
+ptree_pt = STRtree(shapely.points(X, Y))
+q_omi = {}
+for zn, gs in omi_fr.items():
+    ids = ptree_pt.query(transform(to_utm, unary_union(gs)), predicate="contains")
+    if len(ids) >= N_MIN_QUANT:
+        q_omi[zn] = quant(area[ids])
+print("quantili:", len(q_zto), "codici ZTO,", len(q_omi), "zone OMI")
+
 # ---- Vincoli areali (VA): la sovrapposizione e' il dato, nessuna partizione
 CAT = [("pae", "Paesaggistici"), ("amb", "Ambientali"), ("idr", "Idrogeologici"), ("arc", "Archeologici e storici"), ("inf", "Rispetto e infrastrutture")]
 CAT_TIPO = {
@@ -357,7 +390,7 @@ out = {
     "hist": {"edges": [round(float(e), 1) for e in edges], "n": hist},
     "hist_compatt": {"edges": hist_c_edges, "n": hist_c},
     "fogli": per_foglio, "hex": hexes, "irregolari": irregolari,
-    "prg": PRG_OUT, "vincoli": VINC_OUT,
+    "prg": PRG_OUT, "vincoli": VINC_OUT, "q_zto": q_zto, "q_omi": q_omi,
 }
 with open(OUT, "w", encoding="utf-8") as fo:
     json.dump(out, fo, ensure_ascii=False, separators=(",", ":"))

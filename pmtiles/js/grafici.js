@@ -58,7 +58,7 @@ const dedupeGeom = list => { const s = new Set(); return list.filter(f => { cons
 
 export const PLACEHOLDER = '<section class="sc-sec" id="sc-async"><h3>' + '</h3><p class="sc-src">Calcolo zone e vincoli…</p></section>';
 
-export async function zoneVincoliSection(geom, selfId, sup_mq) {
+export async function zoneVincoliSection(geom, selfId, sup_mq, zoneOmi) {
     const turf = await loadLib('turf');
     const m = state.map;
     const q = sl => (m.getSource('prg') ? dedupeGeom(m.querySourceFeatures('prg', { sourceLayer: sl })) : []);
@@ -114,7 +114,7 @@ export async function zoneVincoliSection(geom, selfId, sup_mq) {
             <ul class="sc-leg sc-rows">${righe}</ul>
             <p class="sc-src">Libera da vincoli: ${fmt(tot - vincolata)} m² · ${pct(100 - p)}</p>`);
     }
-    return (await distribuzioneSection(Number(sup_mq) || tot, selfId.split('/')[0])) + zonaHtml + vincHtml + intornoSection(turf, part, selfId);
+    return (await distribuzioneSection(Number(sup_mq) || tot, selfId.split('/')[0], zto.map(([lbl]) => lbl.split(' – ')[0]), zoneOmi)) + zonaHtml + vincHtml + intornoSection(turf, part, selfId);
 }
 
 // ---- posizione nella distribuzione delle superfici (dati di analisi_particelle.json) ----
@@ -137,7 +137,7 @@ function percentileHist(x, { edges, n }) {
     }
     return 100;
 }
-async function distribuzioneSection(mq, foglio) {
+async function distribuzioneSection(mq, foglio, codiciZto = [], zoneOmi = []) {
     if (!(mq > 0)) return '';
     try {
         const d = await analisi();
@@ -145,6 +145,8 @@ async function distribuzioneSection(mq, foglio) {
         const riga = (lbl, p) => `<li class="sc-row"><span>${lbl}</span><b>più grande del ${Math.round(p)}%</b><span class="sc-meter"><i style="width:${p}%"></i></span></li>`;
         const righe = [
             f && riga(`Foglio ${esc(foglio)} (${f.n.toLocaleString('it-IT')} particelle, mediana ${fmt(f.q[2])} m²)`, percentile(mq, f.q)),
+            ...codiciZto.filter(c => d.q_zto?.[c]).map(c => riga(`Zona PRG ${esc(c)} (${d.q_zto[c][0].toLocaleString('it-IT')} particelle, mediana ${fmt(d.q_zto[c][3])} m²)`, percentile(mq, d.q_zto[c].slice(1)))),
+            ...zoneOmi.filter(z => d.q_omi?.[z]).map(z => riga(`Zona OMI ${esc(z)} (${d.q_omi[z][0].toLocaleString('it-IT')} particelle, mediana ${fmt(d.q_omi[z][3])} m²)`, percentile(mq, d.q_omi[z].slice(1)))),
             riga(`Tutta Palermo (mediana ${fmt(d.mediana)} m²)`, percentileHist(mq, d.hist))
         ].filter(Boolean).join('');
         return sec('Dimensione rispetto alle altre', 'table-cells', `<ul class="sc-leg sc-rows">${righe}</ul>
