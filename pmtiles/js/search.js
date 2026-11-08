@@ -87,12 +87,16 @@ export function selectOdonimo(name) {
 export function switchSearchMode(mode) {
     document.getElementById('search-mode-foglio').hidden = mode !== 'foglio';
     document.getElementById('search-mode-civico').hidden = mode !== 'civico';
+    document.getElementById('search-mode-territorio').hidden = mode !== 'territorio';
+    document.getElementById('label-territorio').setAttribute('aria-pressed', mode === 'territorio' ? 'true' : 'false');
     document.getElementById('label-foglio').setAttribute('aria-pressed', mode === 'foglio' ? 'true' : 'false');
     document.getElementById('label-civico').setAttribute('aria-pressed', mode === 'civico' ? 'true' : 'false');
     document.getElementById('search-error').textContent = '';
     const infoText = document.getElementById('search-info-text');
     if (infoText) infoText.textContent = mode === 'civico'
         ? 'Inserisci il nome della via e il numero civico per trovare la zona sulla mappa.'
+        : mode === 'territorio'
+        ? 'Scegli la circoscrizione, poi il quartiere e la UPL: la mappa inquadra la zona scelta.'
         : 'La ricerca funziona sull\'area visibile della mappa. Naviga prima nella zona di interesse, poi avvia la ricerca.';
     closeOdonimoDropdown();
 

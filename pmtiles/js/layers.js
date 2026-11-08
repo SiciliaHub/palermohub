@@ -2,6 +2,7 @@ import { syncZoomUI } from './ui.js';
 import { onMapClick } from './card.js';
 import { layerMapping, layerStates, state } from './state.js';
 import { syncUrl } from './urlstate.js';
+import { initTerritorio, setTerritorioVisible } from './territorio.js';
 
 export function toggleLayer(layerId) {
     if (!(layerId in layerMapping)) {
@@ -56,6 +57,8 @@ export function toggleLayer(layerId) {
                 );
             }
         }
+
+        if (layerId === 'territorio') setTerritorioVisible(layerStates[layerId]);
 
         if (layerId === 'vincoli_lin' || layerId === 'vincoli_ar') {
             syncVincoliMain();
@@ -135,7 +138,7 @@ export function initLayerButtons() {
         });
     });
 
-    ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'zonizzazione', 'zone_omi'].forEach(layerId => {
+    ['vincoli_lin', 'vincoli_ar', 'particelle', 'civici', 'zonizzazione', 'zone_omi', 'territorio'].forEach(layerId => {
         const button = document.getElementById(layerId);
         if (button) button.addEventListener('click', () => toggleLayer(layerId));
     });
@@ -531,6 +534,8 @@ export function initializeMapLayers() {
                 "text-halo-width": 1.5
             }
         });
+
+        try { initTerritorio(); } catch (e) { console.error("Territorio non caricato:", e); }
 
         // INIZIALIZZA I PULSANTI DEI LAYER
         initLayerButtons();

@@ -2,6 +2,7 @@ import * as maplibregl from 'maplibre-gl';
 import { state } from './state.js';
 import { closePanel, esc, iconSvg } from './ui.js';
 import { syncUrl } from './urlstate.js';
+import { territorioDelPunto } from './territorio.js';
 
 export function buildDl(rows) {
     const items = rows
@@ -182,10 +183,12 @@ export function onMapClick(e) {
         }
     });
     const omi = Object.values(omiByZona).map(buildOMIPopup);
+    const t = territorioDelPunto(e.point);
+    const terr = t ? [buildInfoCard('Territorio', [{ lbl: 'Circoscrizione', val: t.circ }, { lbl: 'Quartiere', val: t.quart }, { lbl: 'UPL', val: t.upl }], 'city')] : [];
 
     openScheda({
         particella: part ? { foglio: part.properties.Foglio, particella: part.properties.Paricella, geometry: part.geometry } : null,
-        html: [...parts, ...omi].join('')
+        html: [...terr, ...parts, ...omi].join('')
     });
     if (state.isMobile && navigator.vibrate) navigator.vibrate(30);
 }

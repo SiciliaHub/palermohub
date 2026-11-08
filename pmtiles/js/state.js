@@ -33,7 +33,8 @@ export const layerStates = {
     'carta_tecnica': false,
     'satellite': false,
     'zonizzazione': true,
-    'zone_omi': false
+    'zone_omi': false,
+    'territorio': false
 };
 
 // MAPPATURA TRA ID PULSANTI E ID LAYER SULLA MAPPA
@@ -46,5 +47,6 @@ export const layerMapping = {
     'carta_tecnica': 'carta_tecnica',
     'satellite': 'satellite-layer',
     'zonizzazione': 'zto',
-    'zone_omi': 'Zone OMI'
+    'zone_omi': 'Zone OMI',
+    'territorio': 'territorio-circ-line'
 };

@@ -92,6 +92,9 @@
                     <button type="button" class="lyr-row" id="zone_omi" title="Zone OMI 2025 - II semestre - Agenzia delle Entrate">
                         <span class="lyr-ico ico-omi" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-euro-sign"/></svg></span><span class="lyr-name">Zone OMI 2025 S2</span><span class="lyr-swatch sw-omi" aria-hidden="true"></span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
+                    <button type="button" class="lyr-row" id="territorio" title="Circoscrizioni, quartieri e UPL del Comune di Palermo">
+                        <span class="lyr-ico ico-ter" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-draw-polygon"/></svg></span><span class="lyr-name">Quartieri e UPL</span><span class="lyr-swatch sw-ter" aria-hidden="true"></span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
+                    </button>
                     <button type="button" class="lyr-row" id="civici" title="Numeri Civici - Aggiornamento Febbraio 2026">
                         <span class="lyr-ico ico-civ" aria-hidden="true"><svg class="ic" aria-hidden="true" focusable="false"><use href="icons.svg#i-location-dot"/></svg></span><span class="lyr-name">Numeri civici</span><span class="lyr-swatch sw-civ" aria-hidden="true">12</span><span class="lyr-new">Nuovo</span><span class="lyr-sw" aria-hidden="true"></span>
                     </button>
@@ -127,6 +130,7 @@
                 <div class="seg" role="group" aria-label="Tipo di ricerca">
                     <button type="button" id="label-foglio" aria-pressed="true" data-action="switchSearchMode" data-arg="foglio">Foglio / particella</button>
                     <button type="button" id="label-civico" aria-pressed="false" data-action="switchSearchMode" data-arg="civico">Via / civico</button>
+                    <button type="button" id="label-territorio" aria-pressed="false" data-action="switchSearchMode" data-arg="territorio">Territorio</button>
                 </div>
 
                 <form id="search-mode-foglio" class="search-mode-panel">
@@ -146,6 +150,16 @@
                         <input type="text" id="civico-search" inputmode="numeric" aria-label="Numero civico" placeholder="Numero civico (es. 10)" autocomplete="off">
                     </div>
                     <button type="button" class="btn" data-action="searchByCivico">Cerca civico</button>
+                </div>
+
+                <div id="search-mode-territorio" class="search-mode-panel" hidden>
+                    <div class="search-inputs">
+                        <select id="ter-circ" aria-label="Circoscrizione"><option value="">Tutte le circoscrizioni</option></select>
+                        <select id="ter-quart" aria-label="Quartiere" disabled><option value="">Tutti i quartieri</option></select>
+                        <select id="ter-upl" aria-label="Unità di primo livello (UPL)" disabled><option value="">Tutte le UPL</option></select>
+                    </div>
+                    <p class="search-note" id="ter-info" aria-live="polite"></p>
+                    <button type="button" class="btn secondary" id="ter-reset">Azzera filtri</button>
                 </div>
 
                 <div id="search-error" role="alert"></div>

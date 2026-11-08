@@ -138,10 +138,11 @@ async function renderOffscreenMap(p) {
         const features = map.queryRenderedFeatures(map.project(p.center), {
             layers: QUERY_LAYERS.filter(id => map.getLayer(id))
         });
+        const ter = map.getLayer('territorio-hit') ? map.queryRenderedFeatures(map.project(p.center), { layers: ['territorio-hit'] })[0] : null;
         lg('canvas ok');
         const extra = await collectOmiCivici(map, p);
         lg(`OMI zone=${extra.omiByZona.length} civici=${extra.civici.length}`);
-        return { image: out.toDataURL('image/jpeg', 0.85), ratio: out.height / out.width, features, ...extra };
+        return { image: out.toDataURL('image/jpeg', 0.85), ratio: out.height / out.width, features, territorio: ter ? ter.properties : null, ...extra };
     } finally {
         map.remove();
         box.remove();
@@ -189,7 +190,7 @@ export async function generatePDF() {
 
         lg('zoom ok, render mappa');
         const [{ jsPDF }, , shot] = await Promise.all([loadLib('jspdf'), loadLib('turf'), renderOffscreenMap(cp)]);
-        const { image: mapImage, ratio, features, omiByZona, civici } = shot;
+        const { image: mapImage, ratio, features, omiByZona, civici, territorio } = shot;
         lg('mappa+jspdf ok, calcolo aree');
         let areaData = null;
         try { areaData = await calculateAreasAndIntersections(features); }
@@ -289,6 +290,14 @@ export async function generatePDF() {
                 doc.text(`${fmt(it.percentage)} %`, W - M, y, { align: "right" });
                 y += 5.5;
             });
+        }
+
+        // Territorio
+        if (territorio) {
+            heading("Territorio");
+            row("Circoscrizione", territorio.circ);
+            row("Quartiere", territorio.quart);
+            row("UPL", territorio.upl);
         }
 
         // Dettagli per livello
