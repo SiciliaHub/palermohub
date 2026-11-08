@@ -58,7 +58,7 @@ const dedupeGeom = list => { const s = new Set(); return list.filter(f => { cons
 
 export const PLACEHOLDER = '<section class="sc-sec" id="sc-async"><h3>' + '</h3><p class="sc-src">Calcolo zone e vincoli…</p></section>';
 
-export async function zoneVincoliSection(geom) {
+export async function zoneVincoliSection(geom, selfId, sup_mq) {
     const turf = await loadLib('turf');
     const m = state.map;
     const q = sl => (m.getSource('prg') ? dedupeGeom(m.querySourceFeatures('prg', { sourceLayer: sl })) : []);
@@ -114,7 +114,83 @@ export async function zoneVincoliSection(geom) {
             <ul class="sc-leg sc-rows">${righe}</ul>
             <p class="sc-src">Libera da vincoli: ${fmt(tot - vincolata)} m² · ${pct(100 - p)}</p>`);
     }
-    return zonaHtml + vincHtml;
+    return (await distribuzioneSection(Number(sup_mq) || tot, selfId.split('/')[0])) + zonaHtml + vincHtml + intornoSection(turf, part, selfId);
+}
+
+// ---- posizione nella distribuzione delle superfici (dati di analisi_particelle.json) ----
+// ponytail: percentile per interpolazione lineare in log(m²) tra p5..p95 (fuori range: 2,5 / 97,5); citywide dall'istogramma
+let analisiP;
+const analisi = () => analisiP || (analisiP = fetch(new URL('../analisi_particelle.json', import.meta.url)).then(r => r.json()));
+const PQ = [5, 25, 50, 75, 95];
+function percentile(x, q) {
+    const l = Math.log(x), k = q.map(Math.log);
+    if (l <= k[0]) return 2.5;
+    if (l >= k[4]) return 97.5;
+    const i = k.findIndex((v, j) => l < k[j + 1]);
+    return PQ[i] + (PQ[i + 1] - PQ[i]) * (l - k[i]) / (k[i + 1] - k[i]);
+}
+function percentileHist(x, { edges, n }) {
+    const tot = n.reduce((a, b) => a + b, 0); let acc = 0;
+    for (let i = 0; i < n.length; i++) {
+        if (x >= edges[i + 1]) { acc += n[i]; continue; }
+        return (acc + n[i] * Math.max(0, Math.log(x / edges[i]) / Math.log(edges[i + 1] / edges[i]))) / tot * 100;
+    }
+    return 100;
+}
+async function distribuzioneSection(mq, foglio) {
+    if (!(mq > 0)) return '';
+    try {
+        const d = await analisi();
+        const f = d.fogli.find(r => String(r.f) === String(foglio));
+        const riga = (lbl, p) => `<li class="sc-row"><span>${lbl}</span><b>più grande del ${Math.round(p)}%</b><span class="sc-meter"><i style="width:${p}%"></i></span></li>`;
+        const righe = [
+            f && riga(`Foglio ${esc(foglio)} (${f.n.toLocaleString('it-IT')} particelle, mediana ${fmt(f.q[2])} m²)`, percentile(mq, f.q)),
+            riga(`Tutta Palermo (mediana ${fmt(d.mediana)} m²)`, percentileHist(mq, d.hist))
+        ].filter(Boolean).join('');
+        return sec('Dimensione rispetto alle altre', 'table-cells', `<ul class="sc-leg sc-rows">${righe}</ul>
+            <p class="sc-src">Percentile stimato sulle superfici del catasto (${esc(d.data_catasto)}).</p>`);
+    } catch { return ''; }
+}
+
+// ---- intorno: confinanti, conteggi entro 100 m, distanza dal vincolo lineare ----
+// ponytail: usa solo i tile gia' caricati (quelli fuori vista mancano); distanza misurata dal centroide
+const R_INTORNO = 100;
+function intornoSection(turf, part, selfId) {
+    try {
+        const m = state.map;
+        const me = f => f.properties.Foglio + '/' + f.properties.Paricella;
+        const cat = dedupeGeom(m.getSource('catasto') ? m.querySourceFeatures('catasto', { sourceLayer: 'particelle' }) : []);
+        const ctr = turf.centroid(part);
+        const zona = turf.buffer(part, R_INTORNO, { units: 'meters' });
+        const tocco = turf.buffer(part, 0.5, { units: 'meters' });
+        const vicine = new Map(), conf = new Map();
+        cat.forEach(f => {
+            try {
+                const k = me(f);
+                if (k === selfId) return;
+                if (turf.booleanIntersects(f, zona)) vicine.set(k, 1);
+                if (turf.booleanIntersects(f, tocco)) conf.set(k, 1);
+            } catch { /* geometria non valida */ }
+        });
+        const civici = m.getSource('civici') ? dedupeGeom(m.querySourceFeatures('civici', { sourceLayer: 'civici_wgs84' })) : [];
+        const nCiv = civici.filter(f => { try { return turf.booleanPointInPolygon(f.geometry, zona.geometry); } catch { return false; } }).length;
+        let dist = null;
+        dedupeGeom(m.getSource('prg') ? m.querySourceFeatures('prg', { sourceLayer: 'vl' }) : []).forEach(f => {
+            try {
+                const l = f.geometry.type === 'MultiLineString' ? turf.multiLineString(f.geometry.coordinates) : turf.lineString(f.geometry.coordinates);
+                const d = turf.pointToLineDistance(ctr, l, { units: 'meters' });
+                if (dist == null || d < dist.d) dist = { d, t: f.properties.TIPO || 'Vincolo lineare' };
+            } catch { /* geometria non valida */ }
+        });
+        const ids = [...conf.keys()].sort((a, b) => parseInt(a) - parseInt(b) || a.localeCompare(b, 'it', { numeric: true }));
+        return sec('Intorno', 'location-dot', `<ul class="sc-leg sc-rows">
+            <li><span>Confinanti</span><b>${ids.length}</b></li>
+            <li><span>Particelle entro ${R_INTORNO} m</span><b>${vicine.size}</b></li>
+            <li><span>Civici entro ${R_INTORNO} m</span><b>${nCiv}</b></li>
+            ${dist ? `<li><span>Vincolo lineare più vicino</span><b>${fmt(dist.d)} m</b></li>` : ''}</ul>
+            ${ids.length ? `<p class="sc-src">Confinanti (foglio/particella): ${esc(ids.join(', '))}</p>` : ''}
+            <p class="sc-src">Calcolo sulle tessere caricate in mappa${dist ? `; vincolo: ${esc(dist.t)}, distanza dal centro` : ''}.</p>`);
+    } catch { return ''; }
 }
 
 // ---- OMI: grafico min-max per tipologia + rendimento lordo ----
