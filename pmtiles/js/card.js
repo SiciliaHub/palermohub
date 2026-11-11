@@ -3,7 +3,7 @@ import { DATA_CATASTO, state } from './state.js';
 import { closePanel, esc, iconSvg } from './ui.js';
 import { syncUrl } from './urlstate.js';
 import { territorioDelPunto } from './territorio.js';
-import { shapeSection, zoneVincoliSection, omiChart, PLACEHOLDER } from './grafici.js';
+import { shapeSection, zoneVincoliSection, omiRows, OMI_NOTE, PLACEHOLDER } from './grafici.js';
 
 // interruttore "Essenziale": nasconde le sezioni .sc-adv; scelta ricordata
 const semplice = document.getElementById('scheda-semplice');
@@ -121,7 +121,8 @@ export function buildOMIPopup(omiFeatures) {
     const tipoPrev = clean(p0.Descr_tip_prev);
     const codTipPrev = p0.Cod_tip_prev || '';
 
-    const tipiHTML = omiFeatures.map(f => {
+    const barre = omiRows(omiFeatures);
+    const tipiHTML = omiFeatures.map((f, i) => {
         const p = f.properties;
         const cMin = parseOMI(p.Compr_min), cMax = parseOMI(p.Compr_max);
         const lMin = parseOMI(p.Loc_min), lMax = parseOMI(p.Loc_max);
@@ -132,6 +133,7 @@ export function buildOMIPopup(omiFeatures) {
         return `<details class="sc-det sc-adv">
             <summary><span>${esc(clean(p.Descr_Tipologia) || '—')}${p.Stato ? ` <em>${esc(p.Stato)}</em>` : ''}</span>${preview ? `<span class="sc-prev">${esc(preview)}</span>` : ''}</summary>
             <dl class="sc-dl"><div><dt>Compravendita</dt><dd>${esc(comp)}</dd></div><div><dt>Locazione</dt><dd>${esc(loc)}</dd></div></dl>
+            ${barre[i]}
         </details>`;
     }).join('');
 
@@ -144,8 +146,8 @@ export function buildOMIPopup(omiFeatures) {
             { lbl: 'Microzona', val: p0.Microzona }
         ])}
         <p class="sc-prevalente">Tipo prevalente: <b>${prevalente}</b></p>
-        ${omiChart(omiFeatures)}
         ${tipiHTML}
+        <p class="sc-src">${OMI_NOTE}</p>
         <p class="sc-src">Fonte: Agenzia delle Entrate — ${esc(semestre)}. Zona OMI del punto toccato sulla mappa: una particella a cavallo di due zone può avere quotazioni diverse nelle due parti.</p>
     </section>`;
 }

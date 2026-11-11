@@ -310,7 +310,7 @@ body {
 
 /* ========== SCHEDA PARTICELLA / PUNTO ========== */
 .scheda {
-    position: fixed; top: 12px; right: 12px; bottom: 12px; width: 340px; min-height: 200px;
+    position: fixed; top: 12px; right: 12px; bottom: 12px; width: min(460px, calc(100vw - 24px)); min-height: 200px;
     display: flex; flex-direction: column;
     background: var(--panel); color: var(--ink); border: 1px solid var(--line-strong); border-radius: var(--radius-panel);
     box-shadow: var(--shadow-lg); z-index: var(--z-card); user-select: text; -webkit-user-select: text;
@@ -332,7 +332,7 @@ body {
 .sc-sec h3 { display: flex; align-items: center; gap: 8px; margin: 0 0 6px; font: 600 12px var(--font-ui); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
 .sc-badge { margin-left: auto; padding: 2px 8px; border-radius: 10px; background: var(--accent); color: var(--accent-ink); font: 600 12px var(--font-ui); letter-spacing: 0; text-transform: none; }
 .sc-dl { margin: 0; }
-.sc-dl > div { display: grid; grid-template-columns: 104px 1fr; gap: 8px; padding: 3px 0; font-size: 14px; line-height: 1.4; }
+.sc-dl > div { display: grid; grid-template-columns: 120px 1fr; gap: 8px; padding: 3px 0; font-size: 14px; line-height: 1.4; }
 .sc-dl dt { color: var(--ink-2); }
 .sc-dl dd { margin: 0; font-weight: 500; overflow-wrap: anywhere; }
 .sc-prevalente { margin: 8px 0 4px; font-size: 14px; }
@@ -341,6 +341,13 @@ body {
 .sc-det summary em { font-style: normal; color: var(--ink-2); font-size: 12px; }
 .sc-prev { font: 500 12px var(--font-mono); white-space: nowrap; color: var(--ink-2); }
 .sc-det .sc-dl { padding: 0 10px 8px; }
+.sc-det summary { list-style: none; }
+.sc-det summary::-webkit-details-marker { display: none; }
+.sc-det summary > span:first-child { flex: 1; }
+.sc-det summary::after { content: ""; flex: none; align-self: center; width: 8px; height: 8px; margin: 0 2px 0 4px; border-right: 2px solid var(--accent-text); border-bottom: 2px solid var(--accent-text); transform: rotate(45deg); transition: transform .15s; }
+.sc-det[open] > summary::after { transform: rotate(-135deg); }
+.sc-det[open] > summary { border-bottom: 1px solid var(--line); background: var(--paper); }
+.sc-det .sc-omi { padding: 6px 10px 8px; border-top: 0; }
 .sc-src { margin: 8px 0 0; font-size: 12px; color: var(--ink-2); }
 
 /* grafici scheda */

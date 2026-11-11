@@ -201,26 +201,28 @@ function intornoSection(turf, part, selfId) {
     } catch { return ''; }
 }
 
-// ---- OMI: grafico min-max per tipologia + rendimento lordo ----
-export function omiChart(omiFeatures) {
+// ---- OMI: barre min-max + rendimento lordo, una per feature (stessa scala per tutte le tipologie) ----
+export const OMI_NOTE = 'Rendimento lordo = affitto annuo / valore di vendita: valore centrale sui punti medi, tra parentesi gli estremi degli intervalli. Scale distinte per vendita e affitto.';
+export function omiRows(omiFeatures) {
     const num = v => { if (v == null) return null; const n = parseFloat(String(v).replace(',', '.')); return isNaN(n) ? null : n; };
     const rows = omiFeatures.map(f => {
         const p = f.properties;
-        return { t: String(p.Descr_Tipologia ?? '').replace(/^'|'$/g, '').trim(), cmin: num(p.Compr_min), cmax: num(p.Compr_max), lmin: num(p.Loc_min), lmax: num(p.Loc_max) };
-    }).filter(r => r.t && r.cmin != null && r.cmax != null);
-    if (!rows.length) return '';
-    const maxC = Math.max(...rows.map(r => r.cmax)), maxL = Math.max(0, ...rows.map(r => r.lmax ?? 0));
+        return { cmin: num(p.Compr_min), cmax: num(p.Compr_max), lmin: num(p.Loc_min), lmax: num(p.Loc_max) };
+    });
+    const valid = rows.filter(r => r.cmin != null && r.cmax != null);
+    if (!valid.length) return rows.map(() => '');
+    const maxC = Math.max(...valid.map(r => r.cmax)), maxL = Math.max(0, ...valid.map(r => r.lmax ?? 0));
     const range = (a, b, max, c) => a == null || b == null ? '' :
         `<span class="sc-range"><i style="left:${a / max * 100}%;width:${Math.max((b - a) / max * 100, 1.5)}%;background:${c}"></i></span>`;
-    const body = rows.map(r => {
+    return rows.map(r => {
+        if (r.cmin == null || r.cmax == null) return '';
         const ok = r.lmin != null && r.lmax != null && r.cmin > 0 && r.cmax > 0;
         const y = ok ? ((r.lmin + r.lmax) / 2 * 12) / ((r.cmin + r.cmax) / 2) * 100 : null;
         const yLo = ok ? r.lmin * 12 / r.cmax * 100 : null, yHi = ok ? r.lmax * 12 / r.cmin * 100 : null;  // estremi: affitto minimo / valore massimo e viceversa
         return `<div class="sc-omi">
-            <div class="sc-omi-h"><span>${esc(r.t)}</span>${y != null ? `<b title="Rendimento lordo stimato (affitto annuo / valore). Punti medi: ${pct(y)}; estremi degli intervalli: ${pct(yLo)}–${pct(yHi)}">${pct(y)} <small>(${pct(yLo)}–${pct(yHi)})</small></b>` : ''}</div>
+            ${y != null ? `<div class="sc-omi-h"><span>Rendimento lordo</span><b title="Rendimento lordo stimato (affitto annuo / valore). Punti medi: ${pct(y)}; estremi degli intervalli: ${pct(yLo)}–${pct(yHi)}">${pct(y)} <small>(${pct(yLo)}–${pct(yHi)})</small></b></div>` : ''}
             <div class="sc-omi-r"><em>Vendita</em>${range(r.cmin, r.cmax, maxC, PAL[1])}<small>${fmt(r.cmin)}–${fmt(r.cmax)} €/m²</small></div>
             ${r.lmin != null ? `<div class="sc-omi-r"><em>Affitto</em>${range(r.lmin, r.lmax, maxL, PAL[0])}<small>${r.lmin.toLocaleString('it-IT')}–${r.lmax.toLocaleString('it-IT')} €/m²·mese</small></div>` : ''}
         </div>`;
-    }).join('');
-    return `<div class="sc-omi-chart sc-adv">${body}<p class="sc-src">Rendimento lordo = affitto annuo / valore di vendita: valore centrale sui punti medi, tra parentesi gli estremi degli intervalli. Scale distinte per vendita e affitto.</p></div>`;
+    });
 }
