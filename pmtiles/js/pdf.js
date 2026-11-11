@@ -338,7 +338,7 @@ Locazione ${range(p.Loc_min, p.Loc_max, "€/m²/mese")}`);
             });
             doc.setFont("helvetica", "normal"); doc.setFontSize(7.5); ink(MUTED);
             ensure(5);
-            doc.text(`Fonte: Agenzia delle Entrate — OMI ${p0.Anno_Semestre ? String(p0.Anno_Semestre).replace(" / ", " S") : "2025 S2"}`, M, y);
+            doc.text(`Fonte: Agenzia delle Entrate — OMI ${p0.Anno_Semestre ? String(p0.Anno_Semestre).replace(" / ", " S") : "semestre non indicato"}`, M, y);
             y += 4;
         });
 

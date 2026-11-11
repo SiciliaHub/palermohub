@@ -184,8 +184,8 @@ export function initializeMapLayers() {
 
         state.map.addSource("zone_omi", {
             type: "vector",
-            url: "pmtiles://https://palermohub.github.io/PRG2004/civici/Zone_OMI_2025_II.pmtiles",
-            attribution: "Zone OMI 2025 S2 - <b>Agenzia delle Entrate</b>"
+            url: "pmtiles://https://palermohub.github.io/PRG2004/civici/Zone_OMI_2026_I.pmtiles",
+            attribution: "Zone OMI 2026 S1 - <b>Agenzia delle Entrate</b>"
         });
 
         state.map.addSource("civici", {

@@ -1,5 +1,5 @@
 import * as maplibregl from 'maplibre-gl';
-import { state } from './state.js';
+import { DATA_CATASTO, state } from './state.js';
 import { closePanel, esc, iconSvg } from './ui.js';
 import { syncUrl } from './urlstate.js';
 import { territorioDelPunto } from './territorio.js';
@@ -52,6 +52,9 @@ function superficie(p, geom) {
     return pre > 0 ? Math.round(pre).toLocaleString('it-IT') + ' m² (calcolata)'
                    : '≈ ' + Math.round(geomArea(geom)).toLocaleString('it-IT') + ' m² (stima)';
 }
+
+// vero se la geometria letta dai tile e' solo una parte della particella (sup_mq riguarda quella intera)
+const parziale = (p, geom) => Number(p.sup_mq) > 0 && geomArea(geom) < Number(p.sup_mq) * 0.98;
 
 export function setCurrentParticella(foglio, particella, geometry) {
     const coords = geometry.type === 'MultiPolygon' ? geometry.coordinates[0][0] : geometry.coordinates[0];
@@ -114,7 +117,7 @@ export function buildOMIPopup(omiFeatures) {
     const zona = p0.Zona_OMI || p0.Zona || '—';
     const fascia = p0.Fascia || p0.Fasce || '—';
     const fasciaDescr = clean(p0.Fascia_Descr);
-    const semestre = p0.Anno_Semestre ? `OMI ${String(p0.Anno_Semestre).replace(' / ', ' S')}` : 'OMI 2025 S2';
+    const semestre = p0.Anno_Semestre ? `OMI ${String(p0.Anno_Semestre).replace(' / ', ' S')}` : 'semestre non indicato';
     const tipoPrev = clean(p0.Descr_tip_prev);
     const codTipPrev = p0.Cod_tip_prev || '';
 
@@ -143,7 +146,7 @@ export function buildOMIPopup(omiFeatures) {
         <p class="sc-prevalente">Tipo prevalente: <b>${prevalente}</b></p>
         ${omiChart(omiFeatures)}
         ${tipiHTML}
-        <p class="sc-src">Fonte: Agenzia delle Entrate — ${esc(semestre)}</p>
+        <p class="sc-src">Fonte: Agenzia delle Entrate — ${esc(semestre)}. Zona OMI del punto toccato sulla mappa: una particella a cavallo di due zone può avere quotazioni diverse nelle due parti.</p>
     </section>`;
 }
 
@@ -191,7 +194,9 @@ export function onMapClick(e) {
                 return buildInfoCard('Zonizzazione', [{ lbl: 'ZTO', val: p.ZTO }, { lbl: 'Descrizione', val: p.DESCRIZION }], 'map');
             case "Particelle catastali":
                 if (!part) part = f;
-                return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }, { lbl: 'Superficie', val: superficie(p, f.geometry) }], 'table-cells') + shapeSection(f.geometry) + PLACEHOLDER;
+                return buildInfoCard('Particella catastale', [{ lbl: 'Foglio', val: p.Foglio }, { lbl: 'Particella', val: p.Paricella }, { lbl: 'Superficie', val: superficie(p, f.geometry) }], 'table-cells')
+                    + `<p class="sc-src">Fonte: S.I.T.R. Sicilia, aggiornamento ${esc(DATA_CATASTO)}. Superficie geodetica calcolata sul disegno della mappa: non coincide con la superficie della visura.${parziale(p, f.geometry) ? ' La particella è tagliata dal bordo dei dati caricati: forma e perimetro riguardano solo il tratto visibile.' : ''}</p>`
+                    + shapeSection(f.geometry) + PLACEHOLDER;
             case "Numeri Civici": {
                 const esp = p.Esponente;
                 const civico = (esp && esp !== 'NULL' && esp !== '') ? `${p.Civico}/${esp}` : p.Civico;

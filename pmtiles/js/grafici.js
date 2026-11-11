@@ -65,6 +65,9 @@ export async function zoneVincoliSection(geom, selfId, sup_mq, zoneOmi) {
     const part = feat(geom);
     const tot = turf.area(part);
     if (!tot) return '';
+    // area letta dai tile < sup_mq: particella tagliata, le percentuali valgono solo per il tratto caricato
+    const parz = Number(sup_mq) > 0 && tot < Number(sup_mq) * 0.98;
+    const nota = parz ? `<p class="sc-src">Particella tagliata dal bordo dei dati caricati: valori sul tratto visibile (${fmt(tot)} di ${fmt(sup_mq)} m²).</p>` : '';
     const inter = (f, buf) => {
         try {
             let g = feat(f.geometry);
@@ -84,7 +87,7 @@ export async function zoneVincoliSection(geom, selfId, sup_mq, zoneOmi) {
     const ztoTot = zto.reduce((t, [, a]) => t + a, 0);
     const items = zto.map(([lbl, a]) => ({ lbl, mq: Math.min(a, tot), pct: Math.min(a / tot * 100, 100) }));
     if (tot - ztoTot > tot * 0.01) items.push({ lbl: 'Non zonizzata / n.d.', mq: tot - ztoTot, pct: (tot - ztoTot) / tot * 100, color: '#bdbdbd' });
-    const zonaHtml = items.length ? sec('Ripartizione per zona PRG', 'map', stacked(items) + (zto.length > 1 ? '<p class="sc-src">La particella ricade in più zone.</p>' : ''), true) : '';
+    const zonaHtml = items.length ? sec('Ripartizione per zona PRG', 'map', stacked(items) + (zto.length > 1 ? '<p class="sc-src">La particella ricade in più zone.</p>' : '') + nota, true) : '';
 
     // vincoli: areali + lineari (fascia 10 m dalla linea)
     // ponytail: buffer fisso 10 m sui lineari, la fascia reale dipende dal tipo di vincolo
@@ -93,7 +96,7 @@ export async function zoneVincoliSection(geom, selfId, sup_mq, zoneOmi) {
     const vinc = [...va, ...vl].sort((a, b) => b[1] - a[1]);
     let vincHtml;
     if (!vinc.length) {
-        vincHtml = sec('Vincoli', 'shield', '<p class="sc-stato sc-ok">Particella non vincolata</p>');
+        vincHtml = sec('Vincoli', 'shield', parz ? `<p class="sc-stato sc-ok">Nessun vincolo nel tratto visibile</p>${nota}` : '<p class="sc-stato sc-ok">Particella non vincolata</p>');
     } else {
         // unione di tutti i vincoli per la quota libera (evita di sommare sovrapposizioni)
         let uni = null;
@@ -112,9 +115,9 @@ export async function zoneVincoliSection(geom, selfId, sup_mq, zoneOmi) {
         }).join('');
         vincHtml = sec('Quota vincolata', 'shield', `<p class="sc-stato sc-warn">Particella ${stato}: ${pct(p)}</p>
             <ul class="sc-leg sc-rows">${righe}</ul>
-            <p class="sc-src">Libera da vincoli: ${fmt(tot - vincolata)} m² · ${pct(100 - p)}</p>`);
+            <p class="sc-src">Libera da vincoli: ${fmt(tot - vincolata)} m² · ${pct(100 - p)}</p>${nota}`);
     }
-    return (await distribuzioneSection(Number(sup_mq) || tot, selfId.split('/')[0], zto.map(([lbl]) => lbl.split(' – ')[0]), zoneOmi)) + zonaHtml + vincHtml + intornoSection(turf, part, selfId);
+    return (await distribuzioneSection(Number(sup_mq) || tot, selfId.split('/')[0], zto.map(([lbl]) => lbl.split(' – ')[0]), zoneOmi, selfId.split('/')[1])) + zonaHtml + vincHtml + intornoSection(turf, part, selfId);
 }
 
 // ---- posizione nella distribuzione delle superfici (dati di analisi_particelle.json) ----
@@ -137,12 +140,15 @@ function percentileHist(x, { edges, n }) {
     }
     return 100;
 }
-async function distribuzioneSection(mq, foglio, codiciZto = [], zoneOmi = []) {
+async function distribuzioneSection(mq, foglio, codiciZto = [], zoneOmi = [], particella = '') {
     if (!(mq > 0)) return '';
+    // l'analisi confronta solo i lotti numerati: strade e acque (STRADAnnn, ACQUE...) sono escluse dalla popolazione
+    if (!/^\d+$/.test(particella)) return sec('Dimensione rispetto alle altre', 'table-cells', '<p class="sc-src">Sedime pubblico (strada, acque…): non confrontabile con i lotti.</p>', true);
     try {
         const d = await analisi();
         const f = d.fogli.find(r => String(r.f) === String(foglio));
-        const riga = (lbl, p) => `<li class="sc-row"><span>${lbl}</span><b>più grande del ${Math.round(p)}%</b><span class="sc-meter"><i style="width:${p}%"></i></span></li>`;
+        const testo = p => p >= 97 ? 'tra il 3% più grandi' : p <= 3 ? 'tra il 3% più piccole' : `più grande del ${Math.round(p)}%`;
+        const riga = (lbl, p) => `<li class="sc-row"><span>${lbl}</span><b>${testo(p)}</b><span class="sc-meter"><i style="width:${p}%"></i></span></li>`;
         const righe = [
             f && riga(`Foglio ${esc(foglio)} (${f.n.toLocaleString('it-IT')} particelle, mediana ${fmt(f.q[2])} m²)`, percentile(mq, f.q)),
             ...codiciZto.filter(c => d.q_zto?.[c]).map(c => riga(`Zona PRG ${esc(c)} (${d.q_zto[c][0].toLocaleString('it-IT')} particelle, mediana ${fmt(d.q_zto[c][3])} m²)`, percentile(mq, d.q_zto[c].slice(1)))),
@@ -150,7 +156,7 @@ async function distribuzioneSection(mq, foglio, codiciZto = [], zoneOmi = []) {
             riga(`Tutta Palermo (mediana ${fmt(d.mediana)} m²)`, percentileHist(mq, d.hist))
         ].filter(Boolean).join('');
         return sec('Dimensione rispetto alle altre', 'table-cells', `<ul class="sc-leg sc-rows">${righe}</ul>
-            <p class="sc-src">Percentile stimato sulle superfici del catasto (${esc(d.data_catasto)}).</p>`, true);
+            <p class="sc-src">Percentile stimato sulle superfici dei lotti numerati (${esc(d.data_catasto)}): ${d.n.toLocaleString('it-IT')} particelle, esclusi ${d.esclusi.toLocaleString('it-IT')} sedimi pubblici.</p>`, true);
     } catch { return ''; }
 }
 
@@ -207,12 +213,14 @@ export function omiChart(omiFeatures) {
     const range = (a, b, max, c) => a == null || b == null ? '' :
         `<span class="sc-range"><i style="left:${a / max * 100}%;width:${Math.max((b - a) / max * 100, 1.5)}%;background:${c}"></i></span>`;
     const body = rows.map(r => {
-        const y = r.lmin != null && r.lmax != null && r.cmin + r.cmax > 0 ? ((r.lmin + r.lmax) / 2 * 12) / ((r.cmin + r.cmax) / 2) * 100 : null;
+        const ok = r.lmin != null && r.lmax != null && r.cmin > 0 && r.cmax > 0;
+        const y = ok ? ((r.lmin + r.lmax) / 2 * 12) / ((r.cmin + r.cmax) / 2) * 100 : null;
+        const yLo = ok ? r.lmin * 12 / r.cmax * 100 : null, yHi = ok ? r.lmax * 12 / r.cmin * 100 : null;  // estremi: affitto minimo / valore massimo e viceversa
         return `<div class="sc-omi">
-            <div class="sc-omi-h"><span>${esc(r.t)}</span>${y != null ? `<b title="Rendimento lordo stimato (affitto annuo / valore, punti medi)">${pct(y)}</b>` : ''}</div>
+            <div class="sc-omi-h"><span>${esc(r.t)}</span>${y != null ? `<b title="Rendimento lordo stimato (affitto annuo / valore). Punti medi: ${pct(y)}; estremi degli intervalli: ${pct(yLo)}–${pct(yHi)}">${pct(y)} <small>(${pct(yLo)}–${pct(yHi)})</small></b>` : ''}</div>
             <div class="sc-omi-r"><em>Vendita</em>${range(r.cmin, r.cmax, maxC, PAL[1])}<small>${fmt(r.cmin)}–${fmt(r.cmax)} €/m²</small></div>
             ${r.lmin != null ? `<div class="sc-omi-r"><em>Affitto</em>${range(r.lmin, r.lmax, maxL, PAL[0])}<small>${r.lmin.toLocaleString('it-IT')}–${r.lmax.toLocaleString('it-IT')} €/m²·mese</small></div>` : ''}
         </div>`;
     }).join('');
-    return `<div class="sc-omi-chart sc-adv">${body}<p class="sc-src">Rendimento lordo = affitto annuo / valore di vendita (punti medi dell'intervallo). Scale distinte per vendita e affitto.</p></div>`;
+    return `<div class="sc-omi-chart sc-adv">${body}<p class="sc-src">Rendimento lordo = affitto annuo / valore di vendita: valore centrale sui punti medi, tra parentesi gli estremi degli intervalli. Scale distinte per vendita e affitto.</p></div>`;
 }
