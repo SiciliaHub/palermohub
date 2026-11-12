@@ -2891,5 +2891,19 @@
     ],
     "fonte": "Comune di Palermo",
     "descrizione": "Differenze di quota e pendenza tra le versioni 1.1 e 1.3 del modello digitale del terreno di Palermo a 5 metri."
+  },
+  "ps_palermo.html": {
+    "titolo": "Pronto Soccorso Palermo",
+    "categoria": "Ospedali",
+    "territorio": "Palermo",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "Codici colore",
+      "Triage",
+      "Sovraffollamento"
+    ],
+    "fonte": "ASP Palermo",
+    "descrizione": "Pazienti in attesa, sovraffollamento e codici colore dei pronto soccorso di Palermo, dai dati pubblici degli ospedali."
   }
 }
