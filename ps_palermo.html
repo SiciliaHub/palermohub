@@ -147,6 +147,7 @@
         <iframe id="main-iframe" 
                 src="https://palermo-ps.coseerobe.workers.dev/?embed=1" 
                 title="Pazienti in attesa, sovraffollamento e codici colore dei pronto soccorso di Palermo, dai dati pubblici degli ospedali. Un progetto di #opendatasicilia."
+                allow="geolocation; fullscreen; web-share; clipboard-write"
                 allowfullscreen
                 loading="lazy">
         </iframe>
@@ -187,6 +188,14 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 1000);
     
+    // Link condivisi dall'app: #grafici apre l'analisi, #ps=<id> apre la scheda di un presidio
+    (function () {
+        var f = document.getElementById('main-iframe'), h = location.hash;
+        var B = 'https://palermo-ps.coseerobe.workers.dev/';
+        if (h === '#grafici') f.src = B + 'grafici.html?embed=1';
+        else if (/^#ps=/.test(h)) f.src = B + '?embed=1' + h;
+    })();
+
     // Esempio di come cambiare il src dell'iframe
     // document.getElementById('main-iframe').src = 'https://example.com';
 });	
