@@ -140,7 +140,7 @@
     <!-- Container per iframe - occupa tutto lo spazio tra header e footer -->
     <div class="iframe-container">
         <iframe id="main-iframe" 
-                src="https://palermohub.github.io/marsala_tpl/"
+                src="https://palermohub.github.io/marsala_tpl/?embed=1"
                 allow="geolocation; clipboard-write; web-share; fullscreen"
                 title="Marsala TPL · Quando passa il bus a Marsala?"
                 allowfullscreen
@@ -188,8 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const frame = document.getElementById('main-iframe');
     const q = new URLSearchParams(window.location.search);
     q.delete('mapTitle');
-    const qs = q.toString();
-    if (qs || window.location.hash) frame.src = APP + (qs ? '?' + qs : '') + window.location.hash;
+    q.set('embed', '1');
+    frame.src = APP + '?' + q.toString() + window.location.hash;
 
     // L'app segnala l'hash corrente: la barra degli indirizzi resta un link condivisibile
     window.addEventListener('message', function(e) {
