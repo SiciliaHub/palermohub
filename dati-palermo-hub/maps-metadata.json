@@ -2905,5 +2905,19 @@
     ],
     "fonte": "ASP Palermo",
     "descrizione": "Pazienti in attesa, sovraffollamento e codici colore dei pronto soccorso di Palermo, dai dati pubblici degli ospedali."
+  },
+  "marsala_tpl.html": {
+    "titolo": "Marsala TPL · Quando passa il bus a Marsala?",
+    "categoria": "Trasporto pubblico",
+    "territorio": "Marsala",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "REaltime",
+      "Mezzi plubblici",
+      "Bus"
+    ],
+    "fonte": "Comune di Marsala",
+    "descrizione": "Orari, fermate e mappa delle linee del trasporto pubblico locale realtime di Marsala, anche offline."
   }
 }
