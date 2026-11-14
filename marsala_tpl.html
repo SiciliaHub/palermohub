@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>PalermoHub - S </title>
+	<title>Marsala TPL · PalermoHub</title>
     <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -38,7 +38,7 @@
 <meta property="og:locale" content="it_IT">
 <meta property="og:site_name" content="Marsala TPL">
 <meta property="og:title" content="Marsala TPL · Quando passa il bus a Marsala?">
-<meta property="og:description" content="Palermo Hub - Contenitore di mappe su Palermo realizzato da OpenDataSicilia.it">
+<meta property="og:description" content="Orari, fermate e mappa delle linee del trasporto pubblico locale di Marsala, anche offline. App della community Open Data Sicilia.">
 <meta property="og:url" content="https://palermohub.opendatasicilia.it/marsala_tpl.html">
 <meta property="og:image" content="https://palermohub.github.io/marsala_tpl/img/social.png">
 <meta property="og:image:width" content="1200">
@@ -140,7 +140,8 @@
     <!-- Container per iframe - occupa tutto lo spazio tra header e footer -->
     <div class="iframe-container">
         <iframe id="main-iframe" 
-                src="https://palermohub.github.io/marsala_tpl/" 
+                src="https://palermohub.github.io/marsala_tpl/"
+                allow="geolocation; clipboard-write; web-share; fullscreen"
                 title="Marsala TPL · Quando passa il bus a Marsala?"
                 allowfullscreen
                 loading="lazy">
@@ -182,10 +183,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 1000);
     
-    // Esempio di come cambiare il src dell'iframe
-    // document.getElementById('main-iframe').src = 'https://example.com';
+    // Link condiviso (es. marsala_tpl.html#/stop/12): inoltra hash e parametri mappa all'app incorporata
+    const APP = 'https://palermohub.github.io/marsala_tpl/';
+    const frame = document.getElementById('main-iframe');
+    const q = new URLSearchParams(window.location.search);
+    q.delete('mapTitle');
+    const qs = q.toString();
+    if (qs || window.location.hash) frame.src = APP + (qs ? '?' + qs : '') + window.location.hash;
+
+    // L'app segnala l'hash corrente: la barra degli indirizzi resta un link condivisibile
+    window.addEventListener('message', function(e) {
+        if (e.origin !== 'https://palermohub.github.io' || !e.data || e.data.type !== 'marsala-tpl-hash') return;
+        const h = String(e.data.hash || '');
+        if (/^(#\/[\w\-./%~]*)?$/.test(h)) history.replaceState(null, '', window.location.pathname + window.location.search + h);
+    });
 });	
-</script>
 </script>
 </body>
 </html>
