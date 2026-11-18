@@ -1276,10 +1276,20 @@
 
 <url>
 <loc>https://palermohub.opendatasicilia.it/marsala_tpl.html</loc>
-<lastmod>2026-14-09</lastmod>
+<lastmod>2026-11-14</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 </url>	
+
+
+<url>
+<loc>https://palermohub.opendatasicilia.it/palermo_in_chiaro.html</loc>
+<lastmod>2026-11-18</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>	
+
+
 
 <!--- <url>
 <loc>https://palermohub.opendatasicilia.it/xxxx.html</loc>
