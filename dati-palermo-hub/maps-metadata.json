@@ -2913,11 +2913,25 @@
     "autore": "@gbvitrano",
     "anno": "2026",
     "tags": [
-      "REaltime",
+      "Realtime",
       "Mezzi plubblici",
       "Bus"
     ],
     "fonte": "Comune di Marsala",
     "descrizione": "Orari, fermate e mappa delle linee del trasporto pubblico locale realtime di Marsala, anche offline."
+  },
+  "palermo_in_chiaro.html": {
+    "titolo": "Palermo in chiaro",
+    "categoria": "Territorio",
+    "territorio": "Palermo",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "PNRR",
+      "ANAC",
+      "OpenCoesione"
+    ],
+    "fonte": "Comune di Palermo",
+    "descrizione": "Residenti, opere programmate, bilancio, appalti, PNRR e fondi di coesione del Comune di Palermo, con il dato per circoscrizione dove esiste"
   }
 }
