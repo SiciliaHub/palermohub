@@ -2933,5 +2933,19 @@
     ],
     "fonte": "Comune di Palermo",
     "descrizione": "Residenti, opere programmate, bilancio, appalti, PNRR e fondi di coesione del Comune di Palermo, con il dato per circoscrizione dove esiste"
+  },
+  "atlante_pnrr.html": {
+    "titolo": "PNRR Italia · Atlante dei progetti",
+    "categoria": "Fondi",
+    "territorio": "Italia",
+    "autore": "@gbvitrano",
+    "anno": "2026",
+    "tags": [
+      "PNRR",
+      "ANAC",
+      "Progetti"
+    ],
+    "fonte": "Italia Domani",
+    "descrizione": "Tutti i progetti del PNRR: dove sono finiti i fondi, a che punto sono i lavori, che cosa non torna. Mappa e schede per Italia, regione, provincia e comune. Dati Italia Domani al 13 giugno 2026."
   }
 }
