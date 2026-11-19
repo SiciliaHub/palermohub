@@ -1289,7 +1289,12 @@
 <priority>0.8</priority>
 </url>	
 
-
+<url>
+<loc>https://palermohub.opendatasicilia.it/atlante_pnrr.html</loc>
+<lastmod>2026-11-1</lastmod>
+<changefreq>weekly</changefreq>
+<priority>0.8</priority>
+</url>	
 
 <!--- <url>
 <loc>https://palermohub.opendatasicilia.it/xxxx.html</loc>
