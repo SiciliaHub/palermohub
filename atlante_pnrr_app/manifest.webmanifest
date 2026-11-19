@@ -1,0 +1,18 @@
+{
+  "name": "PNRR Italia · Atlante dei progetti",
+  "short_name": "Atlante PNRR",
+  "description": "Tutti i progetti del PNRR su mappa e schede: Italia, regione, provincia e comune. Dati Italia Domani.",
+  "lang": "it",
+  "id": "/atlante_pnrr.html",
+  "start_url": "/atlante_pnrr.html?fonte=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#0c1c33",
+  "background_color": "#0c1c33",
+  "categories": ["government", "utilities"],
+  "icons": [
+    { "src": "/atlante_pnrr_app/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/atlante_pnrr_app/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/atlante_pnrr_app/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
